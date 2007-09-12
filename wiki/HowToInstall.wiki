@@ -1,0 +1,3 @@
+#summary how to install gnizr step-by-step
+
+_pending_
