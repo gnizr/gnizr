@@ -299,15 +299,15 @@ public class TestBookmarkManager extends GnizrCoreTestBase {
 		assertTrue(manager.updateBookmark(bm300));
 		
 		bm300 = manager.getBookmark(300);
-		assertEquals("abc.df 12/13 \\019 ..ppp [0-x] | ?11?? *** p+ (.*)",bm300.getTags());
+		assertEquals("abc.df 12/13 019 ..ppp [0-x] | 11 *** p+ (.*)",bm300.getTags());
 		assertEquals(10,bm300.getTagList().size());
 		
 		bm300.setTags("abc df abc 12 13 \\ 019 ppp ppp [ 0-x ] | ?11 ?? * ** p + ( .* )");
 		assertTrue(manager.updateBookmark(bm300));
 		
 		bm300 = manager.getBookmark(300);
-		assertEquals("abc df 12 13 \\ 019 ppp [ 0-x ] | ?11 ?? * ** p + ( .* )",bm300.getTags());		
-		assertEquals(20,bm300.getTagList().size());
+		assertEquals("abc df 12 13 019 ppp [ 0-x ] | 11 * ** p + ( .* )",bm300.getTags());		
+		assertEquals(18,bm300.getTagList().size());
 		
 		Tag tag1 = tagDao.findTag("abc").get(0);
 		assertEquals(1,tag1.getCount());
@@ -315,14 +315,13 @@ public class TestBookmarkManager extends GnizrCoreTestBase {
 		Tag tag2 = tagDao.findTag("df").get(0);
 		assertEquals(1,tag2.getCount());
 		
-		Tag tag3 = tagDao.findTag("\\").get(0);
-		assertEquals(1,tag3.getCount());
+		assertEquals(0,tagDao.findTag("\\").size());
 		
 		Tag tag4 = tagDao.findTag("(").get(0);
 		assertEquals(1,tag4.getCount());
 		
-		Tag tag5 = tagDao.findTag("\\019").get(0);
-		assertEquals(0,tag5.getCount());
+		Tag tag5 = tagDao.findTag("019").get(0);
+		assertEquals(1,tag5.getCount());
 	}
 	
 	
