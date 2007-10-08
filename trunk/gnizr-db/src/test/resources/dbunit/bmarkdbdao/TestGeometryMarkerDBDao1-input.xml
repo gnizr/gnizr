@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+	<user id="1" username="hchen1" password="cf95caeb19ac6b9743cb6398d68da02e"
+		fullname="Harry Chen" created_on="2006-11-16 21:55:18.0" email="harry.chen@gmail.com"
+		acct_status="1"/>
+	
+  <link id="200" mime_type_id="0" url="http://www.w3.org/2005/Incubator/geo/Wiki/Geo_Update" url_hash="129ccb651f4172ce14b85ae538667253"/>
+  <link id="201" mime_type_id="0" url="http://www.eclipse.org/projects/dev_process/bugzilla-use.php" url_hash="e317a5fad150e660dcab24f8ceb625a9"/>
+  <link id="202" mime_type_id="0" url="http://www.databasejournal.com/features/mysql/article.php/10897_1587371_1" url_hash="a4be21d01fb334f8277ffb0f779c46e8"/>
+  <link id="203" mime_type_id="0" url="http://www.databasejournal.com/features/mysql/article.php/1578331" url_hash="d0392c3cdfcbf29f3ed3521ac67f9833"/>
+		
+	<bookmark id="299" user_id="1" link_id="203" title="cnn"
+		notes="news" created_on="2006-10-16 21:55:19.0" last_updated="2006-11-20 21:55:19.0" />
+	
+	<bookmark id="300" user_id="1" link_id="202" title="cnn"
+		notes="news" created_on="2006-11-16 21:55:19.0" last_updated="2006-11-19 21:55:19.0" />
+	
+	<bookmark id="301" user_id="1" link_id="200" title="cnn33"
+		notes="news" created_on="2006-11-16 21:55:19.0" last_updated="2006-11-19 21:55:19.0" />
+	
+	<folder id="1" owner_id="1" folder_name="my folder1" description="stuff that matters" last_updated="2006-11-18 21:55:19.0" />
+	
+	<bookmark_folder id="10" bookmark_id="300" folder_id="1" last_updated="2006-11-18 21:55:19.0" />
+	<bookmark_folder id="11" bookmark_id="301" folder_id="1" last_updated="2006-11-18 21:55:19.0" />
+	
+</dataset>

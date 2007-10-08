@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+	<user id="1" username="gnizr" password=""
+		fullname="gnizr" created_on="2006-11-16 21:55:18.0"
+		email="" acct_status="1"/>
+	<user id="2" username="hchen1" password="cf95caeb19ac6b9743cb6398d68da02e"
+		fullname="Harry Chen" created_on="2006-11-16 21:55:18.0"
+		email="harry.chen@gmail.com" acct_status="1"/>
+	<user id="3" username="jsmith" password="39ce7e2a8573b41ce73b5ba41617f8f7"
+		fullname="Joe Smith" created_on="2006-11-16 21:55:18.0"
+		email="jsmith@hchen1.com" acct_status="1"/>
+
+	<link id="202" mime_type_id="0" url="http://www.google.com"
+		url_hash="ed646a3334ca891fd3467db131372140"/>
+	
+	<link id="204" mime_type_id="1003"
+		url="http://www.learntechnology.net/webwork-crud-lm.do"
+		url_hash="b1ab0901c5e0f0239cfd2634954f4f9e"/>
+	
+	<bookmark id="300" user_id="1" link_id="202" title="google" notes="website"
+		created_on="2006-11-16 21:55:19.0" last_updated="2006-11-19 21:55:19.0"
+		/>
+	
+	<tag id="1" tag="webwork" count="0"/>
+	<tag id="2" tag="wii" count="0"/>
+	<tag id="3" tag="web" count="0"/>
+	<tag id="4" tag="cnn" count="1"/>
+	<tag id="5" tag="news" count="0"/>
+	
+	<search_idx bookmark_id="300" text="zirrus,website" tags="cnn news"/>
+	<bookmark_tag_idx id="1" tag_id="4" bookmark_id="300" count="1" position="0"/>
+	
+	<user_tag_idx id="1" user_id="1" tag_id="4" count="1"/>
+	
+	<link_tag_idx id="1" link_id="202" tag_id="4" count="1"/>
+	
+</dataset>

@@ -1,0 +1,53 @@
+.version{
+	font-size: 10px;
+	vertical-align: text-top;
+}
+
+#headline, #login, #register{
+	margin-top: 45px;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+
+#footer, #footer #sitemap{
+	margin: none;
+	margin-left: auto;
+	margin-right: auto;
+	text-align:center;
+	float:none;
+}
+
+#login{
+	height: 250px;
+	width: 260px;
+	border-width: 0px;
+	border-style: none;
+	margin-top: 25px;
+	font-size: 12px;
+}
+
+h1{
+	font-size: 34px;
+	color: #FF6600;
+}
+
+h2 {
+	font-size: 14px;
+}
+
+
+#userLogin ul, #register ul {
+	list-style-type: none;
+	width: 300px;	
+	padding: 0px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#userLogin table, #register table{
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: auto;
+  margin-bottom: 45px;;
+}
