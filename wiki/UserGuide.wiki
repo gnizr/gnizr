@@ -1,4 +1,4 @@
-#summary layout of the gnizr table of contents.
+#summary One-sentence summary of this page.
 
 = The Basics=
  # How do I login and logout?
