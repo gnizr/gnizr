@@ -1,0 +1,19 @@
+<!DOCTYPE xwork PUBLIC "-//OpenSymphony Group//XWork 1.0//EN"
+	"http://www.opensymphony.com/xwork/xwork-1.0.dtd">
+<xwork>
+	
+	<package name="gnizr-rss1.0" extends="gnizr-default" namespace="/data/rss1.0">		
+		<action name="bookmark" class="com.gnizr.core.web.action.bookmark.ListUserBookmark">
+			<interceptor-ref name="loggedIn"/>			
+			<interceptor-ref name="gnizrDefaultStack"/>	
+			<param name="sessionMode">false</param>
+			<param name="quietMode">true</param>
+			<param name="perPageCount">10</param>	
+			<result name="success" type="freemarker">
+				<param name="location">/rss/userhome-rss1_0.ftl</param>
+				<param name="contentType">xhtml/xml</param>
+			</result>										
+			<result name="error">/error.ftl</result>	
+		</action>
+	</package>
+</xwork>

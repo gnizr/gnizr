@@ -1,0 +1,73 @@
+<!DOCTYPE xwork PUBLIC "-//OpenSymphony Group//XWork 1.0//EN"
+	"http://www.opensymphony.com/xwork/xwork-1.0.dtd">
+<xwork>
+	
+	
+	<!-- see also webwork doc: http://www.opensymphony.com/webwork/wikidocs/Interceptors.html -->
+	
+	<package name="gnizr-basic" extends="webwork-default">
+		<interceptors>
+			
+			<!-- sets the LoggedInUser if an action implements LoggedInUserAware -->
+			<interceptor name="loggedIn"
+				class="com.gnizr.core.web.interceptor.LoggedInUserInterceptor"/>
+			
+			<!-- force a user to login. If an action implements LoggedInUserAware
+			the loggedInUser object is set on the action -->
+			<interceptor name="auth"
+				class="com.gnizr.core.web.interceptor.AuthenticationInterceptor"/>
+			
+			<!-- force a user to login as 'gnizr'.  -->
+			<interceptor name="auth-gnizr"
+				class="com.gnizr.core.web.interceptor.GnizrAuthenticationInterceptor"/>
+			
+			<!-- sets the configuration of this gnizr installation  -->
+			<interceptor name="config-gnizr"
+				class="com.gnizr.core.web.interceptor.ConfigurationInterceptor"/>
+			
+			<!-- routes user requests to a maintenance page if the server is being worked on -->
+			<interceptor name="server-maintenance"
+				class="com.gnizr.core.web.interceptor.ServerMaintenanceInterceptor"/>
+		</interceptors>
+		
+		
+		<!-- all action result of type "login" will redirect to /login by default -->
+		<global-results>
+			<result name="login" type="redirect">/login</result>
+			<result name="maintenance" type="freemarker">/server-maintenance.ftl</result>
+		</global-results>
+	</package>
+	
+	<package name="gnizr-default" extends="gnizr-basic">
+		<interceptors>
+			<interceptor name="reader-policy"
+				class="com.gnizr.core.web.interceptor.EnforceReaderPolicyInterceptor"/>
+			
+			<interceptor-stack name="gnizrDefaultStack">			
+				<interceptor-ref name="server-maintenance"/>
+				<interceptor-ref name="config-gnizr"/>
+				<interceptor-ref name="reader-policy"/>
+				<interceptor-ref name="exception"/>
+				<interceptor-ref name="servlet-config"/>
+				<interceptor-ref name="static-params"/>
+				<interceptor-ref name="params"/>
+				<interceptor-ref name="prepare"/>
+			</interceptor-stack>
+			
+			<interceptor-stack name="gnizrNoPrepareStack">	
+				<interceptor-ref name="server-maintenance"/>						
+	            <interceptor-ref name="config-gnizr"/>				
+				<interceptor-ref name="reader-policy"/>
+				<interceptor-ref name="exception"/>
+				<interceptor-ref name="servlet-config"/>
+				<interceptor-ref name="static-params"/>
+				<interceptor-ref name="params"/>
+			</interceptor-stack>
+		</interceptors>
+	
+		
+		<!-- the default interceptor stack if an action doesn't specify any -->
+		<default-interceptor-ref name="gnizrDefaultStack"/>
+	</package>
+	
+</xwork>
