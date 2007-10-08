@@ -1,4 +1,4 @@
-#summary One-sentence summary of this page.
+#summary Table of Contents
 
 = The Basics=
  # How do I login and logout?
