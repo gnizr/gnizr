@@ -11,3 +11,32 @@ Add your content here.  Format your content with:
   * Text in *bold* or _italic_
   * Headings, paragraphs, and lists
   * Automatic links to other wiki pages
+
+= The Basics=
+ # How do I login and logout?
+ # What am I seeing on my Homepage?
+ # How do I change my user profile and password?
+ # How do I Save bookmarks?
+ # What is the user homepage overview?
+ # How do I find bookmarks using tags?
+ # How do I find bookmarks using the search box?
+ # How do I view bookmark history?
+ # How do I user Folders?
+
+= Bookmark Views =
+ # What is a Tagcloud?
+ # What is a Clustermap?
+ # What is a Timeline?
+ # How is Google Maps used within gnizr?
+
+= Tagging =
+ # What is the tagging syntax?
+ # How do I add Location Tags?
+ # How do I create a For-user Tag?
+ # How do I create an RSS Subscription Tag?
+ # How to rename and delete tags?
+ # What are tag relations?
+
+= Changing Settings =
+ # What options are available within Settings?
+ # How do I import from other websites?
