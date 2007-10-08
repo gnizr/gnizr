@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+	"http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	<bean id="loggedInUserInterceptor" class="com.gnizr.core.web.interceptor.LoggedInUserInterceptor" singleton="true">
+		<property name="userManager">
+			<ref bean="userManager"/>
+		</property>		
+	</bean>
+	
+	<bean id="gnizrAuthenticationInterceptor" class="com.gnizr.core.web.interceptor.GnizrAuthenticationInterceptor" singleton="true">
+		<property name="userManager">
+			<ref bean="userManager"/>
+		</property>		
+	</bean>
+	
+	<bean id="configurationInterceptor" class="com.gnizr.core.web.interceptor.ConfigurationInterceptor" singleton="true">
+		<property name="gnizrConfiguration">
+			<ref bean="gnizrConfiguration"/>
+		</property>
+	</bean>
+	
+	<bean id="enforceReaderPolicyInterceptor" class="com.gnizr.core.web.interceptor.EnforceReaderPolicyInterceptor" singleton="true">
+		<property name="gnizrConfiguration">
+			<ref bean="gnizrConfiguration"/>
+		</property>		
+	</bean>
+	
+	<bean id="serverMaintenanceInterceptor" class="com.gnizr.core.web.interceptor.EnforceReaderPolicyInterceptor" singleton="true">
+		<property name="gnizrConfiguration">
+			<ref bean="gnizrConfiguration"/>
+		</property>	
+	</bean>
+	
+</beans>
