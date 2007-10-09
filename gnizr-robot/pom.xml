@@ -25,6 +25,12 @@
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
 		</dependency>	
+     	<dependency>
+			<groupId>com.gnizr.test</groupId>
+			<artifactId>gnizr-test</artifactId>
+			<version>2.2</version>
+			<scope>test</scope>
+		</dependency>			
 		<dependency>
 			<groupId>com.gnizr.core.web</groupId>
 			<artifactId>gnizr-web</artifactId>
