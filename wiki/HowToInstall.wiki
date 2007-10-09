@@ -1,3 +1,4 @@
 #summary how to install gnizr step-by-step
+#labels Featured
 
 _coming soon..._
