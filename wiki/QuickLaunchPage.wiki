@@ -1,6 +1,6 @@
 #summary gnizr Quick Launch.
 
- # [LoginLogout Login/Logout]
+ # [LoginLogout How do I Login/Logout?]
  # What am I seeing?
  # How do I create a bookmark?
  # How do I find a bookmark?
