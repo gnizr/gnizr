@@ -4,9 +4,9 @@
  # [WhatAmISeeing What am I seeing?]
  # [CreateBookmark How do I create a bookmark?]
  # [FindBookmark How do I find a bookmark?]
-   # [FindBookmarkTagCloud Tag Cloud]
-   # [FindBookmarkSearch Search]
+   # Tag Cloud
+   # Search
  # [SearchSpecificTopic How do search for a specific topic?]
-   # [SearchSpecificTopicTagCloud Tag Cloud]
-   # [SearchSpecificTopicSearch Search Tool]
+   # Tag Cloud
+   # Search Tool
  # [CreateRSSFeed How do I create an RSS feed?]
