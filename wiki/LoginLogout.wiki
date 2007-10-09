@@ -1,0 +1,15 @@
+#summary How to login and logout of gnizr.
+
+= How do I login and logout?=
+===Login Screen===
+http://sdsfie.imagemattersllc.com/gnizr/images/Login-Screen.png
+
+To log in to gnizr:
+
+ # Go to http://yoursite/login (ie. http://im.gnizr.com/
+ # Enter username and password, and then click on "login"
+ # If you are unable to login, contact your system administrator.
+
+To logout from gnizr, go to your user home page (i.e. http://yoursite/home), click on the "logout" link, which is located in the top right menu bar.  
+===User Logout===
+http://sdsfie.imagemattersllc.com/gnizr/images/logout.PNG
