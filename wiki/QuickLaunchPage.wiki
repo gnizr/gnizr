@@ -13,7 +13,7 @@
 
 = How do I login and logout?=
 ===Login Screen===
-***************************************************
+http://farm3.static.flickr.com/2242/1526175068_0f36c25da1_o.png
 
 To log in to gnizr:
 
