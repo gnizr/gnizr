@@ -18,6 +18,7 @@
      <module>gnizr-webapp</module>
      <module>gnizr-timeline</module>
      <module>gnizr-clustermap</module>
+     <module>gnizr-test</module>
   </modules>
 
   <repositories>
