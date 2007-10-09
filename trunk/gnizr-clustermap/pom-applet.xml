@@ -1,5 +1,7 @@
 <?xml version="1.0"?>
-<project>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<parent>
 		<artifactId>gnizr</artifactId>
 		<groupId>com.gnizr</groupId>
@@ -13,10 +15,14 @@
 	<url>http://dev.gnizr.com/gnizr-clustermap-applet</url>
 	<dependencies>
 		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+		</dependency>			
+		<dependency>
 			<groupId>aduna</groupId>
 			<artifactId>aduna-clustermap-gnizr</artifactId>
 			<version>2006.3-beta2</version>
-		</dependency>	
+		</dependency>	 
 	</dependencies>
 	<build>
 		<plugins>
