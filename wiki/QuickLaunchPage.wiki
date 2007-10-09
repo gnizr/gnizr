@@ -52,7 +52,7 @@ Bookmarks display information about the page or item that is bookmarked.  The in
     * Pop-up Preview: When the user mouses over the icon it displays a small view of the page to which it is linked.
 
 ===Bookmark Example===
-http://farm3.static.flickr.com/2301/1526525874_4f5751b7ce_o.png
+http://farm3.static.flickr.com/2152/1526525816_fef83624d8_o.png
 
 ==Tag Cloud==
 The tag cloud contains many different ways to view as well as edit new and existing tags. 
