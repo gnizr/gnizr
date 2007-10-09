@@ -1,7 +1,7 @@
 #summary gnizr Quick Launch.
 
  # [LoginLogout How do I Login/Logout?]
- # What am I seeing?
+ # [WhatAmISeeing What am I seeing?]
  # How do I create a bookmark?
  # How do I find a bookmark?
    # Tag Cloud
