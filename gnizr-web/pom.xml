@@ -15,6 +15,18 @@
 	<url>http://dev.gnizr.com/gnizr-web</url>
 	<dependencies>
 		<dependency>
+			<groupId>dbunit</groupId>
+			<artifactId>dbunit</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>com.gnizr.core</groupId>
 			<artifactId>gnizr-core</artifactId>
 			<version>2.2</version>
@@ -43,6 +55,6 @@
 			<artifactId>servlet-api</artifactId>
 			<version>2.3</version>
 			<scope>provided</scope>
-		</dependency>					
+		</dependency>
 	</dependencies>
 </project>
