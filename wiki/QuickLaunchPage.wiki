@@ -11,7 +11,7 @@
    # Search Tool
  # [CreateRSSFeed How do I create an RSS feed?]
 
-
+----
 = How do I login and logout?=
 ===Login Screen===
 http://sdsfie.imagemattersllc.com/gnizr/images/Login-Screen.png
@@ -26,6 +26,7 @@ To logout from gnizr, go to your user home page (i.e. http://yoursite/home), cli
 ===User Logout===
 "coming soon"
 
+----
 =What am I seeing on my Homepage?=
 
 ==Navigation Bar==
@@ -81,6 +82,7 @@ Form field descriptions:
 ===Create Bookmark Example===
 http://www.usersmarts.com/share/Projects/gnizr/images/for-user-825.png
 
+----
 =How do I find bookmarks?=
 
 ==How do I Find bookmarks using tags?==
@@ -118,6 +120,7 @@ The search syntax of Match tags supports various logical operations. For example
     * "+apple ~macintosh": find bookmarks that have the tag "apple", but if the bookmark also have the tag "macintosh", rate it lower than if the bookmark does not.
     * "apple"*: find bookmarks that have tags such as "apple", "apples", "applesauce", or "applet". 
 
+----
 =How do I find bookmarks?=
 
 ==How do I Find bookmarks using tags?==
@@ -155,6 +158,7 @@ The search syntax of Match tags supports various logical operations. For example
     * "+apple ~macintosh": find bookmarks that have the tag "apple", but if the bookmark also have the tag "macintosh", rate it lower than if the bookmark does not.
     * "apple"*: find bookmarks that have tags such as "apple", "apples", "applesauce", or "applet". 
 
+----
 =RSS Subscription machine tag=
 
 Syntax: subscribe:this
