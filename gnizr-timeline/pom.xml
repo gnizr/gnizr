@@ -1,4 +1,7 @@
-<?xml version="1.0"?><project>
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <parent>
     <artifactId>gnizr</artifactId>
     <groupId>com.gnizr</groupId>
@@ -10,12 +13,24 @@
   <name>gnizr webapp component (timeline)</name>
   <version>2.2</version>
   <url>http://dev.gnizr.com/gnizr-timeline</url>
-  <dependencies>
-    <dependency>
-      <groupId>com.gnizr.core.web</groupId>
-      <artifactId>gnizr-web</artifactId>
-      <version>2.2</version>
-      <scope>compile</scope>
-    </dependency>
-  </dependencies>
+	<dependencies>
+		<dependency>
+			<groupId>dbunit</groupId>
+			<artifactId>dbunit</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.gnizr.core.web</groupId>
+			<artifactId>gnizr-web</artifactId>
+			<version>2.2</version>
+			<scope>compile</scope>
+		</dependency>
+	</dependencies>
 </project>
