@@ -11,7 +11,7 @@ The Navigation bar allows the user to navigate through their personal bookmarks,
     * User Utilities: These are quick links to different sections of gnizr.  Adding a bookmark information can be located in section 1.4.  And informaiton dealing with bookmarks sent to yourself check in section 3.4.  More infromatinon on the search tool can be located in section 1.7 
 
 ===Navigation Bar Example===
-http://www.usersmarts.com/share/Projects/gnizr/images/Navigation_Bar-858.png
+coming soon
 
 ==Bookmark==
 Bookmarks display information about the page or item that is bookmarked.  The information that is listed for users to see is as follows:
@@ -25,7 +25,7 @@ Bookmarks display information about the page or item that is bookmarked.  The in
     * Pop-up Preview: When the user mouses over the icon it displays a small view of the page to which it is linked.
 
 ===Bookmark Example===
-http://www.usersmarts.com/share/Projects/gnizr/images/Book_Mark-858.png
+coming soon
 
 ==Tag Cloud==
 The tag cloud contains many different ways to view as well as edit new and existing tags. 
@@ -35,4 +35,4 @@ The tag cloud contains many different ways to view as well as edit new and exist
     * Tag Cloud Options
     * Quick links to settings options
 ===Tag Cloud Example===
-http://www.usersmarts.com/share/Projects/gnizr/images/Tag-Cloud.png
+coming soon
