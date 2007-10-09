@@ -9,7 +9,8 @@ Usage: request gnizr's to monitor a RSS feed and automatically import new feed i
 ===Example RSS subscription==
 http://sdsfie.imagemattersllc.com/gnizr/images/sub-this-785.png
 
-Notes: This machine tag must be used on a bookmark whose URL is a valid RSS feed. New feeds are monitored by the gnizr system periodically. When a new feed items are found, they will appear on the "links for me" page. 
+Notes: This machine tag must be used on a bookmark whose URL is a valid RSS feed. New feeds are monitored by the gnizr system 
+periodically. When a new feed items are found, they will appear on the "links for me" page. 
 
 ===Example of Links for me===
 http://sdsfie.imagemattersllc.com/gnizr/images/link-4-me-785.png
