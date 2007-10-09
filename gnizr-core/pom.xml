@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
@@ -14,23 +15,35 @@
 	</parent>
 	<dependencies>
 		<dependency>
+			<groupId>dbunit</groupId>
+			<artifactId>dbunit</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>com.gnizr.db</groupId>
 			<artifactId>gnizr-db</artifactId>
-			<version>2.2</version>			
-			<scope>compile</scope>			
+			<version>2.2</version>
+			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>rome</groupId>
 			<artifactId>rome</artifactId>
-			<version>0.9</version>			
-			<scope>compile</scope>			
+			<version>0.9</version>
+			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.geonames</groupId>
 			<artifactId>geonames</artifactId>
-			<version>0.4</version>			
-			<scope>compile</scope>			
-		</dependency>		
+			<version>0.4</version>
+			<scope>compile</scope>
+		</dependency>
 		<dependency>
 			<groupId>commons-httpclient</groupId>
 			<artifactId>commons-httpclient</artifactId>
