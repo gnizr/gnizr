@@ -11,10 +11,9 @@
    # Search Tool
  # [CreateRSSFeed How do I create an RSS feed?]
 
-----
 = How do I login and logout?=
 ===Login Screen===
-http://sdsfie.imagemattersllc.com/gnizr/images/Login-Screen.png
+***************************************************
 
 To log in to gnizr:
 
@@ -24,7 +23,7 @@ To log in to gnizr:
 
 To logout from gnizr, go to your user home page (i.e. http://yoursite/home), click on the "logout" link, which is located in the top right menu bar.  
 ===User Logout===
-"coming soon"
+http://farm3.static.flickr.com/2232/1525658597_61e86a7b40_o.png
 
 ----
 =What am I seeing on my Homepage?=
@@ -39,7 +38,7 @@ The Navigation bar allows the user to navigate through their personal bookmarks,
     * User Utilities: These are quick links to different sections of gnizr.  Adding a bookmark information can be located in section 1.4.  And informaiton dealing with bookmarks sent to yourself check in section 3.4.  More infromatinon on the search tool can be located in section 1.7 
 
 ===Navigation Bar Example===
-coming soon
+http://farm3.static.flickr.com/2034/1525658645_73cdd1b87d_o.png
 
 ==Bookmark==
 Bookmarks display information about the page or item that is bookmarked.  The information that is listed for users to see is as follows:
@@ -53,7 +52,7 @@ Bookmarks display information about the page or item that is bookmarked.  The in
     * Pop-up Preview: When the user mouses over the icon it displays a small view of the page to which it is linked.
 
 ===Bookmark Example===
-coming soon
+http://farm3.static.flickr.com/2301/1526525874_4f5751b7ce_o.png
 
 ==Tag Cloud==
 The tag cloud contains many different ways to view as well as edit new and existing tags. 
@@ -63,7 +62,7 @@ The tag cloud contains many different ways to view as well as edit new and exist
     * Tag Cloud Options
     * Quick links to settings options
 ===Tag Cloud Example===
-coming soon
+http://farm3.static.flickr.com/2301/1526525874_4f5751b7ce_o.png
 
 =How do I create a bookmark?=
 To save a new bookmark to your gnizr account:
@@ -80,7 +79,7 @@ Form field descriptions:
     * tags: a list of keywords that describe this bookmark. Separate multiple tags spaces.
 
 ===Create Bookmark Example===
-http://www.usersmarts.com/share/Projects/gnizr/images/for-user-825.png
+***************************************************
 
 ----
 =How do I find bookmarks?=
@@ -166,10 +165,9 @@ Syntax: subscribe:this
 Usage: request gnizr's to monitor a RSS feed and automatically import new feed items
 
 ===Example RSS subscription==
-http://sdsfie.imagemattersllc.com/gnizr/images/sub-this-785.png
+***************************************************
 
 Notes: This machine tag must be used on a bookmark whose URL is a valid RSS feed. New feeds are monitored by the gnizr system 
 periodically. When a new feed items are found, they will appear on the "links for me" page. 
 
-===Example of Links for me===
-http://sdsfie.imagemattersllc.com/gnizr/images/link-4-me-785.png
+===Example of Links for me=== http://farm3.static.flickr.com/2225/1525658879_a040360d69_o.png
