@@ -79,7 +79,8 @@ Form field descriptions:
     * tags: a list of keywords that describe this bookmark. Separate multiple tags spaces.
 
 ===Create Bookmark Example===
-***************************************************
+http://farm3.static.flickr.com/2035/1525733003_4c20a9e683_o.png
+http://farm3.static.flickr.com/2245/1526600708_c997bc3c40_o.png
 
 ----
 =How do I find bookmarks?=
