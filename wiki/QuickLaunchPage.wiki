@@ -1,15 +1,15 @@
 #summary gnizr Quick Launch.
 
- # [LoginLogout How do I Login/Logout?]
- # [WhatAmISeeing What am I seeing?]
- # [CreateBookmark How do I create a bookmark?]
- # [FindBookmark How do I find a bookmark?]
+ # How do I Login/Logout?
+ # What am I seeing?
+ # How do I create a bookmark?
+ # How do I find a bookmark?
    # Tag Cloud
    # Search
- # [SearchSpecificTopic How do search for a specific topic?]
+ # How do search for a specific topic?
    # Tag Cloud
    # Search Tool
- # [CreateRSSFeed How do I create an RSS feed?]
+ # How do I create an RSS feed?
 
 = How do I login and logout?=
 ===Login Screen===
@@ -17,7 +17,7 @@ http://farm3.static.flickr.com/2242/1526175068_0f36c25da1_o.png
 
 To log in to gnizr:
 
- # Go to http://yoursite/login (ie. http://im.gnizr.com/
+ # Go to http://yoursite/login
  # Enter username and password, and then click on "login"
  # If you are unable to login, contact your system administrator.
 
@@ -34,8 +34,8 @@ The Navigation bar allows the user to navigate through their personal bookmarks,
     * Current Page Location: Breadcrumb trail to show the user's current viewing location.
     * Personal Analysis Tools: These links allow the user to view bookmarks in different ways, enabling analysis on them.  In addition the user is able to post as well as view bookmarks supplies to them by other users.
     * User Status and Help: This shows the acount that is logged into gnizr, and allows the user an option to log out.  The help link is located here as well.
-    * Other Tools: The links that allows the user to work on folders as well as import feeds is located here.
-    * User Utilities: These are quick links to different sections of gnizr.  Adding a bookmark information can be located in section 1.4.  And informaiton dealing with bookmarks sent to yourself check in section 3.4.  More infromatinon on the search tool can be located in section 1.7 
+    * Other Tools: The links that allows the user to work on folders, archived bookmarks as well as modify and edit RSS subscriptions.
+    * User Utilities: These are quick links to different sections of gnizr.  The user is able to add a bookmark, view bookmarks that have been assigned to you by other people or robots, or search for bookmarks.
 
 ===Navigation Bar Example===
 http://farm3.static.flickr.com/2034/1525658645_73cdd1b87d_o.png
@@ -46,7 +46,7 @@ Bookmarks display information about the page or item that is bookmarked.  The in
     * Bookmark Link: This gives the page title as well as serving as a link to the page itself.
     * Bookmark Creator: This lets users know who created the bookmark.  It also allows users a link to that user's page.
     * Number of users for a Bookmark: This informs users how many users have this particular bookmark on their bookmark page.
-    * Commands: This section gives users quick access to the Add, Delete, and Edit commands.
+    * Commands: This allows the user to edit the bookmark.
     * Tags:  This is a listing of tags for that particular bookmark.  They also serve as links that allow the user to search on that particular tag.
     * Creation Date:  This informs users as to what day the bookmark was created.
     * Pop-up Preview: When the user mouses over the icon it displays a small view of the page to which it is linked.
@@ -57,19 +57,18 @@ http://farm3.static.flickr.com/2152/1526525816_fef83624d8_o.png
 ==Tag Cloud==
 The tag cloud contains many different ways to view as well as edit new and existing tags. 
 
-    * Tag Relations
-    * Tag Listing
-    * Tag Cloud Options
-    * Quick links to settings options
+    * Tag Relations: Allows the user to create relationships between tags to enable easy navigation and comparisons.
+    * Tag Listing: Lists the tags for the bookmarks that are being viewed.
+    * Tag Cloud Options: This allows the user to easily modify the tag cloud view and properties
+
 ===Tag Cloud Example===
 http://farm3.static.flickr.com/2301/1526525874_4f5751b7ce_o.png
 
 =How do I create a bookmark?=
 To save a new bookmark to your gnizr account:
 
- # Go to your user home page and click on "post", which is located in the top left menu bar.
- # Or, your can go directly to http://yoursite/post
- # Fill out the "save bookmark" form and click "save"
+ # On the toolbar across the top of the page there is a "+bookmark" link which will allow you to post new bookmarks to your account.  Or, your can go directly to http://yoursite/post.
+ # Fill out the "save bookmark" form and click "save".
 
 Form field descriptions:
 
@@ -121,30 +120,17 @@ The search syntax of Match tags supports various logical operations. For example
     * "apple"*: find bookmarks that have tags such as "apple", "apples", "applesauce", or "applet". 
 
 ----
-=How do I find bookmarks?=
+=How do I find other user's bookmarks?=
 
-==How do I Find bookmarks using tags?==
+==How do I Find other user's bookmarks using tags?==
 
-To quickly find bookmarks that you have previously saved, you can exploit your tag cloud. For example, you have saved a bookmark
-of http://www.cnn.com and tagged it using "news" and "cnn". To find this bookmark, in your tag cloud, click on either "cnn" or "news".
-
-You can also go directly to bookmarks of a particular tag via URL.
-
-    * Your bookmarks tagged "cnn": http://yoursite/user/yourusername/tag/cnn
-    * Your bookmarks tagged "news": http://yoursite/user/yourusername/tag/news
-
-You can also see bookmarks tagged by other users via URL
+The easiest way to search fro a bookmark using tags is to see bookmarks tagged by other users via URL as the following example describes.
 
     * Bookmarks tagged "cnn" : http://yoursite/tag/cnn
 
 ==How do I find bookmarks using the search box?==
 
-You can search for bookmarks that you certain criteria that you have defined.  There are two ways to search bookmarks:
-
-   1. Match text: search texts in either the description or the notes field of a bookmark
-   2. Match tags: search texts in the tags field of a bookmark
-
-The search syntax of Match text supports natural language text search. For example
+To search for community bookmarks with the search box, the user need only to enter the desired search into the search text box and choose community from the dropdown box and hit the search button.
 
     * java programming related to database
     * web technology on knowledge management
