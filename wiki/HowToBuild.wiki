@@ -30,7 +30,7 @@ Assume that you've checked out the source code in a top-level directory called `
     * `cd gnizr/gnizr-webapp`
     * `mvn war:war`
 
-*Note*: you probably want to modify various configuration files in gnizr-webapp before creating the WAR file. Those default configurations may not apply for your local machine. _(todo: link to configuration file descriptions)_
+*Note*: you probably want to modify various configuration files in `gnizr-webapp` before creating the WAR file. The default configurations may not apply for your local machine. _(todo: link to configuration file descriptions)_
 
 
 === Problems & Issues === 
