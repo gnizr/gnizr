@@ -1,0 +1,13 @@
+#summary Past, current and future gnizr releases and our release process
+#labels Phase-Implementation
+
+This page describes the past, current and future gnizr releases and our release process. Part of our release process is inspired by which of the [http://subversion.tigris.org/roadmap.html Subversion] project.
+
+== How We Plan Releases ==
+
+== Current Releases ==
+
+== Upcoming Releases ==
+
+== Past Releases ==
+
