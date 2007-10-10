@@ -51,7 +51,7 @@ The Navigation bar allows the user to navigate through their personal bookmarks,
     * Other Tools: The links that allows the user to work on folders, archived bookmarks as well as modify and edit RSS subscriptions.
     * User Utilities: These are quick links to different sections of gnizr.  The user is able to add a bookmark, view bookmarks that have been assigned to you by other people or robots, or search for bookmarks.
 
-||http://farm3.static.flickr.com/2034/1525658645_73cdd1b87d_o.png||
+||http://farm3.static.flickr.com/2034/1525658645_7df0f912d4.jpg||
 
 ===Bookmark===
 Bookmarks display information about the page or item that is bookmarked.  The information that is listed for users to see is as follows:
@@ -64,7 +64,7 @@ Bookmarks display information about the page or item that is bookmarked.  The in
     * Creation Date:  This informs users as to what day the bookmark was created.
     * Pop-up Preview: When the user mouses over the icon it displays a small view of the page to which it is linked.
 
-||http://farm3.static.flickr.com/2152/1526525816_fef83624d8_o.png||
+||http://farm3.static.flickr.com/2152/1526525816_64082897ba.jpg||
 
 ===Tag Cloud===
 The tag cloud contains many different ways to view as well as edit new and existing tags. 
@@ -73,7 +73,7 @@ The tag cloud contains many different ways to view as well as edit new and exist
     * Tag Listing: Lists the tags for the bookmarks that are being viewed.
     * Tag Cloud Options: This allows the user to easily modify the tag cloud view and properties
 
-||http://farm3.static.flickr.com/2301/1526525874_4f5751b7ce_o.png||
+||http://farm3.static.flickr.com/2301/1526525874_bd07bf59c2.jpg||
 
 ==How do I create a bookmark?==
 To save a new bookmark to your gnizr account:
@@ -88,8 +88,8 @@ Form field descriptions:
     * notes: an optional detail description or comments about the bookmark
     * tags: a list of keywords that describe this bookmark. Separate multiple tags spaces.
 
-||http://farm3.static.flickr.com/2035/1525733003_4c20a9e683_o.png||
-||http://farm3.static.flickr.com/2245/1526600708_c997bc3c40_o.png||
+||http://farm3.static.flickr.com/2035/1525733003_46e4b03d23.jpg||
+||http://farm3.static.flickr.com/2245/1526600708_c02aaf3999.jpg||
 
 ----
 ==How do I find bookmarks?==
@@ -164,7 +164,7 @@ periodically. When a new feed items are found, they will appear on the "for you"
 
 Another option is to select the RSS subscription link contained within the "Other Tools" section of the toolbar.  At the bottom of this page there is a text box where the user is able to enter the URL for a feed and select the subscribe button.  This will then take the user to the following page where they are able to set the frequency and location the bookmarks are saved.
 
-||http://farm3.static.flickr.com/2328/1525780467_fed02d3895_o.png||
+||http://farm3.static.flickr.com/2328/1525780467_19145b770a.jpg||
 
 ==== Location of the for you link ==== 
-||http://farm3.static.flickr.com/2225/1525658879_a040360d69_o.png||
+||http://farm3.static.flickr.com/2225/1525658879_9b5fb5fffe.jpg||
