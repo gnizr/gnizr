@@ -35,4 +35,4 @@ Assume that you've checked out the source code in a top-level directory called `
 
 === Problems & Issues === 
 
-Please report bugs and submit your questions to the [http://groups.google.com/group/gnizr-users user discussion group]. 
+Please report bugs and submit your questions to the [http://groups.google.com/group/gnizr-users Gnizr User Discussion]. 
