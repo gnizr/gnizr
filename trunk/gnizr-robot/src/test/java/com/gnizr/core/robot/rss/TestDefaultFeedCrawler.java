@@ -71,12 +71,6 @@ public class TestDefaultFeedCrawler extends GnizrWebappTestBase {
 	}
 
 
-	public void testDoCrawl3() throws Exception{
-		FeedSubscription feed403 = feedManager.getSubscription(403);
-		FeedCrawlResult result = crawler.doCrawl(feed403);
-		assertTrue(result.getEntries().size() > 0);
-	}
-	
 	@Override
 	protected IDataSet getDataSet() throws Exception {
 		return new FlatXmlDataSet(TestDefaultFeedCrawler.class
