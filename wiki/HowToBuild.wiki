@@ -1,0 +1,38 @@
+#summary How to check out and build gnizr on your local machine
+#labels Phase-Implementation,Featured
+
+This page describe the steps to compile gnizr source code. Our current build environment is configured as the follows. 
+
+=== Required Tools ===
+  * Apache Maven 2.0.7
+  * Apache Ant 1.6.5
+  * Java SE Development Kit 6 (JDK 1.6)
+  
+=== Check Out Source Code ===
+
+Follow the subversion [http://code.google.com/p/gnizr/source check out instructions].
+
+=== Compile Source Code ===
+
+Assume that you've checked out the source code in a top-level directory called `gnizr`.
+
+  # Go to the top-level directory
+    * `cd gnizr`
+  # Compile gnizr projects and run Junit tests
+    * `mvn -U install`  
+  # Build clustermap applet JAR file. 
+    *`cd gnizr/gnizr-clustermap`
+    *`mvn -f pom-applet.xml -Dmaven.test.skip=true assembly:assembly`
+  # Copy clustermap applet JAR to the gnizr web application project
+    *`cd gnizr/gnizr-webapp`
+    *`cp ../gnizr-clustermap/target/gnizr-clustermap-applet-2.2-jar-with-dependencies.jar src/main/webapp/applets/gnizr-clustermap-applet.jar`
+  # Create gnizr web application
+    * `cd gnizr/gnizr-webapp`
+    * `mvn war:war`
+
+*Note*: you probably want to modify various configuration files in gnizr-webapp before creating the WAR file. Those default configurations may not apply for your local machine. _(todo: link to configuration file descriptions)_
+
+
+=== Problems & Issues === 
+
+Please report bugs and submit your questions to the [http://groups.google.com/group/gnizr-users user discussion group]. 
