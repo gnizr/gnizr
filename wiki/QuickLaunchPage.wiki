@@ -1,6 +1,34 @@
-#summary gnizr Quick Launch.
+#summary Learn how to use gnizr in 10 minutes.
 
- # How do I Login/Logout?
+This page describes basic features to help you get started using gnizr. For advanced features and a detailed user guide, read the UserGuide page.  
+
+== Before Using Gnizr ==
+
+  # Make sure gnizr is probably installed and is accessible
+  # Create an user account for yourself, or get an account from your administrator 
+  
+In this document, we assume your gnizr application is accessible at http://gnizr.yoursite.com, and your user account is `harryn`.
+
+=== For Administrators ===
+
+All gnizr installations come with a default "super" user: `gnizr`. This account has the administrative capability to change gnizr runtime configurations. The *default password* of this account is `gnizr`. For security reasons, *YOU SHOULD CHANGE THIS PASSWORD*. 
+
+=== For Users ===
+
+After you have logged in to your account, you can change your password under `settings`, `Change your password`.
+
+== How do I login and logout? ==
+
+Log into your account at gnizr's front page (e.g., http://gnizr.yoursite.com). 
+
+|| http://farm3.static.flickr.com/2242/1526175068_8103454071.jpg ||
+
+
+The `logout` link is the located on the top-right of your user home page.
+
+|| http://farm3.static.flickr.com/2232/1525658597_a7b40b6bfc.jpg ||
+
+
  # What am I seeing?
  # How do I create a bookmark?
  # How do I find a bookmark?
@@ -10,20 +38,6 @@
    # Tag Cloud
    # Search Tool
  # How do I create an RSS feed?
-
-= How do I login and logout?=
-===Login Screen===
-http://farm3.static.flickr.com/2242/1526175068_0f36c25da1_o.png
-
-To log in to gnizr:
-
- # Go to http://yoursite/login
- # Enter username and password, and then click on "login"
- # If you are unable to login, contact your system administrator.
-
-To logout from gnizr, go to your user home page (i.e. http://yoursite/home), click on the "logout" link, which is located in the top right menu bar.  
-===User Logout===
-http://farm3.static.flickr.com/2232/1525658597_61e86a7b40_o.png
 
 ----
 =What am I seeing on my Homepage?=
