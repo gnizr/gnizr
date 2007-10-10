@@ -22,7 +22,6 @@
   </modules>
 
   <repositories>
-
     <repository>
       <id>opensymphony</id>
       <name>Open Symphony maven repository</name>
@@ -32,7 +31,6 @@
         <enabled>false</enabled>
       </snapshots>
     </repository>
-
     <repository>
       <id>ibiblio</id>
       <name>Ibiblio - the public's library and digital archive</name>
@@ -54,21 +52,6 @@
     </repository>
 
   </repositories>
-
-  <pluginRepositories>
-    <pluginRepository>
-      <id>central</id>
-      <name>Maven Plugin Repository</name>
-      <url>http://repo1.maven.org/maven2</url>
-      <layout>default</layout>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-      <releases>
-        <updatePolicy>never</updatePolicy>
-      </releases>
-    </pluginRepository>
-  </pluginRepositories>
 
   <dependencyManagement>
   <dependencies>
@@ -95,6 +78,7 @@
    <build>
     <plugins>
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <configuration>
           <source>1.5</source>
@@ -102,15 +86,6 @@
           <encoding>UTF-8</encoding>
         </configuration>
       </plugin>
-<!--
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <configuration>
-          <skip>false</skip>
-        </configuration>
-       </plugin>
--->
     </plugins>
   </build>
 </project>
