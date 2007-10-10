@@ -157,4 +157,4 @@ http://farm3.static.flickr.com/2328/1525780467_fed02d3895_o.png
 Notes: This machine tag must be used on a bookmark whose URL is a valid RSS feed. New feeds are monitored by the gnizr system 
 periodically. When a new feed items are found, they will appear on the "links for me" page. 
 
-===Example of Links for me=== http://farm3.static.flickr.com/2225/1525658879_a040360d69_o.png
+=== Example of Links for me === http://farm3.static.flickr.com/2225/1525658879_a040360d69_o.png
