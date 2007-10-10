@@ -21,11 +21,11 @@ Assume that you've checked out the source code in a top-level directory called `
   # Compile gnizr projects and run Junit tests
     * `mvn -U install`  
   # Build clustermap applet JAR file. 
-    *`cd gnizr/gnizr-clustermap`
-    *`mvn -f pom-applet.xml -Dmaven.test.skip=true assembly:assembly`
+    * `cd gnizr/gnizr-clustermap`
+    * `mvn -f pom-applet.xml -Dmaven.test.skip=true assembly:assembly`
   # Copy clustermap applet JAR to the gnizr web application project
-    *`cd gnizr/gnizr-webapp`
-    *`cp ../gnizr-clustermap/target/gnizr-clustermap-applet-2.2-jar-with-dependencies.jar src/main/webapp/applets/gnizr-clustermap-applet.jar`
+    * `cd gnizr/gnizr-webapp`
+    * `cp ../gnizr-clustermap/target/gnizr-clustermap-applet-2.2-jar-with-dependencies.jar src/main/webapp/applets/gnizr-clustermap-applet.jar`
   # Create gnizr web application
     * `cd gnizr/gnizr-webapp`
     * `mvn war:war`
