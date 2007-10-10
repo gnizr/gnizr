@@ -21,13 +21,6 @@ This page contains information on gnizr's external dependencies. Gnizr uses Mave
   * freemarker-2.3.4.jar
   * geonames-0.4.jar
   * georss-0.9.8.jar
-  * gnizr-clustermap-2.2.jar
-  * gnizr-core-2.2.jar
-  * gnizr-db-2.2.jar
-  * gnizr-delicious-2.2.jar
-  * gnizr-robot-2.2.jar
-  * gnizr-timeline-2.2.jar
-  * gnizr-web-2.2.jar
   * htmlparser-1.6.jar
   * jaxen-1.1-beta-8.jar
   * jdom-1.0.jar
