@@ -7,7 +7,6 @@
 <#assign username=loggedInUser.username/>
 <#assign thisPageHref = gzUserFeedUrl(loggedInUser.username,thisFeedUrl)/>
 <#assign title=title+" -- gnizr"/>
-
 <@pageBegin pageTitle=title cssHref=[gzUrl("/css/gnizr-feed.css")]>
 </@pageBegin>
 <@headerBlock/>
@@ -30,7 +29,7 @@
 <ul>
 <#if currentImportFolders?has_content>
 <#list currentImportFolders as f>
-<#assign rmImFdrHref=gzUrl("/settings/feeds/removeFolder.action?feedUrl="+thisFeedUrl+"&importFolders="+f.name)/>
+<#assign rmImFdrHref=gzUrl("/settings/feeds/removeFolder.action?feedUrl="+thisFeedUrl?url+"&importFolders="+f.name?url)/>
 <li>${f.name} <a href="${rmImFdrHref}" title="remove from this list">x</a></li>
 </#list>
 <#else>
@@ -43,7 +42,7 @@
 <td class="feed-setting-value">
 <ul>
 <#list currentSelectedTags as t>
-<#assign rmTagHref=gzUrl("/settings/feeds/removeTag.action?feedUrl="+thisFeedUrl+"&tag="+t?url)/>
+<#assign rmTagHref=gzUrl("/settings/feeds/removeTag.action?feedUrl="+thisFeedUrl?url+"&tag="+t?url)/>
 <li>${t} <a href="${rmTagHref}" title="remove from this list">x</a></li>
 </#list>
 </ul>
