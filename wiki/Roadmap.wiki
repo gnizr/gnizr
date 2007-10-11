@@ -1,5 +1,5 @@
 #summary Past, current and future gnizr releases and our release process
-#labels Phase-Implementation
+#labels Phase-Implementation,Featured
 
 This page describes the past, current and future gnizr releases and our release process.
 
