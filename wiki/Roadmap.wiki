@@ -5,17 +5,15 @@ This page describes the past, current and future gnizr releases and our release 
 
 == How We Plan Releases ==
 
-We do not plan releases with hard deadline, but we will try to release with small incremental changes as often as possible. Gnizr releases come in one of two types: Stable Release and Development Release. Both of which are available for download in the [http://code.google.com/p/gnizr/downloads/list Downloads] section. 
+We do not plan releases with hard deadline, but we will try to release with small incremental changes as often as possible. Gnizr releases are one of two types: Stable Release and Development Release. Both of which are available for download in the [http://code.google.com/p/gnizr/downloads/list Downloads] section. 
 
-Softwares made available under Stable Release are suitable for end-user deployment. New gnizr users are encouraged to use these softwares for their daily "gnizring" needs. The Development Release softwares are intended for developers and advanced users. They usually come with new features and enhancements that currently under development. 
+Softwares made available under the Stable Release are suitable for end-user deployment. New gnizr users are encouraged to use these softwares for their daily "gnizring" needs. The Development Release softwares are intended for developers and advanced users. They usually come with new features and enhancements that are currently under development. 
 
-We will try to make a new Stable Release every 2-3 months and a new Development Release every 2-3 weeks. Stable Release software with major bug-fixes will be available as soon as possible. 
+We will try to make a new Stable Release every 2-3 months and a new Development Release every 2-3 weeks. Stable Release softwares with major bug-fixes will be made available whenever necessary. 
 
-The version number of Stable Releases is in the form `x.y.z`, where `x` and `y` are the major revision and the minor revision number, respectively. The number `z` is for bug-fix revisions. For example, if a software is labeled `2.2.0`, it means that it is the first Stable Release of gnizr software 2.2, and if it is labeled `2.2.3`, it means that it is the third bug fix release of gnizr 2.2. 
+The version number of Stable Release softwares is in the form of `x.y.z`, where `x` and `y` are the major revision and the minor revision number, respectively. The number `z` is for bug-fix revisions. For example, if a software is labeled `2.2.0`, it means that it is the first Stable Release of gnizr software 2.2, and if it is labeled `2.2.3`, it means that it is the third bug-fix release of gnizr 2.2. 
 
-The version number of Development Release is in the form `x.y.0-M#`, where `#` is the milestone number. For example, if a software is labeled `2.2.0-M4`, it means that it is forth milestone release of gnizr 2.2. 
-
-
+The version number of Development Release is in the form of either `x.y.0-M#` or `x.y.0-RC#`. The string `M#` and `RC#` are the Milestone revision number and the Release Candidate revision number, respectively. For example, if a software is labeled `2.2.0-M4`, it means that it is forth milestone release of gnizr 2.2, and if it is labeled `2.2.0-RC1`, it means that it is the first Release Candidate of gnizr 2.2. When the software goes into RC, all API changes are prohibited and source code commits are limited to bug fixes. 
 
 == Current Releases ==
 
