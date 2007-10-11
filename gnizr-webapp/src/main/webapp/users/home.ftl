@@ -1,8 +1,5 @@
-<#-- /webapp/users/home.ftl -->
 <#assign ww=JspTaglibs["/WEB-INF/webwork.tld"] >
-<#-- import Freemarker macros that are common to the site -->
 <#include "/lib/web/macro-lib.ftl"/>
-<#-- import Freemarker macros that are specific to USERS -->
 <#include "./macro-lib.ftl"/>
 <#assign username=user.username/>
 <#assign title="${username}'s bookmarks"/>
