@@ -1,13 +1,24 @@
 #summary Past, current and future gnizr releases and our release process
 #labels Phase-Implementation
 
-This page describes the past, current and future gnizr releases and our release process. Part of our release process is inspired by which of the [http://subversion.tigris.org/roadmap.html Subversion] project.
+This page describes the past, current and future gnizr releases and our release process.
 
 == How We Plan Releases ==
+
+We do not plan releases with hard deadline, but we will try to release with small incremental changes as often as possible. Gnizr releases come in one of two types: Stable Release and Development Release. Both of which are available for download in the [http://code.google.com/p/gnizr/downloads/list Downloads] section. 
+
+Softwares made available under Stable Release are suitable for end-user deployment. New gnizr users are encouraged to use these softwares for their daily "gnizring" needs. The Development Release softwares are intended for developers and advanced users. They usually come with new features and enhancements that currently under development. 
+
+We will try to make a new Stable Release every 2-3 months and a new Development Release every 2-3 weeks. Stable Release software with major bug-fixes will be available as soon as possible. 
+
+The version number of Stable Releases is in the form `x.y.z`, where `x` and `y` are the major revision and the minor revision number, respectively. The number `z` is for bug-fix revisions. For example, if a software is labeled `2.2.0`, it means that it is the first Stable Release of gnizr software 2.2, and if it is labeled `2.2.3`, it means that it is the third bug fix release of gnizr 2.2. 
+
+The version number of Development Release is in the form `x.y.0-M#`, where `#` is the milestone number. For example, if a software is labeled `2.2.0-M4`, it means that it is forth milestone release of gnizr 2.2. 
+
+
 
 == Current Releases ==
 
 == Upcoming Releases ==
 
 == Past Releases ==
-
