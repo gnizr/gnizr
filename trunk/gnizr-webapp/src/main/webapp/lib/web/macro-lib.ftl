@@ -15,7 +15,7 @@ each gnizr page.
 </#function>
 
 <#function gnizrDevVersion >
-  <#return "ALPHA"/>
+  <#return "-RC1"/>
 </#function>
 
 <#-- 
@@ -56,22 +56,6 @@ INPUT: pageTitle:String // the <title/> of this HTML page
 <#macro pageBegin pageTitle="gnizr" cssHref=[] 
 				  bodyOnUnload="" bodyOnLoad="" bodyOnResize="" enableJS=true
 				  thisPageHref="" thisPageBaseHref="" toPageHref="">
-<#-- this hack is needed to pass on the page context to Action executed within the page -->
-<#if (thisPageHref != "")>
-  ${session.setAttribute("thisPageHref",thisPageHref)}
-<#elseif (Session.thisPageHref)?exists>  
- ${session.setAttribute("thisPageHref",null)}
-</#if>
-<#if (thisPageBaseHref != "")>
-  ${session.setAttribute("thisPageBaseHref",thisPageBaseHref)}
-<#elseif (Session.thisPageBaseHref)?exists>  
- ${session.setAttribute("thisPageBaseHref",null)}
-</#if>
-<#if (toPageHref != "")>
-  ${session.setAttribute("toPageHref",toPageHref)}
-<#elseif (Session.toPageHref)?exists>  
-  ${session.setAttribute("toPageHref",null)}
-</#if>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -110,7 +94,22 @@ INPUT: pageTitle:String // the <title/> of this HTML page
 </#if>
 <!-- JAVASCRIPT DATA ENDS -->
 </#if>
-
+<#-- this hack is needed to pass on the page context to Action executed within the page -->
+<#if (thisPageHref != "")>
+  ${session.setAttribute("thisPageHref",thisPageHref)}
+<#elseif (Session.thisPageHref)?exists>  
+ ${session.setAttribute("thisPageHref",null)}
+</#if>
+<#if (thisPageBaseHref != "")>
+  ${session.setAttribute("thisPageBaseHref",thisPageBaseHref)}
+<#elseif (Session.thisPageBaseHref)?exists>  
+ ${session.setAttribute("thisPageBaseHref",null)}
+</#if>
+<#if (toPageHref != "")>
+  ${session.setAttribute("toPageHref",toPageHref)}
+<#elseif (Session.toPageHref)?exists>  
+  ${session.setAttribute("toPageHref",null)}
+</#if>
 <!-- OTHER DATA BEGINS -->
 <#nested/>
 <!-- OTHER DATA ENDS -->
