@@ -52,11 +52,9 @@
 			<value>ABQIAAAA5UsQFqmHpHln5pC8nyp05RTwM0brOpm-All5BF6PoaKBxRWWERS_Vpbx966CLXx9tDQthE6QI_9_bg</value>
 		</property>
 		<!-- Define Snap Shots configuration paramaters -->
-		<!--
 		<property name="snapShotsKey">
-			<value>ap=1&amp;key=4bd2f0bce12b349ff82b1087947a9cca&amp;sb=&amp;th=silver&amp;cl=0&amp;si=&amp;po=&amp;df=1&amp;oi=0&amp;link_icon=on&amp;shots_trigger=icon&amp;lang=en-us&amp;domain=gnizr.com</value>
+			<value></value>
 		</property>
-			-->
 		<!--
 		  Defines whether or not anonymous readers are allowed to view gnizr users' bookmarks 
 			- "close" indicates user login is required for viewing any gnizr user pages
