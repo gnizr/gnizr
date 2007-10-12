@@ -21,3 +21,4 @@ Note: We assume that you have properly installed MySQL database. If you need add
   # Run BASH script to setup database
     * `./loadsch.sh gnizr_db gnizr gnizrpass` 
     * syntax: `loadsch [db_name] [db_username] [db_password]`
+  # Done!
