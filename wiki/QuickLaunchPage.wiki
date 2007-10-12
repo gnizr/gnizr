@@ -28,17 +28,6 @@ The `logout` link is the located on the top-right of your user home page.
 
 || http://farm3.static.flickr.com/2232/1525658597_a7b40b6bfc.jpg ||
 
-
- # What am I seeing?
- # How do I create a bookmark?
- # How do I find a bookmark?
-   # Tag Cloud
-   # Search
- # How do search for a specific topic?
-   # Tag Cloud
-   # Search Tool
- # How do I create an RSS feed?
-
 ----
 ==What am I seeing on my Homepage?==
 
