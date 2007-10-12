@@ -14,7 +14,7 @@ This page describes the steps to prepare MySQL database for gnizr installation. 
 
 Note: We assume that you have properly installed MySQL database. If you need addition help on using MySQL, see http://dev.mysql.com
 
-=== Create database tables and stored procedures == 
+== Create database tables and stored procedures ==
 
   # Go to the SQL script directory
     * `cd gnizr-x.y.z/sql`
