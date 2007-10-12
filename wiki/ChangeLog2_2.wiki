@@ -1,0 +1,5 @@
+#summary Changelog of all releases made under version 2.2
+#labels Phase-Implementation
+
+==== Version 2.2.0-RC1 (12 October 2007) ====
+
