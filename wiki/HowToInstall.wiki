@@ -12,6 +12,7 @@ This page describes the steps to install gnizr web applications. If you have que
 == Steps to Install ==
 
   # Download and unpack latest gnizr release.
+    * e.g., after unpacking, the top-level directory is `gnizr-x.y.z`
   # Prepare MySQL database for gnizr installation
     * See SetupGnizrDatabase
   # Copy gnizr web application directory to Tomcat
