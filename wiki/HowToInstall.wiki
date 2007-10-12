@@ -19,3 +19,4 @@ This page describes the steps to install gnizr web applications. If you have que
     * `cp -r gnizr-x.y.z/gnizr /your/tomcat/webapps/`
   # Edit gnizr configuration 
     * See [GnizrConfigXML]
+  # Start Tomcat
