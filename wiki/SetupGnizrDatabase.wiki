@@ -1,7 +1,7 @@
 #summary Prepare MySQL database for gnizr installation
 #labels Phase-Deploy
 
-This page describes the steps to prepare MySQL database for gnizr installation. *These steps must be performed before running the gnizr web application.* 
+This page describes the steps to prepare MySQL database for gnizr installation. These steps must be performed before running the gnizr web application.
 
 == Requirement ==
 
