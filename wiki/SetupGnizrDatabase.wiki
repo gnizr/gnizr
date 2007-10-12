@@ -1,4 +1,5 @@
 #summary Prepare MySQL database for gnizr installation
+#labels Phase-Deploy
 
 This page describes the steps to prepare MySQL database for gnizr installation. These steps must be performed before running the gnizr web application. 
 
@@ -13,14 +14,10 @@ This page describes the steps to prepare MySQL database for gnizr installation. 
 
 Note: We assume that you have properly installed MySQL database. If you need addition help on using MySQL, see http://dev.mysql.com
 
-=== Load database schema and stored procedures == 
+=== Create database tables and stored procedures == 
 
   # Go to the SQL script directory
     * `cd gnizr-x.y.z/sql`
-  # Run BASH script to setup DB
-    * `./loadsch gni` 
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+  # Run BASH script to setup database
+    * `./loadsch.sh gnizr_db gnizr gnizrpass` 
+    * syntax: `loadsch [db_name] [db_username] [db_password]`
