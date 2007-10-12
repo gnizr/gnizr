@@ -1,0 +1,12 @@
+#summary The XML configuration of gnizr web application
+
+This page describes the specification of gnizr XML configuration file. This configuration controls the JDBC connectivity to gnizr MySQL database and the runtime behavior of a gnizr deployment. 
+
+== Edit `gnizr-config.xml` ==
+
+The gnizr web application comes with a default configuration file called `gnizr-config.xml`. This file is located in the directory `gnizr/WEB-INF/classes`. 
+
+You should edit this configuration file to suit your machine's configuration. Configurations are defined as a set of property/value pairs. The format of `gnizr-config.xml` is based on Spring bean configuration.
+
+== Configuration Property Specifications ==
+
