@@ -4,6 +4,7 @@
 This page describe the steps to compile gnizr source code. Our current build environment is configured as the follows. 
 
 === Required Tools ===
+
   * Apache Maven 2.0.7
   * Apache Ant 1.6.5
   * Java SE Development Kit 6 (JDK 1.6)
@@ -31,7 +32,6 @@ Assume that you've checked out the source code in a top-level directory called `
     * `mvn war:war`
 
 *Note*: you probably want to modify various configuration files in `gnizr-webapp` before creating the WAR file. The default configurations may not apply on your local machine. _(todo: link to configuration file descriptions)_
-
 
 === Problems & Issues === 
 
