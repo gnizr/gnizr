@@ -1,17 +1,20 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.gnizr.robot</groupId>
-	<artifactId>gnizr-robot</artifactId>
-	<version>2.2</version>
-	<name>gnizr RSS robot</name>
-	<url>http://dev.gnizr.com/gnizr-robot/</url>
 	<parent>
 		<groupId>com.gnizr</groupId>
 		<artifactId>gnizr</artifactId>
-		<version>2.2</version>
-	</parent>
+		<version>2.2.0-RC1</version>
+	</parent>	
+	
+	<modelVersion>4.0.0</modelVersion>
+	
+	<groupId>com.gnizr.robot</groupId>
+	<artifactId>gnizr-robot</artifactId>	
+	<name>gnizr RSS robot</name>
+	
+	<version>${gnVersion}</version>
+
 	<dependencies>
 		<dependency>
 			<groupId>dbunit</groupId>
@@ -28,64 +31,22 @@
      	<dependency>
 			<groupId>com.gnizr.test</groupId>
 			<artifactId>gnizr-test</artifactId>
-			<version>2.2</version>
-			<scope>test</scope>
+			<version>${gnVersion}</version>
+			<scope>test</scope>			 
 		</dependency>			
 		<dependency>
 			<groupId>com.gnizr.core.web</groupId>
 			<artifactId>gnizr-web</artifactId>
-			<version>2.2</version>			
-			<scope>compile</scope>			
+			<version>${gnVersion}</version>
+			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>rome</groupId>
-			<artifactId>rome</artifactId>
-			<version>0.9</version>			
-			<scope>compile</scope>			
+			<artifactId>rome</artifactId>	
 		</dependency>
 		<dependency>
 			<groupId>rome</groupId>
-			<artifactId>georss</artifactId>
-			<version>0.9.8</version>			
-			<scope>compile</scope>			
+			<artifactId>georss</artifactId>		
 		</dependency>		
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>5.0.4</version>			
-			<scope>compile</scope>			
-		</dependency>
 	</dependencies>
-	<build>
-		<plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-         <artifactId>maven-jar-plugin</artifactId>
-         <configuration>
-	   <type>standalone</type>
-           <archive>
-            <manifest>
-              <mainClass>com.gnizr.robot.rss.App</mainClass>
-              <addClasspath>true</addClasspath>
-            </manifest>
-           </archive>
-         </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-assembly-plugin</artifactId>
-        <configuration>
-          <archive>
-            <manifest>
-              <mainClass>com.gnizr.robot.rss.App</mainClass>
-            </manifest>
-          </archive>
-          <descriptor>assembly.xml</descriptor>
-          <finalName>gnizr-robot</finalName>
-          <outputDirectory>output/</outputDirectory>
-          <workDirectory>target/assembly/work</workDirectory>
-        </configuration>
-      </plugin>
-		</plugins>
-	</build>
 </project>
