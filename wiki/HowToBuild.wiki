@@ -1,5 +1,5 @@
 #summary How to check out and build gnizr on your local machine
-#labels Phase-Implementation,Featured
+#labels Phase-Implementation
 
 This page describe the steps to compile gnizr source code. Our current build environment is configured as the follows. 
 
