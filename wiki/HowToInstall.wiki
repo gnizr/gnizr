@@ -15,4 +15,4 @@ This page describes the steps to install gnizr web applications. If you have que
   # Prepare MySQL database for gnizr installation (see SetupGnizrDatabase).
   # Copy gnizr web application directory to Tomcat
     * `cp -r gnizr-x.y.z/gnizr /your/tomcat/webapps/`
-  # Edit gnizr configuration (see GnizrConfigXML  ).
+  # Edit gnizr configuration (see [GnizrConfigXML]).
