@@ -2,17 +2,20 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.gnizr.core</groupId>
-	<artifactId>gnizr-core</artifactId>
-	<version>2.2</version>
-	<name>gnizr core</name>
-	<url>http://gnizr.com/gnizr-core/</url>
 	<parent>
 		<groupId>com.gnizr</groupId>
 		<artifactId>gnizr</artifactId>
-		<version>2.2</version>
+		<version>2.2.0-RC1</version>
 	</parent>
+	
+	<modelVersion>4.0.0</modelVersion>
+	
+	<groupId>com.gnizr.core</groupId>
+	<artifactId>gnizr-core</artifactId>
+	<name>gnizr core</name>
+	
+	<version>${gnVersion}</version>	
+	
 	<dependencies>
 		<dependency>
 			<groupId>dbunit</groupId>
@@ -29,26 +32,20 @@
 		<dependency>
 			<groupId>com.gnizr.db</groupId>
 			<artifactId>gnizr-db</artifactId>
-			<version>2.2</version>
-			<scope>compile</scope>
+			<version>${gnVersion}</version>
+			<scope>compile</scope>			
 		</dependency>
 		<dependency>
 			<groupId>rome</groupId>
 			<artifactId>rome</artifactId>
-			<version>0.9</version>
-			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.geonames</groupId>
 			<artifactId>geonames</artifactId>
-			<version>0.4</version>
-			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>commons-httpclient</groupId>
 			<artifactId>commons-httpclient</artifactId>
-			<version>3.0</version>
-			<scope>compile</scope>
 		</dependency>
 	</dependencies>
 </project>
