@@ -6,12 +6,11 @@ This page describe the steps to compile gnizr source code. Our current build env
 === Required Tools ===
 
   * Apache Maven 2.0.7
-  * Apache Ant 1.6.5
   * Java SE Development Kit 6 (JDK 1.6)
   
 === Check Out Source Code ===
 
-Follow the subversion [http://code.google.com/p/gnizr/source check out instructions].
+Follow these [http://code.google.com/p/gnizr/source instructions].
 
 === Compile Source Code ===
 
@@ -19,7 +18,9 @@ Assume that you've checked out the source code in a top-level directory called `
 
   # Go to the top-level directory
     * `cd gnizr`
-  # Compile gnizr projects and run Junit tests
+  # Install the root project POM
+    * `mvn -N install`
+  # Compile all gnizr modules and run JUnit tests
     * `mvn -U install`  
   # Build clustermap applet JAR file. 
     * `cd gnizr/gnizr-clustermap`
