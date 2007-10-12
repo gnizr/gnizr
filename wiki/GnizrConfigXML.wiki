@@ -1,12 +1,23 @@
 #summary The XML configuration of gnizr web application
+#labels Phase-Deploy
 
 This page describes the specification of gnizr XML configuration file. This configuration controls the JDBC connectivity to gnizr MySQL database and the runtime behavior of a gnizr deployment. 
 
-== Edit `gnizr-config.xml` ==
+== Edit gnizr-config.xml ==
 
-The gnizr web application comes with a default configuration file called `gnizr-config.xml`. This file is located in the directory `gnizr/WEB-INF/classes`. 
+The gnizr web application comes with a configuration file called `gnizr-config.xml`. This file is located in the directory `gnizr/WEB-INF/classes`. 
 
-You should edit this configuration file to suit your machine's configuration. Configurations are defined as a set of property/value pairs. The format of `gnizr-config.xml` is based on Spring bean configuration.
+You should edit this configuration file to suit your machine's configuration. Configurations are defined as a set of property/value pairs. You should only edit properties that are described in the following section and leave others untouched.
 
 == Configuration Property Specifications ==
 
+|| *Property Name* || *Description* || *Default Value* ||
+|| `url` || gnizr JDBC connection URL || `jdbc:mysql://localhost/gnizr_db` ||
+|| `username` || gnizr JDBC connection username || `gnizr` ||
+|| `password` || gnizr JDBC connection password || `gnizr` ||
+|| `webApplicationUrl` || The URL to your gnizr installation || `http://localhost:8080/gnizr`||
+|| `googleMapsKey` || Google Maps API key of your site || _a key registered for `http://localhost` ||
+|| `snapShotsKey` || SnapShots API key of your site || ||
+|| `anonymousReaderPolicy` || Whether you allow anonymous user to view contents published in gnizr. If `open`, anyone can view contents published in gnizr. If `close`, only logged in user is allowed to view published contents. || `open` || 
+|| `registrationPolicy` || Whether you required new user accounts to be created by system administrator. If `open`, anyone can register a new account via a self-register page. If `close`, new accounts must be manually created by gnizr administrator. || `open`||
+|| `serverMaintenanceModeEnabled` || Whether the application is run in a service maintenance mode. If `true`, only gnizr administrator is allowed to login. If `false`, any registered user can login. || `false`||
