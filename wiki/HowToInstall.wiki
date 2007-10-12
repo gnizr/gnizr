@@ -20,3 +20,8 @@ This page describes the steps to install gnizr web applications. If you have que
   # Edit gnizr configuration 
     * See [GnizrConfigXML]
   # Start Tomcat
+  
+== Read This First == 
+  
+  * QuickLaunchPage
+  
