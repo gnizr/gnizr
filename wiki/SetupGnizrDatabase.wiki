@@ -18,7 +18,7 @@ Note: We assume that you have properly installed MySQL database. If you need add
   # Go to the SQL script directory
     * `cd gnizr-x.y.z/sql`
   # Run BASH script to setup DB
-    * `./loadsch gni 
+    * `./loadsch gni` 
 
 Add your content here.  Format your content with:
   * Text in *bold* or _italic_
