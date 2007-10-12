@@ -26,9 +26,9 @@
 	<import resource="spring/web-userfeed.xml"/>
 	<import resource="spring/web-links.xml"/>	
 	<import resource="spring/web-ui.xml"/>
+	<import resource="spring/web-clustermap.xml"/>
 
 	<import resource="classpath:com/gnizr/core/web/action/timeline/spring-config.xml"/>
-	<import resource="classpath:com/gnizr/core/web/action/clustermap/spring-config.xml"/>
 	<import resource="classpath:com/gnizr/core/robot/rss/spring-config.xml"/>
 	
 	<bean id="helloWorld" class="com.gnizr.core.web.action.HelloWorld"

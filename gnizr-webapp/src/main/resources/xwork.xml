@@ -19,9 +19,9 @@
 	<include file="xwork/gnizr-rss.xml"/>
 	<include file="xwork/gnizr-rdf.xml"/>
 	<include file="xwork/gnizr-json.xml"/>
-	
+	<include file="xwork/gnizr-clustermap.xml"/>
+		
 	<!-- xwork config from external projects -->
-	<include file="xwork-clustermap.xml"/>
 	<include file="xwork-timeline.xml"/>
 	<include file="xwork-robot.xml"/>
 	
