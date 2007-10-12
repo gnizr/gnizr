@@ -42,12 +42,6 @@
 			<scope>compile</scope>			
 		</dependency>
 		<dependency>
-			<groupId>com.gnizr.core.web</groupId>
-			<artifactId>gnizr-timeline</artifactId>
-			<version>${gnVersion}</version>
-			<scope>compile</scope>			
-		</dependency>
-		<dependency>
 			<groupId>com.gnizr.delicious</groupId>
 			<artifactId>gnizr-delicious</artifactId>
 			<version>${gnVersion}</version>
