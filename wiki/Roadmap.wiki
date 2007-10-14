@@ -9,7 +9,7 @@ We usually plan releases with "soft" deadline. _Stable Releases_, softwares that
 
 The version number of Stable Release is in the form of `x.y.z`, where `x` and `y` are the major revision and the minor revision number, respectively. The number `z` is the bug-fix revision number. For example, if a software is labeled `2.2.0`, it means that it is the first Stable Release of gnizr software 2.2, and if it is labeled `2.2.3`, it means that it is the third bug-fix release of gnizr 2.2. 
 
-The version number of Development Release is in the form of either `x.y.0-M#` or `x.y.0-RC#`. The string `M#` and `RC#` are the Milestone revision number and the Release Candidate revision number, respectively. For example, if a software is labeled `2.2.0-M4`, it means that it is the forth milestone release of gnizr 2.2, and if it is labeled `2.2.0-RC1`, it means that it is the first Release Candidate of gnizr 2.2. When the software goes into RC, all API changes are prohibited and source code commits are limited to bug fixes. 
+The version number of Development Release is in the form of either `x.y.0-M#` or `x.y.0-RC#`. The string `M#` and `RC#` are the Milestone revision number and the Release Candidate revision number, respectively. For example, if a software is labeled `2.2.0-M4`, it means that it is the fourth milestone release of gnizr 2.2, and if it is labeled `2.2.0-RC1`, it means that it is the first Release Candidate of gnizr 2.2. When the software goes into RC, all API changes are prohibited and source code commits are limited to bug fixes. 
 
 == Current Releases ==
 
