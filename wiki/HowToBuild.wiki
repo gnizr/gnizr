@@ -18,7 +18,7 @@ Follow these [http://code.google.com/p/gnizr/source instructions].
 
 Source code options:
   * `/trunk` -- the latest under active development; may not build or may fail tests.
-  * `/branches` -- [http://svnbook.red-bean.com/en/1.1/ch04s04.html#svn-ch-4-sect-4.4.1 release branches]; software under "maintenance" mode; should build and pass fail tests.
+  * `/branches` -- [http://svnbook.red-bean.com/en/1.1/ch04s04.html#svn-ch-4-sect-4.4.1 release branches]; software under "maintenance" mode; should build and pass tests.
   * `/tags` -- tagged Stable Releases and Development Releases; should build successfully and pass all tests.
 
 === Compile Source Code ===
