@@ -17,7 +17,7 @@ We create a new "Release Branch" when we begin developing the new version of the
 
 === Tagging ===
 
-We tag our software after a Stable Release or a Development Release has been created. Tagged branches are usually consisted of major, minor and bugfix version number (e.g., `gnizr-2.2.0`) and possible a build qualifier (e.g., `gnizr-2.2.0-M3`).
+We tag our software after a Stable Release or a Development Release has been created. Tagged branches are usually consisted of major, minor and bugfix version number (e.g., `gnizr-2.2.0`). Sometimes they also include a build qualifier (e.g., `gnizr-2.2.0-M3`).
 
 == Current Releases ==
 
