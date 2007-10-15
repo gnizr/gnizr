@@ -54,6 +54,12 @@
 			<scope>compile</scope>			
 		</dependency>
 		<dependency>
+			<groupId>com.gnizr.core.web</groupId>
+			<artifactId>gnizr-clustermap</artifactId>
+			<version>${gnVersion}</version>
+			<scope>compile</scope>			
+		</dependency>
+		<dependency>
 			<groupId>urlrewrite</groupId>
 			<artifactId>urlrewrite</artifactId>
 		</dependency>
@@ -78,5 +84,35 @@
 		<finalName>gnizr</finalName>
 		<outputDirectory>
 			${basedir}/src/main/webapp/WEB-INF/classes</outputDirectory>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>get-applet-jar</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy</goal>
+						</goals>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<groupId>com.gnizr.core.web</groupId>
+									<artifactId>gnizr-clustermap</artifactId>
+									<version>${gnVersion}</version>
+									<type>jar</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>
+										${basedir}/src/main/webapp/applets</outputDirectory>
+									<destFileName>
+										gnizr-clustermap-applet.jar</destFileName>
+								</artifactItem>
+							</artifactItems>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
 	</build>
 </project>

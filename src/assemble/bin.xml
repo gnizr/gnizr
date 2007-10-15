@@ -17,6 +17,7 @@
         <unpack>true</unpack>
       </binaries>
     </moduleSet>
+<!--
     <moduleSet>
       <includes>
         <include>com.gnizr.core.web:gnizr-clustermap</include>
@@ -28,6 +29,7 @@
         <unpack>false</unpack>
       </binaries>    
     </moduleSet>
+-->
     <moduleSet>
       <includes>
         <include>com.gnizr.db:gnizr-db</include>
