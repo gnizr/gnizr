@@ -3,3 +3,4 @@
 
 ==== Version 2.2.0-RC1 (12 October 2007) ====
 
+  * Initial public release of gnizr
