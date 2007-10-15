@@ -21,7 +21,7 @@ We tag our software after a Stable Release or a Development Release has been cre
 
 == Current Releases ==
 
-  * [ChangeLog2_2 gnizr-2.2.0-RC1]
+  * [ChangeLog2_2 gnizr-2.2.0-RC1] (12 October 2007)
 
 == Upcoming Releases ==
   
