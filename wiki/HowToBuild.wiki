@@ -5,14 +5,14 @@ This page describe the steps to build gnizr from SVN source code. Most users sho
 
 If you have any questions, send email to [http://groups.google.com/group/gnizr-users Gnizr User Discussion].
 
-=== Required Tools ===
+== Required Tools ==
 
 Our build configuration requires the following tools already been installed:
 
   * [http://maven.apache.org Apache Maven 2] (we use 2.0.7)
   * [http://www.javasoft.com Java SE Development Kit 6 (JDK 1.6)]
   
-=== Download Source Code ===
+== Download Source Code ==
 
 Follow these [http://code.google.com/p/gnizr/source instructions].
 
@@ -21,7 +21,7 @@ Source code options:
   * `/branches` -- [http://svnbook.red-bean.com/en/1.1/ch04s04.html#svn-ch-4-sect-4.4.1 release branches]; software under "maintenance" mode; should build and pass tests.
   * `/tags` -- tagged Stable Releases and Development Releases; should build and pass tests.
 
-=== Compile Source Code ===
+== Compile Source Code ==
 
 Assume that you've checked out the source code in a top-level directory called `gnizr`.
 
@@ -35,7 +35,3 @@ Assume that you've checked out the source code in a top-level directory called `
     * `cd gnizr/target`
 
 In the `target` directory, you will find two different outputs of the same build: one in a uncompressed directory structure, and the other bundled in a ZIP file. 
-
-=== Problems & Issues === 
-
-Please report bugs and submit your questions to the [http://groups.google.com/group/gnizr-users Gnizr User Discussion] group. 
