@@ -1,38 +1,33 @@
 #summary How to check out and build gnizr on your local machine
-#labels Phase-Implementation
+#labels Phase-Implementation,Featured
 
-This page describe the steps to compile gnizr source code. Our current build environment is configured as the follows. 
+This page describe the steps to build gnizr from SVN source code. 
 
 === Required Tools ===
 
-  * Apache Maven 2.0.7
-  * Java SE Development Kit 6 (JDK 1.6)
+Our build configuration requires the following tools already been installed:
+
+  * [http://maven.apache.org Apache Maven 2] (tested 2.0.7)
+  * [http://www.javasoft.com Java SE Development Kit 6 (JDK 1.6)]
   
-=== Check Out Source Code ===
+=== Download Source Code ===
 
 Follow these [http://code.google.com/p/gnizr/source instructions].
 
 === Compile Source Code ===
 
-Assume that you've checked out the source code in a top-level directory called `gnizr`.
+Assume that you've checked out the source code into a top-level directory called `gnizr`.
 
   # Go to the top-level directory
     * `cd gnizr`
-  # Install the root project POM
-    * `mvn -N install`
-  # Compile all gnizr modules and run JUnit tests
-    * `mvn -U install`  
-  # Build clustermap applet JAR file. 
-    * `cd gnizr/gnizr-clustermap`
-    * `mvn -f pom-applet.xml -Dmaven.test.skip=true assembly:assembly`
-  # Copy clustermap applet JAR to the gnizr web application project
-    * `cd gnizr/gnizr-webapp`
-    * `cp ../gnizr-clustermap/target/gnizr-clustermap-applet-2.2-jar-with-dependencies.jar src/main/webapp/applets/gnizr-clustermap-applet.jar`
-  # Create gnizr web application
-    * `cd gnizr/gnizr-webapp`
-    * `mvn war:war`
+  # Install the root project POM and update Maven plugins
+    * `mvn -U -N install`
+  # Compile gnizr modules, run JUnit tests and assemble the application
+    * `mvn package assembly:assembly`  
+  # If you see no error messages, then the build is complete.
+    * `cd gnizr/target`
 
-*Note*: you probably want to modify various configuration files in `gnizr-webapp` before creating the WAR file. The default configurations may not apply on your local machine. _(todo: link to configuration file descriptions)_
+In the `target` directory, you will find two different outputs of the same build: one in a uncompressed directory structure, and the other bundled in a ZIP file. 
 
 === Problems & Issues === 
 
