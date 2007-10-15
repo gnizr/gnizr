@@ -21,7 +21,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
@@ -1002,27 +1001,24 @@ public class TagDBDao implements TagDao{
 		return opOkay;
 	}
 
-	public boolean[] expandTag(User user, Tag fromTag, Tag[] toTags) {
+	public List<Bookmark> expandTag(User user, Tag fromTag, Tag[] toTags) {
 		logger.debug("expandTag: user="+user+", fromTag="+fromTag+",toTags="+toTags);
 		Connection conn = null;
 		CallableStatement stmt = null;
-		boolean[] opOkay = new boolean[toTags.length];
+		List<Bookmark> changedBookmarks = new ArrayList<Bookmark>();
 		try {
-			conn = dataSource.getConnection();
+			ResultSet rs = null;
+			conn = dataSource.getConnection();			
 			stmt = conn.prepareCall("call expandTag(?,?,?)");
 			for(Tag t : toTags){
 				stmt.setInt(1,fromTag.getId());
 				stmt.setInt(2,t.getId());
 				stmt.setInt(3,user.getId());
-				stmt.addBatch();
-			}	
-			int result[] = stmt.executeBatch();
-			for(int i = 0; i < result.length; i++){
-				if(result[i] != Statement.EXECUTE_FAILED){
-					opOkay[i] = true;
-				}else{
-					opOkay[i] = false;
-				}
+				rs = stmt.executeQuery();
+			}			
+			while(rs.next()){
+				Bookmark bm = BookmarkDBDao.createBookmarkObject2(rs);
+				changedBookmarks.add(bm);
 			}
 		} catch (SQLException e) {
 			logger.fatal(e);
@@ -1033,29 +1029,26 @@ public class TagDBDao implements TagDao{
 				logger.fatal(e);
 			}
 		}		
-		return opOkay;
+		return changedBookmarks;
 	}
 
-	public boolean[] reduceTag(User user, Tag[] tags) {
+	public List<Bookmark> reduceTag(User user, Tag[] tags) {
 		logger.debug("expandTag: user="+user+", tags="+tags);
 		Connection conn = null;
 		CallableStatement stmt = null;
-		boolean[] opOkay = new boolean[tags.length];
+		List<Bookmark> changeBookmarks = new ArrayList<Bookmark>();
 		try {
+			ResultSet rs = null;
 			conn = dataSource.getConnection();
 			stmt = conn.prepareCall("call reduceTag(?,?)");
 			for(Tag t : tags){
 				stmt.setInt(1,t.getId());
 				stmt.setInt(2,user.getId());
-				stmt.addBatch();
+				rs = stmt.executeQuery();
 			}			
-			int result[] = stmt.executeBatch();
-			for(int i = 0; i < result.length; i++){
-				if(result[i] != Statement.EXECUTE_FAILED){
-					opOkay[i] = true;
-				}else{
-					opOkay[i] = false;
-				}
+			while(rs.next()){
+				Bookmark bm = BookmarkDBDao.createBookmarkObject2(rs);
+				changeBookmarks.add(bm);
 			}
 		} catch (SQLException e) {
 			logger.fatal(e);
@@ -1066,7 +1059,7 @@ public class TagDBDao implements TagDao{
 				logger.fatal(e);
 			}
 		}		
-		return opOkay;
+		return changeBookmarks;
 	}
 
 	public List<BookmarkTag> findBookmarkTagCommunitySearch(String searchQuery) {

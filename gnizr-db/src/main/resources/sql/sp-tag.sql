@@ -398,16 +398,24 @@ END//
 ###############################################################
 # PROCEDURE: expandTag
 # INPUT: fromTagId, toTagId, userId
-# OUTPUT: none
+# OUTPUT: NONE
 DROP PROCEDURE IF EXISTS expandTag//
 CREATE PROCEDURE expandTag(fromTagId INT,
                            toTagId INT,
                            userId INT)
 BEGIN
   DECLARE CONTINUE HANDLER FOR SQLSTATE '01000' SELECT 'ignore inconsist accounting';
+ 
+  CREATE TEMPORARY TABLE changed_bookmarks_t (bookmark_id INT);
   
+  INSERT INTO changed_bookmarks_t(bookmark_id)
+    SELECT bookmark_tag_idx.bookmark_id FROM bookmark_tag_idx, bookmark
+    WHERE bookmark_tag_idx.tag_id = fromTagId AND
+          bookmark_tag_idx.bookmark_id = bookmark.id AND
+          bookmark.user_id = userId;
+    
   START TRANSACTION;
-  
+   
   UPDATE bookmark_tag_idx t1, bookmark_tag_idx t2, bookmark
   SET t1.count = 1
   WHERE bookmark.user_id = userId AND
@@ -451,8 +459,16 @@ BEGIN
             bookmark_folder.bookmark_id = bookmark_tag_idx.bookmark_id AND
             bookmark_tag_idx.tag_id = toTagId
     GROUP by folder.id;  
-      
-  COMMIT;  
+  
+  COMMIT; 
+         
+  SELECT bookmark.*, user.*, link.*, bookmarkTags(bookmark.id) as tags, 
+          bookmarkInFolders(bookmark.id) AS folders,
+          linkCount(link.id) as count    
+    FROM user, bookmark, link
+    WHERE bookmark.user_id=user.id AND
+          bookmark.link_id=link.id AND
+          bookmark.id IN (SELECT bookmark_id FROM changed_bookmarks_t);      
 END//   
 ###############################################################
 # PROCEDURE: reduceTag
@@ -463,7 +479,15 @@ CREATE PROCEDURE reduceTag(tagId INT,
                            userId INT)
 BEGIN
   DECLARE CONTINUE HANDLER FOR SQLSTATE '01000' SELECT 'ignore inconsistant accounting';
-    
+
+  CREATE TEMPORARY TABLE changed_bookmarks_t (bookmark_id INT);
+  
+  INSERT INTO changed_bookmarks_t(bookmark_id)
+    SELECT bookmark_tag_idx.bookmark_id FROM bookmark_tag_idx, bookmark
+    WHERE bookmark_tag_idx.tag_id = tagId AND
+          bookmark_tag_idx.bookmark_id = bookmark.id AND
+          bookmark.user_id = userId;        
+
   START TRANSACTION;
 
   UPDATE bookmark_tag_idx  
@@ -504,6 +528,14 @@ BEGIN
             bookmark_tag_idx.tag_id = tagId
     GROUP by folder.id;      
   COMMIT;  
+  
+  SELECT bookmark.*, user.*, link.*, bookmarkTags(bookmark.id) as tags, 
+          bookmarkInFolders(bookmark.id) AS folders,
+          linkCount(link.id) as count    
+    FROM user, bookmark, link
+    WHERE bookmark.user_id=user.id AND
+          bookmark.link_id=link.id AND
+          bookmark.id IN (SELECT bookmark_id FROM changed_bookmarks_t);   
 END//                                                    
 ######################################################
 # PROCEDURE: createBookmarkTag
