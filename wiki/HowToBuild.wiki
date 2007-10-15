@@ -14,6 +14,11 @@ Our build configuration requires the following tools already been installed:
 
 Follow these [http://code.google.com/p/gnizr/source instructions].
 
+Source code options:
+  * `/trunk` -- the latest under active development; may not build or may fail tests.
+  * `/branches` -- forked from `trunk` for bug-fixe; may not build or may fail tests.
+  * `/tags` -- tagged Stable Releases and Development Releases; should build successfully and pass all tests.
+
 === Compile Source Code ===
 
 Assume that you've checked out the source code in a top-level directory called `gnizr`.
