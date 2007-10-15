@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+	<user id="1" username="gnizr" password=""
+		fullname="gnizr" created_on="2006-11-16 21:55:18.0"
+		email="" acct_status="1"/>
+	<user id="2" username="hchen1" password="cf95caeb19ac6b9743cb6398d68da02e"
+		fullname="Harry Chen" created_on="2006-11-16 21:55:18.0" email="harry.chen@gmail.com"
+		acct_status="1"/>
+	<user id="3" username="jsmith" password="39ce7e2a8573b41ce73b5ba41617f8f7"
+		fullname="Joe Smith" created_on="2006-11-16 21:55:18.0" email="jsmith@hchen1.com"
+		acct_status="1"/>
+	<link id="202" mime_type_id="1003" url="http://rss.cnn.com/rss/cnn_topstories.rss" url_hash="4a557f2f685dba25493c4f53092d421c"
+		/>
+	<link id="203" mime_type_id="1003" url="http://rss.slashdot.org/Slashdot/slashdot" url_hash="0a30ee5d677d2e622cac4572bc0a415a"
+		/>
+	<link id="204" mime_type_id="1003" url="http://newsrss.bbc.co.uk/rss/newsonline_world_edition/front_page/rss.xml" url_hash="206baced3f2b5fb9afb1416b3303df83"
+		/>
+	
+	<bookmark id="300" user_id="2" link_id="202" title="CNN News Feed"
+		notes="top news" created_on="2006-11-16 21:55:19.0" last_updated="2006-11-19 21:55:19.0" 
+		/>
+	
+	<bookmark id="301" user_id="1" link_id="203" title="Slashdot Feed"
+		notes="news for nerds" created_on="2006-11-18 21:55:19.0" last_updated="2006-11-18 21:55:19.0" 
+		/>
+	
+	<feed_subscription id="400" bookmark_id="300" auto_import="true" last_sync="2007-02-01 08:10:15.2" match_text=""/>
+
+	<tag id="1" tag="cnn" count="1"/>
+	<tag id="2" tag="java" count="0"/>
+	<tag id="3" tag="subscribe:this" count="1"/>
+	<tag id="4" tag="news" count="1"/>
+	
+	<bookmark_tag_idx id="1" tag_id="1" bookmark_id="300" count="1" position="0"/>
+	<bookmark_tag_idx id="2" tag_id="3" bookmark_id="300" count="1" position="0"/>
+	<bookmark_tag_idx id="3" tag_id="4" bookmark_id="300" count="1" position="0"/>
+
+	<link_tag_idx id="1" tag_id="1" link_id="202" count="1"/>
+	<link_tag_idx id="2" tag_id="4" link_id="202" count="1"/>
+	
+	<user_tag_idx id="1" tag_id="1" user_id="2" count="1"/>
+	<user_tag_idx id="2" tag_id="4" user_id="2" count="1"/>
+	
+	<search_idx bookmark_id="300" text="CNN News Feed,top news" tags="news cnn"/>
+	<search_idx bookmark_id="301" text="Slashdot Feed,news for nerds" tags=""/>
+	
+	
+	
+</dataset>

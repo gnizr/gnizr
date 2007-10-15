@@ -1,0 +1,37 @@
+#search-block{
+	width: 300px;
+	margin:auto;
+}
+
+#mini-search-block{
+	position: relative;
+	width: 90%;
+	margin-bottom: 20px;
+}
+
+#mini-search-block #wwgrp_search-string{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+}
+
+
+.long-text-input{
+	width: 300px;
+}
+
+#searchForm table{
+   width: 300px;
+   margin-left: auto;
+   margin-right: auto;
+}
+
+#search-view-options{
+	text-align:right;
+	padding:0px;
+	margin:auto;
+}
+
+
+
+
