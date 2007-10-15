@@ -13,6 +13,10 @@ The version number of Development Release is in the form of either `x.y.0-M#` or
 
 == Current Releases ==
 
+  * [ChangeLog2_2 gnizr-2.2.0-RC1]
+
 == Upcoming Releases ==
+  
+  * [ChangeLog2_3 gnizr-2.3.0-M1]
 
 == Past Releases ==
