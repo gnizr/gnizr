@@ -1,7 +1,7 @@
 #summary How to check out and build gnizr on your local machine
 #labels Phase-Implementation,Featured
 
-This page describe the steps to build gnizr from SVN source code. 
+This page describe the steps to build gnizr from SVN source code. Most users should download and install from [HowToInstall gnizr binary releases].
 
 === Required Tools ===
 
