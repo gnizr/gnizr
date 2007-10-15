@@ -7,7 +7,7 @@ This page describe the steps to build gnizr from SVN source code.
 
 Our build configuration requires the following tools already been installed:
 
-  * [http://maven.apache.org Apache Maven 2] (tested 2.0.7)
+  * [http://maven.apache.org Apache Maven 2] (we use 2.0.7)
   * [http://www.javasoft.com Java SE Development Kit 6 (JDK 1.6)]
   
 === Download Source Code ===
