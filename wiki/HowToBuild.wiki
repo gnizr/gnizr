@@ -16,7 +16,7 @@ Follow these [http://code.google.com/p/gnizr/source instructions].
 
 === Compile Source Code ===
 
-Assume that you've checked out the source code into a top-level directory called `gnizr`.
+Assume that you've checked out the source code in a top-level directory called `gnizr`.
 
   # Go to the top-level directory
     * `cd gnizr`
