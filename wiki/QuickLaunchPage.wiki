@@ -1,4 +1,4 @@
-#summary Learn how to use gnizr in 10 minutes.
+#summary Learn how to use gnizr in 10 minutes (in progress)
 
 This page describes basic features to help you get started using gnizr. For advanced features and a detailed user guide, read the UserGuide page.  
 
