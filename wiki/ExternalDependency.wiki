@@ -3,6 +3,6 @@
 
 This page contains information on gnizr's external dependencies. Gnizr uses Maven to manage external dependencies. Information described here can help developers to avoid dependency conflicts when building gnizr extensions (i.e., jar files deployed into `WEB-INF/lib`).
 
-  * See [http://spreadsheets.google.com/ccc?key=pPfonkJ3-7VZmmHmrXpmnOg&hl=en the complete list] on Google Docs
+  * See the [http://spreadsheets.google.com/ccc?key=pPfonkJ3-7VZmmHmrXpmnOg&hl=en complete list] on Google Docs
 
   
