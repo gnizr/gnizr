@@ -111,7 +111,7 @@
 </div>
 </@ww.form>
 <div id="editTools" class="editInputGroup">
-Tools: <a id="addTags" href="#">edit tags</a> | <a id="addPlacemarks" href="#">define placemarks</a>
+Tools: <a id="addTags" href="#">edit tags</a> | <a id="addPlacemarks" href="#">edit placemarks</a>
 <!-- user tag cloud -->
 <div id="selectUserTag">
 <table id="bookmark-edit-menu-bar" class="menubar">
