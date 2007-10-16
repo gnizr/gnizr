@@ -469,7 +469,64 @@ public class TestBookmarkManager extends GnizrCoreTestBase {
 	}
 	
 	
+	private class MyTestBookmarkListener implements BookmarkListener{
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = -3917697198455763529L;
+		private List<Bookmark> notifiedBookmarks = new ArrayList<Bookmark>();
+		private List<Bookmark> notifiedOldBookmarks = new ArrayList<Bookmark>();
+		
+		public List<Bookmark> getNotifiedOldBookmarks(){
+			return notifiedOldBookmarks;
+		}
+		
+		public List<Bookmark> getNotifiedBookmarks(){
+			return notifiedBookmarks;
+		}
+		
+		public void notifyAdded(BookmarkManager manager, Bookmark bookmark) throws Exception {
+			notifiedBookmarks.add(bookmark);			
+		}
+
+		public void notifyDeleted(BookmarkManager manager, Bookmark bookmark) throws Exception {
+			notifiedBookmarks.add(bookmark);
+		}
+
+		public void notifyUpdated(BookmarkManager manager, Bookmark oldBookmark, Bookmark newBookmark) throws Exception {
+			notifiedBookmarks.add(newBookmark);
+			notifiedOldBookmarks.add(oldBookmark);
+		}
+	}
+	
+	public void testRenameTags6() throws Exception{
+		MyTestBookmarkListener listener = new MyTestBookmarkListener();
+		manager.addBookmarkListener(listener);
+		
+		Bookmark bm300 = manager.getBookmark(300);
+		List<String> tags = bm300.getTagList();
+		assertTrue(tags.contains("cnn"));
+		assertEquals(1,tags.size());
+		
+		boolean isOkay = manager.renameTag(bm300.getUser(), "cnn", new String[]{"gn:geonames=USA","foobar_1"});
+		assertTrue(isOkay);
+		
+		manager.shutdown();
+		
+		List<Bookmark> notifiedNew = listener.getNotifiedBookmarks();
+		assertEquals(1,notifiedNew.size());
+		tags = notifiedNew.get(0).getTagList();
+		assertTrue(tags.contains("gn:geonames=USA"));
+		assertTrue(tags.contains("foobar_1"));
+		
+		List<Bookmark> notifiedOld = listener.getNotifiedOldBookmarks();
+		assertEquals(1,notifiedOld.size());
+		assertEquals("cnn",notifiedOld.get(0).getTags());
+	}
+	
 	public void testDeleteTag() throws Exception{
+		MyTestBookmarkListener listener = new MyTestBookmarkListener();
+		manager.addBookmarkListener(listener);
 		boolean okay =  manager.deleteTag(new User(1),"cnn");
 		assertTrue(okay);
 		
@@ -478,6 +535,18 @@ public class TestBookmarkManager extends GnizrCoreTestBase {
 		
 		Bookmark bm = manager.getBookmark(300);
 		assertEquals("",bm.getTags());
+		
+		manager.shutdown();
+		
+		List<Bookmark> newBookmarks = listener.getNotifiedBookmarks();
+		List<Bookmark> oldBookmarks = listener.getNotifiedOldBookmarks();
+		assertEquals(newBookmarks.size(),oldBookmarks.size());
+		
+		bm = newBookmarks.get(0);
+		assertEquals("",bm.getTags());
+		
+		bm = oldBookmarks.get(0);
+		assertEquals("cnn",bm.getTags());
 	}
 	
 	
@@ -667,5 +736,6 @@ public class TestBookmarkManager extends GnizrCoreTestBase {
 		
 		assertTrue(geomMarkerDao.deletePointMarker(ptMarkers.get(0).getId()));
 		assertTrue(geomMarkerDao.deletePointMarker(ptMarkers.get(1).getId()));
+	
 	}
 }
