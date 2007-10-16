@@ -5,5 +5,5 @@
 
   * [http://code.google.com/p/gnizr/issues/detail?id=5 Issue 5]: Provide clickable tag cloud in the Edit Tag Relations page  
   * [http://code.google.com/p/gnizr/issues/detail?id=6 Issue 6]: Renaming tags to "gn:geonames=" don't trigger geocoding
-  * Link "define placemarks" in the Edit Bookmark has been renamed to "edit placemarks"
+  * Link "define placemarks" in the Edit Bookmark page has been renamed to "edit placemarks"
  
