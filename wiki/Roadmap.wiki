@@ -1,8 +1,6 @@
 #summary Past, current and future gnizr releases and our release process
 #labels Phase-Implementation,Featured
 
-This page describes the past, current and future gnizr releases and our release process.
-
 == How We Plan Releases ==
 
 We usually plan releases with "soft" deadline. _Stable Releases_, softwares that are suitable for end-user deployment, are usually made available *every three months*. _Development Releases_, softwares with new features that are under active development, are usually released *every three weeks*. Our goal is to release gnizr software with small incremental changes as often as possible. 
