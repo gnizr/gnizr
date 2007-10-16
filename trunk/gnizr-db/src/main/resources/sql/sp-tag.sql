@@ -469,6 +469,7 @@ BEGIN
     WHERE bookmark.user_id=user.id AND
           bookmark.link_id=link.id AND
           bookmark.id IN (SELECT bookmark_id FROM changed_bookmarks_t);      
+   DROP TABLE changed_bookmarks_t;
 END//   
 ###############################################################
 # PROCEDURE: reduceTag
@@ -536,6 +537,7 @@ BEGIN
     WHERE bookmark.user_id=user.id AND
           bookmark.link_id=link.id AND
           bookmark.id IN (SELECT bookmark_id FROM changed_bookmarks_t);   
+  DROP TABLE changed_bookmarks_t;          
 END//                                                    
 ######################################################
 # PROCEDURE: createBookmarkTag
