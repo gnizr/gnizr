@@ -10,6 +10,7 @@ var tagsInputFieldId = "saveBookmark_tags";
 /* ID of the node where the list of user tags will be written to*/
 var saveSubmitClass = "saveSubmit";
 var saveBookmarkFormId = "saveBookmark";
+var submitSaveBookmarkId = "submitSaveBookmark";
 var userTagsId = "userTags";
 var tagCloudId = "tagCloud";
 var selectUserTagDIVId = "selectUserTag";
@@ -37,6 +38,9 @@ var geomMarkerClass = "geomMarker";
 var getRecommendedTagsUrl = null;
 var getUserTagsUrl = null;
 var getUserTagGroupUrl = null;
+
+/* stores the ID of the input button from which the form is submitted */
+var submitSrcButtonId = null;
 
 var tagIdPrefixMap = {userTagsId:'ti_'};
 
@@ -314,9 +318,14 @@ function setMenuHref(){
 	var submitElms = MochiKit.DOM.getElementsByTagAndClassName('INPUT',saveSubmitClass,saveBookmarkFormId);
 	for(var i = 0; i < submitElms.length; i++){
 		MochiKit.Logging.log('set onclick writeGeometryMarkers() on saveSubmit: ' + submitElms[i].value);
-		MochiKit.DOM.setNodeAttribute(submitElms[i],'onclick','writeGeometryMarkers();');		
+		MochiKit.DOM.setNodeAttribute(submitElms[i],'onclick',
+		   'writeGeometryMarkers();setSubmitInputSource(\''+submitElms[i].id+'\');');		
 	}	
 	MochiKit.DOM.setNodeAttribute(zoomToId,'onclick','findPlaceAndZoom()');
+}
+
+function setSubmitInputSource(srcId){
+    submitSrcButtonId = srcId;
 }
 
 function writeGeometryMarkers(){
@@ -626,6 +635,15 @@ function delMarker(pmId){
 function isValidUrl(s){
 	var regexp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/
 	return regexp.test(s);
+}
+
+function saveAndClose(flag){
+  MochiKit.Logging.log('closeAndSave = ' + flag);
+     if(Boolean(flag) == true){
+         if(submitSrcButtonId == submitSaveBookmarkId){        
+             window.close();
+         }
+     }
 }
 
 MochiKit.Signal.connect(window,'onload',initializePage);

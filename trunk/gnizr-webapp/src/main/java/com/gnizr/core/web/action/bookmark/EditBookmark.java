@@ -42,6 +42,7 @@ public class EditBookmark extends AbstractAction implements LoggedInUserAware {
 	// action paramaters
 	private int id;	
 	private boolean redirect;
+	private boolean saveAndClose;
 	private String title;
 	private String notes;
 	private String url;
@@ -397,6 +398,14 @@ public class EditBookmark extends AbstractAction implements LoggedInUserAware {
 
 	public void setSaveAndContinueEdit(String saveAndContinueEdit) {
 		this.saveAndContinueEdit = saveAndContinueEdit;
+	}
+
+	public boolean isSaveAndClose() {
+		return saveAndClose;
+	}
+
+	public void setSaveAndClose(boolean saveAndClose) {
+		this.saveAndClose = saveAndClose;
 	}
 
 

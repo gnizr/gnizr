@@ -42,12 +42,14 @@
   <#assign bkmrkUrl = 'http://'/>  
 </#if>
 <@ww.fielderror/>
-<@ww.form id="saveBookmark" action="/bookmark/save.action" method="post" cssClass="editInputGroup" theme="simple">
+<@ww.form onsubmit="saveAndClose('${saveAndClose?string}')" id="saveBookmark" action="/bookmark/save.action" method="post" cssClass="editInputGroup" theme="simple"
+>
 <div id="legend">* = Required Field</div>
   <div class="inputDataRow">
   <span class="inputLabel">URL*:</span> 
   <@ww.textfield id="bookmarkUrl" cssClass="text-input-url" required="true" label="url"  labelposition="top"
-                 size="80" name="url" value="${bkmrkUrl?if_exists}"/>                               
+                 size="80" name="url" value="${bkmrkUrl?if_exists}"/>   
+                                             
   <div id="openUrlWindowLink"><a href="#" id="openUrlWindow" class="system-link">Open URL in a new window</a></div>
   </div>
   <div class="inputDataRow">
