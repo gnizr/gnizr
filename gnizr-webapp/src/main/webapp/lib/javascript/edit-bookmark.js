@@ -496,12 +496,9 @@ function monitorZoomInputSubmit(){
 
 function monitorTaglineChanges(){
 	var changed = function(e){
-		// space or backspace
-		if(e.key().code == 32 || e.key().code == 0){		
-			colorSelectedTags();
-		}
+		colorSelectedTags();
 	};
-	MochiKit.Signal.connect(tagsInputFieldId,'onkeydown',changed);
+	MochiKit.Signal.connect(tagsInputFieldId,'onkeyup',changed);
 }
 
 function monitorTagGroupSelectionChanges(){
