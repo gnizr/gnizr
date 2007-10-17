@@ -7,3 +7,4 @@
   * [http://code.google.com/p/gnizr/issues/detail?id=6 Issue 6]: Renaming tags to "gn:geonames=" don't trigger geocoding (fixed, need testing)
   * Link "define placemarks" in the Edit Bookmark page has been renamed to "edit placemarks"
   * User changing bookmark tags via keyboard inputs in the "Edit Bookmark" page is made more responsive. 
+  * Changed version number string in 'macro-lib.ftl' to '2.3.0-M1'
