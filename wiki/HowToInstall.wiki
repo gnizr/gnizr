@@ -29,7 +29,7 @@ Gnizr comes with a default user account -- `gnizr`, who is the administrator of 
 
   # Go to the front page of gnizr 
      * If installed on `localhost` port 8080, `http://localhost:8080/gnizr`
-  # Log in as `gnizr` -- administrator 
+  # Log in as `gnizr`
      * username: `gnizr`
      * password: `gnizr` 
   # Change `gnizr` password (*IMPORTANT!*) 
