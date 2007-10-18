@@ -25,5 +25,4 @@ This page helps you to get started using gnizr. For more information on how to u
 == Add a New Bookmark ==
 
 || Edit the description of your bookmark ||
-|| http://farm3.static.flickr.com/2035/1525733003_46e4b03d23.jpg http://farm3.static.flickr.com/2245/1526600708_c02aaf3999.jpg ||
-
+|| http://farm3.static.flickr.com/2035/1525733003_46e4b03d23.jpg \\http://farm3.static.flickr.com/2245/1526600708_c02aaf3999.jpg ||
