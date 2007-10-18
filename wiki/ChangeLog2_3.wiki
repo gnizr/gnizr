@@ -5,6 +5,7 @@
 
   * [http://code.google.com/p/gnizr/issues/detail?id=5 Issue 5]: Provide clickable tag cloud in the Edit Tag Relations page  (fixed, need testing)
   * [http://code.google.com/p/gnizr/issues/detail?id=6 Issue 6]: Renaming tags to "gn:geonames=" don't trigger geocoding (fixed, need testing)
+  * [http://code.google.com/p/gnizr/issues/detail?id=8 Issue 8]: Allow users to add 'gn:geonames=' without typing the whole string everything
   * Link "define placemarks" in the Edit Bookmark page has been renamed to "edit placemarks"
   * User changing bookmark tags via keyboard inputs in the "Edit Bookmark" page is made more responsive. 
   * Changed version number string in `macro-lib.ftl` to `2.3.0-M1`
