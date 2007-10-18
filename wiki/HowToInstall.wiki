@@ -22,5 +22,17 @@ If you have any questions, send email to [http://groups.google.com/group/gnizr-u
   # Edit gnizr configuration 
     * See [GnizrConfigXML]
   # Start Tomcat
-  # Read QuickLaunchPage
-  
+
+== Login and Create New Accounts ==
+
+Gnizr comes with a default user account -- `gnizr`, who is the administrator of the system. After you have logged in as `gnizr`, you can create additional user accounts.
+
+  # Go to the front page of gnizr 
+     * If installed on `localhost` port 8080, `http://localhost:8080/gnizr`
+  # Log in as `gnizr` -- administrator 
+     * username: `gnizr`
+     * password: `gnizr` 
+  # Change `gnizr` password (*IMPORTANT!*) 
+     * Go to `settings` -> `Change your password`
+  # Create new accounts 
+     * Go to `settings` -> `Manage user accounts`
