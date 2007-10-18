@@ -3,7 +3,7 @@
 
 This page describes the steps to install gnizr web applications. Developers can also download and build gnizr from [HowToBuild the SVN source code]. 
 
-If you have any questions, send email to [http://groups.google.com/group/gnizr-users Gnizr User Discussion].
+If you have any questions, post them to [http://groups.google.com/group/gnizr-users Gnizr User Discussion].
 
 == System Requirement  ==
 
