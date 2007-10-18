@@ -33,6 +33,11 @@ var zoomToId="zoomTo";
 var zoomToInputId="zoomToInput";
 var mapId = "map";
 var geomMarkerClass = "geomMarker";
+var machineTagHelpersSPANId = "machineTagHelpers";
+var geonamesMTHelperId = "geonamesMTHelper";
+var forUserMTHelperId = "forUserMTHelper";
+var folderMTHelperId = "folderMTHelper";
+var subscribeMTHelperId = "subscribeMTHelper";
 
 /* to be defined in the header of an HTML page */
 var getRecommendedTagsUrl = null;
@@ -322,7 +327,91 @@ function setMenuHref(){
 		   'writeGeometryMarkers();setSubmitInputSource(\''+submitElms[i].id+'\');');		
 	}	
 	MochiKit.DOM.setNodeAttribute(zoomToId,'onclick','findPlaceAndZoom()');
+	MochiKit.DOM.setNodeAttribute(geonamesMTHelperId,'href','javascript:addGeonamesMT()');
+	MochiKit.DOM.setNodeAttribute(forUserMTHelperId,'href','javascript:addForUserMT()');
+	MochiKit.DOM.setNodeAttribute(subscribeMTHelperId,'href','javascript:addSubscribeMT()');
+	MochiKit.DOM.setNodeAttribute(folderMTHelperId,'href','javascript:addFolderMT()');
 }
+
+function addGeonamesMT(){
+   var inputTag = prompt("Enter a place name", "");
+   var regexp = /[\\&\?\/:]/;
+   if(MochiKit.Base.isUndefinedOrNull(inputTag) == false){
+      if(inputTag.length == 0){
+          alert("Place name can't be an empty string!");
+      }else if(regexp.test(inputTag) == true){
+          alert("Place name must not contain these special characters: & ? / \\ :");
+      }else{
+          var safeInputTag = inputTag.trim()
+          safeInputTag = safeInputTag.replace(/\s+/g,'_');
+          addMachineTagToTagline('gn','geonames',safeInputTag);      
+      }
+   }
+}
+
+function addFolderMT(){
+   var inputTag = prompt("Save this bookmark to folder", "");
+   var regexp = /[\\&\?\/:;%^+_*'"]/;
+   if(MochiKit.Base.isUndefinedOrNull(inputTag) == false){
+      if(inputTag.length == 0){
+          alert("Folder name can't be an empty string!");
+      }else if(regexp.test(inputTag) == true){
+          alert("Folder name must not contain these special characters: * ? & / \\ ; ' \" * % ^ + _");
+      }else{
+          var safeInputTag = inputTag.trim()
+          safeInputTag = safeInputTag.replace(/\s+/g,'_');
+          addMachineTagToTagline('gn','folder',safeInputTag);      
+      }
+   }
+}
+
+function addForUserMT(){
+   var inputTag = prompt("Recommend this bookmark to user", "");
+   var regexp = /[\W]/;
+   if(MochiKit.Base.isUndefinedOrNull(inputTag) == false){
+      if(inputTag.length == 0){
+          alert("User name can't be an empty string!");
+      }else if(regexp.test(inputTag) == true){
+          alert("Invalid user name!");
+      }else{
+          var safeInputTag = inputTag.trim()
+          safeInputTag = safeInputTag.replace(/\s+/g,'');
+          addMachineTagToTagline('gn','for',safeInputTag);      
+      }
+   }
+}
+
+function addSubscribeMT(){
+   var okay = confirm("If this is an RSS feed, subscribe it?");
+   if(okay == true){
+      addMachineTagToTagline('gn','subscribe','this');      
+   }
+}
+
+
+
+function addMachineTagToTagline(ns,pred,value){
+  var tagsInputElm = MochiKit.DOM.getElement(tagsInputFieldId);
+  var tagline = tagsInputElm.value;
+  var mtFull = '';
+  var mtShrt = '';
+  if(ns != null){
+    mtFull = ns + ':' + pred + '=' + value;
+  }
+  mtShrt = pred + ':' + value;  
+  var exists = false;
+  for(var i = 0; i < bookmarkTags.length; i++){
+      if(bookmarkTags[i] == mtFull ||bookmarkTags[i] == mtShrt){
+          exists = true;
+          break;
+      }      
+  }
+  if(exists == false){     
+      tagsInputElm.value = mtShrt + ' ' + tagline;
+      colorSelectedTags();
+  }
+}
+
 
 function setSubmitInputSource(srcId){
     submitSrcButtonId = srcId;

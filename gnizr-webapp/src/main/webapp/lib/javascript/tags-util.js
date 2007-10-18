@@ -16,6 +16,18 @@ String.prototype.unescapeHTML = function () {
   );                                                                     
 };
 
+String.prototype.trim = function(){
+    var l=0; 
+    var r=this.length -1;
+    while(l < this.length && this[l] == ' '){	
+       l++; 
+    }
+	while(r > l && this[r] == ' '){	
+	   r-=1;	
+	}
+    return this.substring(l, r+1);
+};
+
 function toTagline(tagArray){
 	var tagline = '';
 	if(tagArray){
