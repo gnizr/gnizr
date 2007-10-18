@@ -1,4 +1,4 @@
-#summary Learn how to use gnizr in 10 minutes (in progress)
+#summary Learn how to use gnizr in 10 minutes
 #labels Featured
 
 This page helps you to get started using gnizr. For more information on how to use gnizr,  read UserGuide.
