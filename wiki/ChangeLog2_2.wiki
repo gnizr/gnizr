@@ -3,4 +3,6 @@
 
 ==== Version 2.2.0-RC1 (12 October 2007) ====
 
+[http://gnizr.googlecode.com/files/gnizr-2.2.0-RC1.zip Download]
+
   * Initial public release of gnizr
