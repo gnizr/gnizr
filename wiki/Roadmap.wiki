@@ -9,7 +9,7 @@ The version number of Stable Release is in the form of `x.y.z`, where `x` and `y
 
 The version number of Development Release is in the form of either `x.y.0-M#` or `x.y.0-RC#`. The string `M#` and `RC#` are the Milestone revision number and the Release Candidate revision number, respectively. For example, if a software is labeled `2.2.0-M4`, it means that it is the fourth milestone release of gnizr 2.2, and if it is labeled `2.2.0-RC1`, it means that it is the first Release Candidate of gnizr 2.2. When the software goes into RC, all API changes are prohibited and source code commits are limited to bug fixes. 
 
-[http://www.google.com/calendar/render?cid=ii8jeu3fdm2tciv005jj86a5kg%40group.calendar.google.com Gnizr Release Schedule] 
+We also publish our [http://www.google.com/calendar/embed?src=ii8jeu3fdm2tciv005jj86a5kg%40group.calendar.google.com release schedule] online.
 
 === Branching ===
 
