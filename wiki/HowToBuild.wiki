@@ -3,7 +3,7 @@
 
 This page describe the steps to build gnizr from SVN source code. Most users should download and install from [HowToInstall gnizr binary releases].
 
-If you have any questions, send email to [http://groups.google.com/group/gnizr-users Gnizr User Discussion].
+If you have any questions, post them in [http://groups.google.com/group/gnizr-users Gnizr User Discussion].
 
 == Required Tools ==
 
