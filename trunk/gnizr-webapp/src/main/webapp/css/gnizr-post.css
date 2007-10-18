@@ -53,6 +53,7 @@
 }
 
 .inputDataRow{
+	position: relative;
 	margin: 8px 0px 20px 0px;
 }
 
@@ -69,6 +70,12 @@
 .text-input-tags{
 	word-spacing: 6px;
 	height: 50px;
+}
+
+.machineTagHelpers{
+	position: absolute;
+	right:0px;
+	top:0px;
 }
 
 .menubar{
