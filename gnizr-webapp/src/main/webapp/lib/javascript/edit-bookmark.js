@@ -38,6 +38,7 @@ var geonamesMTHelperId = "geonamesMTHelper";
 var forUserMTHelperId = "forUserMTHelper";
 var folderMTHelperId = "folderMTHelper";
 var subscribeMTHelperId = "subscribeMTHelper";
+var suggestedTagsDIVId = "suggestedTags";
 
 /* to be defined in the header of an HTML page */
 var getRecommendedTagsUrl = null;
@@ -147,7 +148,7 @@ function doReadTagline(){
 	var tagsInput = getElement(tagsInputFieldId)
 	// removes the leading and trailing white spaces
 	var tagline = strip(tagsInput.value);	
-	var ltags = tagline.split(' ');
+	var ltags = tagline.split(/\s+/);
 	bookmarkTags = new Array();			
 	for(var i = 0; i < ltags.length; i++){
 		if(getInCurrentBookmarkTagsPos(ltags[i]) == -1){
@@ -165,7 +166,7 @@ function doWriteTagline(){
 function doSwapTag(tag){		
 	var curPos = getInCurrentBookmarkTagsPos(tag);
 	if(curPos == -1){
-		bookmarkTags.unshift(tag);
+		bookmarkTags.push(tag);
 	}else{
 		bookmarkTags.splice(curPos,1);
 	}	
@@ -203,7 +204,7 @@ function createTagSelectionBlock(tagData, tagListId, tagIdPrefix){
 }
 
 function initializePage(){		
-	//MochiKit.LoggingPane.createLoggingPane(true);
+	MochiKit.LoggingPane.createLoggingPane(true);
 	setMenuHref();
 	createUserSelection(users);
 	monitorUserSelectionChanges();
@@ -333,6 +334,8 @@ function setMenuHref(){
 	MochiKit.DOM.setNodeAttribute(folderMTHelperId,'href','javascript:addFolderMT()');
 }
 
+/* ========  BEGIN: Machine Tag Helper Functions ========== */
+
 function addGeonamesMT(){
    var inputTag = prompt("Enter a place name", "");
    var regexp = /[\\&\?\/:]/;
@@ -411,7 +414,7 @@ function addMachineTagToTagline(ns,pred,value){
       colorSelectedTags();
   }
 }
-
+/* ========  END: Machine Tag Helper Functions ========== */
 
 function setSubmitInputSource(srcId){
     submitSrcButtonId = srcId;
@@ -596,7 +599,21 @@ function monitorTaglineChanges(){
 	var changed = function(e){
 		colorSelectedTags();
 	};
+	var changed2 = function(e){
+	    if(e.key().code != 32 && e.key().code != 9 && 
+	       e.key().code != 13){
+	        var caretPos = getSelectionStart(e.src());
+	        MochiKit.Logging.log("caret start: " + caretPos);
+       	    if(suggestTagsToComplete(caretPos) == false){
+       	        clearSuggestedTags();
+       	    }
+	    }else{
+	        MochiKit.Logging.log('SPACE-like key pressed: ' + e.key().string);
+	        clearSuggestedTags();
+	    }
+	}
 	MochiKit.Signal.connect(tagsInputFieldId,'onkeyup',changed);
+	MochiKit.Signal.connect(tagsInputFieldId,'onkeyup',changed2);
 }
 
 function monitorTagGroupSelectionChanges(){
@@ -734,5 +751,84 @@ function saveAndClose(flag){
          }
      }
 }
+
+/* ========  BEGIN: Suggest Tags for Auto-Complete Functions ========== */
+function suggestTagsToComplete(curPos){  
+   var ltags = getParsedTagline();
+   if(ltags.length > 0){
+      var pcTag = ltags[ltags.length-1].trim();
+      if(pcTag.length > 0){
+         MochiKit.Logging.log('pcTag: -' + pcTag+'-');
+         var matched = getPartiallyMatchedTags(pcTag,7);
+         MochiKit.Logging.log('do u mean? ' + matched);
+         if(matched.length > 0){
+           doWriteSuggestedTags(matched);
+         }
+         return true;
+      }
+   }
+   return false;
+}
+
+function getParsedTagline(){
+   var ltags = new Array();
+   var tagInputElm = MochiKit.DOM.getElement(tagsInputFieldId);
+   var tagline = tagInputElm.value;
+   if(MochiKit.Base.isUndefinedOrNull(tagline) == false){
+      ltags = tagline.split(/\s+/); 
+   }
+   MochiKit.Logging.log("parsed tagline: " + ltags);
+   return ltags;
+}
+
+function doWriteSuggestedTags(tags2suggest){
+    var suggestTagsElm = MochiKit.DOM.getElement(suggestedTagsDIVId);
+    MochiKit.DOM.replaceChildNodes(suggestTagsElm,
+      MochiKit.DOM.SPAN({'class':'tipTitle'},'Do you mean: ')
+    );
+    for(var i = 0; i < tags2suggest.length; i++){
+        var sep = ', ';
+        if(i == (tags2suggest.length-1)){
+            sep = ' ';
+        }
+        var t_unescaped = tags2suggest[i].unescapeHTML();
+        MochiKit.DOM.appendChildNodes(suggestTagsElm,
+          MochiKit.DOM.A({'href':'javascript:autoComplete(\''+t_unescaped+'\')'},tags2suggest[i]),sep);
+    }
+}
+
+function autoComplete(t2c){
+    var ltags = getParsedTagline();
+    if(ltags.length > 0){
+        ltags.splice((ltags.length-1),1);
+        var tagInputElm = MochiKit.DOM.getElement(tagsInputFieldId);
+        tagInputElm.value = toTagline(ltags);
+        taggle(t2c);    
+    }
+}
+
+function clearSuggestedTags(){
+    MochiKit.DOM.replaceChildNodes(suggestedTagsDIVId,'');
+}
+
+function getPartiallyMatchedTags(ps,maxCount){
+    var matchedTags = new Array();   
+    var cnt = 0;
+    var candidateTags = MochiKit.Base.keys(tags);
+    if(MochiKit.Base.isUndefinedOrNull(ps) == false){
+        var encodedPS = ps.replace(/([.?$\^*])/g,'\\$1');
+        MochiKit.Logging.log('encodedPS = ->' + encodedPS+'<-');
+        var re = new RegExp("^"+ps+".*");
+        MochiKit.Logging.log('re: ' + re + ' and candidateTags.length = ' + candidateTags.length);
+        for(var i = 0; i < candidateTags.length && cnt < maxCount; i++){           
+            if(re.test(candidateTags[i]) == true){
+                matchedTags.push(candidateTags[i]);
+                cnt++;
+            }
+        }
+    }
+    return matchedTags;
+}
+/* ========  END: Suggest Tags for Auto-Complete Functions ========== */
 
 MochiKit.Signal.connect(window,'onload',initializePage);

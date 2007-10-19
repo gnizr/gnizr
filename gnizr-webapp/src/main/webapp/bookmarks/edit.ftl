@@ -9,7 +9,8 @@
   <#assign title="save url -- gnizr"/>
 </#if>
 <@pageBegin pageTitle=title cssHref=[gzUrl("/css/gnizr-tagcloud.css"),
-                                     gzUrl("/css/gnizr-post.css")]>                                                                                                            
+                                     gzUrl("/css/gnizr-post.css")]>      
+<script type="text/javascript" src="${gzUrl("/lib/javascript/selection.js")}"></script>                                                                                                      
 <script type="text/javascript" src="${gzUrl("/lib/javascript/edit-bookmark.js")}"></script>
 <script type="text/javascript" src="${gzUrl("/data/json/userTagCloud.action?callback=loadUserTags&username="+username)}"></script>
 <script type="text/javascript" src="${gzUrl("/data/json/listUserTagInGroups.action?callback=loadUserTagGroups&username="+username)}"></script>
@@ -88,6 +89,7 @@
   </span>		
   <@ww.textarea cssClass="text-input-tags" label="tags (use white-space to separte multiple tags)"  labelposition="top"
                  name="tags"  value="${(editBookmark.tags)?if_exists}"/>                   
+  <div id="suggestedTags"></div>                 
   </div>                 
   <@ww.hidden name="redirect" value="${redirect?if_exists?string}"/> 
   <#if redirectToPage?exists>    
