@@ -9,7 +9,7 @@ The gnizr web application comes with a configuration file called `gnizr-config.x
 
 You should edit this configuration file to suit your machine's configuration. Configurations are defined as a set of property/value pairs. You should only edit properties that are described in the following section and leave others untouched.
 
-== Configuration Property Specifications ==
+== Configuration Property Specification ==
 
 || *Property Name* || *Description* || *Default Value* ||
 || `url` || gnizr JDBC connection URL || `jdbc:mysql://localhost/gnizr_db` ||
