@@ -78,6 +78,10 @@
 	top:0px;
 }
 
+#suggestedTags{
+	height: 20px;
+}
+
 .menubar{
 	margin: 10px auto 0px auto;
 	width: 100%;
