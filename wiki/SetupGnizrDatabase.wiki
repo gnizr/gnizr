@@ -19,6 +19,7 @@ Note: We assume that you have properly installed MySQL database. If you need add
   # Go to the SQL script directory
     * `cd gnizr-x.y.z/sql`
   # Run BASH script to setup database
+    * `chmod 755 loadsch.sh loadsp.sh`
     * `./loadsch.sh gnizr_db gnizr gnizrpass` 
     * syntax: `loadsch [db_name] [db_username] [db_password]`
   # Done!
