@@ -21,3 +21,7 @@ You should edit this configuration file to suit your machine's configuration. Co
 || `anonymousReaderPolicy` || Whether you allow anonymous user to view contents published in gnizr. If `open`, anyone can view contents published in gnizr. If `close`, only logged in user is allowed to view published contents. || `open` || 
 || `registrationPolicy` || Whether you required new user accounts to be created by system administrator. If `open`, anyone can register a new account via a self-register page. If `close`, new accounts must be manually created by gnizr administrator. || `open`||
 || `serverMaintenanceModeEnabled` || Whether the application is run in a service maintenance mode. If `true`, only gnizr administrator is allowed to login. If `false`, any registered user can login. || `false`||
+
+== Related ==
+  * HowToInstall
+  * HowToBuild
