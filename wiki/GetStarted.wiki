@@ -6,16 +6,16 @@ This page helps you to get started using gnizr. For more information on how to u
 == Login and Logout ==
 
 || Go to gnizr front page in your browser. ||
-|| http://farm3.static.flickr.com/2242/1526175068_8103454071.jpg ||
+|| [http://www.flickr.com/photos/14804582@N08/1526175068/ http://farm3.static.flickr.com/2242/1526175068_8103454071.jpg] ||
 
 
 || The `logout` link is the located on the top-right of your home page. ||
-|| http://farm3.static.flickr.com/2232/1525658597_a7b40b6bfc.jpg ||
+|| [http://www.flickr.com/photos/14804582@N08/1525658597/ http://farm3.static.flickr.com/2232/1525658597_a7b40b6bfc.jpg] ||
 
 == Your Homepage ==
 
 || Use the Navigation Bar to find, search and manage bookmarks ||
-|| http://farm3.static.flickr.com/2034/1525658645_7df0f912d4.jpg ||
+|| [http://www.flickr.com/photos/14804582@N08/1525658645/ http://farm3.static.flickr.com/2034/1525658645_7df0f912d4.jpg] ||
 
 || Saved bookmarks ||
 || http://farm3.static.flickr.com/2152/1526525816_64082897ba.jpg ||
