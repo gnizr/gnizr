@@ -391,8 +391,6 @@ function addSubscribeMT(){
    }
 }
 
-
-
 function addMachineTagToTagline(ns,pred,value){
   var tagsInputElm = MochiKit.DOM.getElement(tagsInputFieldId);
   var tagline = tagsInputElm.value;
@@ -410,7 +408,11 @@ function addMachineTagToTagline(ns,pred,value){
       }      
   }
   if(exists == false){     
-      tagsInputElm.value = mtShrt + ' ' + tagline;
+      var spc = '';
+      if(tagline.length > 0){
+          spc = ' ';
+      }
+      tagsInputElm.value = tagline + spc + mtShrt;
       colorSelectedTags();
   }
 }
@@ -595,8 +597,16 @@ function monitorZoomInputSubmit(){
 	MochiKit.Signal.connect(zoomToInputId,'onkeydown',changed);
 }
 
+function removeSpecialCharInTagline(){
+    var tagline = getTaglineString();
+    tagline = tagline.replace(/[\t\r\n\f]+/g,'');
+    var tagInputElm = MochiKit.DOM.getElement(tagsInputFieldId);
+    tagInputElm.value = tagline;
+}
+
 function monitorTaglineChanges(){
-	var changed = function(e){
+	var changed1 = function(e){
+	    //removeSpecialCharInTagline();
 		colorSelectedTags();
 	};
 	var changed2 = function(e){
@@ -612,8 +622,16 @@ function monitorTaglineChanges(){
 	        clearSuggestedTags();
 	    }
 	}
-	MochiKit.Signal.connect(tagsInputFieldId,'onkeyup',changed);
+	var changed3 = function(e){
+	    var caretPos = getSelectionStart(e.src());
+	    MochiKit.Logging.log("caret start: " + caretPos);
+       	if(suggestTagsToComplete(caretPos) == false){
+       	   clearSuggestedTags();
+        }
+	}
+	MochiKit.Signal.connect(tagsInputFieldId,'onkeyup',changed1);
 	MochiKit.Signal.connect(tagsInputFieldId,'onkeyup',changed2);
+	//MochiKit.Signal.connect(tagsInputFieldId,'onmouseup',changed3);
 }
 
 function monitorTagGroupSelectionChanges(){
@@ -752,39 +770,74 @@ function saveAndClose(flag){
      }
 }
 
+
+var focusedTag = '';
+var focusedTagCaretPos = -1;
 /* ========  BEGIN: Suggest Tags for Auto-Complete Functions ========== */
-function suggestTagsToComplete(curPos){  
-   var ltags = getParsedTagline();
-   if(ltags.length > 0){
-      var pcTag = ltags[ltags.length-1].trim();
-      if(pcTag.length > 0){
-         MochiKit.Logging.log('pcTag: -' + pcTag+'-');
-         var matched = getPartiallyMatchedTags(pcTag,7);
-         MochiKit.Logging.log('do u mean? ' + matched);
-         if(matched.length > 0){
-           doWriteSuggestedTags(matched);
-         }
-         return true;
-      }
+function suggestTagsToComplete(curPos){      
+   var taglns = getTaglineString();
+   MochiKit.Logging.log('curPos: ' + curPos + ' char:' + taglns[curPos]);
+   var lPart = taglns.substring(0,curPos);
+   var rPart = taglns.substring(curPos,taglns.length);
+   MochiKit.Logging.log('lPart: ->'+lPart + '<- rPart: ->'+rPart + '<-');
+   var lastSpcOnLeftIdx = lPart.lastIndexOf(' ');
+   var frstSpcOnRightIdx = rPart.indexOf(' ');
+   MochiKit.Logging.log('lastSpcOnLeftIdx: ' + lastSpcOnLeftIdx + ' frstSpcOnRightIdx: ' + frstSpcOnRightIdx);
+   if(lastSpcOnLeftIdx < 0){
+       focusedTag = lPart;
+   }else{
+       focusedTag = lPart.substring(lastSpcOnLeftIdx+1,curPos);
+   }
+   if(focusedTag.length > 0){
+       if(frstSpcOnRightIdx < 0){
+          focusedTag = focusedTag + rPart;  
+       }else{
+          focusedTag = focusedTag + rPart.substring(0,frstSpcOnRightIdx);
+       }
+   }
+   MochiKit.Logging.log('focusedTag: ->' + focusedTag+'<-');
+   if(focusedTag.length > 0){
+      var matched = getPartiallyMatchedTags(focusedTag,7);
+      //MochiKit.Logging.log('auto-compete candidates: ' + matched);
+      var matchedTags = MochiKit.Base.map(function(t){
+         return focusedTag + t;
+      },matched);
+      MochiKit.Logging.log('Suggestion: ' + matchedTags);
+      if(matchedTags.length > 0){
+           doWriteSuggestedTags(matchedTags);
+           focusedTagCaretPos = curPos;
+           return true;
+      }else{
+          focusedTagCaretPos = -1;
+      }     
    }
    return false;
 }
 
-function getParsedTagline(){
-   var ltags = new Array();
+function getTaglineString() {
    var tagInputElm = MochiKit.DOM.getElement(tagsInputFieldId);
-   var tagline = tagInputElm.value;
-   if(MochiKit.Base.isUndefinedOrNull(tagline) == false){
-      ltags = tagline.split(/\s+/); 
+   var s = tagInputElm.value;   
+   if(MochiKit.Base.isUndefinedOrNull(s) == false){
+       return s;
+   }else{
+       return '';
    }
-   MochiKit.Logging.log("parsed tagline: " + ltags);
+}
+
+function getParsedTagline(){
+   var tagline = getTaglineString();
+   var ltags = new Array();
+   if(tagline.length > 0){  
+     ltags = tagline.split(/\s+/);    
+     MochiKit.Logging.log("parsed tagline: " + ltags);
+   }
    return ltags;
 }
 
 function doWriteSuggestedTags(tags2suggest){
     var suggestTagsElm = MochiKit.DOM.getElement(suggestedTagsDIVId);
     MochiKit.DOM.replaceChildNodes(suggestTagsElm,
-      MochiKit.DOM.SPAN({'class':'tipTitle'},'Do you mean: ')
+      MochiKit.DOM.SPAN({'class':'tipTitle'},'Suggestion: ')
     );
     for(var i = 0; i < tags2suggest.length; i++){
         var sep = ', ';
@@ -798,17 +851,41 @@ function doWriteSuggestedTags(tags2suggest){
 }
 
 function autoComplete(t2c){
-    var ltags = getParsedTagline();
-    if(ltags.length > 0){
-        ltags.splice((ltags.length-1),1);
-        var tagInputElm = MochiKit.DOM.getElement(tagsInputFieldId);
-        tagInputElm.value = toTagline(ltags);
-        taggle(t2c);    
+    MochiKit.Logging.log('auto-complete focusedTag: ' + focusedTag + ' using ->'+t2c+'<-');
+    var tagline = getTaglineString();
+    var lPart = tagline.substring(0,focusedTagCaretPos);
+    var lastSpcIdxOnLeft = lPart.lastIndexOf(' ');
+    MochiKit.Logging.log('lastSpcIdxOnLeft: ' + lastSpcIdxOnLeft);
+    lPart = lPart.substring(0,lastSpcIdxOnLeft+1);
+    var rPart = tagline.substring(focusedTagCaretPos,tagline.length);     
+    var frstSpcIdxOnRght = rPart.indexOf(' ');
+    MochiKit.Logging.log('frstSpcIdxOnRgh: ' + frstSpcIdxOnRght);
+    if(frstSpcIdxOnRght >= 0){
+       rPart = rPart.substring(frstSpcIdxOnRght,rPart.length);          
+    }else{
+       rPart = '';
     }
+    MochiKit.Logging.log('lPart: ->' + lPart + '<-');
+    MochiKit.Logging.log('rPart: ->' + rPart + '<-');
+    var newTagline = lPart + t2c + rPart;
+    MochiKit.Logging.log('insert auto-complete tag into tagline: ' + newTagline);
+    var tagInputElm = MochiKit.DOM.getElement(tagsInputFieldId);
+    tagInputElm.value = newTagline + ' ';
+    colorSelectedTags();
+    clearSuggestedTags();
 }
 
 function clearSuggestedTags(){
     MochiKit.DOM.replaceChildNodes(suggestedTagsDIVId,'');
+}
+
+function existsInCurrentTagline(t){
+    for(var i = 0; i < bookmarkTags.length; i++){
+        if(bookmarkTags[i] == t){
+            return true;
+        }
+    }
+    return false;
 }
 
 function getPartiallyMatchedTags(ps,maxCount){
@@ -816,14 +893,17 @@ function getPartiallyMatchedTags(ps,maxCount){
     var cnt = 0;
     var candidateTags = MochiKit.Base.keys(tags);
     if(MochiKit.Base.isUndefinedOrNull(ps) == false){
-        var encodedPS = ps.replace(/([.?$\^*])/g,'\\$1');
+        var encodedPS = ps.escapeHTML();
         MochiKit.Logging.log('encodedPS = ->' + encodedPS+'<-');
-        var re = new RegExp("^"+ps+".*");
+        var re = new RegExp("^"+encodedPS+"(.*)");
         MochiKit.Logging.log('re: ' + re + ' and candidateTags.length = ' + candidateTags.length);
-        for(var i = 0; i < candidateTags.length && cnt < maxCount; i++){           
-            if(re.test(candidateTags[i]) == true){
-                matchedTags.push(candidateTags[i]);
-                cnt++;
+        for(var i = 0; i < candidateTags.length && cnt < maxCount; i++){          
+            var match = re.exec(candidateTags[i]); 
+            if(MochiKit.Base.isNull(match) == false){
+               if(existsInCurrentTagline(candidateTags[i]) == false){             
+                  matchedTags.push(match[1]);
+                  cnt++;
+               }
             }
         }
     }
