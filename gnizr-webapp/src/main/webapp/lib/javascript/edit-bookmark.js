@@ -630,8 +630,12 @@ function monitorTaglineChanges(){
         }
 	}
 	MochiKit.Signal.connect(tagsInputFieldId,'onkeyup',changed1);
-	MochiKit.Signal.connect(tagsInputFieldId,'onkeyup',changed2);
-	//MochiKit.Signal.connect(tagsInputFieldId,'onmouseup',changed3);
+	if(BO.ie == false){
+  	   MochiKit.Signal.connect(tagsInputFieldId,'onkeyup',changed2);
+  	   MochiKit.Signal.connect(tagsInputFieldId,'onmouseup',changed3);
+	}else{
+  	   MochiKit.Logging.log('IE detected. Will not load auto-complete function');
+	}	
 }
 
 function monitorTagGroupSelectionChanges(){
@@ -900,8 +904,8 @@ function getPartiallyMatchedTags(ps,maxCount){
         for(var i = 0; i < candidateTags.length && cnt < maxCount; i++){          
             var match = re.exec(candidateTags[i]); 
             if(MochiKit.Base.isNull(match) == false){
-               if(existsInCurrentTagline(candidateTags[i]) == false){             
-                  matchedTags.push(match[1]);
+               if(existsInCurrentTagline(candidateTags[i].unescapeHTML()) == false){             
+                  matchedTags.push(match[1].unescapeHTML());
                   cnt++;
                }
             }
