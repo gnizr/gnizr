@@ -7,7 +7,7 @@
   * [http://code.google.com/p/gnizr/issues/detail?id=4 Issue 4]: Unable to delete tags when editing a given RSS subscription (fixed, need testing)
   * [http://code.google.com/p/gnizr/issues/detail?id=11 Issue 11]: No error is reported when change password to empty strings (fixed, need testing)
   * [http://code.google.com/p/gnizr/issues/detail?id=4 Issue 12]: User 'gnizr' can create new user whose username is an empty string (fixed, need testing)
-  * [http://code.google.com/p/gnizr/issues/detail?id=4 Issue 13]: Bookmarks tagged '/' don't show up in the user home page (fixed, need testing)
+  * [http://code.google.com/p/gnizr/issues/detail?id=13 Issue 13]: Bookmarks tagged '/' don't show up in the user home page (fixed, need testing)
 
 ==== Version 2.2.0-RC1 (12 October 2007) ====
 
