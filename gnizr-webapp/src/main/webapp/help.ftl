@@ -10,9 +10,10 @@
 <h2>gnizr tools</h2>
 <p>
 <ul>
-  <li>Drag this link: <a href="javascript:location.href='${webApplicationUrl}/post?url='+encodeURIComponent(location.href)+'&amp;title='+encodeURIComponent(document.title)+'&redirect=true'" title="post to gnizr" onclick="window.alert('Drag this link to your bookmarks toolbar, or right-click it and choose Bookmark This Link...');return false;">post to gnizr</a>' up to your Bookmarks Toolbar.</li>
-
-  <li>Drag this link: <a href="javascript:location.href='${webApplicationUrl}/home'" onclick="window.alert('Drag this link to your bookmarks toolbar, or right-click it and choose Bookmark This Link...');return false;">my gnizr</a> up to your Bookmarks Toolbar.
+  <#assign postHref = gzUrl("/post?url='+encodeURIComponent(location.href)+'&amp;title='+encodeURIComponent(document.title)+'&redirect=true")/>
+  <li>Drag this link: <a href="javascript:location.href='${postHref}'" title="post to gnizr" onclick="window.alert('Drag this link to your bookmarks toolbar, or right-click it and choose Bookmark This Link...');return false;">post to gnizr</a>' up to your Bookmarks Toolbar.</li>
+  <#assign homeHref = gzUrl("/home")/>
+  <li>Drag this link: <a href="javascript:location.href='${homeHref}'" onclick="window.alert('Drag this link to your bookmarks toolbar, or right-click it and choose Bookmark This Link...');return false;">my gnizr</a> up to your Bookmarks Toolbar.
 </ul>
 </p>
 </@mainBlock>
