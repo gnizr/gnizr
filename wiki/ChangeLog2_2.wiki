@@ -6,7 +6,7 @@
 
 Download 
   * Binrary: [http://gnizr.googlecode.com/files/gnizr-2.2.0-RC2.zip gnizr-2.2.0-RC2.zip]
-  * Source: [http://gnizr.googlecode.com/svn/tags/gnizr-2.2.0-RC2/ gnizr-2.2.0-RC2]
+  * Source: http://gnizr.googlecode.com/svn/tags/gnizr-2.2.0-RC2/
 
 Changelog
   * [http://code.google.com/p/gnizr/issues/detail?id=4 Issue 4]: Unable to delete tags when editing a given RSS subscription (fixed, need testing)
