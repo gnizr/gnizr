@@ -4,10 +4,11 @@
 
 ==== Version 2.2.0-RC2 (23 October 2007) ====
 
-Download: 
-  * binrary: [http://gnizr.googlecode.com/files/gnizr-2.2.0-RC2.zip gnizr-2.2.0-RC2.zip]
-  * source: [http://gnizr.googlecode.com/svn/tags/gnizr-2.2.0-RC2/ gnizr-2.2.0-RC2]
+Download 
+  * Binrary: [http://gnizr.googlecode.com/files/gnizr-2.2.0-RC2.zip gnizr-2.2.0-RC2.zip]
+  * Source: [http://gnizr.googlecode.com/svn/tags/gnizr-2.2.0-RC2/ gnizr-2.2.0-RC2]
 
+Changelog
   * [http://code.google.com/p/gnizr/issues/detail?id=4 Issue 4]: Unable to delete tags when editing a given RSS subscription (fixed, need testing)
   * [http://code.google.com/p/gnizr/issues/detail?id=11 Issue 11]: No error is reported when change password to empty strings (fixed, need testing)
   * [http://code.google.com/p/gnizr/issues/detail?id=4 Issue 12]: User 'gnizr' can create new user whose username is an empty string (fixed, need testing)
