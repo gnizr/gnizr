@@ -30,7 +30,7 @@ Assume that you've checked out the source code in a top-level directory called `
   # Install the root project POM and update Maven plugins
     * `mvn -U -N install`
   # Compile gnizr modules, run JUnit tests and assemble the application
-    * `mvn clean package assembly:assembly`  
+    * `mvn clean assembly:assembly`  
   # If you see no error messages, then the build is complete.
     * `cd gnizr/target`
 
