@@ -53,12 +53,14 @@
 			<version>${gnVersion}</version>
 			<scope>compile</scope>			
 		</dependency>
+		<!--
 		<dependency>
 			<groupId>com.gnizr.core.web</groupId>
 			<artifactId>gnizr-clustermap</artifactId>
 			<version>${gnVersion}</version>
 			<scope>compile</scope>			
 		</dependency>
+		-->
 		<dependency>
 			<groupId>urlrewrite</groupId>
 			<artifactId>urlrewrite</artifactId>
