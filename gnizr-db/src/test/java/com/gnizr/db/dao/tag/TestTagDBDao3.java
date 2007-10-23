@@ -140,13 +140,8 @@ public class TestTagDBDao3 extends GnizrDBTestBase {
 		assertEquals("news",t2.getTag().getLabel());
 		assertEquals(1,t2.getTag().getCount());
 		
-		List<Bookmark> chngBmarks = tagDao.expandTag(new User(1), new Tag(1), new Tag[]{new Tag(4)});
-		assertEquals(1,chngBmarks.size());
-		for(Bookmark c : chngBmarks){
-			assertTrue(c.getTagList().contains("questions"));
-			assertTrue(c.getTagList().contains("cnn"));
-		}
-				
+		tagDao.expandTag(new User(1), new Tag(1), new Tag[]{new Tag(4)});
+		
 		cnnTag = tagDao.getTag(1);
 		assertEquals(1,cnnTag.getCount());
 		
@@ -197,11 +192,8 @@ public class TestTagDBDao3 extends GnizrDBTestBase {
 		assertEquals("news",t2.getTag().getLabel());
 		assertEquals(1,t2.getTag().getCount());
 		
-		List<Bookmark> changeBookmarks= tagDao.reduceTag(new User(1), new Tag[]{new Tag(1)});
-		assertEquals(1,changeBookmarks.size());
-		for(Bookmark c : changeBookmarks){
-			assertFalse(c.getTagList().contains("cnn"));
-		}
+		boolean[] opOkay = tagDao.reduceTag(new User(1), new Tag[]{new Tag(1)});
+		assertTrue(opOkay[0]);
 		
 		BookmarkTag bm11 = tagDao.getBookmarkTag(11);
 		assertEquals("cnn",bm11.getTag().getLabel());

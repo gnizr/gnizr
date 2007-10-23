@@ -10,7 +10,6 @@ var tagsInputFieldId = "saveBookmark_tags";
 /* ID of the node where the list of user tags will be written to*/
 var saveSubmitClass = "saveSubmit";
 var saveBookmarkFormId = "saveBookmark";
-var submitSaveBookmarkId = "submitSaveBookmark";
 var userTagsId = "userTags";
 var tagCloudId = "tagCloud";
 var selectUserTagDIVId = "selectUserTag";
@@ -33,20 +32,11 @@ var zoomToId="zoomTo";
 var zoomToInputId="zoomToInput";
 var mapId = "map";
 var geomMarkerClass = "geomMarker";
-var machineTagHelpersSPANId = "machineTagHelpers";
-var geonamesMTHelperId = "geonamesMTHelper";
-var forUserMTHelperId = "forUserMTHelper";
-var folderMTHelperId = "folderMTHelper";
-var subscribeMTHelperId = "subscribeMTHelper";
-var suggestedTagsDIVId = "suggestedTags";
 
 /* to be defined in the header of an HTML page */
 var getRecommendedTagsUrl = null;
 var getUserTagsUrl = null;
 var getUserTagGroupUrl = null;
-
-/* stores the ID of the input button from which the form is submitted */
-var submitSrcButtonId = null;
 
 var tagIdPrefixMap = {userTagsId:'ti_'};
 
@@ -148,7 +138,7 @@ function doReadTagline(){
 	var tagsInput = getElement(tagsInputFieldId)
 	// removes the leading and trailing white spaces
 	var tagline = strip(tagsInput.value);	
-	var ltags = tagline.split(/\s+/);
+	var ltags = tagline.split(' ');
 	bookmarkTags = new Array();			
 	for(var i = 0; i < ltags.length; i++){
 		if(getInCurrentBookmarkTagsPos(ltags[i]) == -1){
@@ -166,7 +156,7 @@ function doWriteTagline(){
 function doSwapTag(tag){		
 	var curPos = getInCurrentBookmarkTagsPos(tag);
 	if(curPos == -1){
-		bookmarkTags.push(tag);
+		bookmarkTags.unshift(tag);
 	}else{
 		bookmarkTags.splice(curPos,1);
 	}	
@@ -204,7 +194,7 @@ function createTagSelectionBlock(tagData, tagListId, tagIdPrefix){
 }
 
 function initializePage(){		
-	MochiKit.LoggingPane.createLoggingPane(true);
+	//MochiKit.LoggingPane.createLoggingPane(true);
 	setMenuHref();
 	createUserSelection(users);
 	monitorUserSelectionChanges();
@@ -324,102 +314,9 @@ function setMenuHref(){
 	var submitElms = MochiKit.DOM.getElementsByTagAndClassName('INPUT',saveSubmitClass,saveBookmarkFormId);
 	for(var i = 0; i < submitElms.length; i++){
 		MochiKit.Logging.log('set onclick writeGeometryMarkers() on saveSubmit: ' + submitElms[i].value);
-		MochiKit.DOM.setNodeAttribute(submitElms[i],'onclick',
-		   'writeGeometryMarkers();setSubmitInputSource(\''+submitElms[i].id+'\');');		
+		MochiKit.DOM.setNodeAttribute(submitElms[i],'onclick','writeGeometryMarkers();');		
 	}	
 	MochiKit.DOM.setNodeAttribute(zoomToId,'onclick','findPlaceAndZoom()');
-	MochiKit.DOM.setNodeAttribute(geonamesMTHelperId,'href','javascript:addGeonamesMT()');
-	MochiKit.DOM.setNodeAttribute(forUserMTHelperId,'href','javascript:addForUserMT()');
-	MochiKit.DOM.setNodeAttribute(subscribeMTHelperId,'href','javascript:addSubscribeMT()');
-	MochiKit.DOM.setNodeAttribute(folderMTHelperId,'href','javascript:addFolderMT()');
-}
-
-/* ========  BEGIN: Machine Tag Helper Functions ========== */
-
-function addGeonamesMT(){
-   var inputTag = prompt("Enter a place name", "");
-   var regexp = /[\\&\?\/:]/;
-   if(MochiKit.Base.isUndefinedOrNull(inputTag) == false){
-      if(inputTag.length == 0){
-          alert("Place name can't be an empty string!");
-      }else if(regexp.test(inputTag) == true){
-          alert("Place name must not contain these special characters: & ? / \\ :");
-      }else{
-          var safeInputTag = inputTag.trim()
-          safeInputTag = safeInputTag.replace(/\s+/g,'_');
-          addMachineTagToTagline('gn','geonames',safeInputTag);      
-      }
-   }
-}
-
-function addFolderMT(){
-   var inputTag = prompt("Save this bookmark to folder", "");
-   var regexp = /[\\&\?\/:;%^+_*'"]/;
-   if(MochiKit.Base.isUndefinedOrNull(inputTag) == false){
-      if(inputTag.length == 0){
-          alert("Folder name can't be an empty string!");
-      }else if(regexp.test(inputTag) == true){
-          alert("Folder name must not contain these special characters: * ? & / \\ ; ' \" * % ^ + _");
-      }else{
-          var safeInputTag = inputTag.trim()
-          safeInputTag = safeInputTag.replace(/\s+/g,'_');
-          addMachineTagToTagline('gn','folder',safeInputTag);      
-      }
-   }
-}
-
-function addForUserMT(){
-   var inputTag = prompt("Recommend this bookmark to user", "");
-   var regexp = /[\W]/;
-   if(MochiKit.Base.isUndefinedOrNull(inputTag) == false){
-      if(inputTag.length == 0){
-          alert("User name can't be an empty string!");
-      }else if(regexp.test(inputTag) == true){
-          alert("Invalid user name!");
-      }else{
-          var safeInputTag = inputTag.trim()
-          safeInputTag = safeInputTag.replace(/\s+/g,'');
-          addMachineTagToTagline('gn','for',safeInputTag);      
-      }
-   }
-}
-
-function addSubscribeMT(){
-   var okay = confirm("If this is an RSS feed, subscribe it?");
-   if(okay == true){
-      addMachineTagToTagline('gn','subscribe','this');      
-   }
-}
-
-function addMachineTagToTagline(ns,pred,value){
-  var tagsInputElm = MochiKit.DOM.getElement(tagsInputFieldId);
-  var tagline = tagsInputElm.value;
-  var mtFull = '';
-  var mtShrt = '';
-  if(ns != null){
-    mtFull = ns + ':' + pred + '=' + value;
-  }
-  mtShrt = pred + ':' + value;  
-  var exists = false;
-  for(var i = 0; i < bookmarkTags.length; i++){
-      if(bookmarkTags[i] == mtFull ||bookmarkTags[i] == mtShrt){
-          exists = true;
-          break;
-      }      
-  }
-  if(exists == false){     
-      var spc = '';
-      if(tagline.length > 0){
-          spc = ' ';
-      }
-      tagsInputElm.value = tagline + spc + mtShrt;
-      colorSelectedTags();
-  }
-}
-/* ========  END: Machine Tag Helper Functions ========== */
-
-function setSubmitInputSource(srcId){
-    submitSrcButtonId = srcId;
 }
 
 function writeGeometryMarkers(){
@@ -597,45 +494,14 @@ function monitorZoomInputSubmit(){
 	MochiKit.Signal.connect(zoomToInputId,'onkeydown',changed);
 }
 
-function removeSpecialCharInTagline(){
-    var tagline = getTaglineString();
-    tagline = tagline.replace(/[\t\r\n\f]+/g,'');
-    var tagInputElm = MochiKit.DOM.getElement(tagsInputFieldId);
-    tagInputElm.value = tagline;
-}
-
 function monitorTaglineChanges(){
-	var changed1 = function(e){
-	    //removeSpecialCharInTagline();
-		colorSelectedTags();
+	var changed = function(e){
+		// space or backspace
+		if(e.key().code == 32 || e.key().code == 0){		
+			colorSelectedTags();
+		}
 	};
-	var changed2 = function(e){
-	    if(e.key().code != 32 && e.key().code != 9 && 
-	       e.key().code != 13){
-	        var caretPos = getSelectionStart(e.src());
-	        MochiKit.Logging.log("caret start: " + caretPos);
-       	    if(suggestTagsToComplete(caretPos) == false){
-       	        clearSuggestedTags();
-       	    }
-	    }else{
-	        MochiKit.Logging.log('SPACE-like key pressed: ' + e.key().string);
-	        clearSuggestedTags();
-	    }
-	}
-	var changed3 = function(e){
-	    var caretPos = getSelectionStart(e.src());
-	    MochiKit.Logging.log("caret start: " + caretPos);
-       	if(suggestTagsToComplete(caretPos) == false){
-       	   clearSuggestedTags();
-        }
-	}
-	MochiKit.Signal.connect(tagsInputFieldId,'onkeyup',changed1);
-	if(BO.ie == false){
-  	   MochiKit.Signal.connect(tagsInputFieldId,'onkeyup',changed2);
-  	   MochiKit.Signal.connect(tagsInputFieldId,'onmouseup',changed3);
-	}else{
-  	   MochiKit.Logging.log('IE detected. Will not load auto-complete function');
-	}	
+	MochiKit.Signal.connect(tagsInputFieldId,'onkeydown',changed);
 }
 
 function monitorTagGroupSelectionChanges(){
@@ -764,155 +630,5 @@ function isValidUrl(s){
 	var regexp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/
 	return regexp.test(s);
 }
-
-function saveAndClose(flag){
-  MochiKit.Logging.log('closeAndSave = ' + flag);
-     if(Boolean(flag) == true){
-         if(submitSrcButtonId == submitSaveBookmarkId){        
-             window.close();
-         }
-     }
-}
-
-
-var focusedTag = '';
-var focusedTagCaretPos = -1;
-/* ========  BEGIN: Suggest Tags for Auto-Complete Functions ========== */
-function suggestTagsToComplete(curPos){      
-   var taglns = getTaglineString();
-   MochiKit.Logging.log('curPos: ' + curPos + ' char:' + taglns[curPos]);
-   var lPart = taglns.substring(0,curPos);
-   var rPart = taglns.substring(curPos,taglns.length);
-   MochiKit.Logging.log('lPart: ->'+lPart + '<- rPart: ->'+rPart + '<-');
-   var lastSpcOnLeftIdx = lPart.lastIndexOf(' ');
-   var frstSpcOnRightIdx = rPart.indexOf(' ');
-   MochiKit.Logging.log('lastSpcOnLeftIdx: ' + lastSpcOnLeftIdx + ' frstSpcOnRightIdx: ' + frstSpcOnRightIdx);
-   if(lastSpcOnLeftIdx < 0){
-       focusedTag = lPart;
-   }else{
-       focusedTag = lPart.substring(lastSpcOnLeftIdx+1,curPos);
-   }
-   if(focusedTag.length > 0){
-       if(frstSpcOnRightIdx < 0){
-          focusedTag = focusedTag + rPart;  
-       }else{
-          focusedTag = focusedTag + rPart.substring(0,frstSpcOnRightIdx);
-       }
-   }
-   MochiKit.Logging.log('focusedTag: ->' + focusedTag+'<-');
-   if(focusedTag.length > 0){
-      var matched = getPartiallyMatchedTags(focusedTag,7);
-      //MochiKit.Logging.log('auto-compete candidates: ' + matched);
-      var matchedTags = MochiKit.Base.map(function(t){
-         return focusedTag + t;
-      },matched);
-      MochiKit.Logging.log('Suggestion: ' + matchedTags);
-      if(matchedTags.length > 0){
-           doWriteSuggestedTags(matchedTags);
-           focusedTagCaretPos = curPos;
-           return true;
-      }else{
-          focusedTagCaretPos = -1;
-      }     
-   }
-   return false;
-}
-
-function getTaglineString() {
-   var tagInputElm = MochiKit.DOM.getElement(tagsInputFieldId);
-   var s = tagInputElm.value;   
-   if(MochiKit.Base.isUndefinedOrNull(s) == false){
-       return s;
-   }else{
-       return '';
-   }
-}
-
-function getParsedTagline(){
-   var tagline = getTaglineString();
-   var ltags = new Array();
-   if(tagline.length > 0){  
-     ltags = tagline.split(/\s+/);    
-     MochiKit.Logging.log("parsed tagline: " + ltags);
-   }
-   return ltags;
-}
-
-function doWriteSuggestedTags(tags2suggest){
-    var suggestTagsElm = MochiKit.DOM.getElement(suggestedTagsDIVId);
-    MochiKit.DOM.replaceChildNodes(suggestTagsElm,
-      MochiKit.DOM.SPAN({'class':'tipTitle'},'Suggestion: ')
-    );
-    for(var i = 0; i < tags2suggest.length; i++){
-        var sep = ', ';
-        if(i == (tags2suggest.length-1)){
-            sep = ' ';
-        }
-        var t_unescaped = tags2suggest[i].unescapeHTML();
-        MochiKit.DOM.appendChildNodes(suggestTagsElm,
-          MochiKit.DOM.A({'href':'javascript:autoComplete(\''+t_unescaped+'\')'},tags2suggest[i]),sep);
-    }
-}
-
-function autoComplete(t2c){
-    MochiKit.Logging.log('auto-complete focusedTag: ' + focusedTag + ' using ->'+t2c+'<-');
-    var tagline = getTaglineString();
-    var lPart = tagline.substring(0,focusedTagCaretPos);
-    var lastSpcIdxOnLeft = lPart.lastIndexOf(' ');
-    MochiKit.Logging.log('lastSpcIdxOnLeft: ' + lastSpcIdxOnLeft);
-    lPart = lPart.substring(0,lastSpcIdxOnLeft+1);
-    var rPart = tagline.substring(focusedTagCaretPos,tagline.length);     
-    var frstSpcIdxOnRght = rPart.indexOf(' ');
-    MochiKit.Logging.log('frstSpcIdxOnRgh: ' + frstSpcIdxOnRght);
-    if(frstSpcIdxOnRght >= 0){
-       rPart = rPart.substring(frstSpcIdxOnRght,rPart.length);          
-    }else{
-       rPart = '';
-    }
-    MochiKit.Logging.log('lPart: ->' + lPart + '<-');
-    MochiKit.Logging.log('rPart: ->' + rPart + '<-');
-    var newTagline = lPart + t2c + rPart;
-    MochiKit.Logging.log('insert auto-complete tag into tagline: ' + newTagline);
-    var tagInputElm = MochiKit.DOM.getElement(tagsInputFieldId);
-    tagInputElm.value = newTagline + ' ';
-    colorSelectedTags();
-    clearSuggestedTags();
-}
-
-function clearSuggestedTags(){
-    MochiKit.DOM.replaceChildNodes(suggestedTagsDIVId,'');
-}
-
-function existsInCurrentTagline(t){
-    for(var i = 0; i < bookmarkTags.length; i++){
-        if(bookmarkTags[i] == t){
-            return true;
-        }
-    }
-    return false;
-}
-
-function getPartiallyMatchedTags(ps,maxCount){
-    var matchedTags = new Array();   
-    var cnt = 0;
-    var candidateTags = MochiKit.Base.keys(tags);
-    if(MochiKit.Base.isUndefinedOrNull(ps) == false){
-        var encodedPS = ps.escapeHTML();
-        MochiKit.Logging.log('encodedPS = ->' + encodedPS+'<-');
-        var re = new RegExp("^"+encodedPS+"(.*)");
-        MochiKit.Logging.log('re: ' + re + ' and candidateTags.length = ' + candidateTags.length);
-        for(var i = 0; i < candidateTags.length && cnt < maxCount; i++){          
-            var match = re.exec(candidateTags[i]); 
-            if(MochiKit.Base.isNull(match) == false){
-               if(existsInCurrentTagline(candidateTags[i].unescapeHTML()) == false){             
-                  matchedTags.push(match[1].unescapeHTML());
-                  cnt++;
-               }
-            }
-        }
-    }
-    return matchedTags;
-}
-/* ========  END: Suggest Tags for Auto-Complete Functions ========== */
 
 MochiKit.Signal.connect(window,'onload',initializePage);
