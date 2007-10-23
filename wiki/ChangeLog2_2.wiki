@@ -2,7 +2,9 @@
 #labels Phase-Implementation
 
 
-==== Version 2.2.0-RC2 (in process) ====
+==== Version 2.2.0-RC2 (23 October 2007) ====
+
+Download: [http://gnizr.googlecode.com/files/gnizr-2.2.0-RC2.zip gnizr-2.2.0-RC2.zip]
 
   * [http://code.google.com/p/gnizr/issues/detail?id=4 Issue 4]: Unable to delete tags when editing a given RSS subscription (fixed, need testing)
   * [http://code.google.com/p/gnizr/issues/detail?id=11 Issue 11]: No error is reported when change password to empty strings (fixed, need testing)
