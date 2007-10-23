@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+	<user id="1" username="gnizr" password="nullpass" fullname="gnizr"
+		created_on="2006-11-16 21:55:18.0" email="gnizr@gnizr.com"
+		acct_status="1"/>
+	<user id="2" username="hchen1" password="cf95caeb19ac6b9743cb6398d68da02e"
+		fullname="Harry Chen" created_on="2006-11-16 21:55:18.0"
+		email="harry.chen@gmail.com" acct_status="1"/>
+	<user id="3" username="jsmith" password="39ce7e2a8573b41ce73b5ba41617f8f7"
+		fullname="Joe Smith" created_on="2006-11-16 21:55:18.0"
+		email="jsmith@hchen1.com" acct_status="1"/>
+	
+	<link id="202" mime_type_id="1003" url="http://www.cnn.com/"
+		url_hash="c50252f4f24784b5d368926df781ede9"/>
+	
+	<link id="203" mime_type_id="1003" url="http://www.cnn3.com/"
+		url_hash="dbf3fd86629412df89054767414a393f"/>
+	
+	<link id="204" mime_type_id="1003"
+		url="http://www.learntechnology.net/webwork-crud-lm.do"
+		url_hash="b1ab0901c5e0f0239cfd2634954f4f9e"/>
+	
+	<link id="205" mime_type_id="1003"
+		url="http://www.springframework.org/docs/reference/beans.html"
+		url_hash="97014960532642d4a2038b7f7361efab"/>
+	
+	<link id="206" mime_type_id="1003"
+		url="http://www.javaworld.com/javaworld/jw-03-2004/jw-0329-webwork.html"
+		url_hash="f2d29ce95d494a3553d39f502b887120"/>
+	
+	<link id="207" mime_type_id="1003"
+		url="http://www.nytimes.com/2006/12/10/travel/10Tibet.html?pagewanted=1&amp;ei=5087%0A&amp;em&amp;en=5ec229a46c166112&amp;ex=1165899600"
+		url_hash="6f1947e07eccc25bd1dcf12dcc65dc80"/>
+	
+	<link id="208" mime_type_id="1003"
+		url="http://www.zonaingame.com/2006/12/10/wii-play-cow-racing/"
+		url_hash="f2a6f05155b739b459edc2146b786048"/>
+	
+	<link id="209" mime_type_id="1003"
+		url="http://www.gamefaqs.com/console/wii/game/928519.html"
+		url_hash="32781997f6fa1867befc53702f41e0fe"
+		created_on="2006-11-30 11:00:00.0"/>
+	
+	<bookmark id="300" user_id="2" link_id="202" title="cnn" notes="news"
+		created_on="2006-11-16 21:55:19.0" last_updated="2006-11-19 21:55:19.0"
+		/>
+	
+	<bookmark id="301" user_id="2" link_id="203" title="foo" notes="news"
+		created_on="2006-11-18 21:55:19.0" last_updated="2006-11-18 21:55:19.0"
+		/>
+	
+	<bookmark id="302" user_id="2" link_id="204" title="WebWork CRUD (Larry)"
+		notes="webwork and spring example" created_on="2006-11-18 21:55:19.0"
+		last_updated="2006-11-18 21:55:19.0"/>
+	
+	<bookmark id="303" user_id="2" link_id="205"
+		title="Spring Framework: Inversion of Control (IoC)" notes=""
+		created_on="2006-11-18 21:55:19.0" last_updated="2006-11-18 21:55:19.0"
+		/>
+	
+	<bookmark id="304" user_id="2" link_id="206"
+		title="Art of Java Web development: WebWork" notes=""
+		created_on="2006-11-18 21:55:19.0" last_updated="2006-11-18 21:55:19.0"
+		/>
+	
+	<bookmark id="305" user_id="2" link_id="207" title="Tibet, Now"
+		notes="nyt traval article on tibet" created_on="2006-11-18 21:55:19.0"
+		last_updated="2006-11-18 21:55:19.0"/>
+	
+	<bookmark id="306" user_id="2" link_id="208" title="Wii Play: Cow Racing"
+		notes="wii game: cow racing" created_on="2006-11-18 21:55:19.0"
+		last_updated="2006-11-18 21:55:19.0"/>
+	
+	<bookmark id="307" user_id="2" link_id="209"
+		title="The Legend of Zelda: Twilight Princess (FAQ and Walkthoughts)"
+		notes="" created_on="2006-11-18 21:55:19.0"
+		last_updated="2006-11-18 21:55:19.0" />
+	
+	<tag id="1" tag="webwork" count="10"/>
+	<tag id="2" tag="wii" count="2"/>
+	<tag id="3" tag="www" count="3"/>
+	
+	<bookmark_tag_idx id="1" bookmark_id="304" tag_id="1" count="1" position="0"/>
+	<bookmark_tag_idx id="2" bookmark_id="302" tag_id="1" count="1" position="0"/>
+	<bookmark_tag_idx id="3" bookmark_id="302" tag_id="2" count="1" position="0"/>
+	<bookmark_tag_idx id="4" bookmark_id="302" tag_id="3" count="1" position="0"/>	
+	<bookmark_tag_idx id="5" bookmark_id="306" tag_id="1" count="1" position="0"/>
+
+		
+	<tag id="5" tag="place" count="0"/>
+	<tag_prpt id="1" name="related" ns_prefix="skos" description="SKOS related"
+		prpt_type="default" cardinality="-1"/>
+	<tag_prpt id="2" name="broader" ns_prefix="skos" description="SKOS broader"
+		prpt_type="default" cardinality="-1"/>
+	<tag_prpt id="3" name="narrower" ns_prefix="skos" description="SKOS narrower"
+		prpt_type="default" cardinality="-1"/>
+	<tag_prpt id="4" name="type" ns_prefix="rdf" description="RDF type"
+		prpt_type="default" cardinality="-1"/>
+	
+	<user_tag_idx id="1" user_id="2" tag_id="1" count="2"/>
+	<user_tag_idx id="2" user_id="2" tag_id="2" count="4"/>
+	<user_tag_idx id="3" user_id="2" tag_id="3" count="5"/>
+	<user_tag_idx id="5" user_id="1" tag_id="5" count="0"/>
+	
+	<folder id="1" owner_id="2" folder_name="my folder1" description="stuff that matters" last_updated="2006-11-18 21:55:19.0" />
+</dataset>
