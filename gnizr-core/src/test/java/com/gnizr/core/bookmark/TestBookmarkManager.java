@@ -306,8 +306,8 @@ public class TestBookmarkManager extends GnizrCoreTestBase {
 		assertTrue(manager.updateBookmark(bm300));
 		
 		bm300 = manager.getBookmark(300);
-		assertEquals("abc df 12 13 019 ppp [ 0-x ] | 11 * ** p + ( .* )",bm300.getTags());		
-		assertEquals(18,bm300.getTagList().size());
+		assertEquals("abc df 12 13 019 ppp [ 0-x ] | 11 * ** p + ( )",bm300.getTags());		
+		assertEquals(17,bm300.getTagList().size());
 		
 		Tag tag1 = tagDao.findTag("abc").get(0);
 		assertEquals(1,tag1.getCount());
