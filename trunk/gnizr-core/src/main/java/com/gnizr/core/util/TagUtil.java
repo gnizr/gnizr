@@ -82,12 +82,13 @@ public class TagUtil {
 	
 	public static String makeSafeTagString(String tag){
 		if(tag != null){
-			String t = tag.trim();
-			t = t.replace("/$","");
+			String t = tag.trim();				
 			t = t.replaceAll("\\\\","");
 			t = t.replaceAll("[&%\\?]","");			
 			t = t.replaceAll("\\s+","_");
-			return t;
+			t = t.replaceFirst("^[.]+[\\W]*$", "");
+			t = t.replaceFirst("/$","");
+			return t.trim();
 		}
 		return tag;
 	}

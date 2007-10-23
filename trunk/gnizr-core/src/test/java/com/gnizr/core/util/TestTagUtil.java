@@ -50,8 +50,20 @@ public class TestTagUtil extends TestCase {
 		s = TagUtil.makeSafeTagString("a&b&c");
 		assertEquals("abc",s);
 		
+		s = TagUtil.makeSafeTagString("/");
+		assertEquals("",s);
+		
+		s = TagUtil.makeSafeTagString("./.");
+		assertEquals("",s);
+		
+		s = TagUtil.makeSafeTagString("..");
+		assertEquals("",s);
+		
+		s = TagUtil.makeSafeTagString(".java");
+		assertEquals(".java",s);
+		
 		s = TagUtil.makeSafeTagString("aa/");
-		assertEquals("aa/",s);
+		assertEquals("aa",s);
 		
 		s = TagUtil.makeSafeTagString("ac/dc");
 		assertEquals("ac/dc",s);
