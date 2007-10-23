@@ -62,8 +62,8 @@ PUBLIC "-//tuckey.org//DTD UrlRewrite 3.0//EN"
 </rule>
 	
 <rule>
-  <from>^/search$</from>
   <condition name="query-string" operator="notequal">.+</condition>
+  <from>^/search$</from>  
   <to last="true">/bookmark/searchInput.action</to>
 </rule>	
 	
@@ -141,21 +141,19 @@ PUBLIC "-//tuckey.org//DTD UrlRewrite 3.0//EN"
 </rule>		
 	
 <rule>
-  <!--<from>^/rdf/tag/([\S]+)$</from>-->
   <from>^/rdf/tag/([\S&amp;&amp;[^\?]]+)$</from>
   <to last="true">/data/rdf/tag.action?tag=$1</to>
 </rule>			
 	
 <rule>
-  <nam>MyTags edit with no tag string defined</nam>	
+  <name>MyTags edit with no tag string defined</name>	
   <from>^/edit/tag$</from>
   <to last="true">/settings/tags/edit.action</to>
 </rule>	
 	
 <rule>
-  <nam>MyTags edit with defind tag string</nam>	
+  <name>MyTags edit with defind tag string</name>	
   <from>^/edit/tag/([\S&amp;&amp;[^\?]]+)$</from> 
-  <!--<from>^/edit/tag/([\S]+)$</from>-->
   <to last="true">/settings/tags/edit.action?tag=$1</to>
 </rule>		
 			
