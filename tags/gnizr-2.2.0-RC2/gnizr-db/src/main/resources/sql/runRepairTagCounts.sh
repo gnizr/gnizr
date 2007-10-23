@@ -1,1 +1,0 @@
-mysql -u gnizr --password=gnizr gnizr_db < repair-tagcounts.sql
