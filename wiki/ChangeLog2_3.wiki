@@ -9,4 +9,4 @@
   * Link "define placemarks" in the Edit Bookmark page has been renamed to "edit placemarks"
   * User changing bookmark tags via keyboard inputs in the "Edit Bookmark" page is made more responsive. 
   * Changed version number string in `macro-lib.ftl` to `2.3.0-M1`
-  * Merged changes from the 2.2 branch: R167-R235
+  * Merged changes from the 2.2 branch: R167-R235 (at R239)
