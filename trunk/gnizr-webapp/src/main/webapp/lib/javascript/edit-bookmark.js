@@ -204,7 +204,7 @@ function createTagSelectionBlock(tagData, tagListId, tagIdPrefix){
 }
 
 function initializePage(){		
-	MochiKit.LoggingPane.createLoggingPane(true);
+	//MochiKit.LoggingPane.createLoggingPane(true);
 	setMenuHref();
 	createUserSelection(users);
 	monitorUserSelectionChanges();
@@ -385,7 +385,7 @@ function addForUserMT(){
 }
 
 function addSubscribeMT(){
-   var okay = confirm("If this is an RSS feed, subscribe it?");
+   var okay = confirm("If this is an RSS feed, subscribe to it?");
    if(okay == true){
       addMachineTagToTagline('gn','subscribe','this');      
    }
