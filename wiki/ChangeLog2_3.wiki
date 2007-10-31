@@ -8,7 +8,7 @@
   * [http://code.google.com/p/gnizr/issues/detail?id=8 Issue 8]: Allow users to add 'gn:geonames=' without typing the whole string every time (fixed, tested)
   * [http://code.google.com/p/gnizr/issues/detail?id=9 Issue 9]: Post-to-gnizr bookmarklet should open 'Edit Bookmark' in a new window (fixed, tested)
   * [http://code.google.com/p/gnizr/issues/detail?id=10 Issue 10]: Provide auto-complete for editing bookmark tags
-  * [http://code.google.com/p/gnizr/issues/detail?id=14 Issue 14]: Help page generates incorrect link URL for bookmarklets
+  * [http://code.google.com/p/gnizr/issues/detail?id=14 Issue 14]: Help page generates incorrect link URL for bookmarklets (fixed, need testing)
   * Link "define placemarks" in the Edit Bookmark page has been renamed to "edit placemarks"
   * User changing bookmark tags via keyboard inputs in the "Edit Bookmark" page is made more responsive. 
   * Changed version number string in `macro-lib.ftl` to `2.3.0-M1`
