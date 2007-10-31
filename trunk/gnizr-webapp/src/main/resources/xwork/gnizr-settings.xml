@@ -178,6 +178,14 @@
 	
 			
 	<package name="gnizr-settings" extends="gnizr-default" namespace="/settings">	
+		
+		<action name="help" class="com.gnizr.core.web.action.settings.ListSettings"
+			method="doDefault">
+			<interceptor-ref name="loggedIn"/>	
+			<interceptor-ref name="gnizrDefaultStack"/>
+			<result name="success" type="freemarker">/help.ftl</result>	
+		</action>
+		
 		<action name="list" class="com.gnizr.core.web.action.settings.ListSettings">
 			<interceptor-ref name="loggedIn"/>
 			<interceptor-ref name="auth"/>						
