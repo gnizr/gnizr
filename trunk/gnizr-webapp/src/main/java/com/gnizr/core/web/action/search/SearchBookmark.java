@@ -17,6 +17,7 @@
 package com.gnizr.core.web.action.search;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.codec.digest.DigestUtils;
@@ -24,11 +25,14 @@ import org.apache.log4j.Logger;
 
 import com.gnizr.core.search.Search;
 import com.gnizr.core.search.SearchResult;
+import com.gnizr.core.util.GnizrDaoUtil;
+import com.gnizr.core.util.SyndFeedFactory;
 import com.gnizr.core.web.action.AbstractPagingAction;
 import com.gnizr.core.web.action.LoggedInUserAware;
 import com.gnizr.core.web.action.SessionConstants;
 import com.gnizr.db.dao.Bookmark;
 import com.gnizr.db.dao.User;
+import com.sun.syndication.feed.synd.SyndFeed;
 
 public class SearchBookmark extends AbstractPagingAction implements LoggedInUserAware{
 
@@ -97,6 +101,17 @@ public class SearchBookmark extends AbstractPagingAction implements LoggedInUser
 			
 		}
 		return SUCCESS;
+	}
+	
+	public SyndFeed getOpenSearchResult(){
+		String title = "Gnizr Search Result for '" + getQueryString() + "'";
+		String author = "gnizr";
+		String link = getGnizrConfiguration().getWebApplicationUrl();
+		String feedUri = GnizrDaoUtil.getRandomURI();
+		Date pubDate = GnizrDaoUtil.getNow();
+		SyndFeed syndFeed = SyndFeedFactory.create(getBookmarks(),author,title,link,pubDate,feedUri);
+		syndFeed = SyndFeedFactory.addOpenSearchModule(syndFeed,getPerPageCount(),computeOffset(getPage()),getTotalMatched(), null);
+		return syndFeed;
 	}
 	
 	private SearchResult<Bookmark> doSearch(){		
