@@ -93,6 +93,12 @@
        <scope>compile</scope>			
     </dependency>	
     <dependency>
+       <groupId>rome</groupId>
+       <artifactId>opensearch</artifactId>
+       <version>0.1</version>			
+       <scope>compile</scope>			
+    </dependency>	
+    <dependency>
       <groupId>org.geonames</groupId>
       <artifactId>geonames</artifactId>
       <version>0.4</version>
