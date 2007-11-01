@@ -56,6 +56,7 @@ public class TestSyndFeedFactory extends GnizrCoreTestBase {
 		assertEquals(title,syndFeed.getTitle());
 		assertEquals(pubDate,syndFeed.getPublishedDate());
 		assertEquals(feedUri,syndFeed.getUri());
+		assertEquals(link,syndFeed.getLink());
 		
 		List<SyndEntry> entries = syndFeed.getEntries();
 		assertEquals(1,entries.size());

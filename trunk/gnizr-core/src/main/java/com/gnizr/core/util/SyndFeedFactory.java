@@ -58,6 +58,7 @@ public class SyndFeedFactory {
 		syndFeed.setAuthor(author);
 		syndFeed.setTitle(title);
 		syndFeed.setUri(feedUri);
+		syndFeed.setLink(link);
 		syndFeed.setPublishedDate(pubDate);
 		List<SyndEntry> entries = new ArrayList<SyndEntry>();
 		for(Bookmark bmark : bookmarks){
