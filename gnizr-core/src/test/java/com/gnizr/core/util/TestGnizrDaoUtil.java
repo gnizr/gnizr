@@ -534,4 +534,12 @@ public class TestGnizrDaoUtil extends GnizrCoreTestBase {
 		assertFalse(s1.contains("\f"));
 		assertFalse(s1.contains("\u0007"));
 	}
+	
+	public void testGetRandomURI() throws Exception{
+		String s1 = GnizrDaoUtil.getRandomURI();
+		assertNotNull(s1);
+		String s2 = GnizrDaoUtil.getRandomURI();
+		assertNotNull(s2);
+		assertFalse(s1.equals(s2));
+	}
 }
