@@ -23,7 +23,7 @@ Source code options:
 
 == Step 2: Prepare JUnit Test DB ==
 
-Follow instructions described in SetUpGnizrDatabase to create a database schema for testing. This schema should be created using the following configuration:
+Follow instructions described in SetupGnizrDatabase to create a database schema for testing. This schema should be created using the following configuration:
 
   * Database Schema Name: `gnizr_test`
   * Database User: `gnizr`
