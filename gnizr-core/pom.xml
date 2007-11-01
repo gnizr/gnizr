@@ -40,6 +40,10 @@
 			<artifactId>rome</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>rome</groupId>
+			<artifactId>opensearch</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>org.geonames</groupId>
 			<artifactId>geonames</artifactId>
 		</dependency>
