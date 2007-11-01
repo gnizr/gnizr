@@ -25,6 +25,7 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.apache.commons.httpclient.Header;
 import org.apache.commons.httpclient.HeaderElement;
@@ -908,5 +909,11 @@ public class GnizrDaoUtil {
 			}
 		}
 		return map;
+	}
+	
+	public static String getRandomURI(){
+		StringBuffer sb = new StringBuffer("urn-x:gnizr:");
+		sb.append(UUID.randomUUID().toString());
+		return sb.toString();
 	}
 }

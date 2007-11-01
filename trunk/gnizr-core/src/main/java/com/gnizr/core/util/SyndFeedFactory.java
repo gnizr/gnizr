@@ -42,74 +42,19 @@ import com.sun.syndication.feed.synd.SyndFeedImpl;
  * @author Harry Chen
  *
  */
-public class BookmarkSyndFeed {
+public class SyndFeedFactory {
 
-	private static final Logger logger = Logger.getLogger(BookmarkSyndFeed.class);
-	private List<Bookmark> bookmarks;
-	private String author;
-	private String title;
-	private String feedUri;
-	private Date pubDate;
+	private static final Logger logger = Logger.getLogger(SyndFeedFactory.class);
 	
-	private SyndFeed syndFeed;
-	
-	public BookmarkSyndFeed(List<Bookmark> bookmarks, String author, String title, String link, Date pubDate, String feedUri){
-		logger.debug("BookmarkSyndFeed constructor called.");
-		this.author = author;
-		logger.debug("author="+this.author);
-		this.title = title;
-		logger.debug("title="+this.title);
-		this.feedUri = feedUri;
-		logger.debug("feedUri="+this.feedUri);
-		if(pubDate == null){
-			this.pubDate = GnizrDaoUtil.getNow();
-		}else{
-			this.pubDate = pubDate;
-		}
-		logger.debug("pubDate="+this.pubDate);
-		if(bookmarks == null){
-			this.bookmarks = new ArrayList<Bookmark>();
-		}else{
-			this.bookmarks = bookmarks;
-		}
-		logger.debug("bookmarks="+this.bookmarks);
-	}
-	
-	public SyndFeed getFeed(){
-		if(syndFeed == null){			
-			initSyndFeed();
-		}
-		return syndFeed;
-	}
-	
-	@SuppressWarnings("unchecked")
-	public static SyndFeed addOpenSearchModule(SyndFeed feed, int itemsPerPage, int startIdx, int totalResult, String searchDescriptionUrl){
-		if(feed == null){
-			throw new NullPointerException("feed is NULL");
-		}
-		List<Module> mods = null;
-		mods = feed.getModules();
-		if(mods == null){
-			mods = new ArrayList<Module>();
-		}
-		OpenSearchModule osm = new OpenSearchModuleImpl();
-		osm.setItemsPerPage(itemsPerPage);
-		osm.setStartIndex(startIdx);
-		osm.setTotalResults(totalResult);
-		if(searchDescriptionUrl != null){
-			Link link = new Link();
-			link.setHref(searchDescriptionUrl);
-			link.setType("application/opensearchdescription+xml");
-			osm.setLink(link);
-		}
-		mods.add(osm);
-		feed.setModules(mods);
-		return feed;
-	}
-	
-	private void initSyndFeed(){
-		logger.debug("initialize syndFeed object for the first time");
-		syndFeed = new SyndFeedImpl();
+	public static SyndFeed create(List<Bookmark> bookmarks, String author, String title, String link, Date pubDate, String feedUri){
+		logger.debug("SyndFeedFactory create method called");
+		logger.debug("bookmarks="+bookmarks);
+		logger.debug("author="+author);
+		logger.debug("title="+title);
+		logger.debug("link="+link);
+		logger.debug("pubDate="+pubDate);
+		logger.debug("feedUri="+feedUri);
+		SyndFeed syndFeed = new SyndFeedImpl();
 		syndFeed.setAuthor(author);
 		syndFeed.setTitle(title);
 		syndFeed.setUri(feedUri);
@@ -141,5 +86,34 @@ public class BookmarkSyndFeed {
 		syndFeed.setEntries(entries);
 		syndFeed.setEncoding("UTF-8");
 		logger.debug("done initializing syndFeed object");
+		return syndFeed;
 	}
+	
+	
+	@SuppressWarnings("unchecked")
+	public static SyndFeed addOpenSearchModule(SyndFeed feed, int itemsPerPage, int startIdx, int totalResult, String searchDescriptionUrl){
+		if(feed == null){
+			throw new NullPointerException("feed is NULL");
+		}
+		List<Module> mods = null;
+		mods = feed.getModules();
+		if(mods == null){
+			mods = new ArrayList<Module>();
+		}
+		OpenSearchModule osm = new OpenSearchModuleImpl();
+		osm.setItemsPerPage(itemsPerPage);
+		osm.setStartIndex(startIdx);
+		osm.setTotalResults(totalResult);
+		if(searchDescriptionUrl != null){
+			Link link = new Link();
+			link.setHref(searchDescriptionUrl);
+			link.setType("application/opensearchdescription+xml");
+			osm.setLink(link);
+		}
+		mods.add(osm);
+		feed.setModules(mods);
+		return feed;
+	}
+	
+
 }
