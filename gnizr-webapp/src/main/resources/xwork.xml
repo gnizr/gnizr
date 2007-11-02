@@ -23,14 +23,6 @@
 	<include file="xwork/gnizr-timeline.xml"/>
 		
 	<!-- xwork config from external projects -->
-	<include file="xwork-robot.xml"/>
-	
-	<package name="default" extends="gnizr-default">			
-		<action name="hello" class="com.gnizr.core.web.action.HelloWorld">			
-			<interceptor-ref name="gnizrDefaultStack"/>
-			<result name="success" type="freemarker">hello.ftl</result>			
-		</action>		
-	</package>
-	
+	<include file="xwork-robot.xml"/>	
 	
 </xwork>

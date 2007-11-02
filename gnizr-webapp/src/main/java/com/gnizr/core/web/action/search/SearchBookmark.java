@@ -53,6 +53,7 @@ public class SearchBookmark extends AbstractPagingAction implements LoggedInUser
 	private int totalMatched;
 	private User loggedInUser;
 	
+
 	public String getQueryString() {
 		return queryString;
 	}
