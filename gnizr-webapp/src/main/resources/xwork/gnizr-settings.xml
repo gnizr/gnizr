@@ -176,11 +176,19 @@
 		
 	</package>
 	
-	<package name="gnizr-opensearch" extends="gnizr-default" namespace="/opensearch">
-		<action name="mybookmarks" class="com.gnizr.core.web.action.settings.ListSettings"
+	<package name="gnizr-opensearch" extends="gnizr-default"
+		namespace="/opensearch">
+		<action name="mybookmarks"
+			class="com.gnizr.core.web.action.settings.ListSettings"
 			method="doDefault">
 			<interceptor-ref name="gnizrDefaultStack"/>
-			<result name="success" type="freemarker">/settings/mybmarks-searchdescription.ftl</result>	
+			<result name="success" type="freemarker">/settings/mybmarks-searchdescription.ftl</result>
+		</action>
+		<action name="community"
+			class="com.gnizr.core.web.action.settings.ListSettings"
+			method="doDefault">
+			<interceptor-ref name="gnizrDefaultStack"/>
+			<result name="success" type="freemarker">/settings/community-searchdescription.ftl</result>
 		</action>
 	</package>
 			
