@@ -14,7 +14,7 @@
  * Portions created by the Initial Contributor are Copyright (C) 2007
  * Image Matters LLC. All Rights Reserved.
  */
-package com.gnizr.core.web.action.search;
+package com.gnizr.core.search;
 
 import java.io.Serializable;
 
@@ -25,8 +25,6 @@ public class OpenSearchService implements Serializable{
 	 */
 	private static final long serialVersionUID = 7124626370222484815L;
 	
-	
-	private int id;
 	private String serviceUrlPattern;
 	private String shortName;
 	private String description;
@@ -34,9 +32,17 @@ public class OpenSearchService implements Serializable{
 	private String type;
 	private boolean supportsPageBased;
 	private boolean supportsIndexBased;
+	private boolean loginRequired;
+
+	public boolean isLoginRequired() {
+		return loginRequired;
+	}
+
+	public void setLoginRequired(boolean loginRequired) {
+		this.loginRequired = loginRequired;
+	}
 
 	public OpenSearchService(){
-		this.id = -1;
 		tags = new String[0];
 	}
 	
@@ -46,12 +52,7 @@ public class OpenSearchService implements Serializable{
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
+	
 	public String getServiceUrlPattern() {
 		return serviceUrlPattern;
 	}
