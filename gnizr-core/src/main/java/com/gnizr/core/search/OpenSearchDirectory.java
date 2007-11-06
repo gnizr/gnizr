@@ -14,7 +14,7 @@
  * Portions created by the Initial Contributor are Copyright (C) 2007
  * Image Matters LLC. All Rights Reserved.
  */
-package com.gnizr.core.web.action.search;
+package com.gnizr.core.search;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -32,58 +32,52 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import com.gnizr.core.web.action.AbstractLoggedInUserAction;
+public class OpenSearchDirectory {
 
-public class OpenSearchDirectory extends AbstractLoggedInUserAction {
+	private static final String NS_GNIZR_OPENSEARCH = "http://gnizr.com/ont/opensearch/2007/11/";
 
-	private static final String OPEN_SEARCH_NS = "http://a9.com/-/spec/opensearch/1.1/";
 	private static final String ELM_SHORT_NAME = "ShortName";
+
 	private static final String ELM_DESCRIPTION = "Description";
+
 	private static final String ELM_TAGS = "Tags";
+
 	private static final String ELM_URL = "Url";
+
+	private static final String ELM_LOGIN_REQ = "LoginRequired";
+
 	private static final String ATT_TEMPLATE = "template";
+
 	private static final String ATT_TYPE = "type";
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 3059854998950870761L;
 
 	private static final Logger logger = Logger
 			.getLogger(OpenSearchDirectory.class);
 
 	private List<OpenSearchService> services;
 
-	public OpenSearchDirectory(String[] serviceDescriptionUrl) {
-		services = new ArrayList<OpenSearchService>();
-		if (serviceDescriptionUrl != null) {
-			for (String url : serviceDescriptionUrl) {
-				OpenSearchService srv = readServiceDescription(url);
-				if (srv != null) {
-					logger
-							.info("Add OpenSearch Service: "
-									+ srv.getShortName());
-					services.add(srv);
-				}
-			}
-		}
+	private List<String> serviceUrls;
+
+	public OpenSearchDirectory(List<String> serviceDescriptionUrl) {
+		this.serviceUrls = serviceDescriptionUrl;
 	}
 
-	private OpenSearchService readServiceDescription(String url){
+	private OpenSearchService readServiceDescription(String url) {
 		OpenSearchService aService = null;
 		String sname = null;
 		String dsp = null;
 		String tags = null;
 		String urlpttn = null;
 		String type = null;
+		boolean loginRequired = false;
 		try {
-			DocumentBuilder domBldr = DocumentBuilderFactory.newInstance()
-					.newDocumentBuilder();
+			DocumentBuilderFactory factory = DocumentBuilderFactory
+					.newInstance();
+			factory.setNamespaceAware(true);
+			DocumentBuilder domBldr = factory.newDocumentBuilder();
 			Document doc = domBldr.parse(url);
 			if (doc != null) {
 				Element root = doc.getDocumentElement();
-				NodeList nl = root.getElementsByTagName(
-						ELM_SHORT_NAME);
+				NodeList nl = root.getElementsByTagName(ELM_SHORT_NAME);
 				if (nl != null && nl.getLength() > 0) {
 					sname = nl.item(0).getFirstChild().getNodeValue();
 				}
@@ -95,30 +89,36 @@ public class OpenSearchDirectory extends AbstractLoggedInUserAction {
 				if (nl != null && nl.getLength() > 0) {
 					tags = nl.item(0).getFirstChild().getNodeValue();
 				}
+				nl = root.getElementsByTagNameNS(NS_GNIZR_OPENSEARCH,
+						ELM_LOGIN_REQ);
+				if (nl != null && nl.getLength() > 0) {
+					String v = nl.item(0).getFirstChild().getNodeValue();
+					loginRequired = Boolean.parseBoolean(v);
+				}
 				nl = root.getElementsByTagName(ELM_URL);
 				if (nl != null && nl.getLength() > 0) {
 					Node urlNode = null;
-					for(int i = 0; i < nl.getLength(); i++){						
+					for (int i = 0; i < nl.getLength(); i++) {
 						urlNode = nl.item(i);
 						NamedNodeMap attmap = urlNode.getAttributes();
 						Node typeNode = attmap.getNamedItem(ATT_TYPE);
 						if (typeNode != null) {
 							type = typeNode.getNodeValue();
-							if(type.equals("text/xml")){
+							if (type.equals("text/xml")) {
 								break;
-							}else{
+							} else {
 								urlNode = null;
 							}
 						}
 					}
-					if(urlNode != null){
+					if (urlNode != null) {
 						NamedNodeMap attmap = urlNode.getAttributes();
 						Node templateNode = attmap.getNamedItem(ATT_TEMPLATE);
-						if(templateNode != null){
+						if (templateNode != null) {
 							urlpttn = templateNode.getNodeValue();
 						}
 					}
-				}				
+				}
 			}
 		} catch (ParserConfigurationException e) {
 			logger.error("Internal error: unable to create DOM parser", e);
@@ -129,38 +129,41 @@ public class OpenSearchDirectory extends AbstractLoggedInUserAction {
 			logger.error("Error reading OpenSearch Service Description XML: "
 					+ url, e);
 		}
-		
-		if(urlpttn != null){
+
+		if (urlpttn != null) {
 			aService = new OpenSearchService();
 			aService.setServiceUrlPattern(urlpttn);
 			aService.setDescription(dsp);
 			aService.setShortName(sname);
 			aService.setType(type);
-			if(tags != null){
+			aService.setLoginRequired(loginRequired);
+			if (tags != null) {
 				aService.setTags(tags.split(" "));
 			}
-			if(urlpttn.contains("{startPage}")){
+			if (urlpttn.contains("{startPage}")) {
 				aService.setSupportsPageBased(true);
 			}
-			if(urlpttn.contains("{startIndex}")){
+			if (urlpttn.contains("{startIndex}")) {
 				aService.setSupportsIndexBased(true);
 			}
 		}
 		return aService;
 	}
 
-	@Override
-	protected boolean isStrictLoggedInUserMode() {
-		return false;
-	}
-
-	@Override
-	protected String go() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	public List<OpenSearchService> getServices() {
+		if (services == null) {
+			services = new ArrayList<OpenSearchService>();
+			if (serviceUrls != null) {
+				for (String url : serviceUrls) {
+					OpenSearchService srv = readServiceDescription(url);
+					if (srv != null) {
+						logger.info("Add OpenSearch Service: "
+								+ srv.getShortName());
+						services.add(srv);
+					}
+				}
+			}
+		}
 		return services;
 	}
 

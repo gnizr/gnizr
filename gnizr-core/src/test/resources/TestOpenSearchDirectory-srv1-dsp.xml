@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
+<OpenSearchDescription
+  xmlns="http://a9.com/-/spec/opensearch/1.1/" 
+  xmlns:gn="http://gnizr.com/ont/opensearch/2007/11/">	
+  <gn:LoginRequired>true</gn:LoginRequired>
   <ShortName>Gnizr Community 2</ShortName>
   <Description>Search bookmarks in gnizr</Description>
   <Tags>bookmarks gnizr</Tags>
