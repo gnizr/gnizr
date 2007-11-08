@@ -12,4 +12,13 @@
 		</constructor-arg>
 	</bean>
 
+	<bean id="openSearchDirectory" class="com.gnizr.core.search.OpenSearchDirectory" singleton="true">
+		<constructor-arg>
+			<list>
+				<value>/settings/opensearch/mybookmarks.action</value>
+				<value>/settings/opensearch/community.action</value>
+			</list>
+		</constructor-arg>		
+	</bean>
+	
 </beans>

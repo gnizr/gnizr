@@ -176,8 +176,8 @@
 		
 	</package>
 	
-	<package name="gnizr-opensearch" extends="gnizr-default"
-		namespace="/opensearch">
+	<package name="gnizr-opensearch-description" extends="gnizr-default"
+		namespace="/settings/opensearch">
 		<action name="mybookmarks"
 			class="com.gnizr.core.web.action.settings.ListSettings"
 			method="doDefault">

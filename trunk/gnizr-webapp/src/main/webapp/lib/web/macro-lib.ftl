@@ -76,7 +76,8 @@ INPUT: pageTitle:String // the <title/> of this HTML page
 <#if (enableJS == true)>
 <!-- JAVASCRIPT DATA BEGINS -->
 <script type="text/javascript">MochiKit = {__compat__: true};</script>
-<script type="text/javascript" charset="utf-8" src="${gzUrl("/lib/javascript/MochiKit1.4.js")}"></script>
+<script type="text/javascript" charset="utf-8" src="${gzUrl("/lib/javascript/MochiKit/MochiKit1.4.js")}"></script>
+<script type="text/javascript" charset="utf-8" src="${gzUrl("/lib/javascript/MochiKit/DragAndDrop.js")}"></script>
 <script type="text/javascript" charset="utf-8" src="${gzUrl("/lib/javascript/tags-util.js")}"></script>
 <script type="text/javascript" charset="utf-8" src="${gzUrl("/lib/javascript/common.js")}"></script>
 <#if (gnizrConfiguration.snapShotsKey)?exists>
