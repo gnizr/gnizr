@@ -28,7 +28,8 @@
 	<import resource="spring/web-ui.xml"/>
 	<import resource="spring/web-clustermap.xml"/>
 	<import resource="spring/web-timeline.xml"/>
-
+    <import resource="spring/web-search.xml"/>
+	
 	<import resource="classpath:com/gnizr/core/robot/rss/spring-config.xml"/>
 	
 	<bean id="helloWorld" class="com.gnizr.core.web.action.HelloWorld"

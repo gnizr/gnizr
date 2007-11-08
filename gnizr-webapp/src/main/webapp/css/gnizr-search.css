@@ -32,6 +32,39 @@
 	margin:auto;
 }
 
+/* ======== CSS used in OpenSearch result page ====== */
 
+#searchPageContent{
+	width: 100%;
+	position:relative;
+}
 
+#searchPageContent #left{
+	margin-right:260px;
+}
 
+#searchPageContent #right{
+	position:absolute;
+	top:0px;
+	right:0px;
+	width:240px;
+}
+
+#resultTiles {
+	width: 100%;
+}
+
+#resultTiles, #resultTiles td{
+	border-width:  1px;
+	border-style: solid;
+}
+
+.tileSeperator{
+	width: 10px;
+}
+
+#selectSearchServices {
+  list-style-type: none;
+  margin-left: 0px;
+  padding-left: 4px;
+}
