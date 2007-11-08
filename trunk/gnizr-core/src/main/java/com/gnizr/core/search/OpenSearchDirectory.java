@@ -17,6 +17,8 @@
 package com.gnizr.core.search;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,6 +58,8 @@ public class OpenSearchDirectory {
 	private List<OpenSearchService> services;
 
 	private List<String> serviceUrls;
+	
+	private String webApplicationUrl;
 
 	public OpenSearchDirectory(List<String> serviceDescriptionUrl) {
 		this.serviceUrls = serviceDescriptionUrl;
@@ -115,7 +119,7 @@ public class OpenSearchDirectory {
 						NamedNodeMap attmap = urlNode.getAttributes();
 						Node templateNode = attmap.getNamedItem(ATT_TEMPLATE);
 						if (templateNode != null) {
-							urlpttn = templateNode.getNodeValue();
+							urlpttn = templateNode.getNodeValue();							
 						}
 					}
 				}
@@ -149,12 +153,26 @@ public class OpenSearchDirectory {
 		}
 		return aService;
 	}
-
-	public List<OpenSearchService> getServices() {
+	
+	public synchronized void init() {
 		if (services == null) {
 			services = new ArrayList<OpenSearchService>();
 			if (serviceUrls != null) {
 				for (String url : serviceUrls) {
+					if (isValidURL(url) == false) {
+						if (getWebApplicationUrl() != null) {
+							url = getWebApplicationUrl() + url;
+							logger
+									.debug("Partial URL detected. Using webapp prefix to create: "
+											+ url);
+						} else {
+							logger
+									.warn("Partial URL detected, but no defined webapp URL prefiex. OpenSearchDirectory will exclude: "
+											+ url);
+							continue;
+						}
+					}
+
 					OpenSearchService srv = readServiceDescription(url);
 					if (srv != null) {
 						logger.info("Add OpenSearch Service: "
@@ -164,7 +182,28 @@ public class OpenSearchDirectory {
 				}
 			}
 		}
+	}
+	
+	public List<OpenSearchService> getServices() {			
 		return services;
 	}
+	
+	private boolean isValidURL(String url) {
+		try {
+			new URL(url);
+		} catch (MalformedURLException e) {
+			return false;
+		}
+		return true;
+	}
+	
+	public String getWebApplicationUrl() {
+		return webApplicationUrl;
+	}
+
+	public void setWebApplicationUrl(String webApplicationUrl) {
+		this.webApplicationUrl = webApplicationUrl;
+	}
+
 
 }
