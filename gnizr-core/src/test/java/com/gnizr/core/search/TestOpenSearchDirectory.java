@@ -13,9 +13,11 @@ public class TestOpenSearchDirectory extends TestCase {
 		super.setUp();
 		String srv1 = TestOpenSearchDirectory.class.getResource("/TestOpenSearchDirectory-srv1-dsp.xml").toString();
 		String srv2 = TestOpenSearchDirectory.class.getResource("/TestOpenSearchDirectory-srv2-dsp.xml").toString();
+		String srv3 = "/abcd.xml";
 		servicesUrl = new ArrayList<String>();
 		servicesUrl.add(srv1);
 		servicesUrl.add(srv2);
+		servicesUrl.add(srv3);		
 	}
 
 	protected void tearDown() throws Exception {
@@ -24,6 +26,8 @@ public class TestOpenSearchDirectory extends TestCase {
 	
 	public void testGetServices() throws Exception{
 		OpenSearchDirectory osDirectory = new OpenSearchDirectory(servicesUrl);
+		osDirectory.init();
+		
 		List<OpenSearchService> services = osDirectory.getServices();
 		assertFalse(services.isEmpty());		
 		OpenSearchService srv1 = services.get(0);
