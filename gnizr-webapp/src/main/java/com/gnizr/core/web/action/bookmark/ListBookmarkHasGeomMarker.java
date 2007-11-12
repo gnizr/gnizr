@@ -16,6 +16,7 @@
  */
 package com.gnizr.core.web.action.bookmark;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.gnizr.core.bookmark.BookmarkManager;
@@ -25,6 +26,7 @@ import com.gnizr.core.web.action.AbstractLoggedInUserAction;
 import com.gnizr.db.dao.Bookmark;
 import com.gnizr.db.dao.DaoResult;
 import com.gnizr.db.dao.Folder;
+import com.gnizr.db.dao.PointMarker;
 
 public class ListBookmarkHasGeomMarker extends AbstractLoggedInUserAction{
 
@@ -36,7 +38,7 @@ public class ListBookmarkHasGeomMarker extends AbstractLoggedInUserAction{
 	private static final int PER_PAGE_COUNT = 250;
 	
 	// read-only objects
-	private List<Bookmark> bookmarks;
+	private List<? extends Bookmark> bookmarks;
 	private List<Folder> userFolders;
 	private int maxPageNumber;
 	private int totalNumOfBookmark;
@@ -73,7 +75,7 @@ public class ListBookmarkHasGeomMarker extends AbstractLoggedInUserAction{
 		this.folder = folder;
 	}
 
-	public List<Bookmark> getBookmarks() {
+	public List<? extends Bookmark> getBookmarks() {
 		return bookmarks;
 	}
 
@@ -147,11 +149,39 @@ public class ListBookmarkHasGeomMarker extends AbstractLoggedInUserAction{
 			DaoResult<Bookmark> result = bookmarkManager.pageBookmarkHasGeomMarker(getUser(),offset,PER_PAGE_COUNT);
 			bookmarks = result.getResult();
 			totalNumOfBookmark = result.getSize();
-			maxPageNumber = computeMaxPageNumber(totalNumOfBookmark);
+			maxPageNumber = computeMaxPageNumber(totalNumOfBookmark);				
 			return SUCCESS;
 		}catch(Exception e){
 			return ERROR;
 		}	
+	}
+	
+	public String doListAllGBookmarks() throws Exception{
+		try{
+			super.resolveUser();
+		}catch(Exception e){
+			return INPUT;
+		}
+		try{
+			//DaoResult<Bookmark> result = bookmarkManager.pageBookmarkHasGeomMarker(getUser(),0,0);
+			//int maxSize = result.getSize();
+			DaoResult<Bookmark> result = bookmarkManager.pageBookmarkHasGeomMarker(getUser(),0,200);
+			bookmarks = result.getResult();
+			totalNumOfBookmark = result.getSize();
+			maxPageNumber = 1;
+			List<GeoBookmark> geobmarks = new ArrayList<GeoBookmark>();
+			for(Bookmark b : bookmarks){
+				List<PointMarker> ptms = bookmarkManager.getPointMarkers(b);
+				GeoBookmark aGeoBmark = new GeoBookmark(b);
+				aGeoBmark.setPointMarkers(ptms);
+				geobmarks.add(aGeoBmark);
+			}		
+			bookmarks = geobmarks;
+			return SUCCESS;
+		}catch(Exception e){
+			return ERROR;
+		}
+
 	}
 	
 	@Override
@@ -179,4 +209,5 @@ public class ListBookmarkHasGeomMarker extends AbstractLoggedInUserAction{
 		return totalNumOfBookmark;
 	}
 
+	
 }
