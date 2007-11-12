@@ -111,7 +111,7 @@ BEGIN
             WHERE bookmark_folder.folder_id = ? ) AND EXISTS ( 
             SELECT * FROM bookmark_point_marker_idx 
             WHERE bookmark_point_marker_idx.bookmark_id = bookmark.id)
-    ORDER BY bookmark.title ASC LIMIT ?,?            
+    ORDER BY bookmark.last_updated DESC LIMIT ?,?            
   ");
   PREPARE STMT FROM @qry;
   EXECUTE STMT USING @folderId, @offset, @count;
@@ -140,7 +140,7 @@ BEGIN
           bookmark.link_id=link.id AND EXISTS ( 
             SELECT * FROM bookmark_point_marker_idx 
             WHERE bookmark_point_marker_idx.bookmark_id = bookmark.id)
-    ORDER BY bookmark.title ASC LIMIT ?,?            
+    ORDER BY bookmark.last_updated DESC LIMIT ?,?            
   ");
   PREPARE STMT FROM @qry;
   EXECUTE STMT USING @userId, @offset, @count;

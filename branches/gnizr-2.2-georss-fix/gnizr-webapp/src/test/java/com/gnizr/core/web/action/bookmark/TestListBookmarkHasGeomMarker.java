@@ -70,7 +70,7 @@ public class TestListBookmarkHasGeomMarker extends GnizrWebappTestBase {
 		action.setUsername("gnizr");
 		action.setFolder("my folder1");
 		assertEquals(ActionSupport.SUCCESS,action.execute());
-		List<Bookmark> bmarks = action.getBookmarks();
+		List<? extends Bookmark> bmarks = action.getBookmarks();
 		assertEquals(1,bmarks.size());
 		assertEquals(307,bmarks.get(0).getId());
 		
@@ -94,7 +94,7 @@ public class TestListBookmarkHasGeomMarker extends GnizrWebappTestBase {
 		
 		action.setUsername("hchen1");
 		assertEquals(ActionSupport.SUCCESS,action.execute());
-		List<Bookmark> bmarks = action.getBookmarks();
+		List<? extends Bookmark> bmarks = action.getBookmarks();
 		assertEquals(1,bmarks.size());
 		assertEquals(307,bmarks.get(0).getId());
 		

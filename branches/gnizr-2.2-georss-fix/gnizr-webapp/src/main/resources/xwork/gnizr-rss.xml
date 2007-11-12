@@ -11,7 +11,20 @@
 			<param name="perPageCount">10</param>	
 			<result name="success" type="freemarker">
 				<param name="location">/rss/userhome-rss1_0.ftl</param>
-				<param name="contentType">xhtml/xml</param>
+				<param name="contentType">application/rdf+xml</param>
+			</result>										
+			<result name="error">/error.ftl</result>	
+		</action>		
+	</package>
+	
+	<package name="gnizr-georss" extends="gnizr-default" namespace="/data/georss">				
+		<action name="bookmark" class="com.gnizr.core.web.action.bookmark.ListBookmarkHasGeomMarker"
+			method="doListAllGBookmarks">
+			<interceptor-ref name="loggedIn"/>			
+			<interceptor-ref name="gnizrDefaultStack"/>				
+			<result name="success" type="freemarker">
+				<param name="location">/rss/userhome-georss-rss1_0.ftl</param>
+				<param name="contentType">application/rdf+xml</param>
 			</result>										
 			<result name="error">/error.ftl</result>	
 		</action>
