@@ -5,7 +5,7 @@
 	<parent>
       <groupId>com.gnizr</groupId>
       <artifactId>gnizr</artifactId>
-      <version>2.3.0-M1</version>
+      <version>2.2.0-RC2</version>
     </parent>
 	
 	<modelVersion>4.0.0</modelVersion>
@@ -53,19 +53,21 @@
 			<version>${gnVersion}</version>
 			<scope>compile</scope>			
 		</dependency>
+		<!--
 		<dependency>
 			<groupId>com.gnizr.core.web</groupId>
 			<artifactId>gnizr-clustermap</artifactId>
 			<version>${gnVersion}</version>
 			<scope>compile</scope>			
 		</dependency>
+		-->
 		<dependency>
 			<groupId>urlrewrite</groupId>
 			<artifactId>urlrewrite</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.htmlparser</groupId>
-			<artifactId>htmlparser</artifactId>			       
+			<artifactId>htmlparser</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -77,7 +79,7 @@
 			<groupId>net.sf.json-lib</groupId>
 			<artifactId>json-lib</artifactId>
 			<version>1.0</version>
-			<classifier>jdk15</classifier>			      
+			<classifier>jdk15</classifier>
 		</dependency>
 	</dependencies>
 	<build>

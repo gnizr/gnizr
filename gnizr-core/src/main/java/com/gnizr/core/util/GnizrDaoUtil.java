@@ -22,10 +22,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
 import org.apache.commons.httpclient.Header;
 import org.apache.commons.httpclient.HeaderElement;
@@ -890,30 +887,4 @@ public class GnizrDaoUtil {
 		return s;
 	}
 	
-	/**
-	 * Creates a <code>Map</code> view from a list of <code>Bookmark</code> objects. Map keys are
-	 * created from <code>Bookmark.getId</code> and map values are object references to
-	 * <code>bookmarks</code>. If multiple objects in <code>bookmarks</code> have the same <code>Bookmark.getId</code> 
-	 * value, only one of those objects will appear in the output <code>Map</code>.
-	 * 
-	 * @param bookmarks objects with instantiated bookmark ID that will be used to create a <code>Map</code> 
-	 * 
-	 * @return a <code>Map</code> of ID (key) and <code>Bookmark</code> (value). This method will always return an instantiated
-	 * <code>Map</code> object, even if <code>bookmarks</code> is <code>null</code>. 
-	 */
-	public static Map<Integer,Bookmark> getBookmarksMap(List<Bookmark> bookmarks){
-		Map<Integer,Bookmark> map = new HashMap<Integer, Bookmark>();
-		if(bookmarks != null){
-			for(Bookmark b : bookmarks){
-				map.put(b.getId(),b);
-			}
-		}
-		return map;
-	}
-	
-	public static String getRandomURI(){
-		StringBuffer sb = new StringBuffer("urn-x:gnizr:");
-		sb.append(UUID.randomUUID().toString());
-		return sb.toString();
-	}
 }

@@ -11,11 +11,11 @@ NOTE: returns a version string to be injected in the <head/> of
 each gnizr page.
 -->
 <#function gnizrVersion >
-  <#return "2.3.0"/>
+  <#return "2.2.0"/>
 </#function>
 
 <#function gnizrDevVersion >
-  <#return "-M1"/>
+  <#return "-RC2"/>
 </#function>
 
 <#-- 
@@ -76,8 +76,7 @@ INPUT: pageTitle:String // the <title/> of this HTML page
 <#if (enableJS == true)>
 <!-- JAVASCRIPT DATA BEGINS -->
 <script type="text/javascript">MochiKit = {__compat__: true};</script>
-<script type="text/javascript" charset="utf-8" src="${gzUrl("/lib/javascript/MochiKit/MochiKit1.4.js")}"></script>
-<script type="text/javascript" charset="utf-8" src="${gzUrl("/lib/javascript/MochiKit/DragAndDrop.js")}"></script>
+<script type="text/javascript" charset="utf-8" src="${gzUrl("/lib/javascript/MochiKit1.4.js")}"></script>
 <script type="text/javascript" charset="utf-8" src="${gzUrl("/lib/javascript/tags-util.js")}"></script>
 <script type="text/javascript" charset="utf-8" src="${gzUrl("/lib/javascript/common.js")}"></script>
 <#if (gnizrConfiguration.snapShotsKey)?exists>
@@ -203,7 +202,7 @@ as <h1/> (page header) of this page:
     <li><a href="${gzUrl("/settings")}">settings</a></li>
     <li><a href="${gzUrl("/logout")}">logout</a></li>     
 </#if>
-    <li><a href="${gzUrl("/settings/help.action")}">help</a></li>
+    <li><a href="${gzUrl("/help.ftl")}">help</a></li>
     </ul>
   </div>
 </div>  

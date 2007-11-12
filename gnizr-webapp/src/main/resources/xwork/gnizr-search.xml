@@ -34,13 +34,4 @@
 		
 	</package>
 	
-	<package name="gnizr-opensearch" extends="gnizr-default" namespace="/search">
-		<action name="list" class="com.gnizr.core.web.action.search.ListSearchEngines">
-			<interceptor-ref name="loggedIn"/>	
-			<interceptor-ref name="gnizrDefaultStack"/>		
-			<result name="success" type="freemarker">/search/multi-search-results.ftl</result>	
-		</action>		
-	</package>
-	
-	
 </xwork>

@@ -16,42 +16,29 @@
  */
 package com.gnizr.core.web.action.search;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSet;
 
 import com.gnizr.core.search.Search;
 import com.gnizr.core.web.junit.GnizrWebappTestBase;
-import com.gnizr.core.web.util.GnizrConfiguration;
 import com.gnizr.db.dao.Bookmark;
 import com.gnizr.db.dao.User;
 import com.opensymphony.xwork.ActionSupport;
-import com.sun.syndication.feed.module.opensearch.OpenSearchModule;
-import com.sun.syndication.feed.synd.SyndEntry;
-import com.sun.syndication.feed.synd.SyndFeed;
 
 public class TestSearchBookmark extends GnizrWebappTestBase {
 	
 	
 	private Search search;
 	private SearchBookmark action;
-	private Map<Object, Object> session = new HashMap<Object, Object>();
 	
 	protected void setUp() throws Exception {
 		super.setUp();
-		
-		GnizrConfiguration config = new GnizrConfiguration();
-		config.setWebApplicationUrl("http://foo.com/gnizr");
-		
 		search = new Search(getGnizrDao());
 		
 		action = new SearchBookmark();		
 		action.setSearch(search);
-		action.setGnizrConfiguration(config);
-		action.setSession(session);
 	}
 
 	protected void tearDown() throws Exception {
@@ -86,36 +73,6 @@ public class TestSearchBookmark extends GnizrWebappTestBase {
 		List<Bookmark> bmarks = action.getBookmarks();
 		assertEquals(1,bmarks.size());
 	}
-	
-	public void testGetOpenSearchResult() throws Exception {
-		action.setType(SearchBookmark.TYPE_USER);
-		action.setLoggedInUser(new User(3));
-		action.setQueryString("Category WordPress Group Wiki");
-		
-		String code = action.execute();
-		assertEquals(ActionSupport.SUCCESS,code);
-		
-		SyndFeed syndFeed = action.getOpenSearchResult();
-		assertNotNull(syndFeed);
-		
-		assertEquals("gnizr",syndFeed.getAuthor());
-		assertNotNull(syndFeed.getTitle());
-		assertNotNull(syndFeed.getUri());
-		assertNotNull(syndFeed.getPublishedDate());
-		assertNotNull(syndFeed.getEntries());
-		assertNotNull(syndFeed.getLink());
-		
-		@SuppressWarnings("unchecked")
-		List<SyndEntry> entries = syndFeed.getEntries();
-		assertEquals(1,entries.size());
-		
-		OpenSearchModule mod = (OpenSearchModule)syndFeed.getModule(OpenSearchModule.URI);
-		assertNotNull(mod);
-		assertEquals(10,mod.getItemsPerPage());
-		assertEquals(0,mod.getStartIndex());
-		assertEquals(1,mod.getTotalResults());
-	}
-	
 	
 	@Override
 	protected IDataSet getDataSet() throws Exception {

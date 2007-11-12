@@ -173,7 +173,7 @@ public class TestForUserPager extends GnizrCoreTestBase {
 		addSampleForUserRecord();
 		User user = new User(3);
 		List<ForUser> results = forUserPager.pageForUser(user,TimeRange.LAST_MONTH,0,10);
-		assertTrue(results.size()>=1);
+		assertEquals(1,results.size());
 	}
 	
 	
