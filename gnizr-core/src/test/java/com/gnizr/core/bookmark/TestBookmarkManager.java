@@ -295,11 +295,11 @@ public class TestBookmarkManager extends GnizrCoreTestBase {
 	
 	public void testUpdateBookmark5() throws Exception{
 		Bookmark bm300 = manager.getBookmark(300);
-		bm300.setTags("abc.df 12/13 \\019 ..ppp [0-x] | ?11?? *** p+ (.*)");
+		bm300.setTags("abc.df 1213 \\019 ..ppp [0-x] | ?11?? *** p+ (.*)");
 		assertTrue(manager.updateBookmark(bm300));
 		
 		bm300 = manager.getBookmark(300);
-		assertEquals("abc.df 12/13 019 ..ppp [0-x] | 11 *** p+ (.*)",bm300.getTags());
+		assertEquals("abc.df 1213 019 ..ppp [0-x] | 11 *** p+ (.*)",bm300.getTags());
 		assertEquals(10,bm300.getTagList().size());
 		
 		bm300.setTags("abc df abc 12 13 \\ 019 ppp ppp [ 0-x ] | ?11 ?? * ** p + ( .* )");
