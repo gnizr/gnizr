@@ -66,7 +66,7 @@ public class TestTagUtil extends TestCase {
 		assertEquals("aa",s);
 		
 		s = TagUtil.makeSafeTagString("ac/dc");
-		assertEquals("ac/dc",s);
+		assertEquals("acdc",s);
 		
 		s = TagUtil.makeSafeTagString("add\\add\\poo");
 		assertEquals("addaddpoo",s);

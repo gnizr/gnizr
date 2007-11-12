@@ -87,7 +87,7 @@ public class TagUtil {
 			t = t.replaceAll("[&%\\?]","");			
 			t = t.replaceAll("\\s+","_");
 			t = t.replaceFirst("^[.]+[\\W]*$", "");
-			t = t.replaceFirst("/$","");
+			t = t.replaceAll("/","");
 			return t.trim();
 		}
 		return tag;

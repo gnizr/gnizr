@@ -25,6 +25,7 @@ import org.apache.log4j.Logger;
 
 import com.gnizr.core.folder.FolderManager;
 import com.gnizr.core.util.GnizrDaoUtil;
+import com.gnizr.core.util.TagUtil;
 import com.gnizr.core.vocab.MachineTags;
 import com.gnizr.db.dao.Bookmark;
 import com.gnizr.db.dao.FeedSubscription;
@@ -119,13 +120,14 @@ public class BookmarkEntryFactory {
 					parser = new TagsParser(catStr,"[,]+");
 					List<String> parsedTags = parser.getTags();
 					for(String t: parsedTags){
-						t = t.trim();
+						t = TagUtil.makeSafeTagString(t.trim());
 						if(t.length() > 0){
 							tags.add(t);
 						}
 					}
 				}else{
 					catStr = catStr.replaceAll("[\\s]+","");
+					catStr = TagUtil.makeSafeTagString(catStr);
 					tags.add(catStr);
 				}
 			}
