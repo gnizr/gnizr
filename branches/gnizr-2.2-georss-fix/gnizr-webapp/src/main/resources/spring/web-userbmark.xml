@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+	"http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	<bean id="listForUserBookmark"
+		class="com.gnizr.core.web.action.bookmark.ListForUserBookmark"
+		singleton="false">
+		<property name="forUserPager">
+			<ref bean="forUserPager"/>
+		</property>
+		<property name="forUserManager">
+			<ref bean="forUserManager"/>
+		</property>
+	</bean>
+	
+	<bean id="editForUser" class="com.gnizr.core.web.action.bookmark.EditForUser" singleton="false">
+		<property name="forUserPager">
+			<ref bean="forUserPager"/>
+		</property>
+	</bean>
+	
+	<bean id="listBookmark"
+		class="com.gnizr.core.web.action.bookmark.ListUserBookmark"
+		singleton="false">
+		<property name="bookmarkPager">
+			<ref bean="bookmarkPager"/>
+		</property>
+		<property name="userManager">
+			<ref bean="userManager"/>
+		</property>
+		<property name="tagManager">
+			<ref bean="tagManager"/>
+		</property>
+	</bean>
+	
+	<bean id="editBmark"
+		class="com.gnizr.core.web.action.bookmark.EditBookmark"
+		singleton="false">
+		<property name="bookmarkManager">
+			<ref bean="bookmarkManager"/>
+		</property>
+		<property name="linkManager">
+			<ref bean="linkManager"/>
+		</property>
+	</bean>
+	
+	<bean id="importDeliciousPosts"
+		class="com.gnizr.core.web.action.bookmark.ImportDeliciousPosts"
+		singleton="false">
+		<property name="userManager">
+			<ref bean="userManager"/>
+		</property>
+		<property name="bookmarkManager">
+			<ref bean="bookmarkManager"/>
+		</property>
+		<property name="folderManager">
+			<ref bean="folderManager"/>
+		</property>
+	</bean>
+	
+	<bean id="manageBookmarks" class="com.gnizr.core.web.action.bookmark.ManageBookmarks" singleton="false">
+		<property name="bookmarkManager">
+			<ref bean="bookmarkManager"/>
+		</property>
+		<property name="folderManager">
+			<ref bean="folderManager"/>
+		</property>
+	</bean>
+	
+	<bean id="listBookmarkHasGeomMarker" class="com.gnizr.core.web.action.bookmark.ListBookmarkHasGeomMarker" singleton="false">
+	<property name="bookmarkManager">
+			<ref bean="bookmarkManager"/>
+		</property>
+		<property name="folderManager">
+			<ref bean="folderManager"/>
+		</property>
+        <property name="userManager">
+			<ref bean="userManager"/>
+		</property>		
+	</bean>
+</beans>

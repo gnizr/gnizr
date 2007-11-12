@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+	"http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	
+	<bean id="registration" class="com.gnizr.core.web.action.user.Registration" singleton="false">
+		<property name="userManager">
+			<ref bean="userManager"/>
+		</property>
+	</bean>
+	
+	<bean id="userLogin" class="com.gnizr.core.web.action.user.UserLogin" singleton="false">
+		<property name="userManager">
+			<ref bean="userManager"/>
+		</property>
+	</bean>
+	
+	<bean id="userLogout" class="com.gnizr.core.web.action.user.UserLogout" singleton="false"/>
+	
+	<bean id="changeUserProfile" class="com.gnizr.core.web.action.user.ChangeUserProfile" singleton="false">
+		<property name="userManager">
+			<ref bean="userManager"/>
+		</property>
+	</bean>	
+	
+	<bean id="editUserBean" class="com.gnizr.core.web.action.user.EditUser" singleton="false">
+		<property name="userManager">
+			<ref bean="userManager"/>
+		</property>
+		<property name="folderManager">
+			<ref bean="folderManager"/>
+		</property>
+	</bean>
+	
+	<bean id="listUserStats" class="com.gnizr.core.web.action.user.ListUserStats" singleton="false">
+		<property name="userManager">
+			<ref bean="userManager"/>
+		</property>
+	</bean>
+	
+	<bean id="updateOwnership" class="com.gnizr.core.web.action.folder.UpdateOwnership" singleton="false">
+		<property name="userManager">
+			<ref bean="userManager"/>
+		</property>
+		<property name="folderManager">
+			<ref bean="folderManager"/>
+		</property>
+		<property name="bookmarkManager">
+			<ref bean="bookmarkManager"/>
+		</property>
+	</bean>
+	
+	<bean id="listSettings" class="com.gnizr.core.web.action.settings.ListSettings" singleton="false"/>
+	
+</beans>
