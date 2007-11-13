@@ -57,6 +57,15 @@
 #resultTiles, #resultTiles td{
 	border-width:  1px;
 	border-style: solid;
+	vertical-align: top;
+}
+
+.tileTitle{
+	padding: 4px 4px;	
+}
+
+.tileContent{
+	padding: 2px;
 }
 
 .tileSeperator{

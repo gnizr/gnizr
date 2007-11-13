@@ -6,6 +6,8 @@ var selectSearchServicesULID = 'selectSearchServices';
 var services = new Array();
 var imagePathUrl = '';
 var searchManager = null;
+var queryTerm = null;
+var proxyUrl = null;
 
 ResizeTile = {
     tileSeperator: null,
@@ -92,14 +94,146 @@ ResizeTile = {
     }
 };
 
-function ResultTile(service){
-    this.service = service;
+function parseOpenSearchResult(atomXml){
+    MochiKit.Logging.log('here: ' + atomXml);   
+    var resultMap = {};
+    if(MochiKit.Base.isUndefinedOrNull(atomXml) == true){
+        return resultMap;
+    }
+    var title = parseStringOne(atomXml,'title');
+    MochiKit.Logging.log('title: ' + title);
+    var link = parseStringOne(atomXml,'link','href');
+    MochiKit.Logging.log('link: ' + link);
+    var itemsPerPage = parseIntegerOne(atomXml,'opensearch:itemsPerPage',null,0); 
+    MochiKit.Logging.log('itemsPerPage: ' + itemsPerPage);
+    var totalResults = parseIntegerOne(atomXml,'totalResults',null,0);
+    MochiKit.Logging.log('totalResults: ' + totalResults);
+    var startIndex = parseIntegerOne(atomXml,'startIndex',null,-1);
+    MochiKit.Logging.log('startIndex: ' + startIndex);    
+};
+
+function parseIntegerOne(dom,tag,attr,def){
+    var value = parseStringOne(dom,tag,attr);
+    MochiKit.Logging.log('v='+value);
+    if(MochiKit.Base.isUndefinedOrNull(value)){
+        if(MochiKit.Base.isUndefinedOrNull(def) == false){
+            return def;
+        }else{
+            return 0;
+        }
+    }else{
+        return value;
+    }
+}
+function parseStringOne(dom,tag,attr){
+    var elm = MochiKit.DOM.getFirstElementByTagAndClassName(tag,null,dom);
+    if(MochiKit.Base.isUndefinedOrNull(elm) == false){        
+        if(MochiKit.Base.isUndefinedOrNull(attr) == false){
+            return MochiKit.DOM.getNodeAttribute(elm,attr);
+        }else{
+            MochiKit.Logging.log('node value: ' + elm.firstChild.nodeValue);
+            return elm.firstChild.nodeValue;
+        }
+    }
+    return null;
 }
 
-ResultTile.prototype.createHTMLElement = function(parentNode){
+
+function SearchExecutor(service,contentNode){
+    this.service = service;   
+    this.contentNode = contentNode;
+    this.qs = decodeURIComponent(queryTerm);
+    this.startPage = -1;
+    this.startIndex = -1;
+    this.totalResult = 0;    
+    this.searchDataUrl = this.getNextSearchQuery();    
+    this.fetchMoreDataLinkElm = MochiKit.DOM.A({'href':'#'},'more');    
+    this.resultListElm = MochiKit.DOM.OL({'class':'resultList'},null);
+    MochiKit.DOM.appendChildNodes(contentNode,this.resultListElm, this.fetchMoreDataLinkElm);
+  
+    // don't forget to disconnect this signal.
+    this.fetch = MochiKit.Signal.connect(this.fetchMoreDataLinkElm,'onclick',this,'fetchMoreData');    
+}
+
+SearchExecutor.prototype.fetchMoreData = function(){    
+    var resultElm = this.resultListElm;
+    var onSucceed = function(result){
+        MochiKit.Logging.log('got result: size= ' + result.entries.length);  
+        if(MochiKit.Base.isUndefinedOrNull(result.entries) == false){
+            var entries = result.entries;
+            for(var i = 0; i < entries.length; i++){
+               MochiKit.Logging.log('e'+i+':'+entries[i].link+','+entries[i].title);
+               var entryElm = MochiKit.DOM.LI(null,MochiKit.DOM.SPAN(null,entries[i].title));
+               MochiKit.DOM.appendChildNodes(resultElm,entryElm);
+            }
+        }
+    };
+    var onFailed = function(result){
+        MochiKit.Logging.log('fetch data failed. ' + result);
+    }
+    
+    MochiKit.Logging.log('try to fetchMoreData from : ' + this.searchDataUrl);
+    //var d = MochiKit.Async.doSimpleXMLHttpRequest(this.searchDataUrl);
+    if(MochiKit.Base.isUndefinedOrNull(proxyUrl) == false){
+        var callUrl = proxyUrl + encodeURIComponent(this.searchDataUrl);
+        MochiKit.Logging.log('AJAX call: ' + callUrl);
+        var d = MochiKit.Async.loadJSONDoc(callUrl);
+        d.addCallbacks(onSucceed,onFailed);            
+    }else{
+        alert('Internal Error: proxy URL is undefined');    
+    }    
+}
+
+SearchExecutor.prototype.terminate = function(){
+    if(MochiKit.Base.isUndefinedOrNull(this.fetch) == false){
+        MochiKit.Signal.disconnect(this.fetch);
+        MochiKit.Logging.log('Disconnected the fetch signal of service ID:' + this.service.id);
+    }
+}
+
+SearchExecutor.prototype.getNextSearchQuery = function(){
+    var pStr = decodeURIComponent(this.service.serviceUrl).split('?');
+    MochiKit.Logging.log('getNextSearchQuery: split serviceUrl => ' + pStr);
+    var baseUrl = pStr[0];    
+    var qTerms = MochiKit.Base.parseQueryString(pStr[1]);
+    var qTerms2 = {}; // needed bec parseQueryString include '&' as a key
+    for(key in qTerms){
+        if(qTerms[key] == '{searchTerms}'){
+            qTerms2[key] = this.qs;
+            MochiKit.Logging.log('replace {searchTerms} with ' + qTerms2[key]);
+        }else if(qTerms[key] == '{startPage}'){
+            if(this.startPage <= 0){
+                this.startPage = 1;
+            }else{
+                this.startPage++;
+            }
+            qTerms2[key] = this.startPage;
+            MochiKit.Logging.log('replace {startPage} with ' + qTerms2[key]);
+        }else if(key.match(/(\&amp\;|\&\#38\;|\&#x26;|\&)/) == false){            
+            qTerms2[key] = qTerms[key];
+        }
+    }
+    for(k in qTerms2){
+        MochiKit.Logging.log('k=' + k + ',v='+qTerms2[k]);
+    }
+    var nxtQuery = baseUrl + '?' +MochiKit.Base.queryString(qTerms2);
+    MochiKit.Logging.log('Return from getNextSearchQuery=' + nxtQuery);
+    return nxtQuery;
+}
+
+function ResultTile(service){
+    this.service = service;
+    this.searchExec = null;
+    this.seperatorDrag = null;
+}
+
+ResultTile.prototype.createHTMLElement = function(parentNode){       
+   var tileCntElm = MochiKit.DOM.DIV({'class':'tileContent'});
    var tileElm = MochiKit.DOM.TD({'id':this.getId()},
-          this.service.shortName); 
+      MochiKit.DOM.DIV({'class':'tileTitle'},this.service.shortName),
+      tileCntElm); 
    MochiKit.DOM.appendChildNodes(parentNode,tileElm);
+   this.searchExec = new SearchExecutor(this.service,tileCntElm);
 }
 
 ResultTile.prototype.createSeperatorHTMLElement = function(parentNode){
@@ -111,9 +245,12 @@ ResultTile.prototype.createSeperatorHTMLElement = function(parentNode){
     return spElm;
 }
 
-ResultTile.prototype.destorySeperator = function(){
+ResultTile.prototype.destroy = function(){
     MochiKit.DOM.removeElement(this.getSeperatorId());
-    MochiKit.Signal.disconnect(this.seperatorDrag);    
+    MochiKit.Signal.disconnect(this.seperatorDrag);  
+    if(MochiKit.Base.isUndefinedOrNull(this.searchExec) == false){
+        this.searchExec.terminate();
+    }  
 }
 
 ResultTile.prototype.getId = function(){
@@ -149,13 +286,13 @@ SearchManager.prototype.hideService = function(serviceId){
          var tileSpId = aSrv.resultTile.getSeperatorId();
          var tileSpElm = MochiKit.DOM.getElement(tileSpId);
          if(MochiKit.Base.isUndefinedOrNull(tileSpElm) == false){
-            aSrv.resultTile.destorySeperator();        
+            aSrv.resultTile.destroy();        
          }else{
             var resultRowElm = MochiKit.DOM.getElement(this.searchResultRowId);
             var lastTileSpId = resultRowElm.lastChild.id;  
             var lastTileElmId = lastTileSpId.replace('SP','');
             var lastTile = this.findResultTile(lastTileElmId);
-            lastTile.destorySeperator();
+            lastTile.destroy();
          }         
      }else{
          MochiKit.Logging.log('attempt to remove an undefined service: ' + aSrv.shortName);
