@@ -10,6 +10,7 @@
 		<result-types>
             <result-type name="romerss" class="com.gnizr.core.web.result.RomeResult"/>
  		    <result-type name="opensearch" class="com.gnizr.core.web.result.OpenSearchRomeResult"/>
+			<result-type name="json" class="com.gnizr.core.web.result.JSONResult"/>
         </result-types>
 		
 		<interceptors>

@@ -6,6 +6,8 @@
 <script type="text/javascript">
  services = <@openSearchSrvJson services=services/>;
  imagePathUrl = '${gzUrl("/images")}';
+ queryTerm = '${q?if_exists?html}';
+ proxyUrl = '${gzUrl("/data/json/searchproxy.action?searchUrl=")}';
 </script>
 </@pageBegin>            
 <@headerBlock/>

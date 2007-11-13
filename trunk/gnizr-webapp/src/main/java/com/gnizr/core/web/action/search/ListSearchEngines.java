@@ -21,6 +21,16 @@ public class ListSearchEngines extends AbstractLoggedInUserAction{
 	
 	private List<OpenSearchService> services;
 
+	private String q;
+	
+	public String getQ() {
+		return q;
+	}
+
+	public void setQ(String q) {
+		this.q = q;
+	}
+
 	public List<OpenSearchService> getServices() {
 		return services;
 	}

@@ -134,7 +134,14 @@
 				<param name="location">/json/op-failed.ftl</param>
 				<param name="contentType">text/javascript</param>
 			</result>
-	   </action>				
+	   </action>		
+		
+		<action name="searchproxy" class="com.gnizr.core.web.action.search.OpenSearchProxy">
+			<interceptor-ref name="gnizrDefaultStack"/>		
+			<result name="success" type="json">
+				<param name="jsonName">jsonResult</param>
+			</result>
+		</action>		
 	</package>
 	
 	
