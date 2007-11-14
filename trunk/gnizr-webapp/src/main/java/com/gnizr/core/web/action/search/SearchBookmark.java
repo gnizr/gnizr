@@ -23,6 +23,7 @@ import java.util.List;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.log4j.Logger;
 
+import com.gnizr.core.managers.UserManager;
 import com.gnizr.core.search.Search;
 import com.gnizr.core.search.SearchResult;
 import com.gnizr.core.util.GnizrDaoUtil;
@@ -47,6 +48,7 @@ public class SearchBookmark extends AbstractPagingAction implements LoggedInUser
 	public static final String TYPE_USER = "user";
 	
 	private Search search;
+	private UserManager userManager;
 	private String queryString;
 	private String type;	
 	private List<Bookmark> bookmarks;
@@ -117,7 +119,18 @@ public class SearchBookmark extends AbstractPagingAction implements LoggedInUser
 	
 	private SearchResult<Bookmark> doSearch(){		
 		if(TYPE_USER.equalsIgnoreCase(getType()) == true){
-			return search.searchBookmarkUser(queryString,loggedInUser);
+			User u = loggedInUser;
+			if(u == null && username != null){
+				if(userManager == null){
+					throw new NullPointerException("UserManager is NULL; can't lookup information of user: " + username);
+				}
+				try{					
+					u = userManager.getUser(getUsername());
+				}catch(Exception e){
+					logger.debug("No such user: " + getUsername());
+				}
+			}			
+			return search.searchBookmarkUser(queryString,u);
 		}else{
 			return search.searchBookmarkCommunity(queryString);
 		}
@@ -188,6 +201,22 @@ public class SearchBookmark extends AbstractPagingAction implements LoggedInUser
 
 	public void setLoggedInUser(User loggedInUser) {
 		this.loggedInUser = loggedInUser;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public UserManager getUserManager() {
+		return userManager;
+	}
+
+	public void setUserManager(UserManager userManager) {
+		this.userManager = userManager;
 	}
 	
 }
