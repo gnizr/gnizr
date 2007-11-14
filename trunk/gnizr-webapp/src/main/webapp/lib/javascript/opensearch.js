@@ -8,6 +8,7 @@ var imagePathUrl = '';
 var searchManager = null;
 var queryTerm = null;
 var proxyUrl = null;
+var loggedInUser = null;
 
 ResizeTile = {
     tileSeperator: null,
@@ -94,91 +95,109 @@ ResizeTile = {
     }
 };
 
-function parseOpenSearchResult(atomXml){
-    MochiKit.Logging.log('here: ' + atomXml);   
-    var resultMap = {};
-    if(MochiKit.Base.isUndefinedOrNull(atomXml) == true){
-        return resultMap;
-    }
-    var title = parseStringOne(atomXml,'title');
-    MochiKit.Logging.log('title: ' + title);
-    var link = parseStringOne(atomXml,'link','href');
-    MochiKit.Logging.log('link: ' + link);
-    var itemsPerPage = parseIntegerOne(atomXml,'opensearch:itemsPerPage',null,0); 
-    MochiKit.Logging.log('itemsPerPage: ' + itemsPerPage);
-    var totalResults = parseIntegerOne(atomXml,'totalResults',null,0);
-    MochiKit.Logging.log('totalResults: ' + totalResults);
-    var startIndex = parseIntegerOne(atomXml,'startIndex',null,-1);
-    MochiKit.Logging.log('startIndex: ' + startIndex);    
-};
-
-function parseIntegerOne(dom,tag,attr,def){
-    var value = parseStringOne(dom,tag,attr);
-    MochiKit.Logging.log('v='+value);
-    if(MochiKit.Base.isUndefinedOrNull(value)){
-        if(MochiKit.Base.isUndefinedOrNull(def) == false){
-            return def;
-        }else{
-            return 0;
-        }
-    }else{
-        return value;
-    }
-}
-function parseStringOne(dom,tag,attr){
-    var elm = MochiKit.DOM.getFirstElementByTagAndClassName(tag,null,dom);
-    if(MochiKit.Base.isUndefinedOrNull(elm) == false){        
-        if(MochiKit.Base.isUndefinedOrNull(attr) == false){
-            return MochiKit.DOM.getNodeAttribute(elm,attr);
-        }else{
-            MochiKit.Logging.log('node value: ' + elm.firstChild.nodeValue);
-            return elm.firstChild.nodeValue;
-        }
-    }
-    return null;
-}
-
-
-function SearchExecutor(service,contentNode){
+function SearchExecutor(service,resultTile){
     this.service = service;   
-    this.contentNode = contentNode;
+    this.resultTile = resultTile;   
     this.qs = decodeURIComponent(queryTerm);
     this.startPage = -1;
     this.startIndex = -1;
+    this.totalFetched = 0;
     this.totalResult = 0;    
     this.searchDataUrl = this.getNextSearchQuery();    
-    this.fetchMoreDataLinkElm = MochiKit.DOM.A({'href':'#'},'more');    
+    this.fetchMoreDataLinkElm = MochiKit.DOM.A({'class':'fetchMoreDataLink system-link','href':'#'},'show more');    
     this.resultListElm = MochiKit.DOM.OL({'class':'resultList'},null);
-    MochiKit.DOM.appendChildNodes(contentNode,this.resultListElm, this.fetchMoreDataLinkElm);
-  
+    MochiKit.DOM.appendChildNodes(this.resultTile.getTileContentNode(),this.resultListElm, this.fetchMoreDataLinkElm);
+    
+    this.fetchMoreData();
+    
     // don't forget to disconnect this signal.
     this.fetch = MochiKit.Signal.connect(this.fetchMoreDataLinkElm,'onclick',this,'fetchMoreData');    
 }
 
 SearchExecutor.prototype.fetchMoreData = function(){    
     var resultElm = this.resultListElm;
-    var onSucceed = function(result){
+    var resultTile = this.resultTile; 
+    var searchExec = this;   
+    
+    function appendOneResult(anEntry){
+        MochiKit.Logging.log('e'+i+':'+anEntry.link+','+anEntry.title);
+        var title = anEntry.title;
+        var summary = '';
+        if(MochiKit.Base.isUndefinedOrNull(anEntry.summary) == false){                                      
+            summary = anEntry.summary;
+            if(summary.length > 250){
+                summary = summary.substring(0,250) + '...';
+            }
+           summary = summary.escapeHTML();
+         }
+         var link = anEntry.link;
+         var entryElm = MochiKit.DOM.LI(null,
+            MochiKit.DOM.A({'class':'entryTitle','href':link,'target':'_blank'},title),
+            MochiKit.DOM.P(null,summary)                    
+          );              
+         MochiKit.DOM.appendChildNodes(resultElm,entryElm);
+    }
+    
+    function updateResultMeta(result){
+        if(searchExec.totalFetched > 0){
+            var msg = 'Showing 1 - ' + searchExec.totalFetched ;
+            if(searchExec.totalResults > 0){
+                msg = msg + ' of ' + searchExec.totalResults;
+            }
+            var resultMetaElm = resultTile.getTileResultMetaElm();
+            var metaDataElm = MochiKit.DOM.P({'class':'resultMeta'},msg);
+            MochiKit.DOM.replaceChildNodes(resultMetaElm,metaDataElm);
+        }
+    }
+        
+    var onSucceed = function(result){        
+        resultTile.hideLoadingDialog();        
         MochiKit.Logging.log('got result: size= ' + result.entries.length);  
         if(MochiKit.Base.isUndefinedOrNull(result.entries) == false){
             var entries = result.entries;
             for(var i = 0; i < entries.length; i++){
-               MochiKit.Logging.log('e'+i+':'+entries[i].link+','+entries[i].title);
-               var entryElm = MochiKit.DOM.LI(null,MochiKit.DOM.SPAN(null,entries[i].title));
-               MochiKit.DOM.appendChildNodes(resultElm,entryElm);
+                appendOneResult(entries[i]);
+                searchExec.totalFetched++;
             }
         }
+        if(MochiKit.Base.isUndefinedOrNull(result.startIndex) == false){
+            searchExec.startIndex = result.startIndex;
+            MochiKit.Logging.log('From Result: startIndex = ' + searchExec.startIndex);
+        }
+        if(MochiKit.Base.isUndefinedOrNull(result.itemsPerPage) == false){
+            searchExec.itemsPerPage = result.itemsPerPage;
+            MochiKit.Logging.log('From Result: itemsPerPage = ' + searchExec.itemsPerPage);
+        }
+        if(MochiKit.Base.isUndefinedOrNull(result.totalResults) == false){
+            searchExec.totalResults = result.totalResults;
+            MochiKit.Logging.log('From Result: totalResults = ' + searchExec.totalResults);
+        }
+        if(searchExec.totalResults > 0 && (
+            searchExec.startIndex + searchExec.itemsPerPage) < searchExec.totalResults){
+            MochiKit.Logging.log('updating searchDataUrl');  
+            searchExec.searchDataUrl = searchExec.getNextSearchQuery();             
+        }else{
+            searchExec.searchDataUrl = null;
+            MochiKit.DOM.removeElement(searchExec.fetchMoreDataLinkElm);
+        }    
+        updateResultMeta(result);
+                
     };
     var onFailed = function(result){
-        MochiKit.Logging.log('fetch data failed. ' + result);
-    }
-    
-    MochiKit.Logging.log('try to fetchMoreData from : ' + this.searchDataUrl);
-    //var d = MochiKit.Async.doSimpleXMLHttpRequest(this.searchDataUrl);
-    if(MochiKit.Base.isUndefinedOrNull(proxyUrl) == false){
-        var callUrl = proxyUrl + encodeURIComponent(this.searchDataUrl);
-        MochiKit.Logging.log('AJAX call: ' + callUrl);
-        var d = MochiKit.Async.loadJSONDoc(callUrl);
-        d.addCallbacks(onSucceed,onFailed);            
+       resultTile.hideLoadingDialog();  
+       MochiKit.Logging.log('fetch data failed. ' + result);
+    }    
+    MochiKit.Logging.log('try to fetchMoreData from : ' + this.searchDataUrl);    
+    if(MochiKit.Base.isUndefinedOrNull(proxyUrl) == false){        
+        if(MochiKit.Base.isUndefinedOrNull(this.searchDataUrl) == false){
+            this.resultTile.showLoadingDialog();
+            var callUrl = proxyUrl + encodeURIComponent(this.searchDataUrl);
+            MochiKit.Logging.log('AJAX call: ' + callUrl);
+            var d = MochiKit.Async.loadJSONDoc(callUrl);
+            d.addCallbacks(onSucceed,onFailed);            
+        }else{
+            MochiKit.Logging.log('No more results in the searh stream. Halt.');
+        }
     }else{
         alert('Internal Error: proxy URL is undefined');    
     }    
@@ -209,9 +228,15 @@ SearchExecutor.prototype.getNextSearchQuery = function(){
             }
             qTerms2[key] = this.startPage;
             MochiKit.Logging.log('replace {startPage} with ' + qTerms2[key]);
+        }else if(qTerms[key] == '{loggedInUser}'){
+            if(MochiKit.Base.isUndefinedOrNull(loggedInUser) == false){
+                qTerms2[key] = loggedInUser;
+                MochiKit.Logging.log('replace {loggedInUser} with ' + qTerms2[key]);
+            }
         }else if(key.match(/(\&amp\;|\&\#38\;|\&#x26;|\&)/) == false){            
             qTerms2[key] = qTerms[key];
         }
+        
     }
     for(k in qTerms2){
         MochiKit.Logging.log('k=' + k + ',v='+qTerms2[k]);
@@ -225,15 +250,49 @@ function ResultTile(service){
     this.service = service;
     this.searchExec = null;
     this.seperatorDrag = null;
+    this.loadingElm = null;
+    this.tileElm = null;
+    this.tileContentElm = null;
+    this.tileResultMetaElm = null;
 }
 
-ResultTile.prototype.createHTMLElement = function(parentNode){       
-   var tileCntElm = MochiKit.DOM.DIV({'class':'tileContent'});
-   var tileElm = MochiKit.DOM.TD({'id':this.getId()},
-      MochiKit.DOM.DIV({'class':'tileTitle'},this.service.shortName),
-      tileCntElm); 
-   MochiKit.DOM.appendChildNodes(parentNode,tileElm);
-   this.searchExec = new SearchExecutor(this.service,tileCntElm);
+ResultTile.prototype.getTileContentNode = function(){
+    return this.tileContentElm;   
+}
+
+ResultTile.prototype.getTileResultMetaElm = function(){
+    return this.tileResultMetaElm;
+}
+
+ResultTile.prototype.showLoadingDialog = function(){
+    var dim = MochiKit.Style.getElementDimensions(this.tileElm);
+    var pos = MochiKit.Style.getElementPosition(this.tileElm);
+    MochiKit.Logging.log('dim: ' + dim + ', pos: ' + pos);
+    pos = new MochiKit.Style.Coordinates((pos.x+20),(pos.y+40));   
+    MochiKit.Logging.log('new pos: ' + pos);
+    this.loadingElm = MochiKit.DOM.IMG({'src':imagePathUrl+'/loading-big.gif'},null);       
+    MochiKit.DOM.appendChildNodes(MochiKit.DOM.currentDocument().body,this.loadingElm); 
+    MochiKit.Style.setStyle(this.loadingElm,{'position':'absolute'});   
+    MochiKit.Style.setElementPosition(this.loadingElm,pos);
+    MochiKit.Logging.log('loadingelm pos: ' + getElementPosition(this.loadingElm));
+}
+
+ResultTile.prototype.hideLoadingDialog = function(){    
+    if(MochiKit.Base.isUndefinedOrNull(this.loadingElm) == false){
+        MochiKit.DOM.removeElement(this.loadingElm);
+    }    
+    MochiKit.Logging.log('hide loading dialog');
+}
+
+ResultTile.prototype.createHTMLElement = function(parentNode){     
+   this.tileResultMetaElm = MochiKit.DOM.DIV({'class':'resultMeta'});
+   this.tileContentElm = MochiKit.DOM.DIV({'class':'tileContent'},this.tileResultMetaElm);
+   this.tileElm = MochiKit.DOM.TD({'id':this.getId()},
+      MochiKit.DOM.DIV({'class':'tileTitle'},
+      MochiKit.DOM.SPAN({'class':'searchShortName'},this.service.shortName)),
+      this.tileContentElm); 
+   MochiKit.DOM.appendChildNodes(parentNode,this.tileElm);  
+   this.searchExec = new SearchExecutor(this.service,this);
 }
 
 ResultTile.prototype.createSeperatorHTMLElement = function(parentNode){
@@ -260,6 +319,7 @@ ResultTile.prototype.getId = function(){
 ResultTile.prototype.getSeperatorId = function(){
     return 'SP'+this.getId();
 }
+
 
 function SearchManager(searchResultRowId, services){
     this.searchResultRowId = searchResultRowId;   
