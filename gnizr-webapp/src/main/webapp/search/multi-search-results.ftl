@@ -8,6 +8,9 @@
  imagePathUrl = '${gzUrl("/images")}';
  queryTerm = '${q?if_exists?html}';
  proxyUrl = '${gzUrl("/data/json/searchproxy.action?searchUrl=")}';
+<#if loggedInUser?exists>
+ loggedInUser = '${loggedInUser.username}'; 
+</#if>
 </script>
 </@pageBegin>            
 <@headerBlock/>

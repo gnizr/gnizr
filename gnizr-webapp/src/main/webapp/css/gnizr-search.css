@@ -40,36 +40,62 @@
 }
 
 #searchPageContent #left{
-	margin-right:260px;
+	margin-right:200px;
 }
 
 #searchPageContent #right{
 	position:absolute;
 	top:0px;
 	right:0px;
-	width:240px;
+	width:180px;
+}
+
+#resultTilesRow{
+	height: 480px;
 }
 
 #resultTiles {
 	width: 100%;
 }
 
-#resultTiles, #resultTiles td{
-	border-width:  1px;
-	border-style: solid;
-	vertical-align: top;
+.searchShortName{
+	font-color: #736F6E;
+	font-weight: bold;
+	font-size: 10px;
+}
+
+.resultMeta {
+	text-align: right;
 }
 
 .tileTitle{
 	padding: 4px 4px;	
+	background-color: #FAF8CC;	
+	border-width:  1px;
+	border-style: solid;
 }
 
 .tileContent{
+	overflow: scroll;
+	height: 480px;
 	padding: 2px;
+	border-left-width:  1px;
+	border-left-style: solid;
+	border-left-color:  #736F6E
 }
 
 .tileSeperator{
 	width: 10px;
+}
+
+A.entryTitle{
+	font-size: 1.25em;
+	text-decoration: underline;
+}
+
+.fetchMoreDataLink{
+	float:right;
+	padding-right: 4px;
 }
 
 #selectSearchServices {

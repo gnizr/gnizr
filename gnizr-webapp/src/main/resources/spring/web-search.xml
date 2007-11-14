@@ -7,6 +7,9 @@
 		<property name="search">
 			<ref bean="search"/>
 		</property>
+		<property name="userManager">
+			<ref bean="userManager"/>
+		</property>
 	</bean>	
 	
 	<bean id="listSearchEngines" class="" singleton="false">
