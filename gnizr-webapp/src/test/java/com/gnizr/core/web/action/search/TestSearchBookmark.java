@@ -23,6 +23,7 @@ import java.util.Map;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSet;
 
+import com.gnizr.core.managers.UserManager;
 import com.gnizr.core.search.Search;
 import com.gnizr.core.web.junit.GnizrWebappTestBase;
 import com.gnizr.core.web.util.GnizrConfiguration;
@@ -38,11 +39,12 @@ public class TestSearchBookmark extends GnizrWebappTestBase {
 	
 	private Search search;
 	private SearchBookmark action;
+	private UserManager userManager;
 	private Map<Object, Object> session = new HashMap<Object, Object>();
 	
 	protected void setUp() throws Exception {
 		super.setUp();
-		
+		userManager = new UserManager(getGnizrDao());
 		GnizrConfiguration config = new GnizrConfiguration();
 		config.setWebApplicationUrl("http://foo.com/gnizr");
 		
@@ -52,6 +54,7 @@ public class TestSearchBookmark extends GnizrWebappTestBase {
 		action.setSearch(search);
 		action.setGnizrConfiguration(config);
 		action.setSession(session);
+		action.setUserManager(userManager);
 	}
 
 	protected void tearDown() throws Exception {
@@ -78,6 +81,19 @@ public class TestSearchBookmark extends GnizrWebappTestBase {
 	public void testSearchUserBookmark() throws Exception{
 		action.setType(SearchBookmark.TYPE_USER);
 		action.setLoggedInUser(new User(3));
+		action.setQueryString("Category WordPress Group Wiki");
+		
+		String code = action.executeNoPaging();
+		assertEquals(ActionSupport.SUCCESS,code);
+		
+		List<Bookmark> bmarks = action.getBookmarks();
+		assertEquals(1,bmarks.size());
+	}
+	
+	public void testSearchUserBookmark2() throws Exception{
+		action.setType(SearchBookmark.TYPE_USER);
+		action.setLoggedInUser(null);
+		action.setUsername("joe");
 		action.setQueryString("Category WordPress Group Wiki");
 		
 		String code = action.executeNoPaging();
