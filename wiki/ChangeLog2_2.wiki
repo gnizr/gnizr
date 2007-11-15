@@ -1,6 +1,10 @@
 #summary Changelog of all releases made under version 2.2
 #labels Phase-Implementation
 
+==== Version 2.2.0-RC3 (soon) ====
+
+Changelog
+   * Help page generates incorrect link URL for bookmarklets (same as [http://code.google.com/p/gnizr/issues/detail?id=14 Issue 14])
 
 ==== Version 2.2.0-RC2 (23 October 2007) ====
 
