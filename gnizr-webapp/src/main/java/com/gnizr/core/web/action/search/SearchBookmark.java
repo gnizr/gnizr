@@ -46,6 +46,7 @@ public class SearchBookmark extends AbstractPagingAction implements LoggedInUser
 	
 	public static final String TYPE_TEXT = "text";
 	public static final String TYPE_USER = "user";
+	public static final String TYPE_OPEN_SEARCH = "opensearch";
 	
 	private Search search;
 	private UserManager userManager;
@@ -76,7 +77,10 @@ public class SearchBookmark extends AbstractPagingAction implements LoggedInUser
 	}
 
 	@Override
-	protected String go() throws Exception {		
+	protected String go() throws Exception {	
+		if(TYPE_OPEN_SEARCH.equalsIgnoreCase(getType())){
+			return REDIRECT;
+		}
 		initPagingAction();
 		// reuse an existing query string if possible
 		if(getQueryString() == null){

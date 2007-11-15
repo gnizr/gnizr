@@ -20,6 +20,7 @@
 			<result name="success" type="chain">getSearchCommonTags</result>
 			<result name="input" type="redirect">/search/home.ftl</result>			
 			<result name="error" type="freemarker">/edit.ftl</result>	
+			<result name="redirect" type="redirect">/search/list.action?q=${queryString}</result>
 		</action>
 
 		<action name="getSearchCommonTags" class="com.gnizr.core.web.action.link.GetCommonTags">												
