@@ -202,7 +202,7 @@ as <h1/> (page header) of this page:
     <li><a href="${gzUrl("/settings")}">settings</a></li>
     <li><a href="${gzUrl("/logout")}">logout</a></li>     
 </#if>
-    <li><a href="${gzUrl("/help.ftl")}">help</a></li>
+    <li><a href="${gzUrl("/settings/help.action")}">help</a></li>
     </ul>
   </div>
 </div>  
