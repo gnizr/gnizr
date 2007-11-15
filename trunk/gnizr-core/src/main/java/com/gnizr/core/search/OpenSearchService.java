@@ -33,18 +33,18 @@ public class OpenSearchService implements Serializable{
 	private boolean supportsPageBased;
 	private boolean supportsIndexBased;
 	private boolean loginRequired;
-	private boolean isDefaultEnabled;
+	private boolean defaultEnabled;
 	
 	public OpenSearchService(){
 		tags = new String[0];
 	}
 
 	public boolean isDefaultEnabled() {
-		return isDefaultEnabled;
+		return defaultEnabled;
 	}
 
 	public void setDefaultEnabled(boolean isDefaultEnabled) {
-		this.isDefaultEnabled = isDefaultEnabled;
+		this.defaultEnabled = isDefaultEnabled;
 	}
 
 	public boolean isLoginRequired() {
