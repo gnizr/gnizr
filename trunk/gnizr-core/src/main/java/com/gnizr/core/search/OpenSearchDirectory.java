@@ -52,6 +52,8 @@ public class OpenSearchDirectory {
 
 	private static final String ATT_TYPE = "type";
 
+	private static final String ELM_DEFAULT_ENABLED = "DefaultEnabled";
+	
 	private static final Logger logger = Logger
 			.getLogger(OpenSearchDirectory.class);
 
@@ -73,6 +75,7 @@ public class OpenSearchDirectory {
 		String urlpttn = null;
 		String type = null;
 		boolean loginRequired = false;
+		boolean defaultEnabled = false;
 		try {
 			DocumentBuilderFactory factory = DocumentBuilderFactory
 					.newInstance();
@@ -99,6 +102,11 @@ public class OpenSearchDirectory {
 					String v = nl.item(0).getFirstChild().getNodeValue();
 					loginRequired = Boolean.parseBoolean(v);
 				}
+				nl = root.getElementsByTagNameNS(NS_GNIZR_OPENSEARCH, ELM_DEFAULT_ENABLED);
+				if(nl != null && nl.getLength() > 0){
+					String v = nl.item(0).getFirstChild().getNodeValue();
+					defaultEnabled = Boolean.parseBoolean(v);
+				}				
 				nl = root.getElementsByTagName(ELM_URL);
 				if (nl != null && nl.getLength() > 0) {
 					Node urlNode = null;
@@ -141,6 +149,7 @@ public class OpenSearchDirectory {
 			aService.setShortName(sname);
 			aService.setType(type);
 			aService.setLoginRequired(loginRequired);
+			aService.setDefaultEnabled(defaultEnabled);
 			if (tags != null) {
 				aService.setTags(tags.split(" "));
 			}

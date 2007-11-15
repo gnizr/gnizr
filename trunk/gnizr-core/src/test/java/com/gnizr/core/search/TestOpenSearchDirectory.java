@@ -40,6 +40,7 @@ public class TestOpenSearchDirectory extends TestCase {
 		assertTrue(srv1.isSupportsPageBased());
 		assertFalse(srv1.isSupportsIndexBased());
 		assertTrue(srv1.isLoginRequired());
+		assertTrue(srv1.isDefaultEnabled());
 		assertEquals("http://gnizr.com/data/atom/community/search.action?queryString={searchTerms}&start={startPage}",srv1.getServiceUrlPattern());
 		
 		
@@ -49,6 +50,7 @@ public class TestOpenSearchDirectory extends TestCase {
 		assertTrue(srv2.isSupportsIndexBased());
 		assertFalse(srv2.isSupportsPageBased());
 		assertEquals("text/xml",srv2.getType());
+		assertFalse(srv2.isDefaultEnabled());
 		assertEquals("http://gnizr.com/data/atom/community/search.action?queryString={searchTerms}&page={startIndex}",srv2.getServiceUrlPattern());
 	}
 
