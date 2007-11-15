@@ -1,7 +1,7 @@
 #summary Changelog of all releases made under version 2.3
 #labels Phase-Implementation
 
-==== Version 2.3.0-M1 (in process) ====
+==== Version 2.3.0-M1 (in progress) ====
 
   * [http://code.google.com/p/gnizr/issues/detail?id=5 Issue 5]: Provide clickable tag cloud in the Edit Tag Relations page  (fixed, tested)
   * [http://code.google.com/p/gnizr/issues/detail?id=6 Issue 6]: Renaming tags to "gn:geonames=" don't trigger geocoding (fixed, tested)
