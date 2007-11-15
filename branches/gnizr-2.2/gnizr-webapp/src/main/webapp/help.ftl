@@ -1,9 +1,5 @@
-<#assign ww=JspTaglibs["/WEB-INF/webwork.tld"] >
-
 <#include "/lib/web/macro-lib.ftl"/>
-
-<@pageBegin pageTitle="help -- gnizr" />
-          
+<@pageBegin pageTitle="help -- gnizr" />          
 <@headerBlock></@headerBlock>
 <@pageContent>
 <@mainBlock>
