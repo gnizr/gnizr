@@ -6,6 +6,7 @@
   <ShortName>My Gnizr Bookmarks</ShortName>
   <Description>Search my saved bookmarks in gnizr</Description>
   <Tags>bookmarks gnizr</Tags>
+  <gn:DefaultEnabled>true</gn:DefaultEnabled>
   <Url type="text/xml" 
        template="${gzUrl("/data/atom/user/search.action?username={loggedInUser}&amp;queryString={searchTerms}&amp;page={startPage}")}"/>
   <gn:LoginRequired>true</gn:LoginRequired>

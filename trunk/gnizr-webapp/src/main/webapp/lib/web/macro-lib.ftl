@@ -210,10 +210,10 @@ as <h1/> (page header) of this page:
 <@ww.form action="search" namespace="/bookmark" theme="simple">
   <@ww.textfield id="search-input" name="queryString" value="${queryString?if_exists}" size="40"/>
     <#if loggedInUser?exists> 
-      <#assign opt = r"#{'user':'My Bookmark Archive','text':'Community'}"/>
+      <#assign opt = r"#{'opensearch':'OpenSearch','user':'My Bookmark Archive','text':'Community'}"/>
       <@ww.select id="search-space" name="type" list=opt/>   
     <#else>
-      <@ww.hidden name="type" value="text"/>
+      <@ww.hidden name="type" value="opensearch"/>
     </#if>      
     <@ww.submit id="search-submit" cssClass="btn" value="Search"/>    
 </@ww.form>
@@ -248,9 +248,13 @@ FTL NESTED: YES
 <div id="infobanner">
 <ul id="breadcrumbs"> 
   <#list bct as bctItm>
-    <#local url = bctItm['url']/>
+    <#if (bctItm['url']?length > 0)>
+      <#local url = bctItm['url']/>
+    <#else>
+      <#local url = ''/>
+    </#if>
     <#local name = bctItm['name']/>
-    <li><a href="${url}">${name}</a>
+    <li><#if url?exists && (url?length>0)><a href="${url}">${name}</a><#else>${name}</#if>
     <#if bctItm_has_next><img src="${gzUrl("/images/arrow.gif")}"></img></#if>
     </li>
   </#list>

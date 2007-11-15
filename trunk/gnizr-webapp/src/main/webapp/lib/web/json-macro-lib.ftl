@@ -52,7 +52,8 @@
    'type':'${srv.type}',
    'supportsPageBased':${srv.supportsPageBased?string},
    'supportsIndexBased':${srv.supportsIndexBased?string},
-   'serviceUrl':'${srv.serviceUrlPattern?url}'}   
+   'serviceUrl':'${srv.serviceUrlPattern?url}',
+   'defaultEnabled':${srv.defaultEnabled?string}}   
   <#if srv_has_next>,</#if>
 </#list>]
 </#macro>

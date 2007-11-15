@@ -4,9 +4,9 @@
   <@ww.form  action="search" namespace="${namespace}" >
     <@ww.textfield id="search-string" cssClass="long-text-input" name="queryString" value="${queryString?if_exists}"/>
     <#if loggedInUser?exists>
-      <@ww.select name="type" list=r"#{'user':'My Bookmark Archive','text':'Community'}"/>   
+      <@ww.select name="type" list=r"#{'opensearch':'OpenSearch','user':'My Bookmark Archive','text':'Community'}"/>   
     <#else>
-      <@ww.hidden name="type" value="text"/>
+      <@ww.hidden name="type" value="opensearch"/>
     </#if>
     <@ww.submit id="search-button" cssClass="btn" value="Search"/>    
   </@ww.form>

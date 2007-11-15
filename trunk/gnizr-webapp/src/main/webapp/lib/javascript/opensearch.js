@@ -9,6 +9,7 @@ var searchManager = null;
 var queryTerm = null;
 var proxyUrl = null;
 var loggedInUser = null;
+var loadingImg = '/loading-bar-blue.gif';
 
 ResizeTile = {
     tileSeperator: null,
@@ -85,11 +86,12 @@ ResizeTile = {
     
     dragStop: function(e){
         MochiKit.Logging.log('dragStop is called');       
-        var tileElm = ResizeTile.getLeftTileElement(ResizeTile.tileSeperator);                    
+        var tileElm = ResizeTile.getLeftTileElement(ResizeTile.tileSeperator);      
         var tileElmDim = MochiKit.Style.getElementDimensions(tileElm);                 
         tileElmDim.w = tileElmDim.w + ResizeTile.tileWidthOffset;                    
         MochiKit.Style.setElementDimensions(tileElm,tileElmDim);
         MochiKit.Logging.log('new dim: ' + tileElmDim);        
+
         MochiKit.Signal.disconnect(ResizeTile.mouseMove);
         MochiKit.Signal.disconnect(ResizeTile.mouseDown);
     }
@@ -138,11 +140,13 @@ SearchExecutor.prototype.fetchMoreData = function(){
          MochiKit.DOM.appendChildNodes(resultElm,entryElm);
     }
     
-    function updateResultMeta(result){
+    function updateResultMeta(result){      
         if(searchExec.totalFetched > 0){
             var msg = 'Showing 1 - ' + searchExec.totalFetched ;
-            if(searchExec.totalResults > 0){
+            if(searchExec.totalResults > 0 && searchExec.totalResults != Infinity){
                 msg = msg + ' of ' + searchExec.totalResults;
+            }else {
+                msg = msg + ' of many';
             }
             var resultMetaElm = resultTile.getTileResultMetaElm();
             var metaDataElm = MochiKit.DOM.P({'class':'resultMeta'},msg);
@@ -176,6 +180,13 @@ SearchExecutor.prototype.fetchMoreData = function(){
             searchExec.startIndex + searchExec.itemsPerPage) < searchExec.totalResults){
             MochiKit.Logging.log('updating searchDataUrl');  
             searchExec.searchDataUrl = searchExec.getNextSearchQuery();             
+        }else if(MochiKit.Base.isUndefinedOrNull(result.startIndex) == true &&
+                 MochiKit.Base.isUndefinedOrNull(result.itemsPerPage) == true &&
+                 MochiKit.Base.isUndefinedOrNull(result.totalResults) == true){
+            searchExec.startIndex = result.totalFetched;
+            searchExec.totalResults = Infinity; // some random neg number;
+            MochiKit.Logging.log('updating searchDataUrl');  
+            searchExec.searchDataUrl = searchExec.getNextSearchQuery(); 
         }else{
             searchExec.searchDataUrl = null;
             MochiKit.DOM.removeElement(searchExec.fetchMoreDataLinkElm);
@@ -220,6 +231,14 @@ SearchExecutor.prototype.getNextSearchQuery = function(){
         if(qTerms[key] == '{searchTerms}'){
             qTerms2[key] = this.qs;
             MochiKit.Logging.log('replace {searchTerms} with ' + qTerms2[key]);
+        }else if(qTerms[key] == '{startIndex}'){
+            if(this.startIndex <= 0){
+                this.startIndex = 1;
+            }else{
+                this.startIndex = this.totalFetched;
+            }
+            qTerms2[key] = this.startIndex;
+            MochiKit.Logging.log('replace {startIndex} with ' + qTerms2[key]);
         }else if(qTerms[key] == '{startPage}'){
             if(this.startPage <= 0){
                 this.startPage = 1;
@@ -233,8 +252,10 @@ SearchExecutor.prototype.getNextSearchQuery = function(){
                 qTerms2[key] = loggedInUser;
                 MochiKit.Logging.log('replace {loggedInUser} with ' + qTerms2[key]);
             }
-        }else if(key.match(/(\&amp\;|\&\#38\;|\&#x26;|\&)/) == false){            
+        }else if(key != '&amp;' && key != '&'){            
             qTerms2[key] = qTerms[key];
+        }else{
+            MochiKit.Logging.log('unprocessed key: ' + key);
         }
         
     }
@@ -244,6 +265,16 @@ SearchExecutor.prototype.getNextSearchQuery = function(){
     var nxtQuery = baseUrl + '?' +MochiKit.Base.queryString(qTerms2);
     MochiKit.Logging.log('Return from getNextSearchQuery=' + nxtQuery);
     return nxtQuery;
+}
+
+function getResultTilesTableDim(){
+    return MochiKit.Style.getElementDimensions('resultTiles');
+}
+
+function getEqualTileWidth(numOfTiles){
+    var d = getResultTilesTableDim();
+    var w = d.w / numOfTiles;
+    MochiKit.Logging.log('equal tile width: ' + w + ', ' + numOfTiles + ' tiles, table width ' + d.w);
 }
 
 function ResultTile(service){
@@ -270,7 +301,7 @@ ResultTile.prototype.showLoadingDialog = function(){
     MochiKit.Logging.log('dim: ' + dim + ', pos: ' + pos);
     pos = new MochiKit.Style.Coordinates((pos.x+20),(pos.y+40));   
     MochiKit.Logging.log('new pos: ' + pos);
-    this.loadingElm = MochiKit.DOM.IMG({'src':imagePathUrl+'/loading-big.gif'},null);       
+    this.loadingElm = MochiKit.DOM.IMG({'src':imagePathUrl+loadingImg},null);       
     MochiKit.DOM.appendChildNodes(MochiKit.DOM.currentDocument().body,this.loadingElm); 
     MochiKit.Style.setStyle(this.loadingElm,{'position':'absolute'});   
     MochiKit.Style.setElementPosition(this.loadingElm,pos);
@@ -292,6 +323,7 @@ ResultTile.prototype.createHTMLElement = function(parentNode){
       MochiKit.DOM.SPAN({'class':'searchShortName'},this.service.shortName)),
       this.tileContentElm); 
    MochiKit.DOM.appendChildNodes(parentNode,this.tileElm);  
+   
    this.searchExec = new SearchExecutor(this.service,this);
 }
 
@@ -323,17 +355,27 @@ ResultTile.prototype.getSeperatorId = function(){
 
 function SearchManager(searchResultRowId, services){
     this.searchResultRowId = searchResultRowId;   
-    this.serviceMap = {};   
+    this.serviceMap = {};
+    var numTilesShown = 0;
     for(var i = 0; i < services.length; i++){
+        if(services[i].defaultEnabled == true){
+            numTilesShown++;
+        }    
+    }       
+    var spCnt = 0;
+    for(var i = 0; i < services.length; i++){        
         var aSrv = services[i];
-        this.serviceMap[aSrv.id] = aSrv;
+        this.serviceMap[aSrv.id] = aSrv;        
         MochiKit.Logging.log('SearchManager: serviceMap added: ' + this.serviceMap[aSrv.id].shortName);
         var resultTile = new ResultTile(aSrv);
-        this.serviceMap[aSrv.id].resultTile = new ResultTile(aSrv);           
-        this.serviceMap[aSrv.id].resultTile.createHTMLElement(this.searchResultRowId);             
-        if((i+1) < services.length){
-            this.serviceMap[aSrv.id].resultTile.createSeperatorHTMLElement(this.searchResultRowId);
-        }                                      
+        this.serviceMap[aSrv.id].resultTile = new ResultTile(aSrv);     
+        if(this.serviceMap[aSrv.id].defaultEnabled == true){        
+            this.serviceMap[aSrv.id].resultTile.createHTMLElement(this.searchResultRowId);             
+            if(spCnt < (numTilesShown-1)){
+                this.serviceMap[aSrv.id].resultTile.createSeperatorHTMLElement(this.searchResultRowId);
+                spCnt++;
+            }
+        }                                     
    }   
 }
 
@@ -399,11 +441,12 @@ function setupSearchServiceSelection(){
         }
     }
     for(var i = 0; i < services.length; i++){
-        var aSrv = services[i];       
-        var slcElm =  MochiKit.DOM.INPUT({'type':'checkbox','name':aSrv.id,'checked':'true'},null);        
-        MochiKit.Signal.connect(slcElm,'onclick',aSrv,handleSearchServiceSelection);        	
+        var aSrv = services[i]; 
+        var slcElm =  MochiKit.DOM.INPUT({'type':'checkbox','name':aSrv.id},null);               
         var aSrvElm = MochiKit.DOM.LI(null,slcElm,aSrv.shortName);
-        MochiKit.DOM.appendChildNodes(selectSearchServicesULID,aSrvElm);        
+        MochiKit.DOM.appendChildNodes(selectSearchServicesULID,aSrvElm);   
+        slcElm.checked = aSrv.defaultEnabled;
+        MochiKit.Signal.connect(slcElm,'onclick',aSrv,handleSearchServiceSelection);        	        
     }
 }
 
