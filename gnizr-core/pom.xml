@@ -51,5 +51,9 @@
 			<groupId>commons-httpclient</groupId>
 			<artifactId>commons-httpclient</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.htmlparser</groupId>
+		    <artifactId>htmlparser</artifactId>
+		</dependency>
 	</dependencies>
 </project>
