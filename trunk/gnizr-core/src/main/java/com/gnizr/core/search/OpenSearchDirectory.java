@@ -125,9 +125,18 @@ public class OpenSearchDirectory {
 					}
 					if (urlNode != null) {
 						NamedNodeMap attmap = urlNode.getAttributes();
-						Node templateNode = attmap.getNamedItem(ATT_TEMPLATE);
-						if (templateNode != null) {
-							urlpttn = templateNode.getNodeValue();							
+						if(attmap.getLength() > 0){
+							Node templateNode = attmap.getNamedItem(ATT_TEMPLATE);
+							if (templateNode != null) {
+								urlpttn = templateNode.getNodeValue();							
+							}
+						}
+						if(urlpttn == null){
+							urlpttn = urlNode.getFirstChild().getNodeValue();
+							// if <Url>[url]</Url>, assume format "text/xml"
+							if(urlpttn != null && type == null){
+								type = "text/xml";
+							}
 						}
 					}
 				}
