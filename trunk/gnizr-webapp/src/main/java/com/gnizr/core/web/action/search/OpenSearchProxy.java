@@ -10,6 +10,7 @@ import net.sf.json.JSONObject;
 
 import org.apache.log4j.Logger;
 
+import com.gnizr.core.util.FormatUtil;
 import com.gnizr.core.web.action.AbstractAction;
 import com.sun.syndication.feed.module.opensearch.OpenSearchModule;
 import com.sun.syndication.feed.synd.SyndEntry;
@@ -53,7 +54,11 @@ public class OpenSearchProxy extends AbstractAction{
 	@Override
 	protected String go() throws Exception {
 		SyndFeed feed = readAtomData(getSearchUrl()); 
-		jsonResult = createJsonResult(feed);
+		if(feed != null){
+			jsonResult = createJsonResult(feed);
+		}else{
+			jsonResult = null;
+		}
 		return SUCCESS;
 	}
 	
@@ -85,15 +90,23 @@ public class OpenSearchProxy extends AbstractAction{
 		for(SyndEntry e : syndEntries){
 			Map<String, Object> entryMap = new HashMap<String, Object>();
 			entryMap.put(KEY_ID,e.getUri());
-			entryMap.put(KEY_TITLE,e.getTitle());
+			entryMap.put(KEY_TITLE,getTidyText(e.getTitle()));
 			entryMap.put(KEY_LINK,e.getLink());
 			entryMap.put(KEY_AUTHOR,e.getAuthor());
-			entryMap.put(KEY_SUMMARY,e.getDescription().getValue());
+			entryMap.put(KEY_SUMMARY,getTidyText(e.getDescription().getValue()));
 			entries.add(entryMap);
 		}
 		map.put(KEY_ENTRIES, entries);
 		return JSONObject.fromObject(map);				
 	}
 	
+	private String getTidyText(String text){
+		if(text != null){
+			String s = FormatUtil.extractTextFromHtml(text);
+			s = FormatUtil.removeLongWord(s,20);
+			return s;
+		}
+		return null;
+	}
 
 }

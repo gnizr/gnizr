@@ -18,6 +18,7 @@
 				<value>/settings/opensearch/mybookmarks.action</value>
 				<value>/settings/opensearch/community.action</value>
 				<value>/settings/opensearch/yahoo-searchdescription.xml</value>
+				<value>http://www.pfaf.org/database/openSearch.rss</value>
 			</list>
 		</constructor-arg>		
 	</bean>
