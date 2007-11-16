@@ -122,7 +122,7 @@ SearchExecutor.prototype.fetchMoreData = function(){
     var searchExec = this;   
     
     function appendOneResult(anEntry){
-        MochiKit.Logging.log('e'+i+':'+anEntry.link+','+anEntry.title);
+        //MochiKit.Logging.log('e'+i+':'+anEntry.link+','+anEntry.title);
         var title = anEntry.title;
         var summary = '';
         if(MochiKit.Base.isUndefinedOrNull(anEntry.summary) == false){                                      
@@ -135,7 +135,7 @@ SearchExecutor.prototype.fetchMoreData = function(){
          var link = anEntry.link;
          var entryElm = MochiKit.DOM.LI(null,
             MochiKit.DOM.A({'class':'entryTitle','href':link,'target':'_blank'},title),
-            MochiKit.DOM.P(null,summary)                    
+            MochiKit.DOM.P(null,summary) 
           );              
          MochiKit.DOM.appendChildNodes(resultElm,entryElm);
     }
@@ -224,11 +224,17 @@ SearchExecutor.prototype.terminate = function(){
 SearchExecutor.prototype.getNextSearchQuery = function(){
     var pStr = decodeURIComponent(this.service.serviceUrl).split('?');
     MochiKit.Logging.log('getNextSearchQuery: split serviceUrl => ' + pStr);
-    var baseUrl = pStr[0];    
+    var baseUrl = pStr[0];  
+    // in case, a service considers {searchTerms} as part of the URL path
+    baseUrl = baseUrl.replace("{searchTerms}",encodeURIComponent(this.qs)); 
+      
     var qTerms = MochiKit.Base.parseQueryString(pStr[1]);
     var qTerms2 = {}; // needed bec parseQueryString include '&' as a key
     for(key in qTerms){
-        if(qTerms[key] == '{searchTerms}'){
+        if(qTerms[key] == '{count}'){
+            qTerms2[key] = 10;
+            MochiKit.Logging.log('replace {count} with 10');
+        }else if(qTerms[key] == '{searchTerms}'){
             qTerms2[key] = this.qs;
             MochiKit.Logging.log('replace {searchTerms} with ' + qTerms2[key]);
         }else if(qTerms[key] == '{startIndex}'){
@@ -454,7 +460,7 @@ function setupSearchServiceSelection(){
  * initializePage
  */
 function initializePage() {
-   MochiKit.LoggingPane.createLoggingPane(true);
+   //MochiKit.LoggingPane.createLoggingPane(true);
    setupSearchServiceSelection();
    searchManager = new SearchManager(resultTilesRowID,services);
    /*
