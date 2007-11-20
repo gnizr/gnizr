@@ -2,9 +2,9 @@
 #labels Phase-Implementation,Featured
 
 == Current Releases ==
-
-  || *Stable*      || [ChangeLog2_2 gnizr-2.2.0-RC2] (23 October 2007) ||
-  || *Development* || [ChangeLog2_3 gnizr-2.3.0-M1] (20 November 2007) ||
+  
+|| *Stable*     || [ChangeLog2_2 gnizr-2.2.0-RC2] (23 October 2007) ||
+|| *Development* || [ChangeLog2_3 gnizr-2.3.0-M1] (20 November 2007) ||
 
 == Upcoming Releases ==
   
