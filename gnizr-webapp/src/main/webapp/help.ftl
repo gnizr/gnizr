@@ -5,15 +5,18 @@
 <@mainBlock>
 <h2>gnizr tools</h2>
 <p>
-<h5>Save bookmark tool</h5>
+<h3>Save bookmark tool</h3>
+<h4>Option 1: For browsers with Pop-up disabled</h4>
 <ul>
-  <li>For users of Internet Explorer: drag 
+  <li>Drag 
   '<a href="javascript:location.href='${gzUrl("/post")}?url='+encodeURIComponent(location.href)+'&amp;title='+encodeURIComponent(document.title)+'&redirect=true'" title="post to gnizr" onclick="window.alert('Drag this link to your bookmarks toolbar, or right-click it and choose Bookmark This Link...');return false;">post to gnizr</a>' 
   up to your Bookmark Toolbar.</li>
- 
-  <li>For users of Firefox: drag '<a href="javascript:function post2gnizr(url,title){window.open('${gzUrl("/post")}?url='+encodeURIComponent(url)+'&title='+encodeURIComponent(title)+'&redirect=false&saveAndClose=true','gnizr','toolbar=no,width=800,height=640,alwaysRaised=yes,left=0,scrollbars=yes');location.href=url;}; post2gnizr(location.href,document.title);">post to gnizr</a>' up to your Bookmarks Toolbar.</li>
 </ul>
-<h5>Your gnizr homepage</h5>
+<h4>Option 2: For browsers permits Pop-up windows</h4>
+<ul> 
+  <li>Drag '<a href="javascript:function post2gnizr(url,title){window.open('${gzUrl("/post")}?url='+encodeURIComponent(url)+'&title='+encodeURIComponent(title)+'&redirect=false&saveAndClose=true','gnizr','alwaysRaised=yes,toolbar=no,width=800,height=640,left=0,scrollbars=yes');}; post2gnizr(location.href,document.title);" onclick="window.alert('Drag this link to your bookmarks toolbar, or right-click it and choose Bookmark This Link...');return false;">post to gnizr</a>' up to your Bookmarks Toolbar.</li>
+</ul>
+<h3>Your gnizr homepage</h3>
 <ul>  
   <li>Drag this link: '<a href="javascript:location.href='${gzUrl("/home")}'" onclick="window.alert('Drag this link to your bookmarks toolbar, or right-click it and choose Bookmark This Link...');return false;">my gnizr</a>' up to your Bookmarks Toolbar.
 </ul>
