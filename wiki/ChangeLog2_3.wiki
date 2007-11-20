@@ -1,8 +1,13 @@
 #summary Changelog of all releases made under version 2.3
 #labels Phase-Implementation
 
-==== Version 2.3.0-M1 (in progress) ====
+==== Version 2.3.0-M1 (20 November 2007) ====
 
+Download 
+  * Binrary: [http://gnizr.googlecode.com/files/gnizr-2.3.0-M1.zip gnizr-2.3.0-M1.zip]
+  * Source: http://gnizr.googlecode.com/svn/tags/gnizr-2.3.0-M1/
+
+Changelog
   * [http://code.google.com/p/gnizr/issues/detail?id=5 Issue 5]: Provide clickable tag cloud in the Edit Tag Relations page  (fixed, tested)
   * [http://code.google.com/p/gnizr/issues/detail?id=6 Issue 6]: Renaming tags to "gn:geonames=" don't trigger geocoding (fixed, tested)
   * [http://code.google.com/p/gnizr/issues/detail?id=8 Issue 8]: Allow users to add 'gn:geonames=' without typing the whole string every time (fixed, tested)
