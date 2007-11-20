@@ -1,0 +1,54 @@
+<!DOCTYPE validators PUBLIC "-//OpenSymphony Group//XWork Validator 1.0.2//EN"
+	"http://www.opensymphony.com/xwork/xwork-validator-1.0.2.dtd">
+
+<validators>
+
+	<field name="editUser.username" >
+		<field-validator type="requiredstring" short-circuit="true">
+			<message>username is required.</message>
+		</field-validator>
+	</field>
+	
+	<field name="editUser.username">
+		<field-validator type="stringlength" short-circuit="true">
+			<param name="minLength">3</param>
+			<param name="maxLength">12</param>
+			<param name="trim">true</param>
+			<message>must be 3-12 characters long</message>
+		</field-validator>
+	</field>
+	
+	<field name="editUser.password">
+		<field-validator type="requiredstring" short-circuit="true">
+			<message>password is required.</message>
+		</field-validator>
+	</field>
+		
+	<field name="editUser.password" >
+		<field-validator type="stringlength" short-circuit="true">
+			<param name="minLength">5</param>
+			<param name="maxLength">20</param>
+			<param name="trim">true</param>
+			<message>must be between 5-20 characters long</message>
+		</field-validator>
+	</field>
+	
+	<field name="editUser.fullname">
+		<field-validator type="requiredstring" short-circuit="true">
+			<message>full name is required.</message>
+		</field-validator>
+	</field>
+	
+	<field name="editUser.email">
+		<field-validator type="requiredstring" short-circuit="true">
+			<message>email is required.</message>
+		</field-validator>
+	</field>
+	
+	<field name="editUser.email">
+		<field-validator type="email" short-circuit="true">
+			<message>not a valid email address</message>
+		</field-validator>
+	</field>
+	
+</validators>

@@ -1,0 +1,145 @@
+#feeds {
+	margin-left: auto;
+	margin-right: auto;
+	width: 80%;
+}
+
+#feedTable {
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%;
+	border-style: none;
+	border-collapse: collapse;
+}
+
+#feedTable th {
+	font-size: 120%;
+}
+
+.feedRow {
+	height: 60px;
+}
+
+.feedRow td {
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	border-bottom-color: #cccccc;
+}
+
+.feedname,.autoimport {
+	font-size: 110%;
+}
+
+.autoimport {
+	text-align: center;
+}
+
+.feedurl {
+	display: block;
+}
+
+.feedurl a:link,.feedurl a:visited,.feedurl a:hover {
+	color: #4c4c4c;
+}
+
+.feed-notes {
+	font-size: 80%;
+}
+
+.feed-notes a.folder:link,.feed-notes a.folder:visited,.feed-notes a.folder:hover, .feed-notes a.folder:active 
+{
+	color: blue;
+}
+
+.last-sync {
+	color: #006400;
+}
+
+.pending {
+	font-style: italic;
+	color: #CC6666;
+}
+
+#new-feed-url{
+	width: 260px;
+}
+
+#create-feed-form{
+	margin-top: 20px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 400px;
+}
+
+
+/* ======== CSS for edit feed page ======== */
+#feed {
+	margin-left: 30px;
+	margin-right: auto;
+	width: 100%;
+}
+
+#feed-heading {
+	width: 400px;
+	background: #fffaf0;
+	padding: 6px;
+	position: relative;
+}
+
+#feed-title,#feed-url {
+	display: block;
+	padding: 8px;
+}
+
+#feed-title {
+	font-size: 140%;
+	font-weight: bold;
+	width: 80%;
+}
+
+#feed-url {
+	font-size: 120%;
+}
+
+#edit-feed-bmark {
+	position: absolute;
+	top: 0px;
+	right: 4px;
+}
+
+#feed-settings td {
+	padding: 20px;
+}
+
+.feed-setting-option {
+	text-align: right;
+	vertical-align: top;
+}
+
+.feed-setting-value ul {
+	margin-top: 0px;
+	padding-top: 0px;
+	margin-left: 0px;
+	padding-left: 0px;
+	list-style-type: none;
+}
+
+#edit-feed-form {
+	margin-left: 30px;
+	width: 100%;
+}
+
+#edit-feed-form td {
+	padding: 10px 5px;
+}
+
+
+
+/* === override sidebar, which is defined in gnizr-default.css ==*/
+#sidebar {
+	top: 10px;
+}
+
+.element {
+	text-align: center;
+}

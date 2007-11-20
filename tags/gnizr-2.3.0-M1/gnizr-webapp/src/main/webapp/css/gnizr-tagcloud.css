@@ -1,0 +1,52 @@
+/** override the style defined in gnizr-default **/
+#main {	
+	width:100%;
+	margin:0px;
+	padding:0px;
+}
+		
+.tag-cloud {
+	text-align: justify;
+	margin-left:auto;
+	margin-right:auto;
+	font-size: 18px;
+}
+
+.tag-cloud p{
+	text-align: center;
+	font-size: 12px;
+	padding:1px;
+	margin:2px;
+}
+.tag-cloud .sortOpts {
+	font-size: 10px;
+    margin:0px;
+    padding-top: 10px;
+}
+
+.tag-cloud ol {
+	margin-left: 20%;
+	margin-right:20%;
+	padding:0px;
+}
+
+/* display the individual items next to each other, not one-per-line */
+.tag-cloud li {
+	display: inline;
+	margin-left: 0px;
+	margin-right: 5px;
+	padding: 0px;
+	margin-top: 0px;
+	margin-bottom 0px;	
+	line-height: 1.5em;
+}
+
+/* hide the extra context from CSS-enabled browsers, but not screenreaders */
+.tag-cloud span { position: absolute; left: -999px; width: 990px; }
+/* size is purely presentational, based upon the class */
+.tag-cloud .not-popular { font-size: 60%; }
+.tag-cloud .not-very-popular { font-size: 100%; }
+.tag-cloud .somewhat-popular { font-size: 115%; }
+.tag-cloud .popular { font-size: 125%; }
+.tag-cloud .very-popular { font-size: 130%;}
+.tag-cloud .ultra-popular { font-size: 160%;}
