@@ -1,7 +1,7 @@
 #summary Changelog of all releases made under version 2.2
 #labels Phase-Implementation
 
-==== Version 2.2.0-RC3 (soon) ====
+==== Version 2.2.0-RC3 (21 November 2007) ====
 
 Changelog
    * [http://code.google.com/p/gnizr/issues/detail?id=17 Issue 17] : Unable to edit tags if they are not used in a bookmark
