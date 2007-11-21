@@ -57,13 +57,13 @@ public class TestGetUserTagGroups extends GnizrWebappTestBase {
 		assertEquals(ActionSupport.SUCCESS,code);
 		
 		Map<String, List<UserTag>> grps = action.getUserTagGroups();
-		assertEquals(3,grps.size());
+		assertEquals(2,grps.size());
 		
 		List<UserTag> g1 = grps.get("g1");
 		List<UserTag> g2 = grps.get("g2");
 		List<UserTag> nogroup = grps.get("");
-		assertEquals(4,g1.size());
+		assertEquals(2,g1.size());
 		assertEquals(2,g2.size());
-		assertEquals(2,nogroup.size());
+		assertNull(nogroup);
 	}
 }
