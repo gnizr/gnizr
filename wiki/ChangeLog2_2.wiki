@@ -4,6 +4,9 @@
 ==== Version 2.2.0-RC3 (soon) ====
 
 Changelog
+   * [http://code.google.com/p/gnizr/issues/detail?id=17 Issue 17] : Unable to edit tags if they are not used in a bookmark
+   * [http://code.google.com/p/gnizr/issues/detail?id=18 Issue 18] : Tags without bookmarks are not listed in the rename tag drop down box.
+   * [http://code.google.com/p/gnizr/issues/detail?id=19 Issue 19] : Change the "Edit Tag Relations" to "Create/Edit Tag Relations"
    * Help page generates incorrect link URL for bookmarklets (same as [http://code.google.com/p/gnizr/issues/detail?id=14 Issue 14])
 
 ==== Version 2.2.0-RC2 (23 October 2007) ====
