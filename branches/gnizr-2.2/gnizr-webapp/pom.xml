@@ -5,7 +5,7 @@
 	<parent>
       <groupId>com.gnizr</groupId>
       <artifactId>gnizr</artifactId>
-      <version>2.2.0-RC2</version>
+      <version>2.2.0-RC3</version>
     </parent>
 	
 	<modelVersion>4.0.0</modelVersion>
@@ -53,14 +53,12 @@
 			<version>${gnVersion}</version>
 			<scope>compile</scope>			
 		</dependency>
-		<!--
 		<dependency>
 			<groupId>com.gnizr.core.web</groupId>
 			<artifactId>gnizr-clustermap</artifactId>
 			<version>${gnVersion}</version>
-			<scope>compile</scope>			
-		</dependency>
-		-->
+			<scope>compile</scope>	
+		</dependency>		
 		<dependency>
 			<groupId>urlrewrite</groupId>
 			<artifactId>urlrewrite</artifactId>
@@ -93,7 +91,7 @@
 				<executions>
 					<execution>
 						<id>get-applet-jar</id>
-						<phase>package</phase>
+						<phase>compile</phase>
 						<goals>
 							<goal>copy</goal>
 						</goals>
@@ -114,7 +112,7 @@
 						</configuration>
 					</execution>
 				</executions>
-			</plugin>
+			</plugin>					
 		</plugins>
 	</build>
 </project>
