@@ -73,8 +73,8 @@ public interface TagDao extends Serializable{
 
 	public boolean[] subtractTagCountOne(Tag[] tags, User user, Link link, Bookmark bookmark); 
 	
-	public List<Bookmark> expandTag(User user, Tag fromTag, Tag[] toTags);
+	public boolean[] expandTag(User user, Tag fromTag, Tag[] toTags);
 	
-	public List<Bookmark> reduceTag(User user, Tag[] tag);
+	public boolean[] reduceTag(User user, Tag[] tag);
 	
 }

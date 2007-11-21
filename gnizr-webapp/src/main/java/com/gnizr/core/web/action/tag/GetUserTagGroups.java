@@ -59,9 +59,9 @@ public class GetUserTagGroups extends AbstractTagCloudAction {
 		super.resolveUser();
 		logger.debug("GetUserTagGroups.doGetAll() ");
 		if(getSortBy().equalsIgnoreCase(SessionConstants.SORT_ALPH)){
-			userTagGroups = userManager.getTagGroupsSortByAlpha(user,0);
+			userTagGroups = userManager.getTagGroupsSortByAlpha(user,1);
 		}else{
-			userTagGroups = userManager.getTagGroupsSortByFreq(user,0);
+			userTagGroups = userManager.getTagGroupsSortByFreq(user,1);
 		}
 		return SUCCESS;
 	}

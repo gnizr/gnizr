@@ -9,8 +9,7 @@
   <#assign title="save url -- gnizr"/>
 </#if>
 <@pageBegin pageTitle=title cssHref=[gzUrl("/css/gnizr-tagcloud.css"),
-                                     gzUrl("/css/gnizr-post.css")]>      
-<script type="text/javascript" src="${gzUrl("/lib/javascript/selection.js")}"></script>                                                                                                      
+                                     gzUrl("/css/gnizr-post.css")]>                                                                                                            
 <script type="text/javascript" src="${gzUrl("/lib/javascript/edit-bookmark.js")}"></script>
 <script type="text/javascript" src="${gzUrl("/data/json/userTagCloud.action?callback=loadUserTags&username="+username)}"></script>
 <script type="text/javascript" src="${gzUrl("/data/json/listUserTagInGroups.action?callback=loadUserTagGroups&username="+username)}"></script>
@@ -43,14 +42,12 @@
   <#assign bkmrkUrl = 'http://'/>  
 </#if>
 <@ww.fielderror/>
-<@ww.form onsubmit="saveAndClose('${saveAndClose?string}')" id="saveBookmark" action="/bookmark/save.action" method="post" cssClass="editInputGroup" theme="simple"
->
+<@ww.form id="saveBookmark" action="/bookmark/save.action" method="post" cssClass="editInputGroup" theme="simple">
 <div id="legend">* = Required Field</div>
   <div class="inputDataRow">
   <span class="inputLabel">URL*:</span> 
   <@ww.textfield id="bookmarkUrl" cssClass="text-input-url" required="true" label="url"  labelposition="top"
-                 size="80" name="url" value="${bkmrkUrl?if_exists}"/>   
-                                             
+                 size="80" name="url" value="${bkmrkUrl?if_exists}"/>                               
   <div id="openUrlWindowLink"><a href="#" id="openUrlWindow" class="system-link">Open URL in a new window</a></div>
   </div>
   <div class="inputDataRow">
@@ -80,16 +77,9 @@
   </div>
   </div>
   <div class="inputDataRow">		
-  <span class="inputLabel">Tags (use white-space to separate multiple tags):</span>
-  <span class="machineTagHelpers">Add machine tag: 
-  <a href="#" id="geonamesMTHelper" class="system-link" title="gn:geonames"><img class="icon" src="${gzUrl('/images/globe-16.png')}"></a>
-  <a href="#" id="forUserMTHelper" class="system-link" title="gn:for"><img class="icon" src="${gzUrl('/images/user-16.png')}"></a>
-  <a href="#" id="folderMTHelper" class="system-link" title="gn:folder"><img class="icon" src="${gzUrl('/images/folder-16.gif')}"></a>
-  <a href="#" id="subscribeMTHelper" class="system-link" title="gn:subscribe"><img class="icon" src="${gzUrl('/images/rss-16.png')}"></a> 
-  </span>		
+  <span class="inputLabel">Tags (use white-space to separate multiple tags):</span>		
   <@ww.textarea cssClass="text-input-tags" label="tags (use white-space to separte multiple tags)"  labelposition="top"
                  name="tags"  value="${(editBookmark.tags)?if_exists}"/>                   
-  <div id="suggestedTags"></div>                 
   </div>                 
   <@ww.hidden name="redirect" value="${redirect?if_exists?string}"/> 
   <#if redirectToPage?exists>    
@@ -121,7 +111,7 @@
 </div>
 </@ww.form>
 <div id="editTools" class="editInputGroup">
-Tools: <a id="addTags" href="#">edit tags</a> | <a id="addPlacemarks" href="#">edit placemarks</a>
+Tools: <a id="addTags" href="#">edit tags</a> | <a id="addPlacemarks" href="#">define placemarks</a>
 <!-- user tag cloud -->
 <div id="selectUserTag">
 <table id="bookmark-edit-menu-bar" class="menubar">

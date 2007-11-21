@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ExecutorService;
@@ -57,27 +56,13 @@ import com.gnizr.db.dao.tag.TagDao;
 import com.gnizr.db.dao.user.UserDao;
 import com.gnizr.db.vocab.UserSchema;
 
-/**
- * <p>A manager for editing <code>Bookmark</code> and saving changes to the backend database. 
- * Typically clients should always use this class to create and modify bookmark objects in the database to ensure
- * indexing and accountings are properly computed.</p>
- * <p>Clients can register listeners with this manager to listen for 
- * bookmark change events (e.g., new bookmarks added, existing bookmarks deleted and updated). If one or more 
- * listeners are registered, client programs must call <code>shutdown</code> upon program termination.</p>
- * <p>This class also provides methods for "bulk" editing bookmark tags and mangaging <code>PointMarker</code> objects
- * associated with a given bookmark.
- * </p>
- * 
- * @author Harry Chen
- *
- */
 public class BookmarkManager implements Serializable {
 
 	private static final Logger logger = Logger
 			.getLogger(BookmarkManager.class);
 
 	private static final long serialVersionUID = -717938169778226275L;
-
+	
 	private BookmarkDao bookmarkDao;
 
 	private User gnizrUser;
@@ -87,9 +72,9 @@ public class BookmarkManager implements Serializable {
 	private TagDao tagDao;
 
 	private UserDao userDao;
-
+	
 	private GeometryMarkerDao geomMarkerDao;
-
+	
 	private Queue<BookmarkListener> listeners = new ConcurrentLinkedQueue<BookmarkListener>();
 
 	private static final int DEFAULT_WORKER_THREAD_NUM = 2;
@@ -98,24 +83,10 @@ public class BookmarkManager implements Serializable {
 
 	private AtomicBoolean isTerminated;
 
-	/**
-	 * Creates an instance of this class and sets the DAO object will be used
-	 * to access the backend database. 
-	 * 
-	 * @param gnizrDao the DAO object used for accessing database
-	 */
 	public BookmarkManager(GnizrDao gnizrDao) {
 		this(gnizrDao, null, DEFAULT_WORKER_THREAD_NUM);
 	}
 
-	/**
-	 * Creates an instance of this class, sets the DAO object will be used
-	 * to access the backend database, and registers bookmark change event listeners.
-	 * 
-	 * @param gnizrDao the DAO object used for accessing database
-	 * @param listeners listeners will be notified when one of the bookmark change event occured
-	 * @param workerThreadNum the number of threads should be used to notify bookmark change evnet listeners.  
-	 */
 	public BookmarkManager(GnizrDao gnizrDao, List<BookmarkListener> listeners,
 			int workerThreadNum) {
 		this.userDao = gnizrDao.getUserDao();
@@ -146,30 +117,18 @@ public class BookmarkManager implements Serializable {
 		}
 	}
 
-	/**
-	 * Adds a listener to the current list of bookmark change event listeners.
-	 * 
-	 * @param listener a new listener
-	 */
 	public void addBookmarkListener(BookmarkListener listener) {
 		listeners.add(listener);
 	}
 
-	/**
-	 * Deletes a listener from the current list of bookmark change event listeners.
-	 * 
-	 * @param listener a listener to be removed from the list.
-	 * @return Return <code>true</code> if <code>listener</code> is successfully rmeoved. Returns
-	 * <code>false</code> otherwise.
-	 */
 	public boolean deleteBookmarkListener(BookmarkListener listener) {
 		return listeners.remove(listener);
 	}
 
 	/**
-	 * Returns a list of tags that is prepared for tag accouting. Duplicated
-	 * tags are removed. Machine tags are shouldn't appear in the tag cloud are
-	 * also removed.
+	 * Returns a list of tags that is prepared for
+	 * tag accouting. Duplicated tags are removed. Machine tags
+	 * are shouldn't appear in the tag cloud are also removed.
 	 * 
 	 * @param unsafeTags
 	 * @return
@@ -180,7 +139,7 @@ public class BookmarkManager implements Serializable {
 		List<String> sysTags = TagUtil.systemTags(taglist);
 		for (String t : taglist) {
 			String st = TagUtil.makeSafeTagString(t);
-			if (st != null && st.length() > 0) {
+			if(st != null && st.length() > 0){
 				if (sysTags.contains(st) == false) {
 					sb.append(st);
 					sb.append(" ");
@@ -190,51 +149,39 @@ public class BookmarkManager implements Serializable {
 		return sb.toString().trim();
 	}
 
-	private List<String> getSafeTagsList(List<String> unsafeTags) {
+	public List<String> getSafeTagsList(List<String> unsafeTags) {
 		String s = getSafeTags(unsafeTags);
 		String[] tags = s.split("\\s+");
 		return Arrays.asList(tags);
 	}
 
-	/**
-	 * Adds a new bookmark record to the backend database and returns the ID
-	 * of the bookmark in the database. A bookmark is added only if 
-	 * it doesn't already exist in the database (i.e., no bookmark of the same URL and owner user 
-	 * exists in the database). If a bookmark of the same URL and owner user exists, 
-	 * the ID of the existing bookmark is returned.
-	 * 
-	 * @param bookmark a new bookmark to be added to the database
-	 * @return the ID of the bookmark
-	 * @throws NoSuchUserException The user defined by <code>Bookmark.getUser<code> doesn't currently exist 
-	 * in the database. 
-	 */
-	public int addBookmark(Bookmark bookmark) throws NoSuchUserException {
-		if (bookmark == null) {
+	public int addBookmark(Bookmark bookmark) throws NoSuchUserException, NotAuthorizedException, MissingIdException{
+		if(bookmark == null){
 			throw new NullPointerException("bookmark is null");
 		}
 		Bookmark existBmark = null;
-		if (bookmark.getId() > 0) {
-			existBmark = bookmarkDao.getBookmark(bookmark.getId());
-		} else if (bookmark.getUser() != null && bookmark.getLink() != null) {
+		if(bookmark.getId() > 0){
+			existBmark = bookmarkDao.getBookmark(bookmark.getId());					
+		}else if(bookmark.getUser() != null && bookmark.getLink() != null){
 			User user = bookmark.getUser();
 			Link link = bookmark.getLink();
-			try {
+			try{
 				GnizrDaoUtil.fillId(linkDao, link);
 				GnizrDaoUtil.fillId(userDao, user);
 				existBmark = GnizrDaoUtil.getBookmark(bookmarkDao, user, link);
-			} catch (Exception e) {
-				// if exception, that's okay, which means no exist record of the
-				// same bookmark exists
+			}catch(Exception e){ 
+				// if exception, that's okay, which means no exist record of the same bookmark exists			
 			}
-		}
-		if (existBmark != null) {
-			return existBmark.getId();
-		} else {
+		}		
+		if(existBmark != null){
+			return existBmark.getId();			
+		}else{
 			return addBookmarkUpdateTags(bookmark);
 		}
 	}
-
-	private int addBookmarkUpdateTags(Bookmark bookmark) throws NoSuchUserException {
+	
+	
+	private int addBookmarkUpdateTags(Bookmark bookmark) throws NoSuchUserException,NotAuthorizedException, MissingIdException {
 		logger.debug("addBookmarkUpdateTags: bookmark=" + bookmark);
 
 		checkIsTerminited();
@@ -299,10 +246,9 @@ public class BookmarkManager implements Serializable {
 				boolean[] opOkay = tagDao.addTagCountOne(tagObjs
 						.toArray(new Tag[0]), bmark.getUser(), bmark.getLink(),
 						bmark);
-				for (int i = 0; i < opOkay.length; i++) {
-					if (opOkay[i] == false) {
-						logger.debug("addTagCountOne failed: tag="
-								+ tagObjs.get(i) + ",bmark=" + bmark);
+				for(int i =0 ; i < opOkay.length ; i++){
+					if(opOkay[i] == false){
+						logger.debug("addTagCountOne failed: tag=" + tagObjs.get(i) +",bmark="+bmark);
 					}
 				}
 				// when notifying all listener, use the original tag list.
@@ -367,19 +313,9 @@ public class BookmarkManager implements Serializable {
 		return linkDao.createLink(link);
 	}
 
-	/**
-	 * Deletes a bookmark record from the databaes. The bookmark record to be deleted 
-	 * is a record whose ID matches <code>bookmark.getId</code>. If the record is sucessfully deleted,
-	 * registered bookmark change event listeners will be notified.
-	 * 
-	 * @param bookmark a bookmark record to be deleted from the database
-	 * @return Return <code>true</code> if the record is successfully removed. 
-	 * Returns <code>false</code>, otherwise. 
-	 * @throws MissingIdException The ID of <code>bookmark</code> is invalid 
-	 * (i.e., <code>bookmark.getId</code> &lt= <code>0</code>).
-	 */
 	public boolean deleteBookmark(Bookmark bookmark)
-			throws MissingIdException {
+			throws NoSuchUserException, NoSuchLinkException,
+			MissingIdException, NoSuchBookmarkException {
 
 		checkIsTerminited();
 
@@ -407,18 +343,9 @@ public class BookmarkManager implements Serializable {
 		}
 	}
 
-	/**
-	 * Updates the properties of a existing bookmark record in the databaes. The bookmark record to be updated is 
-	 * the record whose ID matches <code>upBookmark.getId</code>. If the record is successfully updated,
-	 * then registered bookmark change event listeners will be notified.
-	 * 
-	 * @param upBookmark the new set of bookmark properties to be set in the database.
-	 * @return Returns <code>true</code> if the update operation is successful. Return <code>false</code>, otherwise.
-	 * @throws MissingIdException The ID of <code>bookmark</code> is invalid 
-	 * (i.e., <code>bookmark.getId</code> &lt= <code>0</code>).
-	 */
 	public boolean updateBookmark(Bookmark upBookmark)
-			throws MissingIdException {
+			throws MissingIdException, NoSuchUserException,
+			NoSuchLinkException, NoSuchBookmarkException {
 
 		checkIsTerminited();
 
@@ -501,14 +428,6 @@ public class BookmarkManager implements Serializable {
 		return upOkay;
 	}
 
-	/**
-	 * Returns a bookmark record in the database whose ID matches <code>bookmarkId</code>.
-	 * 
-	 * @param bookmarkId ID used to find an existing bookmark record in the database.
-	 * 
-	 * @return Returns the matched bookmark with instantiated properties. Returns <code>null</code> if
-	 * no match is found. 
-	 */
 	public Bookmark getBookmark(int bookmarkId) {
 		checkIsTerminited();
 		Bookmark bm = bookmarkDao.getBookmark(bookmarkId);
@@ -553,10 +472,6 @@ public class BookmarkManager implements Serializable {
 		return bookmarkId;
 	}
 
-	/**
-	 * Terminates threads that have been created for notifying bookmark change event listeners.  
-	 *
-	 */
 	public void shutdown() {
 		try {
 			if (isTerminated.compareAndSet(false, true)) {
@@ -586,8 +501,8 @@ public class BookmarkManager implements Serializable {
 		public void run() {
 			for (BookmarkListener aListener : listeners) {
 				try {
-					aListener.notifyUpdated(BookmarkManager.this, new Bookmark(
-							oldBookmark), new Bookmark(newBookmark));
+					aListener.notifyUpdated(BookmarkManager.this,new Bookmark(oldBookmark),
+							new Bookmark(newBookmark));
 				} catch (Exception e) {
 					logger.error("RunBookmarkUpdatedNotify.run()" + e);
 				}
@@ -606,8 +521,7 @@ public class BookmarkManager implements Serializable {
 		public void run() {
 			for (BookmarkListener aListener : listeners) {
 				try {
-					aListener.notifyAdded(BookmarkManager.this, new Bookmark(
-							bookmarkAdded));
+					aListener.notifyAdded(BookmarkManager.this,new Bookmark(bookmarkAdded));
 				} catch (Exception e) {
 					logger.error("RunBookmarkAddedNotify.run()" + e);
 				}
@@ -625,8 +539,7 @@ public class BookmarkManager implements Serializable {
 		public void run() {
 			for (BookmarkListener aListener : listeners) {
 				try {
-					aListener.notifyDeleted(BookmarkManager.this, new Bookmark(
-							bookmarkDeleted));
+					aListener.notifyDeleted(BookmarkManager.this,new Bookmark(bookmarkDeleted));
 				} catch (Exception e) {
 					logger.error("RunBookmarkDeletedNotify.run()" + e);
 				}
@@ -634,168 +547,88 @@ public class BookmarkManager implements Serializable {
 		}
 	}
 
-	/**
-	 * Renames a given tag used by a user to one or more tags. When a tag is renamed, 
-	 * all bookmarks owned by <code>user</code> and were previously tagged <code>oldTag</code> will be tagged 
-	 * with <code>newTags</code>.
-	 * @param user The owner user of those bookmarks that will be updated
-	 * @param oldTag the old tag be renamed
-	 * @param newTags one or more new tags
-	 * @return Returns <code>true</code> if tag renaming is successful. Returns <code>false</code>, otherwise. 
-	 */
-	public boolean renameTag(User user, String oldTag, String[] newTags) {
-		Tag oldTagObj = null;
-		boolean isOkay = false;
+	public boolean renameTag(User user, String oldTag, String[] newTags) {	
+		Tag oldTagObj = null;		
+		boolean isOkay = true;
 		List<Tag> tags = tagDao.findTag(oldTag);
 		if (tags.size() > 0) {
 			oldTagObj = tags.get(0);
 		}
 		if (oldTagObj != null) {
 			DaoResult<Bookmark> result = null;
-			List<Bookmark> oldBookmarks = null;
-			List<Bookmark> newBookmarks = null;
-			result = bookmarkDao.pageBookmarks(user, oldTagObj, 0, oldTagObj
-					.getCount());
-			oldBookmarks = result.getResult();
+			List<Bookmark> upBookmarks = null;
+			result = bookmarkDao.pageBookmarks(user, oldTagObj,0,oldTagObj.getCount());
+			upBookmarks = result.getResult();
 			List<String> safeNewTags = getSafeTagsList(Arrays.asList(newTags));
-			for (Bookmark bm : oldBookmarks) {
+			for (Bookmark bm : upBookmarks) {
 				initTagEntries(bm, safeNewTags);
 			}
 			List<Tag> tagsObjs = getTags(safeNewTags);
-			newBookmarks = tagDao.expandTag(user, oldTagObj, tagsObjs.toArray(new Tag[0]));
-			if (safeNewTags.contains(oldTag) == false) {
-				newBookmarks = tagDao.reduceTag(user, new Tag[] { oldTagObj });
-			}
-			Map<Integer, Bookmark> newBookmarksMap = GnizrDaoUtil
-					.getBookmarksMap(newBookmarks);
-			for (Bookmark oldBookmark : oldBookmarks) {
-				Bookmark newBookmark = newBookmarksMap.get(oldBookmark.getId());
-				if (newBookmark != null) {
-					try {
-						listenerExecutor.execute(new RunBookmarkUpdatedNotify(oldBookmark, newBookmark));
-					} catch (Exception e) {
-						logger.error("Error notifying BookmarkListeners", e);
-					}
-				} else {
-					logger
-							.error("After renaming a tag, bookmark "
-									+ oldBookmark.getId()
-									+ " doesn't appear in the expected list of updated bookmarks");
+			boolean[] opOkay = tagDao.expandTag(user, oldTagObj, tagsObjs.toArray(new Tag[0]));
+			for(int i = 0; i < opOkay.length; i++){
+				if (opOkay[i] == true) {
+					if (safeNewTags.contains(oldTag) == false) {
+						boolean[] opOkay2 = tagDao.reduceTag(user, new Tag[] { oldTagObj });
+						if(opOkay2[0] == false){
+							isOkay = false;
+						}
+					}				
+				}else{
+					isOkay = false;
 				}
-			}
-			if(oldBookmarks.size() == newBookmarks.size()){
-				isOkay = true;
 			}
 		}
 		return isOkay;
 	}
 
-	/**
-	 * Deletes a given tag used by a user.  When a tag is deleted, 
-	 * all bookmarks owned by <code>user</code> and were previously tagged <code>tag</code> will no longer
-	 * be associated with <code>tag</code>
-	 * @param user The owner user of those bookmarks that will be updated
-	 * @param tag a tag to delete 
-	 * @return Returns <code>true</code> if tag deletion is successful. Returns <code>false</code>, otherwise. 
-	 */
 	public boolean deleteTag(User user, String tag) {
 		boolean isOkay = false;
-		Tag tagObj = GnizrDaoUtil.getTag(tagDao, tag);
+		Tag tagObj = null;
+		List<Tag> tags = tagDao.findTag(tag);
+		if (tags.size() > 0) {
+			tagObj = tags.get(0);
+		}
 		if (tagObj != null) {
-			List<Bookmark> oldBookmarks = bookmarkDao.pageBookmarks(user,
-					tagObj, 0, tagObj.getCount()).getResult();
-			List<Bookmark> newBookmarks = tagDao.reduceTag(user,
-					new Tag[] { tagObj });
-			Map<Integer, Bookmark> newBookmarksMap = GnizrDaoUtil
-					.getBookmarksMap(newBookmarks);
-			for (Bookmark oldBookmark : oldBookmarks) {
-				Bookmark newBookmark = newBookmarksMap.get(oldBookmark.getId());
-				if (newBookmark != null) {
-					try {
-						listenerExecutor.execute(new RunBookmarkUpdatedNotify(
-								oldBookmark, newBookmark));
-					} catch (Exception e) {
-						logger.error("Error notifying BookmarkListeners", e);
-					}
-				} else {
-					logger
-					.error("After deleting a tag, bookmark "
-							+ oldBookmark.getId()
-							+ " doesn't appear in the expected list of updated bookmarks");
-				}
-			}
-			if(oldBookmarks.size() == newBookmarks.size()){
-				isOkay = true;
-			}
+			boolean[] opOkay = tagDao.reduceTag(user, new Tag[] { tagObj });
+			isOkay = opOkay[0];
 		}
 		return isOkay;
 	}
-
-	/**
-	 * Adds a new <code>PointMarker</code> to a given bookmark. 
-	 * 
-	 * @param bmark a bookmark that exists in the database
-	 * @param ptMarker a pointermaker description
-	 * @return Return <code>true</code> if the pointmaker is successfully added
-	 * @throws NoSuchUserException
-	 * @throws NoSuchLinkException
-	 * @throws MissingIdException
-	 * @throws NoSuchBookmarkException
-	 */
-	public PointMarker addPointMarker(Bookmark bmark, PointMarker ptMarker)
-			throws NoSuchUserException, NoSuchLinkException,
-			MissingIdException, NoSuchBookmarkException {
-		if (ptMarker != null) {
+	
+	public PointMarker addPointMarker(Bookmark bmark, PointMarker ptMarker) throws NoSuchUserException, NoSuchLinkException, MissingIdException, NoSuchBookmarkException{
+		if(ptMarker != null){
 			List<PointMarker> pm = new ArrayList<PointMarker>();
 			pm.add(ptMarker);
-			pm = addPointMarkers(bmark, pm);
-			if (pm != null && pm.isEmpty() == false) {
+			pm = addPointMarkers(bmark,pm);
+			if(pm != null && pm.isEmpty() == false){
 				return pm.get(0);
 			}
 		}
 		return null;
 	}
-	/**
-	 * Adds multiple <code>PointMarker</code> to a given bookmark. 
-	 * 
-	 * @param bmark a bookmark that exists in the database
-	 * @param ptMarker multiple pointermaker descriptions
-	 * @return Return <code>true</code> if the pointmakers are successfully added
-	 * @throws NoSuchUserException
-	 * @throws NoSuchLinkException
-	 * @throws MissingIdException
-	 * @throws NoSuchBookmarkException
-	 */
-	public List<PointMarker> addPointMarkers(Bookmark bmark,
-			List<PointMarker> ptMarkers) throws NoSuchUserException,
-			NoSuchLinkException, MissingIdException, NoSuchBookmarkException {
-		logger
-				.debug("addPointMarkers: bm=" + bmark + ",ptMarkers="
-						+ ptMarkers);
-		GnizrDaoUtil.fillId(bookmarkDao, userDao, linkDao, bmark);
-		if (ptMarkers == null) {
+	
+	public List<PointMarker> addPointMarkers(Bookmark bmark, List<PointMarker> ptMarkers) throws NoSuchUserException, NoSuchLinkException, MissingIdException, NoSuchBookmarkException{
+		logger.debug("addPointMarkers: bm=" + bmark + ",ptMarkers="+ptMarkers);		
+		GnizrDaoUtil.fillId(bookmarkDao, userDao, linkDao, bmark);	
+		if(ptMarkers == null){
 			throw new NullPointerException("Input PointMarker list is null");
-		} else {
-			for (PointMarker pm : ptMarkers) {
-				if (pm.getId() > 0) {
-					if (geomMarkerDao.updatePointMarker(pm) == false) {
+		}else{
+			for(PointMarker pm : ptMarkers){
+				if(pm.getId() > 0){
+					if(geomMarkerDao.updatePointMarker(pm) == false){
 						logger.error("error updating PointerMarker: " + pm);
 					}
-					if (geomMarkerDao.addPointMarker(bmark, pm) == false) {
-						logger
-								.error("error associating bookmark with PointMarker: "
-										+ pm);
-					}
-				} else {
+					if(geomMarkerDao.addPointMarker(bmark,pm) == false){
+						logger.error("error associating bookmark with PointMarker: " + pm);
+					}							
+				}else{
 					int pmId = geomMarkerDao.createPointMarker(pm);
-					if (pmId > 0) {
+					if(pmId > 0){
 						pm.setId(pmId);
-						if (geomMarkerDao.addPointMarker(bmark, pm) == false) {
-							logger
-									.error("error associating bookmark with PointerMarker: "
-											+ pm);
-						}
-					} else {
+						if(geomMarkerDao.addPointMarker(bmark,pm) == false){
+							logger.error("error associating bookmark with PointerMarker: " + pm);
+						}						
+					}else{
 						logger.error("error creating new PointerMarker: " + pm);
 					}
 				}
@@ -803,73 +636,34 @@ public class BookmarkManager implements Serializable {
 		}
 		return ptMarkers;
 	}
-
-	/**
-	 * Removes multiple <code>PointMarker</code> from a given bookmark. 
-	 * 
-	 * @param bmark a bookmark that exists in the database
-	 * @param ptMarker multiple pointermaker descriptions
-	 * @return Return <code>true</code> if the pointmakers are successfully removed
-	 * @throws NoSuchUserException
-	 * @throws NoSuchLinkException
-	 * @throws MissingIdException
-	 * @throws NoSuchBookmarkException
-	 */
-	public List<PointMarker> removePointMarkers(Bookmark bmark,
-			List<PointMarker> ptMarkers) throws NoSuchUserException,
-			NoSuchLinkException, MissingIdException, NoSuchBookmarkException {
-		logger.debug("removePointMarkers: bm=" + bmark + ",ptMarkers="
-				+ ptMarkers);
+	
+	public List<PointMarker> removePointMarkers(Bookmark bmark, List<PointMarker> ptMarkers) throws NoSuchUserException, NoSuchLinkException, MissingIdException, NoSuchBookmarkException{
+		logger.debug("removePointMarkers: bm="+bmark + ",ptMarkers=" + ptMarkers);
 		GnizrDaoUtil.fillId(bookmarkDao, userDao, linkDao, bmark);
 		List<PointMarker> sccdRmd = new ArrayList<PointMarker>();
-		if (ptMarkers == null) {
-			throw new NullPointerException("the input PointMarker list is null");
-		} else {
-			for (PointMarker pm : ptMarkers) {
-				if (geomMarkerDao.removePointMarker(bmark, pm) == true) {
+		if(ptMarkers == null){
+			throw new NullPointerException("the input PointMarker list is null");	
+		}else{
+			for(PointMarker pm : ptMarkers){
+				if(geomMarkerDao.removePointMarker(bmark,pm) == true){
 					sccdRmd.add(new PointMarker(pm));
-				} else {
-					logger
-							.error("error removing PointMarker from a bookmark: pm="
-									+ pm);
+				}else{
+					logger.error("error removing PointMarker from a bookmark: pm=" + pm);
 				}
 			}
 		}
 		return sccdRmd;
-	}
-
-	/**
-	 * Returns all pointermarkers that are currently associated a given bookmark.
-	 * 
-	 * @param bmark a bookmark currently exists in the database.
-	 * @return Returns a list of pointmarker that is currently associated with <code>bmark</code>
-	 * 
-	 * @throws NoSuchUserException
-	 * @throws NoSuchLinkException
-	 * @throws MissingIdException
-	 * @throws NoSuchBookmarkException
-	 */
-	public List<PointMarker> getPointMarkers(Bookmark bmark)
-			throws NoSuchUserException, NoSuchLinkException,
-			MissingIdException, NoSuchBookmarkException {
-		logger.debug("getPointMarkers: bm=" + bmark);
+	} 
+	
+	
+	public List<PointMarker> getPointMarkers(Bookmark bmark) throws NoSuchUserException, NoSuchLinkException, MissingIdException, NoSuchBookmarkException{
+		logger.debug("getPointMarkers: bm="+ bmark);
 		GnizrDaoUtil.fillId(bookmarkDao, userDao, linkDao, bmark);
 		return geomMarkerDao.listPointMarkers(bmark);
 	}
-
-	/**
-	 * Returns a user's bookmarks that each of which has at least one assocaited pointmarker.
-	 * 
-	 * @param user an existing bookmark owner.
-	 * @param offset the starting index of paging, starting at 0.
-	 * @param count total number of bookmarks to page.
-	 * @return Returns non-<code>null</code> list of bookmarks that have associated pointmarkers.
-	 * @throws NoSuchUserException
-	 */
-	public DaoResult<Bookmark> pageBookmarkHasGeomMarker(User user, int offset,
-			int count) throws NoSuchUserException {
-		logger.debug("pageBookmarkHasGeomMarker: user=" + user + ",offset="
-				+ offset + ",count=" + count);
+	
+	public DaoResult<Bookmark> pageBookmarkHasGeomMarker(User user, int offset, int count) throws NoSuchUserException{
+		logger.debug("pageBookmarkHasGeomMarker: user="+user+",offset="+offset+",count="+count);
 		GnizrDaoUtil.fillId(userDao, user);
 		return geomMarkerDao.pageBookmarksInArchive(user, offset, count);
 	}

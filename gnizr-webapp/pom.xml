@@ -5,7 +5,7 @@
 	<parent>
       <groupId>com.gnizr</groupId>
       <artifactId>gnizr</artifactId>
-      <version>2.3.0-M1</version>
+      <version>2.2.0-RC3</version>
     </parent>
 	
 	<modelVersion>4.0.0</modelVersion>
@@ -57,15 +57,15 @@
 			<groupId>com.gnizr.core.web</groupId>
 			<artifactId>gnizr-clustermap</artifactId>
 			<version>${gnVersion}</version>
-			<scope>compile</scope>			
-		</dependency>
+			<scope>compile</scope>	
+		</dependency>		
 		<dependency>
 			<groupId>urlrewrite</groupId>
 			<artifactId>urlrewrite</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.htmlparser</groupId>
-			<artifactId>htmlparser</artifactId>			       
+			<artifactId>htmlparser</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -76,8 +76,8 @@
 		<dependency>
 			<groupId>net.sf.json-lib</groupId>
 			<artifactId>json-lib</artifactId>
-			<version>2.1</version>
-			<classifier>jdk15</classifier>			      
+			<version>1.0</version>
+			<classifier>jdk15</classifier>
 		</dependency>
 	</dependencies>
 	<build>
@@ -91,7 +91,7 @@
 				<executions>
 					<execution>
 						<id>get-applet-jar</id>
-						<phase>package</phase>
+						<phase>compile</phase>
 						<goals>
 							<goal>copy</goal>
 						</goals>
@@ -112,7 +112,7 @@
 						</configuration>
 					</execution>
 				</executions>
-			</plugin>
+			</plugin>					
 		</plugins>
 	</build>
 </project>

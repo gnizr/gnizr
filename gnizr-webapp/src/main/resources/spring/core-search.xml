@@ -12,15 +12,4 @@
 		</constructor-arg>
 	</bean>
 
-	<bean id="openSearchDirectory" class="com.gnizr.core.search.OpenSearchDirectory" singleton="true">
-		<constructor-arg>
-			<list>
-				<value>/settings/opensearch/mybookmarks.action</value>
-				<value>/settings/opensearch/community.action</value>
-				<value>/settings/opensearch/yahoo-searchdescription.xml</value>
-				<value>http://www.pfaf.org/database/openSearch.rss</value>
-			</list>
-		</constructor-arg>		
-	</bean>
-	
 </beans>

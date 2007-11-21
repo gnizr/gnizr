@@ -20,7 +20,6 @@
 			<result name="success" type="chain">getSearchCommonTags</result>
 			<result name="input" type="redirect">/search/home.ftl</result>			
 			<result name="error" type="freemarker">/edit.ftl</result>	
-			<result name="redirect" type="redirect">/search/list.action?q=${queryString}</result>
 		</action>
 
 		<action name="getSearchCommonTags" class="com.gnizr.core.web.action.link.GetCommonTags">												
@@ -34,14 +33,5 @@
 		</action>
 		
 	</package>
-	
-	<package name="gnizr-opensearch" extends="gnizr-default" namespace="/search">
-		<action name="list" class="com.gnizr.core.web.action.search.ListSearchEngines">
-			<interceptor-ref name="loggedIn"/>	
-			<interceptor-ref name="gnizrDefaultStack"/>		
-			<result name="success" type="freemarker">/search/multi-search-results.ftl</result>	
-		</action>		
-	</package>
-	
 	
 </xwork>

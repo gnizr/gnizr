@@ -60,7 +60,7 @@ public class GeometryMarkerConverter extends WebWorkTypeConverter{
 			map.put("point",pm.getPoint().getX()+","+pm.getPoint().getY());
 			map.put("iconId",pm.getMarkerIconId());
 		}
-		JSONObject json = JSONObject.fromObject(map);
+		JSONObject json = JSONObject.fromMap(map);
 		return json.toString();
 	}
 

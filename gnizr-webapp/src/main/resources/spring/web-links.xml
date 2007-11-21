@@ -24,4 +24,9 @@
 		</property>
 	</bean>
 	
+	<bean id="searchBookmark" class="com.gnizr.core.web.action.search.SearchBookmark" singleton="false">
+		<property name="search">
+			<ref bean="search"/>
+		</property>
+	</bean>	
 </beans>

@@ -24,5 +24,4 @@
 		
 	<!-- xwork config from external projects -->
 	<include file="xwork-robot.xml"/>	
-	
 </xwork>
