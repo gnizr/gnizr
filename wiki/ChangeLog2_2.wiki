@@ -3,6 +3,10 @@
 
 ==== Version 2.2.0-RC3 (21 November 2007) ====
 
+Download 
+  * Binrary: [http://gnizr.googlecode.com/files/gnizr-2.2.0-RC3.zip gnizr-2.2.0-RC3.zip]
+  * Source: http://gnizr.googlecode.com/svn/tags/gnizr-2.2.0-RC3/
+
 Changelog
    * [http://code.google.com/p/gnizr/issues/detail?id=17 Issue 17] : Unable to edit tags if they are not used in a bookmark
    * [http://code.google.com/p/gnizr/issues/detail?id=18 Issue 18] : Tags without bookmarks are not listed in the rename tag drop down box.
