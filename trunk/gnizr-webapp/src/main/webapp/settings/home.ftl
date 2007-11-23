@@ -28,7 +28,7 @@
 </@settingsBlock>
 <@settingsBlock title="Manage Tags">
 <ul>
-<li><a href="${gzUrl("/edit/tag")}" title="edit tag relations">Edit tag relations</a></li>
+<li><a href="${gzUrl("/edit/tag")}" title="edit tag relations">Create/Edit tag relations</a></li>
 <#--<li><a href="${gzUrl("/edit/geotag")}">Edit geotag</a></li>-->
 <@ww.url id="deleteTagHref" value="/settings/tags/delete.action" includeParams="none"/>
 <@ww.url id="renameTagHref" value="/settings/tags/rename.action" includeParams="none"/>
