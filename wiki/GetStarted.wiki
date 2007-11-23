@@ -3,9 +3,11 @@
 
 This page helps you to get started using gnizr. 
 
-!PowerPoint Presentation:
+= !PowerPoint Presentation =
 
   * Getting started with gnizr 2.2.0 -- [http://docs.google.com/Presentation?id=dgfjm22n_9hf3tqz online], [http://groups.google.com/group/gnizr-users/files download]
+
+--
 
 == Login and Logout ==
 
