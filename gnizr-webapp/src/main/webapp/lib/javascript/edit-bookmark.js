@@ -778,14 +778,32 @@ function saveAndClose(flag){
 var focusedTag = '';
 var focusedTagCaretPos = -1;
 /* ========  BEGIN: Suggest Tags for Auto-Complete Functions ========== */
+function getLastNonWord(s){
+   var lastLnBrkPos = s.lastIndexOf('\n');
+   var lastSpcPos = s.lastIndexOf(' ');
+   if(lastLnBrkPos > lastSpcPos){
+       return lastLnBrkPos;
+   }
+   return lastSpcPos;
+}
+
+function getFirstNonWord(s){
+   var frstLnBrkPos = s.indexOf('\n');
+   var frstSpcPos = s.indexOf(' ');
+   if(frstLnBrkPos < frstSpcPos){
+       return frstLnBrkPos;
+   }
+   return frstSpcPos;
+}
+
 function suggestTagsToComplete(curPos){      
    var taglns = getTaglineString();
    MochiKit.Logging.log('curPos: ' + curPos + ' char:' + taglns[curPos]);
    var lPart = taglns.substring(0,curPos);
    var rPart = taglns.substring(curPos,taglns.length);
-   MochiKit.Logging.log('lPart: ->'+lPart + '<- rPart: ->'+rPart + '<-');
-   var lastSpcOnLeftIdx = lPart.lastIndexOf(' ');
-   var frstSpcOnRightIdx = rPart.indexOf(' ');
+   MochiKit.Logging.log('lPart: ->'+lPart + '<- rPart: ->'+rPart + '<-');  
+   var lastSpcOnLeftIdx = getLastNonWord(lPart);
+   var frstSpcOnRightIdx = getFirstNonWord(rPart);
    MochiKit.Logging.log('lastSpcOnLeftIdx: ' + lastSpcOnLeftIdx + ' frstSpcOnRightIdx: ' + frstSpcOnRightIdx);
    if(lastSpcOnLeftIdx < 0){
        focusedTag = lPart;
@@ -857,12 +875,12 @@ function doWriteSuggestedTags(tags2suggest){
 function autoComplete(t2c){
     MochiKit.Logging.log('auto-complete focusedTag: ' + focusedTag + ' using ->'+t2c+'<-');
     var tagline = getTaglineString();
-    var lPart = tagline.substring(0,focusedTagCaretPos);
-    var lastSpcIdxOnLeft = lPart.lastIndexOf(' ');
+    var lPart = tagline.substring(0,focusedTagCaretPos);  
+    var lastSpcIdxOnLeft = getLastNonWord(lPart);
     MochiKit.Logging.log('lastSpcIdxOnLeft: ' + lastSpcIdxOnLeft);
     lPart = lPart.substring(0,lastSpcIdxOnLeft+1);
     var rPart = tagline.substring(focusedTagCaretPos,tagline.length);     
-    var frstSpcIdxOnRght = rPart.indexOf(' ');
+    var frstSpcIdxOnRght = getFirstNonWord(rPart);
     MochiKit.Logging.log('frstSpcIdxOnRgh: ' + frstSpcIdxOnRght);
     if(frstSpcIdxOnRght >= 0){
        rPart = rPart.substring(frstSpcIdxOnRght,rPart.length);          
