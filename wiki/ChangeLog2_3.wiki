@@ -1,6 +1,12 @@
 #summary Changelog of all releases made under version 2.3
 #labels Phase-Implementation
 
+==== Version 2.3.0-M2 (in progress) ====
+
+Changelog
+  * [http://code.google.com/p/gnizr/issues/detail?id=22 Issue 22]: Tagging auto-complete doesn't work if the text contains non-word char (fixed, need testing)
+
+
 ==== Version 2.3.0-M1 (20 November 2007) ====
 
 Download 
