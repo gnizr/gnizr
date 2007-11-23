@@ -5,7 +5,7 @@ This page helps you to get started using gnizr.
 
 = !PowerPoint Presentation =
 
-  * Getting started with gnizr 2.2.0 -- [http://docs.google.com/Presentation?id=dgfjm22n_9hf3tqz online], [http://groups.google.com/group/gnizr-users/files download]
+  * Getting started with gnizr 2.2.0 -- [http://docs.google.com/Presentation?id=dgfjm22n_9hf3tqz online], [http://groups.google.com/group/gnizr-users/web/Getting_started_with_gnizr.ppt download]
 
 --
 
