@@ -81,13 +81,6 @@ public abstract class AbstractAction extends ActionSupport implements GnizrConfi
 	protected abstract String go() throws Exception;
 	
 	public String execute() throws Exception{		
-		/*
-		if(hasErrors()){
-			logger.debug("action not executed, field or action errors");
-			logger.debug("Field errors: " + getFieldErrors() );
-			logger.debug("Action errors: " + getActionErrors() );
-			return INPUT;
-		}*/		
 		loadGnizrConfiguration();
 		logger.debug("executing action");
 		return go();
