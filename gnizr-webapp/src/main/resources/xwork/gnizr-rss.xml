@@ -20,7 +20,7 @@
 	<package name="gnizr-atom-user" extends="gnizr-default" namespace="/data/atom/user">		
 		<action name="search" class="com.gnizr.core.web.action.search.SearchBookmark">
 			<interceptor-ref name="loggedIn"/>			
-			<interceptor-ref name="gnizrDefaultStack"/>	
+			<interceptor-ref name="gnizrNoPolicyDefaultStack"/>	
 			<param name="type">user</param>		
 			<result name="success" type="opensearch">								
 				<param name="encoding">UTF-8</param>				
@@ -31,7 +31,7 @@
 	<package name="gnizr-atom-community" extends="gnizr-default" namespace="/data/atom/community">		
 		<action name="search" class="com.gnizr.core.web.action.search.SearchBookmark">
 			<interceptor-ref name="loggedIn"/>			
-			<interceptor-ref name="gnizrDefaultStack"/>	
+			<interceptor-ref name="gnizrNoPolicyDefaultStack"/>	
 			<param name="type">text</param>		
 			<result name="success" type="opensearch">								
 				<param name="encoding">UTF-8</param>				

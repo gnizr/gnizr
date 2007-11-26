@@ -61,10 +61,10 @@
 			- "open" indicates anonymous readers are permitted to view user pages
 		  -->
 		<property name="anonymousReaderPolicy">
-			<value>open</value>
+			<value>close</value>
 		</property>
 		<property name="registrationPolicy">
-			<value>open</value>
+			<value>close</value>
 		</property>
 		<property name="serverMaintenanceModeEnabled">
 			<value>false</value>
