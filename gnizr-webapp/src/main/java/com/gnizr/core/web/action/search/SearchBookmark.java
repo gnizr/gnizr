@@ -80,7 +80,7 @@ public class SearchBookmark extends AbstractPagingAction implements LoggedInUser
 	protected String go() throws Exception {	
 		if(TYPE_OPEN_SEARCH.equalsIgnoreCase(getType())){
 			return REDIRECT;
-		}
+		}		
 		initPagingAction();
 		// reuse an existing query string if possible
 		if(getQueryString() == null){
