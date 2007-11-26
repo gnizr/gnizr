@@ -181,7 +181,7 @@
 		<action name="mybookmarks"
 			class="com.gnizr.core.web.action.settings.ListSettings"
 			method="doDefault">			
-			<interceptor-ref name="gnizrDefaultStack"/>
+			<interceptor-ref name="gnizrNoPolicyDefaultStack"/>
 			<result name="success" type="freemarker">
 				<param name="location">/settings/mybmarks-searchdescription.ftl</param>
 				<param name="contentType">text/xml</param>
@@ -190,7 +190,7 @@
 		<action name="community"
 			class="com.gnizr.core.web.action.settings.ListSettings"
 			method="doDefault">
-			<interceptor-ref name="gnizrDefaultStack"/>
+			<interceptor-ref name="gnizrNoPolicyDefaultStack"/>
 			<result name="success" type="freemarker">
 				<param name="location">/settings/community-searchdescription.ftl</param>
 				<param name="contentType">text/xml</param>

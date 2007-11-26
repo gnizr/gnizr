@@ -69,6 +69,16 @@
 				<interceptor-ref name="static-params"/>
 				<interceptor-ref name="params"/>
 			</interceptor-stack>
+			
+			<interceptor-stack name="gnizrNoPolicyDefaultStack">			
+				<interceptor-ref name="server-maintenance"/>
+				<interceptor-ref name="config-gnizr"/>			
+				<interceptor-ref name="exception"/>
+				<interceptor-ref name="servlet-config"/>
+				<interceptor-ref name="static-params"/>
+				<interceptor-ref name="params"/>
+				<interceptor-ref name="prepare"/>
+			</interceptor-stack>
 		</interceptors>
 	
 		
