@@ -1,0 +1,12 @@
+#summary What to do and how to improve gnizr
+#labels Phase-Design
+
+= Introduction =
+
+This page describes new features that may be considered in the future gnizr development. There is no guarantee that any of these features will actually be implemented. Users are encouraged to discuss these ideas in [http://groups.google.com/group/gnizr-users the gnizr user group].
+
+=== Suggest related search terms ===
+
+On the search result page, gnizr will suggest related search terms that could be of interests to the users. For example, when search for "programming", the user may receive search suggestions: "java", "maven", "webwork". 
+
+Tag relations defined by the users can used to facilitate search term suggestion. For example, gnizr recommends "java", "maven" and "webwork" because some user has defined those terms to be SKOS related to "programming". 
