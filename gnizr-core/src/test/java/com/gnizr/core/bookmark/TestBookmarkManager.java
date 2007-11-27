@@ -339,7 +339,7 @@ public class TestBookmarkManager extends GnizrCoreTestBase {
 		
 		UserTag cnnUserTag = tagDao.findUserTag(new User(1),cnnTag).get(0);
 		assertEquals(1,cnnUserTag.getCount());
-		assertEquals(0,tagDao.findUserTag(new User(1),newsTag).size());
+		assertEquals(1,tagDao.findUserTag(new User(1),newsTag).size());
 			
 		// rename "cnn" to "news"
 		boolean okay = manager.renameTag(new User(1),"cnn",new String[]{"news"});
@@ -351,6 +351,11 @@ public class TestBookmarkManager extends GnizrCoreTestBase {
 		
 		newsTag = tagDao.findTag("news").get(0);
 		assertEquals(1,newsTag.getCount());
+		
+		UserTag ut = GnizrDaoUtil.getUserTag(tagDao,new User(1), new Tag(4));
+		assertNull(ut);
+		ut = GnizrDaoUtil.getUserTag(tagDao, new User(1), new Tag(5));
+		assertNotNull(ut);
 	}
 	
 	public void testRenameTag2() throws Exception{
@@ -360,7 +365,7 @@ public class TestBookmarkManager extends GnizrCoreTestBase {
 		
 		// verify the baseline data
 		Tag cnnTag = tagDao.findTag("cnn").get(0);	
-		Tag newsTag = tagDao.findTag("news").get(0);
+		Tag newsTag = tagDao.findTag("news2").get(0);
 		assertEquals(1,cnnTag.getCount());
 		assertEquals(0,newsTag.getCount());
 		
@@ -549,6 +554,15 @@ public class TestBookmarkManager extends GnizrCoreTestBase {
 		assertEquals("cnn",bm.getTags());
 	}
 	
+	
+	public void testDeleteTag2() throws Exception{
+		UserTag ut = GnizrDaoUtil.getUserTag(tagDao,new User(1),new Tag(5));
+		assertEquals(0,ut.getCount());
+		boolean okay =  manager.deleteTag(new User(1),"news");
+		assertTrue(okay);
+		ut = GnizrDaoUtil.getUserTag(tagDao, new User(1), new Tag(5));
+		assertNull(ut);
+	}
 	
 	public void testUpdateBookmark6() throws Exception{
 		Bookmark bm300 = manager.getBookmark(300);

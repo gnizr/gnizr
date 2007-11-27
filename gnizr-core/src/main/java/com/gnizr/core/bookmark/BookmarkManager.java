@@ -35,7 +35,6 @@ import com.gnizr.core.exceptions.MissingIdException;
 import com.gnizr.core.exceptions.NoSuchBookmarkException;
 import com.gnizr.core.exceptions.NoSuchLinkException;
 import com.gnizr.core.exceptions.NoSuchUserException;
-import com.gnizr.core.exceptions.NotAuthorizedException;
 import com.gnizr.core.exceptions.ServiceTermintedException;
 import com.gnizr.core.util.GnizrDaoUtil;
 import com.gnizr.core.util.TagUtil;
@@ -643,14 +642,16 @@ public class BookmarkManager implements Serializable {
 	 * @param newTags one or more new tags
 	 * @return Returns <code>true</code> if tag renaming is successful. Returns <code>false</code>, otherwise. 
 	 */
-	public boolean renameTag(User user, String oldTag, String[] newTags) {
-		Tag oldTagObj = null;
+	public boolean renameTag(User user, String oldTag, String[] newTags) {	
 		boolean isOkay = false;
-		List<Tag> tags = tagDao.findTag(oldTag);
-		if (tags.size() > 0) {
-			oldTagObj = tags.get(0);
-		}
-		if (oldTagObj != null) {
+		Tag oldTagObj = GnizrDaoUtil.getTag(tagDao,oldTag);
+		UserTag userTagObj = null;
+		try {
+			userTagObj = GnizrDaoUtil.getUserTag(tagDao, user, oldTagObj);
+		} catch (MissingIdException e) {
+			logger.debug("no such user tag: " + user.getUsername() + "/" + oldTag);		
+		}	
+		if (oldTagObj != null && userTagObj != null && userTagObj.getCount() > 0) {
 			DaoResult<Bookmark> result = null;
 			List<Bookmark> oldBookmarks = null;
 			List<Bookmark> newBookmarks = null;
@@ -687,6 +688,14 @@ public class BookmarkManager implements Serializable {
 				isOkay = true;
 			}
 		}
+		try {
+			userTagObj = GnizrDaoUtil.getUserTag(tagDao, user, oldTagObj);
+			if(userTagObj != null && userTagObj.getCount() == 0){
+				isOkay = tagDao.deleteUserTag(userTagObj.getId());
+			}
+		} catch (MissingIdException e) {
+			logger.debug("no such user tag: " + user.getUsername() + "/" + oldTag);		
+		}			
 		return isOkay;
 	}
 
@@ -698,10 +707,16 @@ public class BookmarkManager implements Serializable {
 	 * @param tag a tag to delete 
 	 * @return Returns <code>true</code> if tag deletion is successful. Returns <code>false</code>, otherwise. 
 	 */
-	public boolean deleteTag(User user, String tag) {
-		boolean isOkay = false;
+	public boolean deleteTag(User user, String tag) {				
+		boolean isOkay = false;	
 		Tag tagObj = GnizrDaoUtil.getTag(tagDao, tag);
-		if (tagObj != null) {
+		UserTag userTagObj = null;
+		try {
+			userTagObj = GnizrDaoUtil.getUserTag(tagDao, user, tagObj);
+		} catch (MissingIdException e) {
+			logger.debug("no such user tag: " + user.getUsername() + "/" + tag);		
+		}			
+		if (tagObj != null && userTagObj != null && userTagObj.getCount() > 0) {
 			List<Bookmark> oldBookmarks = bookmarkDao.pageBookmarks(user,
 					tagObj, 0, tagObj.getCount()).getResult();
 			List<Bookmark> newBookmarks = tagDao.reduceTag(user,
@@ -728,6 +743,14 @@ public class BookmarkManager implements Serializable {
 				isOkay = true;
 			}
 		}
+		try {
+			userTagObj = GnizrDaoUtil.getUserTag(tagDao, user, tagObj);
+			if(userTagObj != null && userTagObj.getCount() == 0){
+				isOkay = tagDao.deleteUserTag(userTagObj.getId());
+			}
+		} catch (MissingIdException e) {
+			logger.debug("no such user tag: " + user.getUsername() + "/" + tagObj);		
+		}		
 		return isOkay;
 	}
 

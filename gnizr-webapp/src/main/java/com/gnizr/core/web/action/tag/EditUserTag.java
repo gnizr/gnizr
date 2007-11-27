@@ -280,7 +280,7 @@ public class EditUserTag extends AbstractAction implements LoggedInUserAware {
 	 */
 	public String fetchEditData() {		
 		try {
-			userTags = userManager.getTagsSortByAlpha(loggedInUser,1);
+			userTags = userManager.getTagsSortByAlpha(loggedInUser,0);
 			if(tag != null){
 				if(isInputTagValid(tag) == false){
 					return INPUT;
