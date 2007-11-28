@@ -143,6 +143,13 @@
 				<param name="jsonName">jsonResult</param>
 			</result>
 		</action>		
+		
+		<action name="suggestSearchTags" class="com.gnizr.core.web.action.search.SuggestSearchTags">
+			<interceptor-ref name="gnizrDefaultStack"/>
+			<result name="success" type="json">
+				<param name="jsonName">jsonResult</param>
+			</result>
+		</action>
 	</package>
 	
 	
