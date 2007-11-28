@@ -31,6 +31,7 @@ import com.gnizr.core.exceptions.NoSuchUserException;
 import com.gnizr.core.exceptions.NoSuchUserTagException;
 import com.gnizr.core.util.GnizrDaoUtil;
 import com.gnizr.db.GnizrDao;
+import com.gnizr.db.dao.Tag;
 import com.gnizr.db.dao.TagAssertion;
 import com.gnizr.db.dao.TagProperty;
 import com.gnizr.db.dao.User;
@@ -39,6 +40,7 @@ import com.gnizr.db.dao.tag.TagAssertionDao;
 import com.gnizr.db.dao.tag.TagDao;
 import com.gnizr.db.dao.tag.TagPropertyDao;
 import com.gnizr.db.dao.user.UserDao;
+import com.gnizr.db.vocab.UserSchema;
 
 public class TagPager implements Serializable {
 
@@ -62,11 +64,14 @@ public class TagPager implements Serializable {
 
 	private TagProperty rdfTypePrpt;
 
+	private User gnizrUser;
+	
 	public TagPager(GnizrDao gnizrDao) {
 		this.userDao = gnizrDao.getUserDao();
 		this.tagDao = gnizrDao.getTagDao();
 		this.tagPropertyDao = gnizrDao.getTagPropertyDao();
 		this.tagAssertionDao = gnizrDao.getTagAssertionDao();
+		this.gnizrUser = GnizrDaoUtil.getUser(userDao,UserSchema.GNIZR_USER);
 		initTagProperty();
 	}
 
@@ -281,6 +286,32 @@ public class TagPager implements Serializable {
 			memberList.add(t.getSubject());
 		}
 		return map;
+	}
+	
+	public List<Tag> getPopularRelatedTagsByGnizrUser(String tag, int minFreq){
+		int mf = 1;
+		if(minFreq > mf){
+			mf = minFreq;
+		}
+		List<Tag> tags = new ArrayList<Tag>();
+		Tag tagObj = GnizrDaoUtil.getTag(tagDao, tag);
+		if(tagObj != null && gnizrUser != null){
+			UserTag userTagObj = null;
+			try {
+				userTagObj = GnizrDaoUtil.getUserTag(tagDao, gnizrUser, tagObj);
+				List<UserTag> relTags = findSKOSRelated(gnizrUser, userTagObj);
+				for(UserTag ut : relTags){
+					if(ut.getTag().getCount() >= mf){
+						tags.add(new Tag(ut.getTag()));
+					}
+				}
+			} catch (Exception e) {
+				logger.error(e);
+			} 	
+		}else if(gnizrUser == null){
+			throw new RuntimeException(new NoSuchUserException("missing superuser: " + UserSchema.GNIZR_USER));
+		}
+		return tags;
 	}
 	
 }

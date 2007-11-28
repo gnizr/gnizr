@@ -16,17 +16,16 @@
  */
 package com.gnizr.core.pagers;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSet;
 
 import com.gnizr.core.GnizrCoreTestBase;
-import com.gnizr.db.dao.User;
-import com.gnizr.db.dao.UserTag;
+import com.gnizr.db.dao.Tag;
 
-public class TestTagPager2 extends GnizrCoreTestBase {
+public class TestTagPager3 extends GnizrCoreTestBase {
 
 	private TagPager tagPager;
 	
@@ -41,23 +40,23 @@ public class TestTagPager2 extends GnizrCoreTestBase {
 
 	@Override
 	protected IDataSet getDataSet() throws Exception {
-		return new FlatXmlDataSet(TestTagPager2.class.getResourceAsStream("/TestTagPager2-input.xml"));
+		return new FlatXmlDataSet(TestTagPager3.class.getResourceAsStream("/TestTagPager3-input.xml"));
 	}
-	
-	public void testGetRDFTypeTagGroups() throws Exception{
-		Map<String,List<UserTag>> tags = tagPager.getRDFTypeTagGroups(new User(1));
-		assertEquals(2,tags.size());
-		List<UserTag> g1 = tags.get("g1");
-		List<UserTag> g2 = tags.get("g2");
-		assertEquals(4,g1.size());
-		assertEquals(2,g2.size());
-		
-		UserTag ut = g1.get(3);
-		assertEquals(1,ut.getUser().getId());
-	}
-	
-	
-	
-	
 
+	public void testGetPopularRelatedTagsByGnizrUser() throws Exception{
+		List<Tag> relTags = tagPager.getPopularRelatedTagsByGnizrUser("games",1);
+		assertEquals(2,relTags.size());
+		List<String> tagLabel = new ArrayList<String>();
+		for(Tag t : relTags){
+			tagLabel.add(t.getLabel());
+		}
+		assertTrue(tagLabel.contains("wii"));
+		assertTrue(tagLabel.contains("online"));
+		
+		relTags = tagPager.getPopularRelatedTagsByGnizrUser("games",5);
+		assertEquals(1,relTags.size());
+		assertEquals("online",relTags.get(0).getLabel());
+	}
+	
+	
 }
