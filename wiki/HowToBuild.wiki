@@ -29,6 +29,8 @@ Follow instructions described in SetupGnizrDatabase to create a database schema 
   * Database User: `gnizr`
   * Database Password: `gnizr`
 
+SQL script files are located in `gnizr-db/src/main/resources/sql`.
+
 == Step 3: Compile Source Code ==
 
 Assume that you've checked out the source code in a top-level directory called `gnizr`.
