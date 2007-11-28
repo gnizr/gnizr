@@ -2,9 +2,9 @@ package com.gnizr.core.web.result;
 
 import java.io.Writer;
 
-import org.apache.log4j.Logger;
+import net.sf.json.JSON;
 
-import net.sf.json.JSONObject;
+import org.apache.log4j.Logger;
 
 import com.opensymphony.webwork.ServletActionContext;
 import com.opensymphony.xwork.ActionInvocation;
@@ -26,7 +26,7 @@ public class JSONResult implements Result{
 			throw new RuntimeException(message);
 		}
 		ServletActionContext.getResponse().setContentType("text/javascript");
-		JSONObject json = (JSONObject)actionInvocation.getStack().findValue(jsonName);
+		JSON json = (JSON)actionInvocation.getStack().findValue(jsonName);
 		if(json != null){
 			Writer out = null;
 			try{
