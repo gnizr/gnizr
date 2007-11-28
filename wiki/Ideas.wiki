@@ -9,4 +9,4 @@ This page describes new features that may be considered in the future gnizr deve
 
 On the search result page, gnizr will suggest related search terms that could be of interests to the users. For example, when search for "programming", the user may receive search suggestions: "java", "maven", "webwork". 
 
-Tag relations defined by the users can used to facilitate search term suggestion. For example, gnizr recommends "java", "maven" and "webwork" because some user (e.g. the superuser 'gnizr') has defined those terms to be SKOS related to "programming". 
+Tag relations defined by the users can be used to facilitate search term suggestion. For example, gnizr recommends "java", "maven" and "webwork" because some user (e.g. the superuser 'gnizr') has defined those terms to be SKOS related to "programming". 
