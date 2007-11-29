@@ -34,6 +34,22 @@
 
 /* ======== CSS used in OpenSearch result page ====== */
 
+
+#searchTermSuggest{
+	position: relative;
+	margin-right: 202px;
+	margin-left: 4px;
+	padding: 4px 10px;
+	background-color: 	#E0FFFF;
+	border-width:  1px;
+	border-style: solid;
+	border-color:  #43C6DB;
+}
+
+#searchTermSuggestControl{
+	text-align:right;
+}
+
 #searchPageContent{	
 	position: relative;
 	width: 100%;
@@ -82,7 +98,13 @@
 	padding: 2px;
 	border-left-width:  1px;
 	border-left-style: solid;
-	border-left-color:  #736F6E
+	border-left-color:  #736F6E;
+	border-right-width:  1px;
+	border-right-style: solid;
+	border-right-color:  #736F6E;
+	border-bottom-width:  1px;
+	border-bottom-style: solid;
+	border-bottom-color:  #736F6E;
 }
 
 .tileSeperator{
