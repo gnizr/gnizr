@@ -29,8 +29,27 @@
 </#if>
 <@infoBlock bct=bct/>
 <div id="searchPageTop">
-<!--
+<#--
 <div id="searchTermSuggest">
+ <table id="searchTermSuggestContent">
+ <tr>
+ <td>Related terms
+ <ul>
+  <li>java</li><li>technology</li>
+  </ul>
+ </td>
+ <td>Narrower terms
+ <ul>
+  <li>foo</li><li>bar</li>
+  </ul></td>
+ <td>Broader terms
+ <ul>
+  <li>poppo</li><li>jajdd</li>
+  </ul></td>
+ </tr>
+ </table>
+ -->
+<#--
  <div id="suggestedSearchTerms">
  <ul>
  <li>related
@@ -44,6 +63,7 @@
  </li>
  </ul>
  </div>
+ 
  <div id="searchTermSuggestControl">search suggestions: <a href="#" id="openSearchSuggestion" class="system-link">expand</a></div>
 </div>
 -->
