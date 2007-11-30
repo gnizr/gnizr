@@ -8,7 +8,9 @@ var searchUrl = '/';
 var fetchSuggestionUrl = null;
 
 SuggestSearchTerms = {
-    relatedTags: null,     
+    relatedTags: null,  
+    narrowerTags: null,
+    broaderTags: null,   
     init: function(){
         //MochiKit.LoggingPane.createLoggingPane(true);
         if(MochiKit.Base.isUndefinedOrNull(fetchSuggestionUrl) == false){
@@ -17,12 +19,24 @@ SuggestSearchTerms = {
             var gotData = function(data){
                 if(MochiKit.Base.isUndefinedOrNull(data) == false){
                     var t = data['related'];
-                    if(MochiKit.Base.isUndefinedOrNull(t) == false && t.length > 0){
+                    if(t != null && t.length > 0){
                         SuggestSearchTerms.relatedTags = t;
                         MochiKit.Logging.log('SuggestSearchTerms: related tags: ' + SuggestSearchTerms.relatedTags);
                     }
+                    t = data['narrower'];
+                    if(t != null && t.length > 0){
+                        SuggestSearchTerms.narrowerTags = t;
+                        MochiKit.Logging.log('SuggestSearchTerms: narrower tags: ' + SuggestSearchTerms.narrowerTags);
+                    }
+                    t = data['broader'];
+                    if(t != null && t.length > 0){
+                        SuggestSearchTerms.broaderTags = t;
+                        MochiKit.Logging.log('SuggestSearchTerms: broader tags: ' + SuggestSearchTerms.broaderTags);
+                    }
                 }
-                if(SuggestSearchTerms.relatedTags != null){
+                if(SuggestSearchTerms.relatedTags != null ||
+                   SuggestSearchTerms.narrowerTags != null ||
+                   SuggestSearchTerms.broaderTags != null){
                     SuggestSearchTerms.createSuggestionBox();
                 }
             };
@@ -53,6 +67,14 @@ SuggestSearchTerms = {
             if(SuggestSearchTerms.relatedTags != null){
                 MochiKit.DOM.appendChildNodes(rowElm,MochiKit.DOM.TD(null,'Related terms',
                 SuggestSearchTerms.createListData(SuggestSearchTerms.relatedTags)));
+            }
+            if(SuggestSearchTerms.narrowerTags != null){
+                MochiKit.DOM.appendChildNodes(rowElm,MochiKit.DOM.TD(null,'Narrower terms',
+                SuggestSearchTerms.createListData(SuggestSearchTerms.narrowerTags)));
+            }
+            if(SuggestSearchTerms.broaderTags != null){
+                MochiKit.DOM.appendChildNodes(rowElm,MochiKit.DOM.TD(null,'Broader terms',
+                SuggestSearchTerms.createListData(SuggestSearchTerms.broaderTags)));
             }
         }
         MochiKit.DOM.appendChildNodes(SuggestSearchTerms.boxElm,SuggestSearchTerms.contentElm); 

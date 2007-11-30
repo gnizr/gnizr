@@ -51,6 +51,10 @@
 	border-style: none;
 }
 
+#searchTermSuggestContent td{
+	vertical-align:top;
+}
+
 #searchTermSuggestControl{
 	text-align:right;
 }

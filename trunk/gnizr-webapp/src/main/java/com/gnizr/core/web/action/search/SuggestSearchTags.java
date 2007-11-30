@@ -24,10 +24,21 @@ public class SuggestSearchTags extends AbstractAction{
 	private TagPager tagPager;
 	private String q;
 	private List<String> skosRelatedTags = new ArrayList<String>();
+	private List<String> skosNarrowerTags = new ArrayList<String>();
+	private List<String> skosBroaderTags = new ArrayList<String>();
+	
 	private JSON jsonResult;
 	
 	public List<String> getSkosRelatedTags() {
 		return skosRelatedTags;
+	}
+
+	public List<String> getSkosBroaderTags() {
+		return skosBroaderTags;
+	}
+
+	public List<String> getSkosNarrowerTags() {
+		return skosNarrowerTags;
 	}
 
 	public TagManager getTagManager() {
@@ -45,9 +56,16 @@ public class SuggestSearchTags extends AbstractAction{
 				if(skosRelatedTags != null && skosRelatedTags.isEmpty() == false){
 					map.put("related",skosRelatedTags);
 				}
+				if(skosNarrowerTags != null && skosNarrowerTags.isEmpty() == false){
+					map.put("narrower",skosNarrowerTags);
+				}
+				if(skosBroaderTags != null && skosBroaderTags.isEmpty() == false){
+					map.put("broader",skosBroaderTags);
+				}
 				jsonResult = JSONSerializer.toJSON(map);
 			}catch(Exception e){
-				final String err = "can't transform skosRelatedTags to JSON: " + skosRelatedTags;
+				final String err = "can't transform SKOS tag objects to JSON: related=" + skosRelatedTags 
+				+ ",narrower=" + skosNarrowerTags + ",broader="+skosBroaderTags;
 				logger.error(err,e);
 			}
 		}
@@ -76,16 +94,35 @@ public class SuggestSearchTags extends AbstractAction{
 		List<String> tags = extractTags(getQ());
 		for(String t : tags){
 			try{	
+				List<Tag> nrwTags = tagPager.getPopularNarrowerTagsByGnizrUser(t,1);
+				if(nrwTags.isEmpty() == false){
+					for(Tag nt: nrwTags){
+						if(skosNarrowerTags.contains(nt.getLabel()) == false){
+							skosNarrowerTags.add(nt.getLabel());
+						}
+					}
+				}
+				List<Tag> brdTags = tagPager.getPopularBroaderTagsByGnizrUser(t,1);
+				if(brdTags.isEmpty() == false){
+					for(Tag bt : brdTags){
+						if(skosBroaderTags.contains(bt.getLabel()) == false){
+							skosBroaderTags.add(bt.getLabel());
+						}
+					}
+				}	
 				List<Tag> relTags = tagPager.getPopularRelatedTagsByGnizrUser(t,1);
 				if(relTags.isEmpty() == false){
 					for(Tag rt : relTags){
-						if(skosRelatedTags.contains(rt.getLabel()) == false){
+						if(skosRelatedTags.contains(rt.getLabel()) == false &&
+						   skosBroaderTags.contains(rt.getLabel()) == false &&
+						   skosNarrowerTags.contains(rt.getLabel()) == false){
 							skosRelatedTags.add(rt.getLabel());
 						}
 					}
 				}
+							
 			}catch(Exception e){
-				final String err = "error getting Popular Related Tags: tag=" + t;
+				final String err = "error getting Popular tags for: tag=" + t;
 				logger.error(err,e);
 			}
 		}
