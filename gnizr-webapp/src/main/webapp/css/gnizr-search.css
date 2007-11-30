@@ -46,6 +46,11 @@
 	border-color:  #43C6DB;
 }
 
+#searchTermSuggestContent{
+	width: 100%;
+	border-style: none;
+}
+
 #searchTermSuggestControl{
 	text-align:right;
 }

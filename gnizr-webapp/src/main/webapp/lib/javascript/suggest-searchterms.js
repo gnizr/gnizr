@@ -1,6 +1,7 @@
 var topDIVId = 'searchPageTop';
 var boxDIVId = 'searchTermSuggest';
 var listDIVId = 'suggestedSearchTerms';
+var boxCntTblId = 'searchTermSuggestContent';
 var controlDIVId = 'searchTermSuggestControl';
 
 var searchUrl = '/';
@@ -36,29 +37,30 @@ SuggestSearchTerms = {
     cntrlLinkElm: MochiKit.DOM.A({'href':'javascript:showSearchSuggestion()','class':'system-link'},'show'),
     createSuggestionBox: function(){
         MochiKit.Logging.log('SuggestSearchTerms: createSuggestionBox: called');
-        SuggestSearchTerms.showCntrlElm = SuggestSearchTerms.boxElm = MochiKit.DOM.DIV(
+        SuggestSearchTerms.boxElm = MochiKit.DOM.DIV(
           {'id':boxDIVId},
           MochiKit.DOM.DIV({'id':controlDIVId},'search suggestions: ', 
                            SuggestSearchTerms.cntrlLinkElm));
+        MochiKit.Style.setStyle(SuggestSearchTerms.boxElm,{'display':'none'});                
         MochiKit.DOM.appendChildNodes(topDIVId,SuggestSearchTerms.boxElm);
-    },
-    
-    listElm : null,
+        MochiKit.Visual.appear(SuggestSearchTerms.boxElm);
+    },  
+    contentElm : null,
     showSuggestion: function(){
-        if(SuggestSearchTerms.listElm == null){
-            SuggestSearchTerms.listElm = MochiKit.DOM.UL(null);
+        if(SuggestSearchTerms.contentElm == null){
+            var rowElm = MochiKit.DOM.TR(null);
+            SuggestSearchTerms.contentElm = MochiKit.DOM.TABLE({'id':'searchTermSuggestContent'},rowElm);
             if(SuggestSearchTerms.relatedTags != null){
-                MochiKit.DOM.appendChildNodes(SuggestSearchTerms.listElm,
-                 MochiKit.DOM.LI(null,'Related terms',
-                 SuggestSearchTerms.createListData(SuggestSearchTerms.relatedTags)));
+                MochiKit.DOM.appendChildNodes(rowElm,MochiKit.DOM.TD(null,'Related terms',
+                SuggestSearchTerms.createListData(SuggestSearchTerms.relatedTags)));
             }
         }
-        MochiKit.DOM.appendChildNodes(SuggestSearchTerms.boxElm,SuggestSearchTerms.listElm); 
+        MochiKit.DOM.appendChildNodes(SuggestSearchTerms.boxElm,SuggestSearchTerms.contentElm); 
         MochiKit.DOM.setNodeAttribute(SuggestSearchTerms.cntrlLinkElm,'href','javascript:hideSearchSuggestion()');
         MochiKit.DOM.replaceChildNodes(SuggestSearchTerms.cntrlLinkElm,'hide');        
     },
     hideSuggestion: function(){
-        MochiKit.DOM.removeElement(SuggestSearchTerms.listElm);
+        MochiKit.DOM.removeElement(SuggestSearchTerms.contentElm);
         MochiKit.DOM.setNodeAttribute(SuggestSearchTerms.cntrlLinkElm,'href','javascript:showSearchSuggestion()');
         MochiKit.DOM.replaceChildNodes(SuggestSearchTerms.cntrlLinkElm,'show');      
     },
