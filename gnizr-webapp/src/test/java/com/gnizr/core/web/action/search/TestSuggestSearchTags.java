@@ -52,11 +52,19 @@ public class TestSuggestSearchTags extends GnizrWebappTestBase {
 		assertEquals(ActionSupport.SUCCESS,okay);
 		List<String> tags= action.getSkosRelatedTags();
 		assertFalse(tags.isEmpty());
-		assertEquals(3,tags.size());
-		assertTrue(tags.contains("wii"));
-		assertTrue(tags.contains("videogame"));
+		assertEquals(1,tags.size());		
 		assertTrue(tags.contains("online"));
 		System.out.println(action.getJsonResult().toString());
+		
+		tags = action.getSkosNarrowerTags();
+		assertEquals(3,tags.size());
+		assertTrue(tags.contains("boardgames"));
+		assertTrue(tags.contains("videogame"));
+		assertTrue(tags.contains("wii"));
+		
+		tags = action.getSkosBroaderTags();
+		assertEquals(0,tags.size());
 	}
+	
 	
 }
