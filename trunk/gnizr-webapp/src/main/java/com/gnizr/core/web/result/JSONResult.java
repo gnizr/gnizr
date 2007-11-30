@@ -25,7 +25,7 @@ public class JSONResult implements Result{
 			final String message = "Required parameter 'jsonName' is not found.";
 			throw new RuntimeException(message);
 		}
-		ServletActionContext.getResponse().setContentType("text/javascript");
+		ServletActionContext.getResponse().setContentType("text/javascript; charset=UTF-8");
 		JSON json = (JSON)actionInvocation.getStack().findValue(jsonName);
 		if(json != null){
 			Writer out = null;
