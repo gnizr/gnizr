@@ -314,4 +314,56 @@ public class TagPager implements Serializable {
 		return tags;
 	}
 	
+	public List<Tag> getPopularNarrowerTagsByGnizrUser(String tag, int minFreq){
+		int mf = 1;
+		if(minFreq > mf){
+			mf = minFreq;
+		}
+		List<Tag> tags = new ArrayList<Tag>();
+		Tag tagObj = GnizrDaoUtil.getTag(tagDao, tag);
+		if(tagObj != null && gnizrUser != null){
+			UserTag userTagObj = null;
+			try {
+				userTagObj = GnizrDaoUtil.getUserTag(tagDao, gnizrUser, tagObj);
+				List<UserTag> relTags = findSKOSNarrower(gnizrUser, userTagObj);
+				for(UserTag ut : relTags){
+					if(ut.getTag().getCount() >= mf){
+						tags.add(new Tag(ut.getTag()));
+					}
+				}
+			} catch (Exception e) {
+				logger.error(e);
+			} 	
+		}else if(gnizrUser == null){
+			throw new RuntimeException(new NoSuchUserException("missing superuser: " + UserSchema.GNIZR_USER));
+		}
+		return tags;
+	}
+	
+	public List<Tag> getPopularBroaderTagsByGnizrUser(String tag, int minFreq){
+		int mf = 1;
+		if(minFreq > mf){
+			mf = minFreq;
+		}
+		List<Tag> tags = new ArrayList<Tag>();
+		Tag tagObj = GnizrDaoUtil.getTag(tagDao, tag);
+		if(tagObj != null && gnizrUser != null){
+			UserTag userTagObj = null;
+			try {
+				userTagObj = GnizrDaoUtil.getUserTag(tagDao, gnizrUser, tagObj);
+				List<UserTag> relTags = findSKOSBroader(gnizrUser, userTagObj);
+				for(UserTag ut : relTags){
+					if(ut.getTag().getCount() >= mf){
+						tags.add(new Tag(ut.getTag()));
+					}
+				}
+			} catch (Exception e) {
+				logger.error(e);
+			} 	
+		}else if(gnizrUser == null){
+			throw new RuntimeException(new NoSuchUserException("missing superuser: " + UserSchema.GNIZR_USER));
+		}
+		return tags;
+	}
+	
 }

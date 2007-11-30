@@ -58,5 +58,27 @@ public class TestTagPager3 extends GnizrCoreTestBase {
 		assertEquals("online",relTags.get(0).getLabel());
 	}
 	
+	public void testGetPopularNarrowerTagsByGnizrUser() throws Exception{
+		List<Tag> nrwTags = tagPager.getPopularNarrowerTagsByGnizrUser("technology",1);
+		assertEquals(2, nrwTags.size());
+		List<String> tags = new ArrayList<String>();
+		for(Tag t : nrwTags){
+			tags.add(t.getLabel());
+			assertTrue(t.getCount() >= 1);
+		}
+		assertTrue(tags.contains("wii"));
+		assertTrue(tags.contains("online"));
+	}
+	
+	public void testGetPopularBroaderTagsByGnizrUser() throws Exception{
+		List<Tag> brdTags = tagPager.getPopularBroaderTagsByGnizrUser("DSL",1);
+		assertEquals(1, brdTags.size());
+		List<String> tags = new ArrayList<String>();
+		for(Tag t : brdTags){
+			tags.add(t.getLabel());
+			assertTrue(t.getCount() >= 1);
+		}
+		assertTrue(tags.contains("online"));
+	}
 	
 }
