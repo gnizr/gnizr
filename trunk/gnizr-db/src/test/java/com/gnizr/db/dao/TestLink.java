@@ -18,7 +18,7 @@ package com.gnizr.db.dao;
 
 import junit.framework.TestCase;
 
-import com.gnizr.db.MIMEType;
+import com.gnizr.db.vocab.MIMEType;
 
 public class TestLink extends TestCase {
 

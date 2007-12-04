@@ -19,7 +19,7 @@ package com.gnizr.db.dao;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-import com.gnizr.db.AccountStatus;
+import com.gnizr.db.vocab.AccountStatus;
 
 import junit.framework.TestCase;
 

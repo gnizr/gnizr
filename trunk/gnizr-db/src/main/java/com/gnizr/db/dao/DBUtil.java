@@ -14,10 +14,29 @@
  * Portions created by the Initial Contributor are Copyright (C) 2007
  * Image Matters LLC. All Rights Reserved.
  */
-package com.gnizr.db;
+package com.gnizr.db.dao;
 
-public interface AccountStatus {
-	public static final int INACTIVE = 0;
-	public static final int ACTIVE = 1;
-	public static final int DISABLED = 2;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class DBUtil {
+
+	public static final void cleanup(Connection conn) throws SQLException {
+		if (conn != null && conn.isClosed() == false) {
+			conn.close();
+		}
+	}
+
+	public static final void cleanup(Statement stmt) throws SQLException {
+		if (stmt != null) {
+			stmt.close();
+		}
+	}
+
+	public static final void cleanup(Connection conn, Statement stmt)
+			throws SQLException {
+		cleanup(conn);
+		cleanup(stmt);
+	}
 }

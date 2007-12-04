@@ -25,8 +25,8 @@ import org.apache.log4j.Logger;
 import com.gnizr.core.exceptions.InvalidTimeRangeValueException;
 import com.gnizr.core.exceptions.NoSuchUserException;
 import com.gnizr.core.util.GnizrDaoUtil;
-import com.gnizr.db.GnizrDao;
 import com.gnizr.db.dao.ForUser;
+import com.gnizr.db.dao.GnizrDao;
 import com.gnizr.db.dao.User;
 import com.gnizr.db.dao.foruser.ForUserDao;
 

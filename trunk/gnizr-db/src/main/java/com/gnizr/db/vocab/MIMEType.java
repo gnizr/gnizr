@@ -14,25 +14,26 @@
  * Portions created by the Initial Contributor are Copyright (C) 2007
  * Image Matters LLC. All Rights Reserved.
  */
-package com.gnizr.db;
+package com.gnizr.db.vocab;
 
-import java.io.Serializable;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Properties;
+public class MIMEType {
 
-import org.apache.commons.dbcp.BasicDataSource;
+	public static final int UNKNOWN = 0;
+	public static final int TEXT_XML = 1001;
+	public static final int TEXT_PLAIN = 1002;
+	public static final int TEXT_HTML = 1003;
+	
+	public static final int IMG_JPEG = 2001;
+	public static final int IMG_PNG = 2002;
+	public static final int IMG_TIFF = 2003;
+	public static final int IMG_GIF = 2004;
+	
+	/** <code>application/rss+xml</code> **/
+	public static final int APP_RSS_XML = 3001;
 
-public class GnizrBasicDataSource extends BasicDataSource implements Serializable{
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 8131969966130166615L;
-
-	public void setConnectionProperties(Properties props) {
-		for (Iterator iter = props.entrySet().iterator(); iter.hasNext();) {
-			Map.Entry entry = (Map.Entry) iter.next();
-			addConnectionProperty((String) entry.getKey(), (String)entry.getValue());
-		}
-	}
+	/** <code>application/rdf+xml</code> **/
+	public static final int APP_RDF_XML = 3002;
+	
+	/** <code>application/owl+xml</code> **/
+	public static final int APP_OWL_XML = 3003;
 }

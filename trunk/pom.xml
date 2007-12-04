@@ -218,4 +218,30 @@
       </plugin>
     </plugins>
   </build>
+  <reporting>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <configuration>        
+          <aggregate>true</aggregate>
+          <groups>
+            <group>
+              <title>Database Packages</title>
+              <packages>com.gnizr.db:com.gnizr.db.*</packages>
+            </group>
+            <group>
+              <title>Core Packages</title>
+              <packages>com.gnizr.core.*:com.gnizr.ext.delicious:com.gnizr.core.web.clustermap</packages>
+            </group>
+            <group>
+              <title>Web Application Packages</title>
+              <packages>com.gnizr.core.web.*</packages>
+            </group>
+          </groups>          
+          <excludePackageNames>com.gnizr.core.web.junit</excludePackageNames>
+        </configuration>        
+      </plugin>
+    </plugins>
+  </reporting>
 </project>

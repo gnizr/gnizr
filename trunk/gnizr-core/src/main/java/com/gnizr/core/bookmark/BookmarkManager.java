@@ -38,11 +38,10 @@ import com.gnizr.core.exceptions.NoSuchUserException;
 import com.gnizr.core.exceptions.ServiceTermintedException;
 import com.gnizr.core.util.GnizrDaoUtil;
 import com.gnizr.core.util.TagUtil;
-import com.gnizr.db.GnizrDao;
-import com.gnizr.db.MIMEType;
 import com.gnizr.db.dao.Bookmark;
 import com.gnizr.db.dao.BookmarkTag;
 import com.gnizr.db.dao.DaoResult;
+import com.gnizr.db.dao.GnizrDao;
 import com.gnizr.db.dao.Link;
 import com.gnizr.db.dao.LinkTag;
 import com.gnizr.db.dao.PointMarker;
@@ -54,6 +53,7 @@ import com.gnizr.db.dao.bookmark.GeometryMarkerDao;
 import com.gnizr.db.dao.link.LinkDao;
 import com.gnizr.db.dao.tag.TagDao;
 import com.gnizr.db.dao.user.UserDao;
+import com.gnizr.db.vocab.MIMEType;
 import com.gnizr.db.vocab.UserSchema;
 
 /**

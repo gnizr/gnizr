@@ -21,7 +21,7 @@ import org.dbunit.DatabaseTestCase;
 import org.dbunit.database.DatabaseConnection;
 import org.dbunit.database.IDatabaseConnection;
 
-import com.gnizr.db.GnizrDao;
+import com.gnizr.db.dao.GnizrDao;
 import com.gnizr.db.dao.bookmark.BookmarkDBDao;
 import com.gnizr.db.dao.bookmark.GeometryMarkerDBDao;
 import com.gnizr.db.dao.folder.FolderDBDao;

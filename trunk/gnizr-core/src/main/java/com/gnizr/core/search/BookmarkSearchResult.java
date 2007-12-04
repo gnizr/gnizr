@@ -20,9 +20,9 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.gnizr.db.GnizrDao;
 import com.gnizr.db.dao.Bookmark;
 import com.gnizr.db.dao.DaoResult;
+import com.gnizr.db.dao.GnizrDao;
 import com.gnizr.db.dao.User;
 import com.gnizr.db.dao.bookmark.BookmarkDao;
 
