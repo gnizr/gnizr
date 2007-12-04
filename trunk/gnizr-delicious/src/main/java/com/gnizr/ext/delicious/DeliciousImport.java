@@ -27,7 +27,7 @@ import com.gnizr.core.bookmark.BookmarkManager;
 import com.gnizr.core.exceptions.NoSuchUserException;
 import com.gnizr.core.exceptions.UsernameTakenException;
 import com.gnizr.core.folder.FolderManager;
-import com.gnizr.core.managers.UserManager;
+import com.gnizr.core.user.UserManager;
 import com.gnizr.db.dao.Bookmark;
 import com.gnizr.db.dao.Link;
 import com.gnizr.db.dao.User;
