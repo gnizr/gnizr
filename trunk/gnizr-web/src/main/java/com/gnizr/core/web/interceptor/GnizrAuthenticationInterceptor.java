@@ -19,7 +19,7 @@ package com.gnizr.core.web.interceptor;
 import java.util.Map;
 
 import com.gnizr.core.exceptions.NoSuchUserException;
-import com.gnizr.core.managers.UserManager;
+import com.gnizr.core.user.UserManager;
 import com.gnizr.core.web.action.LoggedInUserAware;
 import com.gnizr.core.web.action.SessionConstants;
 import com.gnizr.db.dao.User;

@@ -20,6 +20,7 @@ import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSet;
 
 import com.gnizr.core.GnizrCoreTestBase;
+import com.gnizr.core.link.LinkManager;
 import com.gnizr.db.dao.Bookmark;
 
 public class TestLinkManager extends GnizrCoreTestBase {
