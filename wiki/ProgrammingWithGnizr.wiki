@@ -1,4 +1,4 @@
-#summary How to setup a build environment for programming with gnizr Java API
+#summary Programming with gnizr Java API and how to setup a build environment
 #labels Phase-Implementation
 
 This document is intended for developers who want to write programs against gnizr Java API. 
@@ -13,3 +13,12 @@ There are several different ways that developers can introduce new application b
   # Create Java programs to manipulate the data objects stored in the gnizr database.
   # Create web mashup programs to consume RDF, JSON or RSS documents published by gnizr.
 
+Developing third-party web mashup programs doesn't require special build enviornment setup. These programs simply read data documents from the appropriate URL published by the gnizr web application. 
+
+Create Java programs to access data objects stored in a gnizr database or develop custom gnizr components will require the use of *gnizr Core API*. 
+
+Adding new application behavior by create WebWork actions will also require the use of *gnizr Core API* and *gnizr Web Application API*. 
+
+= Setup to use gnizr Core API =
+
+todo...
