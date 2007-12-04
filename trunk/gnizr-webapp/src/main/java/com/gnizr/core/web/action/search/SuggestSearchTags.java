@@ -10,8 +10,8 @@ import net.sf.json.JSONSerializer;
 
 import org.apache.log4j.Logger;
 
-import com.gnizr.core.managers.TagManager;
-import com.gnizr.core.pagers.TagPager;
+import com.gnizr.core.tag.TagManager;
+import com.gnizr.core.tag.TagPager;
 import com.gnizr.core.web.action.AbstractAction;
 import com.gnizr.db.dao.Tag;
 

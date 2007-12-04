@@ -25,8 +25,8 @@ import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSet;
 
 import com.gnizr.core.bookmark.BookmarkPager;
-import com.gnizr.core.managers.TagManager;
-import com.gnizr.core.managers.UserManager;
+import com.gnizr.core.tag.TagManager;
+import com.gnizr.core.user.UserManager;
 import com.gnizr.core.web.action.SessionConstants;
 import com.gnizr.core.web.junit.GnizrWebappTestBase;
 import com.gnizr.db.dao.Bookmark;

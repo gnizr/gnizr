@@ -23,9 +23,9 @@ import java.util.List;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.log4j.Logger;
 
-import com.gnizr.core.managers.UserManager;
 import com.gnizr.core.search.Search;
 import com.gnizr.core.search.SearchResult;
+import com.gnizr.core.user.UserManager;
 import com.gnizr.core.util.GnizrDaoUtil;
 import com.gnizr.core.util.SyndFeedFactory;
 import com.gnizr.core.web.action.AbstractPagingAction;

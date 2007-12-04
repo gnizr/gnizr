@@ -22,7 +22,7 @@ import org.apache.log4j.Logger;
 
 import com.gnizr.core.exceptions.NoSuchUserException;
 import com.gnizr.core.folder.FolderManager;
-import com.gnizr.core.managers.UserManager;
+import com.gnizr.core.user.UserManager;
 import com.gnizr.core.util.GnizrDaoUtil;
 import com.gnizr.core.web.action.AbstractAction;
 import com.gnizr.db.dao.Folder;

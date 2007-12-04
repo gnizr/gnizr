@@ -19,8 +19,8 @@ package com.gnizr.core.web.action.bookmark;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSet;
 
-import com.gnizr.core.managers.ForUserManager;
-import com.gnizr.core.pagers.ForUserPager;
+import com.gnizr.core.foruser.ForUserManager;
+import com.gnizr.core.foruser.ForUserPager;
 import com.gnizr.core.web.junit.GnizrWebappTestBase;
 import com.gnizr.db.dao.User;
 import com.opensymphony.xwork.ActionSupport;

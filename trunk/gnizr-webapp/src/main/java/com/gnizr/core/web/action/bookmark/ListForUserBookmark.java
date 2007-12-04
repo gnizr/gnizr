@@ -22,8 +22,8 @@ import org.apache.log4j.Logger;
 
 import com.gnizr.core.exceptions.InvalidTimeRangeValueException;
 import com.gnizr.core.exceptions.NoSuchUserException;
-import com.gnizr.core.managers.ForUserManager;
-import com.gnizr.core.pagers.ForUserPager;
+import com.gnizr.core.foruser.ForUserManager;
+import com.gnizr.core.foruser.ForUserPager;
 import com.gnizr.core.vocab.TimeRange;
 import com.gnizr.core.web.action.AbstractPagingAction;
 import com.gnizr.core.web.action.LoggedInUserAware;
