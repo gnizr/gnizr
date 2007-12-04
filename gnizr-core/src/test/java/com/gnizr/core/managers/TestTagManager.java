@@ -23,6 +23,7 @@ import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSet;
 
 import com.gnizr.core.GnizrCoreTestBase;
+import com.gnizr.core.tag.TagManager;
 import com.gnizr.core.util.GnizrDaoUtil;
 import com.gnizr.db.dao.Tag;
 import com.gnizr.db.dao.TagAssertion;
