@@ -7,7 +7,7 @@ Changelog
   * [http://code.google.com/p/gnizr/issues/detail?id=22 Issue 22]: Tagging auto-complete doesn't work if the text contains non-word char (fixed, need testing)
   * [http://code.google.com/p/gnizr/issues/detail?id=24 Issue 24]: Bookmarklet window pop-up is not focused (fixed, need testing)
   * [http://code.google.com/p/gnizr/issues/detail?id=25 Issue 25]: !OpenSearch action redirects to a page that doesn't exist (fixed, need testing)
-  * Re-arranged the java packaging of few DB classes ([http://fisheye2.cenqua.com/changelog/gnizr/?cs=349 SVN Revision 349]).
+  * Re-arranged the java packaging: SVN Revision 349-366, 12/04/2007.
 
 
 ==== Version 2.3.0-M1 (20 November 2007) ====
