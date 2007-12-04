@@ -10,7 +10,7 @@
 -->
 <beans>
 	<!-- Defines the Database Connection to use -->
-	<bean id="dataSource" class="com.gnizr.db.GnizrBasicDataSource"
+	<bean id="dataSource" class="com.gnizr.db.dao.GnizrBasicDataSource"
 		destroy-method="close" singleton="true">
 		<property name="driverClassName">
 			<value>com.mysql.jdbc.Driver</value>
