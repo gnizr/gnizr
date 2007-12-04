@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">	
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<parent>
-      <groupId>com.gnizr</groupId>
-      <artifactId>gnizr</artifactId>
-      <version>2.3.0-M2</version>
-    </parent>
+		<groupId>com.gnizr</groupId>
+		<artifactId>gnizr</artifactId>
+		<version>2.3.0-M2</version>
+	</parent>
 	
 	<modelVersion>4.0.0</modelVersion>
 	
@@ -33,31 +33,31 @@
 			<groupId>com.gnizr.test</groupId>
 			<artifactId>gnizr-test</artifactId>
 			<version>${gnVersion}</version>
-			<scope>test</scope>			
-		</dependency>		
+			<scope>test</scope>
+		</dependency>
 		<dependency>
 			<groupId>com.gnizr.core.web</groupId>
 			<artifactId>gnizr-web</artifactId>
 			<version>${gnVersion}</version>
-			<scope>compile</scope>			
+			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.gnizr.delicious</groupId>
 			<artifactId>gnizr-delicious</artifactId>
 			<version>${gnVersion}</version>
-			<scope>compile</scope>			
+			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.gnizr.robot</groupId>
 			<artifactId>gnizr-robot</artifactId>
 			<version>${gnVersion}</version>
-			<scope>compile</scope>			
+			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.gnizr.core.web</groupId>
 			<artifactId>gnizr-clustermap</artifactId>
 			<version>${gnVersion}</version>
-			<scope>compile</scope>			
+			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>urlrewrite</groupId>
@@ -65,19 +65,19 @@
 		</dependency>
 		<dependency>
 			<groupId>org.htmlparser</groupId>
-			<artifactId>htmlparser</artifactId>			       
+			<artifactId>htmlparser</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
 		</dependency>
 		<!-- Define <version/> in this POM because using <classifier/> in 
-			 the parent POM failed. Probably it's a bug in Maven 2 -->
+		the parent POM failed. Probably it's a bug in Maven 2 -->
 		<dependency>
 			<groupId>net.sf.json-lib</groupId>
 			<artifactId>json-lib</artifactId>
 			<version>2.1</version>
-			<classifier>jdk15</classifier>			      
+			<classifier>jdk15</classifier>
 		</dependency>
 	</dependencies>
 	<build>
@@ -112,6 +112,19 @@
 						</configuration>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-clean-plugin</artifactId>
+				<configuration>
+					<filesets>
+						<fileset>
+							<directory>src/main/webapp/WEB-INF/lib</directory>
+							<includes>
+								<include>**/*.jar</include>								
+							</includes>
+						</fileset>
+					</filesets>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
