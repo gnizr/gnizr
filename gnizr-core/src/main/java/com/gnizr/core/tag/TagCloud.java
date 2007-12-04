@@ -14,7 +14,7 @@
  * Portions created by the Initial Contributor are Copyright (C) 2007
  * Image Matters LLC. All Rights Reserved.
  */
-package com.gnizr.core.tagging;
+package com.gnizr.core.tag;
 
 import java.io.Serializable;
 import java.util.ArrayList;
