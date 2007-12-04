@@ -14,9 +14,8 @@
  * Portions created by the Initial Contributor are Copyright (C) 2007
  * Image Matters LLC. All Rights Reserved.
  */
-package com.gnizr.core.managers;
+package com.gnizr.core.util;
 
-import com.gnizr.core.util.GnizrDaoUtil;
 import com.gnizr.db.dao.Bookmark;
 import com.gnizr.db.dao.TagAssertion;
 import com.gnizr.db.dao.User;
