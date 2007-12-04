@@ -7,8 +7,8 @@ import net.sf.json.JSON;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSet;
 
-import com.gnizr.core.managers.TagManager;
-import com.gnizr.core.pagers.TagPager;
+import com.gnizr.core.tag.TagManager;
+import com.gnizr.core.tag.TagPager;
 import com.gnizr.core.web.junit.GnizrWebappTestBase;
 import com.opensymphony.xwork.ActionSupport;
 

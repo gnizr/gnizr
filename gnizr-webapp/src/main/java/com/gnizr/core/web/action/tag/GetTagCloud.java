@@ -21,7 +21,7 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 
-import com.gnizr.core.tagging.TagCloud;
+import com.gnizr.core.tag.TagCloud;
 import com.gnizr.core.web.action.AbstractAction;
 import com.gnizr.db.dao.Tag;
 

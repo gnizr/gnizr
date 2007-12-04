@@ -19,9 +19,9 @@ package com.gnizr.core.web.action.tag;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSet;
 
-import com.gnizr.core.managers.TagManager;
-import com.gnizr.core.managers.UserManager;
-import com.gnizr.core.pagers.TagPager;
+import com.gnizr.core.tag.TagManager;
+import com.gnizr.core.tag.TagPager;
+import com.gnizr.core.user.UserManager;
 import com.gnizr.core.web.junit.GnizrWebappTestBase;
 import com.gnizr.db.dao.User;
 import com.gnizr.db.dao.UserTag;
