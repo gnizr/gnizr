@@ -1,0 +1,15 @@
+#summary How to setup a build environment for programming with gnizr Java API
+#labels Phase-Implementation
+
+This document is intended for developers who want to write programs against gnizr Java API. 
+
+= Introduction =
+
+Gnizr provides a set of Java API that allows developers to create new application behavior  and to interface with gnizr data objects -- e.g., user accounts, bookmarks, links, tags and folders and RSS feeds.
+
+There are several different ways that developers can introduce new application behavior: 
+  # Create new WebWork actions or JavaScript code that augment the existing gnizr function. 
+  # Create custom implementations of gnizr interface components and inject these implementations into a gnizr installation. 
+  # Create Java programs to manipulate the data objects stored in the gnizr database.
+  # Create web mashup programs to consume RDF, JSON or RSS documents published by gnizr.
+
