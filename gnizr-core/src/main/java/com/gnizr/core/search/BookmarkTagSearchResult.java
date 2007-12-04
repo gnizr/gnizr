@@ -20,8 +20,8 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.gnizr.db.GnizrDao;
 import com.gnizr.db.dao.BookmarkTag;
+import com.gnizr.db.dao.GnizrDao;
 import com.gnizr.db.dao.tag.TagDao;
 
 public class BookmarkTagSearchResult implements SearchResult<BookmarkTag>{

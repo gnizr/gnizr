@@ -32,8 +32,8 @@ import javax.sql.DataSource;
 
 import org.apache.log4j.Logger;
 
-import com.gnizr.db.DBUtil;
 import com.gnizr.db.dao.Bookmark;
+import com.gnizr.db.dao.DBUtil;
 import com.gnizr.db.dao.DaoResult;
 import com.gnizr.db.dao.FeedSubscription;
 import com.gnizr.db.dao.Folder;

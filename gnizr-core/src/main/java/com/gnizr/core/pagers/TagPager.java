@@ -30,7 +30,7 @@ import com.gnizr.core.exceptions.NoSuchTagException;
 import com.gnizr.core.exceptions.NoSuchUserException;
 import com.gnizr.core.exceptions.NoSuchUserTagException;
 import com.gnizr.core.util.GnizrDaoUtil;
-import com.gnizr.db.GnizrDao;
+import com.gnizr.db.dao.GnizrDao;
 import com.gnizr.db.dao.Tag;
 import com.gnizr.db.dao.TagAssertion;
 import com.gnizr.db.dao.TagProperty;

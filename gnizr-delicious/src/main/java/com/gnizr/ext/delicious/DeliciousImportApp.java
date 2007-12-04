@@ -25,9 +25,9 @@ import com.gnizr.core.bookmark.BookmarkManager;
 import com.gnizr.core.folder.FolderManager;
 import com.gnizr.core.managers.UserManager;
 import com.gnizr.core.util.GnizrDaoUtil;
-import com.gnizr.db.AccountStatus;
-import com.gnizr.db.GnizrDao;
+import com.gnizr.db.dao.GnizrDao;
 import com.gnizr.db.dao.User;
+import com.gnizr.db.vocab.AccountStatus;
 
 public class DeliciousImportApp {
 

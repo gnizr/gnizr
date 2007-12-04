@@ -44,7 +44,6 @@ import com.gnizr.core.exceptions.NoSuchUserTagException;
 import com.gnizr.core.exceptions.ParseTagException;
 import com.gnizr.core.folder.FolderManager;
 import com.gnizr.core.vocab.TimeRange;
-import com.gnizr.db.MIMEType;
 import com.gnizr.db.dao.Bookmark;
 import com.gnizr.db.dao.ForUser;
 import com.gnizr.db.dao.Link;
@@ -61,6 +60,7 @@ import com.gnizr.db.dao.tag.TagAssertionDao;
 import com.gnizr.db.dao.tag.TagDao;
 import com.gnizr.db.dao.tag.TagPropertyDao;
 import com.gnizr.db.dao.user.UserDao;
+import com.gnizr.db.vocab.MIMEType;
 
 /**
  * This class defines convenience methods for working gnizr data transport

@@ -20,10 +20,10 @@ import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSet;
 
 import com.gnizr.core.GnizrCoreTestBase;
-import com.gnizr.db.MIMEType;
 import com.gnizr.db.dao.Bookmark;
 import com.gnizr.db.dao.Link;
 import com.gnizr.db.dao.User;
+import com.gnizr.db.vocab.MIMEType;
 
 public class TestUpdateMIMETypeListener extends GnizrCoreTestBase {
 

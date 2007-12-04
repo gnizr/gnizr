@@ -32,7 +32,7 @@ import javax.sql.DataSource;
 
 import org.apache.log4j.Logger;
 
-import com.gnizr.db.DBUtil;
+import com.gnizr.db.dao.DBUtil;
 import com.gnizr.db.dao.Tag;
 import com.gnizr.db.dao.User;
 import com.gnizr.db.dao.UserStat;

@@ -24,7 +24,7 @@ import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSet;
 
 import com.gnizr.core.managers.UserManager;
-import com.gnizr.db.GnizrDao;
+import com.gnizr.db.dao.GnizrDao;
 import com.gnizr.db.dao.User;
 import com.opensymphony.xwork.ActionSupport;
 

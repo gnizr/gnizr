@@ -25,16 +25,41 @@ import org.apache.log4j.Logger;
 import com.gnizr.core.exceptions.NoSuchUserException;
 import com.gnizr.core.exceptions.UsernameTakenException;
 import com.gnizr.core.util.GnizrDaoUtil;
-import com.gnizr.db.AccountStatus;
-import com.gnizr.db.GnizrDao;
+import com.gnizr.db.dao.GnizrDao;
 import com.gnizr.db.dao.User;
 import com.gnizr.db.dao.UserStat;
 import com.gnizr.db.dao.UserTag;
 import com.gnizr.db.dao.tag.TagDao;
 import com.gnizr.db.dao.user.UserDao;
+import com.gnizr.db.vocab.AccountStatus;
 
 /**
- * Manages gnizr user registration, profile change and authentication. 
+ * Manages gnizr user registration, profile change and authentication, and provide methods to query user created tags. 
+ * 
+ * <h4>How to instantiate <code>UserManager</code></h4>
+ * <code>
+ *   import com.gnizr.db.GnizrDao;<br/>
+ *   ...<br/>
+ *   GnizrDao gnizrDao = ... // create GnizrDao object<br/>
+ *   UserManager userManager = new UserManager(gnizrDao);  
+ * </code>
+ * 
+ * <h4>Create a new user account</h4>
+ * <code>
+ * import com.gnizr.db.AccountStatus; <br/>
+ * ....
+ *    String username = "newUser";<br/>
+ *    String password = "safePass";<br/>
+ *    String fullname = "John Smith";<br/>
+ *    String email = "johns@example.com";<br/>
+ *    int acctStatus = AccountStatus.ACTIVE; <br/>
+ *    Date createdOn = ... // create today's date<br/>
+ *    User u = new User(username,password,fullname,email,acctStatus,createdOn);   
+ *    <br/><br/>
+ *    UserManager userManager = ... // create User Manager<br/>
+ *    userManager.createUser(u);    
+ * </code>
+ * 
  * 
  * @author harryc
  *
@@ -118,7 +143,7 @@ public class UserManager implements Serializable{
 	 * @return the status code of the user account.
 	 * @throws NoSuchUserException an exception is thrown if the input <code>User</code> 
 	 * doesn't match any user account record in the persistent store.
-	 * @see com.gnizr.db.AccountStatus
+	 * @see com.gnizr.db.vocab.AccountStatus
 	 */
 	public int getAccountStatus(User user) throws NoSuchUserException{
 		logger.debug("getAccountStatus: username="+user.getUsername());
@@ -280,7 +305,16 @@ public class UserManager implements Serializable{
 		return userDao.updateUser(profile);		
 	}
 
-	
+	/**
+	 * Deletes an user account from the system. The <code>getId</code> 
+	 * of the input <code>user</code> must return a valid user account id.
+	 * 
+	 * @param user an user account to be deleted
+	 * @return <code>true</code> if the given user account is deleted successfully. Returns
+	 * <code>false</code> otherwise.
+	 * @throws NoSuchUserException An exception is thrown if the system has no record
+	 * about <code>user</code>. 
+	 */
 	public boolean deleteUser(User user) throws NoSuchUserException{
 		logger.debug("deleteUser: user="+user);
 		if(user.getId() > 0){
@@ -294,31 +328,80 @@ public class UserManager implements Serializable{
 		return false;
 	}
 	
+	/**
+	 * Returns a list of all user accounts in the system. 
+	 * 
+	 * @return all users in the system.
+	 */
 	public List<User> listUsers(){
 		logger.debug("listUsers");
 		return userDao.listUsers();		
 	}
 	
+	/**
+	 * Return the user statistics of all users in the system. 
+	 * @return the user statistics of all users. 
+	 */
 	public List<UserStat> listUserStats(){
 		logger.debug("listUserStats");
 		return userDao.listUserStats();
 	}
-	
+
+	/**
+	 * Returns a list of alphabetically sorted tags of a minimal usage-frequency 
+	 * created by a given user.
+	 * 
+	 * @param user the given user who created tags in the list of <code>UserTag</code>
+	 * @param minFreq the mininal usage-frequency used for filtering
+	 * @return A non-<code>null</code> list of <code>UserTag</code>
+	 * @throws NoSuchUserException An exception is thrown if <code>user</code> doesn't
+	 * exist in the system. 
+	 */
 	public List<UserTag> getTagsSortByAlpha(User user, int minFreq) throws NoSuchUserException{
 		GnizrDaoUtil.fillId(userDao, user);
 		return tagDao.findUserTag(user, minFreq, TagDao.SORT_ALPH);
 	}
 	
+	/**
+	 * Returns a list of sorted tags of a minimal usage-frequency 
+	 * created by a given user. Tags are sorted based on their usage-frequency (i.e., <code>UserTag.getCount</code>).
+	 * 
+	 * @param user the given user who created tags in the list of <code>UserTag</code>
+	 * @param minFreq the mininal usage-frequency used for filtering
+	 * @return A non-<code>null</code> list of <code>UserTag</code>
+	 * @throws NoSuchUserException An exception is thrown if <code>user</code> doesn't
+	 * exist in the system. 
+	 */
 	public List<UserTag> getTagsSortByFreq(User user, int minFreq) throws NoSuchUserException{
 		GnizrDaoUtil.fillId(userDao, user);
 		return tagDao.findUserTag(user, minFreq, TagDao.SORT_FREQ);
 	}
 	
+	/**
+	 * Returns tags of a minimal usage-frequency created by a given user in groups, and sort tags in an alphabetical order.  
+	 * 
+	 * @param user the given user who created those tags
+	 * @param minFreq the minimal usage frequency used for filtering
+	 * @return a <code>Map</code> of user tag groups. Keys in the <code>Map</code> are the name of the tag group, and
+	 * the values in the <code>Map</code> are the list of member tags in that group.
+	 * @throws NoSuchUserException
+	 */
 	public Map<String, List<UserTag>> getTagGroupsSortByAlpha(User user, int minFreq) throws NoSuchUserException{
 		GnizrDaoUtil.fillId(userDao,user);
 		return userDao.listTagGroups(user,minFreq, UserDao.SORT_BY_TAG_ALPHA, UserDao.ASCENDING);
 	}
 	
+	
+	/**
+	 * Returns tags of a minimal usage-frequency created by a given user in groups, and sort tags based on their
+	 * usage-frequency.
+	 * 
+	 * @param user the given user who created those tags
+	 * @param minFreq the minimal usage frequency used for filtering
+	 * @return a <code>Map</code> of user tag groups. Keys in the <code>Map</code> are the name of the tag group, and
+	 * the values in the <code>Map</code> are the list of member tags in that group.
+	 * @throws NoSuchUserException
+	 */
 	public Map<String, List<UserTag>> getTagGroupsSortByFreq(User user, int minFreq) throws NoSuchUserException{
 		GnizrDaoUtil.fillId(userDao,user);
 		return userDao.listTagGroups(user,minFreq, UserDao.SORT_BY_TAG_USAGE_FREQ, UserDao.DESCENDING);
