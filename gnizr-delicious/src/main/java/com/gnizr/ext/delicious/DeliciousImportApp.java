@@ -23,7 +23,7 @@ import org.apache.commons.dbcp.BasicDataSource;
 
 import com.gnizr.core.bookmark.BookmarkManager;
 import com.gnizr.core.folder.FolderManager;
-import com.gnizr.core.managers.UserManager;
+import com.gnizr.core.user.UserManager;
 import com.gnizr.core.util.GnizrDaoUtil;
 import com.gnizr.db.dao.GnizrDao;
 import com.gnizr.db.dao.User;
