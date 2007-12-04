@@ -2,19 +2,19 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
 	"http://www.springframework.org/dtd/spring-beans.dtd">
 <beans>
-	<bean id="userManager" class="com.gnizr.core.managers.UserManager" singleton="true">
+	<bean id="userManager" class="com.gnizr.core.user.UserManager" singleton="true">
 		<constructor-arg>
 			<ref bean="gnizrDao"/>
 		</constructor-arg>
 	</bean>
 	
-	<bean id="tagManager" class="com.gnizr.core.managers.TagManager" singleton="true">
+	<bean id="tagManager" class="com.gnizr.core.tag.TagManager" singleton="true">
 		<constructor-arg>
 			<ref bean="gnizrDao"/>
 		</constructor-arg>
 	</bean>
 	
-	<bean id="linkManager" class="com.gnizr.core.managers.LinkManager" singleton="true">
+	<bean id="linkManager" class="com.gnizr.core.link.LinkManager" singleton="true">
 		<constructor-arg>
 			<ref bean="gnizrDao"/>
 		</constructor-arg>
@@ -26,7 +26,7 @@
 		</constructor-arg>
 	</bean>
 
-	<bean id="forUserManager" class="com.gnizr.core.managers.ForUserManager" singleton="true">
+	<bean id="forUserManager" class="com.gnizr.core.foruser.ForUserManager" singleton="true">
 		<constructor-arg>
 			<ref bean="gnizrDao"/>
 		</constructor-arg>
