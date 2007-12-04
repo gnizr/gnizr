@@ -228,7 +228,7 @@
           <groups>
             <group>
               <title>Database Packages</title>
-              <packages>com.gnizr.db:com.gnizr.db.*</packages>
+              <packages>com.gnizr.db.*</packages>
             </group>
             <group>
               <title>Core Packages</title>
@@ -236,7 +236,7 @@
             </group>
             <group>
               <title>Web Application Packages</title>
-              <packages>com.gnizr.core.web.*</packages>
+              <packages>com.gnizr.core.web.*:com.gnizr.core.robot.rss.action</packages>
             </group>
           </groups>          
           <excludePackageNames>com.gnizr.core.web.junit</excludePackageNames>
