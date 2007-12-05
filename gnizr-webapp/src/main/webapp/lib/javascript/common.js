@@ -23,3 +23,19 @@ function detectBrowser() {
 } 
  
 var BO = new detectBrowser(); 
+
+SaveLinkUtil = {
+    popUpEdit: function(postUrl,link,title){
+        var params = MochiKit.Base.queryString({'url':link,'title':title,'redirect':'false','saveAndClose':'true'});        
+        a = function(){
+            if(!window.open(postUrl+params,'gnizr','toolbar=0,status=0,resizable=0,width=800,height=640,scrollbars=yes')){
+                window.location.href = postUrl + params;
+            }
+        };
+        if(/Firefox/.test(navigator.userAgent)){
+            setTimeout(a,0);
+        }else{
+            a()
+        };       
+    }    
+}
