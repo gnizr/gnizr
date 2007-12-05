@@ -34,6 +34,13 @@
 
 /* ======== CSS used in OpenSearch result page ====== */
 
+.saveLink{
+	margin-left: 8px;
+}
+
+.resultEntryFocused{
+	background-color: #FFF8C6;
+}
 
 #searchTermSuggest{
 	position: relative;

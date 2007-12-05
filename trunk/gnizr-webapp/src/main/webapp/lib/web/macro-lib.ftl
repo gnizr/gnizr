@@ -79,6 +79,7 @@ INPUT: pageTitle:String // the <title/> of this HTML page
 <script type="text/javascript" charset="utf-8" src="${gzUrl("/lib/javascript/Mochikit/MochiKit1.4.js")}"></script>
 <script type="text/javascript" charset="utf-8" src="${gzUrl("/lib/javascript/tags-util.js")}"></script>
 <script type="text/javascript" charset="utf-8" src="${gzUrl("/lib/javascript/common.js")}"></script>
+<script type="text/javascript" charset="utf-8" src="${gzUrl("/lib/javascript/cookie-util.js")}"></script>
 <#if (gnizrConfiguration.snapShotsKey)?exists>
 <script type="text/javascript" src="http://shots.snap.com/snap_shots.js?${gnizrConfiguration.snapShotsKey}"></script>
 </#if>
