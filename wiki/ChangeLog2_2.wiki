@@ -1,6 +1,17 @@
 #summary Changelog of all releases made under version 2.2
 #labels Phase-Implementation
 
+==== Version 2.2.0 (in progress) ====
+
+Download
+  * Binrary: _soon_ 
+  * Source: _soon_
+
+Changelog
+  * [http://code.google.com/p/gnizr/issues/detail?id=20 Issue 20]: Unable to resize the preview URL window
+  * [http://code.google.com/p/gnizr/issues/detail?id=27 Issue 27]: Bookmarklet window pop-up is not focused (fixed, verified)
+
+
 ==== Version 2.2.0-RC3 (21 November 2007) ====
 
 Download 
