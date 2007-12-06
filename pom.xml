@@ -5,12 +5,12 @@
   <groupId>com.gnizr</groupId>
   <artifactId>gnizr</artifactId>
   <packaging>pom</packaging>
-  <version>2.2.0-RC3</version>
+  <version>2.2.0</version>
 
   <name>gnizr</name>
 
   <properties>
-    <gnVersion>2.2.0-RC3</gnVersion>
+    <gnVersion>2.2.0</gnVersion>
   </properties>
 
   <modules>
