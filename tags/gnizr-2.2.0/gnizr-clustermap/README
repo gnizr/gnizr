@@ -1,0 +1,7 @@
+How to deploy gnizr-clustermap-applet.jar
+
+mvn -f pom-applet.xml -Dmaven.test.skip=true assembly:assembly
+
+cp target/gnizr-clustermap-applet-x.x-jar-with-dependencies.jar \\
+   gnizr-webap/src/main/webapp/applets
+
