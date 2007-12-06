@@ -8,7 +8,7 @@ Download
   * Source: _soon_
 
 Changelog
-  * [http://code.google.com/p/gnizr/issues/detail?id=20 Issue 20]: Unable to resize the preview URL window
+  * [http://code.google.com/p/gnizr/issues/detail?id=20 Issue 20]: Unable to resize the preview URL window (fixed, verified)
   * [http://code.google.com/p/gnizr/issues/detail?id=27 Issue 27]: Bookmarklet window pop-up is not focused (fixed, verified)
 
 
