@@ -177,12 +177,12 @@ SearchExecutor.prototype.fetchMoreData = function(){
          var link = anEntry.link;
          var editLinkElm = '';
          if(MochiKit.Base.isUndefinedOrNull(loggedInUser) == false){
-            editLinkElm = MochiKit.DOM.A({'href':'#','class':'system-link invisible ' + saveResultLinkClass},'edit'); 
+            editLinkElm = MochiKit.DOM.A({'href':'#','class':'system-link invisible ' + saveResultLinkClass},''); 
          }
          var entryElm = MochiKit.DOM.LI(null,
             MochiKit.DOM.A({'class':'entryTitle','href':link,'target':'_blank'},title),
             editLinkElm,
-            MochiKit.DOM.P(null,summary) 
+            MochiKit.DOM.P({'class':'entryDescription'},summary) 
           );                                  
          MochiKit.DOM.appendChildNodes(resultElm,entryElm); 
          resultTile.notifyResultEntryCreated(entryElm);      
@@ -331,6 +331,111 @@ function getEqualTileWidth(numOfTiles){
     MochiKit.Logging.log('equal tile width: ' + w + ', ' + numOfTiles + ' tiles, table width ' + d.w);
 }
 
+function LinkEntry(linkEntryElement){
+    this.title = null;
+    this.url = null;
+    this.dsp = null;
+    if(linkEntryElement != null){
+        var hrefAElm = MochiKit.DOM.getFirstElementByTagAndClassName(null,'entryTitle',linkEntryElement);
+        MochiKit.Logging.log('LinkEntry: constructor: hrefAElm = ' + hrefAElm);
+        if(hrefAElm != null){
+            this.title = hrefAElm.innerHTML;
+            MochiKit.Logging.log('LinkEntry: constructor: this.title = ' + this.title);
+            this.url = hrefAElm.href;
+            MochiKit.Logging.log('LinkEntry: constructor: this.url = ' + this.url);
+        }
+        var dspElm = MochiKit.DOM.getFirstElementByTagAndClassName(null,'entryDescription',linkEntryElement);
+        if(dspElm != null){
+            this.dsp = dspElm.innerHTML;
+            MochiKit.Logging.log('LinkEntry: constructor: this.dsp = ' + this.dsp);
+        }
+    }
+}
+
+
+function QuickSave(linkEntryElement){    
+    this.callback = null;
+    this.entryElement = linkEntryElement;
+    this.linkEntry = new LinkEntry(this.entryElement);
+    if(this.entryElement != null){
+      var saveLnkElm = MochiKit.DOM.getFirstElementByTagAndClassName('A',saveResultLinkClass,this.entryElement);    
+      var svOrEdtLabel = saveLnkElm.innerHTML;
+      if(svOrEdtLabel == 'save'|| svOrEdtLabel == 'edit'){
+          this.connectOnClick(saveLnkElm,svOrEdtLabel);
+      }else{
+          if(MochiKit.Base.isUndefinedOrNull(fetchBookmarkUrl) == false){
+              var bmarkQS = MochiKit.Base.queryString({'url':this.linkEntry.url});
+              var d = MochiKit.Async.loadJSONDoc(fetchBookmarkUrl+'?'+bmarkQS);
+              var qs = this;
+              var fetchBmarkOkay = function(data){
+                 if(data != -1){
+			        saveLnkElm.innerHTML = 'edit';
+			        //this.callback = MochiKit.Signal.connect(saveLnkElm,'onclick',l,doEdit);
+   				    //MochiKit.Logging.log('QuickSave: constructor: connected onclick callback');	
+	       		 }else{
+					saveLnkElm.innerHTML = 'save';
+					//this.callback = MochiKit.Signal.connect(saveLnkElm,'onclick',l,doSave);
+   				    //MochiKit.Logging.log('QuickSave: constructor: connected onclick callback');				
+			     } 			     
+			     qs.connectOnClick(saveLnkElm,saveLnkElm.innerHTML);			    
+              }
+              var fetchBmarkFailed = function(err){
+        	       MochiKit.Logging.log('get bookmark failed: ' + err);
+		      }
+           	  d.addCallbacks(fetchBmarkOkay,fetchBmarkFailed);
+          }
+       }       
+    }   
+}
+
+QuickSave.prototype.destroy = function(){
+    if(this.callback != null){
+        MochiKit.Signal.disconnect(this.callback);
+        MochiKit.Logging.log('QuickSave: destroy: disconnected onclick callback');
+    }
+}
+
+QuickSave.prototype.connectOnClick = function (saveOrEditNode, actionLabel){ 
+     MochiKit.Logging.log('actionlabel: ' + actionLabel + ', saveOrEditNode: ' + saveOrEditNode + ', linkEntry: ' + this.linkEntry);
+     function doSave(e){         
+        e.stop();
+        var saveLoadingElm = MochiKit.DOM.SPAN({'class':'visible ' + saveResultLinkClass},'saving...');       
+        var saveLnkElm = MochiKit.DOM.getFirstElementByTagAndClassName('A',saveResultLinkClass,this.entryElement); 
+        function onSucc(data){
+            saveLoadingElm.innerHTML = 'done!';
+        }
+        function onErr(data){
+            saveLoadingElm.innerHTML = 'error!';
+        }
+        if(MochiKit.Base.isUndefinedOrNull(saveBookmarkUrl) == false){
+            var linkEntry = this.linkEntry;           
+            if(MochiKit.Base.isUndefinedOrNull(saveLnkElm) == false){               
+                MochiKit.DOM.insertSiblingNodesAfter(saveLnkElm,saveLoadingElm);
+                MochiKit.DOM.removeElement(saveLnkElm);
+            }
+            SaveLinkUtil.ajaxSave(saveBookmarkUrl,linkEntry.url,linkEntry.title,onSucc,onErr);
+        }
+     }
+    
+     function doEdit(e){
+        e.stop();          
+        if(postUrl != null){
+            var linkEntry = this.linkEntry;
+            SaveLinkUtil.popUpEdit(postUrl,linkEntry.url,linkEntry.title);
+        }
+     }   
+     
+    if(this.callback == null){
+        if(actionLabel == 'save'){
+            this.callback = MochiKit.Signal.connect(saveOrEditNode,'onclick',this,doSave);                   
+            MochiKit.Logging.log('QuickSave: connectOnClick: connected onclick callback');
+        }else if(actionLabel == 'edit'){
+            this.callback = MochiKit.Signal.connect(saveOrEditNode,'onclick',this,doEdit);    
+            MochiKit.Logging.log('QuickSave: connectOnClick: will connect to edit callback');
+        }
+    }
+} 
+   
 function ResultTile(service){
     this.service = service;
     this.searchExec = null;
@@ -391,38 +496,33 @@ ResultTile.prototype.createSeperatorHTMLElement = function(parentNode){
     return spElm;
 }
 
-function doEditLink(e){
-    e.stop();    
-    var entryElm = MochiKit.DOM.getFirstParentByTagAndClassName(e.src(),null,null);   
-    var entryAElm = MochiKit.DOM.getFirstElementByTagAndClassName(null,'entryTitle',entryElm);
-    var linkHref = entryAElm.href;
-    var linkTitle = entryAElm.innerHTML;
-    if(postUrl != null){
-        SaveLinkUtil.popUpEdit(postUrl,linkHref,linkTitle);
-    }
-}
+
 
 ResultTile.prototype.notifyResultEntryCreated = function(entryNode){
     function entryFocused(e){
       var elm = e.src();
-      MochiKit.DOM.addElementClass(elm,entryFocusedClass);         
-      var saveLnkElms = MochiKit.DOM.getElementsByTagAndClassName('A',saveResultLinkClass,elm);
-      for(var i = 0; i < saveLnkElms.length; i++){
-          var ivElm = saveLnkElms[i];
+      elm.quicksave = new QuickSave(elm);
+      MochiKit.DOM.addElementClass(elm,entryFocusedClass);              
+      var invisibleElms = MochiKit.DOM.getElementsByTagAndClassName(null,'invisible',elm);       
+      for(var i = 0; i < invisibleElms.length; i++){
+          var ivElm = invisibleElms[i];
           MochiKit.DOM.removeElementClass(ivElm,'invisible');
-          MochiKit.Signal.connect(ivElm,'onclick',doEditLink);
+          MochiKit.DOM.addElementClass(ivElm,'visible');
       }
     }
     
     function entryUnfocused(e){
       var elm = e.src();
-      MochiKit.DOM.removeElementClass(elm,entryFocusedClass);   
-      var saveLnkElms = MochiKit.DOM.getElementsByTagAndClassName('A',saveResultLinkClass,elm);
-      for(var i = 0; i < saveLnkElms.length; i++){
-          var ivElm = saveLnkElms[i];
-          MochiKit.DOM.addElementClass(ivElm,'invisible');
-          MochiKit.Signal.disconnectAll(ivElm,'onclick');
-      }         
+      MochiKit.DOM.removeElementClass(elm,entryFocusedClass);
+      if(MochiKit.Base.isUndefinedOrNull(elm.quicksave) == false){
+          elm.quicksave.destroy();
+      }
+      var visibleElms = MochiKit.DOM.getElementsByTagAndClassName(null,'visible',elm);       
+      for(var i = 0; i < visibleElms.length; i++){
+          var vElm = visibleElms[i];
+          MochiKit.DOM.removeElementClass(vElm,'visible');
+          MochiKit.DOM.addElementClass(vElm,'invisible');
+      }   
     }
     
     if(MochiKit.Base.isUndefinedOrNull(entryNode) == false){
