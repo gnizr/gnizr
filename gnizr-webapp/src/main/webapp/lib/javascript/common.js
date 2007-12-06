@@ -37,5 +37,20 @@ SaveLinkUtil = {
         }else{
             a()
         };       
+    },
+    ajaxSave: function(postUrl,link,title,onSuccess,onFail){        
+         var bmarkQS = MochiKit.Base.queryString({'url':link,'title':title});
+         var d = MochiKit.Async.loadJSONDoc(postUrl + '?' + bmarkQS);
+         var saveOkay = function(data){
+             if(MochiKit.Base.isUndefinedOrNull(onSuccess) == false){
+                 onSuccess(data);
+             }         
+         };
+         var saveFailed = function(err){
+             if(MochiKit.Base.isUndefinedOrNull(onFail) == false){
+                 onFail(err);
+             }
+         }  
+         d.addCallbacks(saveOkay,saveFailed);		 
     }    
 }
