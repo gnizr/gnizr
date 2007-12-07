@@ -41,7 +41,7 @@ Assume that you've checked out the source code in a top-level directory called `
     * `mvn -U -N install`
   # Compile gnizr modules, run JUnit tests and assemble the application
     * `mvn clean install`
-    * `mvn -Dmaven.test.skip=true clean package assembly:assembly`  
+    * `mvn -Dmaven.test.skip=true package assembly:assembly`  
   # If you see no error messages, then the build is complete.
     * `cd gnizr/target`
 
