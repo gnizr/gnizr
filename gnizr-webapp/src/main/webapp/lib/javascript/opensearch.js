@@ -5,6 +5,7 @@ var resultTilesRowID = 'resultTilesRow';
 var selectSearchServicesULID = 'selectSearchServices';
 var entryFocusedClass = 'resultEntryFocused';
 var saveResultLinkClass = 'saveLink';
+var linkActionClass = 'linkAction';
 
 /* Cookie related global variables */
 var chckSrvCookieName = 'rememberCheckedServices';
@@ -177,7 +178,8 @@ SearchExecutor.prototype.fetchMoreData = function(){
          var link = anEntry.link;
          var editLinkElm = '';
          if(MochiKit.Base.isUndefinedOrNull(loggedInUser) == false){
-            editLinkElm = MochiKit.DOM.A({'href':'#','class':'system-link invisible ' + saveResultLinkClass},''); 
+            editLinkElm = MochiKit.DOM.SPAN({'class':'invisible ' + linkActionClass},
+               MochiKit.DOM.A({'href':'#','class':'system-link ' + saveResultLinkClass},'')); 
          }
          var entryElm = MochiKit.DOM.LI(null,
             MochiKit.DOM.A({'class':'entryTitle','href':link,'target':'_blank'},title),
@@ -352,13 +354,18 @@ function LinkEntry(linkEntryElement){
     }
 }
 
-
 function QuickSave(linkEntryElement){    
-    this.callback = null;
+    this.callback = null;  
     this.entryElement = linkEntryElement;
-    this.linkEntry = new LinkEntry(this.entryElement);
+    this.linkEntry = new LinkEntry(this.entryElement);  
+    this.linkActionElement = null;  
     if(this.entryElement != null){
-      var saveLnkElm = MochiKit.DOM.getFirstElementByTagAndClassName('A',saveResultLinkClass,this.entryElement);    
+      this.linkActionElement = MochiKit.DOM.getFirstElementByTagAndClassName('SPAN',linkActionClass,this.entryElement);      
+      var saveLnkElm = MochiKit.DOM.getFirstElementByTagAndClassName('A',saveResultLinkClass,this.linkActionElement);    
+      if(MochiKit.Base.isUndefinedOrNull(saveLnkElm) == true){
+          saveLnkElm = MochiKit.DOM.A({'class':'system-link ' + saveResultLinkClass,'href':'#'});
+          MochiKit.DOM.replaceChildNodes(this.linkActionElement,saveLnkElm);         
+      }
       var svOrEdtLabel = saveLnkElm.innerHTML;
       if(svOrEdtLabel == 'save'|| svOrEdtLabel == 'edit'){
           this.connectOnClick(saveLnkElm,svOrEdtLabel);
@@ -369,13 +376,9 @@ function QuickSave(linkEntryElement){
               var qs = this;
               var fetchBmarkOkay = function(data){
                  if(data != -1){
-			        saveLnkElm.innerHTML = 'edit';
-			        //this.callback = MochiKit.Signal.connect(saveLnkElm,'onclick',l,doEdit);
-   				    //MochiKit.Logging.log('QuickSave: constructor: connected onclick callback');	
+			        saveLnkElm.innerHTML = 'edit';			        
 	       		 }else{
-					saveLnkElm.innerHTML = 'save';
-					//this.callback = MochiKit.Signal.connect(saveLnkElm,'onclick',l,doSave);
-   				    //MochiKit.Logging.log('QuickSave: constructor: connected onclick callback');				
+					saveLnkElm.innerHTML = 'save';								
 			     } 			     
 			     qs.connectOnClick(saveLnkElm,saveLnkElm.innerHTML);			    
               }
@@ -399,22 +402,16 @@ QuickSave.prototype.connectOnClick = function (saveOrEditNode, actionLabel){
      MochiKit.Logging.log('actionlabel: ' + actionLabel + ', saveOrEditNode: ' + saveOrEditNode + ', linkEntry: ' + this.linkEntry);
      function doSave(e){         
         e.stop();
-        var saveLoadingElm = MochiKit.DOM.SPAN({'class':'visible ' + saveResultLinkClass},'saving...');       
-        var saveLnkElm = MochiKit.DOM.getFirstElementByTagAndClassName('A',saveResultLinkClass,this.entryElement); 
+        var saveLoadingElm = MochiKit.DOM.SPAN(null,'saving...');       
         function onSucc(data){
             saveLoadingElm.innerHTML = 'done!';
         }
         function onErr(data){
             saveLoadingElm.innerHTML = 'error!';
-        }
-        if(MochiKit.Base.isUndefinedOrNull(saveBookmarkUrl) == false){
-            var linkEntry = this.linkEntry;           
-            if(MochiKit.Base.isUndefinedOrNull(saveLnkElm) == false){               
-                MochiKit.DOM.insertSiblingNodesAfter(saveLnkElm,saveLoadingElm);
-                MochiKit.DOM.removeElement(saveLnkElm);
-            }
-            SaveLinkUtil.ajaxSave(saveBookmarkUrl,linkEntry.url,linkEntry.title,onSucc,onErr);
-        }
+        }      
+        MochiKit.DOM.replaceChildNodes(this.linkActionElement,saveLoadingElm);
+        var linkEntry = this.linkEntry;
+        SaveLinkUtil.ajaxSave(saveBookmarkUrl,linkEntry.url,linkEntry.title,onSucc,onErr);       
      }
     
      function doEdit(e){
@@ -679,7 +676,7 @@ function setupSearchServiceSelection(){
  * initializePage
  */
 function initializePage() {
-   MochiKit.LoggingPane.createLoggingPane(true);
+   //MochiKit.LoggingPane.createLoggingPane(true);
    setupSearchServiceSelection();
    searchManager = new SearchManager(resultTilesRowID,services); 
 }

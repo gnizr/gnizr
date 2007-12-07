@@ -123,7 +123,7 @@ public class SuggestSearchTags extends AbstractAction{
 							
 			}catch(Exception e){
 				final String err = "error getting Popular tags for: tag=" + t;
-				logger.error(err,e);
+				logger.debug(err,e);
 			}
 		}
 		return SUCCESS;

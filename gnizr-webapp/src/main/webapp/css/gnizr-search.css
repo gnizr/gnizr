@@ -34,7 +34,7 @@
 
 /* ======== CSS used in OpenSearch result page ====== */
 
-.saveLink{
+.saveLink, .linkAction{
 	margin-left: 8px;
 }
 
