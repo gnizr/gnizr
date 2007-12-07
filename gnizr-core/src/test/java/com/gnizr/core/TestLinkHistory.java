@@ -22,7 +22,7 @@ import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSet;
 
 import com.gnizr.core.bookmark.TestBookmarkManager;
-import com.gnizr.core.link.LinkManager;
+import com.gnizr.core.managers.LinkManager;
 import com.gnizr.db.dao.Bookmark;
 import com.gnizr.db.dao.Link;
 

@@ -339,7 +339,7 @@ public class TestBookmarkManager extends GnizrCoreTestBase {
 		
 		UserTag cnnUserTag = tagDao.findUserTag(new User(1),cnnTag).get(0);
 		assertEquals(1,cnnUserTag.getCount());
-		assertEquals(1,tagDao.findUserTag(new User(1),newsTag).size());
+		assertEquals(0,tagDao.findUserTag(new User(1),newsTag).size());
 			
 		// rename "cnn" to "news"
 		boolean okay = manager.renameTag(new User(1),"cnn",new String[]{"news"});
@@ -351,11 +351,6 @@ public class TestBookmarkManager extends GnizrCoreTestBase {
 		
 		newsTag = tagDao.findTag("news").get(0);
 		assertEquals(1,newsTag.getCount());
-		
-		UserTag ut = GnizrDaoUtil.getUserTag(tagDao,new User(1), new Tag(4));
-		assertNull(ut);
-		ut = GnizrDaoUtil.getUserTag(tagDao, new User(1), new Tag(5));
-		assertNotNull(ut);
 	}
 	
 	public void testRenameTag2() throws Exception{
@@ -365,7 +360,7 @@ public class TestBookmarkManager extends GnizrCoreTestBase {
 		
 		// verify the baseline data
 		Tag cnnTag = tagDao.findTag("cnn").get(0);	
-		Tag newsTag = tagDao.findTag("news2").get(0);
+		Tag newsTag = tagDao.findTag("news").get(0);
 		assertEquals(1,cnnTag.getCount());
 		assertEquals(0,newsTag.getCount());
 		
@@ -474,64 +469,7 @@ public class TestBookmarkManager extends GnizrCoreTestBase {
 	}
 	
 	
-	private class MyTestBookmarkListener implements BookmarkListener{
-		/**
-		 * 
-		 */
-		private static final long serialVersionUID = -3917697198455763529L;
-		private List<Bookmark> notifiedBookmarks = new ArrayList<Bookmark>();
-		private List<Bookmark> notifiedOldBookmarks = new ArrayList<Bookmark>();
-		
-		public List<Bookmark> getNotifiedOldBookmarks(){
-			return notifiedOldBookmarks;
-		}
-		
-		public List<Bookmark> getNotifiedBookmarks(){
-			return notifiedBookmarks;
-		}
-		
-		public void notifyAdded(BookmarkManager manager, Bookmark bookmark) throws Exception {
-			notifiedBookmarks.add(bookmark);			
-		}
-
-		public void notifyDeleted(BookmarkManager manager, Bookmark bookmark) throws Exception {
-			notifiedBookmarks.add(bookmark);
-		}
-
-		public void notifyUpdated(BookmarkManager manager, Bookmark oldBookmark, Bookmark newBookmark) throws Exception {
-			notifiedBookmarks.add(newBookmark);
-			notifiedOldBookmarks.add(oldBookmark);
-		}
-	}
-	
-	public void testRenameTags6() throws Exception{
-		MyTestBookmarkListener listener = new MyTestBookmarkListener();
-		manager.addBookmarkListener(listener);
-		
-		Bookmark bm300 = manager.getBookmark(300);
-		List<String> tags = bm300.getTagList();
-		assertTrue(tags.contains("cnn"));
-		assertEquals(1,tags.size());
-		
-		boolean isOkay = manager.renameTag(bm300.getUser(), "cnn", new String[]{"gn:geonames=USA","foobar_1"});
-		assertTrue(isOkay);
-		
-		manager.shutdown();
-		
-		List<Bookmark> notifiedNew = listener.getNotifiedBookmarks();
-		assertEquals(1,notifiedNew.size());
-		tags = notifiedNew.get(0).getTagList();
-		assertTrue(tags.contains("gn:geonames=USA"));
-		assertTrue(tags.contains("foobar_1"));
-		
-		List<Bookmark> notifiedOld = listener.getNotifiedOldBookmarks();
-		assertEquals(1,notifiedOld.size());
-		assertEquals("cnn",notifiedOld.get(0).getTags());
-	}
-	
 	public void testDeleteTag() throws Exception{
-		MyTestBookmarkListener listener = new MyTestBookmarkListener();
-		manager.addBookmarkListener(listener);
 		boolean okay =  manager.deleteTag(new User(1),"cnn");
 		assertTrue(okay);
 		
@@ -540,29 +478,8 @@ public class TestBookmarkManager extends GnizrCoreTestBase {
 		
 		Bookmark bm = manager.getBookmark(300);
 		assertEquals("",bm.getTags());
-		
-		manager.shutdown();
-		
-		List<Bookmark> newBookmarks = listener.getNotifiedBookmarks();
-		List<Bookmark> oldBookmarks = listener.getNotifiedOldBookmarks();
-		assertEquals(newBookmarks.size(),oldBookmarks.size());
-		
-		bm = newBookmarks.get(0);
-		assertEquals("",bm.getTags());
-		
-		bm = oldBookmarks.get(0);
-		assertEquals("cnn",bm.getTags());
 	}
 	
-	
-	public void testDeleteTag2() throws Exception{
-		UserTag ut = GnizrDaoUtil.getUserTag(tagDao,new User(1),new Tag(5));
-		assertEquals(0,ut.getCount());
-		boolean okay =  manager.deleteTag(new User(1),"news");
-		assertTrue(okay);
-		ut = GnizrDaoUtil.getUserTag(tagDao, new User(1), new Tag(5));
-		assertNull(ut);
-	}
 	
 	public void testUpdateBookmark6() throws Exception{
 		Bookmark bm300 = manager.getBookmark(300);
@@ -750,6 +667,5 @@ public class TestBookmarkManager extends GnizrCoreTestBase {
 		
 		assertTrue(geomMarkerDao.deletePointMarker(ptMarkers.get(0).getId()));
 		assertTrue(geomMarkerDao.deletePointMarker(ptMarkers.get(1).getId()));
-	
 	}
 }

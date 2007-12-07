@@ -22,8 +22,7 @@ import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSet;
 
 import com.gnizr.core.bookmark.BookmarkManager;
-import com.gnizr.core.user.UserManager;
-import com.gnizr.core.util.GnizrDaoUtil;
+import com.gnizr.core.managers.UserManager;
 import com.gnizr.core.web.junit.GnizrWebappTestBase;
 import com.gnizr.db.dao.Bookmark;
 import com.gnizr.db.dao.Link;
@@ -458,9 +457,6 @@ public class TestEditBookmarkTag extends GnizrWebappTestBase{
 		action.setTag("B");
 		String code = action.execute();
 		assertEquals(ActionSupport.SUCCESS,code);
-		
-		// delete a 0-usage-freq tag is allowed.
-		assertNull(GnizrDaoUtil.getUserTag(tagDao, new User(1), new Tag(2)));
 		
 		bmarks = bookmarkDao.pageBookmarks(new User(1),new Tag(1),0,10).getResult();
 		assertEquals(3,bmarks.size());

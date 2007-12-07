@@ -9,14 +9,14 @@
 		</constructor-arg>
 	</bean>
 	
-	<bean id="forUserPager" class="com.gnizr.core.foruser.ForUserPager"
+	<bean id="forUserPager" class="com.gnizr.core.pagers.ForUserPager"
 		singleton="true">
 		<constructor-arg>
 			<ref bean="gnizrDao"/>
 		</constructor-arg>
 	</bean>
 
-	<bean id="tagPager" class="com.gnizr.core.tag.TagPager" singleton="true">
+	<bean id="tagPager" class="com.gnizr.core.pagers.TagPager" singleton="true">
 		<constructor-arg>
 			<ref bean="gnizrDao"/>
 		</constructor-arg>

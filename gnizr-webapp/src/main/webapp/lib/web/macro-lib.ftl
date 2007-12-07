@@ -11,11 +11,11 @@ NOTE: returns a version string to be injected in the <head/> of
 each gnizr page.
 -->
 <#function gnizrVersion >
-  <#return "2.3.0"/>
+  <#return "2.2.0"/>
 </#function>
 
 <#function gnizrDevVersion >
-  <#return "-M1"/>
+  <#return ""/>
 </#function>
 
 <#-- 
@@ -76,10 +76,9 @@ INPUT: pageTitle:String // the <title/> of this HTML page
 <#if (enableJS == true)>
 <!-- JAVASCRIPT DATA BEGINS -->
 <script type="text/javascript">MochiKit = {__compat__: true};</script>
-<script type="text/javascript" charset="utf-8" src="${gzUrl("/lib/javascript/Mochikit/MochiKit1.4.js")}"></script>
+<script type="text/javascript" charset="utf-8" src="${gzUrl("/lib/javascript/MochiKit1.4.js")}"></script>
 <script type="text/javascript" charset="utf-8" src="${gzUrl("/lib/javascript/tags-util.js")}"></script>
 <script type="text/javascript" charset="utf-8" src="${gzUrl("/lib/javascript/common.js")}"></script>
-<script type="text/javascript" charset="utf-8" src="${gzUrl("/lib/javascript/cookie-util.js")}"></script>
 <#if (gnizrConfiguration.snapShotsKey)?exists>
 <script type="text/javascript" src="http://shots.snap.com/snap_shots.js?${gnizrConfiguration.snapShotsKey}"></script>
 </#if>
@@ -211,10 +210,10 @@ as <h1/> (page header) of this page:
 <@ww.form action="search" namespace="/bookmark" theme="simple">
   <@ww.textfield id="search-input" name="queryString" value="${queryString?if_exists}" size="40"/>
     <#if loggedInUser?exists> 
-      <#assign opt = r"#{'opensearch':'OpenSearch','user':'My Bookmark Archive','text':'Community'}"/>
+      <#assign opt = r"#{'user':'My Bookmark Archive','text':'Community'}"/>
       <@ww.select id="search-space" name="type" list=opt/>   
     <#else>
-      <@ww.hidden name="type" value="opensearch"/>
+      <@ww.hidden name="type" value="text"/>
     </#if>      
     <@ww.submit id="search-submit" cssClass="btn" value="Search"/>    
 </@ww.form>
@@ -249,13 +248,9 @@ FTL NESTED: YES
 <div id="infobanner">
 <ul id="breadcrumbs"> 
   <#list bct as bctItm>
-    <#if (bctItm['url']?length > 0)>
-      <#local url = bctItm['url']/>
-    <#else>
-      <#local url = ''/>
-    </#if>
+    <#local url = bctItm['url']/>
     <#local name = bctItm['name']/>
-    <li><#if url?exists && (url?length>0)><a href="${url}">${name}</a><#else>${name}</#if>
+    <li><a href="${url}">${name}</a>
     <#if bctItm_has_next><img src="${gzUrl("/images/arrow.gif")}"></img></#if>
     </li>
   </#list>

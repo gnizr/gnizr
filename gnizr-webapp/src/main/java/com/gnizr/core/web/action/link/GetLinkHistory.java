@@ -20,7 +20,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.gnizr.core.link.LinkManager;
+import com.gnizr.core.managers.LinkManager;
 import com.gnizr.core.web.action.AbstractAction;
 import com.gnizr.core.web.action.LoggedInUserAware;
 import com.gnizr.db.dao.Bookmark;

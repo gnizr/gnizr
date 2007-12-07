@@ -20,11 +20,11 @@ import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSet;
 
 import com.gnizr.core.GnizrCoreTestBase;
-import com.gnizr.core.user.UserManager;
+import com.gnizr.core.managers.UserManager;
 import com.gnizr.core.util.GnizrDaoUtil;
+import com.gnizr.db.AccountStatus;
 import com.gnizr.db.dao.User;
 import com.gnizr.db.dao.user.UserDao;
-import com.gnizr.db.vocab.AccountStatus;
 
 public class TestUserManager extends GnizrCoreTestBase {
 

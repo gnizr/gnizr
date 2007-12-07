@@ -22,7 +22,7 @@ import java.util.Map;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSet;
 
-import com.gnizr.core.tag.TagManager;
+import com.gnizr.core.managers.TagManager;
 import com.gnizr.core.web.junit.GnizrWebappTestBase;
 import com.gnizr.db.dao.Bookmark;
 import com.gnizr.db.dao.Tag;

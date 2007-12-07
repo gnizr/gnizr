@@ -17,7 +17,7 @@
 package com.gnizr.core.web.action;
 
 import com.gnizr.core.exceptions.NoSuchUserException;
-import com.gnizr.core.user.UserManager;
+import com.gnizr.core.managers.UserManager;
 import com.gnizr.db.dao.User;
 
 public abstract class AbstractLoggedInUserAction extends AbstractAction implements LoggedInUserAware{

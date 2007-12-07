@@ -3,7 +3,7 @@
 	"http://www.springframework.org/dtd/spring-beans.dtd">
 <beans>
 	
-	<bean id="tagCloud" class="com.gnizr.core.tag.TagCloud" singleton="true">
+	<bean id="tagCloud" class="com.gnizr.core.tagging.TagCloud" singleton="true">
 		<constructor-arg>
 			<ref bean="gnizrDao"/>
 		</constructor-arg>

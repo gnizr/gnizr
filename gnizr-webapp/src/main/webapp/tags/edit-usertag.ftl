@@ -1,17 +1,22 @@
+<#-- /tags/edit-usertag.ftl -->
+
+<#-- import Freemarker macros that are common to the site -->
 <#include "/lib/web/macro-lib.ftl"/>
+<#-- import Freemarker macros that are specific to TAGS -->
 <#include "./macro-lib.ftl"/>
 <#assign username = loggedInUser.username/>
 <#assign title="edit tag '${tag}' -- gnizr"/>
 <#assign thisPageHref=gzTagUrl(tag)/>
+
 <#if editValueName?exists == false>
   <#assign editValueName="relatedTags"/>
 </#if>
-<@pageBegin pageTitle=title cssHref=[gzUrl("/css/gnizr-editusertag.css")]>
-<script type="text/javascript" src="${gzUrl("/lib/javascript/edit-tagrel.js")}"></script>
-<script type="text/javascript" src="${gzUrl("/data/json/userTagCloud.action?callback=loadUserTags&username="+username)}"></script>
-</@pageBegin>
+
+<@pageBegin pageTitle=title cssHref=[gzUrl("/css/gnizr-editusertag.css")]/>
+
 <@headerBlock>
 </@headerBlock>
+
 <@pageContent>
 <#assign bct = settingsBCT(loggedInUser.username)/>
 <#assign bct = bct + [gzBCTPair('edit tag relations', gzUrl("/edit/tag")),
@@ -58,14 +63,6 @@ Define semantic relationships between <b>'${tag}'</b> and other tags.
 </div>
 </div>
 </@mainBlock>
-<div id="editTools">
-<p>
-View bookmarks tagged: <a href="${gzUserTagUrl(username,tag)}" class="system-link" target="_blank">${tag}</a>
-</p>
-<div id="tagCloud">
-  <ol id="userTags" class="tag-cloud"></ol>
-</div>
-</div>
 </@pageContent>
 <@pageEnd/>
 

@@ -6,13 +6,6 @@
 	<!-- see also webwork doc: http://www.opensymphony.com/webwork/wikidocs/Interceptors.html -->
 	
 	<package name="gnizr-basic" extends="webwork-default">
-		
-		<result-types>
-            <result-type name="romerss" class="com.gnizr.core.web.result.RomeResult"/>
- 		    <result-type name="opensearch" class="com.gnizr.core.web.result.OpenSearchRomeResult"/>
-			<result-type name="json" class="com.gnizr.core.web.result.JSONResult"/>
-        </result-types>
-		
 		<interceptors>
 			
 			<!-- sets the LoggedInUser if an action implements LoggedInUserAware -->
@@ -36,6 +29,7 @@
 			<interceptor name="server-maintenance"
 				class="com.gnizr.core.web.interceptor.ServerMaintenanceInterceptor"/>
 		</interceptors>
+		
 		
 		<!-- all action result of type "login" will redirect to /login by default -->
 		<global-results>
@@ -68,16 +62,6 @@
 				<interceptor-ref name="servlet-config"/>
 				<interceptor-ref name="static-params"/>
 				<interceptor-ref name="params"/>
-			</interceptor-stack>
-			
-			<interceptor-stack name="gnizrNoPolicyDefaultStack">			
-				<interceptor-ref name="server-maintenance"/>
-				<interceptor-ref name="config-gnizr"/>			
-				<interceptor-ref name="exception"/>
-				<interceptor-ref name="servlet-config"/>
-				<interceptor-ref name="static-params"/>
-				<interceptor-ref name="params"/>
-				<interceptor-ref name="prepare"/>
 			</interceptor-stack>
 		</interceptors>
 	

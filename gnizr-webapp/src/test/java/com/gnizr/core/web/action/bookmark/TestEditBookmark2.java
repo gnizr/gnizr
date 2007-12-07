@@ -23,8 +23,8 @@ import org.dbunit.dataset.xml.FlatXmlDataSet;
 
 import com.gnizr.core.bookmark.BookmarkManager;
 import com.gnizr.core.folder.FolderManager;
-import com.gnizr.core.link.LinkManager;
-import com.gnizr.core.user.UserManager;
+import com.gnizr.core.managers.LinkManager;
+import com.gnizr.core.managers.UserManager;
 import com.gnizr.core.web.junit.GnizrWebappTestBase;
 import com.gnizr.db.dao.Bookmark;
 import com.gnizr.db.dao.Link;

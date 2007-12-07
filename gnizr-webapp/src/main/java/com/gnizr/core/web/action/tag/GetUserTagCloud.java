@@ -35,23 +35,12 @@ public class GetUserTagCloud extends AbstractTagCloudAction implements SessionAw
 		
 	// read-only data
 	private List<UserTag> userTags;
-	
+
 	@Override
 	protected String go() throws Exception {
 		logger.debug("GetUserTagCloud.go()");
 		super.resolveUser();
 		int frq = getMinTagFreq();
-		if(getSortBy().equalsIgnoreCase(SessionConstants.SORT_ALPH)){			
-			userTags = getUserManager().getTagsSortByAlpha(user,frq);
-		}else{
-			userTags = getUserManager().getTagsSortByFreq(user,frq);
-		}
-		return SUCCESS;
-	}
-	
-	public String doGetAllTags() throws Exception{
-		super.resolveUser();
-		int frq = 0;
 		if(getSortBy().equalsIgnoreCase(SessionConstants.SORT_ALPH)){			
 			userTags = getUserManager().getTagsSortByAlpha(user,frq);
 		}else{
@@ -68,5 +57,5 @@ public class GetUserTagCloud extends AbstractTagCloudAction implements SessionAw
 	protected boolean isStrictLoggedInUserMode() {
 		return false;
 	}
-
+	
 }

@@ -2,10 +2,9 @@
 	"http://www.opensymphony.com/xwork/xwork-1.0.dtd">
 <xwork>
 	<package name="gnizr-json" extends="gnizr-default" namespace="/data/json">				
-		<action name="userTagCloud" class="com.gnizr.core.web.action.tag.GetUserTagCloud"
-			method="doGetAllTags">
+		<action name="userTagCloud" class="com.gnizr.core.web.action.tag.GetUserTagCloud">
 			<interceptor-ref name="loggedIn"/>
-			<interceptor-ref name="defaultStack"/>			
+			<interceptor-ref name="defaultStack"/>
 			<result name="success" type="freemarker">
 				<param name="location">/json/usertags.ftl</param>
 				<param name="contentType">text/javascript</param>	
@@ -135,21 +134,7 @@
 				<param name="location">/json/op-failed.ftl</param>
 				<param name="contentType">text/javascript</param>
 			</result>
-	   </action>		
-		
-		<action name="searchproxy" class="com.gnizr.core.web.action.search.OpenSearchProxy">
-			<interceptor-ref name="gnizrDefaultStack"/>		
-			<result name="success" type="json">
-				<param name="jsonName">jsonResult</param>
-			</result>
-		</action>		
-		
-		<action name="suggestSearchTags" class="com.gnizr.core.web.action.search.SuggestSearchTags">
-			<interceptor-ref name="gnizrDefaultStack"/>
-			<result name="success" type="json">
-				<param name="jsonName">jsonResult</param>
-			</result>
-		</action>
+	   </action>				
 	</package>
 	
 	

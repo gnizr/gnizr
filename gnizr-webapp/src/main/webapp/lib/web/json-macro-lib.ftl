@@ -43,17 +43,3 @@
  'point':'${pointMarker.x?c},${pointMarker.y?c}'
 }      
 </#macro>
-
-<#macro openSearchSrvJson services>
-[<#list services as srv>
-  {'id':'OS${srv_index+1}',
-   'shortName':'${srv.shortName?html}',
-   'description':'${srv.description?html}',
-   'type':'${srv.type}',
-   'supportsPageBased':${srv.supportsPageBased?string},
-   'supportsIndexBased':${srv.supportsIndexBased?string},
-   'serviceUrl':'${srv.serviceUrlPattern?url}',
-   'defaultEnabled':${srv.defaultEnabled?string}}   
-  <#if srv_has_next>,</#if>
-</#list>]
-</#macro>

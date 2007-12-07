@@ -23,7 +23,6 @@ import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSet;
 
 import com.gnizr.core.GnizrCoreTestBase;
-import com.gnizr.core.foruser.ForUserManager;
 import com.gnizr.core.util.GnizrDaoUtil;
 import com.gnizr.db.dao.Bookmark;
 import com.gnizr.db.dao.DaoResult;

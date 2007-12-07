@@ -25,9 +25,9 @@ import com.gnizr.core.exceptions.MissingIdException;
 import com.gnizr.core.exceptions.NoSuchTagException;
 import com.gnizr.core.exceptions.NoSuchUserException;
 import com.gnizr.core.exceptions.NoSuchUserTagException;
-import com.gnizr.core.tag.TagManager;
-import com.gnizr.core.tag.TagPager;
-import com.gnizr.core.user.UserManager;
+import com.gnizr.core.managers.TagManager;
+import com.gnizr.core.managers.UserManager;
+import com.gnizr.core.pagers.TagPager;
 import com.gnizr.core.util.TagUtil;
 import com.gnizr.core.web.action.AbstractAction;
 import com.gnizr.core.web.action.LoggedInUserAware;
@@ -280,7 +280,7 @@ public class EditUserTag extends AbstractAction implements LoggedInUserAware {
 	 */
 	public String fetchEditData() {		
 		try {
-			userTags = userManager.getTagsSortByAlpha(loggedInUser,0);
+			userTags = userManager.getTagsSortByAlpha(loggedInUser,1);
 			if(tag != null){
 				if(isInputTagValid(tag) == false){
 					return INPUT;

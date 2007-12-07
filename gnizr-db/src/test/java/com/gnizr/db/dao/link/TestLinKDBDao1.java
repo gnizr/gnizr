@@ -21,10 +21,10 @@ import java.util.List;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSet;
 
+import com.gnizr.db.MIMEType;
 import com.gnizr.db.dao.GnizrDBTestBase;
 import com.gnizr.db.dao.Link;
 import com.gnizr.db.dao.user.TestUserDBDao1;
-import com.gnizr.db.vocab.MIMEType;
 
 public class TestLinKDBDao1 extends GnizrDBTestBase {
 	

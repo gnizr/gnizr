@@ -23,7 +23,6 @@ import org.dbunit.dataset.xml.FlatXmlDataSet;
 
 import com.gnizr.core.GnizrCoreTestBase;
 import com.gnizr.core.bookmark.BookmarkManager;
-import com.gnizr.core.tag.TagManager;
 import com.gnizr.db.dao.Bookmark;
 import com.gnizr.db.dao.BookmarkTag;
 import com.gnizr.db.dao.User;

@@ -21,13 +21,13 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 
 import com.gnizr.core.bookmark.BookmarkManager;
-import com.gnizr.core.delicious.DeliciousImport;
-import com.gnizr.core.delicious.ImportStatus;
 import com.gnizr.core.folder.FolderManager;
-import com.gnizr.core.user.UserManager;
+import com.gnizr.core.managers.UserManager;
 import com.gnizr.core.web.action.AbstractAction;
 import com.gnizr.core.web.action.LoggedInUserAware;
 import com.gnizr.db.dao.User;
+import com.gnizr.ext.delicious.DeliciousImport;
+import com.gnizr.ext.delicious.ImportStatus;
 
 import del.icio.us.DeliciousException;
 import del.icio.us.DeliciousNotAuthorizedException;

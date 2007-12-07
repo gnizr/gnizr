@@ -21,7 +21,7 @@ import org.dbunit.DatabaseTestCase;
 import org.dbunit.database.DatabaseConnection;
 import org.dbunit.database.IDatabaseConnection;
 
-import com.gnizr.db.dao.GnizrDao;
+import com.gnizr.db.GnizrDao;
 
 public abstract class GnizrCoreTestBase extends DatabaseTestCase{
 

@@ -23,7 +23,6 @@ import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSet;
 
 import com.gnizr.core.GnizrCoreTestBase;
-import com.gnizr.core.tag.TagPager;
 import com.gnizr.db.dao.User;
 import com.gnizr.db.dao.UserTag;
 
@@ -56,9 +55,6 @@ public class TestTagPager2 extends GnizrCoreTestBase {
 		UserTag ut = g1.get(3);
 		assertEquals(1,ut.getUser().getId());
 	}
-	
-	
-	
 	
 
 }

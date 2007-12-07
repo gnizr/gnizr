@@ -22,7 +22,7 @@ import java.util.Map;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSet;
 
-import com.gnizr.core.tag.TagCloud;
+import com.gnizr.core.tagging.TagCloud;
 import com.gnizr.db.dao.Link;
 import com.gnizr.db.dao.LinkTag;
 import com.gnizr.db.dao.Tag;

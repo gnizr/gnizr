@@ -64,7 +64,7 @@
 		</constructor-arg>
 	</bean>
 	
-	<bean id="gnizrDao" class="com.gnizr.db.dao.GnizrDao" singleton="true">
+	<bean id="gnizrDao" class="com.gnizr.db.GnizrDao" singleton="true">
 		<property name="linkDao">
 			<ref bean="linkDao"/>
 		</property>

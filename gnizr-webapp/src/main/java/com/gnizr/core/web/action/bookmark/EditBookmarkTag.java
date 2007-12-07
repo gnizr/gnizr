@@ -21,7 +21,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import com.gnizr.core.bookmark.BookmarkManager;
-import com.gnizr.core.user.UserManager;
+import com.gnizr.core.managers.UserManager;
 import com.gnizr.core.web.action.AbstractAction;
 import com.gnizr.core.web.action.LoggedInUserAware;
 import com.gnizr.db.dao.User;
@@ -92,7 +92,6 @@ public class EditBookmarkTag extends AbstractAction implements LoggedInUserAware
 				boolean okay = bookmarkManager.renameTag(loggedInUser,tag,ntags);
 				if(okay == false){
 					addActionMessage(RENAME_TAG_FAILED);
-					return INPUT;
 				}
 			}catch(Exception e){
 				addActionError("operation error. check log.");
@@ -111,7 +110,6 @@ public class EditBookmarkTag extends AbstractAction implements LoggedInUserAware
 				boolean okay = bookmarkManager.deleteTag(loggedInUser,tag);
 				if(okay == false){
 					addActionMessage(DELETE_TAG_FAILED);
-					return INPUT;
 				}
 			}catch(Exception e){
 				addActionError("operation error. check log.");
@@ -140,7 +138,7 @@ public class EditBookmarkTag extends AbstractAction implements LoggedInUserAware
 
 	private String fetchEditData() {
 		try{
-			userTags = userManager.getTagsSortByAlpha(loggedInUser,0);
+			userTags = userManager.getTagsSortByAlpha(loggedInUser,1);
 		}catch(Exception e){
 			logger.error(e);
 			return ERROR;

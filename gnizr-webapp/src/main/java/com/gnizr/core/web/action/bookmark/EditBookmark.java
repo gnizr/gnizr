@@ -24,7 +24,7 @@ import org.apache.log4j.Logger;
 
 import com.gnizr.core.bookmark.BookmarkManager;
 import com.gnizr.core.folder.FolderManager;
-import com.gnizr.core.link.LinkManager;
+import com.gnizr.core.managers.LinkManager;
 import com.gnizr.core.util.GnizrDaoUtil;
 import com.gnizr.core.web.action.AbstractAction;
 import com.gnizr.core.web.action.LoggedInUserAware;
@@ -42,7 +42,6 @@ public class EditBookmark extends AbstractAction implements LoggedInUserAware {
 	// action paramaters
 	private int id;	
 	private boolean redirect;
-	private boolean saveAndClose;
 	private String title;
 	private String notes;
 	private String url;
@@ -398,14 +397,6 @@ public class EditBookmark extends AbstractAction implements LoggedInUserAware {
 
 	public void setSaveAndContinueEdit(String saveAndContinueEdit) {
 		this.saveAndContinueEdit = saveAndContinueEdit;
-	}
-
-	public boolean isSaveAndClose() {
-		return saveAndClose;
-	}
-
-	public void setSaveAndClose(boolean saveAndClose) {
-		this.saveAndClose = saveAndClose;
 	}
 
 

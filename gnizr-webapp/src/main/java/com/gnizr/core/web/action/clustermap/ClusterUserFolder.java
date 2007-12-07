@@ -24,7 +24,7 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 
 import com.gnizr.core.exceptions.NoSuchUserException;
-import com.gnizr.core.tag.TagManager;
+import com.gnizr.core.managers.TagManager;
 import com.gnizr.core.web.action.AbstractLoggedInUserAction;
 import com.gnizr.db.dao.Bookmark;
 import com.gnizr.db.dao.BookmarkTag;

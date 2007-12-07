@@ -20,9 +20,9 @@ import java.io.Serializable;
 
 import org.apache.log4j.Logger;
 
+import com.gnizr.db.GnizrDao;
 import com.gnizr.db.dao.Bookmark;
 import com.gnizr.db.dao.BookmarkTag;
-import com.gnizr.db.dao.GnizrDao;
 import com.gnizr.db.dao.User;
 
 public class Search implements Serializable{

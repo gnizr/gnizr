@@ -5,12 +5,12 @@
   <groupId>com.gnizr</groupId>
   <artifactId>gnizr</artifactId>
   <packaging>pom</packaging>
-  <version>2.3.0-M2</version>
+  <version>2.2.0</version>
 
   <name>gnizr</name>
 
   <properties>
-    <gnVersion>2.3.0-M2</gnVersion>
+    <gnVersion>2.2.0</gnVersion>
   </properties>
 
   <modules>
@@ -93,12 +93,6 @@
        <scope>compile</scope>			
     </dependency>	
     <dependency>
-       <groupId>rome</groupId>
-       <artifactId>opensearch</artifactId>
-       <version>0.1</version>			
-       <scope>compile</scope>			
-    </dependency>	
-    <dependency>
       <groupId>org.geonames</groupId>
       <artifactId>geonames</artifactId>
       <version>0.4</version>
@@ -121,12 +115,6 @@
        <artifactId>commons-dbcp</artifactId>
        <version>1.2.1</version>
        <scope>compile</scope>
-       <exclusions>
-        <exclusion> 
-          <groupId>xerces</groupId>
-          <artifactId>xercesImpl</artifactId>
-        </exclusion>
-      </exclusions> 
     </dependency>
     <dependency>
        <groupId>commons-codec</groupId>
@@ -167,7 +155,7 @@
     <dependency>
        <groupId>javax.servlet</groupId>
        <artifactId>servlet-api</artifactId>
-       <version>2.4</version>
+       <version>2.3</version>
        <scope>provided</scope>
     </dependency>
     <dependency>
@@ -185,15 +173,9 @@
     <dependency>
        <groupId>net.sf.json-lib</groupId>
        <artifactId>json-lib</artifactId>
-       <version>2.1</version>
+       <version>1.0</version>
        <classifier>jdk15</classifier>
        <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>xerces</groupId>
-      <artifactId>xercesImpl</artifactId>
-      <version>[2.0.2,)</version>
-      <scope>provided</scope>
     </dependency>
   </dependencies>
   </dependencyManagement>
@@ -218,30 +200,4 @@
       </plugin>
     </plugins>
   </build>
-  <reporting>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-javadoc-plugin</artifactId>
-        <configuration>        
-          <aggregate>true</aggregate>
-          <groups>
-            <group>
-              <title>Database Packages</title>
-              <packages>com.gnizr.db.*</packages>
-            </group>
-            <group>
-              <title>Core Packages</title>
-              <packages>com.gnizr.core.*:com.gnizr.ext.delicious:com.gnizr.core.web.clustermap</packages>
-            </group>
-            <group>
-              <title>Web Application Packages</title>
-              <packages>com.gnizr.core.web.*:com.gnizr.core.robot.rss.action</packages>
-            </group>
-          </groups>          
-          <excludePackageNames>com.gnizr.core.web.junit</excludePackageNames>
-        </configuration>        
-      </plugin>
-    </plugins>
-  </reporting>
 </project>

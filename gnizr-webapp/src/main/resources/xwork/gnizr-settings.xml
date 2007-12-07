@@ -176,35 +176,15 @@
 		
 	</package>
 	
-	<package name="gnizr-opensearch-description" extends="gnizr-default"
-		namespace="/settings/opensearch">
-		<action name="mybookmarks"
-			class="com.gnizr.core.web.action.settings.ListSettings"
-			method="doDefault">			
-			<interceptor-ref name="gnizrNoPolicyDefaultStack"/>
-			<result name="success" type="freemarker">
-				<param name="location">/settings/mybmarks-searchdescription.ftl</param>
-				<param name="contentType">text/xml</param>
-			</result>
-		</action>
-		<action name="community"
-			class="com.gnizr.core.web.action.settings.ListSettings"
-			method="doDefault">
-			<interceptor-ref name="gnizrNoPolicyDefaultStack"/>
-			<result name="success" type="freemarker">
-				<param name="location">/settings/community-searchdescription.ftl</param>
-				<param name="contentType">text/xml</param>
-			</result>
-		</action>
-	</package>
 			
 	<package name="gnizr-settings" extends="gnizr-default" namespace="/settings">	
 		
-		<action name="help" class="com.gnizr.core.web.action.settings.ListSettings"
+		<action name="help"
+			class="com.gnizr.core.web.action.settings.ListSettings"
 			method="doDefault">
-			<interceptor-ref name="loggedIn"/>	
+			<interceptor-ref name="loggedIn"/>
 			<interceptor-ref name="gnizrDefaultStack"/>
-			<result name="success" type="freemarker">/help.ftl</result>	
+			<result name="success" type="freemarker">/help.ftl</result>
 		</action>
 		
 		<action name="list" class="com.gnizr.core.web.action.settings.ListSettings">

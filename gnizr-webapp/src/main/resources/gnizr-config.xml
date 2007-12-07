@@ -10,7 +10,7 @@
 -->
 <beans>
 	<!-- Defines the Database Connection to use -->
-	<bean id="dataSource" class="com.gnizr.db.dao.GnizrBasicDataSource"
+	<bean id="dataSource" class="com.gnizr.db.GnizrBasicDataSource"
 		destroy-method="close" singleton="true">
 		<property name="driverClassName">
 			<value>com.mysql.jdbc.Driver</value>
@@ -64,7 +64,7 @@
 			<value>open</value>
 		</property>
 		<property name="registrationPolicy">
-			<value>close</value>
+			<value>open</value>
 		</property>
 		<property name="serverMaintenanceModeEnabled">
 			<value>false</value>

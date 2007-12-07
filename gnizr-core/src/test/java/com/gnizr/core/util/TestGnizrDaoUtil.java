@@ -28,6 +28,7 @@ import org.dbunit.dataset.xml.FlatXmlDataSet;
 
 import com.gnizr.core.GnizrCoreTestBase;
 import com.gnizr.core.vocab.TimeRange;
+import com.gnizr.db.MIMEType;
 import com.gnizr.db.dao.Bookmark;
 import com.gnizr.db.dao.Link;
 import com.gnizr.db.dao.LinkTag;
@@ -42,7 +43,6 @@ import com.gnizr.db.dao.tag.TagAssertionDao;
 import com.gnizr.db.dao.tag.TagDao;
 import com.gnizr.db.dao.tag.TagPropertyDao;
 import com.gnizr.db.dao.user.UserDao;
-import com.gnizr.db.vocab.MIMEType;
 
 public class TestGnizrDaoUtil extends GnizrCoreTestBase {
 
@@ -533,13 +533,5 @@ public class TestGnizrDaoUtil extends GnizrCoreTestBase {
 		assertFalse(s1.contains("\t"));
 		assertFalse(s1.contains("\f"));
 		assertFalse(s1.contains("\u0007"));
-	}
-	
-	public void testGetRandomURI() throws Exception{
-		String s1 = GnizrDaoUtil.getRandomURI();
-		assertNotNull(s1);
-		String s2 = GnizrDaoUtil.getRandomURI();
-		assertNotNull(s2);
-		assertFalse(s1.equals(s2));
 	}
 }

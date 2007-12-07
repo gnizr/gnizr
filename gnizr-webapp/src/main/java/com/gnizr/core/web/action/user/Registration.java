@@ -22,7 +22,7 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 
 import com.gnizr.core.exceptions.UsernameTakenException;
-import com.gnizr.core.user.UserManager;
+import com.gnizr.core.managers.UserManager;
 import com.gnizr.core.web.action.AbstractAction;
 import com.gnizr.core.web.action.SessionConstants;
 import com.gnizr.db.dao.User;

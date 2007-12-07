@@ -17,7 +17,6 @@
 package com.gnizr.core.web.action.search;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.codec.digest.DigestUtils;
@@ -25,15 +24,11 @@ import org.apache.log4j.Logger;
 
 import com.gnizr.core.search.Search;
 import com.gnizr.core.search.SearchResult;
-import com.gnizr.core.user.UserManager;
-import com.gnizr.core.util.GnizrDaoUtil;
-import com.gnizr.core.util.SyndFeedFactory;
 import com.gnizr.core.web.action.AbstractPagingAction;
 import com.gnizr.core.web.action.LoggedInUserAware;
 import com.gnizr.core.web.action.SessionConstants;
 import com.gnizr.db.dao.Bookmark;
 import com.gnizr.db.dao.User;
-import com.sun.syndication.feed.synd.SyndFeed;
 
 public class SearchBookmark extends AbstractPagingAction implements LoggedInUserAware{
 
@@ -46,17 +41,14 @@ public class SearchBookmark extends AbstractPagingAction implements LoggedInUser
 	
 	public static final String TYPE_TEXT = "text";
 	public static final String TYPE_USER = "user";
-	public static final String TYPE_OPEN_SEARCH = "opensearch";
 	
 	private Search search;
-	private UserManager userManager;
 	private String queryString;
 	private String type;	
 	private List<Bookmark> bookmarks;
 	private int totalMatched;
 	private User loggedInUser;
-	private String username;	
-
+	
 	public String getQueryString() {
 		return queryString;
 	}
@@ -77,10 +69,7 @@ public class SearchBookmark extends AbstractPagingAction implements LoggedInUser
 	}
 
 	@Override
-	protected String go() throws Exception {	
-		if(TYPE_OPEN_SEARCH.equalsIgnoreCase(getType())){
-			return REDIRECT;
-		}		
+	protected String go() throws Exception {		
 		initPagingAction();
 		// reuse an existing query string if possible
 		if(getQueryString() == null){
@@ -110,31 +99,9 @@ public class SearchBookmark extends AbstractPagingAction implements LoggedInUser
 		return SUCCESS;
 	}
 	
-	public SyndFeed getOpenSearchResult(){
-		String title = "Gnizr Search Result for '" + getQueryString() + "'";
-		String author = "gnizr";
-		String link = getGnizrConfiguration().getWebApplicationUrl();
-		String feedUri = GnizrDaoUtil.getRandomURI();
-		Date pubDate = GnizrDaoUtil.getNow();
-		SyndFeed syndFeed = SyndFeedFactory.create(getBookmarks(),author,title,link,pubDate,feedUri);
-		syndFeed = SyndFeedFactory.addOpenSearchModule(syndFeed,getPerPageCount(),computeOffset(getPage()),getTotalMatched(), null);
-		return syndFeed;
-	}
-	
 	private SearchResult<Bookmark> doSearch(){		
 		if(TYPE_USER.equalsIgnoreCase(getType()) == true){
-			User u = loggedInUser;
-			if(u == null && username != null){
-				if(userManager == null){
-					throw new NullPointerException("UserManager is NULL; can't lookup information of user: " + username);
-				}
-				try{					
-					u = userManager.getUser(getUsername());
-				}catch(Exception e){
-					logger.debug("No such user: " + getUsername());
-				}
-			}			
-			return search.searchBookmarkUser(queryString,u);
+			return search.searchBookmarkUser(queryString,loggedInUser);
 		}else{
 			return search.searchBookmarkCommunity(queryString);
 		}
@@ -205,22 +172,6 @@ public class SearchBookmark extends AbstractPagingAction implements LoggedInUser
 
 	public void setLoggedInUser(User loggedInUser) {
 		this.loggedInUser = loggedInUser;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public UserManager getUserManager() {
-		return userManager;
-	}
-
-	public void setUserManager(UserManager userManager) {
-		this.userManager = userManager;
 	}
 	
 }
