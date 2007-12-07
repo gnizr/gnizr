@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+	<user id="1" username="gnizr" password=""
+		fullname="gnizr" created_on="2006-11-16 21:55:18.0"
+		email="" acct_status="1"/>	
+	<user id="2" username="hchen1" password="cf95caeb19ac6b9743cb6398d68da02e"
+		fullname="Harry Chen" created_on="2006-11-16 21:55:18.0" email="harry.chen@gmail.com"
+		acct_status="1"/>
+	<user id="3" username="jsmith" password="39ce7e2a8573b41ce73b5ba41617f8f7"
+		fullname="Joe Smith" created_on="2006-11-16 21:55:18.0" email="jsmith@hchen1.com"
+		acct_status="1"/>
+	<link id="202" mime_type_id="1003" url="http://www.cnn.com/" url_hash="c50252f4f24784b5d368926df781ede9"
+		/>
+	<link id="203" mime_type_id="1003" url="http://www.slashdot.org/" url_hash="dbf3fd86629412df89054767414a393f"
+		/>
+	<bookmark id="300" user_id="1" link_id="202" title="cnn"
+		notes="news" created_on="2006-11-16 21:55:19.0" last_updated="2006-11-19 21:55:19.0" 
+		/>
+	<bookmark id="301" user_id="1" link_id="203" title="foo"
+		notes="news" created_on="2006-11-18 21:55:19.0" last_updated="2006-11-18 21:55:19.0" 
+		/>
+	<for_user id="400" for_user_id="2" bookmark_id="300" message="Crazy! CNN Got Hacked!!" created_on="2007-01-31 15:34:27.0" />	
+	
+	<tag id="1" tag="cnn" count="1"/>
+	<tag id="2" tag="java" count="3"/>
+</dataset>

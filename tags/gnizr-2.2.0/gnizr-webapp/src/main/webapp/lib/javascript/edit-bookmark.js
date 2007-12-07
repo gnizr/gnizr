@@ -1,0 +1,634 @@
+/**
+ * This script file is used in the following template pages:
+ *  - bookmarks/edit.ftl
+ */
+
+/* ID of the HTML text field for editing tags */
+var bmarkUrlInputFieldId = "bookmarkUrl";
+var tagsInputFieldId = "saveBookmark_tags";
+
+/* ID of the node where the list of user tags will be written to*/
+var saveSubmitClass = "saveSubmit";
+var saveBookmarkFormId = "saveBookmark";
+var userTagsId = "userTags";
+var tagCloudId = "tagCloud";
+var selectUserTagDIVId = "selectUserTag";
+var editPlcMrkDIVId = "editPlacemarks";
+var tagGroupSelectionId = "tagGroupSelection";
+var userSelectionId = "userSelection";
+var loadYourTagsId = "loadYourTags";
+var loadRecommendedTagsId = "loadRecommendedTags";
+var clearTaglineId = "clearTagline";
+var selectTagsNoneId = "selectTagsNone";
+var selectTags5Id = "selectTags5";
+var selectTags10Id = "selectTags10";
+var openUrlWindowId = "openUrlWindow";
+var pagePreviewControlId = "pagePreviewControl";
+var edToolsId = "editTools";
+var edToolsAddTagsId = "addTags";
+var edToolsAddPlcMrkId = "addPlacemarks";
+var addPlacemarkId = "createPlacemark";
+var zoomToId="zoomTo";
+var zoomToInputId="zoomToInput";
+var mapId = "map";
+var geomMarkerClass = "geomMarker";
+
+/* to be defined in the header of an HTML page */
+var getRecommendedTagsUrl = null;
+var getUserTagsUrl = null;
+var getUserTagGroupUrl = null;
+
+var tagIdPrefixMap = {userTagsId:'ti_'};
+
+var workingTags = {};
+var workingUserTagGroups = {};
+
+/* a map of tags that the current user has used in the past */
+var tags = {};
+
+/* 
+ * a map of user-defined class tags 
+ * data structure: 
+ *   {'tag-group-name':['member tag 1','member tag 2',..., 'member tag N']}
+ */
+var userTagGroups = {};
+
+/* tags used to label the current bookmark*/
+var bookmarkTags = new Array();
+
+var users = {};
+
+/* a Google Map object */
+var gmap = null;
+var gmapGeocoder = null;
+var gmapMrkMgr = null;
+
+/* 
+ * A map of PointMakers associated with this bookmark.
+ * Keys are PointMarker Id and values are PointMarker objects in JSON.
+ */
+var pointMarkers = {};
+var gmapMarkers = new Array();
+
+var newPlacemarkCount = 1;
+
+function getNewPlacemarkId(){
+	return (newPlacemarkCount++ * -1);
+}
+
+/* initialize user tags */
+function loadUserTags(t){
+	tags = t;
+}
+
+/* initialize user tag groups */
+function loadUserTagGroups(g){
+	userTagGroups = g;
+}
+
+function loadUserList(u){
+	users = u;
+}
+
+/* initialize 'folder:' machine tags of all the folders of this user */
+function loadFolderTags(t){
+	for(var ftag in t){
+		var f_machine_tag = toFolderMachineTag(ftag);
+		folderTags[f_machine_tag]=t[ftag];		
+	}
+}
+
+function loadPointMarkers(p){
+	for(var i = 0; i < p.length; i++){
+		var id = p[i].id;
+		pointMarkers['pm_'+id] = p[i];
+	}
+}
+
+function taggle(tag){
+	doReadTagline();
+	doSwapTag(tag);
+	doChangeTagColor(tag);
+	doWriteTagline();
+}
+
+function doUncolorAllTags(){
+	var tagLinks = MochiKit.DOM.getElementsByTagAndClassName('A','selected');
+	for(var i = 0; i < tagLinks.length; i++){
+		MochiKit.DOM.removeElementClass(tagLinks[i],'selected');
+	}
+}
+
+function doChangeTagColor(tag){
+	for(var tagListId in tagIdPrefixMap){	
+		var tid = tagIdPrefixMap[tagListId] + tag.escapeHTML();		
+		var tagHref = MochiKit.DOM.getElement(tid);		
+		if(tagHref){
+			if(MochiKit.DOM.hasElementClass(tagHref,'selected') == false){			
+				MochiKit.DOM.addElementClass(tagHref,'selected');			
+			}else{			
+				MochiKit.DOM.removeElementClass(tagHref,'selected');
+			}	
+		}
+	}
+}
+
+function doReadTagline(){
+	// reads existing bookmark tags into bookmarkTags
+	var tagsInput = getElement(tagsInputFieldId)
+	// removes the leading and trailing white spaces
+	var tagline = strip(tagsInput.value);	
+	var ltags = tagline.split(' ');
+	bookmarkTags = new Array();			
+	for(var i = 0; i < ltags.length; i++){
+		if(getInCurrentBookmarkTagsPos(ltags[i]) == -1){
+			bookmarkTags.push(ltags[i]);
+		}
+	}
+}
+
+function doWriteTagline(){	
+	var tagsInput = MochiKit.DOM.getElement(tagsInputFieldId);	
+	var tagline = toTagline(bookmarkTags);
+	tagsInput.value = tagline;
+}
+
+function doSwapTag(tag){		
+	var curPos = getInCurrentBookmarkTagsPos(tag);
+	if(curPos == -1){
+		bookmarkTags.unshift(tag);
+	}else{
+		bookmarkTags.splice(curPos,1);
+	}	
+}
+
+function getInCurrentBookmarkTagsPos(taggledTag){
+	for(var i = 0; i < bookmarkTags.length; i++){		
+		if(taggledTag == bookmarkTags[i]){						
+			return i;
+		}
+	}
+	return -1;
+}
+
+function createTagSelectionBlock(tagData, tagListId, tagIdPrefix){		
+	workingTags = tagData;	
+	
+	MochiKit.Visual.appear(userTagsId,{		
+		beforeStart:function(){
+			
+	var tagListElm = MochiKit.DOM.getElement(tagListId);			
+	tagListElm.innerHTML = '';
+	for(var t in tagData){		
+		var tagId = tagIdPrefix + t;
+		var listElm = LI(null);
+		var unescaped_t = t.unescapeHTML();
+		var tagLink = A({'id':tagId,'href':'javascript:taggle(\''+unescaped_t+'\')'});
+		var tagCount = tagData[t];		
+		MochiKit.DOM.addElementClass(tagLink,getTagPopularityStyle(tagCount) + " a"+tagCount);
+		tagLink.innerHTML = t;				
+		MochiKit.DOM.appendChildNodes(listElm,tagLink);
+		MochiKit.DOM.appendChildNodes(tagListElm,listElm,'\n');			
+	}	
+	}});
+}
+
+function initializePage(){		
+	//MochiKit.LoggingPane.createLoggingPane(true);
+	setMenuHref();
+	createUserSelection(users);
+	monitorUserSelectionChanges();
+	createTagGroupSelection(userTagGroups);	
+	monitorTagGroupSelectionChanges();
+	createTagSelectionBlock(tags,userTagsId,tagIdPrefixMap.userTagsId);
+	colorSelectedTags();
+	monitorTaglineChanges();	
+	setOpenUrlWindowOnClickEvent();
+	setEditToolsOnClickEvent();
+	monitorZoomInputSubmit();
+}
+
+/**
+ * Sets the 'onclick' attribute of the 'open url window' button
+ */
+function setOpenUrlWindowOnClickEvent(){
+	var openUrlWindowElm = MochiKit.DOM.getElement(openUrlWindowId);
+	MochiKit.DOM.setNodeAttribute(openUrlWindowElm,'onclick','showPagePreview()');
+}
+
+function setEditToolsOnClickEvent() {
+	var addTagsElm = MochiKit.DOM.getElement(edToolsAddTagsId);
+	var addPlcMrksElm = MochiKit.DOM.getElement(edToolsAddPlcMrkId);
+	MochiKit.DOM.setNodeAttribute(addTagsElm,'href','javascript:showAddTagsPane();');
+	MochiKit.DOM.setNodeAttribute(addPlcMrksElm,'href','javascript:showAddPlacemarksPane()');
+	
+}
+
+function showAddTagsPane(){
+	MochiKit.DOM.addElementClass(editPlcMrkDIVId,'invisible');
+	MochiKit.DOM.removeElementClass(selectUserTagDIVId,'invisible');
+}
+
+function showAddPlacemarksPane(){
+	MochiKit.DOM.addElementClass(selectUserTagDIVId,'invisible');
+	MochiKit.DOM.removeElementClass(editPlcMrkDIVId,'invisible');
+	if(gmap == null){
+		initMap();
+	}
+}
+
+function initMap(){
+	if (GBrowserIsCompatible()) {
+        gmap = new GMap2(MochiKit.DOM.getElement(mapId));       
+        gmap.addControl(new GLargeMapControl());
+        gmap.addControl(new GMapTypeControl());
+        gmap.enableContinuousZoom();
+		gmap.enableDoubleClickZoom();	
+  	    gmap.setCenter(new GLatLng(38.95,77.46),1,G_HYBRID_MAP);
+  	    gmapMrkMgr = new MarkerManager(gmap,{trackMarkers:true, maxZoom:18});  	   
+        for(var k in pointMarkers){
+        	var pm = pointMarkers[k];
+        	var v = pm.point.split(",");
+        	var gLatLng = new GLatLng(v[1],v[0]);
+        	pointMarkers[k].gmapMakerIdx = createGmapPointMarker(pm,gLatLng);
+        }       	   
+       fitGmapToData();
+    }
+}
+
+function fitGmapToData() {
+	if(gmapMarkers.length > 0){
+		var bounds = new GLatLngBounds();
+		for(var i = 0; i < gmapMarkers.length; i++){
+			var latlng = gmapMarkers[i].getLatLng();
+			bounds.extend(latlng);
+		}
+		gmap.setZoom(7);
+		gmap.setCenter(bounds.getCenter());
+	}
+}
+
+function findPlaceAndZoom(){
+	var zoomToInputElm = MochiKit.DOM.getElement(zoomToInputId);
+	var placename = zoomToInputElm.value;
+	if(MochiKit.Base.isUndefinedOrNull(placename) == false){
+		if(gmapGeocoder == null){
+			gmapGeocoder = new GClientGeocoder();	
+		}
+		gmapGeocoder.getLatLng(
+			placename,
+			function(point){
+				if(MochiKit.Base.isUndefinedOrNull(point) == true){
+					alert(placename + ' not found.');
+				}else{
+					gmap.setCenter(point,13);					
+				}	
+			});
+	}
+}
+
+
+function createUserSelection(userStats){
+	var userSlctElm = MochiKit.DOM.getElement(userSelectionId);	
+	// save a copy of the header '-- tag group --'
+	var slctHeaderElm = userSlctElm[0].cloneNode(true);
+	// clears all current selection OPTION
+	userSlctElm.innerHTML = '';
+	MochiKit.DOM.appendChildNodes(userSlctElm,slctHeaderElm);
+	for(var uname in userStats){
+		if(uname.length > 0 && userStats[uname] > 0){
+			var userOptElm = MochiKit.DOM.OPTION({'value':uname,'class':'select-option'},uname);
+			MochiKit.DOM.appendChildNodes(userSlctElm,userOptElm);
+		}
+	}	
+}
+
+function setMenuHref(){
+	MochiKit.DOM.setNodeAttribute(loadYourTagsId,'href','javascript:fetchTags(\'yourtags\')');	
+	MochiKit.DOM.setNodeAttribute(loadRecommendedTagsId,'href','javascript:fetchTags(\'rcmdtags\')');
+	MochiKit.DOM.setNodeAttribute(selectTags5Id,'href','javascript:selectTagCloud(5)');
+	MochiKit.DOM.setNodeAttribute(selectTags10Id,'href','javascript:selectTagCloud(10)');
+	MochiKit.DOM.setNodeAttribute(selectTagsNoneId,'href','javascript:unselectTagCloud()');
+	//MochiKit.DOM.setNodeAttribute(clearTaglineId,'href','javascript:clearTagline()');
+	MochiKit.DOM.setNodeAttribute(addPlacemarkId,'href','javascript:addNewPlacemark()');
+	var submitElms = MochiKit.DOM.getElementsByTagAndClassName('INPUT',saveSubmitClass,saveBookmarkFormId);
+	for(var i = 0; i < submitElms.length; i++){
+		MochiKit.Logging.log('set onclick writeGeometryMarkers() on saveSubmit: ' + submitElms[i].value);
+		MochiKit.DOM.setNodeAttribute(submitElms[i],'onclick','writeGeometryMarkers();');		
+	}	
+	MochiKit.DOM.setNodeAttribute(zoomToId,'onclick','findPlaceAndZoom()');
+}
+
+function writeGeometryMarkers(){
+	var inputElm = MochiKit.DOM.getElementsByTagAndClassName('INPUT',geomMarkerClass,saveBookmarkFormId);
+	for(var i = 0; i < inputElm.length; i++){
+		MochiKit.DOM.removeElement(inputElm[i]);		
+	} 
+	for(var k in pointMarkers){
+		var json = MochiKit.Base.serializeJSON(pointMarkers[k]);
+		MochiKit.Logging.log(json);
+		var inputPtMrkerElm = MochiKit.DOM.INPUT({'type':'hidden','name':'pointMarkers','value':json});
+		MochiKit.DOM.appendChildNodes(saveBookmarkFormId,inputPtMrkerElm);	
+	}
+}
+
+/* until we find a better place to put this control in the HTML page */
+/*
+function clearTagline(){
+	var taglineElm = MochiKit.DOM.getElement(bmarkTagsInputFieldId);
+	taglineElm.value = '';
+	colorSelectedTags();
+}
+*/
+
+function unselectTagCloud(){
+	var tagline = new Array();
+	doReadTagline();
+	for(var i = 0 ; i < bookmarkTags.length; i++){
+		var t = bookmarkTags[i];
+		if(MochiKit.Base.isUndefinedOrNull(workingTags[t]) == true){
+			tagline = MochiKit.Base.concat(tagline,[t]);
+		}
+	}
+	bookmarkTags = tagline;
+	doWriteTagline();
+	colorSelectedTags();
+}
+
+function selectTagCloud(number){
+	var tags2add = getSortedWorkingTagsByFreq().slice(0,number-1);
+	doReadTagline();
+	for(var i = 0; i < tags2add.length; i++){
+		var idx = MochiKit.Base.findValue(bookmarkTags,tags2add[i],0);
+		if(idx == -1){
+			bookmarkTags.unshift(tags2add[i]);
+		}
+	}
+	doWriteTagline();
+	colorSelectedTags();
+}
+
+function getSortedWorkingTagsByFreq(){
+	var keys = MochiKit.Base.keys(workingTags);
+	var sortByFreq = function (t1, t2){
+		var t1Freq = workingTags[t1];
+		var t2Freq = workingTags[t2];
+		return t2Freq - t1Freq;
+	};
+	return keys.sort(sortByFreq);
+}
+
+
+function fetchTags(category){
+	if(category == 'yourtags'){		
+		MochiKit.Visual.fade(userTagsId,{afterFinish:function(){			
+		createUserSelection(users);
+		createTagGroupSelection(userTagGroups);	
+		createTagSelectionBlock(tags,userTagsId,tagIdPrefixMap.userTagsId);
+		colorSelectedTags();
+		}});
+	}else if(category == 'rcmdtags'){
+		MochiKit.Visual.fade(userTagsId,{afterFinish:function(){
+		if(getRecommendedTagsUrl != null){
+			doLoadRecommendedTags();
+		}
+		}});
+	}else{
+		alert('fetch tags from: ' + category);
+	}
+}
+
+function doLoadRecommendedTags(){
+	var url = MochiKit.DOM.getElement(bmarkUrlInputFieldId).value;
+	if(url != null && url.length > 0){		
+		var qs = MochiKit.Base.queryString(['url'],[url])		
+		var d = MochiKit.Async.loadJSONDoc(getRecommendedTagsUrl+'?'+qs);
+		var gotData = function (rcmdTags) {
+			if(MochiKit.Base.keys(rcmdTags).length > 0){
+				createTagGroupSelection({});	
+	  			createTagSelectionBlock(rcmdTags,userTagsId,tagIdPrefixMap.userTagsId);
+				colorSelectedTags();
+			}else{
+				alert('No recommended tags for this URL at this time.');
+				MochiKit.Visual.appear(userTagsId);
+			}			
+		};
+		var dataFetchFailed = function (err) {
+		  alert('Error: ' + err);
+		};
+		d.addCallbacks(gotData, dataFetchFailed);			
+	}else{
+		alert('Please specify the URL of your bookmark!');
+		MochiKit.Visual.appear(userTagsId);
+	}	
+}
+
+function doLoadUserTagCloud(username){
+	var qs = MochiKit.Base.queryString(['username'],[username]);
+	var d = MochiKit.Async.loadJSONDoc(getUserTagsUrl+'?'+qs);
+	var gotData = function(userTagData){		
+		createTagSelectionBlock(userTagData,userTagsId,tagIdPrefixMap.userTagsId);
+		colorSelectedTags();
+	};
+	var dataFetchFailed = function(err){
+		alert('Error: ' + err);
+	}
+	d.addCallbacks(gotData,dataFetchFailed);
+}
+
+function doLoadUserTagGroup(username){
+	var qs = MochiKit.Base.queryString(['username'],[username]);
+	var d = MochiKit.Async.loadJSONDoc(getUserTagGroupUrl+'?'+qs);
+	var gotData = function(userTagGroupData){		
+		createTagGroupSelection(userTagGroupData);
+	};
+	var dataFetchFailed = function(err){
+		alert('Error: ' + err);
+	}
+	d.addCallbacks(gotData,dataFetchFailed);
+}
+
+function createTagGroupSelection(tagGroups){
+	workingUserTagGroups = tagGroups;
+	
+	var tagGrpSlctElm = MochiKit.DOM.getElement(tagGroupSelectionId);
+	// save a copy of the header '-- tag group --'
+	var slctHeaderElm = tagGrpSlctElm[0].cloneNode(true);
+	// clears all current selection OPTION
+	tagGrpSlctElm.innerHTML = '';
+	MochiKit.DOM.appendChildNodes(tagGrpSlctElm,slctHeaderElm);
+	for(var tGrp in tagGroups){
+		var tGrpOptElm = MochiKit.DOM.OPTION({'value':tGrp,'class':'select-option'},tGrp);
+		MochiKit.DOM.appendChildNodes(tagGrpSlctElm,tGrpOptElm);
+	}	
+}
+
+function keepOnlyTagsInTagGroupSet(tagHash,tagGroupSet){
+	var resultHash = {};
+	for(var i = 0; i < tagGroupSet.length; i++){
+		var tag = tagGroupSet[i];	
+		if(MochiKit.Base.isUndefinedOrNull(tagHash[tag]) == false){
+			resultHash[tag] = tagHash[tag];			
+		}else{
+			resultHash[tag] = 0;
+		}
+	}
+	return resultHash;
+}
+
+
+function colorSelectedTags(){
+	doUncolorAllTags();
+	doReadTagline();
+	for(var i = 0; i < bookmarkTags.length; i++){		
+		doChangeTagColor(bookmarkTags[i]);
+	}
+}
+
+function monitorZoomInputSubmit(){
+	var changed = function(e){		
+		if(e.key().code == 13){
+			findPlaceAndZoom();
+		}
+	}
+	MochiKit.Signal.connect(zoomToInputId,'onkeydown',changed);
+}
+
+function monitorTaglineChanges(){
+	var changed = function(e){
+		// space or backspace
+		if(e.key().code == 32 || e.key().code == 0){		
+			colorSelectedTags();
+		}
+	};
+	MochiKit.Signal.connect(tagsInputFieldId,'onkeydown',changed);
+}
+
+function monitorTagGroupSelectionChanges(){
+	var drawTagList = function(e){
+		var tagGrpSlctElm = e.src();
+		var i = tagGrpSlctElm.selectedIndex;
+		var tagGrpName = tagGrpSlctElm.options[i].value;	
+		if(workingUserTagGroups[tagGrpName] != null){
+			var tags2draw = keepOnlyTagsInTagGroupSet(tags,workingUserTagGroups[tagGrpName]);
+			createTagSelectionBlock(tags2draw,userTagsId,tagIdPrefixMap.userTagsId);
+			colorSelectedTags();
+		}			
+	};
+	MochiKit.Signal.connect(tagGroupSelectionId,'onchange',drawTagList);	
+}
+
+function monitorUserSelectionChanges(){
+	var switchTagCloud = function(e){	
+		MochiKit.Visual.fade(userTagsId,
+		{afterFinish:function(){
+			var userSlctElm = e.src();
+			var i = userSlctElm.selectedIndex;
+			var username = userSlctElm[i].value;
+			if(users[username] != null && users[username] > 0){
+				doLoadUserTagCloud(username);
+				doLoadUserTagGroup(username);
+			}	
+		}
+		});		
+	}
+	MochiKit.Signal.connect(userSelectionId,'onchange',switchTagCloud);
+}
+
+function resetTagCloud(){
+	createTagGroupSelection(userTagGroups);
+	createTagSelectionBlock(tags,userTagsId,tagIdPrefixMap.userTagsId);
+}
+
+function showPagePreview(){	
+	var urlElm = MochiKit.DOM.getElement('bookmarkUrl');
+	if(MochiKit.Base.isUndefinedOrNull(urlElm) == false){
+		var url = urlElm.value;		
+		if(MochiKit.Base.isUndefinedOrNull(url) == false && isValidUrl(url) == true){
+			window.open(url,'','alwaysRaised=yes,height=600,width=800,status=no,toolbar=no,menubar=no,scrollbars=yes,left=0,resizable=yes');
+		}else{
+			alert('The URL that you\'ve entered is invalid!');
+		}
+	}
+}
+
+function addNewPlacemark(){
+	var id = getNewPlacemarkId();
+	var curCenterPt = gmap.getCenter();
+	var cv = curCenterPt.lng() + ',' + curCenterPt.lat();
+	var pm = {'id':id,'notes':'This is a placemark associated with this bookmark.','iconId':0,'point':cv,'gLatLng':curCenterPt};
+	MochiKit.Logging.log('->'+MochiKit.Base.serializeJSON(pm));
+	pointMarkers['pm_'+id] = pm;
+	pointMarkers['pm_'+id].gmapMakerIdx = createGmapPointMarker(pm,curCenterPt);	
+}
+
+function createGmapPointMarker(p,gLatLng){
+	var markerD = new GMarker(gLatLng, {icon:G_DEFAULT_ICON, draggable: true}); 
+	markerD.pmId = p.id;	
+	gmapMarkers.push(markerD);
+	//gmap.addOverlay(markerD);
+	gmapMrkMgr.addMarker(markerD,0);
+	markerD.enableDragging();
+	GEvent.addListener(markerD, 'drag', 
+		function(){
+			var cLatLng = this.getPoint();
+			var cv = cLatLng.lng() + ',' + cLatLng.lat();
+			var ptmrkId = this.pmId;
+			pointMarkers['pm_'+ptmrkId].point = cv;			
+			MochiKit.Logging.log('id: ' + ptmrkId + ' has new location: ' + cv);
+		}
+	);
+	markerD.bindInfoWindowHtml(createViewNotesElm(p.id));
+	markerD.openInfoWindowHtml(
+	  MochiKit.DOM.DIV({'class':'editMarkerNotesPopup'},
+	    MochiKit.DOM.P(null,'This is a new placemark. Drag it to a desired location.')
+	  ));
+	return gmapMarkers.length-1;
+}
+
+function createViewNotesElm(pmId){
+	var notes = pointMarkers['pm_'+pmId].notes;
+	var notesElm = MochiKit.DOM.P({'id':'mn_'+pmId},notes);
+	var editNotesElm = MochiKit.DOM.A({'class':'system-link align-right','href':'javascript:editNotes('+pmId+')'},'edit notes');
+	var delMarkerElm = MochiKit.DOM.A({'class':'system-link align-right','href':'javascript:delMarker('+pmId+')'},'remove from the map')
+	var contentElm = MochiKit.DOM.DIV({'id':'ed_mn_'+pmId,'class':'editMarkerNotesPopup'},
+	   notesElm, editNotesElm, MochiKit.DOM.BR(null),delMarkerElm);
+	return contentElm;
+}
+
+function editNotes(pmId){
+	var pm = pointMarkers['pm_'+pmId];
+	var marker = gmapMarkers[pm.gmapMakerIdx];
+	var editAreaElm = MochiKit.DOM.TEXTAREA({'id':'mn_ta_'+pmId,'class':'textInput'},pm.notes);
+	var doneEditElm = MochiKit.DOM.A({'class':'system-link align-right','href':'javascript:doneEditNotes('+pmId+')'},'done');
+	var contentElm = MochiKit.DOM.DIV({'id':'ed_mn_'+pmId,'class':'editMarkerNotesPopup'},editAreaElm,MochiKit.DOM.BR(null),doneEditElm);	
+	marker.openInfoWindowHtml(contentElm);
+}
+
+function doneEditNotes(pmId){
+	var pm = pointMarkers['pm_'+pmId];
+	var marker = gmapMarkers[pm.gmapMakerIdx];
+	var editAreaElm = MochiKit.DOM.getElement('mn_ta_'+pmId);
+	var newNotes = editAreaElm.value;
+	pm.notes = newNotes;
+	var contentElm = createViewNotesElm(pmId);
+	marker.openInfoWindowHtml(contentElm);
+}
+
+function delMarker(pmId){
+	var answer = confirm('Remove this placemark from the map. Yes?');
+	if(answer == true){
+		var pm = pointMarkers['pm_'+pmId];
+		var idx = pm.gmapMakerIdx;
+		//gmap.removeOverlay(gmapMarkers[idx]);	
+		gmapMrkMgr.removeMarker(gmapMarkers[idx]);
+		delete pointMarkers['pm_'+pmId];
+	}
+}
+
+function isValidUrl(s){
+	var regexp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/
+	return regexp.test(s);
+}
+
+MochiKit.Signal.connect(window,'onload',initializePage);
