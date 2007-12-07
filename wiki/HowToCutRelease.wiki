@@ -1,0 +1,15 @@
+#summary Instruction on how to cut gnizr releases (experimental)
+#labels Phase-QA
+
+This document describe key steps to cut a release from the gnizr code base. 
+
+  # Check out the branch of the source from SVN
+  # Build the software by following HowToBuild
+  # Test the bulid in a fresh environment 
+    * Reload gnizr database schema and stored procedures in MySQL
+    * Use the default `gnizr-config.xml` whenever possible
+    * Get the binary from the `target` directory. Deploy `gnizr` in a fresh Tomcat server 
+  # Verify [http://code.google.com/p/gnizr/issues/list key issues] reported are fixed
+  # Verify software version is correct in (1) the login page and (2) version tag in the HTML page source
+  # Tag the branch in SVN
+  # Rename the binary zip to `gnizr-x.y.z.zip` and upload it onto [http://code.google.com/p/gnizr/downloads/list Downloads]
