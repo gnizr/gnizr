@@ -1,11 +1,11 @@
 #summary Changelog of all releases made under version 2.2
 #labels Phase-Implementation
 
-==== Version 2.2.0 (in progress) ====
+==== Version 2.2.0 (7 December 2007) ====
 
 Download
-  * Binrary: _soon_ 
-  * Source: _soon_
+  * Binrary: [http://gnizr.googlecode.com/files/gnizr-2.2.0.zip gnizr-2.2.0.zip]
+  * Source: http://gnizr.googlecode.com/svn/tags/gnizr-2.2.0/
 
 Changelog
   * [http://code.google.com/p/gnizr/issues/detail?id=20 Issue 20]: Unable to resize the preview URL window (fixed, verified)
