@@ -15,11 +15,13 @@ Different ways to introduce new application behavior:
 
 Developing third-party web mashup programs typically doesn't require special build environment setup. These programs simply read data documents from the appropriate URL published by gnizr. Creating Java programs to access data objects stored in a gnizr database or developing custom gnizr components usually will require the use of *gnizr Core API*. Adding new application behavior by creating !WebWork actions usually will require the use of *gnizr Core API* and *gnizr Web Application API*. 
 
-The rest of this document is focused on how to setup a build environment. Follow the links below for a specific development topic: 
+The rest of this document is focused on how to setup a build environment. Follow these links for specific development topics: 
 
   * [GnizrDesignOverview An Overview of Gnizr Architecture]
   * On Bookmark Management and Event Notification
   * On RSS Crawling and Gnizr Robot
+
+  * Gnizr API !JavaDoc
 
 = Your Build Environment You Choose =
 
