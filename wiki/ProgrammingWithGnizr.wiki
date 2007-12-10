@@ -19,7 +19,7 @@ Developing third-party web mashup programs typically doesn't require special bui
 
 We recommend developers to setup build environment using a combination of tools: [http://maven.apache.org Maven], [http://www.eclipse.org Eclipse], [http://tomcat.apache.org Tomcat] and [http://www.mysql.com MySQL]. For the specifics on how to install and use these tools, consult their respective documentations. 
 
-Depending which types of gnizr API you want to use, you can choose to set up your build environment in one of two ways (see below). Option 1 is suitable for building programs that only require using gnizr Core API and do not need to integrate any functions into the web application framework of gnizr. Option 2 is suitable for creating new application behaviors that will integrated into the existing web application framework. 
+*Depending which types of gnizr API you want to use, you can choose to set up your build environment in one of two ways (see below).* Option 1 is suitable for building programs that only require using gnizr Core API and do not need to integrate any functions into the web application framework of gnizr. Option 2 is suitable for creating new application behaviors that will integrated into the existing web application framework. 
 
 Here are some examples.
 
