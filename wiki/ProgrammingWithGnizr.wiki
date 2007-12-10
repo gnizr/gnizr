@@ -18,8 +18,10 @@ Developing third-party web mashup programs typically doesn't require special bui
 The rest of this document is focused on how to setup a build environment. Follow these links for specific development topics: 
 
   * [GnizrDesignOverview An Overview of Gnizr Architecture]
-  * On Bookmark Management and Event Notification
-  * On RSS Crawling and Gnizr Robot
+  * Bookmark Management and Event Notification
+  * RSS Crawling and Gnizr Robot
+  * Machine Tag Syntax and Implementation
+  * Associate Geometry Markers with Bookmarks
 
   * Gnizr API !JavaDoc
 
