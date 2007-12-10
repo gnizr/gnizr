@@ -43,7 +43,17 @@ See also: [http://www.javaworld.com/javaworld/jw-12-2005/jw-1205-maven.html An I
 
 ==== Step 3: Configure project's `pom.xml` ====
 
-Setup `pom.xml` to include gnizr library dependency: e.g.,
+Setup `pom.xml` to include gnizr library dependency.
+
+  * Repository: `http://dev.gnizr.com/maven2`
+  * group ID: `com.gnizr`
+  * artifact ID (gnizr Core API):
+    * `gnizr-db`: gnizr database
+    * `gnizr-core`: gnizr core 
+    * `gnizr-delicious`: gnizr del.icio.us import API
+    * `gnizr-robot`: gnizr robots
+
+Example:
 
 {{{
 <project xmlns="http://maven.apache.org/POM/4.0.0"
@@ -83,14 +93,19 @@ Setup `pom.xml` to include gnizr library dependency: e.g.,
 
 }}}
 
-Gnizr Maven Repository:
+==== Step 4: Initialize Eclipse Project ====
 
-  * Repository: `http://dev.gnizr.com/maven2`
-  * group ID: `com.gnizr`
-  * artifact ID (gnizr Core API):
-    * `gnizr-db`: gnizr database
-    * `gnizr-core`: gnizr core 
-    * `gnizr-delicious`: gnizr del.icio.us import API
-    * `gnizr-robot`: gnizr robots
+Use Maven Eclipse plug-in to create project files for Eclipse. 
+
+  * `mvn eclipse:eclipse`
+
+This command should automatically downloads all necessary Maven plugins and gnizr dependencies. If you encounter errors in fetching gnizr library, [http://groups.google.com/group/gnizr-users please let us know].
+
+==== Step 5: Open your project in Eclipse ====
+
+  * Start Eclipse
+  * Add a new project by import from the existing file system.
+
+Done!
 
 == Option 2: Building on gnizr Web Application API ==
