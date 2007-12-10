@@ -25,7 +25,7 @@ Here are some examples.
 
 If you want to write a separate Java program to create new gnizr user accounts from an existing enterprise database, you can choose the first option. Your program probably will use gnizr Core API to create user account objects, and it doesn't need to be integrated into the existing gnizr web application framework. 
 
-If you want to add a new kind of search capability in gnizr and make this capability available to all users in a gnizr installation, you should choose the second option. It's likely that your implementation will build on the web application framework of gnizr, which is a collection of WebWork actions and Freemarker template pages. To test and deploy your implementation, you will need to extend from gnizr Web Application API, add configuration to the gnizr WebWork and Spring configuration, place Freemarker template pages in the appropriate file system directories, etc.
+If you want to add a new kind of search capability in gnizr and make this capability available to all users in a gnizr installation, you should choose the second option. It's likely that your implementation will build on the web application framework of gnizr, which is a collection of !WebWork actions and Freemarker template pages. To test and deploy your implementation, you will need to extend from gnizr Web Application API, add configuration to the gnizr !WebWork and Spring configuration, place Freemarker template pages in the appropriate file system directories, etc.
 
 == Option 1: Don't need to use gnizr Web Application API ==
 
