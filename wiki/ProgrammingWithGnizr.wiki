@@ -1,5 +1,5 @@
 #summary Programming with gnizr Java API and how to setup a build environment
-#labels Phase-Implementation
+#labels Phase-Implementation,Featured
 
 This document is intended for developers who want to write programs against gnizr Java API. 
 
