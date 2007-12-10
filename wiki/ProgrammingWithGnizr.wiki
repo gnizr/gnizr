@@ -48,10 +48,10 @@ Setup `pom.xml` to include gnizr library dependency.
   * Repository: `http://dev.gnizr.com/maven2`
   * group ID: `com.gnizr`
   * artifact ID (gnizr Core API):
-    * `gnizr-db`: gnizr database
-    * `gnizr-core`: gnizr core 
+    * `gnizr-db`: gnizr database API
+    * `gnizr-core`: gnizr core API
     * `gnizr-delicious`: gnizr del.icio.us import API
-    * `gnizr-robot`: gnizr robots
+    * `gnizr-robot`: gnizr robot framework
 
 Example:
 
