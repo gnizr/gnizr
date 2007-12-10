@@ -27,4 +27,70 @@ If you want to write a separate Java program to create new gnizr user accounts f
 
 If you want to add a new kind of search capability in gnizr and make this capability available to all users in a gnizr installation, you should choose the second option. It's likely that your implementation will build on the web application framework of gnizr, which is a collection of WebWork actions and Freemarker template pages. To test and deploy your implementation, you will need to extend from gnizr Web Application API, add configuration to the gnizr WebWork and Spring configuration, place Freemarker template pages in the appropriate file system directories, etc.
 
-== Option 1: ==
+== Option 1: Don't need to use gnizr Web Application API ==
+
+==== Step 1: Install gnizr, Eclipse and Maven ====
+
+Download and install a copy of the gnizr release that you want to work with. Install Eclipse IDE for writing code. Install Maven for building your program.
+
+==== Step 2: Create a new Maven project ====
+
+Let's assume that you are going to create a new project call `newusers`. 
+
+  * `mvn archetype:create -DgroupId=com.myproj -DartifactId=newusers -Dpackagename=com.myproj.newusers` 
+
+See also: [http://www.javaworld.com/javaworld/jw-12-2005/jw-1205-maven.html An Introduciton to Maven 2]
+
+==== Step 3: Configure project's `pom.xml` ====
+
+Setup `pom.xml` to include gnizr library dependency: e.g.,
+
+{{{
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+                             http://maven.apache.org/maven-v4_0_0.xsd">
+...
+<repositories>
+  <repository>
+    <id>gnizr-repos</id>
+    <name>Gnizr Public Maven 2 Repository</name>
+    <url>http://dev.gnizr.com/maven2</url>
+    <layout>default</layout>
+    <snapshots>
+      <enabled>false</enabled>
+    </snapshots>
+  </repository>
+
+  <!-- other maven repositories -->
+  ...
+</repositories>
+
+<dependencies>
+
+  <dependency>
+    <groupId>com.gnizr.core</groupId>
+    <artifactId>gnizr-core</artifactId>
+    <!-- replace this value to the gnizr version that you want to work with -->
+    <version>2.3.0-M2</version>
+    <scope>compile</scope>
+  </dependency>
+   
+  <!-- other library dependencies -->
+  ...
+</dependencies>
+</project>
+
+}}}
+
+Gnizr Maven Repository:
+
+  * Repository: `http://dev.gnizr.com/maven2`
+  * group ID: `com.gnizr`
+  * artifact ID (gnizr Core API):
+    * `gnizr-db`: gnizr database
+    * `gnizr-core`: gnizr core 
+    * `gnizr-delicious`: gnizr del.icio.us import API
+    * `gnizr-robot`: gnizr robots
+
+== Option 2: Building on gnizr Web Application API ==
