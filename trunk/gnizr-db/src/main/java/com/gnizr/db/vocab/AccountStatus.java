@@ -16,8 +16,30 @@
  */
 package com.gnizr.db.vocab;
 
+/**
+ * Defines the vocabulary for setting user account status. 
+ * 
+ * @author Harry Chen
+ */
 public interface AccountStatus {
+	/**
+	 * An user account has been created but user login is prohibited.
+	 * Typically, this value is used when an account is created for
+	 * the very first time, and it's waiting for the completion of 
+	 * some user identity verificatoin process.  
+	 */
 	public static final int INACTIVE = 0;
+	/**
+	 * An user account has been created and user login is permitted.
+	 * Typically, this value is used when the identity of a user has been
+	 * verified. 
+	 */
 	public static final int ACTIVE = 1;
+	/**
+	 * An user account has been created, but it is disabled. User login 
+	 * is prohibited. Typically, this value is used when the system wants 
+	 * to preserve all information about an account (bookmarks, tags etc.) that
+	 * is no longer associated with an active user. 
+	 */
 	public static final int DISABLED = 2;
 }
