@@ -34,7 +34,18 @@ import com.gnizr.db.dao.user.UserDao;
 import com.gnizr.db.vocab.AccountStatus;
 
 /**
- * Manages gnizr user registration, profile change and authentication, and provide methods to query user created tags. 
+ * Manages gnizr user registration, profile change and authentication, and provide methods to query user created tags.
+ * The <code>UserManager</code> class implements the operations for creating, editing and deleting user accounts from
+ * the database. It also provides methods to query tags that have been used by a specific user to label his/her bookmarks.  
+ * <p>
+ * Operations to be performed on an existing user account require the input <code>User</code> object to be 
+ * instantiated with a valid user ID -- i.e., <code>User.getId</code> must return a positive integer that 
+ * represents the user ID in the database. If no valid ID is defined, these methods will throw an exception.
+ * </p> 
+ * <p>When creating a new user account, the user ID value doesn't need to be defined. This ID will be created
+ * by the underlying datbase if the user account is created sucessfully. Client programs can use <code>User.getUser</code>
+ * method to lookup the ID of a specific user. 
+ * </p>
  * 
  * <h4>How to instantiate <code>UserManager</code></h4>
  * <code>
@@ -61,7 +72,7 @@ import com.gnizr.db.vocab.AccountStatus;
  * </code>
  * 
  * 
- * @author harryc
+ * @author Harry Chen
  *
  */
 public class UserManager implements Serializable{
@@ -106,9 +117,16 @@ public class UserManager implements Serializable{
 	}
 	
 	/**
-	 * Creates a new <code>User</code> in the persistent store. All properties
-	 * <code>User</code> must be instantiated, except <code>User.getId()</code>. 
-	 *  
+	 * Creates a new <code>User</code> in the persistent store. All properties of
+	 * <code>User</code> must be instantiated, except <code>User.getId()</code>.
+	 * Upon the sucessful creation of a new user in the database, a unique ID will
+	 * be assigned to the new account. 
+	 * <p>
+	 * The account status of the user account to be created can be set to 
+	 * <code>AccountStatus.INACTIVE</code>, <code>AccountStatus.ACTIVE</code>
+	 * or <code>AccountStatus.DISABLED</code>.
+	 * </p>
+	 * @see com.gnizr.db.vocab.AccountStatus
 	 * @param user an instantiated <code>User</code> object
 	 * @return <code>true</code> if a new user record is successfully created. Otherwise,
 	 * returns <code>false</code>
@@ -160,8 +178,10 @@ public class UserManager implements Serializable{
 	}
 	
 	/**
-	 * Activates an existing user account.
+	 * Activates an existing user account. Changes the user account status to 
+	 * <code>AccountStatus.ACTIVE</code>.
 	 * 
+	 * @see com.gnizr.db.vocab.AccountStatus
 	 * @param user an instantiated <code>User</code> object of an existing user record in 
 	 * the persistent store.
 	 * @return <code>true</code> if the user account is successfuly activated. Otherwise, 
@@ -186,8 +206,10 @@ public class UserManager implements Serializable{
 	}
 	
 	/**
-	 * Disables an existing user account. 
+	 * Disables an existing user account. Changes the user account status to
+	 * <code>AccountStatus.DISABLED</code>. 
 	 * 
+	 * @see com.gnizr.db.vocab.AccountStatus
 	 * @param useran instantiated <code>User</code> object of an existing user record in 
 	 * the persistent store.
 	 * @return <code>true</code> if the user account is successfuly disabled. Otherwise, 
@@ -244,7 +266,8 @@ public class UserManager implements Serializable{
 	}
 	
 	/**
-	 * Checks whether a user's username and password pair is valid. 
+	 * Checks whether a user's username and password pair is valid against the 
+	 * record in the database.
 	 * 
 	 * @param user an instantiated <code>User</code> object
 	 * @return <code>true</code> if the user is authorized. Otherwise,
