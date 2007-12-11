@@ -9,7 +9,7 @@ Changelog
   * [http://code.google.com/p/gnizr/issues/detail?id=23 Issue 23]: Allow users to delete tag with 0 usage freq (fixed, need testing)
   * [http://code.google.com/p/gnizr/issues/detail?id=24 Issue 24]: Bookmarklet window pop-up is not focused (fixed, need testing)
   * [http://code.google.com/p/gnizr/issues/detail?id=25 Issue 25]: !OpenSearch action redirects to a page that doesn't exist (fixed, need testing)
-  * [http://code.google.com/p/gnizr/issues/detail?id=26 Issue 26]: !OpenSearch page always starts search with default search engine selection (fixed, need testing)
+  * [http://code.google.com/p/gnizr/issues/detail?id=26 Issue 26]: !OpenSearch page always starts search with default search engine selection (verified)
   * [http://code.google.com/p/gnizr/issues/detail?id=28 Issue 28]: Can't save search results in the !OpenSearch page (verified)
   * [http://code.google.com/p/gnizr/issues/detail?id=29 Issue 29]: Provide search term suggestion based on tag relations (verified)
   * Re-arranged the java packaging: SVN Revision 349-366, 12/04/2007.
