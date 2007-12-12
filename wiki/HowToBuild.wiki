@@ -25,7 +25,7 @@ Source code options:
 
 Follow instructions described in SetupGnizrDatabase to create a database schema for testing. This schema should be created using the following configuration:
 
-  * Database Schema Name: `gnizr_test`
+  * Database Name: `gnizr_test`
   * Database User: `gnizr`
   * Database Password: `gnizr`
 
