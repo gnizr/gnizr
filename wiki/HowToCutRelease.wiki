@@ -1,7 +1,7 @@
 #summary Instruction on how to cut gnizr releases (experimental)
 #labels Phase-QA
 
-This document describe key steps to cut a release from the gnizr code base. 
+Key steps to cut a release from the gnizr code base. This document is intended for the gnizr project members only.
 
   # Check out the branch of the source from SVN
   # Build the software by following HowToBuild
