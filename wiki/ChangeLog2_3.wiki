@@ -13,6 +13,7 @@ Changelog
   * [http://code.google.com/p/gnizr/issues/detail?id=28 Issue 28]: Can't save search results in the !OpenSearch page (verified)
   * [http://code.google.com/p/gnizr/issues/detail?id=29 Issue 29]: Provide search term suggestion based on tag relations (verified)
   * Re-arranged the java packaging: SVN Revision 349-366, 12/04/2007.
+    * Renamed `com.gnizr.db.GnizrBasicDataSource` to `com.gnizr.db.dao.GnizrBasicDataSource` -- affects `gnizr-config.xml`
 
 ==== Version 2.3.0-M1 (20 November 2007) ====
 
