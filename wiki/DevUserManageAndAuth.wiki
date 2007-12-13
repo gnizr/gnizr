@@ -1,0 +1,4 @@
+#summary Inside user management and authentication implementation
+#labels Phase-Design,Phase-Implementation
+
+how user management is implemented and how gnizr authenticates user sign-on.
