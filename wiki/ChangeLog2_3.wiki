@@ -1,7 +1,11 @@
 #summary Changelog of all releases made under version 2.3
 #labels Phase-Implementation
 
-==== Version 2.3.0-M2 (in progress) ====
+==== Version 2.3.0-M2 (14 December 2007) ====
+
+Download 
+  * Binrary: [http://gnizr.googlecode.com/files/gnizr-2.3.0-M2.zip gnizr-2.3.0-M2.zip]
+  * Source: http://gnizr.googlecode.com/svn/tags/gnizr-2.3.0-M2/
 
 Changelog
   * [http://code.google.com/p/gnizr/issues/detail?id=14 Issue 14]: Help page generates incorrect link URL for bookmarklets (verified)
