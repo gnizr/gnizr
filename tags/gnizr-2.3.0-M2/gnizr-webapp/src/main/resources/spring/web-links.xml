@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+	"http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	
+	<bean id="listLink" class="com.gnizr.core.web.action.link.ListLink" singleton="false">
+		<property name="bookmarkPager">
+			<ref bean="bookmarkPager"/>
+		</property>
+	</bean>
+	
+	<bean id="getLinkHistory" class="com.gnizr.core.web.action.link.GetLinkHistory" singleton="false">
+		<property name="linkManager">
+			<ref bean="linkManager"/>
+		</property>	
+	</bean>
+	
+	<bean id="getCommonTags" class="com.gnizr.core.web.action.link.GetCommonTags" singleton="false">
+		<property name="tagCloud">
+			<ref bean="tagCloud"/>
+		</property>
+		<property name="linkManager">
+			<ref bean="linkManager"/>
+		</property>
+	</bean>
+	
+</beans>

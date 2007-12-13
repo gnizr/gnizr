@@ -1,0 +1,156 @@
+<!DOCTYPE xwork PUBLIC "-//OpenSymphony Group//XWork 1.0//EN"
+	"http://www.opensymphony.com/xwork/xwork-1.0.dtd">
+<xwork>
+	<package name="gnizr-json" extends="gnizr-default" namespace="/data/json">				
+		<action name="userTagCloud" class="com.gnizr.core.web.action.tag.GetUserTagCloud"
+			method="doGetAllTags">
+			<interceptor-ref name="loggedIn"/>
+			<interceptor-ref name="defaultStack"/>			
+			<result name="success" type="freemarker">
+				<param name="location">/json/usertags.ftl</param>
+				<param name="contentType">text/javascript</param>	
+			</result>
+		</action>	
+		
+		<action name="recommendTags" class="com.gnizr.core.web.action.link.GetCommonTags"
+			method="doPageLinkTags">
+			<interceptor-ref name="loggedIn"/>
+			<interceptor-ref name="defaultStack"/>
+			<result name="success" type="freemarker">
+				<param name="location">/json/recommendtags.ftl</param>
+				<param name="contentType">text/javascript</param>	
+			</result>					
+		</action>	
+		
+		<action name="listFolders" class="com.gnizr.core.web.action.folder.ListUserFolders">
+			<interceptor-ref name="loggedIn"/>				 
+            <interceptor-ref name="gnizrDefaultStack"/>
+			<result name="success" type="freemarker">
+				<param name="location">/json/listfolders.ftl</param>
+				<param name="contentType">text/javascript</param>
+			</result>	
+		</action>
+		
+		<action name="listInFolders" class="com.gnizr.core.web.action.folder.ListUserFolders"
+			method="doListBookmarkFolders">
+			<interceptor-ref name="loggedIn"/>				 
+            <interceptor-ref name="gnizrDefaultStack"/>
+			<result name="success" type="freemarker">
+				<param name="location">/json/listfolders.ftl</param>
+				<param name="contentType">text/javascript</param>
+			</result>	
+		</action>
+	
+		<action name="listUserTagInGroups" class="com.gnizr.core.web.action.tag.GetUserTagGroups"
+			method="doGetAll">
+			<interceptor-ref name="loggedIn"/>				 
+            <interceptor-ref name="gnizrDefaultStack"/>
+			<result name="success" type="freemarker">
+				<param name="location">/json/usertag-groups.ftl</param>
+				<param name="contentType">text/javascript</param>
+			</result>
+		</action>
+		
+		<action name="listUsers" class="com.gnizr.core.web.action.user.ListUserStats">
+			<interceptor-ref name="loggedIn"/>				 
+            <interceptor-ref name="gnizrDefaultStack"/>
+			<result name="success" type="freemarker">
+				<param name="location">/json/users.ftl</param>
+				<param name="contentType">text/javascript</param>
+			</result>	
+		</action>
+		
+		<action name="getForUserCount" class="com.gnizr.core.web.action.bookmark.ListForUserBookmark"
+			method="doGetTotalCount">
+			<interceptor-ref name="loggedIn"/>				 
+            <interceptor-ref name="gnizrDefaultStack"/>
+			<result name="success" type="freemarker">
+				<param name="location">/json/foruser-count.ftl</param>
+				<param name="contentType">text/javascript</param>
+			</result>
+		</action>	
+				
+		<action name="saveBookmark" class="com.gnizr.core.web.action.bookmark.EditBookmark">
+			<interceptor-ref name="loggedIn"/>				
+			<interceptor-ref name="auth"/> 
+            <interceptor-ref name="gnizrDefaultStack"/>
+			<interceptor-ref name="validationWorkflowStack"/>							
+			<result name="success" type="freemarker">
+				<param name="location">/json/save-bookmark.ftl</param>
+				<param name="contentType">text/javascript</param>
+			</result>
+			<result name="input" type="freemarker">
+				<param name="location">/json/op-failed.ftl</param>
+				<param name="contentType">text/javascript</param>
+			</result>
+			<result name="error" type="freemarker">
+				<param name="location">/json/op-failed.ftl</param>
+				<param name="contentType">text/javascript</param>
+			</result>
+			<result name="redirect" type="redirect">${url}</result>
+		</action>
+		
+		<action name="getBookmark" class="com.gnizr.core.web.action.bookmark.EditBookmark"
+			method="doFetchBookmark">
+			<interceptor-ref name="loggedIn"/>				
+			<interceptor-ref name="auth"/> 
+            <interceptor-ref name="gnizrDefaultStack"/>										
+			<result name="success" type="freemarker">
+				<param name="location">/json/save-bookmark.ftl</param>
+				<param name="contentType">text/javascript</param>
+			</result>
+			<result name="input" type="freemarker">
+				<param name="location">/json/op-failed.ftl</param>
+				<param name="contentType">text/javascript</param>
+			</result>
+			<result name="error" type="freemarker">
+				<param name="location">/json/op-failed.ftl</param>
+				<param name="contentType">text/javascript</param>
+			</result>
+			<result name="redirect" type="redirect">${url}</result>
+		</action>
+		
+       <action name="pageGBookmark" class="com.gnizr.core.web.action.bookmark.ListBookmarkHasGeomMarker">
+			<interceptor-ref name="loggedIn"/>
+			<interceptor-ref name="gnizrDefaultStack"/>			
+			<result name="success" type="freemarker">
+				<param name="location">/json/bookmarks.ftl</param>
+				<param name="contentType">text/javascript</param>
+			</result>
+	   </action>	
+		
+       <action name="fetchGMarkers" class="com.gnizr.core.web.action.bookmark.EditBookmark"
+		   method="doFetchGeometryMarkersById">
+		   	<interceptor-ref name="loggedIn"/>
+			<interceptor-ref name="gnizrDefaultStack"/>			
+            <result name="success" type="freemarker">
+				<param name="location">/json/geometry-markers.ftl</param>
+				<param name="contentType">text/javascript</param>
+			</result>
+			<result name="input" type="freemarker">
+				<param name="location">/json/op-failed.ftl</param>
+				<param name="contentType">text/javascript</param>
+			</result>
+			<result name="error" type="freemarker">
+				<param name="location">/json/op-failed.ftl</param>
+				<param name="contentType">text/javascript</param>
+			</result>
+	   </action>		
+		
+		<action name="searchproxy" class="com.gnizr.core.web.action.search.OpenSearchProxy">
+			<interceptor-ref name="gnizrDefaultStack"/>		
+			<result name="success" type="json">
+				<param name="jsonName">jsonResult</param>
+			</result>
+		</action>		
+		
+		<action name="suggestSearchTags" class="com.gnizr.core.web.action.search.SuggestSearchTags">
+			<interceptor-ref name="gnizrDefaultStack"/>
+			<result name="success" type="json">
+				<param name="jsonName">jsonResult</param>
+			</result>
+		</action>
+	</package>
+	
+	
+</xwork>

@@ -1,0 +1,42 @@
+<!DOCTYPE xwork PUBLIC "-//OpenSymphony Group//XWork 1.0//EN"
+	"http://www.opensymphony.com/xwork/xwork-1.0.dtd">
+<xwork>
+	
+	<package name="gnizr-rss1.0" extends="gnizr-default" namespace="/data/rss1.0">		
+		<action name="bookmark" class="com.gnizr.core.web.action.bookmark.ListUserBookmark">
+			<interceptor-ref name="loggedIn"/>			
+			<interceptor-ref name="gnizrDefaultStack"/>	
+			<param name="sessionMode">false</param>
+			<param name="quietMode">true</param>
+			<param name="perPageCount">10</param>	
+			<result name="success" type="freemarker">
+				<param name="location">/rss/userhome-rss1_0.ftl</param>
+				<param name="contentType">xhtml/xml</param>
+			</result>										
+			<result name="error">/error.ftl</result>	
+		</action>
+	</package>
+	
+	<package name="gnizr-atom-user" extends="gnizr-default" namespace="/data/atom/user">		
+		<action name="search" class="com.gnizr.core.web.action.search.SearchBookmark">
+			<interceptor-ref name="loggedIn"/>			
+			<interceptor-ref name="gnizrNoPolicyDefaultStack"/>	
+			<param name="type">user</param>		
+			<result name="success" type="opensearch">								
+				<param name="encoding">UTF-8</param>				
+			</result>	
+		</action>
+	</package>
+	
+	<package name="gnizr-atom-community" extends="gnizr-default" namespace="/data/atom/community">		
+		<action name="search" class="com.gnizr.core.web.action.search.SearchBookmark">
+			<interceptor-ref name="loggedIn"/>			
+			<interceptor-ref name="gnizrNoPolicyDefaultStack"/>	
+			<param name="type">text</param>		
+			<result name="success" type="opensearch">								
+				<param name="encoding">UTF-8</param>				
+			</result>	
+		</action>
+	</package>
+	
+</xwork>
