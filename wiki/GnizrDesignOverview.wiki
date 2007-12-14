@@ -12,8 +12,8 @@ In gnizr, all persistent data is stored in MySQL. This section describes the dat
 
 This model is used in the following releases:
 
-  * Gnizr 2.2.0
-  * Gnizr 2.3.0 
+  * Gnizr 2.2.0 (view: [http://fisheye2.cenqua.com/browse/gnizr/tags/gnizr-2.2.0/gnizr-db/src/main/resources/sql/gnizr_db.sql?r=12 gnizr-db.sql])
+  * Gnizr 2.3.0 (view: [http://fisheye2.cenqua.com/browse/gnizr/trunk/gnizr-db/src/main/resources/sql/gnizr_db.sql?r=12      gnizr-db.sql])     
 
 [http://www.flickr.com/photos/14804582@N08/2111269218/ http://farm3.static.flickr.com/2129/2111269218_950cf23a03.jpg]
 
