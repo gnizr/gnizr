@@ -81,7 +81,6 @@ CREATE TABLE `tag` (
   * `tag` must be unique
 
 ==== Table: `bookmark` ====
-
 {{{
 CREATE TABLE `bookmark` (
   `id` int(10) unsigned NOT NULL auto_increment,
@@ -110,6 +109,29 @@ CREATE TABLE `bookmark` (
     * Deleting an existing user record will also delete all bookmarks saved by the user
     * Updating the ID of the user will also update the referenced user ID in bookmarks saved by the user.
   * Foreign key: `bookmark.link_id => link.id`
-    * Deleting an existing link record will also delete all bookmarks that refer the link
-    * Updating the ID of the link record will also update the link ID referenced by any bookmarks.
+    * Deleting an existing link record will also delete all bookmarks that reference this link
+    * Updating the ID of the link record will also update which referenced by the bookmarks.
 
+==== Table: `folder` ====
+{{{
+CREATE TABLE `folder` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `folder_name` varchar(45) collate utf8_bin NOT NULL,
+  `owner_id` int(10) unsigned NOT NULL,
+  `description` text collate utf8_bin NOT NULL,
+  `last_updated` datetime NOT NULL,
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `folder_owner_folder_idx` USING BTREE (`folder_name`,`owner_id`),
+  KEY `FK_folder_admin_1` (`owner_id`),
+  CONSTRAINT `FK_folder_admin_1` FOREIGN KEY (`owner_id`) 
+    REFERENCES `user` (`id`) 
+    ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+}}}
+
+  * Pair `folder_name` and `owner_id` must be unique
+  * Foreign key: `folder.owner_id => user.id`
+    * Deleting an existing user record will also delete all folders created by this user.
+    * Updating the ID of an existing user record will also update which referenced by the folders.
+
+   
