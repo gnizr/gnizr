@@ -120,6 +120,10 @@ CREATE TABLE `bookmark` (
     * Deleting an existing link record will also delete all bookmarks that reference this link
     * Updating the ID of the link record will also update which referenced by the bookmarks.
 
+Bookmarks are URL resources saved by the users. Unlike records in the `link` table, which only describe the intrinsic property of URL, records in the `bookmark` table adds a relationship between `user` and `link`.
+
+A pair `bookmark.user_id` and `bookmark.link_id` defines a URL being saved by a user. A given user can only have one bookmark for a given URL. Different users can have their own bookmarks of the same URL. 
+
 ==== Table: `folder` ====
 {{{
 CREATE TABLE `folder` (
