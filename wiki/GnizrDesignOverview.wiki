@@ -146,4 +146,11 @@ CREATE TABLE `folder` (
     * Deleting an existing user record will also delete all folders created by this user.
     * Updating the ID of an existing user record will also update which referenced by the folders.
 
+Users can organize their saved bookmarks using folders. This table stores information about user-created folders. Folder names may be any non-empty strings. Some folder names have special purpose. 
+
+Special folder names:
+|| `_my_` || the default folder in which all new bookmarks will be saved. This folder corresponds to the "My Bookmarks" folder in the web application.||
+|| `_import_`|| the default folder in which all new bookmarks saved via RSS crawling will be saved. This folder corresponds to the "My RSS Imports" folder in the web application.||
+
+  
    
