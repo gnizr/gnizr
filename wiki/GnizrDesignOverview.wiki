@@ -47,7 +47,7 @@ CREATE TABLE `user` (
   * `username` must be unique. 
   * `password` should be inserted with MD5 hash of a plain text password string -- e.g., using MySQL function `md5()`.
 
-When gnizr database is initialized for the first time, a special user account is created. The username of this account is `gnizr`. This is the superuser of a gnizr installation. *User account `gnizr` shouldn't be removed or renamed.*
+When gnizr database is initialized for the first time, a special user account is created. The username of this account is `gnizr`. This is the superuser of a gnizr installation. *User account `gnizr` should never be removed or renamed.*
 
 ==== Table: `link` ====
 {{{
