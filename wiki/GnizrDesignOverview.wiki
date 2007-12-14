@@ -21,11 +21,95 @@ This model is used in the following releases:
 
 === Entity Tables ===
 
-|| Table Name || Description ||
+|| *Table Name* || *Description* ||
 || `user` || User account information ||
 || `link` || Web resource links (i.e., URL) and link properties ||
 || `tag`  || Tags (keywords) used by the users to label bookmarks ||
 || `bookmark` || Bookmarks saved by the users and bookmark properties ||
 || `folder` || Folders that users created to organize bookmarks ||
 
+==== Table: `user` ====
+
+{{{
+CREATE TABLE `user` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `username` varchar(45) NOT NULL,
+  `password` varchar(45) NOT NULL,
+  `fullname` varchar(100) NOT NULL,
+  `created_on` datetime NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `acct_status` int(10) unsigned zerofill NOT NULL,
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `idx_username` (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+}}}
+
+  * `username` must be unique. 
+  * `password` should be inserted with MD5 hash of a plain text password string -- e.g., using MySQL function `md5()`.
+
+==== Table: `link` ====
+{{{
+CREATE TABLE `link` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `mime_type_id` int(10) unsigned default NULL,
+  `url` text NOT NULL,
+  `url_hash` varchar(45) NOT NULL,
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `url_hash_idx` USING BTREE (`url_hash`),
+  KEY `FK_link_1` (`mime_type_id`),
+  CONSTRAINT `FK_link_1` FOREIGN KEY (`mime_type_id`) 
+    REFERENCES `mime_type_admin` (`id`) 
+    ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+}}}
+
+  * `url_hash` is a MD5 hash of `url`
+  * `mime_type_id` must exists in table `mime_type_id.id`
+
+==== Table: `tag` ====
+
+{{{
+CREATE TABLE `tag` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `tag` varchar(45) collate utf8_bin NOT NULL,
+  `count` int(10) unsigned zerofill NOT NULL,
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `idx_tag` (`tag`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin ROW_FORMAT=DYNAMIC;
+}}}
+
+  * `tag` must be unique
+
+==== Table: `bookmark` ====
+
+{{{
+CREATE TABLE `bookmark` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `user_id` int(10) unsigned NOT NULL,
+  `link_id` int(10) unsigned NOT NULL,
+  `title` text collate utf8_bin NOT NULL,
+  `notes` text collate utf8_bin NOT NULL,
+  `created_on` datetime NOT NULL,
+  `last_updated` datetime NOT NULL,
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `bookmark_user_id_link_id_idx` USING BTREE (`user_id`,`link_id`),
+  KEY `bookmark_user_id_idx` (`user_id`),
+  KEY `bookmark_link_id` USING BTREE (`link_id`),
+  KEY `bookmark_created_on_idx` (`created_on`),
+  KEY `bookmark_lastup_idx` (`last_updated`),
+  CONSTRAINT `FK_bookmark_1` FOREIGN KEY (`user_id`) 
+    REFERENCES `user` (`id`) 
+    ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_bookmark_2` FOREIGN KEY (`link_id`) 
+    REFERENCES `link` (`id`) 
+    ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin ROW_FORMAT=DYNAMIC;
+}}}
+
+  * Foreign key: `bookmark.user_id => user.id`
+    * Deleting an existing user record will also delete all bookmarks saved by the user
+    * Updating the ID of the user will also update the referenced user ID in bookmarks saved by the user.
+  * Foreign key: `bookmark.link_id => link.id`
+    * Deleting an existing link record will also delete all bookmarks that refer the link
+    * Updating the ID of the link record will also update the link ID referenced by any bookmarks.
 
