@@ -18,3 +18,14 @@ This model is used in the following releases:
 [http://www.flickr.com/photos/14804582@N08/2111269218/ http://farm3.static.flickr.com/2129/2111269218_950cf23a03.jpg]
 
 *Note*: _click 'All Sizes' on the flickr page to fetch a high-resolution of the diagram._
+
+=== Entity Tables ===
+
+|| Table Name || Description ||
+|| `user` || User account information ||
+|| `link` || Web resource links (i.e., URL) and link properties ||
+|| `tag`  || Tags (keywords) used by the users to label bookmarks ||
+|| `bookmark` || Bookmarks saved by the users and bookmark properties ||
+|| `folder` || Folders that users created to organize bookmarks ||
+
+
