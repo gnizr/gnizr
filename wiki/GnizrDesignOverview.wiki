@@ -1,4 +1,5 @@
 #summary Gnizr architecture and key components described
+#labels Phase-Implementation,Phase-Design
 
 This document describes the software architecture of gnizr. Developers who are interested to write programs against gnizr API should study this document. Technical details on how to setup a gnizr build environment can be found in ProgrammingWithGnizr.
 
