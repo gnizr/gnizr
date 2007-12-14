@@ -5,3 +5,16 @@ This document describes the software architecture of gnizr. Developers who are i
 = Architecture =
 
 [http://www.flickr.com/photos/14804582@N08/2100914677/ http://farm3.static.flickr.com/2245/2100914677_3344f3e85d.jpg]
+
+= Database Model =
+
+In gnizr, all persistent data is stored in MySQL. This section describes the database model of gnizr. 
+
+This model is used in the following releases:
+
+  * Gnizr 2.2.0
+  * Gnizr 2.3.0 
+
+[http://www.flickr.com/photos/14804582@N08/2111269218/ http://farm3.static.flickr.com/2129/2111269218_950cf23a03.jpg]
+
+*Note*: _click 'All Sizes' on the flickr page to fetch a high-resolution of the diagram._
