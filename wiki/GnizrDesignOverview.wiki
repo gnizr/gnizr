@@ -84,6 +84,10 @@ CREATE TABLE `tag` (
 
   * `tag` must be unique
 
+This table stores the list of tags that have been used to label bookmarks. This is the central place to store all tag strings. Tables that require references to a tag should define a database column that points to `tag.id`.
+
+The column `count` stores the total number of bookmarks that have been labeled `tag.tag`. This count reflects the number of times used _currently_. 
+
 ==== Table: `bookmark` ====
 {{{
 CREATE TABLE `bookmark` (
