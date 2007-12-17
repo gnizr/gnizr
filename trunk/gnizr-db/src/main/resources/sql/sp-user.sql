@@ -122,8 +122,7 @@ BEGIN
   SELECT *,  
   (SELECT count(*) FROM bookmark WHERE bookmark.user_id = user.id) as total_number_bookmark,
   (SELECT count(*) FROM user_tag_idx WHERE user_tag_idx.user_id = user.id) as total_number_tag
-  FROM user WHERE user.username != "gnizr"
-  ORDER BY total_number_bookmark DESC, total_number_tag DESC;
+  FROM user ORDER BY user.username ASC;
 END//
 ###############################################################
 # PROCEDURE: findTagGroupsOfUser
