@@ -156,23 +156,24 @@ Special folder names:
 === Tagging Relationship Tables ===
 
 || *Table Name* || *Description* ||
-|| `user_tag_idx` || ||
-|| `link_tag_idx` || ||
-|| `bookmark_tag_idx` || ||
-|| `folder_tag_idx` || ||
+|| `user_tag_idx` || Relates users to their tag usage.||
+|| `link_tag_idx` || Relates links (URL) to tags.  ||
+|| `bookmark_tag_idx` || Relates bookmarks to tags. ||
+|| `folder_tag_idx` || Relates folders to tags. ||
+
+
 
 === Tag Hierarchy Tables ===
 || *Table Name* || *Description* ||
-|| `tag_prpt` || ||
-|| `tag_assertion`|| ||
+|| `tag_prpt` || Defines RDF properties that can be used to make tag assertions||
+|| `tag_assertion`|| Stores user-defined assertions that describe how tags are related||
 
 === Bookmark Relationship Tables ===
 
 || *Table Name* || *Description* ||
-|| `bookmark_folder` || ||
-|| `feed_folder` || ||
-|| `for_user`|| ||
-
+|| `bookmark_folder` || Relates bookmarks to folders in which they are saved||
+|| `feed_folder` || Describes folders that bookmarks saved from RSS feed crawling should be saved in ||
+|| `for_user`|| Describes the relationship that a user suggesting bookmarks to other users ||
 
 === Geotagging Tables ===
 
