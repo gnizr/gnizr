@@ -320,8 +320,41 @@ This table defines the set of valid property can be used to construct tag assert
 || `type` || `rdf`|| RDF type || 'default' ||
 
 ==== Table: `tag_assertion` ====
+{{{
+CREATE TABLE `tag_assertion` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `subject_id` int(10) unsigned NOT NULL,
+  `prpt_id` int(10) unsigned NOT NULL,
+  `object_id` int(10) unsigned NOT NULL,
+  `user_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `tag_asrt_uniq_asrt_idx` (`subject_id`,`prpt_id`,`object_id`,`user_id`),
+  KEY `FK_tag_asrt_prpt_id` USING BTREE (`prpt_id`),
+  KEY `FK_tag_asrt_subject_id` USING BTREE (`subject_id`),
+  KEY `FK_tag_asrt_object_id` USING BTREE (`object_id`),
+  KEY `FK_tag_asrt_user_id` USING BTREE (`user_id`),
+  CONSTRAINT `FK_tag_asrt_object_id` FOREIGN KEY (`object_id`) 
+    REFERENCES `user_tag_idx` (`id`) 
+    ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_tag_asrt_prpt_id` FOREIGN KEY (`prpt_id`) 
+    REFERENCES `tag_prpt` (`id`) 
+    ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_tag_asrt_subject_id` FOREIGN KEY (`subject_id`) 
+    REFERENCES `user_tag_idx` (`id`) 
+    ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_tag_asrt_user_id` FOREIGN KEY (`user_id`) 
+    REFERENCES `user` (`id`) 
+    ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+}}}
 
+  * `id`: an unique ID of a tag assertion.
+  * `subject_id`: the subject of a tag assertion.
+  * `prpt_id`: the property of a tag assertion.
+  * `object_id`: the object of a tag assertion.
+  * `user_id`: the user who created this tag assertion.
 
+A tag assertion is an RDF statement, which consists of three parts: subject, property (predicate) and object (value). In `tag_assertion` table, `subject_id`, `prpt_id` and `object_id` represents those three parts, respectively. These columns link to the relationship `user_tag_idx`. This allows different users to make different assertions about the same tag, and doesn't pollute the tag assertion space of each other. 
 
 === Bookmark Relationship Tables ===
 
