@@ -434,3 +434,52 @@ CREATE TABLE `bookmark_point_marker_idx` (
 || *Table Name* || *Description* ||
 || `search_idx` || Cached text description of bookmarks, used for MySQL full-text search||
 || `mime_type_admin` || Defines MIME types can be used to identify the MIME type of link (i.e., `link.mime_type_id`)|| 
+
+==== Table: `search_idx` ====
+{{{
+CREATE TABLE `search_idx` (
+  `bookmark_id` int(10) unsigned NOT NULL,
+  `text` text NOT NULL,
+  `tags` text NOT NULL,
+  PRIMARY KEY  (`bookmark_id`),
+  FULLTEXT KEY `search_idx_text` (`text`),
+  FULLTEXT KEY `search_idx_tags` (`tags`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+}}}
+
+  * `bookmark_id`: the ID of an existing bookmark in `bookmark`
+  * `text`: the concatenation of `bookmark.title` and `bookmark.notes`
+  * `tags`: the concatenation of all tags of a bookmark
+
+This table is created for support full-text search in MySQL. Because MySQL MyISAM engine doesn't support the use of FOREIGN KEY, when a bookmark is deleted, the application must remove it's corresponding record in the `search_idx` table.
+
+==== Table: `mime_type_admin` ====
+{{{
+CREATE TABLE `mime_type_admin` (
+  `id` int(10) unsigned NOT NULL default '0',
+  `mime_type` varchar(45) NOT NULL,
+  `label` varchar(100) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+}}}
+
+  * `id`: an unique ID that identifies a known MIME-type in gnizr
+  * `mime_type`: mime type string 
+  * `label`: text description of the mime type
+
+Predefine MIME type in gnizr:
+
+|| *MIME Type* || *Label* ||
+|| `Unknown` || `Unknown` ||
+|| `text/xml` || `XML` ||
+|| `text/plain` || `Plain Text` ||
+|| `text/html` || `HTML` ||
+|| `image/jpeg`|| `JPEG`||
+|| `image/png` || `PNG`||
+|| `image/tiff` || `TIFF`||
+|| `image/gif` || `GIF`||
+|| `application/rss+xml` || `RSS`||
+|| `application/rdf+xml` || `RDF`||
+|| `application/owl+xml` || `OWL`||
+
+Define MIME types help to identify the type of resources that the users have bookmarked. Objects of `mime_type_admi` are referenced  by `link.mime_type_id`.
