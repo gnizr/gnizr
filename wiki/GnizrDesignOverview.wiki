@@ -221,6 +221,7 @@ CREATE TABLE `link_tag_idx` (
     * On deleting an existing tag record, all `link_tag_idx` records of the same `tag.id` will be deleted. 
     * On updating the `tag.id` of a tag record, records of the same `link_tag_idx.tag_id` will be updated automatically.
 
+The column `count` stores the total number of times a given link has been labeled by users using `link_tag_idx.tag_id`. This count reflects the number of times used _currently_. 
   
 ==== Table: `bookmark_tag_idx` ====
 {{{
@@ -251,6 +252,8 @@ CREATE TABLE `bookmark_tag_idx` (
     * On deleting an existing tag record, all `bookmark_tag_idx` records of the same `bookmark.id` will be deleted. 
     * On updating the `tag.id` of a tag record, records of the same `bookmark_tag_idx.tag_id` will be updated automatically.
 
+The column `count` stores the total number of times a given bookmark has been labeled using `bookmark_tag_idx.tag_id`. This count reflects the number of times used _currently_.  Typically this `count` value is either `0` or `1`.
+
 ==== Table: `folder_tag_idx` ====
 {{{
 CREATE TABLE `folder_tag_idx` (
@@ -276,12 +279,41 @@ CREATE TABLE `folder_tag_idx` (
     * On deleting an existing tag record, all `folder_tag_idx` records of the same `folder.id` will be deleted. 
     * On updating the `tag.id` of a tag record, records of the same `bookmark_tag_idx.tag_id` will be updated automatically.
 
+The column `count` stores the total number of times a tag appeared in all bookmarks that are saved in a given folder. This count reflects the number of times used _currently_. 
+
 === Tag Hierarchy Tables ===
 
 || *Table Name* || *Description* ||
 || `tag_prpt` || Defines RDF properties that can be used to make tag assertions||
 || `tag_assertion`|| Stores user-defined assertions that describe how tags are related||
 
+==== Table: `tag_prpt` ====
+{{{
+CREATE TABLE `tag_prpt` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `name` varchar(45) NOT NULL,
+  `ns_prefix` varchar(10) NOT NULL default 'gn',
+  `description` varchar(255) default NULL,
+  `prpt_type` enum('spatial','temporal','system','reference','default') NOT NULL default 'default',
+  `cardinality` int(11) NOT NULL default '-1',
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `tag_prpt_unique_prpt_idx` (`name`,`ns_prefix`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+}}}
+
+  * `name`: a non-empty string with no white-spaces. 
+  * `ns`: any valid XML namespace prefix
+  * `description`: text description of this tag property
+  * `prpt_type`: must be one of five ENUM types
+    # `spatial`: for describing spatial property
+    # `temporal`: for describing temporal property
+    # `system`: for describing gnizr system functional property
+    # `reference`: for describing relationships with other web resources 
+    # `default`: for describing everything else
+
+This table defines the set of valid property can be used to construct tag assertion. The semantic of this property is the same as which of a RDF property. 
+
+==== Table: `tag_assertion` ====
 
 === Bookmark Relationship Tables ===
 
