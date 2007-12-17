@@ -178,11 +178,11 @@ Special folder names:
 === Geotagging Tables ===
 
 || *Table Name* || *Description* ||
-|| `point_marker` || ||
-|| `bookmark_point_marker_idx` || ||
+|| `point_marker` || Point objects can be used to describe the latitude/longitude location of things||
+|| `bookmark_point_marker_idx` || Relates bookmarks to objects in `point_marker` table||
 
 === Auxiliary Tables ===
 
 || *Table Name* || *Description* ||
-|| `search_idx` || ||
-|| `mime_type_admin` || || 
+|| `search_idx` || Cached text description of bookmarks, used for MySQL full-text search||
+|| `mime_type_admin` || Defines MIME types can be used to identify the MIME type of link (i.e., `link.mime_type_id`|| 
