@@ -3,7 +3,7 @@
 
 = Database Model =
 
-In gnizr, all persistent data is stored in MySQL. This section describes the database model of gnizr. 
+All persistent data in gnizr is stored in MySQL. This document describes the database model of gnizr. 
 
 This model is used in the following releases:
 
@@ -393,7 +393,41 @@ CREATE TABLE `bookmark_folder` (
 || `point_marker` || Point objects can be used to describe the latitude/longitude location of things||
 || `bookmark_point_marker_idx` || Relates bookmarks to objects in `point_marker` table||
 
+==== Table: `point_marker` ====
+{{{
+CREATE TABLE `point_marker` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `geom` point NOT NULL,
+  `notes` varchar(255) NOT NULL,
+  `icon_id` tinyint(3) unsigned NOT NULL default '0',
+  PRIMARY KEY  (`id`),
+  SPATIAL KEY `geom_idx` (`geom`(32))
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+}}}
+  * `id`: an unique ID that identifies a Point marker for describing the geographical location of a thing
+  * `geom`: a `POINT` geometry for describing latitude and longitude. Format `POINT(X,Y)`, in which `X` is longitude and `Y` is latitude. 
+  * `notes`: short text description of this Point marker. This is usually defined by the user who has created this Point marker.
+  * `icon_id`: _this column is not currently used_
 
+This table stores a set of Point markers that can used to geotag bookmarks. Because MySQL MyISAM engine doesn't support the use of FOREIGN KEY, the application will be responsible to delete geotagged bookmarks whenever a referenced Point marker is deleted from this table. 
+
+==== Table: `bookmark_point_marker_idx`====
+{{{
+CREATE TABLE `bookmark_point_marker_idx` (
+  `bookmark_id` int(10) unsigned NOT NULL,
+  `point_marker_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY  (`bookmark_id`,`point_marker_id`),
+  CONSTRAINT `FK_bookmark_point_mark_idx_1` FOREIGN KEY (`bookmark_id`) 
+    REFERENCES `bookmark` (`id`) 
+    ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+}}}
+
+  * Pair `bookmark_id` and `point_marker_id` represents a geotagged bookmark relation. 
+  * A bookmark can have more than one geotag. 
+  * Foreign key: `bookmark_point_marker_idx.bookmark_id => bookmark.id`
+    * On deleting an existing bookmark of `bookmark.id`, all `bookmark_point_marker_idx` records whose `bookmark_id` is the samee as `bookmark.id` will also be deleted.
+    * On updating the `bookmark.id` of an existing bookmark, all `bookmark_point_marker_idx` records whose `bookmark_id` is the same as `bookmark.id` will also be updated. 
 
 === Auxiliary Tables ===
 
