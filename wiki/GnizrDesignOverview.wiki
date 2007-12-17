@@ -311,9 +311,17 @@ CREATE TABLE `tag_prpt` (
     # `reference`: for describing relationships with other web resources 
     # `default`: for describing everything else
 
-This table defines the set of valid property can be used to construct tag assertion. The semantic of this property is the same as which of a RDF property. 
+This table defines the set of valid property can be used to construct tag assertion. The semantic of a tag property follows the RDF property semantic. By default, gnizr comes with a set of tag property definitions. 
+
+|| *Property Name* || *Namespace Prefix* || *Description* || *Type* || 
+|| `related` || `skos` || SKOS related || 'default' ||
+|| `broader` || `skos` || SKOS broader || 'default' ||
+|| `narrower` || `skos` || SKOS narrower || 'default' ||
+|| `type` || `rdf`|| RDF type || 'default' ||
 
 ==== Table: `tag_assertion` ====
+
+
 
 === Bookmark Relationship Tables ===
 
