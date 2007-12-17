@@ -354,7 +354,7 @@ CREATE TABLE `tag_assertion` (
   * `object_id`: the object of a tag assertion.
   * `user_id`: the user who created this tag assertion.
 
-A tag assertion is an RDF statement, which consists of three parts: subject, property (predicate) and object (value). In `tag_assertion` table, `subject_id`, `prpt_id` and `object_id` represents those three parts, respectively. These columns link to the relationship `user_tag_idx`. This allows different users to make different assertions about the same tag, and doesn't pollute the tag assertion space of each other. 
+A tag assertion is an RDF statement, which consists of three parts: subject, property (predicate) and object (value). In the `tag_assertion` table, `subject_id`, `prpt_id` and `object_id` represent those three parts, respectively. These columns link to the 'id' column of the `user_tag_idx` relationship. This allows different users to make different assertions about the same tag, and doesn't pollute the tag assertion space of each other. 
 
 === Bookmark Relationship Tables ===
 
@@ -362,6 +362,36 @@ A tag assertion is an RDF statement, which consists of three parts: subject, pro
 || `bookmark_folder` || Relates bookmarks to folders in which they are saved||
 || `feed_folder` || Describes folders that bookmarks saved from RSS feed crawling should be saved in ||
 || `for_user`|| Describes the relationship that a user suggesting bookmarks to other users ||
+
+==== Table: `bookmark_folder` ====
+{{{
+CREATE TABLE `bookmark_folder` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `bookmark_id` int(10) unsigned NOT NULL,
+  `folder_id` int(10) unsigned NOT NULL,
+  `last_updated` datetime NOT NULL,
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `bookmark_folder_unique_bmark` (`bookmark_id`,`folder_id`),
+  KEY `FK_bookmark_folder_1` (`bookmark_id`),
+  KEY `FK_bookmark_folder_2` (`folder_id`),
+  KEY `bookmark_folder_lastup_idx` (`last_updated`),
+  CONSTRAINT `FK_bookmark_folder_1` FOREIGN KEY (`bookmark_id`) 
+    REFERENCES `bookmark` (`id`) 
+    ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_bookmark_folder_2` FOREIGN KEY (`folder_id`) 
+    REFERENCES `folder` (`id`) 
+    ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+}}}
+
+  * `id`: an unique ID that identifies a given bookmark is saved in a particular folder.
+  * a bookmark can't be saved in the same folder more than once. 
+  * Foreign key: `bookmark_folder.bookmark_id => bookmark.id`
+    * On deleting an existing bookmark record, all `bookmark_folder` records whose `bookmark_id` are the same as `bookmark.id` will also be deleted. 
+    * On updating `bookmark.id` of an existing record, all `bookmark_folder` records whose `bookmark_id` are the same as `bookmark.id` will also be updated.
+  * Foreign key: `bookmark_folder.folder_id => folder.id`
+    * On deleting an existing folder record, all `bookmark_folder` records whose `folder_id` are the same as `folder.id` will also be deleted. 
+    * On updating `folder.id` of an existing record, all `bookmark_folder` records whose `folder_id` are the same as `folder.id` will also be updated.
 
 === Geotagging Tables ===
 
