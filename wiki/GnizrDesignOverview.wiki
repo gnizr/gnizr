@@ -183,20 +183,105 @@ CREATE TABLE `user_tag_idx` (
 
   * `id` must be unique
   * Foreign key: `user_tag_idx.user_id => user.id`
-    * On deleting an existing user record, all `user_tag_idx` records of the user will be deleted. 
-    * On updating the `user.id` of a user record, all `user_tag_idx.user_id` will updated automatically. 
+    * On deleting an existing user record, all `user_tag_idx` records of the same user will be deleted. 
+    * On updating the `user.id` of a user record, records of the same `user_tag_idx.user_id` will updated automatically. 
   * Foreign key: `user_tag_idx.tag_id => tag.id`
-    * On deleting an existing tag record, all `user_tag_idx` records of the tag will be deleted. 
-    * On updating the `tag.id` of a user record, all `user_tag_idx.tag_id` will be updated automatically.
+    * On deleting an existing tag record, all `user_tag_idx` records of the same `tag.id` will be deleted. 
+    * On updating the `tag.id` of a tag record, records of the same `user_tag_idx.tag_id` will be updated automatically.
 
 `user_tag_idx.id` uniquely identifies the relationship between a tag and the user who has used the tag. This `id` is used to form the subject and the object of a tag assertion. 
 
-The column `count` stores the total number of a given user has used `user_tag_idx.tag_id` to label saved bookmarks. This count reflects the number of times used _currently_. 
+The column `count` stores the total number of times a given user has used `user_tag_idx.tag_id` to label saved bookmarks. This count reflects the number of times used _currently_. 
+
+==== Table: `link_tag_idx` ====
+{{{
+CREATE TABLE `link_tag_idx` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `link_id` int(10) unsigned NOT NULL,
+  `tag_id` int(10) unsigned NOT NULL,
+  `count` int(10) unsigned zerofill NOT NULL,
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `idx_link_id_tag_id` (`link_id`,`tag_id`),
+  KEY `FK_link_tag_idx_2` (`tag_id`),
+  KEY `idx_link_id` (`link_id`),
+  CONSTRAINT `FK_link_tag_idx_1` FOREIGN KEY (`link_id`) 
+    REFERENCES `link` (`id`) 
+    ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_link_tag_idx_2` FOREIGN KEY (`tag_id`) 
+    REFERENCES `tag` (`id`) 
+    ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+}}}
+
+  * `id` must be unique
+  * Foreign key: `link_tag_idx.link_id => link.id`
+    * On deleting an existing link record, all `link_tag_idx` records of the same link will be deleted. 
+    * On updating the `link.id` of a link record, records of the same `link_tag_idx.link_id` will updated automatically. 
+  * Foreign key: `link_tag_idx.tag_id => tag.id`
+    * On deleting an existing tag record, all `link_tag_idx` records of the same `tag.id` will be deleted. 
+    * On updating the `tag.id` of a tag record, records of the same `link_tag_idx.tag_id` will be updated automatically.
+
+  
+==== Table: `bookmark_tag_idx` ====
+{{{
+CREATE TABLE `bookmark_tag_idx` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `bookmark_id` int(10) unsigned NOT NULL,
+  `tag_id` int(10) unsigned NOT NULL,
+  `count` int(10) unsigned NOT NULL,
+  `position` smallint(5) unsigned NOT NULL,
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `Index_4` (`bookmark_id`,`tag_id`),
+  KEY `Index_2` (`bookmark_id`),
+  KEY `Index_3` (`tag_id`),
+  CONSTRAINT `FK_bookmark_tag_idx_1` FOREIGN KEY (`bookmark_id`) 
+    REFERENCES `bookmark` (`id`) 
+    ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_bookmark_tag_idx_2` FOREIGN KEY (`tag_id`) 
+    REFERENCES `tag` (`id`) 
+    ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+}}}
+
+  * `id` must be unique
+  * Foreign key: `bookmark_tag_idx.link_id => bookmark.id`
+    * On deleting an existing bookmark record, all `bookmark_tag_idx` records of the same bookmark will be deleted. 
+    * On updating the `bookmark.id` of a bookmark record, records of the same `bookmark_tag_idx.bookmark_id` will updated automatically. 
+  * Foreign key: `bookmark_tag_idx.tag_id => tag.id`
+    * On deleting an existing tag record, all `bookmark_tag_idx` records of the same `bookmark.id` will be deleted. 
+    * On updating the `tag.id` of a tag record, records of the same `bookmark_tag_idx.tag_id` will be updated automatically.
+
+==== Table: `folder_tag_idx` ====
+{{{
+CREATE TABLE `folder_tag_idx` (
+  `folder_id` int(10) unsigned NOT NULL,
+  `tag_id` int(10) unsigned NOT NULL,
+  `count` int(10) unsigned NOT NULL,
+  PRIMARY KEY  (`folder_id`,`tag_id`),
+  KEY `FK_folder_tag_idx_2` (`tag_id`),
+  CONSTRAINT `FK_folder_tag_idx_1` FOREIGN KEY (`folder_id`) 
+    REFERENCES `folder` (`id`) 
+    ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_folder_tag_idx_2` FOREIGN KEY (`tag_id`) 
+    REFERENCES `tag` (`id`) 
+    ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+}}}
+
+  * `id` must be unique
+  * Foreign key: `folder_tag_idx.link_id => folder.id`
+    * On deleting an existing folder record, all `folder_tag_idx` records of the same folder will be deleted. 
+    * On updating the `folder.id` of a folder record, records of the same `folder_tag_idx.folder_id` will updated automatically. 
+  * Foreign key: `folder_tag_idx.tag_id => tag.id`
+    * On deleting an existing tag record, all `folder_tag_idx` records of the same `folder.id` will be deleted. 
+    * On updating the `tag.id` of a tag record, records of the same `bookmark_tag_idx.tag_id` will be updated automatically.
 
 === Tag Hierarchy Tables ===
+
 || *Table Name* || *Description* ||
 || `tag_prpt` || Defines RDF properties that can be used to make tag assertions||
 || `tag_assertion`|| Stores user-defined assertions that describe how tags are related||
+
 
 === Bookmark Relationship Tables ===
 
