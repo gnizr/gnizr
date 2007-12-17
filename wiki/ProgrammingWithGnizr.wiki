@@ -20,6 +20,7 @@ Developing third-party web mashup programs typically doesn't require special bui
 Follow these links to a specific development topic: 
 
   # [GnizrDesignOverview Gnizr Architecture Overview]
+  # [GnizrDatabaseModel Database Model Overview]
   # User Account Management and Authentication 
   # Bookmark Management and Event Notification
   # RSS Crawling and Gnizr Robot
