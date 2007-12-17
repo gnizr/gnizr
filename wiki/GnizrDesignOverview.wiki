@@ -161,7 +161,37 @@ Special folder names:
 || `bookmark_tag_idx` || Relates bookmarks to tags. ||
 || `folder_tag_idx` || Relates folders to tags. ||
 
+==== Table: `user_tag_idx` ====
+{{{
+CREATE TABLE `user_tag_idx` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `user_id` int(10) unsigned NOT NULL,
+  `tag_id` int(10) unsigned NOT NULL,
+  `count` int(10) unsigned zerofill NOT NULL,
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `idx_user_id_tag_id` (`user_id`,`tag_id`),
+  KEY `FK_user_tag_idx_2` (`tag_id`),
+  KEY `idx_user_tag_id_user_id` (`user_id`),
+  CONSTRAINT `FK_user_tag_idx_1` FOREIGN KEY (`user_id`) 
+    REFERENCES `user` (`id`) 
+    ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_user_tag_idx_2` FOREIGN KEY (`tag_id`) 
+    REFERENCES `tag` (`id`) 
+    ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+}}}
 
+  * `id` must be unique
+  * Foreign key: `user_tag_idx.user_id => user.id`
+    * On deleting an existing user record, all `user_tag_idx` records of the user will be deleted. 
+    * On updating the `user.id` of a user record, all `user_tag_idx.user_id` will updated automatically. 
+  * Foreign key: `user_tag_idx.tag_id => tag.id`
+    * On deleting an existing tag record, all `user_tag_idx` records of the tag will be deleted. 
+    * On updating the `tag.id` of a user record, all `user_tag_idx.tag_id` will be updated automatically.
+
+`user_tag_idx.id` uniquely identifies the relationship between a tag and the user who has used the tag. This `id` is used to form the subject and the object of a tag assertion. 
+
+The column `count` stores the total number of a given user has used `user_tag_idx.tag_id` to label saved bookmarks. This count reflects the number of times used _currently_. 
 
 === Tag Hierarchy Tables ===
 || *Table Name* || *Description* ||
@@ -185,4 +215,4 @@ Special folder names:
 
 || *Table Name* || *Description* ||
 || `search_idx` || Cached text description of bookmarks, used for MySQL full-text search||
-|| `mime_type_admin` || Defines MIME types can be used to identify the MIME type of link (i.e., `link.mime_type_id`|| 
+|| `mime_type_admin` || Defines MIME types can be used to identify the MIME type of link (i.e., `link.mime_type_id`)|| 
