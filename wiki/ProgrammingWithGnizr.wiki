@@ -101,7 +101,7 @@ Example:
   <dependency>
     <groupId>com.gnizr</groupId>
     <artifactId>gnizr-core</artifactId>
-    <!-- replace this value to the gnizr version that you want to work with -->
+    <!-- replace this value with the gnizr version that you want to work with -->
     <version>2.3.0</version>
     <scope>compile</scope>
   </dependency>
@@ -145,7 +145,7 @@ mvn archetype:create
  -DarchetypeArtifactId=maven-archetype-webapp 
 }}}
 
-==== Step 3: Edit your project's POM file. ====
+==== Step 3: Configure project's `pom.xml` ====
 
 {{{
 <project xmlns="http://maven.apache.org/POM/4.0.0"
@@ -168,6 +168,7 @@ mvn archetype:create
 		<dependency>
 			<groupId>com.gnizr</groupId>
 			<artifactId>gnizr-web</artifactId>
+   <!-- replace this value with the gnizr version that you want to work with -->
 			<version>2.3.0-M3</version>
 			<type>jar</type>
 			<scope>provided</scope>
@@ -175,6 +176,7 @@ mvn archetype:create
 		<dependency>
 			<groupId>com.gnizr</groupId>
 			<artifactId>gnizr-webapp</artifactId>
+   <!-- replace this value with the gnizr version that you want to work with -->
 			<version>2.3.0-M3</version>
 			<type>war</type>
 			<scope>runtime</scope>
@@ -209,3 +211,7 @@ mvn archetype:create
 	</build>	
 </project>
 }}}
+
+==== Step 4: Overwrite gnizr configuration files ====
+
+There are several configuration files that define how the gnizr web application is instantiated in a Tomcat server. For information on how these configuration files work and how to use them, see GnizrConfigurationFiles and DevHelloWorldDemo. 
