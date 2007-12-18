@@ -87,11 +87,17 @@
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>
 				<executions>
 					<execution>
 						<id>get-applet-jar</id>
-						<phase>package</phase>
+						<phase>process-sources</phase>
 						<goals>
 							<goal>copy</goal>
 						</goals>
@@ -118,9 +124,17 @@
 				<configuration>
 					<filesets>
 						<fileset>
-							<directory>${basedir}/src/main/webapp/WEB-INF/lib</directory>
+							<directory>
+								${basedir}/src/main/webapp/WEB-INF/lib</directory>
 							<includes>
-								<include>**/*.jar</include>								
+								<include>**/*.jar</include>
+							</includes>
+						</fileset>
+						<fileset>
+							<directory>
+								${basedir}/src/main/webapp/applets</directory>
+							<includes>
+								<include>**/*.jar</include>
 							</includes>
 						</fileset>
 					</filesets>
