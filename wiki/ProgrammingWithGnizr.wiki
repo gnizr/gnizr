@@ -129,3 +129,19 @@ This command should automatically downloads all necessary Maven plugins and gniz
 Done! Read gnizr *technical documents* (see Introduction) and check out [http://dev.gnizr.com/javadocs/ gnizr Java API]. 
 
 == Option 2: Building on gnizr Web Application API ==
+
+==== Step 1: Install Eclipse and Maven ====
+
+Install Eclipse IDE for writing code. Install Maven for building your program.
+
+==== Step 2: Create a new Maven Project ====
+
+Let's assume that you want to create a new web application project called `helloworld`.
+{{{
+mvn archetype:create 
+ -DgroupId=com.example
+ -DartifactId=HelloWorldWebapp
+ -Dpackagename=com.example.gnizr 
+ -DarchetypeArtifactId=maven-archetype-webapp 
+}}}
+
