@@ -19,7 +19,7 @@ package com.gnizr.core.robot.rss.action;
 import org.apache.log4j.Logger;
 
 import com.gnizr.core.robot.rss.CrawlRssFeed;
-import com.gnizr.core.web.action.AbstractAction;
+import com.gnizr.web.action.AbstractAction;
 
 public class RssRobotService extends AbstractAction {
 
