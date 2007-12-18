@@ -23,6 +23,6 @@
 	<include file="xwork/gnizr-timeline.xml"/>
 		
 	<!-- xwork config from external projects -->
-	<include file="com/gnizr/core/robot/rss/xwork-robot.xml"/>	
+	<include file="com/gnizr/web/action/robot/rss/xwork-robot.xml"/>	
 	
 </xwork>
