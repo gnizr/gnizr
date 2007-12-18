@@ -270,7 +270,7 @@ mvn compile war:inplace
 
 ==== Step 9: Package gnizr along with your new project ====
 
-To build a WAR file that contains the standard gnizr web application and your new application behavior, you can invoke the following Maven command:
+To build a WAR file that contains the standard gnizr web application and your new application, you can invoke the following Maven command:
 
 {{{
 mvn war:war
