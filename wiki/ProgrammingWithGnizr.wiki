@@ -1,7 +1,7 @@
 #summary Programming with gnizr Java API and how to setup a build environment
 #labels Phase-Implementation,Featured
 
-This document is intended for developers who want to write programs against gnizr Java API. 
+This document is intended for developers who want to write programs against gnizr Java API. Instructions described here are experimental. If you have trouble following them, report them to [http://groups.google.com/group/gnizr-users gnizr users].
 
 = Introduction =
 
@@ -37,7 +37,9 @@ The rest of this document is focused on how to setup a build environment.
 
 We recommend developers to setup build environment using a combination of tools: [http://maven.apache.org Maven], [http://www.eclipse.org Eclipse], [http://tomcat.apache.org Tomcat] and [http://www.mysql.com MySQL]. For the specifics on how to install and use these tools, consult their respective documentations. 
 
-*Depending which types of gnizr API you want to use, you can choose to set up your build environment in one of two ways (see below).* Option 1 is suitable for building programs that only require using gnizr Core API and do not need to integrate any functions into the web application framework of gnizr. Option 2 is suitable for creating new application behaviors that will integrated into the existing web application framework. 
+*Depending on which set of gnizr API you want to use, you can choose to set up your build environment in one of two ways (see below).* 
+  * Option 1: suitable for building programs that only require using gnizr Core API and do not need to integrate any functions into the web application framework of gnizr. 
+  * Option 2: suitable for creating new application behaviors that will integrated into the existing web application framework. 
 
 Here are some examples.
 
@@ -97,10 +99,10 @@ Example:
 <dependencies>
 
   <dependency>
-    <groupId>com.gnizr.core</groupId>
+    <groupId>com.gnizr</groupId>
     <artifactId>gnizr-core</artifactId>
     <!-- replace this value to the gnizr version that you want to work with -->
-    <version>2.3.0-M2</version>
+    <version>2.3.0</version>
     <scope>compile</scope>
   </dependency>
    
