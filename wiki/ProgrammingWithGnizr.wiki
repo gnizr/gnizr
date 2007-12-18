@@ -1,7 +1,9 @@
 #summary Programming with gnizr Java API and how to setup a build environment
 #labels Phase-Implementation,Featured
 
-This document is intended for developers who want to write programs against gnizr Java API. Instructions described here are _experimental_. If you have trouble following them, send your questions to [http://groups.google.com/group/gnizr-users gnizr users].
+This document is intended for developers who want to write programs against gnizr Java API. 
+
+|| Instructions described here are _experimental_. If you have trouble following them, send your questions to [http://groups.google.com/group/gnizr-users gnizr users]. ||
 
 = Introduction =
 
