@@ -225,7 +225,7 @@ There are several configuration files that define how the gnizr web application 
 
 ==== Step 5: Develop the new application that extends gnizr ====
 
-You should place all your Java classes and templates in the `src/main` directory. 
+You should place all your program files in the `src/main` directory. 
 
 || *Type of files* || *Where to place them* ||
 || `*.java` || `src/main/java` ||
