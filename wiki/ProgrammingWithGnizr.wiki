@@ -136,7 +136,7 @@ Install Eclipse IDE for writing code. Install Maven for building your program.
 
 ==== Step 2: Create a new Maven Project ====
 
-Let's assume that you want to create a new web application project called `helloworld`.
+Let's assume that you want to create a new web application project called `HelloWorldWebapp`.
 {{{
 mvn archetype:create 
  -DgroupId=com.example
@@ -145,3 +145,67 @@ mvn archetype:create
  -DarchetypeArtifactId=maven-archetype-webapp 
 }}}
 
+==== Step 3: Edit your project's POM file. ====
+
+{{{
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.example.gnizr</groupId>
+	<artifactId>HelloWorldWebapp</artifactId>
+	<packaging>war</packaging>
+	<version>1.0-SNAPSHOT</version>
+	<name>HelloWorldWebapp Gnizr Webapp</name>
+	<url>http://example.com</url>
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>test</scope>
+		</dependency>		
+		<dependency>
+			<groupId>com.gnizr</groupId>
+			<artifactId>gnizr-web</artifactId>
+			<version>2.3.0-M3</version>
+			<type>jar</type>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.gnizr</groupId>
+			<artifactId>gnizr-webapp</artifactId>
+			<version>2.3.0-M3</version>
+			<type>war</type>
+			<scope>runtime</scope>
+		</dependency>
+	</dependencies>
+	<build>
+		<finalName>HelloWorldWebapp</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.5</source>
+					<target>1.5</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-clean-plugin</artifactId>
+				<configuration>
+					<filesets>
+						<fileset>
+							<directory>${basedir}/src/main/webapp</directory>
+							<includes>
+								<include>**/*</include>
+							</includes>
+						</fileset>
+					</filesets>
+				</configuration>
+			</plugin>			
+		</plugins>
+	</build>	
+</project>
+}}}
