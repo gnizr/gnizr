@@ -160,67 +160,68 @@ mvn archetype:create
 ==== Step 3: Configure project's `pom.xml` ====
 
 {{{
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.example</groupId>
-	<artifactId>HelloWorldWebapp</artifactId>
-	<packaging>war</packaging>
-	<version>1.0-SNAPSHOT</version>
-	<name>HelloWorldWebapp Gnizr Webapp</name>
-	<url>http://example.com</url>
-	<dependencies>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>3.8.1</version>
-			<scope>test</scope>
-		</dependency>		
-		<dependency>
-			<groupId>com.gnizr</groupId>
-			<artifactId>gnizr-web</artifactId>
-   <!-- replace this value with the gnizr version that you want to work with -->
-			<version>2.3.0-M3</version>
-			<type>jar</type>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.gnizr</groupId>
-			<artifactId>gnizr-webapp</artifactId>
-   <!-- replace this value with the gnizr version that you want to work with -->
-			<version>2.3.0-M3</version>
-			<type>war</type>
-			<scope>runtime</scope>
-		</dependency>
-	</dependencies>
-	<build>
-		<finalName>HelloWorldWebapp</finalName>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.5</source>
-					<target>1.5</target>
-					<encoding>UTF-8</encoding>
-				</configuration>
-			</plugin>
-			<plugin>
-				<artifactId>maven-clean-plugin</artifactId>
-				<configuration>
-					<filesets>
-						<fileset>
-							<directory>${basedir}/src/main/webapp</directory>
-							<includes>
-								<include>**/*</include>
-							</includes>
-						</fileset>
-					</filesets>
-				</configuration>
-			</plugin>			
-		</plugins>
-	</build>	
+<project 
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.example</groupId>
+  <artifactId>HelloWorldWebapp</artifactId>
+  <packaging>war</packaging>
+  <version>1.0-SNAPSHOT</version>
+  <name>HelloWorldWebapp Gnizr Webapp</name>
+  <url>http://example.com</url>
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>		
+    <dependency>
+      <groupId>com.gnizr</groupId>
+      <artifactId>gnizr-web</artifactId>
+      <!-- replace this value with the gnizr version that you want to work with -->
+      <version>2.3.0-M3</version>
+      <type>jar</type>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.gnizr</groupId>
+      <artifactId>gnizr-webapp</artifactId>
+      <!-- replace this value with the gnizr version that you want to work with -->
+      <version>2.3.0-M3</version>
+      <type>war</type>
+      <scope>runtime</scope>
+    </dependency>
+  </dependencies>
+  <build>
+    <finalName>HelloWorldWebapp</finalName>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+	<artifactId>maven-compiler-plugin</artifactId>
+	<configuration>
+	  <source>1.5</source>
+	  <target>1.5</target>
+	  <encoding>UTF-8</encoding>
+	</configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-clean-plugin</artifactId>
+        <configuration>
+          <filesets>
+            <fileset>
+	      <directory>${basedir}/src/main/webapp</directory>
+	      <includes>
+	        <include>**/*</include>
+	      </includes>
+	    </fileset>
+	  </filesets>
+	</configuration>
+      </plugin>			
+    </plugins>
+  </build>	
 </project>
 }}}
 
@@ -260,7 +261,9 @@ See DevHelloWorldDemo for an example of program file structure layout.
 
 ==== Step 8: Overlay `gnizr-webapp` WAR into your project ====
 
-{{{mvn compile war:inplace}}}
+{{{
+mvn compile war:inplace
+}}}
 
 || *TIPS*: It's highly recommended that you install this [http://www.eclipsetotale.com/tomcatPlugin.html Tomcat Eclipse Plugin]. Using this plugin, you can use Eclipse IDE to run and debug your program running in Tomcat. ||
 
@@ -269,6 +272,8 @@ See DevHelloWorldDemo for an example of program file structure layout.
 
 To build a WAR file that contains the standard gnizr web application and your new application behavior, you can invoke the following Maven command:
 
-{{{mvn war:war}}}
+{{{
+mvn war:war
+}}}
 
 Before you create the WAR file, make sure that a properly configure `gnizr-config.xml` is either defined in your project or inherited from the `gnizr-webapp` project. If you don't define `gnizr-config.xml` in your project, it's inherited from `gnizr-webapp` when you invoke the Maven command to perform "overlay" (see Step 8).
