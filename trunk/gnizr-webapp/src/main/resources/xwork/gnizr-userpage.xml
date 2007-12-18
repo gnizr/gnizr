@@ -4,7 +4,7 @@
 		
 	<package name="gnizr-userpage" extends="gnizr-default" namespace="/bookmark">		
 		<!-- use the chain interceptor to build a user's home page-->
-		<action name="viewUserPage"	class="com.gnizr.core.web.action.bookmark.ListUserBookmark">
+		<action name="viewUserPage"	class="com.gnizr.web.action.bookmark.ListUserBookmark">
 			<interceptor-ref name="loggedIn"/>								
 			<interceptor-ref name="gnizrDefaultStack"/>	
 			<result name="success" type="freemarker">/users/home.ftl</result>
@@ -13,7 +13,7 @@
 		</action>
 
 		<action name="userTagCloud"
-			class="com.gnizr.core.web.action.tag.GetUserTagCloud">
+			class="com.gnizr.web.action.tag.GetUserTagCloud">
 			<interceptor-ref name="loggedIn"/>
 			<interceptor-ref name="gnizrDefaultStack"/>
 			<result name="success" type="freemarker">/users/usertagcloud-template.ftl</result>
@@ -22,7 +22,7 @@
 		</action>		
 		
 		<action name="userTagGroups"
-			class="com.gnizr.core.web.action.tag.GetUserTagGroups">
+			class="com.gnizr.web.action.tag.GetUserTagGroups">
 			<interceptor-ref name="loggedIn"/>
 			<interceptor-ref name="gnizrDefaultStack"/>
 			<result name="success" type="freemarker">/users/usertaggroups-template.ftl</result>
@@ -31,7 +31,7 @@
 		</action>	
 		
 		<action name="suggestTags"
-			class="com.gnizr.core.web.action.tag.SuggestTags">	
+			class="com.gnizr.web.action.tag.SuggestTags">	
 			<interceptor-ref name="loggedIn"/>	
 			<interceptor-ref name="defaultStack"/>
 			<result name="success" type="freemarker">/users/userskoscloud-template.ftl</result>	
@@ -40,7 +40,7 @@
 		</action>	   
 		
 		<action name="configTagCloud"
-			class="com.gnizr.core.web.action.tag.ConfigTagCloud">
+			class="com.gnizr.web.action.tag.ConfigTagCloud">
 			<interceptor-ref name="loggedIn"/>
 			<interceptor-ref name="gnizrDefaultStack"/>			
 			<result name="success" type="redirect">${redirectToPage}</result>
@@ -48,7 +48,7 @@
 			<result name="error">/common/error.ftl</result>
 		</action>
 		
-		<action name="forme" class="com.gnizr.core.web.action.bookmark.ListForUserBookmark">
+		<action name="forme" class="com.gnizr.web.action.bookmark.ListForUserBookmark">
 			<interceptor-ref name="loggedIn"/>				 
             <interceptor-ref name="auth"/>			
             <interceptor-ref name="gnizrDefaultStack"/>
@@ -57,7 +57,7 @@
 			<result name="error" type="freemarker">/common/error.ftl</result>	
 		</action>	
 		
-		<action name="formebyuser" class="com.gnizr.core.web.action.bookmark.ListForUserBookmark"
+		<action name="formebyuser" class="com.gnizr.web.action.bookmark.ListForUserBookmark"
 			method="doListFromSender">
 			<interceptor-ref name="loggedIn"/>				 
 			<interceptor-ref name="auth"/>
@@ -67,7 +67,7 @@
 			<result name="error" type="freemarker">/common/error.ftl</result>	
 		</action>	
 		
-		<action name="formesenders" class="com.gnizr.core.web.action.bookmark.ListForUserBookmark"
+		<action name="formesenders" class="com.gnizr.web.action.bookmark.ListForUserBookmark"
 			method="doListSenderUsers">
 			<interceptor-ref name="loggedIn"/>				 
 			<interceptor-ref name="auth"/>
@@ -79,7 +79,7 @@
     </package>		
 	
 	<package name="gnizr-userfolder" extends="gnizr-default" namespace="/folder">
-		<action name="view" class="com.gnizr.core.web.action.folder.ListUserFolderContent">
+		<action name="view" class="com.gnizr.web.action.folder.ListUserFolderContent">
 			<interceptor-ref name="loggedIn"/>				 
             <interceptor-ref name="gnizrDefaultStack"/>
 			<result name="success" type="freemarker">/folder/view-content.ftl</result>
@@ -88,7 +88,7 @@
 		</action>	
 		
         <action name="folderTagCloud"
-			class="com.gnizr.core.web.action.tag.GetFolderTagCloud">
+			class="com.gnizr.web.action.tag.GetFolderTagCloud">
 			<interceptor-ref name="loggedIn"/>
 			<interceptor-ref name="gnizrDefaultStack"/>
 			<result name="success" type="freemarker">/folder/foldertags-template.ftl</result>
@@ -97,7 +97,7 @@
 		</action>				
 		
 		<action name="folderTagGroups"
-			class="com.gnizr.core.web.action.tag.GetFolderTagGroups">
+			class="com.gnizr.web.action.tag.GetFolderTagGroups">
 			<interceptor-ref name="loggedIn"/>
 			<interceptor-ref name="gnizrDefaultStack"/>
 			<result name="success" type="freemarker">/folder/foldertaggroups-template.ftl</result>
@@ -105,7 +105,7 @@
 			<result name="error">/common/empty-template.ftl</result>
 		</action>
 		
-		<action name="list" class="com.gnizr.core.web.action.folder.ListUserFolders">
+		<action name="list" class="com.gnizr.web.action.folder.ListUserFolders">
 			<interceptor-ref name="loggedIn"/>				 
             <interceptor-ref name="gnizrDefaultStack"/>			
 			<result name="success" type="freemarker">/folder/list-folders.ftl</result>
@@ -113,7 +113,7 @@
 			<result name="error">/common/error.ftl</result>	
 		</action>		
 		
-		<action name="miniList" class="com.gnizr.core.web.action.folder.ListUserFolders">
+		<action name="miniList" class="com.gnizr.web.action.folder.ListUserFolders">
 			<interceptor-ref name="loggedIn"/>				 
             <interceptor-ref name="gnizrDefaultStack"/>
 			<result name="success" type="freemarker">/folder/list-folders-template.ftl</result>
@@ -125,7 +125,7 @@
 	
 	
 	<package name="gnizr-userfeed" extends="gnizr-default" namespace="/feed">
-		<action name="list" class="com.gnizr.core.web.action.feed.ListSubscriptions">
+		<action name="list" class="com.gnizr.web.action.feed.ListSubscriptions">
 			<interceptor-ref name="loggedIn"/>							 
             <interceptor-ref name="gnizrDefaultStack"/>			
 			<result name="success" type="freemarker">/feed/list-feeds.ftl</result>

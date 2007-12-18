@@ -5,7 +5,7 @@
 	<package name="gnizr-clustermap" extends="gnizr-default" namespace="/data/clustermap">
 		
 		<action name="search"
-			    class="com.gnizr.core.web.action.clustermap.ClusterSearchResult">			
+			    class="com.gnizr.web.action.clustermap.ClusterSearchResult">			
 			<interceptor-ref name="loggedIn"/>
 			<interceptor-ref name="gnizrDefaultStack"/>
 			<result name="success" type="freemarker">
@@ -19,7 +19,7 @@
 			<result name="error" type="freemarker">/common/error.ftl</result>
 		</action>
 		
-		<action name="bookmark" class="com.gnizr.core.web.action.clustermap.ClusterUserBookmark">
+		<action name="bookmark" class="com.gnizr.web.action.clustermap.ClusterUserBookmark">
 			<interceptor-ref name="loggedIn"/>
 			<interceptor-ref name="gnizrDefaultStack"/>
 			<result name="success" type="freemarker">
@@ -29,7 +29,7 @@
 			<result name="error">/common/error.ftl</result>
 		</action>		
 		
-		<action name="folder" class="com.gnizr.core.web.action.clustermap.ClusterUserFolder">
+		<action name="folder" class="com.gnizr.web.action.clustermap.ClusterUserFolder">
 			<interceptor-ref name="loggedIn"/>
 			<interceptor-ref name="gnizrDefaultStack"/>
 			<result name="success" type="freemarker">
@@ -41,7 +41,7 @@
 	</package>
 	
 	<package name="gnizr-clustermap2" extends="gnizr-default" namespace="/clustermap">			
-		<action name="bookmark" class="com.gnizr.core.web.action.clustermap.UserBookmarkClusterMap">
+		<action name="bookmark" class="com.gnizr.web.action.clustermap.UserBookmarkClusterMap">
 			<interceptor-ref name="loggedIn"/>
 			<interceptor-ref name="gnizrDefaultStack"/>
 			<result name="success" type="freemarker">/clustermap/userbookmarks-page.ftl</result>
@@ -50,7 +50,7 @@
 		</action>
 		
 		
-		<action name="folder" class="com.gnizr.core.web.action.clustermap.ClusterUserFolder"
+		<action name="folder" class="com.gnizr.web.action.clustermap.ClusterUserFolder"
 			method="doDefault">
 			<interceptor-ref name="loggedIn"/>
 			<interceptor-ref name="gnizrDefaultStack"/>

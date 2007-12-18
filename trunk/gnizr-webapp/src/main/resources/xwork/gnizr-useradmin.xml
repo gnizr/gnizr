@@ -5,7 +5,7 @@
 	<!-- see also webwork doc: http://www.opensymphony.com/webwork/wikidocs/Interceptors.html -->
 	
 	<package name="gnizr-no-policy" extends="gnizr-basic">
-		<action name="login" class="com.gnizr.core.web.action.user.UserLogin"
+		<action name="login" class="com.gnizr.web.action.user.UserLogin"
 			method="doDefault">
 			<interceptor-ref name="loggedIn"/>					
 			<interceptor-ref name="config-gnizr"/>			
@@ -15,7 +15,7 @@
 			<result name="error" type="freemarker">/login.ftl</result>
 		</action>
 		
-		<action name="userLogin" class="com.gnizr.core.web.action.user.UserLogin">
+		<action name="userLogin" class="com.gnizr.web.action.user.UserLogin">
 			<interceptor-ref name="loggedIn"/>		
 			<interceptor-ref name="config-gnizr"/>			
 			<interceptor-ref name="validationWorkflowStack"/>
@@ -24,7 +24,7 @@
 			<result name="error" type="freemarker">/login.ftl</result>
 		</action>
 		
-		<action name="register" class="com.gnizr.core.web.action.user.Registration">
+		<action name="register" class="com.gnizr.web.action.user.Registration">
         	<interceptor-ref name="config-gnizr"/>			
    		    <interceptor-ref name="validationWorkflowStack"/>			
 			<result name="success" type="redirect">/home</result>
@@ -32,7 +32,7 @@
 			<result name="error" type="freemarker">/users/register.ftl</result>
 		</action>
 		
-		<action name="logout" class="com.gnizr.core.web.action.user.UserLogout">
+		<action name="logout" class="com.gnizr.web.action.user.UserLogout">
 	        <interceptor-ref name="config-gnizr"/>	
 			<interceptor-ref name="basicStack"/>		
 			<result name="success" type="redirect">/</result>

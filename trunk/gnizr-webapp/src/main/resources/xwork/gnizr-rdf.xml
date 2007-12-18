@@ -2,7 +2,7 @@
 	"http://www.opensymphony.com/xwork/xwork-1.0.dtd">
 <xwork>
 	<package name="gnizr-rdf" extends="gnizr-default" namespace="/data/rdf">		
-		<action name="bookmark" class="com.gnizr.core.web.action.bookmark.ListUserBookmark"
+		<action name="bookmark" class="com.gnizr.web.action.bookmark.ListUserBookmark"
 			method="doListAllBookmarks">
 			<interceptor-ref name="loggedIn"/>				 
             <interceptor-ref name="gnizrDefaultStack"/>
@@ -13,7 +13,7 @@
 			<result name="error">/common/error.ftl</result>	
 		</action>
 		
-		<action name="tag" class="com.gnizr.core.web.action.link.ListLink"
+		<action name="tag" class="com.gnizr.web.action.link.ListLink"
 			method="doListAllBookmarks">
 			<interceptor-ref name="loggedIn"/>
             <interceptor-ref name="gnizrDefaultStack"/>

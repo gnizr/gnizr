@@ -2,7 +2,7 @@
 	"http://www.opensymphony.com/xwork/xwork-1.0.dtd">
 <xwork>
 	<package name="gnizr-json" extends="gnizr-default" namespace="/data/json">				
-		<action name="userTagCloud" class="com.gnizr.core.web.action.tag.GetUserTagCloud"
+		<action name="userTagCloud" class="com.gnizr.web.action.tag.GetUserTagCloud"
 			method="doGetAllTags">
 			<interceptor-ref name="loggedIn"/>
 			<interceptor-ref name="defaultStack"/>			
@@ -12,7 +12,7 @@
 			</result>
 		</action>	
 		
-		<action name="recommendTags" class="com.gnizr.core.web.action.link.GetCommonTags"
+		<action name="recommendTags" class="com.gnizr.web.action.link.GetCommonTags"
 			method="doPageLinkTags">
 			<interceptor-ref name="loggedIn"/>
 			<interceptor-ref name="defaultStack"/>
@@ -22,7 +22,7 @@
 			</result>					
 		</action>	
 		
-		<action name="listFolders" class="com.gnizr.core.web.action.folder.ListUserFolders">
+		<action name="listFolders" class="com.gnizr.web.action.folder.ListUserFolders">
 			<interceptor-ref name="loggedIn"/>				 
             <interceptor-ref name="gnizrDefaultStack"/>
 			<result name="success" type="freemarker">
@@ -31,7 +31,7 @@
 			</result>	
 		</action>
 		
-		<action name="listInFolders" class="com.gnizr.core.web.action.folder.ListUserFolders"
+		<action name="listInFolders" class="com.gnizr.web.action.folder.ListUserFolders"
 			method="doListBookmarkFolders">
 			<interceptor-ref name="loggedIn"/>				 
             <interceptor-ref name="gnizrDefaultStack"/>
@@ -41,7 +41,7 @@
 			</result>	
 		</action>
 	
-		<action name="listUserTagInGroups" class="com.gnizr.core.web.action.tag.GetUserTagGroups"
+		<action name="listUserTagInGroups" class="com.gnizr.web.action.tag.GetUserTagGroups"
 			method="doGetAll">
 			<interceptor-ref name="loggedIn"/>				 
             <interceptor-ref name="gnizrDefaultStack"/>
@@ -51,7 +51,7 @@
 			</result>
 		</action>
 		
-		<action name="listUsers" class="com.gnizr.core.web.action.user.ListUserStats">
+		<action name="listUsers" class="com.gnizr.web.action.user.ListUserStats">
 			<interceptor-ref name="loggedIn"/>				 
             <interceptor-ref name="gnizrDefaultStack"/>
 			<result name="success" type="freemarker">
@@ -60,7 +60,7 @@
 			</result>	
 		</action>
 		
-		<action name="getForUserCount" class="com.gnizr.core.web.action.bookmark.ListForUserBookmark"
+		<action name="getForUserCount" class="com.gnizr.web.action.bookmark.ListForUserBookmark"
 			method="doGetTotalCount">
 			<interceptor-ref name="loggedIn"/>				 
             <interceptor-ref name="gnizrDefaultStack"/>
@@ -70,7 +70,7 @@
 			</result>
 		</action>	
 				
-		<action name="saveBookmark" class="com.gnizr.core.web.action.bookmark.EditBookmark">
+		<action name="saveBookmark" class="com.gnizr.web.action.bookmark.EditBookmark">
 			<interceptor-ref name="loggedIn"/>				
 			<interceptor-ref name="auth"/> 
             <interceptor-ref name="gnizrDefaultStack"/>
@@ -90,7 +90,7 @@
 			<result name="redirect" type="redirect">${url}</result>
 		</action>
 		
-		<action name="getBookmark" class="com.gnizr.core.web.action.bookmark.EditBookmark"
+		<action name="getBookmark" class="com.gnizr.web.action.bookmark.EditBookmark"
 			method="doFetchBookmark">
 			<interceptor-ref name="loggedIn"/>				
 			<interceptor-ref name="auth"/> 
@@ -110,7 +110,7 @@
 			<result name="redirect" type="redirect">${url}</result>
 		</action>
 		
-       <action name="pageGBookmark" class="com.gnizr.core.web.action.bookmark.ListBookmarkHasGeomMarker">
+       <action name="pageGBookmark" class="com.gnizr.web.action.bookmark.ListBookmarkHasGeomMarker">
 			<interceptor-ref name="loggedIn"/>
 			<interceptor-ref name="gnizrDefaultStack"/>			
 			<result name="success" type="freemarker">
@@ -119,7 +119,7 @@
 			</result>
 	   </action>	
 		
-       <action name="fetchGMarkers" class="com.gnizr.core.web.action.bookmark.EditBookmark"
+       <action name="fetchGMarkers" class="com.gnizr.web.action.bookmark.EditBookmark"
 		   method="doFetchGeometryMarkersById">
 		   	<interceptor-ref name="loggedIn"/>
 			<interceptor-ref name="gnizrDefaultStack"/>			
@@ -137,14 +137,14 @@
 			</result>
 	   </action>		
 		
-		<action name="searchproxy" class="com.gnizr.core.web.action.search.OpenSearchProxy">
+		<action name="searchproxy" class="com.gnizr.web.action.search.OpenSearchProxy">
 			<interceptor-ref name="gnizrDefaultStack"/>		
 			<result name="success" type="json">
 				<param name="jsonName">jsonResult</param>
 			</result>
 		</action>		
 		
-		<action name="suggestSearchTags" class="com.gnizr.core.web.action.search.SuggestSearchTags">
+		<action name="suggestSearchTags" class="com.gnizr.web.action.search.SuggestSearchTags">
 			<interceptor-ref name="gnizrDefaultStack"/>
 			<result name="success" type="json">
 				<param name="jsonName">jsonResult</param>

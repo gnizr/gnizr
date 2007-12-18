@@ -2,7 +2,7 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
 	"http://www.springframework.org/dtd/spring-beans.dtd">
 <beans>
-	<bean id="listSubscriptions" class="com.gnizr.core.web.action.feed.ListSubscriptions" singleton="false">
+	<bean id="listSubscriptions" class="com.gnizr.web.action.feed.ListSubscriptions" singleton="false">
 		<property name="userManager">
 			<ref bean="userManager"/>
 		</property>
@@ -11,7 +11,7 @@
 		</property>
 	</bean>
 
-	<bean id="editSubscription" class="com.gnizr.core.web.action.feed.EditSubscription" singleton="false">
+	<bean id="editSubscription" class="com.gnizr.web.action.feed.EditSubscription" singleton="false">
 		<property name="userManager">
 			<ref bean="userManager"/>
 		</property>
