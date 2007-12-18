@@ -3,13 +3,13 @@
 <xwork>	
 	<package name="gnizr-community" extends="gnizr-default" namespace="/community">
     
-		<action name="tagcloud" class="com.gnizr.core.web.action.tag.GetTagCloud">
+		<action name="tagcloud" class="com.gnizr.web.action.tag.GetTagCloud">
 			<interceptor-ref name="loggedIn"/>
 			<interceptor-ref name="gnizrDefaultStack"/>
 			<result name="success" type="freemarker">/tags/tagcloud.ftl</result>
 		</action>
 		
-		<action name="topusers" class="com.gnizr.core.web.action.user.ListUserStats">
+		<action name="topusers" class="com.gnizr.web.action.user.ListUserStats">
 			<interceptor-ref name="loggedIn"/>				 
             <interceptor-ref name="gnizrDefaultStack"/>
 			<result name="success" type="freemarker">/users/user-stats.ftl</result>
@@ -17,14 +17,14 @@
 			<result name="error" type="freemarker">/common/error.ftl</result>	
 		</action>
 		
-		<action name="viewTaggedLink" class="com.gnizr.core.web.action.link.ListLink">
+		<action name="viewTaggedLink" class="com.gnizr.web.action.link.ListLink">
 			<interceptor-ref name="loggedIn"/>
             <interceptor-ref name="gnizrDefaultStack"/>
 			<result name="success" type="chain">viewTaggedLinkTagCloud</result>
 			<result name="error" type="freemarker">/common/error.ftl</result>
 		</action>
 		
-		<action name="viewTaggedLinkTagCloud" class="com.gnizr.core.web.action.link.GetCommonTags">
+		<action name="viewTaggedLinkTagCloud" class="com.gnizr.web.action.link.GetCommonTags">
 			<interceptor-ref name="loggedIn"/>	
 			<interceptor-ref name="gnizrNoPrepareStack"/>
 			<interceptor-ref name="chain"/>
@@ -33,7 +33,7 @@
 			<result name="error" type="freemarker">/common/error.ftl</result>
 		</action>	
 		
-		<action name="viewLinkHistory" class="com.gnizr.core.web.action.link.GetLinkHistory">
+		<action name="viewLinkHistory" class="com.gnizr.web.action.link.GetLinkHistory">
 			<interceptor-ref name="loggedIn"/>	
 			<interceptor-ref name="gnizrNoPrepareStack"/>
 			<result name="success" type="chain">viewLinkHistoryTagCloud</result>
@@ -41,7 +41,7 @@
 			<result name="error" type="freemarker">/common/error.ftl</result>
 		</action>
 		
-		<action name="viewLinkHistoryTagCloud" class="com.gnizr.core.web.action.link.GetCommonTags">
+		<action name="viewLinkHistoryTagCloud" class="com.gnizr.web.action.link.GetCommonTags">
 			<interceptor-ref name="loggedIn"/>	
 			<interceptor-ref name="gnizrNoPrepareStack"/>
 			<interceptor-ref name="chain"/>
@@ -53,7 +53,7 @@
 	</package>
 	
 	<package name="gnizr-clustermap-search" extends="gnizr-community" namespace="/community/clustermap">
-		<action name="search" class="com.gnizr.core.web.action.clustermap.SearchClusterMap">
+		<action name="search" class="com.gnizr.web.action.clustermap.SearchClusterMap">
 			<interceptor-ref name="gnizrDefaultStack"/>
 			<result name="success" type="freemarker">/clustermap/search-page.ftl</result>	
 			<result name="error" type="freemarker">/common/error.ftl</result>	

@@ -5,7 +5,7 @@
 	<!-- see also webwork doc: http://www.opensymphony.com/webwork/wikidocs/Interceptors.html -->
 	
 	<package name="gnizr-system-admin" extends="gnizr-default" namespace="/admin">		
-		<action name="editUser" class="com.gnizr.core.web.action.user.EditUser"
+		<action name="editUser" class="com.gnizr.web.action.user.EditUser"
 			method="fetchEditData">
 			<interceptor-ref name="loggedIn"/>
 			<interceptor-ref name="auth-gnizr"/>
@@ -14,7 +14,7 @@
 			<result name="error" type="freemarker">/common/error.ftl</result>
 		</action>
 		
-		<action name="deleteUser" class="com.gnizr.core.web.action.user.EditUser"
+		<action name="deleteUser" class="com.gnizr.web.action.user.EditUser"
 			method="doDelete">
 			<interceptor-ref name="loggedIn"/>
 			<interceptor-ref name="auth-gnizr"/>
@@ -24,7 +24,7 @@
 			<result name="error" type="freemarker">/common/error.ftl</result>
 		</action>
 		
-		<action name="editProfile" class="com.gnizr.core.web.action.user.EditUser"
+		<action name="editProfile" class="com.gnizr.web.action.user.EditUser"
 			method="doUpdate">
 			<interceptor-ref name="loggedIn"/>
 			<interceptor-ref name="auth-gnizr"/>
@@ -34,7 +34,7 @@
 			<result name="error" type="freemarker">/common/error.ftl</result>
 		</action>
 		
-		<action name="changePassword" class="com.gnizr.core.web.action.user.EditUser"
+		<action name="changePassword" class="com.gnizr.web.action.user.EditUser"
 			method="doChangePassword">
 			<interceptor-ref name="loggedIn"/>
 			<interceptor-ref name="auth-gnizr"/>
@@ -44,7 +44,7 @@
 			<result name="error" type="freemarker">/common/error.ftl</result>
 		</action>
 		
-		<action name="saveProfile" class="com.gnizr.core.web.action.user.EditUser"
+		<action name="saveProfile" class="com.gnizr.web.action.user.EditUser"
 			method="doUpdate">
 			<interceptor-ref name="loggedIn"/>
 			<interceptor-ref name="auth-gnizr"/>
@@ -55,7 +55,7 @@
 			<result name="error" type="freemarker">/common/error.ftl</result>
 		</action>
 		
-		<action name="newUser" class="com.gnizr.core.web.action.user.EditUser"
+		<action name="newUser" class="com.gnizr.web.action.user.EditUser"
 			method="doAddNewUser">
 			<interceptor-ref name="loggedIn"/>
 			<interceptor-ref name="auth-gnizr"/>
@@ -65,7 +65,7 @@
 			<result name="error" type="freemarker">/common/error.ftl</result>
 		</action>
 		
-		<action name="addNewUser" class="com.gnizr.core.web.action.user.EditUser"
+		<action name="addNewUser" class="com.gnizr.web.action.user.EditUser"
 			method="doAddNewUser">
 			<interceptor-ref name="loggedIn"/>
 			<interceptor-ref name="auth-gnizr"/>
@@ -77,7 +77,7 @@
 			<result name="error" type="freemarker">/common/error.ftl</result>
 		</action>
 		
-		<action name="updateOwnership" class="com.gnizr.core.web.action.folder.UpdateOwnership">
+		<action name="updateOwnership" class="com.gnizr.web.action.folder.UpdateOwnership">
 			<interceptor-ref name="loggedIn"/>
 			<interceptor-ref name="auth"/>						
 			<interceptor-ref name="gnizrDefaultStack"/>	         

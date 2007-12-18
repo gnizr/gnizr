@@ -3,7 +3,7 @@
 	"http://www.springframework.org/dtd/spring-beans.dtd">
 <beans>
 	<bean id="listUserFolderContent"
-		class="com.gnizr.core.web.action.folder.ListUserFolderContent"
+		class="com.gnizr.web.action.folder.ListUserFolderContent"
 		singleton="false">
 		<property name="folderManager">
 			<ref bean="folderManager"/>
@@ -11,13 +11,13 @@
 	</bean>
 	
 	<bean id="listUserFolders"
-		class="com.gnizr.core.web.action.folder.ListUserFolders" singleton="false">
+		class="com.gnizr.web.action.folder.ListUserFolders" singleton="false">
 		<property name="folderManager">
 			<ref bean="folderManager"/>
 		</property>
 	</bean>
 	
-	<bean id="editUserFolder" class="com.gnizr.core.web.action.folder.EditUserFolder" singleton="false">
+	<bean id="editUserFolder" class="com.gnizr.web.action.folder.EditUserFolder" singleton="false">
 		<property name="folderManager">
 			<ref bean="folderManager"/>
 		</property>

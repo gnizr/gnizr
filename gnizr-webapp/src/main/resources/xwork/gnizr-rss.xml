@@ -3,7 +3,7 @@
 <xwork>
 	
 	<package name="gnizr-rss1.0" extends="gnizr-default" namespace="/data/rss1.0">		
-		<action name="bookmark" class="com.gnizr.core.web.action.bookmark.ListUserBookmark">
+		<action name="bookmark" class="com.gnizr.web.action.bookmark.ListUserBookmark">
 			<interceptor-ref name="loggedIn"/>			
 			<interceptor-ref name="gnizrDefaultStack"/>	
 			<param name="sessionMode">false</param>
@@ -18,7 +18,7 @@
 	</package>
 	
 	<package name="gnizr-atom-user" extends="gnizr-default" namespace="/data/atom/user">		
-		<action name="search" class="com.gnizr.core.web.action.search.SearchBookmark">
+		<action name="search" class="com.gnizr.web.action.search.SearchBookmark">
 			<interceptor-ref name="loggedIn"/>			
 			<interceptor-ref name="gnizrNoPolicyDefaultStack"/>	
 			<param name="type">user</param>		
@@ -29,7 +29,7 @@
 	</package>
 	
 	<package name="gnizr-atom-community" extends="gnizr-default" namespace="/data/atom/community">		
-		<action name="search" class="com.gnizr.core.web.action.search.SearchBookmark">
+		<action name="search" class="com.gnizr.web.action.search.SearchBookmark">
 			<interceptor-ref name="loggedIn"/>			
 			<interceptor-ref name="gnizrNoPolicyDefaultStack"/>	
 			<param name="type">text</param>		

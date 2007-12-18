@@ -6,7 +6,7 @@
 	
 	<package name="gnizr-search-bookmark" extends="gnizr-default" namespace="/bookmark">
 		
-		<action name="searchInput" class="com.gnizr.core.web.action.search.SearchBookmark"
+		<action name="searchInput" class="com.gnizr.web.action.search.SearchBookmark"
 			method="doInput">			
 			<interceptor-ref name="loggedIn"/>							
             <interceptor-ref name="gnizrDefaultStack"/>			
@@ -14,7 +14,7 @@
 			<result name="error" type="freemarker">/edit.ftl</result>	
 		</action>
 		
-		<action name="search" class="com.gnizr.core.web.action.search.SearchBookmark">			
+		<action name="search" class="com.gnizr.web.action.search.SearchBookmark">			
 			<interceptor-ref name="loggedIn"/>							
             <interceptor-ref name="gnizrDefaultStack"/>
 			<result name="success" type="chain">getSearchCommonTags</result>
@@ -27,7 +27,7 @@
 			</result>
 		</action>
 
-		<action name="getSearchCommonTags" class="com.gnizr.core.web.action.link.GetCommonTags">												
+		<action name="getSearchCommonTags" class="com.gnizr.web.action.link.GetCommonTags">												
 			<interceptor-ref name="loggedIn"/>
 			<interceptor-ref name="alias"/>	
 			<interceptor-ref name="gnizrNoPrepareStack"/>
@@ -40,7 +40,7 @@
 	</package>
 	
 	<package name="gnizr-opensearch" extends="gnizr-default" namespace="/search">
-		<action name="list" class="com.gnizr.core.web.action.search.ListSearchEngines">
+		<action name="list" class="com.gnizr.web.action.search.ListSearchEngines">
 			<interceptor-ref name="loggedIn"/>	
 			<interceptor-ref name="gnizrDefaultStack"/>		
 			<result name="success" type="freemarker">/search/multi-search-results.ftl</result>	

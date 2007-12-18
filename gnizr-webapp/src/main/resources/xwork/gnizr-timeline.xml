@@ -5,7 +5,7 @@
 	<!-- see also webwork doc: http://www.opensymphony.com/webwork/wikidocs/Interceptors.html -->
 	
 	<package name="gnizr-timeline" extends="gnizr-default" namespace="/timeline">
-		<action name="bookmark" class="com.gnizr.core.web.action.timeline.UserBookmarkTimeline">
+		<action name="bookmark" class="com.gnizr.web.action.timeline.UserBookmarkTimeline">
 			<interceptor-ref name="loggedIn"/>
             <interceptor-ref name="gnizrDefaultStack"/>				
 			<result name="success" type="freemarker">/timeline/home.ftl</result>
@@ -15,7 +15,7 @@
 	</package>
 	
 	<package name="gnizr-timeline-model" extends="gnizr-default" namespace="/data/timeline">			
-		<action name="bookmark" class="com.gnizr.core.web.action.bookmark.ListUserBookmark"
+		<action name="bookmark" class="com.gnizr.web.action.bookmark.ListUserBookmark"
 			method="doListAllBookmarks">		
 			<interceptor-ref name="loggedIn"/>			
 			<interceptor-ref name="gnizrDefaultStack"/>				

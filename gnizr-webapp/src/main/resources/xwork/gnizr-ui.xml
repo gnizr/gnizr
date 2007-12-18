@@ -5,7 +5,7 @@
 	<!-- see also webwork doc: http://www.opensymphony.com/webwork/wikidocs/Interceptors.html -->
 	
 	<package name="gnizr-ui" extends="gnizr-default" namespace="/ui">
-		<action name="menu" class="com.gnizr.core.web.action.ui.MenuControl">			
+		<action name="menu" class="com.gnizr.web.action.ui.MenuControl">			
 			<interceptor-ref name="loggedIn"/>
             <interceptor-ref name="defaultStack"/>			
 			<result name="success" type="freemarker">/ui/menu-template.ftl</result>		

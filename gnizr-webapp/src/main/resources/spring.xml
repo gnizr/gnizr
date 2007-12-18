@@ -32,7 +32,7 @@
 	
 	<import resource="classpath:com/gnizr/core/robot/rss/spring-config.xml"/>
 	
-	<bean id="helloWorld" class="com.gnizr.core.web.action.HelloWorld"
+	<bean id="helloWorld" class="com.gnizr.web.action.HelloWorld"
 		singleton="false"/>
 	
 </beans>

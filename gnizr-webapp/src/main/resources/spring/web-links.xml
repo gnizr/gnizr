@@ -3,19 +3,19 @@
 	"http://www.springframework.org/dtd/spring-beans.dtd">
 <beans>
 	
-	<bean id="listLink" class="com.gnizr.core.web.action.link.ListLink" singleton="false">
+	<bean id="listLink" class="com.gnizr.web.action.link.ListLink" singleton="false">
 		<property name="bookmarkPager">
 			<ref bean="bookmarkPager"/>
 		</property>
 	</bean>
 	
-	<bean id="getLinkHistory" class="com.gnizr.core.web.action.link.GetLinkHistory" singleton="false">
+	<bean id="getLinkHistory" class="com.gnizr.web.action.link.GetLinkHistory" singleton="false">
 		<property name="linkManager">
 			<ref bean="linkManager"/>
 		</property>	
 	</bean>
 	
-	<bean id="getCommonTags" class="com.gnizr.core.web.action.link.GetCommonTags" singleton="false">
+	<bean id="getCommonTags" class="com.gnizr.web.action.link.GetCommonTags" singleton="false">
 		<property name="tagCloud">
 			<ref bean="tagCloud"/>
 		</property>

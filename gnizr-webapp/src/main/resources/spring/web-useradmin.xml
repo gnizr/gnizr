@@ -3,27 +3,27 @@
 	"http://www.springframework.org/dtd/spring-beans.dtd">
 <beans>
 	
-	<bean id="registration" class="com.gnizr.core.web.action.user.Registration" singleton="false">
+	<bean id="registration" class="com.gnizr.web.action.user.Registration" singleton="false">
 		<property name="userManager">
 			<ref bean="userManager"/>
 		</property>
 	</bean>
 	
-	<bean id="userLogin" class="com.gnizr.core.web.action.user.UserLogin" singleton="false">
+	<bean id="userLogin" class="com.gnizr.web.action.user.UserLogin" singleton="false">
 		<property name="userManager">
 			<ref bean="userManager"/>
 		</property>
 	</bean>
 	
-	<bean id="userLogout" class="com.gnizr.core.web.action.user.UserLogout" singleton="false"/>
+	<bean id="userLogout" class="com.gnizr.web.action.user.UserLogout" singleton="false"/>
 	
-	<bean id="changeUserProfile" class="com.gnizr.core.web.action.user.ChangeUserProfile" singleton="false">
+	<bean id="changeUserProfile" class="com.gnizr.web.action.user.ChangeUserProfile" singleton="false">
 		<property name="userManager">
 			<ref bean="userManager"/>
 		</property>
 	</bean>	
 	
-	<bean id="editUserBean" class="com.gnizr.core.web.action.user.EditUser" singleton="false">
+	<bean id="editUserBean" class="com.gnizr.web.action.user.EditUser" singleton="false">
 		<property name="userManager">
 			<ref bean="userManager"/>
 		</property>
@@ -32,13 +32,13 @@
 		</property>
 	</bean>
 	
-	<bean id="listUserStats" class="com.gnizr.core.web.action.user.ListUserStats" singleton="false">
+	<bean id="listUserStats" class="com.gnizr.web.action.user.ListUserStats" singleton="false">
 		<property name="userManager">
 			<ref bean="userManager"/>
 		</property>
 	</bean>
 	
-	<bean id="updateOwnership" class="com.gnizr.core.web.action.folder.UpdateOwnership" singleton="false">
+	<bean id="updateOwnership" class="com.gnizr.web.action.folder.UpdateOwnership" singleton="false">
 		<property name="userManager">
 			<ref bean="userManager"/>
 		</property>
@@ -50,6 +50,6 @@
 		</property>
 	</bean>
 	
-	<bean id="listSettings" class="com.gnizr.core.web.action.settings.ListSettings" singleton="false"/>
+	<bean id="listSettings" class="com.gnizr.web.action.settings.ListSettings" singleton="false"/>
 	
 </beans>

@@ -3,7 +3,7 @@
 	"http://www.springframework.org/dtd/spring-beans.dtd">
 <beans>
 	
-	<bean id="suggestTags" class="com.gnizr.core.web.action.tag.SuggestTags"
+	<bean id="suggestTags" class="com.gnizr.web.action.tag.SuggestTags"
 		singleton="false">
 		<property name="tagPager">
 			<ref bean="tagPager"/>
@@ -13,17 +13,17 @@
 		</property>
 	</bean>
 	
-	<bean id="configTagCloud" class="com.gnizr.core.web.action.tag.ConfigTagCloud"
+	<bean id="configTagCloud" class="com.gnizr.web.action.tag.ConfigTagCloud"
 		singleton="false"/>
 		
-	<bean id="getUserTagCloud" class="com.gnizr.core.web.action.tag.GetUserTagCloud"
+	<bean id="getUserTagCloud" class="com.gnizr.web.action.tag.GetUserTagCloud"
 		singleton="false">
 		<property name="userManager">
 			<ref bean="userManager"/>
 		</property>
 	</bean>
 	
-	<bean id="getFolderTagCloud" class="com.gnizr.core.web.action.tag.GetFolderTagCloud"
+	<bean id="getFolderTagCloud" class="com.gnizr.web.action.tag.GetFolderTagCloud"
 		singleton="false">
 		<property name="userManager">
 			<ref bean="userManager"/>
@@ -33,14 +33,14 @@
 		</property>
 	</bean>
 		
-	<bean id="getTagCloud" class="com.gnizr.core.web.action.tag.GetTagCloud"
+	<bean id="getTagCloud" class="com.gnizr.web.action.tag.GetTagCloud"
 		singleton="false">
 		<property name="tagCloud">
 			<ref bean="tagCloud"/>
 		</property>
 	</bean>
 	
-	<bean id="editUserTag" class="com.gnizr.core.web.action.tag.EditUserTag" singleton="false">
+	<bean id="editUserTag" class="com.gnizr.web.action.tag.EditUserTag" singleton="false">
 		<property name="tagManager">
 			<ref bean="tagManager"/>
 		</property>
@@ -52,7 +52,7 @@
 		</property>
 	</bean>
 	
-	<bean id="editBookmarkTag" class="com.gnizr.core.web.action.bookmark.EditBookmarkTag" singleton="false">
+	<bean id="editBookmarkTag" class="com.gnizr.web.action.bookmark.EditBookmarkTag" singleton="false">
 		<property name="userManager">
 			<ref bean="userManager"/>
 		</property>
@@ -61,13 +61,13 @@
 		</property>
 	</bean>
 	
-	<bean id="getUserTagGroups" class="com.gnizr.core.web.action.tag.GetUserTagGroups" singleton="false">
+	<bean id="getUserTagGroups" class="com.gnizr.web.action.tag.GetUserTagGroups" singleton="false">
 		<property name="userManager">
 			<ref bean="userManager"/>			
 		</property>
 	</bean>
 	
-	<bean id="getFolderTagGroups" class="com.gnizr.core.web.action.tag.GetFolderTagGroups" singleton="false">
+	<bean id="getFolderTagGroups" class="com.gnizr.web.action.tag.GetFolderTagGroups" singleton="false">
 		<property name="userManager">
 			<ref bean="userManager"/>			
 		</property>

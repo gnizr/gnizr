@@ -8,33 +8,33 @@
 	<package name="gnizr-basic" extends="webwork-default">
 		
 		<result-types>
-            <result-type name="romerss" class="com.gnizr.core.web.result.RomeResult"/>
- 		    <result-type name="opensearch" class="com.gnizr.core.web.result.OpenSearchRomeResult"/>
-			<result-type name="json" class="com.gnizr.core.web.result.JSONResult"/>
+            <result-type name="romerss" class="com.gnizr.web.result.RomeResult"/>
+ 		    <result-type name="opensearch" class="com.gnizr.web.result.OpenSearchRomeResult"/>
+			<result-type name="json" class="com.gnizr.web.result.JSONResult"/>
         </result-types>
 		
 		<interceptors>
 			
 			<!-- sets the LoggedInUser if an action implements LoggedInUserAware -->
 			<interceptor name="loggedIn"
-				class="com.gnizr.core.web.interceptor.LoggedInUserInterceptor"/>
+				class="com.gnizr.web.interceptor.LoggedInUserInterceptor"/>
 			
 			<!-- force a user to login. If an action implements LoggedInUserAware
 			the loggedInUser object is set on the action -->
 			<interceptor name="auth"
-				class="com.gnizr.core.web.interceptor.AuthenticationInterceptor"/>
+				class="com.gnizr.web.interceptor.AuthenticationInterceptor"/>
 			
 			<!-- force a user to login as 'gnizr'.  -->
 			<interceptor name="auth-gnizr"
-				class="com.gnizr.core.web.interceptor.GnizrAuthenticationInterceptor"/>
+				class="com.gnizr.web.interceptor.GnizrAuthenticationInterceptor"/>
 			
 			<!-- sets the configuration of this gnizr installation  -->
 			<interceptor name="config-gnizr"
-				class="com.gnizr.core.web.interceptor.ConfigurationInterceptor"/>
+				class="com.gnizr.web.interceptor.ConfigurationInterceptor"/>
 			
 			<!-- routes user requests to a maintenance page if the server is being worked on -->
 			<interceptor name="server-maintenance"
-				class="com.gnizr.core.web.interceptor.ServerMaintenanceInterceptor"/>
+				class="com.gnizr.web.interceptor.ServerMaintenanceInterceptor"/>
 		</interceptors>
 		
 		<!-- all action result of type "login" will redirect to /login by default -->
@@ -47,7 +47,7 @@
 	<package name="gnizr-default" extends="gnizr-basic">
 		<interceptors>
 			<interceptor name="reader-policy"
-				class="com.gnizr.core.web.interceptor.EnforceReaderPolicyInterceptor"/>
+				class="com.gnizr.web.interceptor.EnforceReaderPolicyInterceptor"/>
 			
 			<interceptor-stack name="gnizrDefaultStack">			
 				<interceptor-ref name="server-maintenance"/>

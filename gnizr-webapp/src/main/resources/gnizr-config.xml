@@ -41,7 +41,7 @@
 	   </property>
 	</bean>
 	
-	<bean id="gnizrConfiguration" class="com.gnizr.core.web.util.GnizrConfiguration"
+	<bean id="gnizrConfiguration" class="com.gnizr.web.util.GnizrConfiguration"
 		  singleton="true">
 		<!-- Define the web application URL of this gnizr installation -->
 		<property name="webApplicationUrl">

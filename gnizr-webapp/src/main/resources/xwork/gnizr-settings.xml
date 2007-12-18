@@ -5,7 +5,7 @@
 	<!-- see also webwork doc: http://www.opensymphony.com/webwork/wikidocs/Interceptors.html -->
 	<package name="gnizr-settings-tags" extends="gnizr-default" namespace="/settings/tags">
 		
-		<action name="edit" class="com.gnizr.core.web.action.tag.EditUserTag"
+		<action name="edit" class="com.gnizr.web.action.tag.EditUserTag"
 			method="fetchEditData">
 			<interceptor-ref name="loggedIn"/>	
 			<interceptor-ref name="auth"/>
@@ -15,7 +15,7 @@
 			<result name="error" type="freemarker">/common/error.ftl</result>
 		</action>
 		
-		<action name="save" class="com.gnizr.core.web.action.tag.EditUserTag">
+		<action name="save" class="com.gnizr.web.action.tag.EditUserTag">
 			<interceptor-ref name="loggedIn"/>	
 			<interceptor-ref name="auth"/>
             <interceptor-ref name="gnizrDefaultStack"/>
@@ -24,7 +24,7 @@
 			<result name="error" type="freemarker">/common/error.ftl</result>
 		</action>			
 		
-		<action name="deleteClassTag" class="com.gnizr.core.web.action.tag.EditUserTag"
+		<action name="deleteClassTag" class="com.gnizr.web.action.tag.EditUserTag"
 			method="doDeleteClassTag">
 			<interceptor-ref name="loggedIn"/>	
 			<interceptor-ref name="auth"/>
@@ -35,7 +35,7 @@
 		</action>
 		
 		
-		<action name="delete" class="com.gnizr.core.web.action.bookmark.EditBookmarkTag">
+		<action name="delete" class="com.gnizr.web.action.bookmark.EditBookmarkTag">
 			<interceptor-ref name="loggedIn"/>
 			<interceptor-ref name="auth"/>						
 			<interceptor-ref name="gnizrDefaultStack"/>	
@@ -44,7 +44,7 @@
 			<result name="error" type="freemarker">/common/error.ftl</result>  
 		</action>
 		
-		<action name="rename" class="com.gnizr.core.web.action.bookmark.EditBookmarkTag">
+		<action name="rename" class="com.gnizr.web.action.bookmark.EditBookmarkTag">
 			<interceptor-ref name="loggedIn"/>
 			<interceptor-ref name="auth"/>						
 			<interceptor-ref name="gnizrDefaultStack"/>           
@@ -55,7 +55,7 @@
 	</package>
 	
 	<package name="gnizr-settings-folders" extends="gnizr-default" namespace="/settings/folders">
-		<action name="removeBookmark" class="com.gnizr.core.web.action.folder.EditUserFolder"
+		<action name="removeBookmark" class="com.gnizr.web.action.folder.EditUserFolder"
 			method="doRemoveBookmark">
 			<interceptor-ref name="loggedIn"/>	
 			<interceptor-ref name="auth"/>
@@ -64,7 +64,7 @@
 			<result name="error" type="freemarker">/common/error.ftl</result>
 		</action>
 		
-		<action name="delete" class="com.gnizr.core.web.action.folder.EditUserFolder"
+		<action name="delete" class="com.gnizr.web.action.folder.EditUserFolder"
 			method="doDeleteFolder">
 			<interceptor-ref name="loggedIn"/>	
 			<interceptor-ref name="auth"/>
@@ -74,7 +74,7 @@
 			<result name="error" type="freemarker">/common/error.ftl</result>
 		</action>
 		
-		<action name="create" class="com.gnizr.core.web.action.folder.EditUserFolder">
+		<action name="create" class="com.gnizr.web.action.folder.EditUserFolder">
 			<interceptor-ref name="loggedIn"/>	
 			<interceptor-ref name="auth"/>
             <interceptor-ref name="gnizrDefaultStack"/>
@@ -82,7 +82,7 @@
 			<result name="input" type="freemarker">/settings/create-folder.ftl</result>
 		</action>
 		
-		<action name="edit" class="com.gnizr.core.web.action.folder.EditUserFolder">
+		<action name="edit" class="com.gnizr.web.action.folder.EditUserFolder">
 			<interceptor-ref name="loggedIn"/>	
 			<interceptor-ref name="auth"/>
             <interceptor-ref name="gnizrDefaultStack"/>
@@ -91,7 +91,7 @@
 			<result name="error" type="freemarker">/common/error.ftl</result>					
 		</action>
 		
-		<action name="save" class="com.gnizr.core.web.action.folder.EditUserFolder"
+		<action name="save" class="com.gnizr.web.action.folder.EditUserFolder"
 			method="doUpdateFolder">
 			<interceptor-ref name="loggedIn"/>	
 			<interceptor-ref name="auth"/>
@@ -101,7 +101,7 @@
 			<result name="error" type="freemarker">/common/error.ftl</result>					
 		</action>
 		
-		<action name="purge" class="com.gnizr.core.web.action.folder.EditUserFolder"
+		<action name="purge" class="com.gnizr.web.action.folder.EditUserFolder"
 			method="doPurgeFolder">
 			<interceptor-ref name="loggedIn"/>	
 			<interceptor-ref name="auth"/>
@@ -115,7 +115,7 @@
 	
 	
 	<package name="gnizr-settings-feed" extends="gnizr-default" namespace="/settings/feeds">
-		<action name="create" class="com.gnizr.core.web.action.feed.EditSubscription">
+		<action name="create" class="com.gnizr.web.action.feed.EditSubscription">
 			<interceptor-ref name="loggedIn"/>	
 			<interceptor-ref name="auth"/>
             <interceptor-ref name="gnizrDefaultStack"/>
@@ -124,7 +124,7 @@
 			<result name="error" type="freemarker">/common/error.ftl</result>
 		</action>
 		
-		<action name="edit" class="com.gnizr.core.web.action.feed.EditSubscription"
+		<action name="edit" class="com.gnizr.web.action.feed.EditSubscription"
 			method="doDefault">
 			<interceptor-ref name="loggedIn"/>	
 			<interceptor-ref name="auth"/>
@@ -134,7 +134,7 @@
 			<result name="error" type="freemarker">/common/error.ftl</result>	
 		</action>
 		
-		<action name="save" class="com.gnizr.core.web.action.feed.EditSubscription"
+		<action name="save" class="com.gnizr.web.action.feed.EditSubscription"
 			method="doUpdateSubscription">
 			<interceptor-ref name="loggedIn"/>	
 			<interceptor-ref name="auth"/>
@@ -144,7 +144,7 @@
 			<result name="error" type="freemarker">/common/error.ftl</result>				
 		</action>	
 			
-		<action name="unsub" class="com.gnizr.core.web.action.feed.EditSubscription"
+		<action name="unsub" class="com.gnizr.web.action.feed.EditSubscription"
 			method="doDeleteSubscription">
 			<interceptor-ref name="loggedIn"/>	
 			<interceptor-ref name="auth"/>
@@ -154,7 +154,7 @@
 			<result name="error" type="freemarker">/common/error.ftl</result>					
 		</action>	
 		
-		<action name="removeFolder" class="com.gnizr.core.web.action.feed.EditSubscription"
+		<action name="removeFolder" class="com.gnizr.web.action.feed.EditSubscription"
 			method="doRemoveImportFolders">
 			<interceptor-ref name="loggedIn"/>	
 			<interceptor-ref name="auth"/>
@@ -164,7 +164,7 @@
 			<result name="error" type="freemarker">/common/error.ftl</result>					
 		</action>	
 		
-		<action name="removeTag" class="com.gnizr.core.web.action.feed.EditSubscription"
+		<action name="removeTag" class="com.gnizr.web.action.feed.EditSubscription"
 			method="doRemoveTag">
 			<interceptor-ref name="loggedIn"/>	
 			<interceptor-ref name="auth"/>
@@ -179,7 +179,7 @@
 	<package name="gnizr-opensearch-description" extends="gnizr-default"
 		namespace="/settings/opensearch">
 		<action name="mybookmarks"
-			class="com.gnizr.core.web.action.settings.ListSettings"
+			class="com.gnizr.web.action.settings.ListSettings"
 			method="doDefault">			
 			<interceptor-ref name="gnizrNoPolicyDefaultStack"/>
 			<result name="success" type="freemarker">
@@ -188,7 +188,7 @@
 			</result>
 		</action>
 		<action name="community"
-			class="com.gnizr.core.web.action.settings.ListSettings"
+			class="com.gnizr.web.action.settings.ListSettings"
 			method="doDefault">
 			<interceptor-ref name="gnizrNoPolicyDefaultStack"/>
 			<result name="success" type="freemarker">
@@ -200,21 +200,21 @@
 			
 	<package name="gnizr-settings" extends="gnizr-default" namespace="/settings">	
 		
-		<action name="help" class="com.gnizr.core.web.action.settings.ListSettings"
+		<action name="help" class="com.gnizr.web.action.settings.ListSettings"
 			method="doDefault">
 			<interceptor-ref name="loggedIn"/>	
 			<interceptor-ref name="gnizrDefaultStack"/>
 			<result name="success" type="freemarker">/help.ftl</result>	
 		</action>
 		
-		<action name="list" class="com.gnizr.core.web.action.settings.ListSettings">
+		<action name="list" class="com.gnizr.web.action.settings.ListSettings">
 			<interceptor-ref name="loggedIn"/>
 			<interceptor-ref name="auth"/>						
 			<interceptor-ref name="gnizrDefaultStack"/>
 			<result name="success" type="freemarker">/settings/home.ftl</result>	 
 		</action>
 			
-		<action name="changePassword" class="com.gnizr.core.web.action.user.ChangeUserProfile">
+		<action name="changePassword" class="com.gnizr.web.action.user.ChangeUserProfile">
 			<interceptor-ref name="loggedIn"/>
 			<interceptor-ref name="auth"/>			
 			<interceptor-ref name="gnizrDefaultStack"/>
@@ -225,7 +225,7 @@
 			<result name="error" type="freemarker">/error.ftl</result>
 		</action>
 		
-		<action name="updateProfile" class="com.gnizr.core.web.action.user.ChangeUserProfile">
+		<action name="updateProfile" class="com.gnizr.web.action.user.ChangeUserProfile">
 			<interceptor-ref name="loggedIn"/>
 			<interceptor-ref name="auth"/>			
 			<interceptor-ref name="gnizrDefaultStack"/>	
@@ -236,7 +236,7 @@
 			<result name="error" type="freemarker">/error.ftl</result>
 		</action>	
 		
-		<action name="importDeliciousPosts" class="com.gnizr.core.web.action.bookmark.ImportDeliciousPosts">
+		<action name="importDeliciousPosts" class="com.gnizr.web.action.bookmark.ImportDeliciousPosts">
 			<interceptor-ref name="loggedIn"/>
 			<interceptor-ref name="auth"/>						
 			<interceptor-ref name="gnizrDefaultStack"/>	         
