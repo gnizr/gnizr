@@ -220,4 +220,16 @@ mvn archetype:create
 
 There are several configuration files that define how the gnizr web application is instantiated in a Tomcat server. Developers usually need to extend these configuration files in order to include new application behavior. For information on how these configuration files work and how to use them, see GnizrConfigurationFiles and DevHelloWorldDemo. 
 
-|| *TIPS*: It's strongly recommended that developers define these configuration files in the `src/main/resources` directory of the new project.|| 
+|| *TIPS*: It's strongly recommended that you define these configuration files in the `src/main/resources` directory of the new project.|| 
+
+
+==== Step 5: Develop the new application that extends gnizr ====
+
+You should place all your Java classes and templates in the `src/main` directory. 
+
+|| *Type of files* || *Where to place them* ||
+|| `*.java` || `src/main/java` ||
+|| `*.xml` || `src/main/resources` ||
+|| `*.ftl` (freemarker templates) || `src/main/resources/[your-project-name]`||
+|| `spring.xml` || `src/main/resources`||
+|| `xwork.xml` || `src/main/resources`||
