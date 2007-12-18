@@ -10,7 +10,7 @@
 	
 	<modelVersion>4.0.0</modelVersion>
 	
-	<groupId>com.gnizr.core.web</groupId>
+	<groupId>com.gnizr</groupId>
 	<artifactId>gnizr-webapp</artifactId>
 	<name>gnizr web application</name>
 	<packaging>war</packaging>
@@ -30,31 +30,31 @@
 			<artifactId>log4j</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.gnizr.test</groupId>
+			<groupId>com.gnizr</groupId>
 			<artifactId>gnizr-test</artifactId>
 			<version>${gnVersion}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.gnizr.core.web</groupId>
+			<groupId>com.gnizr</groupId>
 			<artifactId>gnizr-web</artifactId>
 			<version>${gnVersion}</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.gnizr.delicious</groupId>
+			<groupId>com.gnizr</groupId>
 			<artifactId>gnizr-delicious</artifactId>
 			<version>${gnVersion}</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.gnizr.robot</groupId>
+			<groupId>com.gnizr</groupId>
 			<artifactId>gnizr-robot</artifactId>
 			<version>${gnVersion}</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.gnizr.core.web</groupId>
+			<groupId>com.gnizr</groupId>
 			<artifactId>gnizr-clustermap</artifactId>
 			<version>${gnVersion}</version>
 			<scope>compile</scope>
@@ -98,7 +98,7 @@
 						<configuration>
 							<artifactItems>
 								<artifactItem>
-									<groupId>com.gnizr.core.web</groupId>
+									<groupId>com.gnizr</groupId>
 									<artifactId>gnizr-clustermap</artifactId>
 									<version>${gnVersion}</version>
 									<type>jar</type>
@@ -118,7 +118,7 @@
 				<configuration>
 					<filesets>
 						<fileset>
-							<directory>src/main/webapp/WEB-INF/lib</directory>
+							<directory>${basedir}/src/main/webapp/WEB-INF/lib</directory>
 							<includes>
 								<include>**/*.jar</include>								
 							</includes>

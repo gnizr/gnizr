@@ -9,7 +9,7 @@
 	
 	<modelVersion>4.0.0</modelVersion>
 	
-	<groupId>com.gnizr.robot</groupId>
+	<groupId>com.gnizr</groupId>
 	<artifactId>gnizr-robot</artifactId>	
 	<name>gnizr RSS robot</name>
 	
@@ -29,13 +29,13 @@
 			<artifactId>log4j</artifactId>
 		</dependency>	
      	<dependency>
-			<groupId>com.gnizr.test</groupId>
+			<groupId>com.gnizr</groupId>
 			<artifactId>gnizr-test</artifactId>
 			<version>${gnVersion}</version>
 			<scope>test</scope>			 
 		</dependency>			
 		<dependency>
-			<groupId>com.gnizr.core.web</groupId>
+			<groupId>com.gnizr</groupId>
 			<artifactId>gnizr-web</artifactId>
 			<version>${gnVersion}</version>
 			<scope>compile</scope>

@@ -10,7 +10,7 @@
 	
 	<modelVersion>4.0.0</modelVersion>
 	
-	<groupId>com.gnizr.delicious</groupId>
+	<groupId>com.gnizr</groupId>
 	<artifactId>gnizr-delicious</artifactId>
 	<name>gnizr del.icio.us importer</name>
 	
@@ -30,7 +30,7 @@
 			<artifactId>log4j</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.gnizr.core</groupId>
+			<groupId>com.gnizr</groupId>
 			<artifactId>gnizr-core</artifactId>
 			<version>${gnVersion}</version>
 			<scope>compile</scope>

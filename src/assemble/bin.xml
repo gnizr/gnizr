@@ -8,7 +8,7 @@
   <moduleSets>
     <moduleSet>
       <includes>
-        <include>com.gnizr.core.web:gnizr-webapp</include>
+        <include>com.gnizr:gnizr-webapp</include>
       </includes>
       <binaries>
         <outputDirectory>gnizr-${version}</outputDirectory>
@@ -20,7 +20,7 @@
 <!--
     <moduleSet>
       <includes>
-        <include>com.gnizr.core.web:gnizr-clustermap</include>
+        <include>com.gnizr:gnizr-clustermap</include>
       </includes>
       <binaries>
         <outputDirectory>gnizr-${version}/gnizr/applets</outputDirectory>
@@ -32,7 +32,7 @@
 -->
     <moduleSet>
       <includes>
-        <include>com.gnizr.db:gnizr-db</include>
+        <include>com.gnizr:gnizr-db</include>
       </includes>
       <sources>        
         <fileSets>

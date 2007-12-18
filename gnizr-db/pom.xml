@@ -10,7 +10,7 @@
 	
 	<modelVersion>4.0.0</modelVersion>
 	
-	<groupId>com.gnizr.db</groupId>
+	<groupId>com.gnizr</groupId>
 	<artifactId>gnizr-db</artifactId>
 	<name>gnizr database</name>
 	
