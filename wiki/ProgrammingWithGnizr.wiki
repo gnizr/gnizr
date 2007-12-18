@@ -3,7 +3,7 @@
 
 This document is intended for developers who want to write programs against gnizr Java API. 
 
-|| Instructions described here are _experimental_ for the release gnizr-2.3.0-M3. If you have trouble following them, send your questions to [http://groups.google.com/group/gnizr-users gnizr users]. ||
+|| Instructions described here are _experimental_ for the release gnizr-2.3.0-M3. They may not work properly for the earlier releases. If you have trouble following them, send your questions to [http://groups.google.com/group/gnizr-users gnizr users]. ||
 
 = Introduction =
 
