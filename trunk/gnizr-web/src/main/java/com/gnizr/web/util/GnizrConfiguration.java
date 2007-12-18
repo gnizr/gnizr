@@ -14,7 +14,7 @@
  * Portions created by the Initial Contributor are Copyright (C) 2007
  * Image Matters LLC. All Rights Reserved.
  */
-package com.gnizr.core.web.util;
+package com.gnizr.web.util;
 
 import java.io.Serializable;
 import java.util.Properties;

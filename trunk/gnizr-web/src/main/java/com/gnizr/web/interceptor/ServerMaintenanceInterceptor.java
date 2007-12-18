@@ -14,14 +14,14 @@
  * Portions created by the Initial Contributor are Copyright (C) 2007
  * Image Matters LLC. All Rights Reserved.
  */
-package com.gnizr.core.web.interceptor;
+package com.gnizr.web.interceptor;
 
 import java.util.Map;
 
-import com.gnizr.core.web.action.AbstractAction;
-import com.gnizr.core.web.action.SessionConstants;
-import com.gnizr.core.web.util.GnizrConfiguration;
 import com.gnizr.db.dao.User;
+import com.gnizr.web.action.AbstractAction;
+import com.gnizr.web.action.SessionConstants;
+import com.gnizr.web.util.GnizrConfiguration;
 import com.opensymphony.xwork.ActionInvocation;
 import com.opensymphony.xwork.interceptor.Interceptor;
 

@@ -14,23 +14,25 @@
  * Portions created by the Initial Contributor are Copyright (C) 2007
  * Image Matters LLC. All Rights Reserved.
  */
-package com.gnizr.core.web.interceptor;
+package com.gnizr.web.interceptor;
 
 import java.util.Map;
 
-import com.gnizr.core.web.action.LoggedInUserAware;
-import com.gnizr.core.web.action.SessionConstants;
+import com.gnizr.core.exceptions.NoSuchUserException;
+import com.gnizr.core.user.UserManager;
 import com.gnizr.db.dao.User;
+import com.gnizr.web.action.LoggedInUserAware;
+import com.gnizr.web.action.SessionConstants;
 import com.opensymphony.xwork.Action;
 import com.opensymphony.xwork.ActionInvocation;
 import com.opensymphony.xwork.interceptor.Interceptor;
 
-public class AuthenticationInterceptor implements Interceptor {
+public class GnizrAuthenticationInterceptor implements Interceptor {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -9000709873811063043L;
+	private static final long serialVersionUID = 5194588686597399219L;
 
 	public void destroy() {
 		// no code
@@ -39,19 +41,45 @@ public class AuthenticationInterceptor implements Interceptor {
 	public void init() {
 		// no code
 	}
+	
+	private UserManager userManager;
 
 	public String intercept(ActionInvocation actionInvocation) throws Exception {
 		Map session = actionInvocation.getInvocationContext().getSession();
 		User user = (User)session.get(SessionConstants.LOGGED_IN_USER);
-		if(user == null){
+		if(user == null || isGnizrUser(user) == false){
+			if(user != null){
+				session.remove(SessionConstants.LOGGED_IN_USER);
+			}
 			return Action.LOGIN;
-		}else{
+		}else{	
 			Action action = (Action)actionInvocation.getAction();
 			if(action instanceof LoggedInUserAware){
 				((LoggedInUserAware)action).setLoggedInUser(user);
 			}
 			return actionInvocation.invoke();
 		}
+	}
+
+	private boolean isGnizrUser(User user){
+		boolean isGnizrUser = false;
+		try {
+			User gnizr = userManager.getUser("gnizr");
+			if(gnizr != null && gnizr.equals(user)){
+				isGnizrUser = true;
+			}
+		} catch (NoSuchUserException e) {
+			// no code;
+		}
+		return isGnizrUser;
+		
+	}
+	public UserManager getUserManager() {
+		return userManager;
+	}
+
+	public void setUserManager(UserManager userManager) {
+		this.userManager = userManager;
 	}
 
 }

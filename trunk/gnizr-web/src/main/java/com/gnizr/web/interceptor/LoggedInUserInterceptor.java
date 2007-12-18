@@ -14,7 +14,7 @@
  * Portions created by the Initial Contributor are Copyright (C) 2007
  * Image Matters LLC. All Rights Reserved.
  */
-package com.gnizr.core.web.interceptor;
+package com.gnizr.web.interceptor;
 
 import java.util.Map;
 
@@ -25,10 +25,10 @@ import org.apache.log4j.Logger;
 
 import com.gnizr.core.exceptions.NoSuchUserException;
 import com.gnizr.core.user.UserManager;
-import com.gnizr.core.web.action.LoggedInUserAware;
-import com.gnizr.core.web.action.SessionConstants;
-import com.gnizr.core.web.util.ServletUtilities;
 import com.gnizr.db.dao.User;
+import com.gnizr.web.action.LoggedInUserAware;
+import com.gnizr.web.action.SessionConstants;
+import com.gnizr.web.util.ServletUtilities;
 import com.opensymphony.webwork.ServletActionContext;
 import com.opensymphony.xwork.Action;
 import com.opensymphony.xwork.ActionContext;

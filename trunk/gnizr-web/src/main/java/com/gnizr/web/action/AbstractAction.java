@@ -14,7 +14,7 @@
  * Portions created by the Initial Contributor are Copyright (C) 2007
  * Image Matters LLC. All Rights Reserved.
  */
-package com.gnizr.core.web.action;
+package com.gnizr.web.action;
 
 
 import java.util.Date;
@@ -26,7 +26,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
-import com.gnizr.core.web.util.GnizrConfiguration;
+import com.gnizr.web.util.GnizrConfiguration;
 import com.opensymphony.webwork.ServletActionContext;
 import com.opensymphony.xwork.ActionContext;
 import com.opensymphony.xwork.ActionSupport;

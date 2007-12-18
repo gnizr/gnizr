@@ -14,7 +14,7 @@
  * Portions created by the Initial Contributor are Copyright (C) 2007
  * Image Matters LLC. All Rights Reserved.
  */
-package com.gnizr.core.web.action;
+package com.gnizr.web.action;
 
 import com.gnizr.db.dao.User;
 
