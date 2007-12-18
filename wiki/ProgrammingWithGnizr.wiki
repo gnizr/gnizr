@@ -214,4 +214,6 @@ mvn archetype:create
 
 ==== Step 4: Overwrite gnizr configuration files ====
 
-There are several configuration files that define how the gnizr web application is instantiated in a Tomcat server. For information on how these configuration files work and how to use them, see GnizrConfigurationFiles and DevHelloWorldDemo. 
+There are several configuration files that define how the gnizr web application is instantiated in a Tomcat server. Developers usually need to extend these configuration files in order to include new application behavior. For information on how these configuration files work and how to use them, see GnizrConfigurationFiles and DevHelloWorldDemo. 
+
+It's strongly recommended that developers define these configuration files the `src/main/resources` directory of the new project. 
