@@ -10,7 +10,7 @@
 	
 	<modelVersion>4.0.0</modelVersion>
 	
-	<groupId>com.gnizr.test</groupId>
+	<groupId>com.gnizr</groupId>
 	<artifactId>gnizr-test</artifactId>
 	<name>gnizr-test</name>
 	
@@ -28,7 +28,7 @@
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.gnizr.db</groupId>
+			<groupId>com.gnizr</groupId>
 			<artifactId>gnizr-db</artifactId>
 			<version>${gnVersion}</version>
 			<scope>compile</scope>

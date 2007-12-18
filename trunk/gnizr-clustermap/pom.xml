@@ -10,7 +10,7 @@
 	
 	<modelVersion>4.0.0</modelVersion>
 	
-	<groupId>com.gnizr.core.web</groupId>
+	<groupId>com.gnizr</groupId>
 	<artifactId>gnizr-clustermap</artifactId>
 	<name>gnizr clustermap applet</name>
 	
@@ -46,8 +46,8 @@
 				<artifactId>maven-dependency-plugin</artifactId>
 				<executions>
 					<execution>
-						<id>copy-dependencies</id>
-						<phase>compile</phase>
+						<id>unpack-dependencies</id>
+						<phase>process-sources</phase>
 						<goals>
 							<goal>unpack-dependencies</goal>
 						</goals>
