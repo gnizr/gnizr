@@ -127,7 +127,9 @@ Example:
 
 Use Maven Eclipse plug-in to create project files for Eclipse. 
 
-{{{mvn eclipse:eclipse}}}
+{{{
+mvn eclipse:eclipse
+}}}
 
 This command should automatically downloads all necessary Maven plugins and gnizr dependencies. If you encounter errors in fetching gnizr library, [http://groups.google.com/group/gnizr-users please let us know].
 
@@ -226,7 +228,9 @@ mvn archetype:create
 
 Use Maven Eclipse plug-in to create project files for Eclipse.
 
-{{{mvn eclipse:eclipse}}}
+{{{
+mvn eclipse:eclipse
+}}}
 
 
 ==== Step 5: Open your project in Eclipse ====
