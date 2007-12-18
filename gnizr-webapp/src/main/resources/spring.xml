@@ -30,9 +30,6 @@
 	<import resource="spring/web-timeline.xml"/>
     <import resource="spring/web-search.xml"/>
 	
-	<import resource="classpath:com/gnizr/core/robot/rss/spring-config.xml"/>
-	
-	<bean id="helloWorld" class="com.gnizr.web.action.HelloWorld"
-		singleton="false"/>
+	<import resource="classpath:com/gnizr/web/action/robot/rss/spring-config.xml"/>
 	
 </beans>
