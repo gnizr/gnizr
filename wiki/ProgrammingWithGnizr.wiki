@@ -123,7 +123,7 @@ Example:
 
 Use Maven Eclipse plug-in to create project files for Eclipse. 
 
-  * `mvn eclipse:eclipse`
+{{{mvn eclipse:eclipse}}}
 
 This command should automatically downloads all necessary Maven plugins and gnizr dependencies. If you encounter errors in fetching gnizr library, [http://groups.google.com/group/gnizr-users please let us know].
 
@@ -222,7 +222,7 @@ mvn archetype:create
 
 Use Maven Eclipse plug-in to create project files for Eclipse.
 
-    * mvn eclipse:eclipse 
+{{{mvn eclipse:eclipse}}}
 
 
 ==== Step 5: Open your project in Eclipse ====
@@ -252,8 +252,15 @@ See DevHelloWorldDemo for an example of program file structure layout.
 
 ==== Step 8: Overlay `gnizr-webapp` WAR into your project ====
 
-{{{
-mvn compile war:inplace
-}}}
+{{{mvn compile war:inplace}}}
 
 || *TIPS*: It's highly recommended that you install this [http://www.eclipsetotale.com/tomcatPlugin.html Tomcat Eclipse Plugin]. Using this plugin, you can use Eclipse IDE to run and debug your program running in Tomcat. ||
+
+
+==== Step 9: Package gnizr along with your new project ====
+
+To build a WAR file that contains the standard gnizr web application and your new application behavior, you can invoke the following Maven command:
+
+{{{mvn war:war}}}
+
+Before you create the WAR file, make sure that a properly configure `gnizr-config.xml` is either defined in your project or inherited from the `gnizr-webapp` project. If you don't define `gnizr-config.xml` in your project, it's inherited from `gnizr-webapp` when you invoke the Maven command to perform "overlay" (see Step 8).
