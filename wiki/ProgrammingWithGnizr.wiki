@@ -216,21 +216,42 @@ mvn archetype:create
 </project>
 }}}
 
-==== Step 4: Overwrite gnizr configuration files ====
+==== Step 4: Initialize Eclipse Project ====
+
+Use Maven Eclipse plug-in to create project files for Eclipse.
+
+    * mvn eclipse:eclipse 
+
+
+==== Step 5: Open your project in Eclipse ====
+
+    * Start Eclipse
+    * Add a new project by import from the existing file system. 
+
+==== Step 6: Overwrite gnizr configuration files ====
 
 There are several configuration files that define how the gnizr web application is instantiated in a Tomcat server. Developers usually need to extend these configuration files in order to include new application behavior. For information on how these configuration files work and how to use them, see GnizrConfigurationFiles and DevHelloWorldDemo. 
 
 || *TIPS*: It's strongly recommended that you define these configuration files in the `src/main/resources` directory of the new project.|| 
 
-
-==== Step 5: Develop the new application that extends gnizr ====
+==== Step 7: Develop the new application that extends gnizr ====
 
 You should place all your program files in the `src/main` directory. 
 
 || *Type of files* || *Where to place them* ||
 || `*.java` || `src/main/java` ||
 || `*.xml` || `src/main/resources` ||
-|| `*.ftl` (freemarker templates) || `src/main/resources/[your-project-name]`||
-|| javascript, html, css, jsp files || `src/main/resources/[your-project-name]`||
+|| `*.ftl` (freemarker templates) || `src/main/resources/[your-project-nname]/`||
+|| javascript, html, css, jsp files || `src/main/resources/[your-project-name]/`||
 || `spring.xml` || `src/main/resources`||
 || `xwork.xml` || `src/main/resources`||
+
+See DevHelloWorldDemo for an example of program file structure layout. 
+
+==== Step 8: Overlay `gnizr-webapp` WAR into your project ====
+
+{{{
+mvn compile war:inplace
+}}}
+
+|| TIPS: It's highly recommended that you install this [http://www.eclipsetotale.com/tomcatPlugin.html Tomcat Eclipse Plugin]. Using this plugin, you can use Eclipse IDE to run and debug your program running in Tomcat. ||
