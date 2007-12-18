@@ -1,6 +1,14 @@
 #summary Changelog of all releases made under version 2.3
 #labels Phase-Implementation
 
+==== Version 2.3.0-M3 (in progress) ====
+
+Changelog
+  * POM files changed; renamed the `groupId` of all sub-project modules to `com.gnizr`
+    * SVN Revision 464, 12/18/2007
+  * Renamed Java package name `com.gnizr.core.web` to `com.gnizr.web`
+    * SVN Revision 465-467, 12/18/2007
+
 ==== Version 2.3.0-M2 (14 December 2007) ====
 
 Download 
