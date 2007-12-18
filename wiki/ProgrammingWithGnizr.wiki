@@ -124,8 +124,8 @@ This command should automatically downloads all necessary Maven plugins and gniz
 ==== Step 5: Open your project in Eclipse ====
 
   * Start Eclipse
-  * Add a new project by import from the existing file system.
+  * Add a new project by import from the existing file system.  
 
-Done!
+Done! Read gnizr *technical documents* (see Introduction) and check out [http://dev.gnizr.com/javadocs/ gnizr Java API]. 
 
 == Option 2: Building on gnizr Web Application API ==
