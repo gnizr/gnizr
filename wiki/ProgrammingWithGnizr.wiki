@@ -56,8 +56,12 @@ Download and install a copy of the gnizr release that you want to work with. Ins
 ==== Step 2: Create a new Maven project ====
 
 Let's assume that you are going to create a new project call `newusers`. 
-
-  * `mvn archetype:create -DgroupId=com.myproj -DartifactId=newusers -Dpackagename=com.myproj.newusers` 
+{{{
+mvn archetype:create 
+    -DgroupId=com.myproj 
+    -DartifactId=newusers 
+    -Dpackagename=com.myproj.newusers`
+}}} 
 
 See also: [http://www.javaworld.com/javaworld/jw-12-2005/jw-1205-maven.html An Introduciton to Maven 2]
 
@@ -216,4 +220,4 @@ mvn archetype:create
 
 There are several configuration files that define how the gnizr web application is instantiated in a Tomcat server. Developers usually need to extend these configuration files in order to include new application behavior. For information on how these configuration files work and how to use them, see GnizrConfigurationFiles and DevHelloWorldDemo. 
 
-|| It's strongly recommended that developers define these configuration files in the `src/main/resources` directory of the new project.|| 
+|| *TIPS*: It's strongly recommended that developers define these configuration files in the `src/main/resources` directory of the new project.|| 
