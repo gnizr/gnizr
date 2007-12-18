@@ -254,4 +254,4 @@ See DevHelloWorldDemo for an example of program file structure layout.
 mvn compile war:inplace
 }}}
 
-|| TIPS: It's highly recommended that you install this [http://www.eclipsetotale.com/tomcatPlugin.html Tomcat Eclipse Plugin]. Using this plugin, you can use Eclipse IDE to run and debug your program running in Tomcat. ||
+|| *TIPS*: It's highly recommended that you install this [http://www.eclipsetotale.com/tomcatPlugin.html Tomcat Eclipse Plugin]. Using this plugin, you can use Eclipse IDE to run and debug your program running in Tomcat. ||
