@@ -16,12 +16,30 @@ Get started with WebWork and Spring:
 
 == What You Should Have Already Installed ==
 
-If you are to try out the following "Hello World" example, make sure you have the following installed and properly configured on your machine: 
+Make sure you have the following installed and properly configured on your machine: 
 
   # Eclipse IDE + Sysdeo Tomcat Plugin for Eclipse
-  # Maven 2.x 
+  # Maven 2
   # Gnizr 2.3.0+
 
 If you are new to developing !WebWork applications in Eclipse, follow [http://www.opensymphony.com/webwork/wikidocs/Setting%20up%20Eclipse%20with%20Tomcat.html these instructions] to set up an integrated development environment of Eclipse and Tomcat. 
 
+= Gnizr Code Base Structure =
 
+Building an extended gnizr, you need to use gnizr API libraries. These API libraries are available for download in our public Maven Repository ([http://dev.gnizr.com/maven2]). As of 2.3.0, the gnizr project consists of multiple Maven project modules. 
+
+{{{
+ |-- gnizr (parent)
+   |-- gnizr-db (child)
+   |-- gnizr-core 
+   |-- gnizr-web
+   |-- gnizr-delicious
+   |-- gnizr-clustermap
+   |-- gnizr-robot
+   |-- gnizr-test
+   |-- gnizr-webapp
+}}}
+
+In the `parent` project, its POM file defines all dependent libraries and special Maven plugin configuration for assemble gnizr release. In the `child` projects, their POM files inherit those configuration from the `parent` POM and add customize configurations that are specific to the `child` project. 
+
+There are dependencies between `child` projects. Typically when new projects that build on gnizr API should define `gnizr-web` and `gnzir-webapp` as it's dependent library. The `gnizr-web` should have dependency scope `provided`, and the `gnizr-webapp` should have dependency scope `runtime`.
