@@ -4,4 +4,4 @@ This document is intended for developers who want to extend gnizr capability or 
 
 = Introduction =
 
-Gnizr is designed for developers to add new capabilities and alter the existing application behavior. The code base of gnizr is structured in a way that simplifies many software engineering tasks. Through a "Hello World" example, this tutorial will give a walk-through of the gnizr code base structure and 
+Gnizr is designed for developers to add new capabilities and alter the existing application behavior. The code base of gnizr is structured in a way that attempts to simplify many software engineering tasks. Through a "Hello World" example, this tutorial will give a walk-through of the gnizr code base structure and how developers can exploit this structure, using Eclipse and Maven, to rapidly prototype and implement an extended gnizr. 
