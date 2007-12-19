@@ -18,8 +18,10 @@ Get started with WebWork and Spring:
 
 If you are to try out the following "Hello World" example, make sure you have the following installed and properly configured on your machine: 
 
-  # Eclipse IDE
+  # Eclipse IDE + Sysdeo Tomcat Plugin for Eclipse
   # Maven 2.x 
   # Gnizr 2.3.0+
+
+If you are new to developing !WebWork applications in Eclipse, follow [http://www.opensymphony.com/webwork/wikidocs/Setting%20up%20Eclipse%20with%20Tomcat.html these instructions] to set up an integrated development environment of Eclipse and Tomcat. 
 
 
