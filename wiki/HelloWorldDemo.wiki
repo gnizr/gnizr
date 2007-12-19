@@ -42,4 +42,4 @@ Building an extended gnizr, you need to use gnizr API libraries. These API libra
 
 In the `parent` project, its POM file defines all dependent libraries and special Maven plugin configuration for assemble gnizr release. In the `child` projects, their POM files inherit those configuration from the `parent` POM and add customize configurations that are specific to the `child` project. 
 
-There are dependencies between `child` projects. Typically when new projects that build on gnizr API should define `gnizr-web` and `gnzir-webapp` as it's dependent library. The `gnizr-web` should have dependency scope `provided`, and the `gnizr-webapp` should have dependency scope `runtime`.
+||*TIPS*: There are dependencies between `child` projects. Typically when new projects that build on gnizr API should define `gnizr-web` and `gnzir-webapp` as it's dependent library. The `gnizr-web` should have dependency scope `provided`, and the `gnizr-webapp` should have dependency scope `runtime`.||
