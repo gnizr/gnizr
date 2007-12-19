@@ -42,4 +42,16 @@ Building an extended gnizr, you need to use gnizr API libraries. These API libra
 
 In the `parent` project, its POM file defines all dependent libraries and special Maven plugin configuration for assemble gnizr release. In the `child` projects, their POM files inherit those configuration from the `parent` POM and add customize configurations that are specific to the `child` project. 
 
-||*TIPS*: There are dependencies between `child` projects. Typically when new projects that build on gnizr API should define `gnizr-web` and `gnzir-webapp` as it's dependent library. The `gnizr-web` should have dependency scope `provided`, and the `gnizr-webapp` should have dependency scope `runtime`.||
+||*TIPS*: There are dependencies between `child` projects. Typically new projects that build on gnizr API should define `gnizr-web` and `gnzir-webapp` as their dependent libraries. The `gnizr-web` should have dependency scope `provided`, and the `gnizr-webapp` should have dependency scope `runtime`.||
+
+Different `child` projects provide implementation for different parts of the gnizr application. The `parent` project is responsible for combining `child` project implementation into a single deployable gnizr package. Some `child` project may contains only Java class files, and some others may contain Java class files and static resources, e.g., for building dynamic HTML pages and configuring the application. JUnit tests (Java classes and XML input files) are always reside in the `child` project in which the tests are defined. 
+
+|| *Project Name* || *Description* ||
+|| `gnizr-db` || ||
+|| `gnizr-core` || ||
+|| `gnizr-web` || ||
+|| `gnizr-delicious` || ||
+|| `gnizr-clustermap` || ||
+|| `gnizr-robot` || ||
+|| `gnizr-test` || ||
+|| `gnizr-webapp` || ||
