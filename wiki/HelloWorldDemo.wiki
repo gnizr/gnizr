@@ -8,12 +8,13 @@ Gnizr is designed for develoeprs to add new capabilities and alter the existing 
 
 == What You Should Already Know ==
 
-Readers of this document are assumed to be familiar with the use of Eclipse for Java development and the basic usage of Maven. In addition, the readers are assumed to have some programming knowledge with WebWork and Spring framework. 
+Readers of this document are assumed to be familiar with the use of Eclipse for Java development and the basic usage of Maven. In addition, the readers are assumed to have some programming knowledge with [http://www.opensymphony.com/webwork/ WebWork] and [http://www.springframework.org/ Spring] framework. 
 
 Get started with WebWork and Spring:
   * [http://www.springframework.org/documentation Spring Framework Documentation]
   * [http://www.opensymphony.com/webwork/documentation.action WebWork Framework Documentation]
 
 == What You Should Have Already Installed ==
+
 
 
