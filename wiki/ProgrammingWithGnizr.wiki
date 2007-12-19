@@ -34,7 +34,7 @@ Follow these links to a specific development topic:
   * [http://dev.gnizr.com/javadocs/2.3.0 Gnizr 2.3.0 API]
 
 === Tutorial ===
-  * [DevHelloWorldDemo HelloWorld: Develop a new action to say "Hello World"]
+  * [HelloWorldDemo HelloWorld: Develop a new action to say "Hello World"]
 
 
 The rest of this document is focused on how to setup a build environment. 
@@ -241,7 +241,7 @@ mvn eclipse:eclipse
 
 ==== Step 6: Overwrite gnizr configuration files ====
 
-There are several configuration files that define how the gnizr web application is instantiated in a Tomcat server. Developers usually need to extend these configuration files in order to include new application behavior. For information on how these configuration files work and how to use them, see GnizrConfigurationFiles and DevHelloWorldDemo. 
+There are several configuration files that define how the gnizr web application is instantiated in a Tomcat server. Developers usually need to extend these configuration files in order to include new application behavior. For information on how these configuration files work and how to use them, see GnizrConfigurationFiles and HelloWorldDemo. 
 
 || *TIPS*: It's strongly recommended that you define these configuration files in the `src/main/resources` directory of the new project.|| 
 
