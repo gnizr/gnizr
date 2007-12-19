@@ -16,5 +16,10 @@ Get started with WebWork and Spring:
 
 == What You Should Have Already Installed ==
 
+If you are to try out the following "Hello World" example, make sure you have the following installed and properly configured on your machine: 
+
+  # Eclipse IDE
+  # Maven 2.x 
+  # Gnizr 2.3.0+
 
 
