@@ -1,5 +1,0 @@
-#summary How to use Eclipse + Maven + Gnizr to say HelloWorld
-
-= Introduction =
-
-coming soon.
