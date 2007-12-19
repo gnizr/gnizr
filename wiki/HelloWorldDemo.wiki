@@ -4,4 +4,16 @@ This document is intended for developers who want to extend gnizr capability or 
 
 = Introduction =
 
-Gnizr is designed for developers to add new capabilities and alter the existing application behavior. The code base of gnizr is structured in a way that attempts to simplify many software engineering tasks. Through a "Hello World" example, this tutorial will give a walk-through of the gnizr code base structure and how developers can exploit this structure, using Eclipse and Maven, to rapidly prototype and implement an extended gnizr. 
+Gnizr is designed for develoeprs to add new capabilities and alter the existing application behavior. The code base of gnizr is structured in a way that attempts to simplify many software engineering tasks. Through a "Hello World" example, this tutorial will overview the gnizr code base structure and show you how to rapidly prototype and implement an extended gnizr. 
+
+== What You Should Already Know ==
+
+Readers of this document are assumed to be familiar with the use of Eclipse for Java development and the basic usage of Maven. In addition, the readers are assumed to have some programming knowledge with WebWork and Spring framework. 
+
+Get started with WebWork and Spring:
+  * [http://www.springframework.org/documentation Spring Framework Documentation]
+  * [http://www.opensymphony.com/webwork/documentation.action WebWork Framework Documentation]
+
+== What You Should Have Already Installed ==
+
+
