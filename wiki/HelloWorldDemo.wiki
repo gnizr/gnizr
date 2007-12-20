@@ -4,17 +4,17 @@ This document is intended for developers who want to extend gnizr capability or 
 
 = Introduction =
 
-Gnizr is designed for develoeprs to add new capabilities and alter the existing application behavior. The code base of gnizr is structured in a way that attempts to simplify many software engineering tasks. Through a "Hello World" example, this tutorial will overview the gnizr code base structure and show you how to rapidly prototype and implement an extended gnizr. 
+Gnizr is designed for develoeprs to add new capabilities and alter the existing application behavior. The code base of gnizr is structured in a way that attempts to simplify many software engineering tasks. Through a "Hello World" example, this tutorial will overview the gnizr code base structure and show you how to rapidly prototype and extend gnizr. 
 
-== What You Should Already Know ==
+== What You Should Know ==
 
 Readers of this document are assumed to be familiar with the use of Eclipse for Java development and the basic usage of Maven. In addition, the readers are assumed to have some programming knowledge with [http://www.opensymphony.com/webwork/ WebWork] and [http://www.springframework.org/ Spring] framework. 
 
-Get started with WebWork and Spring:
   * [http://www.springframework.org/documentation Spring Framework Documentation]
   * [http://www.opensymphony.com/webwork/documentation.action WebWork Framework Documentation]
+  * [http://www.javaworld.com/javaworld/jw-12-2005/jw-1205-maven.html?lsrc=maven-users An Introduction to Maven 2]
 
-== What You Should Have Already Installed ==
+== What You Should Have Installed ==
 
 Make sure you have the following installed and properly configured on your machine: 
 
@@ -23,6 +23,8 @@ Make sure you have the following installed and properly configured on your machi
   # Gnizr 2.3.0+
 
 If you are new to developing !WebWork applications in Eclipse, follow [http://www.opensymphony.com/webwork/wikidocs/Setting%20up%20Eclipse%20with%20Tomcat.html these instructions] to set up an integrated development environment of Eclipse and Tomcat. 
+
+It's essential that you have followed [SetupGnizrDatabase this instruction] and initialized MySQL database for gnizr. In this tutorial, we assume that you have taken the default settings (i.e., DB names, usernames and password) described in the instruction.
 
 = Gnizr Code Base Structure =
 
@@ -40,18 +42,19 @@ Building an extended gnizr, you need to use gnizr API libraries. These API libra
    |-- gnizr-webapp
 }}}
 
-In the `parent` project, its POM file defines all dependent libraries and special Maven plugin configuration for assemble gnizr release. In the `child` projects, their POM files inherit those configuration from the `parent` POM and add customize configurations that are specific to the `child` project. 
+In each project module, in both `parent` and `child`, there is a POM file. In the `parent` project, the POM file defines all dependent libraries and special Maven plugin configuration for assemble gnizr release. In the `child` projects, the POM files inherit those configuration from the `parent` POM and add customize configurations that are specific to the `child` project. 
 
-||*TIPS*: There are dependencies between `child` projects. Typically new projects that build on gnizr API should define `gnizr-web` and `gnzir-webapp` as their dependent libraries. The `gnizr-web` should have dependency scope `provided`, and the `gnizr-webapp` should have dependency scope `runtime`.||
+||*TIPS*: There are dependencies among `child` projects. Usually your own project should define `gnizr-web` and `gnzir-webapp` as dependency libraries. `gnizr-web` should have dependency scope `provided`, and `gnizr-webapp` should have dependency scope `runtime`.||
 
-Different `child` projects provide implementation for different parts of the gnizr application. The `parent` project is responsible for combining `child` project implementation into a single deployable gnizr package. Some `child` project may contains only Java class files, and some others may contain Java class files and static resources, e.g., for building dynamic HTML pages and configuring the application. JUnit tests (Java classes and XML input files) are always reside in the `child` project in which the tests are defined. 
+Different `child` projects provide implementation of different parts of the gnizr application. The `parent` project is responsible for combining `child` project implementation into a single deployable gnizr package. Some `child` project may contains only Java class files, and some others may contain Java class files and static resources, e.g., template pages for building dynamic HTML pages and application configurations. JUnit tests (Java classes and XML input files) always reside in the `child` project in which the tests are defined. 
 
 || *Project Name* || *Description* ||
-|| `gnizr-db` || ||
-|| `gnizr-core` || ||
-|| `gnizr-web` || ||
-|| `gnizr-delicious` || ||
-|| `gnizr-clustermap` || ||
-|| `gnizr-robot` || ||
-|| `gnizr-test` || ||
-|| `gnizr-webapp` || ||
+|| `gnizr-db` || Implementation of gnizr database operations.  ||
+|| `gnizr-core` || Business logic that hides database operations from the high-level implementation. ||
+|| `gnizr-web` ||  Interface and abstract implementation of all gnizr !WebWork actions, and convenient classes for !WebWork programming ||
+|| `gnizr-delicious` || API for importing user bookmarks from `del.icio.us` ||
+|| `gnizr-clustermap` || Clustermap applet ||
+|| `gnizr-robot` || Implementation for RSS crawling and bookmark imports||
+|| `gnizr-test` || The base implementation of gnizr JUnit tests.||
+|| `gnizr-webapp` ||  Main implementation of the application and its configuration files ||
+
