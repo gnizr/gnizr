@@ -211,5 +211,32 @@ public class HelloWorldAction extends AbstractAction{
 
 In `src/main/resources/helloworld`, we create a new Freemarker template file. 
 
-||*TIPS*: There is no special requirement for naming of this directory. It's highly recommended that you choose a directory name that is unique or at least identifies your project. ||
+||*TIPS*: There is no special restriction on the naming of this directory. But it's highly recommended that you choose a directory name that is unique or at least identifies your project. ||
+
+[http://farm3.static.flickr.com/2173/2124245120_9d7e1ea417_o.png]
+
+{{{
+<#-- Freemarker macros provided by gnizr -->
+<#include "/lib/web/macro-lib.ftl"/>
+
+<#-- macro builds the heading HTML -->
+<@pageBegin pageTitle="Gnizr HelloWorld Page" cssHref=[]/>
+
+<#-- macro builds the HTML of the top menu bar, search box etc. -->
+<@headerBlock/>
+
+<#-- macro builds the HTML of the page body -->
+<@pageContent>
+
+  <#-- the meat of our Hello World -->
+  <p>Hello World!</p>
+  <#if message?exists>
+    <ul><li>Message: ${message}</li></ul>
+  </#if>
+
+</@pageContent>
+
+<#-- macro build the HTML of page footer -->
+<@pageEnd/>
+}}}
  
