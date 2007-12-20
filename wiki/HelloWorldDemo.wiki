@@ -66,3 +66,91 @@ The objective of our "Hello World" program is to add a new page in gnizr that do
   # When a user visits the page in a browser, the page prints "Hello World" in the body of the page ([http://www.flickr.com/photo_zoom.gne?id=2123343895&size=o screenshot]).
   # If a request parameter `message` is defined when visiting the page, the page will print "Hello World" and also the value of `message` ([http://www.flickr.com/photo_zoom.gne?id=2123343931&size=o screenshot]).
 
+
+== Step 1: Create Maven Project ==
+
+Run the following command to create a Maven project. The `artifactId` parameter defines our project name `HelloWorldWebapp`. The `archetypeArtifactId` parameter defines that your project will use Maven's WAR packaging, as oppose to the default JAR packaging.
+
+{{{
+mvn archetype:create 
+ -DgroupId=com.example
+ -DartifactId=HelloWorldWebapp
+ -Dpackagename=com.example.gnizr 
+ -DarchetypeArtifactId=maven-archetype-webapp
+}}}
+
+== Step 2: Edit POM File ==
+
+In the `HelloWorldWebapp` project directory, you should find `pom.xml`. Edit this file. 
+
+{{{
+<project 
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.example</groupId>
+  <artifactId>HelloWorldWebapp</artifactId>
+  <packaging>war</packaging>
+  <version>1.0-SNAPSHOT</version>
+  <name>HelloWorldWebapp Gnizr Webapp</name>
+  <url>http://example.com</url>
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>               
+    <dependency>
+      <groupId>com.gnizr</groupId>
+      <artifactId>gnizr-web</artifactId>
+      <!-- replace this value with the gnizr version that you want to work with -->
+      <version>2.3.0-M3</version>
+      <type>jar</type>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.gnizr</groupId>
+      <artifactId>gnizr-webapp</artifactId>
+      <!-- replace this value with the gnizr version that you want to work with -->
+      <version>2.3.0-M3</version>
+      <type>war</type>
+      <scope>runtime</scope>
+    </dependency>
+  </dependencies>
+  <build>
+    <finalName>HelloWorldWebapp</finalName>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.5</source>
+          <target>1.5</target>
+          <encoding>UTF-8</encoding>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-clean-plugin</artifactId>
+        <configuration>
+          <filesets>
+            <fileset>
+              <directory>${basedir}/src/main/webapp</directory>
+              <includes>
+                <include>**/*</include>
+              </includes>
+            </fileset>
+          </filesets>
+        </configuration>
+      </plugin>                 
+    </plugins>
+  </build>      
+</project>
+}}}
+
+||*Note*: the dependency type of `gnzir-web` is `jar` and scope `provided`, and the dependency type of `gnizr-webapp` is `war` and scope `runtime`. ||
+
+The above POM file configuration will help us to set up the build environment with the following properties:
+  * Make available all gnizr API classes and their dependency library classes in our project's `CLASSPATH`. This done through defining `gnzir-web` is of type `jar` and scope `provided`. 
+  * Allow the standard gnizr web application (i.e., its WAR file structure) to be "[http://maven.apache.org/plugins/maven-war-plugin/overlays.html overlaid]" on the top of our own web application project.   
