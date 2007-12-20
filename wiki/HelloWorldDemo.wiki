@@ -364,7 +364,7 @@ Add the following `Context` definition in your Tomcat's `${tomcat_root}/conf/ser
 </Context>
 }}}
 
-=== Step 6: Overlap gnizr web application ===
+=== Step 6: Overlay gnizr web application ===
 
 Run the following command to overlay gnizr web application in `HelloWorldWebapp`:
 
@@ -372,7 +372,7 @@ Run the following command to overlay gnizr web application in `HelloWorldWebapp`
 mvn compile war:inplace
 }}}
 
-The above command compiles `HelloWorldAction.java` and does the overlap procedure. 
+The above command compiles `HelloWorldAction.java` and does the overlay procedure. 
 
 === Step 7: Start Tomcat in Eclipse ===
 
