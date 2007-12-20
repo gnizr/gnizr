@@ -207,7 +207,9 @@ public class HelloWorldAction extends AbstractAction{
 }
 }}}
 
+=== (2) Create `index.ftl` ===
 
+In `src/main/resources/helloworld`, we create a new Freemarker template file. 
 
-
+||*TIPS*: There is no special requirement for naming of this directory. It's highly recommended that you choose a directory name that is unique or at least identifies your project. ||
  
