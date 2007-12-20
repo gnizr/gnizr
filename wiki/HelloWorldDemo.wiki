@@ -239,4 +239,16 @@ In `src/main/resources/helloworld`, we create a new Freemarker template file cal
 <#-- macro build the HTML of page footer -->
 <@pageEnd/>
 }}}
- 
+
+=== (3) Add "HelloWorld" to gnizr web application  ===
+
+In order to make available our action and template file in gnizr, we need to tell gnizr's Spring configuration to create `HelloWorldAction` when the web application starts, and tell the xwork configuration how our action will be defined (e.g., what's the action name and namespace, are we using any interceptors, how action results are handled, etc.). 
+
+In our `HelloWorldWebapp`, we first define a set of local Spring and xwork configuration, and then we define a set of global configuration files that will overwrite those defined in the standard gnizr web application.  
+
+|| *Filename* || *Description* ||
+|| `my-spring.xml`           ||  Local Spring configuration that defines how Spring should create `HelloWorldAction`           ||
+|| `my-xwork.xml` || Local xwork configuration that defines the `sayHello.action`  ||
+|| `spring.xml` || Overwritten the global Spring configuration. Adds an extra `import` tag to include `my-spring.xml`||
+|| `xwork.xml` || Overwritten the global xwork configuration. Adds an extra `include` tag to include `my-xwork.xml` ||
+
