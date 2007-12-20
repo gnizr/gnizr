@@ -58,3 +58,5 @@ Different `child` projects provide implementation of different parts of the gniz
 || `gnizr-test` || The base implementation of gnizr JUnit tests.||
 || `gnizr-webapp` ||  Main implementation of the application and its configuration files ||
 
+= Say "Hello World" =
+
