@@ -153,4 +153,10 @@ In the `HelloWorldWebapp` project directory, you should find `pom.xml`. Edit thi
 
 The above POM file configuration will help us to set up the build environment with the following properties:
   * Make available all gnizr API classes and their dependency library classes in our project's `CLASSPATH`. This done through defining `gnzir-web` is of type `jar` and scope `provided`. 
-  * Allow the standard gnizr web application (i.e., its WAR file structure) to be "[http://maven.apache.org/plugins/maven-war-plugin/overlays.html overlaid]" on the top of our own web application project.   
+  * Allow the standard gnizr web application (i.e., its WAR file structure) to be "[http://maven.apache.org/plugins/maven-war-plugin/overlays.html overlaid]" on the top of our own web application project. This is done through defining `gnizr-webapp` is of type `war` and scope `runtime`. 
+  * Instruct Maven to build our project using Java 1.5 compiler. 
+  * Instruct `maven-clean-plugin` to perform extra "cleaning" to delete files in `${basedir}/src/main/webapp` whenever we call `mvn clean`.
+
+
+ 
+
