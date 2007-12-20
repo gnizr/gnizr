@@ -246,9 +246,77 @@ In order to make available our action and template file in gnizr, we need to tel
 
 In our `HelloWorldWebapp`, we first define a set of local Spring and xwork configuration, and then we define a set of global configuration files that will overwrite those defined in the standard gnizr web application.  
 
+[http://farm3.static.flickr.com/2152/2124292642_16c59ef22e_o.png]
+
 || *Filename* || *Description* ||
 || `my-spring.xml`           ||  Local Spring configuration that defines how Spring should create `HelloWorldAction`           ||
 || `my-xwork.xml` || Local xwork configuration that defines the `sayHello.action`  ||
 || `spring.xml` || Overwritten the global Spring configuration. Adds an extra `import` tag to include `my-spring.xml`||
 || `xwork.xml` || Overwritten the global xwork configuration. Adds an extra `include` tag to include `my-xwork.xml` ||
 
+*File: `my-spring.xml`*
+{{{
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+  "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+  <bean id="helloWorldAction" class="com.example.gnizr.HelloWorldAction" 
+        singleton="false">
+  </bean>        
+</beans>
+}}}
+
+*File: `my-xwork.xml`*
+{{{
+<!DOCTYPE xwork PUBLIC "-//OpenSymphony Group//XWork 1.0//EN"
+	"http://www.opensymphony.com/xwork/xwork-1.0.dtd">
+<xwork>
+  <package name="gnizr-helloworld" extends="gnizr-default"
+	   namespace="/helloworld">		
+    <action name="sayHello" class="com.example.gnizr.HelloWorldAction">			
+      <interceptor-ref name="gnizrDefaultStack"/>
+      <result name="success" type="freemarker">/helloworld/index.ftl</result>
+      <result name="error" type="freemarker">/common/error.ftl </result>
+    </action>		
+  </package>
+</xwork>
+}}}
+
+*File: `spring.xml`*
+{{{
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+        "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	
+  <!-- initial gnizr system configuration -->
+  <!-- (copied from gnizr-webapp/src/main/resources as-is) -->
+  <import resource="gnizr-config.xml"/>
+	
+  <!-- standard spring configuration of gnizr -->
+  <!-- (copied from gnizr-webapp/src/main/resources as-is) -->
+  <import resource="spring/gnizr-dao.xml"/>
+  <import resource="spring/core-managers.xml"/>
+  <import resource="spring/core-pagers.xml"/>
+  <import resource="spring/core-tagging.xml"/>
+  <import resource="spring/core-search.xml"/>
+  <import resource="spring/core-bookmark.xml"/>
+  <import resource="spring/web-interceptors.xml"/>	
+  <import resource="spring/web-useradmin.xml"/>
+  <import resource="spring/web-userbmark.xml"/>
+  <import resource="spring/web-userfolder.xml"/>
+  <import resource="spring/web-usertags.xml"/>
+  <import resource="spring/web-userfeed.xml"/>
+  <import resource="spring/web-links.xml"/>
+  <import resource="spring/web-ui.xml"/>
+  <import resource="spring/web-clustermap.xml"/>
+  <import resource="spring/web-timeline.xml"/>
+  <import resource="spring/web-search.xml"/>
+  <import resource="classpath:com/gnizr/web/action/robot/rss/my-spring.xml"/>
+	
+  <!-- helloworld's spring config -->
+  <import resource="classpath:com/example/gnizr/my-spring.xml"/>
+</beans>
+}}}
+
+*File: `xwork.xml`*
