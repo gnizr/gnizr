@@ -320,3 +320,31 @@ In our `HelloWorldWebapp`, we first define a set of local Spring and xwork confi
 }}}
 
 *File: `xwork.xml`*
+{{{
+<!DOCTYPE xwork PUBLIC "-//OpenSymphony Group//XWork 1.0//EN"
+        "http://www.opensymphony.com/xwork/xwork-1.0.dtd">
+<xwork>
+
+  <!-- standard xwork configuration of gnizr -->
+  <!-- (copied from gnizr-webapp/src/main/resources as-is) -->
+  <include file="webwork-default.xml"/>   
+  <include file="xwork/gnizr-default.xml"/>                           
+  <include file="xwork/gnizr-userpage.xml"/>              
+  <include file="xwork/gnizr-useradmin.xml"/>
+  <include file="xwork/gnizr-bookmark.xml"/>
+  <include file="xwork/gnizr-community.xml"/>
+  <include file="xwork/gnizr-search.xml" />
+  <include file="xwork/gnizr-admin.xml"/>
+  <include file="xwork/gnizr-ui.xml"/>
+  <include file="xwork/gnizr-settings.xml"/>
+  <include file="xwork/gnizr-rss.xml"/>
+  <include file="xwork/gnizr-rdf.xml"/>
+  <include file="xwork/gnizr-json.xml"/>
+  <include file="xwork/gnizr-clustermap.xml"/>
+  <include file="xwork/gnizr-timeline.xml"/>
+  <include file="com/gnizr/web/action/robot/rss/my-xwork.xml"/>       
+	  
+  <!-- helloworld's xwork configuration -->
+  <include file="com/example/gnizr/my-xwork.xml"/>
+</xwork>
+}}}
