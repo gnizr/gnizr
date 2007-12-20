@@ -240,7 +240,7 @@ In `src/main/resources/helloworld`, we create a new Freemarker template file cal
 <@pageEnd/>
 }}}
 
-=== (3) Add "HelloWorld" to gnizr web application  ===
+=== (3) Add "Hello World" to gnizr web application  ===
 
 In order to make available our action and template file in gnizr, we need to tell gnizr's Spring configuration to create `HelloWorldAction` when the web application starts, and tell the xwork configuration how our action will be defined (e.g., what's the action name and namespace, are we using any interceptors, how action results are handled, etc.). 
 
@@ -348,3 +348,38 @@ In our `HelloWorldWebapp`, we first define a set of local Spring and xwork confi
   <include file="com/example/gnizr/my-xwork.xml"/>
 </xwork>
 }}}
+
+== Step 5: Configure Tomcat's `server.xml` ==
+
+Add the following `Context` definition in your Tomcat's `${tomcat_root}/conf/server.xml`:
+
+{{{
+<!-- gnizr HelloWorldWebApp demo -->
+
+<Context path="/gnizr" reloadable="true" docBase="F:\home\harryc\workspace\HelloWorldWebapp\src\main\webapp" workDir="F:\home\harryc\workspace\HelloWorldWebapp\target\scratch">
+</Context>
+}}}
+
+=== Step 6: Overlap gnizr web application ===
+
+Run the following command to overlay gnizr web application in `HelloWorldWebapp`:
+
+{{{
+mvn compile war:inplace
+}}}
+
+The above command compiles `HelloWorldAction.java` and does the overlap procedure. 
+
+=== Step 7: Start Tomcat in Eclipse ===
+
+[http://farm3.static.flickr.com/2255/2123545419_7651b7dabd_o.png]
+
+Point your browser to 
+
+{{{
+http://localhost:8080/gnizr/helloworld/sayHello.action
+   or 
+http://localhost:8080/gnizr/helloworld/sayHello.action?message=123abc
+}}}
+
+Done!
