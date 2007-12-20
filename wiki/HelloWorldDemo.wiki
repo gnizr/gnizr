@@ -157,6 +157,20 @@ The above POM file configuration will help us to set up the build environment wi
   * Instruct Maven to build our project using Java 1.5 compiler. 
   * Instruct `maven-clean-plugin` to perform extra "cleaning" to delete files in `${basedir}/src/main/webapp` whenever we call `mvn clean`.
 
+== Step 3: Prepare our project for Eclipse == 
+
+Once we have configured our POM file, we will use the [http://maven.apache.org/plugins/maven-eclipse-plugin/ Maven Eclipse Plugin] to prepare our project so that it becomes editable in the Eclipse IDE. 
+
+Run the following command:
+
+{{{
+mvn eclipse:eclipse
+}}}
+
+Now start Eclipse IDE and import `HelloWorldWebapp` as a Eclipse project.
+|| *1* || *2* || *3* ||
+|| [http://farm3.static.flickr.com/2345/2123441445_3247bc949e_o.png] ||[http://farm3.static.flickr.com/2004/2124210834_9bcda20d8b_o.png]|| [http://farm3.static.flickr.com/2288/2124223206_4003a7594b_o.png] ||
+
+
 
  
-
