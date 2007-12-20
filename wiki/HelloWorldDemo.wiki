@@ -66,5 +66,3 @@ The objective of our "Hello World" program is to add a new page in gnizr that do
   # When a user visits the page in a browser, the page prints "Hello World" in the body of the page ([http://www.flickr.com/photo_zoom.gne?id=2123343895&size=o screenshot]).
   # If a request parameter `message` is defined when visiting the page, the page will print "Hello World" and also the value of `message` ([http://www.flickr.com/photo_zoom.gne?id=2123343931&size=o screenshot]).
 
-
-
