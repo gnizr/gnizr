@@ -356,7 +356,9 @@ Add the following `Context` definition in your Tomcat's `${tomcat_root}/conf/ser
 {{{
 <!-- gnizr HelloWorldWebApp demo -->
 
-<Context path="/gnizr" reloadable="true" docBase="F:\home\harryc\workspace\HelloWorldWebapp\src\main\webapp" workDir="F:\home\harryc\workspace\HelloWorldWebapp\target\scratch">
+<Context path="/gnizr" reloadable="true" 
+  docBase="C:\some\path\to\HelloWorldWebapp\src\main\webapp" 
+  workDir="C:\some\path\to\HelloWorldWebapp\target\scratch">
 </Context>
 }}}
 
