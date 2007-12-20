@@ -2,6 +2,8 @@
 
 This document is intended for developers who want to extend gnizr capability or alter it's default application behavior. The build environment and setups described here are only a recommendation. Developers can choose to use other tools and build environment setups. 
 
+|| Instructions described here are _experimental_ for the release gnizr-2.3.0-M3. They may not work properly for the earlier releases. If you have trouble following these intructions, send your questions to [http://groups.google.com/group/gnizr-users gnizr users]. ||
+
 = Introduction =
 
 Gnizr is designed for develoeprs to add new capabilities and alter the existing application behavior. The code base of gnizr is structured in a way that attempts to simplify many software engineering tasks. Through a "Hello World" example, this tutorial will overview the gnizr code base structure and show you how to rapidly prototype and extend gnizr. 
