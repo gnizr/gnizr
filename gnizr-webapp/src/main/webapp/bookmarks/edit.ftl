@@ -43,7 +43,7 @@
   <#assign bkmrkUrl = 'http://'/>  
 </#if>
 <@ww.fielderror/>
-<@ww.form onsubmit="saveAndClose('${saveAndClose?string}')" id="saveBookmark" action="/bookmark/save.action" method="post" cssClass="editInputGroup" theme="simple"
+<@ww.form id="saveBookmark" action="/bookmark/save.action" method="post" cssClass="editInputGroup" theme="simple"
 >
 <div id="legend">* = Required Field</div>
   <div class="inputDataRow">
@@ -98,6 +98,9 @@
     <@ww.hidden name="redirectToPage" value="/home"/>     
   </#if>    
   <@ww.hidden name="oldUrl" value="${(editBookmark.link.url)?if_exists}"/>
+  <#if saveAndClose?exists>
+    <@ww.hidden name="saveAndClose" value="${saveAndClose?string}"/>
+  </#if>
 <#-- Include all existing PointMarkers in this FORM's input. -->  
 <#if pointMarkers?exists && (pointMarkers?size>0)>   
 <#list pointMarkers as p> 

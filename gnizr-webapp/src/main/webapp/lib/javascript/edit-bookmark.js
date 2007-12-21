@@ -679,7 +679,7 @@ function showPagePreview(){
 	if(MochiKit.Base.isUndefinedOrNull(urlElm) == false){
 		var url = urlElm.value;		
 		if(MochiKit.Base.isUndefinedOrNull(url) == false && isValidUrl(url) == true){
-			window.open(url,'','alwaysRaised=yes,height=600,width=800,status=no,toolbar=no,menubar=no,scrollbars=yes,left=0');
+			window.open(url,'','alwaysRaised=yes,height=600,width=800,status=no,toolbar=no,resizable=yes,menubar=no,scrollbars=yes,left=0');
 		}else{
 			alert('The URL that you\'ve entered is invalid!');
 		}

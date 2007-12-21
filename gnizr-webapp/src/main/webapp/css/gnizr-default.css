@@ -139,6 +139,22 @@ a.system-link:active{
 	background-color:yellow;
 }
 
+.system-message{
+	padding: 20px;
+	border-style: solid;
+	border-color: #ccc;
+    border-width: 1px;
+}
+
+.system-message .title{
+	font-size: 1.25em;
+	font-weight: bold;
+}
+
+.system-message .description{
+	font-size: 1em;
+}
+
 /* ========= Global DIVs =========== */
 .cleardiv {
 	clear: both;
