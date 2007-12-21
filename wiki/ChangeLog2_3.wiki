@@ -8,6 +8,10 @@ Changelog
     * SVN Revision 464, 12/18/2007
   * Renamed Java package name `com.gnizr.core.web` to `com.gnizr.web`
     * SVN Revision 465-467, 12/18/2007
+  * [http://code.google.com/p/gnizr/issues/detail?id=30 Issue 30]: Preview Pop-up can't be resized in IE (fixed, need testing)
+  * [http://code.google.com/p/gnizr/issues/detail?id=31 Issue 31]: User 'gnizr' tag cloud missing in the Edit Bookmark page (fixed, need testing)
+  * [http://code.google.com/p/gnizr/issues/detail?id=32 Issue 32]: Can't save bookmarks using bookmarklet (fixed, need testing)
+
 
 ==== Version 2.3.0-M2 (14 December 2007) ====
 
