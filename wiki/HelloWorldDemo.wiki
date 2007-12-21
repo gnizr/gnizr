@@ -65,8 +65,11 @@ Different `child` projects provide implementation of different parts of the gniz
 = Say "Hello World" =
 
 The objective of our "Hello World" program is to add a new page in gnizr that does the following two things:
-  # When a user visits the page in a browser, the page prints "Hello World" in the body of the page ([http://www.flickr.com/photo_zoom.gne?id=2123343895&size=o screenshot]).
-  # If a request parameter `message` is defined when visiting the page, the page will print "Hello World" and also the value of `message` ([http://www.flickr.com/photo_zoom.gne?id=2123343931&size=o screenshot]).
+  # When a user visits the page in a browser, the page prints "Hello World" in the body of the page.
+  # If a request parameter `message` is defined when visiting the page, the page will print "Hello World" and also the value of `message` .
+
+|| Say "Hello World" || Say "Hello World" + a custom message ||
+|| [http://www.flickr.com/photo_zoom.gne?id=2123343895&size=o http://farm3.static.flickr.com/2171/2123343895_61fa6a7ae8_m.jpg] || [http://www.flickr.com/photo_zoom.gne?id=2123343931&size=o http://farm3.static.flickr.com/2232/2123343931_396850e96d_m.jpg]||
 
 
 == Step 1: Create Maven Project ==
