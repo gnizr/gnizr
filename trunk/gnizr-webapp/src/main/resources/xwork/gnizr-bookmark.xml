@@ -37,6 +37,7 @@
 			<result name="success" type="redirect">${redirectToPage}</result>
 			<result name="input" type="freemarker">/bookmarks/edit.ftl</result>
 			<result name="error" type="freemarker">/common/error.ftl</result>
+			<result name="close" type="freemarker">/bookmarks/close-popup.ftl</result>
 			<result name="redirect" type="redirect">${url}</result>
 		</action>
 		
