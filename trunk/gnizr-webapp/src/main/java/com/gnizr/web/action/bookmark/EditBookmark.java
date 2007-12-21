@@ -331,6 +331,8 @@ public class EditBookmark extends AbstractAction implements LoggedInUserAware {
 			return INPUT;
 		}else if(result == SUCCESS && isRedirect() == true){
 			return REDIRECT;
+		}else if(result == SUCCESS && isSaveAndClose() == true){
+			return "close";
 		}else{
 			return result;
 		}
@@ -407,7 +409,5 @@ public class EditBookmark extends AbstractAction implements LoggedInUserAware {
 	public void setSaveAndClose(boolean saveAndClose) {
 		this.saveAndClose = saveAndClose;
 	}
-
-
 	
 }
