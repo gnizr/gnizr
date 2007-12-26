@@ -1,7 +1,7 @@
 #summary Changelog of all releases made under version 2.3
 #labels Phase-Implementation
 
-==== Version 2.3.0-M3 (in progress) ====
+==== Version 2.3.0-M3 (26 December 2007) ====
 
 Changelog
   * POM files changed; renamed the `groupId` of all sub-project modules to `com.gnizr`
