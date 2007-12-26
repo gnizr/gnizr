@@ -23,6 +23,21 @@ If you have any questions, post them in [http://groups.google.com/group/gnizr-us
     * See [GnizrConfigXML]
   # Start Tomcat
 
+== Steps to Upgrade ==
+
+  # Download and unpack latest gnizr release.
+    * e.g., after unpacking, the top-level directory is `gnizr-x.y.z`
+  # Upgrade gnizr database
+    * See _Upgrade database tables and stored procedures_ in SetupGnizrDatabase
+  # Backup your existing gnizr web application in Tomcat
+    * e.g., `mv /your/tomcat/webapps/gnizr to /tmp/backup-gnizr`
+  # Copy gnizr web application directory to Tomcat
+    * `cp -r gnizr-x.y.z/gnizr /your/tomcat/webapps/`
+  # Edit gnizr configuration
+    * See [GnizrConfigXML]
+  # Start Tomcat
+    
+
 == Login and Create New Accounts ==
 
 Gnizr comes with a default user account -- `gnizr`, who is the administrator of the system. After you have logged in as `gnizr`, you can create additional user accounts.
