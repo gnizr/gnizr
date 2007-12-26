@@ -3,7 +3,7 @@
 
 This page describes the steps to prepare MySQL database for gnizr installation. These steps must be performed before running the gnizr web application.
 
-== I. Requirement ==
+== Requirement ==
 
   # Install MySQL 5.0+
   # Create a database schema for gnizr
@@ -14,7 +14,7 @@ This page describes the steps to prepare MySQL database for gnizr installation. 
 
 Note: We assume that you have properly installed MySQL database. If you need addition help on using MySQL, see http://dev.mysql.com
 
-== II. Create database tables and stored procedures ==
+== Create database tables and stored procedures ==
 
   # Go to the SQL script directory
     * `cd gnizr-x.y.z/sql`
@@ -24,6 +24,23 @@ Note: We assume that you have properly installed MySQL database. If you need add
     * syntax: `loadsch [db_name] [db_username] [db_password]`
   # Done!
 
-== III. Related ==
+
+== Upgrade database tables and stored procedures ==
+
+Instructions described in this section are for upgrading gnizr software from an existing installation. If installing gnizr for the first time, follow instructions in "_Create database tables and stored procedures_". 
+
+=== Upgrading to gnizr 2.3.0 (including gnizr-2.3.0-M3+) ===
+
+If you are currently running gnizr 2.2.x, do the following:
+
+  # Go to the SQL script directory
+    * `cd gnizr-2.3.x/sql` or `cd gnizr-2.3.x-Mz/sql`
+  # Run BASH script to upgrade database 
+    * `chmod 755 loadsch.sh loadsp.sh loadupg.sh`
+    * `./loadupg.sh gnizr_db gnizr gnizrpass`
+    * syntax: `loadupg [db_name] [db_username] [db_password]`
+  # Done!
+
+== Related ==
   * HowToInstall
   * HowToBuild
