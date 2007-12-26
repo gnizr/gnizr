@@ -232,11 +232,11 @@
             </group>
             <group>
               <title>Core Packages</title>
-              <packages>com.gnizr.core.*:com.gnizr.ext.delicious:com.gnizr.core.web.clustermap</packages>
+              <packages>com.gnizr.core.*</packages>
             </group>
             <group>
               <title>Web Application Packages</title>
-              <packages>com.gnizr.core.web.*:com.gnizr.core.robot.rss.action</packages>
+              <packages>com.gnizr.web.*</packages>
             </group>
           </groups>          
           <excludePackageNames>com.gnizr.core.web.junit</excludePackageNames>
@@ -244,4 +244,11 @@
       </plugin>
     </plugins>
   </reporting>
+  <distributionManagement>
+    <repository>
+      <id>gnizr-dev-repos</id>
+      <name>MyCompany Repository</name>
+      <url>scp://192.168.0.3/var/data/www/gnizr.com/maven2</url>
+    </repository>
+  </distributionManagement>
 </project>
