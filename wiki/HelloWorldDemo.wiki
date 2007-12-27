@@ -50,15 +50,15 @@ In each project module, in both `parent` and `child`, there is a POM file. In th
 
 Different `child` projects provide implementation of different parts of the gnizr application. The `parent` project is responsible for combining `child` project implementation into a single deployable gnizr package. Some `child` project may contains only Java class files, and some others may contain Java class files and static resources, e.g., template pages for building dynamic HTML pages and application configurations. JUnit tests (Java classes and XML input files) always reside in the `child` project in which the tests are defined. 
 
-|| *Project Name* || *Description* ||
-|| `gnizr-db` || Implementation of gnizr database operations.  ||
-|| `gnizr-core` || Business logic that hides database operations from the high-level implementation. ||
-|| `gnizr-web` ||  Interface and abstract implementation of all gnizr !WebWork actions, and convenient classes for !WebWork programming ||
-|| `gnizr-delicious` || API for importing user bookmarks from `del.icio.us` ||
-|| `gnizr-clustermap` || Clustermap applet ||
-|| `gnizr-robot` || Implementation for RSS crawling and bookmark imports||
-|| `gnizr-test` || The base implementation of gnizr JUnit tests.||
-|| `gnizr-webapp` ||  Main implementation of the application and its configuration files ||
+|| *Project Name* || *Description* || *Packaging Type* ||
+|| `gnizr-db` || Implementation of gnizr database operations.  || jar ||
+|| `gnizr-core` || Business logic that hides database operations from the high-level implementation. || jar ||
+|| `gnizr-web` ||  Interface and abstract implementation of all gnizr !WebWork actions, and convenient classes for !WebWork programming || jar ||
+|| `gnizr-delicious` || API for importing user bookmarks from `del.icio.us` || jar ||
+|| `gnizr-clustermap` || Clustermap applet || jar ||
+|| `gnizr-robot` || Implementation for RSS crawling and bookmark imports|| jar ||
+|| `gnizr-test` || The base implementation of gnizr JUnit tests.|| jar ||
+|| `gnizr-webapp` ||  Main implementation of the application and its configuration files || war ||
 
 --
 
