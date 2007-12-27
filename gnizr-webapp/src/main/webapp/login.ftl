@@ -13,6 +13,9 @@
 <@ww.textfield label="Username" name="user.username"/>
 <@ww.password label="Password" name="user.password"/>
 <@ww.checkbox label="Remember me" name="rememberMe" value="aBoolean"/>
+<#if redirectToPage?exists>
+  <@ww.hidden name="redirectToPage" value="${redirectToPage}"/>
+</#if>
 <@ww.submit cssClass="btn" value="login"/>
 <@ww.actionerror/>
 </@ww.form>
