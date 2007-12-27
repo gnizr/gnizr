@@ -109,8 +109,12 @@
 </#if>
 <div id="submits">
 <div class="left">
-<#if (editBookmark.link.url)?exists>
- <@ww.url id="delBmarkHref" namespace="/bookmark" action="delete" url=editBookmark.link.url includeParams="none"/>
+<#if (editBookmark.link.url)?exists && (editBookmark.id > 0)>
+ <@ww.url id="delBmarkHref" namespace="/bookmark" action="delete" 
+          url=editBookmark.link.url 
+          saveAndClose=saveAndClose?if_exists 
+          redirect=redirect?if_exists
+          includeParams="none"/>
  <a href="${delBmarkHref}" class="system-link">Delete this bookmark</a>
 </#if> 
 </div>
