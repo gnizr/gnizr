@@ -60,8 +60,9 @@ INPUT: pageTitle:String // the <title/> of this HTML page
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta name="version" content="${gnizrVersion()}${gnizrDevVersion()}">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- leave this for stats -->
+<meta name="generator" content="Gnizr ${gnizrVersion()}${gnizrDevVersion()}"></meta>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
 <title>${pageTitle}</title>
 <!-- GNIZR DEFAULT CSS -->
 <link href="${gzUrl("/css/gnizr-default.css")}" rel="stylesheet" type="text/css">
