@@ -36,6 +36,8 @@ If you have any questions, post them in [http://groups.google.com/group/gnizr-us
   # Edit gnizr configuration
     * See [GnizrConfigXML]
   # Start Tomcat
+
+||*TIPS*: Don't forget to upgrade your bookmarklet program. It can be found in the `help` page. ||
     
 
 == Login and Create New Accounts ==
