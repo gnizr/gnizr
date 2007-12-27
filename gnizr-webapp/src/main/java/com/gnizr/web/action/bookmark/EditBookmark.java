@@ -215,6 +215,9 @@ public class EditBookmark extends AbstractAction implements LoggedInUserAware {
 				}
 			}
 		}
+		if(result == SUCCESS && isSaveAndClose() == true){
+			result = "close";
+		}
 		return result;
 	}
 
@@ -299,7 +302,7 @@ public class EditBookmark extends AbstractAction implements LoggedInUserAware {
 		}else if(getUrl() != null){
 			try{
 				// if there is an existing bookmark, we update that bookmark.
-				if(getOldUrl() != null){					
+				if(getOldUrl() != null && getOldUrl().trim().length() > 0){					
 					this.id = bookmarkManager.getBookmarkId(loggedInUser, getOldUrl());					
 				}else{
 					this.id = bookmarkManager.getBookmarkId(loggedInUser, getUrl());
