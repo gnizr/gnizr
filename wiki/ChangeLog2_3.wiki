@@ -9,6 +9,7 @@ Changelog
   * [http://code.google.com/p/gnizr/issues/detail?id=33 Issue 33]: bookmarklet doesn't maintain state after required authentication (fixed, need testing)
   * [http://code.google.com/p/gnizr/issues/detail?id=36 Issue 36]: Calling delete in the bookmarklet pop-up doesn't close the window (fixed, need testing)
   * [http://code.google.com/p/gnizr/issues/detail?id=37 Issue 37]: Add bookmark operation doesn't automatically update the properties of an existing bookmark (fixed, need testing)
+  * [http://code.google.com/p/gnizr/issues/detail?id=38 Issue 38]: The requested resource (/gnizr/home) was not found (fixed, need testing)
 
 ==== Version 2.3.0-M3 (26 December 2007) ====
 
