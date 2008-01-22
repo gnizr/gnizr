@@ -28,9 +28,9 @@
 		
 		<action name="add" class="com.gnizr.web.action.bookmark.EditBookmark"
 			method="doDefault">
-			<interceptor-ref name="loggedIn"/>
-			<interceptor-ref name="auth"/>
-			<interceptor-ref name="gnizrDefaultStack"/>
+			<interceptor-ref name="loggedIn"/>				
+			<interceptor-ref name="auth"/>		
+			<interceptor-ref name="gnizrDefaultStack"/>				
 			<result name="login" type="redirect-action">
 				<param name="actionName">login</param>
 				<param name="redirectToPage">add.action?url=${url}&amp;title=${title}&amp;notes=${notes}&amp;tags=${tags}&amp;saveAndClose=${saveAndClose}</param>
@@ -43,9 +43,11 @@
 		<action name="edit"
 			class="com.gnizr.web.action.bookmark.EditBookmark"
 			method="doFetchBookmark">
-			<interceptor-ref name="loggedIn"/>		
+			<interceptor-ref name="loggedIn"/>					
+			<interceptor-ref name="static-params"/>
+			<interceptor-ref name="params"/>
+			<interceptor-ref name="auth"/>	
 			<interceptor-ref name="gnizrDefaultStack"/>
-			<interceptor-ref name="auth"/>
 			<interceptor-ref name="validationWorkflowStack"/>
 			<result name="login" type="redirect-action">
 				<param name="actionName">login</param>
