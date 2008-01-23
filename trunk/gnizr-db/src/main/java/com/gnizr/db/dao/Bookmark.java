@@ -26,7 +26,17 @@ import java.util.Map;
 import com.gnizr.db.dao.folder.FoldersParser;
 import com.gnizr.db.dao.tag.TagsParser;
 
-
+/**
+ * <p>Bookmark saved by a user. All bookmarks in the database have a unique ID. A bookmark 
+ * represents a URL (or link) that has been saved by a given user. User can define 
+ * properties about a bookmark -- title, notes and tags. A bookmark maybe saved in
+ * zero or more folders. Each bookmark has two different timestampes: one describes the 
+ * date/time when the bookmark is first created, and the other describes the date/time
+ * when any bookmark properties have been modified.</p>
+ * 
+ * @author Harry Chen
+ *
+ */
 public class Bookmark implements Serializable{
 	/**
 	 * 
@@ -43,16 +53,29 @@ public class Bookmark implements Serializable{
 	private User user;
 	private Link link;
 
+	/**
+	 * Creates a new instance of this class. 
+	 */
 	public Bookmark(){	
 		this.title = "";
 		this.notes = "";
 	}
 	
+	/**
+	 * Creates a new instance of this class with a specific <code>id</code>.
+	 * @param id the ID of this bookmark
+	 */
 	public Bookmark(int id){
 		this();
 		this.id = id;
 	}
 	
+	/**
+	 * Creates a new instance of this class and intitializes
+	 * values that describe the bookmark owner and the bookmark URL. 
+	 * @param user the user who owns this bookmark.
+	 * @param link the URL that the user has bookmarked.
+	 */
 	public Bookmark(User user, Link link){				
 		this();
 		this.user = new User(user);
@@ -60,6 +83,12 @@ public class Bookmark implements Serializable{
 	}
 	
 	
+	/**
+	 * Copy constructor. Creates a new instance of this class and initializes 
+	 * this instance using an existing <code>Bookmark</code>. 
+	 * 
+	 * @param b bookmark object to copy.
+	 */
 	public Bookmark(Bookmark b){						
 		this.id = b.id;		
 		this.title = b.title;
@@ -80,49 +109,123 @@ public class Bookmark implements Serializable{
 		}
 	}
 	
+	/**
+	 * Returns the date/time when the bookmark is created.
+	 * 
+	 * @return the creation date/time of this bookmark.
+	 */
 	public Date getCreatedOn() {
 		return createdOn;
 	}
+	
+	/**
+	 * Sets the date/time when the bookmark is created.
+	 * 
+	 * @param createdOn date/time when this bookmark is created.
+	 */
 	public void setCreatedOn(Date createdOn) {
 		this.createdOn = createdOn;
 	}
+	
+	/**
+	 * Returns the ID of this bookmark
+	 * @return bookmark ID.
+	 */
 	public int getId() {
 		return id;
 	}
+	
+	/**
+	 * Sets the ID of this bookmark
+	 * @param id bookmark ID.
+	 */
 	public void setId(int id) {
 		this.id = id;
 	}
+	
+	/**
+	 * Returns the date/time when any properties of this bookmark
+	 * has been changed.
+	 * 
+	 * @return the last updated date/time of this bookmark.
+	 */
 	public Date getLastUpdated() {
 		return lastUpdated;
 	}
+	
+	/**
+	 * Sets the last updated date/time of this bookmark.
+	 * 
+	 * @param lastUpdated when this bookmark was last updated.
+	 */
 	public void setLastUpdated(Date lastUpdated) {
 		this.lastUpdated = lastUpdated;
 	}
 	
+	/**
+	 * Returns the notes about this bookmark.
+	 * 
+	 * @return bookmark notes
+	 */
 	public String getNotes() {
 		return notes;
 	}
+	
+	/**
+	 * Sets the notes about this bookmark.
+	 * 
+	 * @param notes bookmark notes.
+	 */
 	public void setNotes(String notes) {
 		this.notes = notes;
 	}
+	
+	/**
+	 * Returns tags used to label this bookmark. If more than one tag is used,
+	 * tags are seperated by one or more white-spaces.
+	 * @return a string of tags
+	 */
 	public String getTags() {
 		return tags;
 	}
+	/**
+	 * Sets the tags used to label this bookmark. If more than one tag is used,
+	 * seperate tags using a white-space.
+	 * @param tags a string of tags
+	 */
 	public void setTags(String tags) {
 		this.tags = tags;
 	}
 	
+	/**
+	 * Returns a parsed version of the tag string. Tags are parsed and stored in
+	 * a <code>List</code> object. Each element in the list represents a single tag.
+	 *
+	 * @return a list of tags
+	 */
 	public List<String> getTagList(){
 		TagsParser parser = new TagsParser(tags);
 		return parser.getTags();		
 	}
 	
+	/**
+	 * Returns only machine tags of this bookmark. 
+	 * 
+	 * @return a list of tags.
+	 */
 	public List<MachineTag> getMachineTagList() {
 		TagsParser parser = new TagsParser(tags);
 		return parser.getMachineTags();
 	}
 	
 	
+	/**
+	 * Search machine tags used to label this bookmark. 
+	 * 
+	 * @param nsFilter a regular expression of namespace string to match
+	 * @param predFilter a regular expression of predicate string to match
+	 * @return a list of machine tags that matched the defined filters.
+	 */
 	public List<MachineTag> getMachineTagList(String nsFilter, String predFilter){
 		List<MachineTag> allMTags = getMachineTagList();
 		if(nsFilter == null && predFilter == null){
@@ -152,27 +255,52 @@ public class Bookmark implements Serializable{
 		}
 	}
 	
-	
+	/**
+	 * Returns the title description of this bookmark.
+	 * 
+	 * @return bookmark title.
+	 */
 	public String getTitle() {
 		return title;
 	}
 	
+	/**
+	 * Sets the title description of this bookmark.
+	 * @param title bookmark title.
+	 */
 	public void setTitle(String title) {
 		this.title = title;
 	}
 	
+	/**
+	 * Returns the <code>Link</code> object reprsentation of the bookmark URL.
+	 * @return bookmark url.
+	 */
 	public Link getLink() {
 		return link;
 	}
 	
+	/**
+	 * Sets the bookmark URL, as <code>Link</code> object, of this bookmark. 
+	 * @param link bookmark url.
+	 */
 	public void setLink(Link link) {
 		this.link = link;
 	}
 	
+	/**
+	 * Returns the owner user of tihs bookmark.
+	 * @return bookmark owner.
+	 */
 	public User getUser() {
 		return user;
 	}
 	
+	/**
+	 * Sets the owner user of this bookmark.
+	 * 
+	 * @param user bookmark user.
+	 */
 	public void setUser(User user) {
 		this.user = user;
 	}
@@ -256,14 +384,32 @@ public class Bookmark implements Serializable{
 		return map.toString();
 	}
 
+	/**
+	 * Retuns the list of folders this bookmark is saved to. If the bookmark 
+	 * is saved in more than one folder, white-spaces are used to seperate multiple
+	 * folder names.
+	 * @return folder names.
+	 */
 	public String getFolders() {
 		return folders;
 	}
-
+	
+	/**
+	 * Sets the folders that this bookmark is saved to. If the bookmark is saved in
+	 * more than one folder, use white-spaces to seperate the folder names.
+	 * 
+	 * @param folders folder names
+	 */
 	public void setFolders(String folders) {
 		this.folders = folders;
 	}
 	
+	/**
+	 * Returns a parsed version of the folder names. Folder names seperated by 
+	 * white-spaces are parsed and stored in a <code>List</code> object. Each element
+	 * in the list represents a folder name.
+	 * @return a list of parsed folder names.
+	 */
 	public List<String> getFolderList(){
 		FoldersParser parser = new FoldersParser(getFolders());
 		return parser.getFolderNames();

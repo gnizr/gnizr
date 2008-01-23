@@ -20,6 +20,15 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * This class represents the tagging relationship between a bookmark and a tag.
+ * Every tagging relationship has a unique ID. This class also describes
+ * the number of times the tag is used to label the bookmark (typically is 0 or 1), and 
+ * the index position of the tag in the list of bookmark tags. 
+ * 
+ * @author Harry Chen
+ *
+ */
 public class BookmarkTag implements Serializable, TagLabel{
 
 	/**
@@ -33,14 +42,31 @@ public class BookmarkTag implements Serializable, TagLabel{
 	private int count;
 	private int position;
 	
+	/**
+	 * Creates a new instance of this class.
+	 */
 	public BookmarkTag(){
 		this(-1,null,null,0,0);
 	}
 	
+	/**
+	 * Creates a new instance of this class with a defined ID.
+	 * @param id the ID of this bookmark/tag relation. 
+	 */
 	public BookmarkTag(int id){
 		this(id,null,null,0,0);
 	}
 	
+	/**
+	 * Creates a new instance of this class and initializes 
+	 * the class property values.
+	 * 
+	 * @param id the ID of this bookmark/tag relation.
+	 * @param bookmark a bookmark 
+	 * @param tag a tag
+	 * @param count number of time bookmark is tagged
+	 * @param position the index position of tag. 
+	 */
 	public BookmarkTag(int id, Bookmark bookmark, Tag tag, int count, int position){
 		this.id = id;
 		this.count = count;
@@ -53,30 +79,56 @@ public class BookmarkTag implements Serializable, TagLabel{
 		}		
 	}
 
+	/**
+	 * Returns the bookmark in this relation.
+	 * @return bookmark object
+	 */
 	public Bookmark getBookmark() {
 		return bookmark;
 	}
 
+	/**
+	 * Sets the bookmark in this relation.
+	 * @param bookmark bookmark object
+	 */
 	public void setBookmark(Bookmark bookmark) {
 		if(bookmark != null){
-			this.bookmark = bookmark;
+			this.bookmark = new Bookmark(bookmark);
 		}else{
 			this.bookmark = null;
 		}
 	}
 
+	/**
+	 * Return this ID of this relation.
+	 * 
+	 * @return ID number. If less than or equals 0, the ID in the system is undefined. 
+	 */
 	public int getId() {
 		return id;
 	}
 
+	/**
+	 * Sets the ID of this relation.
+	 * @param id ID number.
+	 */
 	public void setId(int id) {
 		this.id = id;
 	}
 
+	/**
+	 * Returns the tag in this relation.
+	 * 
+	 * @return tag object.
+	 */
 	public Tag getTag() {
 		return tag;
 	}
 
+	/**
+	 * Sets the tag in this relation.
+	 * @param tag tag object.
+	 */
 	public void setTag(Tag tag) {
 		if(tag != null){
 			this.tag = new Tag(tag);
@@ -132,22 +184,46 @@ public class BookmarkTag implements Serializable, TagLabel{
 		return map.toString();
 	}
 
+	/**
+	 * Returns the number of times that the bookmark is labelled with the tag.
+	 * @return tagging count.
+	 */
 	public int getCount() {
 		return count;
 	}
 
+	/**
+	 * Sets the number of times that bookmark is labelled with the tag.
+	 * 
+	 * @param count tagging count.
+	 */
 	public void setCount(int count) {
 		this.count = count;
 	}
 
+	/**
+	 * Returns the index position of the associated tag in the bookmark's tag list. 
+	 * @return index position, starting at 0. 
+	 */
 	public int getPosition() {
 		return position;
 	}
 
+	/**
+	 * Sets the index position of the associated tag in the bookmark's tag list.
+	 * 
+	 * @param position index position; should be great than 0.
+	 */
 	public void setPosition(int position) {
 		this.position = position;
 	}
 
+	/**
+	 * Returns the text label of the tag. If <code>getTag</code> is not <code>null</code>,
+	 * then the return value is the same
+	 * as the value by calling from <code>getTag().getLabel()</code>. 
+	 * 
+	 */
 	public String getLabel() {
 		if(tag != null){
 			return tag.getLabel();
