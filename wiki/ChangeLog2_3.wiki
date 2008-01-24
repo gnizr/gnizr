@@ -1,7 +1,7 @@
 #summary Changelog of all releases made under version 2.3
 #labels Phase-Implementation
 
-==== Version 2.3.0-M4 (in progress) ====
+==== Version 2.3.0-M4 (24 January 2008) ====
 
 Changelog
   * Moved shared Freemarker template files from `gnzir-web` to `gnizr-webapp`
