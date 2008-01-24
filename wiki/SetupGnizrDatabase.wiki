@@ -31,8 +31,9 @@ Instructions described in this section are for upgrading gnizr software from an 
 
 === Upgrading to gnizr 2.3.0 (including gnizr-2.3.0-M3+) ===
 
-If you are currently running gnizr 2.2.x, do the following:
+If you are currently running gnizr 2.2.x or 2.3.0-M3+, do the following:
 
+  # *Backup your existing database* -- always a good idea :-)
   # Go to the SQL script directory
     * `cd gnizr-2.3.x/sql` or `cd gnizr-2.3.x-Mz/sql`
   # Run BASH script to upgrade database 
