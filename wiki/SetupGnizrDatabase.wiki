@@ -29,7 +29,7 @@ Note: We assume that you have properly installed MySQL database. If you need add
 
 Instructions described in this section are for upgrading gnizr software from an existing installation. If installing gnizr for the first time, follow instructions in "_Create database tables and stored procedures_". 
 
-=== Upgrading to gnizr 2.3.0 (including gnizr-2.3.0-M3+) ===
+=== Upgrading to gnizr 2.3.0 (including milestone releases) ===
 
 If you are currently running gnizr 2.2.x or 2.3.0 milestones, do the following:
 
