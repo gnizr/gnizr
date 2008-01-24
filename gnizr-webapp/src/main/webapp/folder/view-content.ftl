@@ -7,6 +7,8 @@
 <#assign username = user.username/>
 <#assign title="${username}'s folder '${gzFormatFolderName(folderName)}'"/>
 <#assign thisPageBaseHref = gzUserFolderUrl(username,folderName)/>
+<#assign thisPageRSS = gzUserUrl(username)+"/output/rss1.0"/>
+<#assign thisPageRDF = gzUserUrl(username)+"/output/rdf"/>
 <#if tag?exists>
   <#assign thisPageHref = thisPageBaseHref + "/tag/"+tag?url/>
   <#assign title = title + ", bookmarks tagged '"+tag+"'"/>
@@ -90,4 +92,4 @@
 </@sidebarBlock>
 </@checkBookmarkExists>
 </@pageContent>
-<@pageEnd/>
+<@pageEnd rssHref=thisPageRSS rdfHref=thisPageRDF/>

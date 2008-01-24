@@ -4,8 +4,8 @@
 <#assign username=user.username/>
 <#assign title="${username}'s bookmarks"/>
 <#assign thisPageBaseHref = gzUserBmarkArchivesUrl(username)/>
-<#assign thisPageRSS = gzUserBmarkArchivesUrl(username)+"/output/rss1.0"/>
-<#assign thisPageRDF = gzUserBmarkArchivesUrl(username)+"/output/rdf"/>
+<#assign thisPageRSS = gzUserUrl(username)+"/output/rss1.0"/>
+<#assign thisPageRDF = gzUserUrl(username)+"/output/rdf"/>
 <#if tag?exists>
   <#assign title=title+" tagged '${tag}'"/>
   <#assign thisPageHref = gzUserBmarkArchivesUrl(username,tag)/>    
