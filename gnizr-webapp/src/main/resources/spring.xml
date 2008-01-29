@@ -15,6 +15,7 @@
 	<import resource="spring/core-tagging.xml"/>	
 	<import resource="spring/core-search.xml"/>
 	<import resource="spring/core-bookmark.xml"/>
+	<import resource="spring/core-timer.xml"/>
 	
 	<!-- creates webwork interceptors common to all webwork actions -->
 	<import resource="spring/web-interceptors.xml"/>	
@@ -29,7 +30,6 @@
 	<import resource="spring/web-clustermap.xml"/>
 	<import resource="spring/web-timeline.xml"/>
     <import resource="spring/web-search.xml"/>
-	
-	<import resource="classpath:com/gnizr/web/action/robot/rss/my-spring.xml"/>
+	<import resource="spring/web-rssrobot.xml"/>
 	
 </beans>
