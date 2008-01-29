@@ -1,0 +1,21 @@
+<itemType name="house" label="Housing" semantic="uri">
+	<description>This is an example house</description>
+	<property name="cost" label="Cost" dataType="xsd:integer">
+		<description>The cost of the house</description>
+	</property>
+	<property name="color" label="Color" dataType="xsd:string">
+		<description>The color of the house -- sure lame.</description>
+	</property>
+	<property name="bedrooms" label="# Of Bedrooms" dataType="xsd:int" default="3">
+		<description>The number of bedrooms.</description>
+	</property>
+	<property name="location" label="Location" dataType="xsd:string">
+		<description>The location of the home</description>
+		<facets>
+			<enumeration name="location1" value="Leesburg, VA"/>
+			<enumeration name="location2" value="Sterling, VA"/>
+			<enumeration name="location3" value="Ashburn, VA"/>
+			<enumeration name="location4" value="Purcellville, VA"/>
+		</facets>
+	</property>
+</itemType>

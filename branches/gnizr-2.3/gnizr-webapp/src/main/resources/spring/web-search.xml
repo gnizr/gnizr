@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+	"http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	
+	<bean id="searchBookmark" class="com.gnizr.web.action.search.SearchBookmark" singleton="false">
+		<property name="search">
+			<ref bean="search"/>
+		</property>
+		<property name="userManager">
+			<ref bean="userManager"/>
+		</property>
+	</bean>	
+	
+	<bean id="listSearchEngines" class="com.gnizr.web.action.search.ListSearchEngines" singleton="false">
+		<property name="openSearchDirectory">
+			<ref bean="openSearchDirectory"/>
+		</property>
+	</bean>
+	
+	<bean id="suggestSearchTags" class="com.gnizr.web.action.search.SuggestSearchTags" singleton="false">
+		<property name="tagManager">
+			<ref bean="tagManager"/>
+		</property>
+		<property name="tagPager">
+			<ref bean="tagPager"/>
+		</property>
+	</bean>
+</beans>
