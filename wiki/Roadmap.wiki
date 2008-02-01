@@ -9,6 +9,7 @@
 == Upcoming Releases ==
   
   * [ChangeLog2_3 gnizr-2.3.0-RC1]
+  * [ChangeLog2_4 gnizr-2.4.0-M1]
 
 == How We Plan Releases ==
 
