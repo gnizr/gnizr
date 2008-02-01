@@ -4,3 +4,6 @@
 ==== Version 2.4.0-M1 (in progress) ====
 
 Changelog
+
+  * Changed the location of `log4j.properties` -- moved from `WEB-INF` to `WEB-INF/classes`
+    * SVN Revision: 579
