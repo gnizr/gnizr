@@ -53,3 +53,30 @@ Gnizr comes with a default user account -- `gnizr`, who is the administrator of 
      * Go to `settings` -> `Change your password`
   # Create new accounts 
      * Go to `settings` -> `Manage user accounts`
+
+== Enable UTF-8 Support (Optional) ==
+
+If you want to be able to save bookmarks in non-English languages, you may need to configure both Tomcat and MySQL to support UTF-8.
+
+=== Tomcat Configuration ===
+
+In `server.xml` file, configure the `<Connector/>` to encode URI with UTF-8. This ensures all HTTP-GET and HTTP-POST parameters are properly encoded using UTF-8.
+{{{
+<Connector port="8080" maxHttpHeaderSize="8192"
+               maxThreads="150" minSpareThreads="25" maxSpareThreads="75"
+               enableLookups="false" redirectPort="8443" acceptCount="100"
+               connectionTimeout="20000" disableUploadTimeout="true"
+               URIEncoding="UTF-8"/>
+}}}
+
+=== MySQL Configuration ===
+
+In the MySQL server configuration file (e.g. `my.ini`),  configure both client and server to use UTF-8 as their default encoding character set. 
+
+{{{
+[mysql]
+default-character-set=utf8
+[mysqld]
+default-character-set=utf8
+character_set_server=utf8
+}}}
