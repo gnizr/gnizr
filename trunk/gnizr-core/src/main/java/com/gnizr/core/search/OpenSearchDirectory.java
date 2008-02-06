@@ -172,7 +172,7 @@ public class OpenSearchDirectory {
 		return aService;
 	}
 	
-	public synchronized void init() {
+	public void init() {
 		if (services == null) {
 			services = new ArrayList<OpenSearchService>();
 			if (serviceUrls != null) {
