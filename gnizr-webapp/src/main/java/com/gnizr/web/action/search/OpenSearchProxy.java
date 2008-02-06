@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 import com.gnizr.core.util.FormatUtil;
 import com.gnizr.web.action.AbstractAction;
 import com.sun.syndication.feed.module.opensearch.OpenSearchModule;
+import com.sun.syndication.feed.synd.SyndContent;
 import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndFeed;
 import com.sun.syndication.io.SyndFeedInput;
@@ -93,7 +94,12 @@ public class OpenSearchProxy extends AbstractAction{
 			entryMap.put(KEY_TITLE,getTidyText(e.getTitle()));
 			entryMap.put(KEY_LINK,e.getLink());
 			entryMap.put(KEY_AUTHOR,e.getAuthor());
-			entryMap.put(KEY_SUMMARY,getTidyText(e.getDescription().getValue()));
+			SyndContent content = e.getDescription();
+			if(content != null && content.getValue() != null){
+				entryMap.put(KEY_SUMMARY,getTidyText(e.getDescription().getValue()));
+			}else{
+				entryMap.put(KEY_SUMMARY,"");
+			}
 			entries.add(entryMap);
 		}
 		map.put(KEY_ENTRIES, entries);
