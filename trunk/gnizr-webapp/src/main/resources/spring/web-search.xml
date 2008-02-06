@@ -12,11 +12,7 @@
 		</property>
 	</bean>	
 	
-	<bean id="listSearchEngines" class="com.gnizr.web.action.search.ListSearchEngines" singleton="false">
-		<property name="openSearchDirectory">
-			<ref bean="openSearchDirectory"/>
-		</property>
-	</bean>
+	<bean id="listSearchEngines" class="com.gnizr.web.action.search.ListSearchEngines" singleton="false"/>
 	
 	<bean id="suggestSearchTags" class="com.gnizr.web.action.search.SuggestSearchTags" singleton="false">
 		<property name="tagManager">
