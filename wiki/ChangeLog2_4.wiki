@@ -7,3 +7,5 @@ Changelog
 
   * Changed the location of `log4j.properties` -- moved from `WEB-INF` to `WEB-INF/classes`
     * SVN Revision: 579
+  * Merged `OpenSearchDirectory` configuration into `gnizr-config.xml`
+    * SVN Revision: 583
