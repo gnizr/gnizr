@@ -96,7 +96,9 @@ public class OpenSearchProxy extends AbstractAction{
 			entryMap.put(KEY_AUTHOR,e.getAuthor());
 			SyndContent content = e.getDescription();
 			if(content != null && content.getValue() != null){
-				entryMap.put(KEY_SUMMARY,getTidyText(e.getDescription().getValue()));
+				String tt = getTidyText(e.getDescription().getValue());
+				tt = FormatUtil.highlightStarEnclosedText(tt,"<span class=\"matched_text\">","</span>");
+				entryMap.put(KEY_SUMMARY,tt);
 			}else{
 				entryMap.put(KEY_SUMMARY,"");
 			}
@@ -114,5 +116,5 @@ public class OpenSearchProxy extends AbstractAction{
 		}
 		return null;
 	}
-
+	
 }
