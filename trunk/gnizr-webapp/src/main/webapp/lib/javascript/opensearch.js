@@ -173,7 +173,7 @@ SearchExecutor.prototype.fetchMoreData = function(){
             if(summary.length > 250){
                 summary = summary.substring(0,250) + '...';
             }
-           summary = summary.escapeHTML();
+           //summary = summary.escapeHTML();
          }
          var link = anEntry.link;
          var editLinkElm = '';
@@ -181,10 +181,12 @@ SearchExecutor.prototype.fetchMoreData = function(){
             editLinkElm = MochiKit.DOM.SPAN({'class':'invisible ' + linkActionClass},
                MochiKit.DOM.A({'href':'#','class':'system-link ' + saveResultLinkClass},'')); 
          }
+         var summaryElm = MochiKit.DOM.P({'class':'entryDescription'});
+         summaryElm.innerHTML = summary;
          var entryElm = MochiKit.DOM.LI(null,
             MochiKit.DOM.A({'class':'entryTitle','href':link,'target':'_blank'},title),
             editLinkElm,
-            MochiKit.DOM.P({'class':'entryDescription'},summary) 
+			summaryElm            
           );                                  
          MochiKit.DOM.appendChildNodes(resultElm,entryElm); 
          resultTile.notifyResultEntryCreated(entryElm);      
