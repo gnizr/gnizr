@@ -1,5 +1,8 @@
 package com.gnizr.core.util;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.apache.log4j.Logger;
 import org.htmlparser.Parser;
 import org.htmlparser.util.ParserException;
@@ -35,5 +38,21 @@ public class FormatUtil {
 			max = maxLength;
 		}
 		return text.replaceAll("\\w{"+max+",}+"," ");
+	}
+	
+	public static String highlightStarEnclosedText(String text, String pre, String post){
+		try{
+			String srcText = text;
+			Pattern p = Pattern.compile("(.*)\\*(\\S+)\\*(.*)");
+			Matcher m = p.matcher(text);
+			while(m.matches()){
+				srcText = m.replaceFirst("$1" + pre+"$2"+post + "$3");
+				m = p.matcher(srcText);
+			}
+			return srcText;
+		}catch(Exception e){
+			
+		}
+		return text;
 	}
 }
