@@ -399,6 +399,8 @@ The above command compiles `HelloWorldAction.java` and does the [http://maven.ap
 
 === Step 7: Start Tomcat in Eclipse ===
 
+|| *TIPS:* Make sure your Tomcat plugin is properly configured. In Eclipse, go to `Window` -> `Preferences...` -> `Tomcat`. Configure various [http://www.flickr.com/photos/14804582@N08/2254700625/ Tomcat parameters]. ||
+
 [http://farm3.static.flickr.com/2255/2123545419_7651b7dabd_o.png]
 
 Point your browser to 
