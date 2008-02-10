@@ -196,6 +196,8 @@ Now start Eclipse IDE and import `HelloWorldWebapp` as a Eclipse project.
 || *1* || *2* || *3* ||
 || [http://farm3.static.flickr.com/2345/2123441445_3247bc949e_o.png] ||[http://farm3.static.flickr.com/2004/2124210834_9bcda20d8b_o.png]|| [http://farm3.static.flickr.com/2288/2124223206_4003a7594b_o.png] ||
 
+|| *TIPS:* If you see any compile error that reports `M2_REPO` is undefined. In Eclipse, go to `Window` -> `Preference...` -> `Java` -> `Build Path` -> `Classpath Variables`. Define a new variable `M2_REPO` to point to your local maven repository (e.g., `~/.m2`). Here is [http://www.flickr.com/photos/14804582@N08/2255500022/ an example]. ||
+
 == Step 4: Create Action and Overwrite Default Configuration ==
 
 There are few things to do in this step. (1) We need to create a new WebWork action to act as the "control" of our "Hello World" program. (2) We need to create a new Freemarker template page to render the dynamic HTML page of our action output. (3) We need to inject our new action implementation into the gnizr web application. 
