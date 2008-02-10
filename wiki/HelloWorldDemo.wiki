@@ -100,6 +100,22 @@ In the `HelloWorldWebapp` project directory, you should find `pom.xml`. Edit thi
   <version>1.0-SNAPSHOT</version>
   <name>HelloWorldWebapp Gnizr Webapp</name>
   <url>http://example.com</url>
+
+  <repositories>
+    <repository>
+      <id>gnizr-repos</id>
+      <name>Gnizr Public Maven 2 Repository</name>
+      <url>http://dev.gnizr.com/maven2</url>
+      <layout>default</layout>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+  </repository>
+
+  <!-- other maven repositories -->
+    ...
+  </repositories>
+
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
