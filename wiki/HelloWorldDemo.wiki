@@ -142,8 +142,6 @@ In the `HelloWorldWebapp` project directory, you should find `pom.xml`. Edit thi
   </dependencies>
   <build>
     <finalName>HelloWorldWebapp</finalName>
-    <!-- Overwrites the class output directory, in which the compiled .class will be produced. -->
-    <outputDirectory>${basedir}/src/main/webapp/WEB-INF/classes</outputDirectory>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
