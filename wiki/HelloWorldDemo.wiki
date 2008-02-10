@@ -184,6 +184,8 @@ The above POM file configuration will help us to set up the build environment wi
 
 Once we have configured our POM file, we will use the [http://maven.apache.org/plugins/maven-eclipse-plugin/ Maven Eclipse Plugin] to prepare our project so that it becomes editable in the Eclipse IDE. 
 
+|| *TIPS:* Before calling the `mvn eclipse:eclipse` command. Check if `src/main/java` directory exists. If not, create it. ||
+
 Run the following command:
 
 {{{
