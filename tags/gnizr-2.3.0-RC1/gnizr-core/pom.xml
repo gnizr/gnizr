@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<parent>
+		<groupId>com.gnizr</groupId>
+		<artifactId>gnizr</artifactId>
+		<version>2.3.0-RC1</version>
+	</parent>
+	
+	<modelVersion>4.0.0</modelVersion>
+	
+	<groupId>com.gnizr</groupId>
+	<artifactId>gnizr-core</artifactId>
+	<name>gnizr core</name>
+	
+	<version>${gnVersion}</version>	
+	
+	<dependencies>
+		<dependency>
+			<groupId>dbunit</groupId>
+			<artifactId>dbunit</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.gnizr</groupId>
+			<artifactId>gnizr-db</artifactId>
+			<version>${gnVersion}</version>
+			<scope>compile</scope>			
+		</dependency>
+		<dependency>
+			<groupId>rome</groupId>
+			<artifactId>rome</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>rome</groupId>
+			<artifactId>opensearch</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.geonames</groupId>
+			<artifactId>geonames</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-httpclient</groupId>
+			<artifactId>commons-httpclient</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.htmlparser</groupId>
+		    <artifactId>htmlparser</artifactId>
+		</dependency>
+	</dependencies>
+</project>

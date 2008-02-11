@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+	"http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	<bean id="clusterUserBookmark" class="com.gnizr.web.action.clustermap.ClusterUserBookmark" singleton="false">
+		<property name="tagManager">
+			<ref bean="tagManager"/>
+		</property>
+	</bean>
+	
+	<bean id="userBookmarkClusterMap" class="com.gnizr.web.action.clustermap.UserBookmarkClusterMap"
+		  singleton="false">	
+	</bean>
+	
+	<bean id="clusterSearchResult" class="com.gnizr.web.action.clustermap.ClusterSearchResult" singleton="false" >
+		<property name="search">
+			<ref bean="search"/>
+		</property>
+	</bean>
+	
+	<bean id="searchClusterMap" class="com.gnizr.web.action.clustermap.SearchClusterMap" singleton="false"/>
+	
+	<bean id="clusterUserFolder" class="com.gnizr.web.action.clustermap.ClusterUserFolder" singleton="false">
+		<property name="userManager">
+			<ref bean="userManager"/>
+		</property>
+		<property name="tagManager">
+			<ref bean="tagManager"/>
+		</property>
+	</bean>
+	
+</beans>
