@@ -533,15 +533,19 @@ ResultTile.prototype.notifyResultEntryCreated = function(entryNode){
     + this.listeners.length);
 }
 
-ResultTile.prototype.destroy = function(){
-    if(this.tileElm != null){
-        MochiKit.DOM.removeElement(this.tileElm);        
-    }
-    var tileSpElm = MochiKit.DOM.getElement(this.getSeperatorId());
+ResultTile.prototype.destroySeperator = function(){
+	var tileSpElm = MochiKit.DOM.getElement(this.getSeperatorId());
     if(MochiKit.Base.isUndefinedOrNull(tileSpElm) == false){
         MochiKit.DOM.removeElement(this.getSeperatorId());
         MochiKit.Signal.disconnect(this.seperatorDrag);          
     }    
+}
+
+ResultTile.prototype.destroy = function(){
+    if(this.tileElm != null){
+        MochiKit.DOM.removeElement(this.tileElm);        
+    }
+   	this.destroySeperator();
     if(MochiKit.Base.isUndefinedOrNull(this.searchExec) == false){
         this.searchExec.terminate();
     }  
@@ -560,7 +564,6 @@ ResultTile.prototype.getId = function(){
 ResultTile.prototype.getSeperatorId = function(){
     return 'SP'+this.getId();
 }
-
 
 function SearchManager(searchResultRowId, services){
     this.searchResultRowId = searchResultRowId;   
@@ -595,7 +598,18 @@ SearchManager.prototype.hideService = function(serviceId){
          var tileId = aSrv.resultTile.getId();
          MochiKit.Logging.log('trying to remove element: ' + tileId);
          // do clean up
-         aSrv.resultTile.destroy();  
+         aSrv.resultTile.destroy();                   
+		 var resultRowElm = MochiKit.DOM.getElement(this.searchResultRowId);        	
+		 if(resultRowElm.childNodes.length > 0){
+		 	MochiKit.Logging.log('resultRowElm childNodes length: ' + resultRowElm.childNodes.length);
+		 	var lastTileId = resultRowElm.lastChild.id;
+		 	MochiKit.Logging.log('lastTileId=' + lastTileId);
+		 	var lastTile = this.findResultTile(lastTileId);
+		 	MochiKit.Logging.log('lastTile : ' + lastTile);
+		 	if(MochiKit.Base.isUndefinedOrNull(lastTile) == false){
+		 		lastTile.destroySeperator();		 		
+		 	}
+		 }		
      }else{
          MochiKit.Logging.log('attempt to remove an undefined service: ' + aSrv.shortName);
      }
@@ -623,9 +637,15 @@ SearchManager.prototype.showService = function(serviceId){
 }
 
 SearchManager.prototype.findResultTile = function(tileElmId){
+	var id = tileElmId;
+	// if matches a Separator ID, extract the substring
+	if(id.match("SP")){
+		id = id.substr(2);
+	}
     var services = MochiKit.Base.values(this.serviceMap);
     for(var i = 0; i < services.length; i++){
-        if(services[i].resultTile.getId() == tileElmId){
+    	MochiKit.Logging.log('findResultTile: checking ID: ' + services[i].resultTile.getId());
+        if(services[i].resultTile.getId() == id){
             return services[i].resultTile;
         }
     }
