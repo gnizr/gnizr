@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 
 import com.gnizr.core.search.OpenSearchDirectory;
 import com.gnizr.core.search.OpenSearchService;
+import com.gnizr.core.util.FormatUtil;
 import com.gnizr.web.action.AbstractLoggedInUserAction;
 
 public class ListSearchEngines extends AbstractLoggedInUserAction{
@@ -28,7 +29,11 @@ public class ListSearchEngines extends AbstractLoggedInUserAction{
 	}
 
 	public void setQ(String q) {
-		this.q = q;
+		if(q != null){
+			this.q = FormatUtil.extractTextFromHtml(q);
+		}else{
+			this.q = null;
+		}
 	}
 
 	public List<OpenSearchService> getServices() {
