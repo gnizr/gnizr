@@ -4,8 +4,8 @@
 ==== Version 2.3.0-RC1 (in progress) ====
 
 Changelog
-  * [http://code.google.com/p/gnizr/issues/detail?id=35 Issue 35]: OpenSearch result page shows a non-functional result tile separator (fixed, need testing)
-  * [http://code.google.com/p/gnizr/issues/detail?id=41 Issue 41]: Potential XSS attach via OpenSearch query (fixed, need testing)
+  * [http://code.google.com/p/gnizr/issues/detail?id=35 Issue 35]: !OpenSearch result page shows a non-functional result tile separator (fixed, need testing)
+  * [http://code.google.com/p/gnizr/issues/detail?id=41 Issue 41]: Potential XSS attach via !OpenSearch query (fixed, need testing)
 
 ==== Version 2.3.0-M4 (24 January 2008) ====
 
