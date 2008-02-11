@@ -47,7 +47,7 @@ public class ImportDeliciousPosts extends AbstractAction implements LoggedInUser
 	private BookmarkManager bookmarkManager;
 	private FolderManager folderManager;
 
-	@SuppressWarnings({ "unused", "unchecked" })
+	@SuppressWarnings("unused")
 	private Map session;
 	private ImportStatus status;
 	

@@ -17,7 +17,6 @@
 package com.gnizr.web.util;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Properties;
 
 import org.apache.log4j.Logger;
@@ -36,7 +35,6 @@ public class GnizrConfiguration implements Serializable, InitializingBean {
 	public static final String ANONYMOUS_READER_POLICY = "anonymousReaderPolicy";
 	public static final String REGISTRATION_POLICY = "registrationPolicy";
 	public static final String SERVER_MAINTENANCE = "serverMaintenanceModeEnabled";
-	public static final String OPENSEARCH_SERVICES = "openSearchServices";
 	
 	private Properties gnizrProperties;
 
@@ -71,16 +69,6 @@ public class GnizrConfiguration implements Serializable, InitializingBean {
 		this.gnizrProperties = gnizrProperties;
 	}
 
-	public void setOpenSearchServices(List<String> serviceUrl){
-		this.gnizrProperties.put(OPENSEARCH_SERVICES, serviceUrl);
-	}
-	
-	@SuppressWarnings("unchecked")
-	public List<String> getOpenSearchServices(){
-		return (List<String>)gnizrProperties.get(OPENSEARCH_SERVICES);
-	}
-	
-	
 	/**
 	 * Sets the URL of this gnizr web application. If this 
 	 * paramater is defined, the system will use it to generate
@@ -189,12 +177,8 @@ public class GnizrConfiguration implements Serializable, InitializingBean {
 	 */
 	public void afterPropertiesSet() throws Exception {
 		for(Object key : gnizrProperties.keySet()){
-			if(gnizrProperties.get(key) instanceof String){
-				System.setProperty((String)key, (String)gnizrProperties.get(key));
-				logger.debug("set system property: key="+key+",value="+gnizrProperties.get(key));
-			}else{
-				logger.debug("skip system property: key="+key + " value is not a String");
-			}
+			System.setProperty((String)key, (String)gnizrProperties.get(key));
+			logger.debug("set system property: key="+key+",value="+gnizrProperties.get(key));
 		}
 	}
 	

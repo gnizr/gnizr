@@ -11,11 +11,11 @@ NOTE: returns a version string to be injected in the <head/> of
 each gnizr page.
 -->
 <#function gnizrVersion >
-  <#return "2.4.0"/>
+  <#return "2.3.0"/>
 </#function>
 
 <#function gnizrDevVersion >
-  <#return "-M1"/>
+  <#return "-RC1"/>
 </#function>
 
 <#-- 
