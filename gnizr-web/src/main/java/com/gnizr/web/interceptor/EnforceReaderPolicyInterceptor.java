@@ -50,6 +50,7 @@ public class EnforceReaderPolicyInterceptor implements Interceptor{
 		// no code;		
 	}
 
+	@SuppressWarnings("unchecked")
 	public String intercept(ActionInvocation actionInvocation) throws Exception {
 		Map session = actionInvocation.getInvocationContext().getSession();
 		User user = (User)session.get(SessionConstants.LOGGED_IN_USER);
