@@ -27,6 +27,7 @@ public abstract class AbstractPagingAction extends AbstractAction implements
 
 	protected static final Logger logger = Logger.getLogger(AbstractPagingAction.class);
 
+	@SuppressWarnings("unchecked")
 	protected Map session;
 
 	protected int page;
@@ -93,6 +94,7 @@ public abstract class AbstractPagingAction extends AbstractAction implements
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public void setSession(Map session) {
 		this.session = session;
 	}

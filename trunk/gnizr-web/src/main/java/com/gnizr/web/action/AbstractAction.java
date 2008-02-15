@@ -81,28 +81,9 @@ public abstract class AbstractAction extends ActionSupport implements GnizrConfi
 	protected abstract String go() throws Exception;
 	
 	public String execute() throws Exception{		
-		loadGnizrConfiguration();
 		logger.debug("executing action");
 		return go();
 	}
-	
-	
-	@SuppressWarnings("unchecked")
-	private void loadGnizrConfiguration(){
-		Map session = ActionContext.getContext().getSession();		
-		String webappUrl = System.getProperty(GnizrConfiguration.WEB_APPLICATION_URL);
-		String gmapkey = System.getProperty(GnizrConfiguration.GOOGLE_MAPS_KEY);
-		String snapKey = System.getProperty(GnizrConfiguration.SNAPSHOTS_KEY);
-		String regPolicy = System.getProperty(GnizrConfiguration.REGISTRATION_POLICY);
-		logger.debug("session = " + session);
-		if(session != null){
-			session.put(SessionConstants.WEB_APP_URL,webappUrl);
-			session.put(SessionConstants.GMAPS_KEY,gmapkey);
-			session.put(SessionConstants.SNAP_SHOTS_KEY,snapKey);
-			session.put(SessionConstants.REGISTRATION_POLICY, regPolicy);
-		}
-	}
-
 	
 	protected HttpServletResponse getServletResponse(){
 		ActionContext ctx = ActionContext.getContext();
@@ -155,6 +136,7 @@ public abstract class AbstractAction extends ActionSupport implements GnizrConfi
 	}
 
 	
+	@SuppressWarnings("unchecked")
 	public String getRedirectToPage() {
 		Map session = ActionContext.getContext().getSession();		
 		return (String)session.get(SessionConstants.REDIRECT_TO_PAGE);

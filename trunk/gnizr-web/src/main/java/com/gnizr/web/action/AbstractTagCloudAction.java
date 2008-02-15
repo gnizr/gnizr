@@ -22,8 +22,10 @@ import com.opensymphony.webwork.interceptor.SessionAware;
 
 public abstract class AbstractTagCloudAction extends AbstractLoggedInUserAction implements SessionAware{
 
+	@SuppressWarnings("unchecked")
 	protected Map session;
 	
+	@SuppressWarnings("unchecked")
 	public void setSession(Map session) {
 		this.session = session;		
 	}

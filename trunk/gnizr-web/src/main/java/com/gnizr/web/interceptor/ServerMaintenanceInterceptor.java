@@ -50,6 +50,7 @@ public class ServerMaintenanceInterceptor implements Interceptor{
 		// no code;		
 	}
 
+	@SuppressWarnings("unchecked")
 	public String intercept(ActionInvocation actionInvocation) throws Exception {
 		if(gnizrConfiguration != null){
 			boolean isEnabled = gnizrConfiguration.isServerMaintenanceModeEnabled();
