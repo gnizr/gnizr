@@ -22,8 +22,11 @@ import com.gnizr.db.dao.Bookmark;
 
 /**
  * An interface class for implementing listeners to monitor <code>Bookmark</code> changes. 
+ * Implementations of this class should assume that the class methods maybe invoked by
+ * multiple Java threads simultaneously. 
  * 
- * @author harryc
+ * @author Harry Chen
+ * @since 2.2
  *
  */
 public interface BookmarkListener extends Serializable{
