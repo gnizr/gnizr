@@ -68,6 +68,7 @@ import com.gnizr.db.vocab.UserSchema;
  * </p>
  * 
  * @author Harry Chen
+ * @since 2.2
  *
  */
 public class BookmarkManager implements Serializable {
