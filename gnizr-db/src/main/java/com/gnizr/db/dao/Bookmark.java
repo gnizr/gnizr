@@ -27,15 +27,16 @@ import com.gnizr.db.dao.folder.FoldersParser;
 import com.gnizr.db.dao.tag.TagsParser;
 
 /**
- * <p>Bookmark saved by a user. All bookmarks in the database have a unique ID. A bookmark 
+ * <p>Bookmark saved by a user. A bookmark 
  * represents a URL (or link) that has been saved by a given user. User can define 
  * properties about a bookmark -- title, notes and tags. A bookmark maybe saved in
  * zero or more folders. Each bookmark has two different timestampes: one describes the 
  * date/time when the bookmark is first created, and the other describes the date/time
  * when any bookmark properties have been modified.</p>
- * 
+ * <p>All bookmarks have an unique ID, which is usually assigned by the database system
+ * when the DB record for a bookmark is created for the first time.</p>
  * @author Harry Chen
- *
+ * @since 2.2
  */
 public class Bookmark implements Serializable{
 	/**

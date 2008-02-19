@@ -22,6 +22,12 @@ import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.Point;
 
+/**
+ * This abstract class represents a  geometry marker can be assigned to a bookmark for geotagging purpose. 
+ *  
+ * @author Harry Chen
+ *
+ */
 public abstract class GeometryMarker implements Serializable{
 
 	protected int markerIconId;
