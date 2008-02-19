@@ -23,12 +23,21 @@ import java.util.Properties;
 
 import org.apache.commons.dbcp.BasicDataSource;
 
+/**
+ * <p>This class provides an implementation of <code>BasicDataSource</code> that allow
+ * JDBC connection properties to be configured via a Java <code>Properties</code></p>
+ * <p>This class used for creating a <code>BasicDataSource</code> via Spring IoC.</p>
+ * 
+ * @author Harry Chen
+ *
+ */
 public class GnizrBasicDataSource extends BasicDataSource implements Serializable{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 8131969966130166615L;
 
+	@SuppressWarnings("unchecked")
 	public void setConnectionProperties(Properties props) {
 		for (Iterator iter = props.entrySet().iterator(); iter.hasNext();) {
 			Map.Entry entry = (Map.Entry) iter.next();
