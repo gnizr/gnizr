@@ -41,6 +41,16 @@ import com.gnizr.db.dao.link.LinkDao;
 import com.gnizr.db.dao.tag.TagDao;
 import com.gnizr.db.dao.user.UserDao;
 
+/**
+ * <p>This class provide methods for implementing bookmark paging capability. Paging methods 
+ * usually require two input parameters: (1) start index and (2) count. The "start index" defines
+ * the position in the result set where the paging starts. The first position in the matching result
+ * set is 0. The "count" defines the maximum number of item to return in a single paging operation.  
+ * </p>   
+ * 
+ * @author Harry Chen
+ *
+ */
 public class BookmarkPager implements Serializable {
 
 	/**
@@ -58,6 +68,11 @@ public class BookmarkPager implements Serializable {
 	
 	private LinkDao linkDao;
 	
+	/**
+	 * Creates an instance of this class and using the input
+	 * <code>gnizrDao</code> to support low-level paging calls.
+	 * @param gnizrDao an instantiated DAO object.
+	 */
 	public BookmarkPager(GnizrDao gnizrDao) {
 		this.bookmarkDao = gnizrDao.getBookmarkDao();
 		this.userDao = gnizrDao.getUserDao();
@@ -66,6 +81,16 @@ public class BookmarkPager implements Serializable {
 	}
 
 	
+	/**
+	 * Returns the maximum number of pages for bookmarks of a given tag. The input
+	 * <code>perPageCount</code> defines the number of bookmarks per page.
+	 *   
+	 * @param tag page only bookmarks that have been tagged <code>tag</code>
+	 * @param perPageCount the number of bookmarks to page.
+	 * @return the computed maximum number of bookmarks per page.
+	 * @throws NoSuchTagException An exception is thrown if <code>tag</code> doesn't exist
+	 * in the system.
+	 */
 	public int getMaxPageNumber(Tag tag, int perPageCount) throws NoSuchTagException{
 		logger.debug("getMaxPageNumber: tag="+tag+",perPageCount="+perPageCount);
 		int max = 1;
@@ -86,6 +111,16 @@ public class BookmarkPager implements Serializable {
 		return max;
 	}
 	
+	/**
+	 * Returns the maximum number of pages for bookmarks saved by a given user. The input
+	 * <code>perPageCount</code> defines the number of bookmarks per page.
+	 *   
+	 * @param user page only bookmarks that have been saved by <code>user</code>
+	 * @param perPageCount the number of bookmarks to page.
+	 * @return the computed maximum number of bookmarks per page.
+	 * @throws NoSuchUserException An exception is thrown if <code>user</code> doesn't exist
+	 * in the system.
+	 */
 	public int getMaxPageNumber(User user, Integer perPageCount) throws NoSuchUserException {
 		logger.debug("getMaxPageNumber: gUser=" + user + ",perPageCount="
 				+ perPageCount);
@@ -108,6 +143,18 @@ public class BookmarkPager implements Serializable {
 		return max;
 	}
 
+	/**
+	 * Returns the maximum number of pages for bookmarks saved by a given user under a specific tag. The input
+	 * <code>perPageCount</code> defines the number of bookmarks per page.
+	 *   
+	 * @param userTag page only bookmarks that have been saved by <code>userTag.getUser</code> and tagged <code>userTag.getTag</code>
+	 * @param perPageCount the number of bookmarks to page.
+	 * @return the computed maximum number of bookmarks per page.
+	 * @throws NoSuchUserException An exception is thrown if <code>userTag.getUser</code> doesn't exist in the system.
+	 * @throws NoSuchTagException An exception is thrown if <code>userTag.getTag</code> doesn't exist
+	 * in the system.
+	 * @throws MissingIdException An exception is thrown if the ID of <code>userTag</code> is not defined. 
+	 */
 	public int getMaxPageNumber(UserTag tag, Integer perPageCount) throws NoSuchUserException, NoSuchTagException, NoSuchUserTagException, MissingIdException{
 		logger.debug("getMaxPageNumber: userTag=" + tag
 				+ ",perPageCount=" + perPageCount);
@@ -132,7 +179,22 @@ public class BookmarkPager implements Serializable {
 		}
 		return max;
 	}
-
+	
+	/**
+	 * Returns a page of the bookmarks saved by a given user. The paging starts at <code>offset</code>
+	 * and returns at maximum no more than <code>count</code> number of bookmarks.
+	 * @param user search bookmarks saved by this user
+	 * @param offset the starting index of the paging
+	 * @param count the maximum of bookmarks to return
+	 * @return bookmarks in this page. Unless an exception is thrown, otherwise,
+	 * the returned object is always instantied. If no bookmarks are found, the result set 
+	 * is of size 0.
+	 * 
+	 * @throws NoSuchUserException
+	 * @throws NoSuchLinkException
+	 * @throws MissingIdException
+	 * @throws NoSuchBookmarkException
+	 */
 	public DaoResult<Bookmark> pageBookmark(User user, int offset,
 			int count) throws NoSuchUserException, NoSuchLinkException, MissingIdException, NoSuchBookmarkException {
 		logger.debug("pageGnizrBookmark: user=" + user + ",offset=" + offset
@@ -141,6 +203,22 @@ public class BookmarkPager implements Serializable {
 		return bookmarkDao.pageBookmarks(user, offset, count);		
 	}
 
+	/**
+	 * Returns a page of the bookmarks saved by a given user under a specific tag. 
+	 * The paging starts at <code>offset</code>
+	 * and returns at maximum no more than <code>count</code> number of bookmarks.
+	 * @param userTag search bookmarks saved by a user under a specific tag.
+	 * @param offset the starting index of the paging
+	 * @param count the maximum of bookmarks to return
+	 * @return bookmarks in this page. Unless an exception is thrown, otherwise,
+	 * the returned object is always instantied. If no bookmarks are found, the result set 
+	 * is of size 0.
+	 * 
+	 * @throws NoSuchUserException
+	 * @throws NoSuchLinkException
+	 * @throws MissingIdException
+	 * @throws NoSuchBookmarkException
+	 */
 	public DaoResult<Bookmark> pageBookmark(UserTag tag, int offset,
 			int count) throws NoSuchUserException, NoSuchTagException, NoSuchUserTagException, MissingIdException, NoSuchLinkException, NoSuchBookmarkException {
 		logger.debug("pageGnizrBookmark: userTag=" + tag
@@ -158,6 +236,18 @@ public class BookmarkPager implements Serializable {
 		return new DaoResult<Bookmark>(new ArrayList<Bookmark>(),0);
 	}
 	
+	/**
+	 * Returns a page of the bookmarks saved by any one under a specific tag. 
+	 * The paging starts at <code>offset</code>
+	 * and returns at maximum no more than <code>count</code> number of bookmarks.
+	 * @param tag search bookmarks saved under a specific tag.
+	 * @param offset the starting index of the paging
+	 * @param count the maximum of bookmarks to return
+	 * @return bookmarks in this page. Unless an exception is thrown, otherwise,
+	 * the returned object is always instantied. If no bookmarks are found, the result set 
+	 * is of size 0.
+	 * 
+	 */
 	public List<Bookmark> pageBookmark(Tag tag, int offset, int count) throws NoSuchTagException{
 		logger.debug("pageLink: tag="+tag+",offset="+offset+",count="+count);		
 		GnizrDaoUtil.checkNull(tag);
@@ -168,12 +258,27 @@ public class BookmarkPager implements Serializable {
 		return result.getResult();
 	}
 	
+	/**
+	 * Returns all bookmarks saved by a given user.
+	 * @param user page the bookmarks of this user
+	 * @return all bookmarks saved by <code>user</code>
+	 * @throws NoSuchUserException
+	 */
 	public DaoResult<Bookmark> pageAllBookmark(User user) throws NoSuchUserException{
 		GnizrDaoUtil.fillId(userDao, user);
 		DaoResult<Bookmark> result = bookmarkDao.pageBookmarks(user,0,0);
 		return bookmarkDao.pageBookmarks(user,0, result.getSize());
 	}
 	
+	/**
+	 * Returns all bookmarks saved by a user under a specific tag.
+	 * 
+	 * @param user page bookmarks of a given user.
+	 * @param tag page bookmarks of <code>user</code> that are saved under <code>tag</code>
+	 * @return all bookmarks saved by <code>user</code> under <code>tag</code>
+	 * @throws NoSuchUserException
+	 * @throws NoSuchTagException
+	 */
 	public DaoResult<Bookmark> pageAllBookmark(User user, Tag tag) throws NoSuchUserException, NoSuchTagException{
 		GnizrDaoUtil.fillId(userDao, user);
 		GnizrDaoUtil.fillId(tagDao, tag);
@@ -181,12 +286,25 @@ public class BookmarkPager implements Serializable {
 		return bookmarkDao.pageBookmarks(user, tag,0, result.getSize());
 	}
 	
+	/**
+	 * Returns all bookmarks saved under a given tag.
+	 * 
+	 * @param tag page bookmarks that are saved under <code>tag</code> 
+	 * @return all bookmarks saved under <code>tag</code>
+	 * @throws NoSuchTagException
+	 */
 	public DaoResult<Bookmark> pageAllBookmark(Tag tag) throws NoSuchTagException{
 		GnizrDaoUtil.fillId(tagDao, tag);
 		DaoResult<Bookmark> result = bookmarkDao.pageBookmarks(tag,0, 0);
 		return bookmarkDao.pageBookmarks(tag,0, result.getSize());
 	}
 	
+	/**
+	 * Returns all bookmarks that are about a given <code>Link</code>. 
+	 * @param link page bookmarks of <code>link</code>
+	 * @return all bookmarks that are saved for <code>link</code>
+	 * @throws NoSuchLinkException
+	 */
 	public DaoResult<Bookmark> pageAllBookmark(Link link) throws NoSuchLinkException{
 		GnizrDaoUtil.fillId(linkDao, link);
 		DaoResult<Bookmark> result = bookmarkDao.pageBookmarks(link, 0,0);
