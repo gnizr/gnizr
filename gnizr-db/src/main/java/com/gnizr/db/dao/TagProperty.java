@@ -18,6 +18,16 @@ package com.gnizr.db.dao;
 
 import java.io.Serializable;
 
+/**
+ * <p>This class provides the representation of a tag property, 
+ * which can be used to construct a <code>TagAssertion</code></p>
+ * <p>
+ * For predefined tag property, see <code>tag_prpt</code> DB table.
+ * </p>
+ * 
+ * @author Harry Chen
+ * @since 2.2
+ */
 public class TagProperty implements Serializable{
 	
 	/**
@@ -33,19 +43,47 @@ public class TagProperty implements Serializable{
 	
 	public static final int CARDINALITY_ONE = 1;
 	public static final int CARDINALITY_ONE_OR_MORE = -1;
+	
+	/**
+	 * Flag for system-specific tag property
+	 */
 	public static final String TYPE_SYSTEM = "system";
+	/**
+	 * Flag for geospatial-related tag proeprty
+	 */
 	public static final String TYPE_SPATIAL = "spatial";
+	/**
+	 * Flag for temporal-related tag property
+	 */
 	public static final String TYPE_TEMPORAL = "temporal";
+	/**
+	 * Flag for tag property that doesn't fit other types.
+	 */
 	public static final String TYPE_DEFAULT = "default";
 	
+	/**
+	 * Creates a new instance of this class
+	 */
 	public TagProperty(){
 		this(-1,null,null,TYPE_DEFAULT,CARDINALITY_ONE_OR_MORE);
 	}
 
+	/**
+	 * Creates a new instance of this class with defined ID
+	 * @param id this <code>TagProperty</code> ID
+	 */
 	public TagProperty(int id){
 		this(id,null,null,TYPE_DEFAULT,CARDINALITY_ONE_OR_MORE);
 	}
 
+	/**
+	 * Creates a new instance of this class with defined properties.
+	 * @param id the ID of this <code>TagProperty</code>
+	 * @param nsPrefix the namespace prefix for this property
+	 * @param description a text description about this property
+	 * @param prptType integer ID code for this property type
+	 * @param cardinality integer defines the cardinality of this property
+	 */
 	public TagProperty(int id, String nsPrefix, String description, String prptType, int cardinality){
 		this.id = id;
 		this.namespacePrefix = nsPrefix;
@@ -54,6 +92,10 @@ public class TagProperty implements Serializable{
 		this.cardinality = cardinality;
 	}
 
+	/**
+	 * Copy constructor for this class
+	 * @param tp object to copy from
+	 */
 	public TagProperty(TagProperty tp){
 		this.id = tp.id;		
 		this.namespacePrefix = tp.namespacePrefix;
@@ -62,42 +104,83 @@ public class TagProperty implements Serializable{
 		this.cardinality = tp.cardinality;
 	}
 
+	/**
+	 * Gets the cardinality of this property
+	 * @return the cardinality of this property
+	 */
 	public int getCardinality() {
 		return cardinality;
 	}
 
+	/**
+	 * Gets the text description of this property 
+	 * @return property text description
+	 */
 	public String getDescription() {
 		return description;
 	}
 
+	/**
+	 * Gets the ID of this tag property
+	 * @return property ID
+	 */
 	public int getId() {
 		return id;
 	}
 
+	/**
+	 * Gets the namespace prefix of this property
+	 * @return namespace prefix string
+	 */
 	public String getNamespacePrefix() {
 		return namespacePrefix;
 	}
 
+	/**
+	 * Gets the property type ID code for this property
+	 * @return property type integer ID
+	 */
 	public String getPropertyType() {
 		return propertyType;
 	}
 
+	/**
+	 * Sets the cardinality of this property
+	 * @param cardinality property cardinality
+	 */
 	public void setCardinality(int cardinality) {
 		this.cardinality = cardinality;
 	}
 	
+	/**
+	 * Sets the text description of this property
+	 * @param description text description of this property
+	 */
 	public void setDescription(String description) {
 		this.description = description;
 	}
 	
+	/**
+	 * Sets the ID of this property
+	 * @param id ID value
+	 */
 	public void setId(int id) {
 		this.id = id;
 	}
 	
+	/**
+	 * Sets the namespace prefix string of this property
+	 * @param namespacePrefix namespace prefix string
+	 */
 	public void setNamespacePrefix(String namespacePrefix) {
 		this.namespacePrefix = namespacePrefix;
 	}
 	
+	/**
+	 * Sets the type flag of this property type
+	 * 
+	 * @param propertyType one of the predefined property type integer code
+	 */
 	public void setPropertyType(String propertyType) {
 		this.propertyType = propertyType;
 	}
@@ -158,14 +241,16 @@ public class TagProperty implements Serializable{
 	}
 
 	/**
-	 * @return the name
+	 * Gets the name  of this property
+	 * @return property name
 	 */
 	public String getName() {
 		return name;
 	}
 
 	/**
-	 * @param name the name to set
+	 * Sets the property name
+	 * @param name property name
 	 */
 	public void setName(String name) {
 		this.name = name;
