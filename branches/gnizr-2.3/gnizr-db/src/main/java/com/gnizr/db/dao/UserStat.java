@@ -16,6 +16,12 @@
  */
 package com.gnizr.db.dao;
 
+/**
+ * 
+ * This class provides the representation of usage statistics of a user's bookmarks and tags.  
+ * @author Harry Chen
+ * @since 2.2
+ */
 public class UserStat extends User{
 
 	/**
@@ -26,12 +32,19 @@ public class UserStat extends User{
 	private int numOfBookmarks;
 	private int numOfTags;
 	
+	/**
+	 * Creates a new instance of this class.
+	 */	
 	public UserStat(){
 		super();
 		this.numOfBookmarks = 0;
 		this.numOfTags = 0;
 	}
 	
+	/**
+	 * Creates a new instance of this class with a defined <code>User</code>.
+	 * @param user the user whose usage statistics are to be described
+	 */
 	public UserStat(User user){
 		super(user);
 		this.numOfBookmarks = 0;
@@ -44,18 +57,35 @@ public class UserStat extends User{
 		this.numOfTags = userStat.numOfTags;
 	}
 
+	/**
+	 * Returns the number of bookmarks saved by this <code>User</code>
+	 * @return the total number of bookmarks saved.
+	 */
 	public int getNumOfBookmarks() {
 		return numOfBookmarks;
 	}
 
+	/**
+	 * Sets the number of bookmarks saved by this <code>User</code>
+	 * @param numOfBookmarks the total number of bookmarks saved.
+	 */
 	public void setNumOfBookmarks(int numOfBookmarks) {
 		this.numOfBookmarks = numOfBookmarks;
 	}
 
+	/**
+	 * Gets the total number of tags used by this <code>User</code>
+	 * @return the total number of tags used by this user
+	 */
 	public int getNumOfTags() {
 		return numOfTags;
 	}
 
+	/**
+	 * Sets the total number of tags used by this <code>User</code>
+	 * 
+	 * @param numOfTags total number of tags used
+	 */
 	public void setNumOfTags(int numOfTags) {
 		this.numOfTags = numOfTags;
 	}
