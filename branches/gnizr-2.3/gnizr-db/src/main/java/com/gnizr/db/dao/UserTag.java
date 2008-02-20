@@ -19,7 +19,11 @@ package com.gnizr.db.dao;
 import java.io.Serializable;
 
 
-
+/**
+ * This class provides the representation for describing a relationship betwen a user and a tag.
+ * @author Harry Chen
+ * @since 2.2
+ */
 public class UserTag implements Serializable, TagLabel{
 	
 	/**
@@ -31,26 +35,50 @@ public class UserTag implements Serializable, TagLabel{
 	private User user;
 	private Tag tag;
 
+	/**
+	 * Creates a new instance of this class.
+	 */
 	public UserTag(){
 		count = 0;
 	}
 	
+	/**
+	 * Creates a new instance of this class with defined ID.
+	 * @param id the ID of this user-tag relationship.
+	 */
 	public UserTag(int id){
 		this();
 		this.id = id;
 	}
 	
+	/**
+	 * Creates a new instance of this class for a given <code>User</code> and 
+	 * a <code>Tag</code>.
+	 * 
+	 * @param user the <code>User</code> in this user-tag relationship
+	 * @param tag the <code>Tag</code> in this user-tag relationship
+	 */
 	public UserTag(User user, Tag tag){
 		this();
 		this.user = new User(user);
 		this.tag = new Tag(tag);
 	}
 	
+	/**
+	 * Creates a new instance of this class for a give username and a tag label.
+	 * @param username the username of the <code>User</code> in this user-tag relationship
+	 * @param tag the tag label of the <code>Tag</code> in this user-tag relationship
+	 */
 	public UserTag(String username, String tag){
 		this();
 		this.user = new User(username);
 		this.tag = new Tag(tag);
 	}
+	
+	/**
+	 * Copy constructor of this class. 
+	 * @param tag object to copy from.
+	 */
 	public UserTag(UserTag tag){
 		this.id = tag.id;		
 		this.count = tag.count;		
@@ -62,28 +90,68 @@ public class UserTag implements Serializable, TagLabel{
 		}
 	}
 	
+	/**
+	 * Gets the number of times the user used the tag to label bookmarks.
+	 * @return tag usage count of the user
+	 */
 	public int getCount() {
 		return count;
 	}
+	
+	/**
+	 * Sets the number of times the user used the tag to label bookmarks.
+	 * 
+	 * @param count tag usage count of the user
+	 */
 	public void setCount(int count) {
 		this.count = count;
 	}
+	
+	/**
+	 * Gets the ID of this user-tag relationship.
+	 * @return the ID value
+	 */
 	public int getId() {
 		return id;
 	}
+	
+	/**
+	 * Sets the ID of this user-tag relationship
+	 * @param id the ID value
+	 */
 	public void setId(int id) {
 		this.id = id;
 	}
 
+	/**
+	 * Gets the <code>Tag</code> in this user-tag relationship.
+	 * @return a tag object
+	 */
 	public Tag getTag() {
 		return tag;
 	}
+	
+	/**
+	 * Sets the <code>Tag</code> in this user-tag relationship.
+	 * @param tag a tag object
+	 */
 	public void setTag(Tag tag) {
 		this.tag = tag;
 	}
+	
+	/**
+	 * Gets the <code>user</code> in this user-tag relationship.
+	 * 
+	 * @return a user object
+	 */
 	public User getUser() {
 		return user;
 	}
+	
+	/**
+	 * Sets the <code>User</code> in this user-tag relationship.
+	 * @param user a user object
+	 */
 	public void setUser(User user) {
 		this.user = user;
 	}
@@ -131,6 +199,10 @@ public class UserTag implements Serializable, TagLabel{
 		return true;
 	}
 
+	/**
+	 * Gets the text label of the <code>Tag</code> in this user-tag relationship.
+	 * @return tag label
+	 */
 	public String getLabel() {
 		if(tag != null){
 			return tag.getLabel();
