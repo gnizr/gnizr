@@ -37,6 +37,14 @@ public class GnizrBasicDataSource extends BasicDataSource implements Serializabl
 	 */
 	private static final long serialVersionUID = 8131969966130166615L;
 
+	/**
+	 * Sets the connection property by reading configurations from the input <code>Properties</code>
+	 * object. When reading configurations from <code>props</code>, key/value pairs in <code>props</code>
+	 * are assumed to be of type <code>String</code>. The key is the name of the property, and the value
+	 * is the value to be set for that property.
+	 * @param props an instantiated properties object -- keys are the connection property names,
+	 * and values are the values to be set for the corresponding connection properties. 
+	 */
 	@SuppressWarnings("unchecked")
 	public void setConnectionProperties(Properties props) {
 		for (Iterator iter = props.entrySet().iterator(); iter.hasNext();) {
