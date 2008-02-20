@@ -20,7 +20,16 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-
+/**
+ * <p>This class provides a representation of a tag. A tag is consists of three parts:
+ * the ID of tag, a <code>String</code> representation of the tag, and the number of 
+ * times the tag is used to label gnizr bookmarks.</p>
+ * <p>The ID of the tag is usually assigned by the database system when the tag
+ * is created for the first time. 
+ * </p>
+ * @author Harry Chen
+ * @since 2.2
+ */
 public class Tag implements Serializable, TagLabel{
 	
 	/**
@@ -31,53 +40,101 @@ public class Tag implements Serializable, TagLabel{
 	private String label;
 	private int count;
 	
+	/**
+	 * Creates a new instance of this class and tag count is set to 0.
+	 */
 	public Tag(){
 		count = 0;
 	}
 	
+	/**
+	 * Creates a new instance of this class with defind tag ID.
+	 * @param id tag ID
+	 */
 	public Tag(int id){
 		this();
 		this.id = id;
 	}
 	
+	/**
+	 * Creates a new instance of this class with a defined tag label.
+	 * @param label the string representation of the tag.
+	 */
 	public Tag(String label){
 		this();
 		this.label = label;
 	}
 	
+	/**
+	 * Creates a new instance of this class with defined tag label and
+	 * tag count.
+	 * @param label the string representation of the tag
+	 * @param count the number of times the tag is used
+	 */
 	public Tag(String label, int count){
 		this();
 		this.label = label;
 		this.count = count;		
 	}
 	
+	/**
+	 * Copy constructor for this class.
+	 * 
+	 * @param tag object to copy from.
+	 */
 	public Tag(Tag tag){
 		this.id = tag.id;		
 		this.label = tag.label;
 		this.count = tag.count;		
 	}
 
-	/* (non-Javadoc)
-	 * @see com.gnizr.db.dao.TagLabel#getCount()
+	/**
+	 * Returns the number of times this tag is used to label gnizr bookmarks.
+	 * @return tag usage count.
 	 */
 	public int getCount() {
 		return count;
 	}
+	
+	/**
+	 * Sets the number of times this tag is used to label gnizr bookmarks.
+	 * @param count tag usage count
+	 */
 	public void setCount(int count) {
 		this.count = count;
 	}
+	
+	/**
+	 * Returns the ID of this tag object
+	 * 
+	 * @return tag ID
+	 */
 	public int getId() {
 		return id;
 	}
+	
+	/**
+	 * Sets the ID of this tag object
+	 * 
+	 * @param id tag ID
+	 */
 	public void setId(int id) {
 		this.id = id;
 	}
-	/* (non-Javadoc)
-	 * @see com.gnizr.db.dao.TagLabel#getLabel()
+	
+	/**
+	 * Returns the string representation of this tag.
+	 * @return tag label
 	 */
 	public String getLabel() {
 		return label;
 	}
+	
+	/**
+	 * Sets the string representation of this tag.
+	 * 
+	 * @param tag the string representation of this tag
+	 */
 	public void setLabel(String tag) {
 		this.label = tag;
 	}
