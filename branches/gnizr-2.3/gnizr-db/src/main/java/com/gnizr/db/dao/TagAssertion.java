@@ -18,7 +18,19 @@ package com.gnizr.db.dao;
 
 import java.io.Serializable;
 
-
+/**
+ * <p>This class provides the representation for a tag assertion. Tag assertion is a statement made by a user to describe a tagging relation
+ * between two <code>UserTag</code>. For example, the user can made assertions to state that a given tag related to, narrower than, 
+ * broader than, or is type of another tag.</p>
+ * <p>Relationships are defined by <code>TagProperty</code>. Gnizr comes with a set of predefined <code>TagProperty</code>, which 
+ * is defined by the gnizr database schema. Developers
+ * can create new property by introduce new tag property records in the database schema.</p>
+ * <p>The ID of the <code>TagProperty</code> uniquely identifies a <code>TagProperty</code>. The ID is usually assigned
+ * by the database system when a <code>TagProperty</code> is created for the first time.</p>
+ * @author Harry Chen
+ * @since 2.3
+ *
+ */
 public class TagAssertion implements Serializable {
 
 	/**
@@ -31,14 +43,28 @@ public class TagAssertion implements Serializable {
 	private TagProperty property;
 	private User user;
 	
+	/**
+	 * Creates a new instance of this class.
+	 */
 	public TagAssertion(){
 		// no code
 	}
 	
+	/**
+	 * Creates a new instance of this class with a defined ID.
+	 * @param id this tag assertion ID
+	 */
 	public TagAssertion(int id){
 		this.id = id;
 	}
 	
+	/**
+	 * Creates a new instance of this class with defined properties
+	 * @param subject the subject <code>UserTag</code> in this tag assertion
+	 * @param property the property that relates the subject and the object
+	 * @param object the object <code>UserTag</code> in this tag assertion
+	 * @param user
+	 */
 	public TagAssertion(UserTag subject, TagProperty property, UserTag object, User user){
 		if(subject != null){
 			this.subject = new UserTag(subject);
@@ -54,38 +80,95 @@ public class TagAssertion implements Serializable {
 		}
 	}
 	
+	/**
+	 * Copy constructor for this class
+	 * @param ta object to copy from
+	 */
 	public TagAssertion(TagAssertion ta){
 		this(ta.getSubject(),ta.getProperty(),ta.getObject(),ta.getUser());
 		this.id = ta.id;						
 	}
 	
+	/**
+	 * Returns the ID of this tag assertion.
+	 * @return an ID
+	 */
 	public int getId() {
 		return id;
 	}
+	
+	/**
+	 * Sets the ID of this tag assertion
+	 * @param id an ID
+	 */
 	public void setId(int id) {
 		this.id = id;
 	}
+	
+	/**
+	 * Returns the object <code>UserTag</code> in this tag assertion
+	 * @return the object value of this assertion
+	 */
 	public UserTag getObject() {
 		return object;
 	}
+	
+	/**
+	 * Sets the object <code>UserTag</code> in this tag assertion
+	 * @param object the object value of this assertion
+	 */
 	public void setObject(UserTag object) {
 		this.object = object;
 	}
+	
+	/**
+	 * Returns the property of this tag assertion. 
+	 * 
+	 * @return the property value of this assertion.
+	 */
 	public TagProperty getProperty() {
 		return property;
 	}
+	
+	/**
+	 * Sets the property of this tag assertion
+	 * 
+	 * @param property the property value of this assertion
+	 */
 	public void setProperty(TagProperty property) {
 		this.property = property;
 	}
+	
+	/**
+	 * Gets the subject value of this tag assertion
+	 * 
+	 * @return the subject value of this assertion
+	 */
 	public UserTag getSubject() {
 		return subject;
 	}
+	
+	/**
+	 * Sets the subject value of this tag assertion
+	 * 
+	 * @param subject the subjeect value of this assertion
+	 */
 	public void setSubject(UserTag subject) {
 		this.subject = subject;
 	}
+	
+	/**
+	 * Gets the user who made this tag assertion.
+	 * @return the <code>User</code> who made this assertion
+	 */
 	public User getUser() {
 		return user;
 	}
+	
+	/**
+	 * Sets the user who made this tag assertion
+	 * @param user who makes the assertion
+	 */
 	public void setUser(User user) {
 		this.user = user;
 	}
