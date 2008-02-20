@@ -16,9 +16,22 @@
  */
 package com.gnizr.db.dao;
 
+/**
+ * A unified interface for accessing the text label and the usage count of a tag.
+ * @author Harry Chen
+ * @since 2.3
+ */
 public interface TagLabel {
 
+	/**
+	 * Returns the text label of a tag
+	 * @return tag label
+	 */
 	public abstract String getLabel();
 
+	/**
+	 * Returns the usage count of a tag 
+	 * @return usage count
+	 */
 	public abstract int getCount();
 }
