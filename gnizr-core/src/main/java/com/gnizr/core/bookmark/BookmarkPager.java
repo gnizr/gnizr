@@ -47,7 +47,15 @@ import com.gnizr.db.dao.user.UserDao;
  * the position in the result set where the paging starts. The first position in the matching result
  * set is 0. The "count" defines the maximum number of item to return in a single paging operation.  
  * </p>   
- * 
+ * <h4>How to page bookmarks</h4>
+ * <pre>
+ *  // Get the max count
+ *  // We set both 'offset' and 'count' to 0 to reduce overhead in the SQL query  
+ *      DaoResult&lt;Bookmark&gt; results = bookmarkPager.pageBookmark(user,0,0);
+ *  
+ *  // Page 10 items starting at position 20
+ *      DaoResult&lt;Bookmark&gt; results = bookmarkPager.pageBookmark(user,20,10); 
+ * </pre>
  * @author Harry Chen
  *
  */
