@@ -32,6 +32,16 @@ import com.gnizr.db.dao.Bookmark;
 import com.gnizr.db.dao.MachineTag;
 import com.gnizr.db.dao.PointMarker;
 
+/**
+ * <p>This listener provides the support for geotagging using the Geonames service. When a bookmark
+ * is added or updated, this listener checks if the tags of a given bookmark contains machine 
+ * tag <code>geonames:[location]</code> or <code>gn:geonames=[location]</code>. If this machine
+ * tag exists, then the string <code>[location]</code> is sent to the Geonames web service to 
+ * lookup a latitude/longitude value for <code>[location]</code>. If the lookup is sucessful, 
+ * then the bookmark is geotagged. Otherwise, the geotagging request is ignored.</p>
+ * @author Harry Chen
+ * @since 2.3
+ */
 public class GeonamesTagListener implements BookmarkListener{
 
 	private static final Logger logger = Logger.getLogger(GeonamesSearch.class);
