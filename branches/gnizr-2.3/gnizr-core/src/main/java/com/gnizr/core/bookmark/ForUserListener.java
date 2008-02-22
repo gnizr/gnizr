@@ -35,6 +35,16 @@ import com.gnizr.db.dao.ForUser;
 import com.gnizr.db.dao.MachineTag;
 import com.gnizr.db.dao.User;
 
+/**
+ * <p>This listener provides the support for bookmark recommendations from one user to another. When a 
+ * bookmark is added or updated, this listener checks if the tags of a given bookmark contains
+ * machine tag <code>for:[username]</code> or <code>gn:for=[username]</code>. If this machine tag
+ * exists, this bookmark will be suggested to the user of <code>[username]</code>. 
+ * If a user of the <code>[username]</code> doesn't exist in the system, the bookmark recommendation
+ * is ignored.</p>
+ * @author Harry Chen
+ * @since 2.3
+ */
 public class ForUserListener implements BookmarkListener{
 
 	/**
