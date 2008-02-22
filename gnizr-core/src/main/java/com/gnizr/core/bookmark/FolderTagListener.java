@@ -31,6 +31,20 @@ import com.gnizr.db.dao.Bookmark;
 import com.gnizr.db.dao.MachineTag;
 import com.gnizr.db.dao.User;
 
+/**
+ * <p>This listener providers the support for adding bookmark to a folder. 
+ * When a bookmark is added or updated, this listener checks if the tgas
+ * of a given bookmark contains machine tag <code>folder:[folder_name]</code>
+ * or <code>gn:folder=[folder_name]</code>. If this machine tag exists,
+ * then a reference of this bookmark will be saved into the folder defined by
+ * the <code>[folder_name]</code>. The save process will create a new folder
+ * if the folder doesn't already exist.</p>
+ * <p>Note that this listener doesn't remove bookmarks from folders if 
+ * folder machine tags are deleted from the existing bookmark tags.</p>
+ * 
+ * @author Harry Chen
+ *
+ */
 public class FolderTagListener implements BookmarkListener{
 
 	/**
