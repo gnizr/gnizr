@@ -22,6 +22,17 @@ import com.opensymphony.xwork.Action;
 import com.opensymphony.xwork.ActionInvocation;
 import com.opensymphony.xwork.interceptor.Interceptor;
 
+/**
+ * An {@link com.opensymphony.xwork.interceptor.Interceptor} implementation for
+ * passing on the runtime application configuration to an Action. 
+ * When this <code>Interceptor</code> is used, it will pass on
+ * the runtime configuration, <code>GnizrConfiguration</code>, to 
+ * an Action that implements the {@link com.gnizr.web.action.GnizrConfigurationAware}
+ * interface. 
+ * 
+ * @author Harry Chen
+ * @since 2.3
+ */
 public class ConfigurationInterceptor implements Interceptor{
 
 	/**

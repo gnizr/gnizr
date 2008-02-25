@@ -25,6 +25,15 @@ import com.opensymphony.xwork.Action;
 import com.opensymphony.xwork.ActionInvocation;
 import com.opensymphony.xwork.interceptor.Interceptor;
 
+/**
+ * An {@link com.opensymphony.xwork.interceptor.Interceptor} implementation for protecting
+ * gnizr content from incoming requests without proper user authentication. When this 
+ * <code>Interceptor</code> is used, it will enforce the policy flag
+ * defined by the <code>anonymousReaderPolicy</code> parameter in the <code>gnizr-config.xml</code>.
+ * 
+ * @author Harry Chen 
+ * @since 2.2
+ */
 public class EnforceReaderPolicyInterceptor implements Interceptor{
 
 	/**
@@ -50,6 +59,7 @@ public class EnforceReaderPolicyInterceptor implements Interceptor{
 		// no code;		
 	}
 
+	@SuppressWarnings("unchecked")
 	public String intercept(ActionInvocation actionInvocation) throws Exception {
 		Map session = actionInvocation.getInvocationContext().getSession();
 		User user = (User)session.get(SessionConstants.LOGGED_IN_USER);
