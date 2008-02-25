@@ -25,6 +25,7 @@ import com.gnizr.web.util.GnizrConfiguration;
 import com.opensymphony.xwork.ActionInvocation;
 import com.opensymphony.xwork.interceptor.Interceptor;
 
+
 public class ServerMaintenanceInterceptor implements Interceptor{
 
 	/**
@@ -50,6 +51,7 @@ public class ServerMaintenanceInterceptor implements Interceptor{
 		// no code;		
 	}
 
+	@SuppressWarnings({ "unchecked", "unchecked" })
 	public String intercept(ActionInvocation actionInvocation) throws Exception {
 		if(gnizrConfiguration != null){
 			boolean isEnabled = gnizrConfiguration.isServerMaintenanceModeEnabled();

@@ -35,6 +35,21 @@ import com.opensymphony.xwork.ActionContext;
 import com.opensymphony.xwork.ActionInvocation;
 import com.opensymphony.xwork.interceptor.Interceptor;
 
+/**
+ * <p>An {@link com.opensymphony.xwork.interceptor.Interceptor} implementation for
+ * passing on the information of a logged-user user to an Action. When this 
+ * <code>Interceptor</code> is used on an Action that implements 
+ * {@link com.gnizr.web.action.LoggedInUserAware}, if the session contains the information 
+ * of a logged-in <code>User</code>, it will be passed onto the Action.</p>
+ * <p>If the session doesn't contain any information of a logged-in user, this class
+ * checks for a cookie named <code>rememberMe</code>. If this cookie exists, this 
+ * <code>Interceptor</code> will attempt to use this information to construct a valid 
+ * logged-in <code>User</code> and store it in the session. </p> 
+ * 
+ * @author Harry Chen
+ * @since 2.2
+ *
+ */
 public class LoggedInUserInterceptor implements Interceptor{
 
 	/**

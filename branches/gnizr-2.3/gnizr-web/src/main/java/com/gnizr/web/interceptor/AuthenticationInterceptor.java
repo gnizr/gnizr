@@ -25,6 +25,17 @@ import com.opensymphony.xwork.Action;
 import com.opensymphony.xwork.ActionInvocation;
 import com.opensymphony.xwork.interceptor.Interceptor;
 
+/**
+ * An {@link com.opensymphony.xwork.interceptor.Interceptor} implementation for
+ * checking user login authentication. When this <code>Interceptor</code> is 
+ * used on a WebWork Action, it will allow an incoming request to if and only
+ * if that the current session stores a valid logged-in user entry. If no login
+ * information is find, this <code>Interceptor</code> will redirect the
+ * request to the <code>LOGIN</code> result.  
+ *   
+ * @author Harry Chen
+ * @since 2.2
+ */
 public class AuthenticationInterceptor implements Interceptor {
 
 	/**
@@ -40,6 +51,7 @@ public class AuthenticationInterceptor implements Interceptor {
 		// no code
 	}
 
+	@SuppressWarnings("unchecked")
 	public String intercept(ActionInvocation actionInvocation) throws Exception {
 		Map session = actionInvocation.getInvocationContext().getSession();
 		User user = (User)session.get(SessionConstants.LOGGED_IN_USER);
