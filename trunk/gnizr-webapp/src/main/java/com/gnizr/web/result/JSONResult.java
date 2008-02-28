@@ -10,6 +10,38 @@ import com.opensymphony.webwork.ServletActionContext;
 import com.opensymphony.xwork.ActionInvocation;
 import com.opensymphony.xwork.Result;
 
+/**
+ * <p>This class provides an convenient way to produce data in the JSON format.</p>
+ * 
+ * <h3>How to use Result <code>jsonName</code></h3>
+ * <h4>Step 1: Implement an accessor method for getting a <code>JSON</code> object</h4>
+ * <pre>
+ *   public class MyActionClass extends Action{
+ *      public String execute(){
+ *       ... 
+ *       return SUCCESS;
+ *      }
+ *       ...
+ *      public JSON getMyJsonData(){
+ *        ...
+ *        return jData;
+ *      }
+ *   }
+ * </pre>
+ * <h4>Step 2: Define ResultType in xwork configuration</h4> 
+ * In the <code>xwork.xml</code>
+ * <pre>
+ *   &lt;action name="doWork" class="com.example.MyActionClass"&gt;
+ *	  ...		
+ *     &lt;result name="success" type="json"&gt;
+ *       &lt;param name="jsonName">myJsonData&lt;/param&gt;
+ *     &lt;/result&gt;
+ *   &lt;/action&gt;	
+ * </pre> 
+ * 
+ * @author Harry Chen
+ * @since 2.3
+ */
 public class JSONResult implements Result{
 
 	/**

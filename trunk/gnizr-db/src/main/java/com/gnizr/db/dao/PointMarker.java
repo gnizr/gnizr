@@ -19,6 +19,16 @@ package com.gnizr.db.dao;
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.Point;
 
+/**
+ * <p>This class provides a representation of a <code>GeometryMarker</code> that is a point. A point marker 
+ * is consisted of X and Y coordinates. In gnizr, when using this class to describe a geo-location, 
+ * the X-value is longitude and the Y-value is the latitude.</p>
+ * <p>The ID of a <code>PointMarker</code> is usually assigned by the database system when 
+ * a point marker is created for the first time.</p> 
+ *  
+ * @author Harry Chen
+ * @since 2.3
+ */
 public class PointMarker extends GeometryMarker{
 
 	/**
@@ -26,26 +36,56 @@ public class PointMarker extends GeometryMarker{
 	 */
 	private static final long serialVersionUID = 6660247624861588585L;
 	
+	/**
+	 * Creates a new instance of this class.
+	 */
 	public PointMarker(){
 		this(-1,null,0,null);
 	}
 	
+	/**
+	 * Creates a new instance of this class with predefined properties.
+	 * 
+	 * @param id the ID of this object
+	 * @param pt the point value
+	 * @param markerIconId the ID of the desired marker icon.
+	 * @param notes notes about this point marker.
+	 */
 	public PointMarker(int id,Point pt, int markerIconId, String notes){
 		super(id,pt,markerIconId,notes);		
 	}
 	
+	/**
+	 * Copy constructor of this class.
+	 * 
+	 * @param pm object to copy from.
+	 */
 	public PointMarker(PointMarker pm){
 		super(pm);
 	}
 
+	/**
+	 * Returns the point geometry of this marker.
+	 * @return a <code>Point</code> object
+	 */
 	public Point getPoint() {
 		return (Point)geometry;
 	}
 
+	/**
+	 * Sets the point geometry of this marker
+	 * 
+	 * @param point a <code>Point</code> object
+	 */
 	public void setPoint(Point point) {
 		this.geometry = point;
 	}
 	
+	/**
+	 * Sets the point geometry of this marker by defining the X and Y values.
+	 * @param x the X-value of a point
+	 * @param y the Y-value of a point
+	 */
 	public void setPoint(double x, double y){
 		if(geometry == null){
 			geometry = geometryFactory.createPoint(new Coordinate(x,y));
@@ -56,6 +96,10 @@ public class PointMarker extends GeometryMarker{
 		}
 	}
 	
+	/**
+	 * Sets the X-value of this point marker
+	 * @param x the X-value to set
+	 */
 	public void setX(double x){
 		if(geometry == null){
 			geometry = geometryFactory.createPoint(new Coordinate(x,0));
@@ -65,6 +109,10 @@ public class PointMarker extends GeometryMarker{
 		}
 	}
 	
+	/**
+	 * Sets the Y-value of this point marker
+	 * @param y the Y-value to set
+	 */
 	public void setY(double y){
 		if(geometry == null){
 			geometry = geometryFactory.createPoint(new Coordinate(0,y));
@@ -74,6 +122,10 @@ public class PointMarker extends GeometryMarker{
 		}
 	}
 	
+	/**
+	 * Returns the X-value of this point marker
+	 * @return the X-value of the point. If not defined, returns <code>0.0</code>
+	 */
 	public double getX(){
 		if(geometry != null){
 			return geometry.getCoordinate().x;
@@ -81,6 +133,10 @@ public class PointMarker extends GeometryMarker{
 		return 0.0;
 	}
 	
+	/**
+	 * Returns the Y-value of this point marker.
+	 * @return the Y-value of the point. If not defined, returns <code>0.0</code>.
+	 */
 	public double getY(){
 		if(geometry != null){
 			return geometry.getCoordinate().y;

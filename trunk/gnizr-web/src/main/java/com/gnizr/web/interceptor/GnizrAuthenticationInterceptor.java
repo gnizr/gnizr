@@ -27,6 +27,18 @@ import com.opensymphony.xwork.Action;
 import com.opensymphony.xwork.ActionInvocation;
 import com.opensymphony.xwork.interceptor.Interceptor;
 
+/**
+ * An {@link com.opensymphony.xwork.interceptor.Interceptor} implementation for 
+ * checking whether or not a given incoming request contains properly user-authentication
+ * information for the user <code>gnizr</code>. This <code>Interceptor</code> is typically
+ * used to support the running of a gnizr application under the "maintenance" mode. When
+ * running in the "maintenance" mode, no users are allowed to login, exception for the superuser 
+ * <code>gnizr</code>. 
+ * 
+ * @author Harry Chen
+ * @since 2.3
+ *
+ */
 public class GnizrAuthenticationInterceptor implements Interceptor {
 
 	/**

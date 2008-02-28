@@ -26,6 +26,16 @@ import com.gnizr.db.dao.FeedSubscription;
 import com.gnizr.db.dao.MachineTag;
 import com.gnizr.db.dao.User;
 
+/**
+ * <p>This listener provides the support for RSS feed import via machine tagging. When a bookmark is 
+ * added or updated, this listener checks if the tags of a given bookmark contains machine tag 
+ * <code>subscribe:this</code> or <code>gn:subscribe=this</code>. If this machine tag exists, 
+ * then the bookmark's URL will be subscribed by the RSS robot to perform bookmark import.</p> 
+ * <p>Note that the bookmark import will work on bookmark URLs that are valid RSS feeds. If the 
+ * URL doesn't point a RSS feed, the RSS robot will ignore the subscription request.</p>
+ * @author Harry Chen
+ * @since 2.3
+ */
 public class FeedSubscribeListener implements BookmarkListener{
 
 	private static final long serialVersionUID = 5808065554881663484L;

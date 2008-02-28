@@ -20,9 +20,21 @@ import org.apache.log4j.Logger;
 
 
 /**
- * <p>An object representation of a machine tag. </p>
+ * <p>This class provides an representation of machine tag. A machine tag is consists of three parts:
+ * the namespace URL prefix of the predicate, predicate name and value. </p> 
+ * <h4>A machine tag example:</h5>
+ * <pre>
+ *  dc:name=bob.smith
  *  
- * @author harryc
+ *  - namespace URL prefix: dc
+ *  - predicate name: name
+ *  - value: bob.smith
+ * </pre>
+ * <p>
+ * The namespace URL prefix is optionally. If not defined, the default prefix <code>gn</code> is assumed. 
+ * </p>
+ * @author Harry Chen
+ * @since 2.2
  *
  */
 public class MachineTag {
@@ -32,10 +44,20 @@ public class MachineTag {
 	private String predicate;
 	private String value;
 	
+	/**
+	 * Creates a new instance of this class with undefined namespace URL prefix,
+	 * predicate name and value.
+	 */
 	public MachineTag(){
 		this(null,null,null);
 	}
 	
+	/**
+	 * Creates a new instance of this class.
+	 * @param nsPrefix the namespace URL prefix of the predicate
+	 * @param predicate the predicate name
+	 * @param value the value of this machine tag
+	 */
 	public MachineTag(String nsPrefix, String predicate, String value){
 		logger.debug("machineTag: nsPrefix="+nsPrefix +",predicate="+predicate+",value="+value);		
 		if(nsPrefix != null){
@@ -47,18 +69,34 @@ public class MachineTag {
 		this.value = value;
 	}
 
+	/**
+	 * Returns the namespace URL prefix of the predicate 
+	 * @return the NS predicate string
+	 */
 	public String getNsPrefix() {
 		return nsPrefix;
 	}
 
+	/**
+	 * Returns the string name of the predicate
+	 * @return the predicate name string
+	 */
 	public String getPredicate() {
 		return predicate;
 	}
 
+	/**
+	 * Return the value string of this machine tag
+	 * 
+	 * @return the value string
+	 */
 	public String getValue() {
 		return value;
 	}
 	
+	/**
+	 * Returns a string representation of this machine tag.
+	 */
 	public String toString(){
 		StringBuilder sb = new StringBuilder();
 		if(nsPrefix != null){
