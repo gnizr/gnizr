@@ -19,6 +19,18 @@ package com.gnizr.db.dao;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * <p>This class defines the representation of a folder for storing bookmarks. Folders are usually created 
+ * users to organize bookmarks. All folders have an unique ID, which is usually assigned by the database system
+ * when the DB record for a folder is created for the first time. 
+ * </p>
+ * <p>
+ * All <code>FolderTag</code> have an unique ID, which is usually assigned by the database system
+ * when the DB record is created for the first time. 
+ * </p>
+ * @author Harry Chen
+ * @since 2.2
+ */
 public class Folder implements Serializable{
 
 	/**

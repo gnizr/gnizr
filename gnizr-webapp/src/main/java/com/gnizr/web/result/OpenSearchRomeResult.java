@@ -21,9 +21,41 @@ import com.opensymphony.xwork.ActionInvocation;
 import com.opensymphony.xwork.Result;
 
 /**
- * A {@link Result} to output OpenSearch Response in ATOM. 
+ * <p>An extended {@link RomeResult} to output OpenSearch Response in ATOM. This class extends the function provided 
+ * by {@link RomeResult} by fixing RSS parameter values: <code>mimeType</code>, <code>feedType</code>
+ * and <code>feedName</code>.</p>
+ * <pre>
+ *     name          value
+ *     mimeType     text/xml
+ *     feedType     atom_1.0
+ *     feedName     openSearchResult
+ * </pre>
+ * 
+ * 
+ * <h3>How to use this <code>Result</code> in the xwork configuration</h3>
+ * <pre>
+ *  // SearchBookmark.java
+ * public class SearchBookmark extends Action {
+ *   ...
+ *   // required method "getOpenSearchResult"
+ *   public SyndFeed getOpenSearchResult(){
+ *     ...
+ *     return feed;
+ *   }
+ * }
+ * </pre>
+ * <pre>
+ *  // xwork configuration 
+ * &lt;action name="search" class="com.gnizr.web.action.search.SearchBookmark"&gt;
+ *   ...
+ *   &lt;result name="success" type="opensearch"&gt;								
+ *     &lt;param name="encoding"&gt;UTF-8&lt;/param&gt;				
+ *   &lt;/result&gt;	
+ * &lt;/action&gt;
+ * </pre>
  * 
  * @author Harry Chen
+ * @since 2.3
  *
  */
 public class OpenSearchRomeResult extends RomeResult {

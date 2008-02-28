@@ -24,6 +24,15 @@ import com.gnizr.db.dao.GnizrDao;
 import com.gnizr.db.dao.Link;
 import com.gnizr.db.dao.link.LinkDao;
 
+/**
+ * <p>This class provides the support for detecting the MIME-TYPE of a saved bookmark. When a bookmark is 
+ * added or updated, this listener will try to fetch the full content of the URL associated with the 
+ * bookmark and guess the content MIME-TYPE. If the MIME-TYPE is successfully detected, then the MIME-TYPE
+ * attribute of the URL link is updated in the database.</p>  
+ * 
+ * @author Harry Chen
+ * @since 2.3
+ */
 public class UpdateMIMETypeListener implements BookmarkListener{
 
 	/**

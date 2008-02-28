@@ -18,6 +18,18 @@ package com.gnizr.db.dao;
 
 import java.io.Serializable;
 
+/**
+ * <p>This class represents a relationship between a folder and a tag. An instance of this
+ * class usually created to hold information about the tag usage within a specific folder. 
+ * </p>
+ * <p>A <code>FolderTag</code> has two properties: <code>folder</code> and <code>tag</code>. 
+ * The property <code>folder</code> describes a specific user folder has been created to store
+ * bookmarks. The property <code>tag</code> describes a specific tag that may have been
+ * used to label one or more bookmarks in <code>folder</code>.</p>
+ * 
+ * @author Harry Chen
+ * @since 2.2
+ */
 public class FolderTag implements Serializable, TagLabel{
 
 	/**

@@ -23,9 +23,13 @@ import java.util.Map;
 /**
  * This class represents the tagging relationship between a bookmark and a tag.
  * Every tagging relationship has a unique ID. This class also describes
- * the number of times the tag is used to label the bookmark (typically is 0 or 1), and 
- * the index position of the tag in the list of bookmark tags. 
- * 
+ * the number of times the tag is used to label the associated bookmark (this 
+ * number is typically either 0 or 1), and the index position of the tag 
+ * in the list of bookmark tags. 
+ * <p>
+ * All <code>BookmarkTag</code> have an unique ID, which is usually assigned by the database system
+ * when the DB record is created for the first time. 
+ * </p>
  * @author Harry Chen
  *
  */

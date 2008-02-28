@@ -22,6 +22,30 @@ import java.util.Map;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
+/**
+ * <p>This class provides the representation of a URL link. This class
+ * defines key properties of a URL: URL string, a MD5 has of the URL string, MIME-TYPE and 
+ * the number of times the link is bookmarked.</p> 
+ * <p>The ID of the class uniquely identifies a <code>Link</code>, which is usually created
+ * by the database system when the <code>Link</code> is created for the first time.</p>
+ * <h5>Gnizr MIME-TYPE ID</h5>
+ * <pre>
+ *    ID : MIME-TYPE
+ *   0000: Unknown
+ *   1001: text/xml
+ *   1002: text/plain
+ *   1003: text/html
+ *   2001: image/jpeg
+ *   2002: image/png
+ *   2003: image/tiff
+ *   2004: image/gif
+ *   3001: application/rss+xml
+ *   3002: application/rdf+xml
+ *   3003: application/owl-xml
+ * </pre>
+ * @author Harry Chen
+ *
+ */
 public class Link implements Serializable{
 
 	@Override
@@ -40,6 +64,12 @@ public class Link implements Serializable{
 	 */
 	private static final long serialVersionUID = -313034364360342931L;
 	
+	/**
+	 * Computes the MD5 hash of an input URL string. 
+	 * 
+	 * @param url a valid URL string
+	 * @return MD5 of the input URL
+	 */
 	public static final String computeUrlHash(String url){
 		return DigestUtils.md5Hex(url);		
 	}
@@ -51,34 +81,44 @@ public class Link implements Serializable{
 	private int count;
 
 	/**
-	 * @return the count
+	 * Returns the number of times this <code>Link</code> is bookmarked.
+	 * 
+	 * @return the count value
 	 */
 	public int getCount() {
 		return count;
 	}
 
 	/**
-	 * @param count the count to set
+	 * Sets the number of times this <code>Link</code> is bookmarked.
+	 * 
+	 * @param count the count value 
 	 */
 	public void setCount(int count) {
 		this.count = count;
 	}
 
 	/**
-	 * @return the id
+	 * Returns the ID of this <code>Link</code>.
+	 * 
+	 * @return the unique ID of this <code>Link</code>
 	 */
 	public int getId() {
 		return id;
 	}
 
 	/**
-	 * @param id the id to set
+	 * Sets the ID of this <code>Link</code>
+	 * 
+	 * @param id the unique ID of this <code>Link</code>
 	 */
 	public void setId(int id) {
 		this.id = id;
 	}
 
 	/**
+	 * Returns the ID of the MIME-TYPE of this <code>Link</code>.
+	 *  
 	 * @return the mimeTypeId
 	 */
 	public int getMimeTypeId() {
@@ -86,49 +126,68 @@ public class Link implements Serializable{
 	}
 
 	/**
-	 * @param mimeTypeId the mimeTypeId to set
+	 * Sets the MIME-TYPE ID of this <code>Link</code>
+	 * 
+	 * @param mimeTypeId MIME-TYPE ID.
 	 */
 	public void setMimeTypeId(int mimeTypeId) {
 		this.mimeTypeId = mimeTypeId;
 	}
 
 	/**
-	 * @return the url
+	 * Returns the URL string of this <code>Link</code>
+	 * 
+	 * @return the url string
 	 */
 	public String getUrl() {
 		return url;
 	}
 
 	/**
-	 * @param url the url to set
+	 * Sets the URL string of this <code>Link</code>
+	 * @param url an URL tring
 	 */
 	public void setUrl(String url) {
 		this.url = url;
 	}
 
 	/**
-	 * @return the urlHash
+	 * Returns the MD5 hash of the URL of this <code>Link</code>
+	 * @return a MD5 hash string
 	 */
 	public String getUrlHash() {
 		return urlHash;
 	}
 
 	/**
-	 * @param urlHash the urlHash to set
+	 * Sets the MD5 hash of the URL of this <code>Link</code>
+	 * 
+	 * @param urlHash the MD5 of the URL of this <code>Link</code>
 	 */
 	public void setUrlHash(String urlHash) {
 		this.urlHash = urlHash;
 	}
-
+	
+	/**
+	 * Creates a new instance of this class
+	 */
 	public Link(){
 		this.count = 0;
 		this.id = -1;
 	}
 
+	/**
+	 * Creates a new instance of this class with a defined <code>Link</code> ID
+	 * @param id Link ID
+	 */
 	public Link(int id){
 		this.id = id;
 	}
 	
+	/**
+	 * Copy constructor for <code>Link</code>
+	 * @param link an object to copy from.
+	 */
 	public Link(Link link){		
 		this.id = link.id;
 		this.mimeTypeId = link.mimeTypeId;		
@@ -137,12 +196,20 @@ public class Link implements Serializable{
 		this.count = link.count;
 	}
 	
+	/**
+	 * Creates a new instance of this class with a defined URL string
+	 * @param url the URL string of this <code>Link</code>
+	 */
 	public Link(String url){
 		this();
 		this.url = url;
 	}
 
-	
+	/**
+	 * Creates a new instance of this class with a defined URL string and MIME-TYPE id.
+	 * @param url the URL string of this <code>Link</code>
+	 * @param mimeTypeId the MIME-TYPE ID of this <code>Link</code>
+	 */
 	public Link(String url, int mimeTypeId){
 		this(url);
 		this.mimeTypeId = mimeTypeId;

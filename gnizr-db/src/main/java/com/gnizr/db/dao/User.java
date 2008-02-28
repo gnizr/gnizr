@@ -38,7 +38,7 @@ import java.util.Map;
  * must be set in the <em>plain text</em> format.</p>
  * 
  * @author Harry Chen
- *
+ * @since 2.2
  */
 public class User implements Serializable{
 

@@ -20,6 +20,12 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
+ * <p>This class describes the bookmark recommendation send from one user to another. The sender of this
+ * recommendation is the owner of the bookmark, and the receiver is defined by <code>forUser</code>.</p>
+ * <p>
+ * All <code>ForUser</code> have an unique ID, which is usually assigned by the database system
+ * when the DB record is created for the first time. 
+ * </p>
  * @author Torey
  *
  */
