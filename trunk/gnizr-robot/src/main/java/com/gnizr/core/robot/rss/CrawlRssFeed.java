@@ -86,8 +86,26 @@ public class CrawlRssFeed extends TimerTask{
 	}
 	
 	public void shutdown() {
-		logger.info("CrawlRssFeed shutdown.");
-		saveBookmarkEntriesExecutor.shutdownNow();
+		try{
+			System.out.println("CrawlRssFeed shutdown.");
+			List<Runnable> activeTasks = saveBookmarkEntriesExecutor.shutdownNow();
+			System.out.println("After shutdown. Number of active tasks = " + activeTasks.size());
+			if(activeTasks.size() > 0){
+				System.out.println("calling Thread.interrputed");
+				Thread.interrupted();
+				System.out.println("done calling Thread.interrputed");
+			}
+		}catch(Exception e){
+			
+		}
+		if(threadPoolTaskExecutor != null){
+			try{
+				threadPoolTaskExecutor.shutdown();
+			}catch(Exception e){
+			
+			}
+		}
+	
 	}
 	
 	public void awaitAndShutdown(long time, TimeUnit timeUnit){
@@ -119,7 +137,7 @@ public class CrawlRssFeed extends TimerTask{
 			FeedCrawlerFactory factory = getDefaultFactoryIfNull();
 			for(FeedSubscription aFeed : feeds){
 				FeedCrawler crawler = factory.createFeedCrawler();
-				threadPoolTaskExecutor.execute(new FeedCrawlerRunnable(crawler,aFeed));
+				threadPoolTaskExecutor.execute(new FeedCrawlerRunnable(crawler,aFeed));				
 			}
 			logger.info("Crawling ends... ThreadId=" + Thread.currentThread().getId());
 		}else if(serviceEnabled == false){
