@@ -1,3 +1,19 @@
+/*
+ * gnizr is a trademark of Image Matters LLC in the United States.
+ * 
+ * The contents of this file are subject to the Mozilla Public License Version
+ * 1.1 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ * http://www.mozilla.org/MPL/
+ * 
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either expressed or implied. See the License
+ * for the specific language governing rights and limitations under the License.
+ * 
+ * The Initial Contributor of the Original Code is Image Matters LLC.
+ * Portions created by the Initial Contributor are Copyright (C) 2007
+ * Image Matters LLC. All Rights Reserved.
+ */
 package com.gnizr.core.search;
 
 import java.io.File;
@@ -8,9 +24,11 @@ import java.util.List;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import org.apache.log4j.Logger;
+import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.CorruptIndexException;
-import org.apache.lucene.store.LockObtainFailedException;
+import org.apache.lucene.index.IndexWriter;
+import org.apache.lucene.index.Term;
 
 /**
  * This class provides the implementation for building 
@@ -30,7 +48,7 @@ public class SearchIndexManager implements Serializable{
 	
 	private IndexStoreProfile profile;
 
-	private LinkedBlockingQueue<Document> documentQueue;
+	private LinkedBlockingQueue<Request> documentQueue;
 
 	private Thread workerThread;
 
@@ -61,9 +79,14 @@ public class SearchIndexManager implements Serializable{
 				logger.error(e.toString());
 			}
 		}
-		documentQueue = new LinkedBlockingQueue<Document>();
-		workerThread = new Thread(new UpdateIndexWorker());
+		documentQueue = new LinkedBlockingQueue<Request>();
+		workerThread = new Thread(new UpdateIndexWorker());		
+		workerThread.setDaemon(true);
 		workerThread.start();
+	}
+	
+	public boolean isActive(){
+		return workerThread.isAlive();
 	}
 	
 	/**
@@ -74,7 +97,7 @@ public class SearchIndexManager implements Serializable{
 		if(workerThread != null){
 			try{
 				if(workerThread.isAlive() == true){
-					requestIndexUpdate(POISON_DOC);
+					addIndex(POISON_DOC);
 				}
 			}catch(Exception e){
 				logger.error("SearchIndexManager destory(): " + e);
@@ -106,41 +129,113 @@ public class SearchIndexManager implements Serializable{
 	 * after this method has been called.
 	 *  
 	 * @param doc a document to be updated.
+	 * @throws InterruptedException 
 	 *
-	 * @throws CorruptIndexException 
-	 * @throws LockObtainFailedException
-	 * @throws IOException
 	 * @throws InterruptedException
 	 */
-	public void requestIndexUpdate(Document doc) throws CorruptIndexException,
-			LockObtainFailedException, IOException, InterruptedException {
+	public void updateIndex(Document doc) throws InterruptedException {
 		if (doc != null) {
-			documentQueue.put(doc);
+			documentQueue.put(new Request(doc,UPD));
+		}
+	}
+	
+	public void addIndex(Document doc) throws InterruptedException{
+		if(doc != null){
+			documentQueue.put(new Request(doc,ADD));
 		}
 	}
 
+	public void deleteIndex(Document doc) throws InterruptedException{
+		if(doc != null){
+			documentQueue.put(new Request(doc,DEL));
+		}
+	}
+	
+	private static final int ADD = 1;
+	private static final int DEL = 2;
+	private static final int UPD = 3;
+	
+	private class Request {
+		Document doc;
+		int type;
+		
+		public Request(Document doc, int type){
+			this.doc = doc;
+			this.type = type;
+		}
+		
+		public String toString(){
+			StringBuilder sb = new StringBuilder();
+			sb.append("req:"+type + ",doc:"+doc);
+			return sb.toString();
+		}
+	}
+	
+	
 	private class UpdateIndexWorker implements Runnable {
 		public void run() {
-			while (true) {
+			boolean stopRunning = false;
+			while (true && stopRunning == false) {				
 				try {
-					List<Document> partialList = new ArrayList<Document>();
-					Document d = documentQueue.take();
+					List<Request> partialList = new ArrayList<Request>();
+					Request d = documentQueue.take();
 					partialList.add(d);
 					documentQueue.drainTo(partialList);
-					logger.debug("UpdateIndexWorker: drainedTo partialList # of doc :" + partialList.size());
+					logger.debug("UpdateIndexWorker: drainedTo partialList # of request :" + partialList.size());
 					if (partialList.isEmpty() == false) {
-						logger.debug("Updating total # of doc index: " + partialList.size());
-						doUpdate(partialList);					
+						logger.debug("Updating total # of doc: " + partialList.size());			
+						for(Request req : partialList){							
+							Document doc = req.doc;
+							if(POISON_DOC.equals(doc)){
+								logger.debug("Terminate UpdateIndexWorker.");
+								stopRunning = true;
+							}else{								
+								processRequest(req);
+							}
+						}												
 					}
 				} catch (InterruptedException e) {
+					logger.debug("UpdateIndexWorker is interrupted.");
 					break;
-				} 
+				}
 			}
 		}
 		
-		private void doUpdate(List<Document> docs){
-			// TODO: 
+		public void processRequest(Request req){
+			IndexWriter writer = null;
+			try{
+				writer = new IndexWriter(profile.getDirectoryPath(),new StandardAnalyzer());
+				if(req.type == ADD){
+					writer.addDocument(req.doc);
+				}else if(req.type == DEL || req.type == UPD){
+					String bmid = req.doc.get(DocumentCreator.FIELD_BOOKMARK_ID);
+					Term term = new Term(DocumentCreator.FIELD_BOOKMARK_ID,bmid);
+					if(req.type == DEL){
+						writer.deleteDocuments(term);
+					}else{
+						writer.updateDocument(term, req.doc);
+					}
+				}
+			}catch(Exception e){
+				logger.error("Unable to process request to modify index: " + req.toString());
+			}finally{
+				if(writer != null){
+					try {
+						writer.close();
+					} catch (CorruptIndexException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
 		}
+		
+		
+		
+		
 	}
 	
 	
