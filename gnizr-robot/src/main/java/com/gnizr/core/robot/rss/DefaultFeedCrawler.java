@@ -20,11 +20,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.Logger;
 
@@ -90,22 +85,15 @@ public class DefaultFeedCrawler implements FeedCrawler{
 		return new FeedCrawlResult(entries,feedLastUpdated,feedPubDate);
 	}
 	
-	private SyndFeed fetchFeed(String feedUrl){
+	private SyndFeed fetchFeed(String feedUrl){		
 		SyndFeed feed = null;
-		final String aFeedUrl = feedUrl;
-		try {
-			ExecutorService executor = Executors.newSingleThreadExecutor();
-			Future<SyndFeed> future = executor.submit(new Callable<SyndFeed>(){
-				public SyndFeed call() throws Exception {
-					SyndFeedInput input = new SyndFeedInput();
-					return input.build(new XmlReader(new URL(aFeedUrl)));
-				}				
-			});
-			feed = future.get(30,TimeUnit.SECONDS);			
-		} catch (Exception e) {
+		try{
+			SyndFeedInput input = new SyndFeedInput();
+			feed = input.build(new XmlReader(new URL(feedUrl)));
+		}catch(Exception e){
 			logger.error("error reading feed: " + feedUrl);
 			logger.debug("error reading feed exception: " + feedUrl,e);
-		}
+		}		
 		return feed;
 	}
 
