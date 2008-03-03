@@ -17,18 +17,21 @@
 package com.gnizr.core.search;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import org.apache.log4j.Logger;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
-import org.apache.lucene.index.CorruptIndexException;
+import org.apache.lucene.document.FieldSelector;
+import org.apache.lucene.document.FieldSelectorResult;
+import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.Term;
+import org.apache.lucene.index.TermDocs;
 
 /**
  * This class provides the implementation for building 
@@ -85,13 +88,23 @@ public class SearchIndexManager implements Serializable{
 		workerThread.start();
 	}
 	
+	/**
+	 * Checks whether the thread that is responsible for adding,
+	 * deleting and updating bookmark index is still alive.
+	 * 
+	 * @return <code>true</code> if the worker thread that
+	 * performs index modification is still alive. Returns <code>false</code>,
+	 * otherwise.
+	 */
 	public boolean isActive(){
 		return workerThread.isAlive();
 	}
 	
 	/**
 	 * Cleans up the internal resources used by this class instance.
-	 * 
+	 * <p><b>IMPORTANT</b>: it's necessary to call this method if
+	 * the client wants to this class to be properly unloaded from
+	 * the JVM.</p> 
 	 */
 	public void destroy() {
 		if(workerThread != null){
@@ -171,6 +184,114 @@ public class SearchIndexManager implements Serializable{
 		}
 	}
 	
+	public Document findLeadDocument(String urlHash){
+		IndexReader reader = null;
+		TermDocs termDocs = null;
+		Document leadDoc = null;
+		try{
+			boolean exists = IndexReader.indexExists(profile.getDirectoryPath());
+			if(exists == true){
+				reader = IndexReader.open(profile.getDirectoryPath());
+				Term key = new Term(DocumentCreator.FIELD_URL_MD5,urlHash);
+				termDocs = reader.termDocs(key);					
+				boolean found = false;
+				while(termDocs.next() && found == false){
+					int pos = termDocs.doc();
+					// use FieldSelector for more efficient loading of Fields.
+					// load only what's needed to determine a leading document
+					Document d = reader.document(pos, new FieldSelector(){
+						private static final long serialVersionUID = 1426724242925499003L;
+						public FieldSelectorResult accept(String field) {
+							if(field.equals(DocumentCreator.FIELD_INDEX_TYPE)){
+								return FieldSelectorResult.LOAD_AND_BREAK;
+							}else{
+								return FieldSelectorResult.NO_LOAD;
+							}
+						}						
+					});
+					String[] values = d.getValues(DocumentCreator.FIELD_INDEX_TYPE);
+					if(values != null){
+						List<String> vList = Arrays.asList(values);
+						if(vList.contains(DocumentCreator.INDEX_TYPE_LEAD) == true){
+							leadDoc = reader.document(pos);
+							found = true;
+						}
+					}
+				}				
+			}
+		}catch(Exception e){
+			logger.error("FindLeadDocument failed to find doc: " + urlHash + ", exception=" + e);
+		}finally{
+			try{
+			if(termDocs != null){
+				termDocs.close();
+			}
+			if(reader != null){
+				reader.close();
+			}
+			}catch(Exception e){
+				logger.error("FindLeadDocument can't close reader or termDocs: " + e);
+			}
+		}
+		return leadDoc;
+	}
+	
+	public Document findNonLeadDocument(String urlHash){
+		IndexReader reader = null;
+		TermDocs termDocs = null;
+		Document leadDoc = null;
+		try{
+			boolean exists = IndexReader.indexExists(profile.getDirectoryPath());
+			if(exists == true){
+				reader = IndexReader.open(profile.getDirectoryPath());
+				Term key = new Term(DocumentCreator.FIELD_URL_MD5,urlHash);
+				termDocs = reader.termDocs(key);		
+				boolean found = false;
+				while(termDocs.next() && found == false){
+					int pos = termDocs.doc();
+					// use FieldSelector for more efficient loading of Fields.
+					// load only what's needed to determine a leading document
+					Document d = reader.document(pos, new FieldSelector(){
+						private static final long serialVersionUID = 1426724242925499003L;
+						public FieldSelectorResult accept(String field) {
+							if(field.equals(DocumentCreator.FIELD_INDEX_TYPE)){
+								return FieldSelectorResult.LOAD_AND_BREAK;
+							}else{
+								return FieldSelectorResult.NO_LOAD;
+							}
+						}
+						
+					});
+					String[] values = d.getValues(DocumentCreator.FIELD_INDEX_TYPE);
+					if(values != null){		
+						List<String> vList = Arrays.asList(values);
+						if(vList.contains(DocumentCreator.INDEX_TYPE_LEAD) == false){
+							leadDoc = reader.document(pos);
+							found = true;
+						}
+					}else{
+						leadDoc = reader.document(pos);
+						found = true;
+					}
+				}
+			}
+		}catch(Exception e){
+			logger.error("FindLeadDocument failed to find doc hash: " + urlHash + ", exception=" + e);
+		}finally{
+			try{
+			if(termDocs != null){
+				termDocs.close();
+			}
+			if(reader != null){
+				reader.close();
+			}
+			}catch(Exception e){
+				logger.error("FindLeadDocument can't close reader or termDocs: " + e);
+			}
+		}
+		return leadDoc;
+	}
+	
 	
 	private class UpdateIndexWorker implements Runnable {
 		public void run() {
@@ -189,8 +310,14 @@ public class SearchIndexManager implements Serializable{
 							if(POISON_DOC.equals(doc)){
 								logger.debug("Terminate UpdateIndexWorker.");
 								stopRunning = true;
-							}else{								
-								processRequest(req);
+							}else{		
+								if(req.type == ADD){
+									doAdd(doc);
+								}else if(req.type == UPD){
+									doUpdate(doc);
+								}else if(req.type == DEL){
+									doDelete(doc);
+								}							
 							}
 						}												
 					}
@@ -201,41 +328,94 @@ public class SearchIndexManager implements Serializable{
 			}
 		}
 		
-		public void processRequest(Request req){
+		private void doAdd(Document doc){
+			if(doc == null){
+				throw new NullPointerException("Can't add document to the index. Doc is NULL");
+			}
+			String urlHash = doc.get(DocumentCreator.FIELD_URL_MD5);
+			if(urlHash == null){
+				throw new NullPointerException("Can't add document to the index. Doc is missing URL hash. doc:" + doc);
+			}
+			Document leadDoc = findLeadDocument(urlHash);
+			if(leadDoc == null){
+				doc = DocumentCreator.addIndexTypeLead(doc);
+			}
 			IndexWriter writer = null;
 			try{
-				writer = new IndexWriter(profile.getDirectoryPath(),new StandardAnalyzer());
-				if(req.type == ADD){
-					writer.addDocument(req.doc);
-				}else if(req.type == DEL || req.type == UPD){
-					String bmid = req.doc.get(DocumentCreator.FIELD_BOOKMARK_ID);
-					Term term = new Term(DocumentCreator.FIELD_BOOKMARK_ID,bmid);
-					if(req.type == DEL){
-						writer.deleteDocuments(term);
-					}else{
-						writer.updateDocument(term, req.doc);
-					}
-				}
+				writer = new IndexWriter(profile.getDirectoryPath(), new StandardAnalyzer());
+				writer.addDocument(doc);
 			}catch(Exception e){
-				logger.error("Unable to process request to modify index: " + req.toString());
+				logger.error("Can't add documen to the index. Doc = " + doc + ", exception = " + e);
 			}finally{
 				if(writer != null){
 					try {
 						writer.close();
-					} catch (CorruptIndexException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+					} catch (Exception e){
+						logger.error(e);
 					}
 				}
 			}
 		}
 		
+		private void doDelete(Document doc){
+			if(doc == null){
+				throw new NullPointerException("Can't delete document from the index. Doc is NULL");
+			}
+			IndexWriter writer = null;
+			try{
+				writer = new IndexWriter(profile.getDirectoryPath(), new StandardAnalyzer());
+				Term t = new Term(DocumentCreator.FIELD_BOOKMARK_ID,doc.get(DocumentCreator.FIELD_BOOKMARK_ID));
+				writer.deleteDocuments(t);
+			}catch(Exception e){
+				logger.error("Can't add documen to the index. Doc = " + doc + ", exception = " + e);
+			}finally{
+				if(writer != null){
+					try {
+						writer.close();
+					} catch (Exception e){
+						logger.error(e);
+					}
+				}
+			}
+			String urlHash = doc.get(DocumentCreator.FIELD_URL_MD5);
+			if(urlHash == null){
+				throw new NullPointerException("Can't delete document from the index. Doc is missing URL hash. doc:" + doc);
+			}
+			Document leadDoc = findLeadDocument(urlHash);
+			if(leadDoc == null){
+				Document nonleadDoc = findNonLeadDocument(urlHash);
+				if(nonleadDoc != null){
+					nonleadDoc = DocumentCreator.addIndexTypeLead(nonleadDoc);
+					doUpdate(nonleadDoc);
+				}
+			}
+		}
 		
-		
-		
+		private void doUpdate(Document doc){
+			if(doc == null){
+				throw new NullPointerException("Can't update document in the index. Doc is NULL");
+			}
+			String urlHash = doc.get(DocumentCreator.FIELD_URL_MD5);
+			if(urlHash == null){
+				throw new NullPointerException("Can't update document in the index. Doc is missing URL hash. doc:" + doc);
+			}
+			IndexWriter writer = null;
+			try{
+				writer = new IndexWriter(profile.getDirectoryPath(), new StandardAnalyzer());
+				Term t = new Term(DocumentCreator.FIELD_BOOKMARK_ID,doc.get(DocumentCreator.FIELD_BOOKMARK_ID));
+				writer.updateDocument(t, doc);
+			}catch(Exception e){
+				logger.error("Can't add documen to the index. Doc = " + doc + ", exception = " + e);
+			}finally{
+				if(writer != null){
+					try {
+						writer.close();
+					} catch (Exception e){
+						logger.error(e);
+					}
+				}
+			}	
+		}				
 	}
 	
 	
