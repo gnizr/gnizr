@@ -38,12 +38,8 @@ public class IndexBookmarkListener implements BookmarkListener {
 	private static final Logger logger = Logger.getLogger(IndexBookmarkListener.class);
 	
 	private SearchIndexManager searchIndexManager;
-
-	public SearchIndexManager getSearchIndexManager() {
-		return searchIndexManager;
-	}
-
-	public void setSearchIndexManager(SearchIndexManager searchIndexManager) {
+	
+	public IndexBookmarkListener(SearchIndexManager searchIndexManager){
 		this.searchIndexManager = searchIndexManager;
 	}
 

@@ -8,6 +8,7 @@ import java.util.List;
 import junit.framework.TestCase;
 
 import org.apache.lucene.document.Document;
+import org.apache.lucene.document.Field;
 
 import com.gnizr.db.dao.Bookmark;
 import com.gnizr.db.dao.Link;
@@ -24,7 +25,9 @@ public class TestDocumentCreator extends TestCase {
 		bmark1 = new Bookmark(101);
 		bmark1.setUser(new User("jsmith"));
 		bmark1.setTitle("Title of a Bookmark");
-		bmark1.setLink(new Link("http://example.org/foo1.html"));
+		Link ln = new Link("http://example.org/foo1.html");
+		ln.setUrlHash("123456789abcdefg");
+		bmark1.setLink(ln);
 		bmark1.setTags("tag1 tag2 foo.bar machine:tag=233");
 		bmark1.setNotes("Some <b>notes</b> of the bookmark <i>not wellformed");
 		
@@ -52,6 +55,9 @@ public class TestDocumentCreator extends TestCase {
 		String link = doc1.get(DocumentCreator.FIELD_URL);
 		assertEquals("http://example.org/foo1.html",link);
 		
+		String md5 = doc1.get(DocumentCreator.FIELD_URL_MD5);
+		assertEquals("123456789abcdefg",md5);
+		
 		String[] tags = doc1.getValues(DocumentCreator.FIELD_TAG);
 		assertEquals(4,tags.length);
 		List<String> tagList = Arrays.asList(tags);
@@ -66,4 +72,26 @@ public class TestDocumentCreator extends TestCase {
 		assertEquals("20080211",lDate);
 	}
 
+	public void testRemoveIndexTypeLead() throws Exception{
+		Document doc1 = new Document();
+		doc1.add(new Field(DocumentCreator.FIELD_BOOKMARK_ID,"100",Field.Store.YES,Field.Index.UN_TOKENIZED));
+		doc1.add(new Field(DocumentCreator.FIELD_INDEX_TYPE,DocumentCreator.INDEX_TYPE_LEAD,Field.Store.NO,Field.Index.UN_TOKENIZED));
+		doc1.add(new Field(DocumentCreator.FIELD_INDEX_TYPE,"other-type",Field.Store.NO,Field.Index.UN_TOKENIZED));
+		doc1 = DocumentCreator.removeIndexTypeLead(doc1);
+		Field[] fields = doc1.getFields(DocumentCreator.FIELD_INDEX_TYPE);
+		assertEquals(1,fields.length);
+		assertEquals("other-type",fields[0].stringValue());
+		fields = doc1.getFields(DocumentCreator.FIELD_BOOKMARK_ID);
+		assertEquals(1,fields.length);	
+	}
+	
+	public void testAddIndexTypeLead() throws Exception {
+		Document doc1 = new Document();
+		doc1.add(new Field(DocumentCreator.FIELD_BOOKMARK_ID,"100",Field.Store.YES,Field.Index.UN_TOKENIZED));
+		doc1 = DocumentCreator.addIndexTypeLead(doc1);
+		Field[] fields = doc1.getFields(DocumentCreator.FIELD_INDEX_TYPE);
+		assertEquals(1,fields.length);
+		assertEquals(DocumentCreator.INDEX_TYPE_LEAD,fields[0].stringValue());	
+	}
+	
 }
