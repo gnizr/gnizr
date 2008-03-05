@@ -78,5 +78,11 @@
 			</list>
 		</property>
 	</bean>
-	
+	<!--  	
+	<bean id="indexStoreProfile" class="com.gnizr.core.search.IndexStoreProfile" singleton="true">
+		<property name="directoryPath">
+			<value>D:/cygwin/tmp/search-data</value>
+		</property>
+	</bean>
+	-->
 </beans>

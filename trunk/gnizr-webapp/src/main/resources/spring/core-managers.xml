@@ -37,4 +37,12 @@
 			<ref bean="gnizrDao"/>
 		</constructor-arg>
 	</bean>
+	<!--  	
+	<bean id="searchIndexManager" class="com.gnizr.core.search.SearchIndexManager" singleton="true"
+	  	  init-method="init" destroy-method="destroy">
+	 	<property name="profile">
+	 		<ref bean="indexStoreProfile"/>
+	 	</property>
+	</bean>
+	-->
 </beans>
