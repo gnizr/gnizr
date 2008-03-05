@@ -341,8 +341,8 @@ public class SearchIndexManager implements Serializable{
 				doc = DocumentCreator.addIndexTypeLead(doc);
 			}
 			IndexWriter writer = null;
-			try{
-				writer = new IndexWriter(profile.getDirectoryPath(), new StandardAnalyzer());
+			try{			
+				writer = new IndexWriter(profile.getDirectoryPath(), new StandardAnalyzer());				
 				writer.addDocument(doc);
 			}catch(Exception e){
 				logger.error("Can't add documen to the index. Doc = " + doc + ", exception = " + e);
