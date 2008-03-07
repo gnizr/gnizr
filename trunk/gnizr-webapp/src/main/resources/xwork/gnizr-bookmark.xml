@@ -144,19 +144,6 @@
 			<result name="error" type="freemarker">/common/error.ftl</result>
 		</action>
 	</package>
-	<!--
-	<package name="richtexteditor-browse1" extends="webwork-default"
-		namespace="/webwork/richtexteditor/editor/filemanager/browser/default/connectors/jsp">
-		<action name="connector"
-			class="com.opensymphony.webwork.components.DefaultRichtexteditorConnector"
-			method="browse">
-			<result name="getFolders" type="richtexteditorGetFolders"/>
-			<result name="getFoldersAndFiles" type="richtexteditorGetFoldersAndFiles"/>
-			<result name="createFolder" type="richtexteditorCreateFolder"/>
-			<result name="fileUpload" type="richtexteditorFileUpload"/>
-		</action>
-	</package>
-		-->
 
 	<package name="gnizr-placemarks" extends="gnizr-default" namespace="/gmap">
 		<action name="bookmark" class="com.gnizr.web.action.bookmark.ListBookmarkHasGeomMarker">
