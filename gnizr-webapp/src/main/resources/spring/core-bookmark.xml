@@ -31,13 +31,13 @@
 			<ref bean="folderManager"/>
 		</constructor-arg>	
 	</bean>
-	<!--  
+	 
 	<bean id="indexBookmarkListener" class="com.gnizr.core.bookmark.IndexBookmarkListener" singleton="true">
 		<constructor-arg index="0">
 			<ref bean="searchIndexManager"/>
 		</constructor-arg>	
 	</bean>
-	-->	
+	
 	<bean id="bookmarkManager" class="com.gnizr.core.bookmark.BookmarkManager" destroy-method="shutdown" singleton="true">		
 		<!-- gnizrDao -->
 		<constructor-arg index="0">
@@ -52,7 +52,7 @@
 				<ref bean="geonamesTagListener"/>
 				<ref bean="updateMIMETypeListener"/>
 				<ref bean="folderTagListener"/>
-<!--  				<ref bean="indexBookmarkListener"/> -->
+ 				<ref bean="indexBookmarkListener"/>
 			</list>
 		</constructor-arg>
 		
