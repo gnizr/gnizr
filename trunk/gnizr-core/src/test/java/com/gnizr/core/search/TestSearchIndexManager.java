@@ -35,9 +35,12 @@ public class TestSearchIndexManager extends TestCase {
 		doc2.add(new Field(DocumentCreator.FIELD_BOOKMARK_ID,"112",Field.Store.YES,Field.Index.UN_TOKENIZED));
 		doc2 = DocumentCreator.addIndexTypeLead(doc2);
 	}
+	
+	
 
 	protected void tearDown() throws Exception {
 		super.tearDown();
+		manager.destroy();
 	}
 
 	public void testDestroy() throws Exception {

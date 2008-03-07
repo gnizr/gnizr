@@ -82,10 +82,34 @@ public class SearchIndexManager implements Serializable{
 				logger.error(e.toString());
 			}
 		}
+		if (profile.isOverwrite() == true) {
+			logger.info("Overwriting the existing index store, if it exists.");
+			File f = new File(profile.getDirectoryPath());
+			try {
+				boolean isOkay = deleteDir(f);
+				logger.debug("Delete is okay? " + isOkay);
+			} catch (Exception e) {
+				logger.error(e);
+			}
+		}
 		documentQueue = new LinkedBlockingQueue<Request>();
 		workerThread = new Thread(new UpdateIndexWorker());		
 		workerThread.setDaemon(true);
 		workerThread.start();
+	}
+	
+	private static boolean deleteDir(File dir) {
+		if (dir.isDirectory()) {
+			String[] children = dir.list();
+			for (int i = 0; i < children.length; i++) {
+				boolean success = deleteDir(new File(dir, children[i]));
+				if (!success) {
+					return false;
+				}
+			}
+		}
+		// The directory is now empty so delete it
+		return dir.delete();
 	}
 	
 	/**
