@@ -22,4 +22,11 @@
 			<ref bean="tagPager"/>
 		</property>
 	</bean>
+	
+	<bean id="indexBookmark" class="com.gnizr.web.action.search.IndexBookmark" singleton="false">
+		<property name="searchIndexManager">
+		 	<ref bean="searchIndexManager"/>
+		</property>
+	</bean>
+	
 </beans>
