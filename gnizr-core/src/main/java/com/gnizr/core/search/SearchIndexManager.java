@@ -55,6 +55,8 @@ public class SearchIndexManager implements Serializable{
 
 	private Thread workerThread;
 
+	private UpdateIndexWorker worker;
+	
 	// used to signal workerThread that this class instance is shutting down.
 	private static final Document POISON_DOC = new Document();
 	
@@ -93,9 +95,36 @@ public class SearchIndexManager implements Serializable{
 			}
 		}
 		documentQueue = new LinkedBlockingQueue<Request>();
-		workerThread = new Thread(new UpdateIndexWorker());		
+		worker = new UpdateIndexWorker();
+		workerThread = new Thread(worker);		
 		workerThread.setDaemon(true);
 		workerThread.start();
+	}
+	
+	/**
+	 * Checks whether the internal index thread is performing 
+	 * any active indexing. This is an estimated result.
+	 * @return <code>true</code> if the the internal thread
+	 * is performing indexing. Returns <code>false</code> otherwise.
+	 */
+	public boolean isIndexProcessActive(){
+		if(worker.getEstimatedWorkLoad() > 0){
+			return true;
+		}
+		return false;
+	}
+	
+	/**
+	 * Gets an estimated count of the 
+	 * workload of the internal index thread.
+	 * Use with caution. This number is only an estimated number.
+	 * @return workload count
+	 */
+	public int getIndexProcessWorkLoad(){
+		if(worker.getEstimatedWorkLoad() > 0){
+			return worker.getEstimatedWorkLoad();
+		}
+		return 0;
 	}
 	
 	private static boolean deleteDir(File dir) {
@@ -318,17 +347,19 @@ public class SearchIndexManager implements Serializable{
 	
 	
 	private class UpdateIndexWorker implements Runnable {
-		public void run() {
+		private List<Request> partialList = new ArrayList<Request>();
+		int estimateWorkLoad = 0;
+		public void run() {		
 			boolean stopRunning = false;
 			while (true && stopRunning == false) {				
-				try {
-					List<Request> partialList = new ArrayList<Request>();
+				try {					
 					Request d = documentQueue.take();
 					partialList.add(d);
 					documentQueue.drainTo(partialList);
 					logger.debug("UpdateIndexWorker: drainedTo partialList # of request :" + partialList.size());
 					if (partialList.isEmpty() == false) {
-						logger.debug("Updating total # of doc: " + partialList.size());			
+						estimateWorkLoad = partialList.size();
+						logger.debug("Updating total # of doc: " + estimateWorkLoad);			
 						for(Request req : partialList){							
 							Document doc = req.doc;
 							if(POISON_DOC.equals(doc)){
@@ -343,13 +374,20 @@ public class SearchIndexManager implements Serializable{
 									doDelete(doc);
 								}							
 							}
+							estimateWorkLoad--;
 						}												
 					}
 				} catch (InterruptedException e) {
 					logger.debug("UpdateIndexWorker is interrupted.");
 					break;
 				}
+				partialList.clear();
+				estimateWorkLoad = 0;
 			}
+		}
+		
+		public int getEstimatedWorkLoad(){
+			return estimateWorkLoad; 
 		}
 		
 		private void doAdd(Document doc){
