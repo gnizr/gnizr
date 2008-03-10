@@ -2,6 +2,7 @@ package com.gnizr.web.action.search;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.apache.lucene.document.Document;
@@ -12,7 +13,9 @@ import com.gnizr.core.search.SearchIndexManager;
 import com.gnizr.db.dao.Bookmark;
 import com.gnizr.db.dao.DaoResult;
 import com.gnizr.db.dao.User;
+import com.gnizr.db.dao.UserStat;
 import com.gnizr.web.action.AbstractLoggedInUserAction;
+import com.opensymphony.webwork.interceptor.SessionAware;
 
 /**
  * <p>An Action implementation for building search index of bookmarks 
@@ -25,13 +28,16 @@ import com.gnizr.web.action.AbstractLoggedInUserAction;
  * @author Harry Chen
  * @since 2.4
  */
-public class IndexBookmark extends AbstractLoggedInUserAction{
+public class IndexBookmark extends AbstractLoggedInUserAction implements SessionAware{
 
 	private static final long serialVersionUID = 7092403721954833011L;
 	private static final Logger logger = Logger.getLogger(IndexBookmark.class);
 	
 	private SearchIndexManager searchIndexManager;
 	private BookmarkPager bookmarkPager;
+	private IndexStatus status;
+	@SuppressWarnings("unchecked")
+	private Map session;
 	
 	public SearchIndexManager getSearchIndexManager() {
 		return searchIndexManager;
@@ -54,12 +60,23 @@ public class IndexBookmark extends AbstractLoggedInUserAction{
 		return true;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	protected String go() throws Exception {
 		logger.debug("IndexBookmark action go() is called.");
 		resolveUser();
 		
-		List<User> users = userManager.listUsers();
+		status = new IndexStatus();
+		session.put("status", status);
+		
+		int cnt = 0;
+		List<UserStat> userStats = userManager.listUserStats();
+		for(UserStat stat : userStats){
+			cnt = cnt+stat.getNumOfBookmarks();
+		}
+		status.setTotalBookmarkCount(cnt);
+		
+		List<User> users = userManager.listUsers();		
 		for(User user : users){
 			logger.debug("Indexing the bookmarks of user: " + user.getUsername());
 			int ppc = 10;
@@ -70,7 +87,18 @@ public class IndexBookmark extends AbstractLoggedInUserAction{
 				DaoResult<Bookmark> result  = bookmarkPager.pageBookmark(user,start,ppc);
 				doIndex(result.getResult());
 				start = start + ppc;
+				int indexCount = status.getBookmarkIndexed();
+				status.setBookmarkIndexed(indexCount + ppc);				
+				while(searchIndexManager.getIndexProcessWorkLoad() > 222){
+					try{
+						logger.debug("Wait 5 seconds. SearchIndexManager seems to be too busy -- reach max load 222.");
+						Thread.sleep(5000);					
+					}catch(Exception e){
+						
+					}
+				}
 			}
+			
 		}
 		return SUCCESS;
 	}
@@ -93,6 +121,35 @@ public class IndexBookmark extends AbstractLoggedInUserAction{
 		}catch(Exception e){
 			logger.error("IndexBookmark.doIndex(), "+e);
 		}
+	}
+	
+	public class IndexStatus {
+		
+		private int totalBookmarkCount;
+		private int bookmarkIndexed;
+		
+		public IndexStatus(){
+			totalBookmarkCount = 0;
+			bookmarkIndexed = 0;
+		}
+		public int getTotalBookmarkCount() {
+			return totalBookmarkCount;
+		}
+		public void setTotalBookmarkCount(int totalBookmarkCount) {
+			this.totalBookmarkCount = totalBookmarkCount;
+		}
+		public int getBookmarkIndexed() {
+			return bookmarkIndexed;
+		}
+		public void setBookmarkIndexed(int bookmarkIndexed) {
+			this.bookmarkIndexed = bookmarkIndexed;
+		}
+			
+	}
+
+	@SuppressWarnings("unchecked")
+	public void setSession(Map session) {
+		this.session = session;
 	}
 	
 }
