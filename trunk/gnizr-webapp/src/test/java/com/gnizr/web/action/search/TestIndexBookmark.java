@@ -1,5 +1,8 @@
 package com.gnizr.web.action.search;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.lucene.document.Document;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSet;
@@ -37,11 +40,15 @@ public class TestIndexBookmark extends GnizrWebappTestBase {
 	}
 
 	public void testGo() throws Exception{
+		Map<Object, Object> session = new HashMap<Object, Object>();
+		
+		
 		IndexBookmark action = new IndexBookmark();
 		action.setBookmarkPager(bookmarkPager);
 		action.setSearchIndexManager(searchIndexManager);
 		action.setUserManager(new UserManager(getGnizrDao()));
 		action.setUser(new User(1));
+		action.setSession(session);
 		
 		String doc1Hash = "d1a8e491759cb30d11357c4776be9c66";
 		Document d1 = searchIndexManager.findLeadDocument(doc1Hash);
@@ -51,6 +58,8 @@ public class TestIndexBookmark extends GnizrWebappTestBase {
 		Thread.sleep(10000);
 		d1 = searchIndexManager.findLeadDocument(doc1Hash);
 		assertNotNull(d1);
+		
+		assertNotNull(session.get("status"));
 	}
 	
 	
