@@ -25,6 +25,12 @@ import com.gnizr.db.dao.BookmarkTag;
 import com.gnizr.db.dao.GnizrDao;
 import com.gnizr.db.dao.User;
 
+/**
+ * This class provides the bookmark search implementation. 
+ *  
+ * @author Harry Chen
+ *
+ */
 public class Search implements Serializable{
 
 	/**
@@ -35,22 +41,65 @@ public class Search implements Serializable{
 	private static final Logger logger = Logger.getLogger(Search.class);
 	
 	private GnizrDao gnizrDao;
+	private IndexStoreProfile indexStoreProfile;
 	
 	public Search(GnizrDao gnizrDao){
 		this.gnizrDao = gnizrDao;
 	}
 	
+	public GnizrDao getGnizrDao() {
+		return gnizrDao;
+	}
 
+	public void setGnizrDao(GnizrDao gnizrDao) {
+		this.gnizrDao = gnizrDao;
+	}
+
+	public IndexStoreProfile getIndexStoreProfile() {
+		return indexStoreProfile;
+	}
+
+	public void setIndexStoreProfile(IndexStoreProfile indexStoreProfile) {
+		this.indexStoreProfile = indexStoreProfile;
+	}
+
+	public void init(){
+		if(gnizrDao == null){
+			throw new NullPointerException("Search.init(): GnizrDao is not defined");
+		}
+		if(indexStoreProfile == null){
+			throw new NullPointerException("Search.init(): indexStoreProfile is not defined");
+		}
+	}
+	
+	/**
+	 * Returns bookmarks saved in the community that match the input search query.
+	 * @deprecated
+	 * @param textQuery a search query 
+	 * @return matching bookmarks
+	 */
 	public SearchResult<Bookmark> searchBookmarkCommunity(String textQuery){
 		logger.debug("searchLink: textQuery="+textQuery);
 		return new BookmarkSearchResult(gnizrDao, textQuery);		
 	}
 	
+	/**
+	 * Returns bookmarks saved by <code>user</code> that match the input search query.
+	 * @deprecated
+	 * @param textQuery a search query 
+	 * @return matching bookmarks
+	 */
 	public SearchResult<Bookmark> searchBookmarkUser(String textQuery, User user){
 		logger.debug("searchLink: textQuery="+textQuery+",user="+user);
 		return new BookmarkSearchResult(gnizrDao, textQuery, user);
 	}
 	
+	/**
+	 * Returns tags used to label bookmarks that match input search query.
+	 * 
+	 * @param textQuery a search query used to match bookmarks
+	 * @return a list of bookmark-tag relations
+	 */
 	public SearchResult<BookmarkTag> searchBookmarkTags(String textQuery){
 		return new BookmarkTagSearchResult(gnizrDao,textQuery);
 	}
