@@ -35,6 +35,7 @@ public class DocumentCreator implements Serializable {
 	private static final Logger logger = Logger
 			.getLogger(DocumentCreator.class);
 
+	
 	public static final String FIELD_BOOKMARK_ID = "bmid";
 	public static final String FIELD_URL = "url";
 	public static final String FIELD_URL_MD5 = "urlMD5";
@@ -48,6 +49,7 @@ public class DocumentCreator implements Serializable {
 
 	public static final String INDEX_TYPE_LEAD = "lead";
 
+	
 	/**
 	 * 
 	 */
