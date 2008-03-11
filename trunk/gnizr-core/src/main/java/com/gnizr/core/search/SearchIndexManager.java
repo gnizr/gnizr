@@ -35,7 +35,7 @@ import org.apache.lucene.index.TermDocs;
 
 /**
  * This class provides the implementation for building 
- * the search index for bookmark search. 
+ * bookmark search index using Lucene API.
  * 
  * @author Harry Chen
  *
