@@ -39,18 +39,43 @@ public class IndexBookmark extends AbstractLoggedInUserAction implements Session
 	@SuppressWarnings("unchecked")
 	private Map session;
 	
+	/**
+	 * Gets the search index manager used by this class.
+	 * 
+	 * @return an instance of the <code>SearchIndexManager</code>.
+	 * Returns <code>null</code> if the manager has been set.
+	 */
 	public SearchIndexManager getSearchIndexManager() {
 		return searchIndexManager;
 	}
 
+	/**
+	 * Sets the search index manager used by this class to perform 
+	 * search index updates. 
+	 * 
+	 * @param searchIndexManager an instantiated <code>SearchIndexManager</code>
+	 */
 	public void setSearchIndexManager(SearchIndexManager searchIndexManager) {
 		this.searchIndexManager = searchIndexManager;
 	}
 
+	/**
+	 * Gets the bookmark pager used for iterating through
+	 * all bookmarks saved in the system.
+	 * 
+	 * @return an instance of the <code>BookmarkPager</code>.
+	 * Returns <code>null</code> if the pager has been set.
+	 */
 	public BookmarkPager getBookmarkPager() {
 		return bookmarkPager;
 	}
 
+	/**
+	 * Sets the bookmark pager used for iterating through
+	 * all bookmarks saved in the system.
+	 * 
+	 * @param bookmarkPager an instantiated <code>BookmarkPager</code.
+	 */
 	public void setBookmarkPager(BookmarkPager bookmarkPager) {
 		this.bookmarkPager = bookmarkPager;
 	}
@@ -60,6 +85,15 @@ public class IndexBookmark extends AbstractLoggedInUserAction implements Session
 		return true;
 	}
 
+	/**
+	 * <p>Executes this action to perform search index update. Once the process is started,
+	 * it can't be terminated. Interrupting the running thread may be result a partially 
+	 * completed search index (i.e., not all saved bookmarks are searchable).</p> 
+	 * <p>While the index process in progress, this action reports the status 
+	 * updating the <code>IndexStatus</code> object. This object can accessible
+	 * by calling <code>getIndexStatus</code> or accessible it in the HTTP Session under
+	 * the name <code>"status"</code>. </p>
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	protected String go() throws Exception {
