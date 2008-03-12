@@ -278,6 +278,9 @@ public class BookmarkManager implements Serializable {
 				}
 			}
 			bmark.setLink(link);
+		}else{
+			link = linkDao.getLink(link.getId());
+			bmark.setLink(link);
 		}
 		// if no date properties set, we will set them as of now.
 		if (bmark.getCreatedOn() == null) {
