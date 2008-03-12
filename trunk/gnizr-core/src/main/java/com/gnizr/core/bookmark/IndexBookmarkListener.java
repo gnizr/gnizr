@@ -76,7 +76,7 @@ public class IndexBookmarkListener implements BookmarkListener {
 		Document doc = DocumentCreator.createDocument(newBookmark);
 		if(doc != null){
 			logger.debug("notify SearchIndexManager to updateIndex: " + newBookmark.toString());
-			searchIndexManager.addIndex(doc);
+			searchIndexManager.updateIndex(doc);
 		}
 
 	}
