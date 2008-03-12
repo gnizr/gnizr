@@ -37,6 +37,16 @@
 				<param name="encoding">UTF-8</param>				
 			</result>	
 		</action>
+		
+		<action name="searchBookmark" class="com.gnizr.web.action.search.SearchCommunityBookmark">
+			<interceptor-ref name="loggedIn"/>			
+			<interceptor-ref name="gnizrNoPolicyDefaultStack"/>		
+			<result name="success" type="opensearch">								
+				<param name="encoding">UTF-8</param>							
+			</result>	
+			<result name="input" type="freemarker">/common/empty-template.ftl</result>
+		</action>
+		
 	</package>
 	
 </xwork>

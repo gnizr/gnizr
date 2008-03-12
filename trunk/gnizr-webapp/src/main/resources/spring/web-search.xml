@@ -29,4 +29,10 @@
 		</property>
 	</bean>
 	
+	<bean id="searchCommunityBookmark" class="com.gnizr.web.action.search.SearchCommunityBookmark" singleton="false">
+		<property name="bookmarkSearcher">
+			<ref bean="bookmarkSearcher"/>
+		</property>
+	</bean>
+	
 </beans>
