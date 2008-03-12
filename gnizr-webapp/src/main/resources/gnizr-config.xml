@@ -83,6 +83,9 @@
 		<property name="directoryPath">
 			<value>D:/cygwin/tmp/search-data</value>
 		</property>
+		<property name="overwrite">
+			<value>false</value>
+		</property>
 	</bean>
 	
 </beans>

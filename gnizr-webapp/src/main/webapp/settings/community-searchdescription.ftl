@@ -7,5 +7,5 @@
   <Tags>bookmarks gnizr</Tags>
   <gn:DefaultEnabled>true</gn:DefaultEnabled>
   <Url type="text/xml" 
-       template="${gzUrl("/data/atom/community/search.action?queryString={searchTerms}&amp;page={startPage}")}"/>
+       template="${gzUrl("/data/atom/community/searchBookmark.action?queryString={searchTerms}&amp;page={startPage}")}"/>
 </OpenSearchDescription>
