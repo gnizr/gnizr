@@ -22,6 +22,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import com.gnizr.core.search.BookmarkDoc;
 import com.gnizr.db.dao.Bookmark;
 import com.sun.syndication.feed.atom.Link;
 import com.sun.syndication.feed.module.Module;
@@ -37,7 +38,8 @@ import com.sun.syndication.feed.synd.SyndFeed;
 import com.sun.syndication.feed.synd.SyndFeedImpl;
 
 /**
- * An utility class for creating ROME {@link SyndFeed}} object from a list of {@link Bookmark}. 
+ * An utility class for creating ROME {@link SyndFeed}} object from a list of {@link Bookmark} or 
+ * {@link BookmarkDoc}
  * 
  * @author Harry Chen
  *
@@ -45,6 +47,42 @@ import com.sun.syndication.feed.synd.SyndFeedImpl;
 public class SyndFeedFactory {
 
 	private static final Logger logger = Logger.getLogger(SyndFeedFactory.class);
+	
+	
+	public static SyndFeed createFromBookmarkDoc(List<BookmarkDoc> bookmarks, String author, String title, String link, Date pubDate, String feedUri){
+		logger.debug("SyndFeedFactory create method called");
+		logger.debug("bookmarks="+bookmarks);
+		logger.debug("author="+author);
+		logger.debug("title="+title);
+		logger.debug("link="+link);
+		logger.debug("pubDate="+pubDate);
+		logger.debug("feedUri="+feedUri);
+		SyndFeed syndFeed = new SyndFeedImpl();
+		syndFeed.setAuthor(author);
+		syndFeed.setTitle(title);
+		syndFeed.setUri(feedUri);
+		syndFeed.setLink(link);
+		syndFeed.setPublishedDate(pubDate);
+		List<SyndEntry> entries = new ArrayList<SyndEntry>();
+		for(BookmarkDoc bmark : bookmarks){
+			SyndEntry entry = new SyndEntryImpl();
+			entry.setTitle(bmark.getTitle());
+			entry.setAuthor(bmark.getUsername());
+			entry.setLink(bmark.getUrl());
+			entry.setUri("urn:bookmark:"+bmark.getBookmarkId());		
+			SyndContent cnt = new SyndContentImpl();
+			cnt.setType("text/html");
+			if(bmark.getNotes() != null){
+				cnt.setValue(bmark.getNotes());
+				entry.setDescription(cnt);
+			}		
+			entries.add(entry);			
+		}
+		syndFeed.setEntries(entries);
+		syndFeed.setEncoding("UTF-8");
+		logger.debug("done initializing syndFeed object");
+		return syndFeed;
+	}
 	
 	public static SyndFeed create(List<Bookmark> bookmarks, String author, String title, String link, Date pubDate, String feedUri){
 		logger.debug("SyndFeedFactory create method called");
