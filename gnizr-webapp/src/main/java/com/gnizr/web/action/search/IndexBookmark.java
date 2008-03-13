@@ -109,30 +109,41 @@ public class IndexBookmark extends AbstractLoggedInUserAction implements Session
 			cnt = cnt+stat.getNumOfBookmarks();
 		}
 		status.setTotalBookmarkCount(cnt);
-		
-		List<User> users = userManager.listUsers();		
-		for(User user : users){
-			logger.debug("Indexing the bookmarks of user: " + user.getUsername());
+			
+		for(UserStat stat : userStats){
+			User user = userManager.getUser(stat.getUsername());
+			logger.info("Indexing the bookmarks of user: " + user.getUsername());
 			int ppc = 10;
 			int start = 0;
 			int numOfPages = bookmarkPager.getMaxPageNumber(user,ppc);
 			for(int i = 0; i < numOfPages; i++){
-				logger.debug("--> page=" + i + ", start="+start+", ppc=" + ppc);
+				//logger.debug("--> page=" + i + ", start="+start+", ppc=" + ppc);
 				DaoResult<Bookmark> result  = bookmarkPager.pageBookmark(user,start,ppc);
 				doIndex(result.getResult());
 				start = start + ppc;
-				int indexCount = status.getBookmarkIndexed();
-				status.setBookmarkIndexed(indexCount + ppc);				
+				int indexCount = status.getBookmarkIndexed() + ppc;
+				if(indexCount > status.getTotalBookmarkCount()){
+					status.setBookmarkIndexed(status.getTotalBookmarkCount());
+				}else{
+					status.setBookmarkIndexed(indexCount);
+				}								
 				while(searchIndexManager.getIndexProcessWorkLoad() > 222){
 					try{
 						logger.debug("Wait 5 seconds. SearchIndexManager seems to be too busy -- reach max load 222.");
 						Thread.sleep(5000);					
-					}catch(Exception e){
-						
+					}catch(Exception e){						
+						logger.error(e);					
 					}
 				}
 			}
-			
+			while(searchIndexManager.getIndexProcessWorkLoad() > 0){
+				try{
+					logger.debug("Wait 5 seconds. SearchIndexManager still has tasks left to work on.");
+					Thread.sleep(5000);
+				}catch(Exception e){
+					logger.error(e);
+				}
+			}			
 		}
 		return SUCCESS;
 	}

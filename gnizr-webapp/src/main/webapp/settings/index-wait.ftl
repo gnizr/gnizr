@@ -7,7 +7,7 @@
 <@ww.url id="thisPageHref" method="post" includeParams="none"/>
 <#-- if not logged in, redirect to the login page -->
 <@ensureUserLoggedIn>
-<#assign title="update search index -- ${loggedInUser.username} -- gnizr"/>
+<#assign title="rebuild search index -- ${loggedInUser.username} -- gnizr"/>
 <#assign username=loggedInUser.username/>
 <@pageBegin pageTitle=title cssHref=[gzUrl("/css/gnizr-settings.css")]>
 <meta http-equiv="refresh" content="5;url=${thisPageHref}"/>
@@ -15,11 +15,11 @@
 <@headerBlock>
 </@headerBlock>
 <@pageContent>
-  <#assign bct = settingsBCT(username) + [gzBCTPair('update search index',gzUrl('/settings/indexBookmark.action'))]/>
+  <#assign bct = settingsBCT(username) + [gzBCTPair('rebuild search index',gzUrl('/settings/indexBookmark.action'))]/>
   <@infoBlock bct=bct/>
 <@mainBlock>  
 <p class="notice-block">
-<span class="large-text">Please wait while the search index is being updated...</span> 
+<span class="large-text">Please wait while the search index is being created...</span> 
 <br/><br/>
 <#if (Session.status?exists == true)>
 Processing ${Session.status.bookmarkIndexed?c} of ${Session.status.totalBookmarkCount?c}

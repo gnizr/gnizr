@@ -8,7 +8,7 @@
 
 <#-- if not logged in, redirect to the login page -->
 <@ensureUserLoggedIn>
-<#assign title="update bookmark search index -- ${loggedInUser.username} -- gnizr"/>
+<#assign title="rebuild bookmark search index -- ${loggedInUser.username} -- gnizr"/>
 <#assign username=loggedInUser.username/>
 
 <@pageBegin pageTitle=title cssHref=[gzUrl("/css/gnizr-settings.css")]/>
@@ -16,18 +16,18 @@
 </@headerBlock>
 
 <@pageContent>
-  <#assign bct = settingsBCT(username) + [gzBCTPair('update search index',gzUrl('/settings/indexBookmark.action'))]/>
+  <#assign bct = settingsBCT(username) + [gzBCTPair('rebuild search index',gzUrl('/settings/indexBookmark.action'))]/>
   <@infoBlock bct=bct/>
 <@mainBlock>  
 <#if (status?exists == false)>
-<p>To update bookmark, click the button in below.</p>
+<p>To rebuild search index database, click the button in below.</p>
 <@ww.form action="updateIndex.action" namespace="/settings" method="post">
-  <@ww.submit cssClass="btn" value="Update Now"/>
+  <@ww.submit cssClass="btn" value="Rebuild Index Now"/>
 </@ww.form>
 <#else>
-Successfully updated search index.
+Search index created sucessfully!
 <ul>
-<li>Total number of bookmark index: ${status.bookmarkIndexed}</li>
+<li>Total number of bookmark indexed: ${status.bookmarkIndexed?c}</li>
 </ul>
 </#if>
 </@mainBlock>
