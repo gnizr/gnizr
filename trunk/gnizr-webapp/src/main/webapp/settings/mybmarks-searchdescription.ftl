@@ -7,7 +7,7 @@
   <Description>Search my saved bookmarks in gnizr</Description>
   <Tags>bookmarks gnizr</Tags>
   <gn:DefaultEnabled>true</gn:DefaultEnabled>
-  <Url type="text/xml" 
-       template="${gzUrl("/data/atom/user/search.action?username={loggedInUser}&amp;queryString={searchTerms}&amp;page={startPage}")}"/>
+  <Url type="application/vnd.gn-opensearch+json" 
+       template="${gzUrl("/data/json/user/searchBookmark.action?queryString={searchTerms}&amp;page={startPage}")}"/>
   <gn:LoginRequired>true</gn:LoginRequired>
 </OpenSearchDescription>

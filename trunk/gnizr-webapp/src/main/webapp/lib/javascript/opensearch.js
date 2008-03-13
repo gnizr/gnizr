@@ -250,20 +250,30 @@ SearchExecutor.prototype.fetchMoreData = function(){
        resultTile.hideLoadingDialog();  
        MochiKit.Logging.log('fetch data failed. ' + result);
     }    
-    MochiKit.Logging.log('try to fetchMoreData from : ' + this.searchDataUrl);    
-    if(MochiKit.Base.isUndefinedOrNull(proxyUrl) == false){        
-        if(MochiKit.Base.isUndefinedOrNull(this.searchDataUrl) == false){
-            this.resultTile.showLoadingDialog();
-            var callUrl = proxyUrl + encodeURIComponent(this.searchDataUrl);
-            MochiKit.Logging.log('AJAX call: ' + callUrl);
-            var d = MochiKit.Async.loadJSONDoc(callUrl);
-            d.addCallbacks(onSucceed,onFailed);            
-        }else{
-            MochiKit.Logging.log('No more results in the searh stream. Halt.');
-        }
+    MochiKit.Logging.log('try to fetchMoreData from : ' + this.searchDataUrl);        
+      
+    if(MochiKit.Base.isUndefinedOrNull(this.searchDataUrl) == false){
+    	var callUrl = null;
+    	if(this.service.type == 'synd'){
+    		if(MochiKit.Base.isUndefinedOrNull(proxyUrl) == false){
+    			callUrl =  proxyUrl + encodeURIComponent(this.searchDataUrl);	
+    		}else{
+    	   		alert('Internal Error: proxy URL is undefined');  
+	    	}
+    	}else if(this.service.type == 'gn-json'){
+    		callUrl = this.searchDataUrl;
+	    }else{
+    		MochiKit.Logging.log('Unsupport OpenSearch result type: neither gn-json or synd');
+	    }
+	    if(MochiKit.Base.isUndefinedOrNull(callUrl) == false){
+    		this.resultTile.showLoadingDialog();
+   			MochiKit.Logging.log('AJAX call: ' + callUrl);
+        	var d = MochiKit.Async.loadJSONDoc(callUrl);
+        	d.addCallbacks(onSucceed,onFailed);            
+	    }
     }else{
-        alert('Internal Error: proxy URL is undefined');    
-    }    
+    	MochiKit.Logging.log('No more results in the searh stream. Halt.');
+    }
 }
 
 SearchExecutor.prototype.terminate = function(){

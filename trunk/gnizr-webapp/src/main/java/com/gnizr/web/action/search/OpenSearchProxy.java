@@ -75,7 +75,7 @@ public class OpenSearchProxy extends AbstractAction{
 	}
 	
 	@SuppressWarnings("unchecked")
-	private JSONObject createJsonResult(SyndFeed feed){		
+	public static JSONObject createJsonResult(SyndFeed feed){		
 		Map<String,Object> map = new HashMap<String, Object>();
 		map.put(KEY_TITLE, feed.getTitle());
 		map.put(KEY_LINK,feed.getLink());
@@ -108,7 +108,7 @@ public class OpenSearchProxy extends AbstractAction{
 		return JSONObject.fromObject(map);				
 	}
 	
-	private String getTidyText(String text){
+	private static String getTidyText(String text){
 		if(text != null){
 			String s = FormatUtil.extractTextFromHtml(text);
 			s = FormatUtil.removeLongWord(s,20);
