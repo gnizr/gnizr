@@ -35,4 +35,10 @@
 		</property>
 	</bean>
 	
+	<bean id="searchUserBookmark" class="com.gnizr.web.action.search.SearchUserBookmark" singleton="false">
+		<property name="bookmarkSearcher">
+			<ref bean="bookmarkSearcher"/>
+		</property>
+	</bean>
+	
 </beans>

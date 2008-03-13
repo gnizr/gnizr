@@ -50,6 +50,8 @@
 <li><a href="${adminUser}" title="edit user accounts">Manage user accounts</a></li>
 <@ww.url id="adminRssRobotHref" namespace="/admin" action="robot.action" includeParams="none"/>
 <li><a href="${adminRssRobotHref}" title="change RSS robot settings">Manage RSS robot</a></li>
+<@ww.url id="upIndexHref" namespace="/settings" action="indexBookmark.action" includeParams="none"/>
+<li><a href="${upIndexHref}" title="rebuild search index">Rebuild search index</a></li>
 </ul>
 </@settingsBlock>
 <#--

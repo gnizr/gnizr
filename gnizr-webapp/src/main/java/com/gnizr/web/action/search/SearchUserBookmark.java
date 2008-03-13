@@ -11,36 +11,27 @@ import com.gnizr.core.search.BookmarkSearcher;
 import com.gnizr.core.util.GnizrDaoUtil;
 import com.gnizr.core.util.SyndFeedFactory;
 import com.gnizr.db.dao.DaoResult;
+import com.gnizr.db.dao.User;
 import com.gnizr.web.action.AbstractPagingAction;
+import com.gnizr.web.action.LoggedInUserAware;
 import com.gnizr.web.action.OpenSearchResultAware;
 import com.sun.syndication.feed.synd.SyndFeed;
 
-public class SearchCommunityBookmark extends AbstractPagingAction implements OpenSearchResultAware{
+
+public class SearchUserBookmark extends AbstractPagingAction implements LoggedInUserAware, OpenSearchResultAware{
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 2956638031909684580L;
+	private static final long serialVersionUID = 1924677398312543973L;
 
+	private User loggedInUser;
 	private String queryString;
-	private List<BookmarkDoc> bookmarks;
 	private int totalMatched;
+	private List<BookmarkDoc> bookmarks;
 	
 	private BookmarkSearcher bookmarkSearcher;
 	
-	
-	public BookmarkSearcher getBookmarkSearcher() {
-		return bookmarkSearcher;
-	}
-
-	public void setBookmarkSearcher(BookmarkSearcher bookmarkSearcher) {
-		this.bookmarkSearcher = bookmarkSearcher;
-	}
-
-	public List<BookmarkDoc> getBookmarks() {
-		return bookmarks;
-	}
-
 	public String getQueryString() {
 		return queryString;
 	}
@@ -49,14 +40,38 @@ public class SearchCommunityBookmark extends AbstractPagingAction implements Ope
 		this.queryString = queryString;
 	}
 
+	public BookmarkSearcher getBookmarkSearcher() {
+		return bookmarkSearcher;
+	}
+
+	public void setBookmarkSearcher(BookmarkSearcher bookmarkSearcher) {
+		this.bookmarkSearcher = bookmarkSearcher;
+	}
+	
+	public User getUser(){
+		return getLoggedInUser();
+	}
+
+	public User getLoggedInUser() {
+		return loggedInUser;
+	}
+
+	public int getTotalMatched() {
+		return totalMatched;
+	}
+
+	public List<BookmarkDoc> getBookmarks() {
+		return bookmarks;
+	}
+
 	@Override
 	protected String go() throws Exception {
 		initPagingAction();
 		if(getQueryString() != null){
-			int offset = computeOffset(getPage());			
+			int offset = computeOffset(getPage());
 			DaoResult<BookmarkDoc> result = null;
 			try{
-				result = bookmarkSearcher.searchAll(getQueryString(),offset,getPerPageCount());
+				result = bookmarkSearcher.searchUser(getQueryString(),getUser().getUsername(),offset,getPerPageCount());
 				int max = computeMaxPageNumber(getPerPageCount(),result.getSize());
 				setTotalNumOfPages(max);
 				setNextPageNum(getPage(),max);
@@ -68,14 +83,14 @@ public class SearchCommunityBookmark extends AbstractPagingAction implements Ope
 			}
 			if(bookmarks == null){
 				bookmarks = new ArrayList<BookmarkDoc>();
-			}
-			return SUCCESS;
+			}	
 		}
-		return INPUT;
+		
+		return SUCCESS;
 	}
-	
+
 	public SyndFeed getOpenSearchResult(){
-		String title = "Gnizr Search Result for '" + getQueryString() + "'";
+		String title = "Gnizr search result for '" + getQueryString() + "' -- saved by " + getUser().getFullname();
 		String author = "gnizr";
 		String link = getGnizrConfiguration().getWebApplicationUrl();
 		String feedUri = GnizrDaoUtil.getRandomURI();
@@ -84,7 +99,7 @@ public class SearchCommunityBookmark extends AbstractPagingAction implements Ope
 		syndFeed = SyndFeedFactory.addOpenSearchModule(syndFeed,getPerPageCount(),computeOffset(getPage()),getTotalMatched(), null);
 		return syndFeed;
 	}
-
+	
 	public JSONObject getJsonResult(){
 		SyndFeed feed = getOpenSearchResult();
 		if(feed != null){
@@ -93,7 +108,8 @@ public class SearchCommunityBookmark extends AbstractPagingAction implements Ope
 		return null;
 	}
 	
-	public int getTotalMatched() {
-		return totalMatched;
+	public void setLoggedInUser(User user) {
+		this.loggedInUser = user;		
 	}
+
 }
