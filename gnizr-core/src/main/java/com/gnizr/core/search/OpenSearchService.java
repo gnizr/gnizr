@@ -34,6 +34,17 @@ public class OpenSearchService implements Serializable{
 	private boolean supportsIndexBased;
 	private boolean loginRequired;
 	private boolean defaultEnabled;
+
+	/**
+	 * Flag that identifies a service that output opensearch result in a syndication XML format (RSS or Atom). 
+	 * This flag has string value: <code>synd</code>
+	 */
+	public static final String TYPE_SYND = "synd";
+	/**
+	 * Flag that identifies a service that output opensearch result in a gnizr-specific JSON format.
+	 * This flag has string value: <code>gn-json</code>
+	 */
+	public static final String TYPE_GN_JSON = "gn-json";
 	
 	public OpenSearchService(){
 		tags = new String[0];
