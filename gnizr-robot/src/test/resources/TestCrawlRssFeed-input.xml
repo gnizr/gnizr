@@ -13,7 +13,7 @@
 		/>
 	<link id="203" mime_type_id="1003" url="http://rss.slashdot.org/Slashdot/slashdot" url_hash="0a30ee5d677d2e622cac4572bc0a415a"
 		/>
-	<link id="204" mime_type_id="1003" url="http://groups.google.com/group/gnizr-users/web/eqs7day-M2.5.xml" url_hash="39c08245d8ba57e6007e2d0422b07565"
+	<link id="204" mime_type_id="1003" url="http://dev.gnizr.com/test-data/eqs7day-M2.5.xml" url_hash="a8ba06181e9cf2215613ed740a804197"
 		/>
 	<bookmark id="300" user_id="2" link_id="202" title="CNN News Feed"
 		notes="top news" created_on="2006-11-16 21:55:19.0" last_updated="2006-11-19 21:55:19.0" 
