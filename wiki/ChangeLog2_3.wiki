@@ -5,7 +5,9 @@
 
 Changelog
   * [http://code.google.com/p/gnizr/issues/detail?id=45 Issue 45]: Dangling thread is detected after gnizr is shutdown (fixed, need testing)
-
+  * [http://code.google.com/p/gnizr/issues/detail?id=46 Issue 46]: JUnit tests failed when building gnizr-robot package (fixed, verified)
+  * Updated doc that describes the [DevUserManageAndAuth User Authentication] implementation
+  * Updated gnizr Java API documentation
 
 ==== Version 2.3.0-RC1 (11 February 2008) ====
 
