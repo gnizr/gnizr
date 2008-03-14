@@ -1,4 +1,11 @@
-#summary Inside user management and authentication implementation
+#summary Gnizr user management and authentication implementation
 #labels Phase-Design,Phase-Implementation
 
-how user management is implemented and how gnizr authenticates user sign-on.
+=User Authentication=
+
+Gnizr implements a session-based user authentication. After a user is logged in, a special authentication object of the user is created in the HTTP Session. This object is subsequently used to authenticate the user when the client browser is trying access protected pages in gnizr. 
+
+When a user is logged out, the user's authentication object is removed from the session. The authentication object may also be destroyed when a previously established HTTP session is expired. 
+
+When logging into the system, in the login page, the user can choose to enable a 'Remember Me' option. When this option is enabled, a special cookie object will be created on the client browser if the login is successful. This 'Remember Me' cookie allows the user to be automatically authenticated when a currently established HTTP session is expired. The life-span of this cookie is set to 'never expire'. When the user is logged out (i.e., the user clicks on the 'logout' link), the gnizr application will attempt to delete the 'Remember Me' cookie from the browser.
+
