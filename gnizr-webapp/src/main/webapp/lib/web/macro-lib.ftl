@@ -15,7 +15,7 @@ each gnizr page.
 </#function>
 
 <#function gnizrDevVersion >
-  <#return "-RC1"/>
+  <#return "-RC2"/>
 </#function>
 
 <#-- 
