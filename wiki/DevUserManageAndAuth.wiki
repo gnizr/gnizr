@@ -53,9 +53,13 @@ The injection of the class into `UserManager` is defined in `spring/core-manager
 These XML files are located in the `gnizr-webapp` project, directory `src/main/resources`.
 
 
+=WebWork Action Implementation=
 
+The class `com.gnizr.web.action.user.UserLogin` and `com.gnizr.web.action.user.UserLogout` handle user login and user logout functions, respectively.
 
+The `UserLogin` class is implemented to handle FORM input submitted by a user from a login page. The a pair `username` and `password` is received, the class uses the `UserManager` class to verify the login information. If the information is correct, then a special authentication object is created and placed in the HTTP session. This object is an instance of the `com.gnizr.db.dao.User` class, and it can be accessed from the session using the key string `loggedInUser`. The `UserLogin` class also handles the creation of the 'Remember Me' cookie. 
 
+The `UserLogout` class is implemented to handle user log out. When a logout request is received, this action removes the authentication object (i.e., key `loggedInUser`) from the HTTP session. If a 'Remember Me' cookie exists in the session, the action will attempt to delete it from the client browser. 
 
 
 
