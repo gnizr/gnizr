@@ -17,9 +17,10 @@
 package com.gnizr.web.util;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Properties;
 
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.InitializingBean;
 /**
  * <p>Holds the configuration of a gnizr web application. An instance of this class 
  * is usually created via Spring IoC in <code>gnizr-config.xml</code>. In this XML file,
@@ -65,7 +66,9 @@ import java.util.List;
  * @author Harry Chen
  *
  */
-public class GnizrConfiguration implements Serializable {
+public class GnizrConfiguration implements Serializable, InitializingBean {
+
+	private static final Logger logger = Logger.getLogger(GnizrConfiguration.class);
 	
 	private static final long serialVersionUID = 3110706144455468541L;
 	
@@ -76,78 +79,153 @@ public class GnizrConfiguration implements Serializable {
 	public static final String ANONYMOUS_READER_POLICY = "anonymousReaderPolicy";
 	public static final String REGISTRATION_POLICY = "registrationPolicy";
 	public static final String SERVER_MAINTENANCE = "serverMaintenanceModeEnabled";
-	public static final String OPENSEARCH_SERVICES = "openSearchServices";
-
-	private String webApplicationUrl;
-	private String googleMapsKey;
-	private String snapShotsKey;
-	private String anonymousReaderPolicy;
-	private String registrationPolicy;
-	private boolean serverMaintenanceModeEnabled;
-	private List<String> openSearchServices;
 	
+	private Properties gnizrProperties;
+
 	/**
 	 * Creates an instance of this class to hold
 	 * gnizr system configuration properties.
 	 *
 	 */
 	public GnizrConfiguration(){
-		openSearchServices = new ArrayList<String>();
+		gnizrProperties = new Properties();
 	}
 	
-	public String getWebApplicationUrl() {
-		return webApplicationUrl;
+	/**
+	 * Returns the <code>Properties</code> object that holds the
+	 * gnizr system configuration properties.
+	 * 
+	 * @return an instantiated <code>Properties</code> object
+	 * that holds the current system configruation
+	 */
+	public Properties getGnizrProperties() {
+		return gnizrProperties;
 	}
 
-	public void setWebApplicationUrl(String webApplicationUrl) {
-		this.webApplicationUrl = webApplicationUrl;
+	/**
+	 * Sets the <code>Properties</code> object that defines
+	 * gnizr system configuration properties. Old properties
+	 * will be replaced with <code>gnizrProperties</code>
+	 * 
+	 * @param gnizrProperties new system configuration properties
+	 */
+	public void setGnizrProperties(Properties gnizrProperties) {
+		this.gnizrProperties = gnizrProperties;
 	}
 
-	public String getGoogleMapsKey() {
-		return googleMapsKey;
+	/**
+	 * Sets the URL of this gnizr web application. If this 
+	 * paramater is defined, the system will use it to generate
+	 * URL full path for various links. If a gnizr web application
+	 * deployment is installed behind a firewall or on a J2EE container
+	 * whose hostname is different from the one that is seen by client browser,
+	 * set this URL paramater. 
+	 * <pre>
+	 *  http://host.domain.com
+	 * </pre>
+	 * 
+	 * @param url the web application URL
+	 */
+	public void setWebApplicationUrl(String url){
+		gnizrProperties.put(WEB_APPLICATION_URL,url);
+	}
+	
+	/**
+	 * Returns the URL of this gnizr web application. 
+	 * @return a URL string. If not defined, returns <code>null</code>.
+	 */
+	public String getWebApplicationUrl(){
+		return gnizrProperties.getProperty(WEB_APPLICATION_URL);
+	}
+	
+	/**
+	 * Sets the key string of Google Maps API Key
+	 * @param key key string
+	 */
+	public void setGoogleMapsKey(String key){
+		gnizrProperties.put(GOOGLE_MAPS_KEY, key);
 	}
 
-	public void setGoogleMapsKey(String googleMapsKey) {
-		this.googleMapsKey = googleMapsKey;
+	/**
+	 * Returns a string to be used as the Google Map API key
+	 * 
+	 * @return a key string. Returns <code>null</code> if no key is set.
+	 */
+	public String getGoogleMapsKey(){
+		return gnizrProperties.getProperty(GOOGLE_MAPS_KEY);
 	}
-
-	public String getSnapShotsKey() {
-		return snapShotsKey;
+	
+	/**
+	 * Sets a flag to define whether the service provided
+	 * by gnizr RSS robot should be turned on by default.
+	 * 
+	 * @param enabled Set <code>true</code> if the service should be 
+	 * turned by default. Set <code>false</code>, otherwise.
+	 */
+	public void setEnableRssRobot(boolean enabled){
+		gnizrProperties.put(ENABLE_RSS_ROBOT,Boolean.toString(enabled));
 	}
-
-	public void setSnapShotsKey(String snapShotsKey) {
-		this.snapShotsKey = snapShotsKey;
+	
+	/**
+	 * Returns the flag that defines whether the service 
+	 * provided by gnizr RSS robot should be turned on by default.
+	 * 
+	 * @return <code>true</code> if the service is turned by default. Returns
+	 * <code>false</code>, otherwise.
+	 */
+	public boolean isEnableRssRobot(){
+		String flag = gnizrProperties.getProperty(ENABLE_RSS_ROBOT,Boolean.toString(false));
+		return Boolean.parseBoolean(flag);
 	}
-
-	public String getAnonymousReaderPolicy() {
-		return anonymousReaderPolicy;
+	
+	
+	public String getSnapShotsKey(){
+		return gnizrProperties.getProperty(SNAPSHOTS_KEY);
 	}
-
-	public void setAnonymousReaderPolicy(String anonymousReaderPolicy) {
-		this.anonymousReaderPolicy = anonymousReaderPolicy;
+	
+	public void setSnapShotsKey(String key){
+		gnizrProperties.put(SNAPSHOTS_KEY,key);
 	}
-
-	public String getRegistrationPolicy() {
-		return registrationPolicy;
+	
+	
+	public void setAnonymousReaderPolicy(String policy){
+		gnizrProperties.put(ANONYMOUS_READER_POLICY,policy);
 	}
-
-	public void setRegistrationPolicy(String registrationPolicy) {
-		this.registrationPolicy = registrationPolicy;
+	
+	public String getAnonymousReaderPolicy(){
+		return gnizrProperties.getProperty(ANONYMOUS_READER_POLICY);
 	}
-
-	public boolean isServerMaintenanceModeEnabled() {
-		return serverMaintenanceModeEnabled;
+	
+	public void setRegistrationPolicy(String policy){
+		gnizrProperties.setProperty(REGISTRATION_POLICY,policy);
 	}
-
-	public void setServerMaintenanceModeEnabled(boolean serverMaintenanceModeEnabled) {
-		this.serverMaintenanceModeEnabled = serverMaintenanceModeEnabled;
+	
+	public String getRegistrationPolicy(){
+		return gnizrProperties.getProperty(REGISTRATION_POLICY);
 	}
-
-	public List<String> getOpenSearchServices() {
-		return openSearchServices;
+	
+	
+	public boolean isServerMaintenanceModeEnabled(){
+		String flag = gnizrProperties.getProperty(SERVER_MAINTENANCE,Boolean.toString(false));
+		return Boolean.parseBoolean(flag);
 	}
-
-	public void setOpenSearchServices(List<String> openSearchServices) {
-		this.openSearchServices = openSearchServices;
+	
+	public void setServerMaintenanceModeEnabled(boolean enabled){
+		gnizrProperties.put(SERVER_MAINTENANCE,Boolean.toString(enabled));
 	}
+	
+	
+	/**
+	 * Called by Spring to initialize this class when it is created
+	 * for the first.
+	 */
+	public void afterPropertiesSet() throws Exception {
+		for(Object key : gnizrProperties.keySet()){
+			System.setProperty((String)key, (String)gnizrProperties.get(key));
+			logger.debug("set system property: key="+key+",value="+gnizrProperties.get(key));
+		}
+	}
+	
+	
+	
 }

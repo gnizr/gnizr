@@ -30,14 +30,4 @@ public class TestFormatUtil extends TestCase {
 		String t = "jajdjdjdjdjjdjdjdjdjdjd 123 djdjdjdjdjdjdjjdd";
 		assertEquals("123",FormatUtil.removeLongWord(t,4).trim());
 	}
-	
-	public void testHighlightStarEnclosedText() throws Exception {
-		String t = "hello *world* *abc*";
-		String t2 = FormatUtil.highlightStarEnclosedText(t,"<b>", "</b>");
-		assertEquals("hello <b>world</b> <b>abc</b>",t2);
-		
-		t = "*dk* abc";
-		t2 = FormatUtil.highlightStarEnclosedText(t,"<b>", "</b>");
-		assertEquals("<b>dk</b> abc",t2);
-	}
 }

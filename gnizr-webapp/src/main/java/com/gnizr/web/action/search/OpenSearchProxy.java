@@ -13,7 +13,6 @@ import org.apache.log4j.Logger;
 import com.gnizr.core.util.FormatUtil;
 import com.gnizr.web.action.AbstractAction;
 import com.sun.syndication.feed.module.opensearch.OpenSearchModule;
-import com.sun.syndication.feed.synd.SyndContent;
 import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndFeed;
 import com.sun.syndication.io.SyndFeedInput;
@@ -75,7 +74,7 @@ public class OpenSearchProxy extends AbstractAction{
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static JSONObject createJsonResult(SyndFeed feed){		
+	private JSONObject createJsonResult(SyndFeed feed){		
 		Map<String,Object> map = new HashMap<String, Object>();
 		map.put(KEY_TITLE, feed.getTitle());
 		map.put(KEY_LINK,feed.getLink());
@@ -94,21 +93,14 @@ public class OpenSearchProxy extends AbstractAction{
 			entryMap.put(KEY_TITLE,getTidyText(e.getTitle()));
 			entryMap.put(KEY_LINK,e.getLink());
 			entryMap.put(KEY_AUTHOR,e.getAuthor());
-			SyndContent content = e.getDescription();
-			if(content != null && content.getValue() != null){
-				String tt = getTidyText(e.getDescription().getValue());
-				tt = FormatUtil.highlightStarEnclosedText(tt,"<span class=\"matched_text\">","</span>");
-				entryMap.put(KEY_SUMMARY,tt);
-			}else{
-				entryMap.put(KEY_SUMMARY,"");
-			}
+			entryMap.put(KEY_SUMMARY,getTidyText(e.getDescription().getValue()));
 			entries.add(entryMap);
 		}
 		map.put(KEY_ENTRIES, entries);
 		return JSONObject.fromObject(map);				
 	}
 	
-	private static String getTidyText(String text){
+	private String getTidyText(String text){
 		if(text != null){
 			String s = FormatUtil.extractTextFromHtml(text);
 			s = FormatUtil.removeLongWord(s,20);
@@ -116,5 +108,5 @@ public class OpenSearchProxy extends AbstractAction{
 		}
 		return null;
 	}
-	
+
 }

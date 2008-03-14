@@ -1,8 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
 	"http://www.springframework.org/dtd/spring-beans.dtd">
-<beans>	
-	<bean id="scheduledRssRobotTask"
+<beans>
+	
+	<bean id="timerFactoryBean"
+		class="org.springframework.scheduling.timer.TimerFactoryBean"
+		singleton="true">
+		<property name="scheduledTimerTasks">
+			<list>
+				<ref bean="scheduledTask"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="scheduledTask"
 		class="org.springframework.scheduling.timer.ScheduledTimerTask"
 		singleton="true">
 		<!-- wait 10 seconds before starting repeated execution -->

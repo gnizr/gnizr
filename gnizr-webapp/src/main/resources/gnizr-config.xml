@@ -69,23 +69,6 @@
 		<property name="serverMaintenanceModeEnabled">
 			<value>false</value>
 		</property>
-		<property name="openSearchServices">			
-			<list>
-				<value>/settings/opensearch/mybookmarks.action</value>
-				<value>/settings/opensearch/community.action</value>
-				<value>/settings/opensearch/yahoo-searchdescription.xml</value>
-				<value>http://www.pfaf.org/database/openSearch.rss</value>
-			</list>
-		</property>
-	</bean>
-	
-	<bean id="indexStoreProfile" class="com.gnizr.core.search.IndexStoreProfile" singleton="true">
-		<property name="directoryPath">
-			<value>D:/cygwin/tmp/search-data</value>
-		</property>
-		<property name="overwrite">
-			<value>false</value>
-		</property>
 	</bean>
 	
 </beans>

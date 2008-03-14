@@ -117,12 +117,8 @@ public class OpenSearchDirectory {
 						if (typeNode != null) {
 							type = typeNode.getNodeValue();
 							if (type.equals("text/xml")) {
-								type = OpenSearchService.TYPE_SYND;							
 								break;
-							} else if (type.equals("application/vnd.gn-opensearch+json")){
-								type = OpenSearchService.TYPE_GN_JSON;									
-								break;
-							}else{
+							} else {
 								urlNode = null;
 							}
 						}
@@ -139,7 +135,7 @@ public class OpenSearchDirectory {
 							urlpttn = urlNode.getFirstChild().getNodeValue();
 							// if <Url>[url]</Url>, assume format "text/xml"
 							if(urlpttn != null && type == null){
-								type = OpenSearchService.TYPE_SYND;
+								type = "text/xml";
 							}
 						}
 					}
@@ -176,7 +172,7 @@ public class OpenSearchDirectory {
 		return aService;
 	}
 	
-	public void init() {
+	public synchronized void init() {
 		if (services == null) {
 			services = new ArrayList<OpenSearchService>();
 			if (serviceUrls != null) {

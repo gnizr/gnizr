@@ -1,16 +1,12 @@
 package com.gnizr.core.util;
 
-import java.io.StringReader;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSet;
 
 import com.gnizr.core.GnizrCoreTestBase;
-import com.gnizr.core.search.BookmarkDoc;
 import com.gnizr.db.dao.Bookmark;
 import com.gnizr.db.dao.DaoResult;
 import com.gnizr.db.dao.User;
@@ -20,8 +16,6 @@ import com.sun.syndication.feed.synd.SyndCategory;
 import com.sun.syndication.feed.synd.SyndContent;
 import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndFeed;
-import com.sun.syndication.io.SyndFeedInput;
-import com.sun.syndication.io.SyndFeedOutput;
 
 public class TestSyndFeedFactory extends GnizrCoreTestBase {
 	
@@ -97,37 +91,6 @@ public class TestSyndFeedFactory extends GnizrCoreTestBase {
 		assertEquals(searchDescriptionUrl,osm.getLink().getHref());
 	}
 	
-	public void testCreateFromBookmarkDoc() throws Exception {
-		List<BookmarkDoc> docs = new ArrayList<BookmarkDoc>();
-		BookmarkDoc doc1 = new BookmarkDoc();
-		doc1.setTitle("bookmark 1 title");
-		doc1.setNotes("<p>some html description</p>");
-		doc1.setBookmarkId(123);
-		doc1.setUrl("http://foo.com/doc?id=102&p=334");
-		doc1.setUsername("johna");
-		doc1.setUrlHash("383774jd9383232");
-		docs.add(doc1);
-		
-		String feedUrl = "http://foo.com/feed?id=1&p=3";
-		Date pubDate = GregorianCalendar.getInstance().getTime();
-		String title = "a feed of bookmark docs";
-		String feedAuthor = "john s";
-		
-		SyndFeed syndFeed = SyndFeedFactory.createFromBookmarkDoc(docs,feedAuthor, title, feedUrl, pubDate, null);
-		assertNotNull(syndFeed);
-		assertEquals(1,syndFeed.getEntries().size());
 	
-		syndFeed.setFeedType("atom_1.0");
-		
-		SyndFeedOutput output = new SyndFeedOutput();
-		String feedData = output.outputString(syndFeed);		
-		
-		StringReader sreader = new StringReader(feedData);
-		SyndFeedInput input = new SyndFeedInput(true);
-		SyndFeed copyFeed = input.build(sreader);
-		assertNotNull(copyFeed);
-	}
-	
-
 	
 }

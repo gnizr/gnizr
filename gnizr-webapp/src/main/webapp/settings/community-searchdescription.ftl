@@ -6,6 +6,6 @@
   <Description>Search bookmarks in gnizr</Description>
   <Tags>bookmarks gnizr</Tags>
   <gn:DefaultEnabled>true</gn:DefaultEnabled>
-  <Url type="application/vnd.gn-opensearch+json"
-       template="${gzUrl("/data/json/community/searchBookmark.action?queryString={searchTerms}&amp;page={startPage}")}"/>
+  <Url type="text/xml" 
+       template="${gzUrl("/data/atom/community/search.action?queryString={searchTerms}&amp;page={startPage}")}"/>
 </OpenSearchDescription>

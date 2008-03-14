@@ -12,7 +12,11 @@
 		</property>
 	</bean>	
 	
-	<bean id="listSearchEngines" class="com.gnizr.web.action.search.ListSearchEngines" singleton="false"/>
+	<bean id="listSearchEngines" class="com.gnizr.web.action.search.ListSearchEngines" singleton="false">
+		<property name="openSearchDirectory">
+			<ref bean="openSearchDirectory"/>
+		</property>
+	</bean>
 	
 	<bean id="suggestSearchTags" class="com.gnizr.web.action.search.SuggestSearchTags" singleton="false">
 		<property name="tagManager">
@@ -22,23 +26,4 @@
 			<ref bean="tagPager"/>
 		</property>
 	</bean>
-	
-	<bean id="indexBookmark" class="com.gnizr.web.action.search.IndexBookmark" singleton="false">
-		<property name="searchIndexManager">
-		 	<ref bean="searchIndexManager"/>
-		</property>
-	</bean>
-	
-	<bean id="searchCommunityBookmark" class="com.gnizr.web.action.search.SearchCommunityBookmark" singleton="false">
-		<property name="bookmarkSearcher">
-			<ref bean="bookmarkSearcher"/>
-		</property>
-	</bean>
-	
-	<bean id="searchUserBookmark" class="com.gnizr.web.action.search.SearchUserBookmark" singleton="false">
-		<property name="bookmarkSearcher">
-			<ref bean="bookmarkSearcher"/>
-		</property>
-	</bean>
-	
 </beans>

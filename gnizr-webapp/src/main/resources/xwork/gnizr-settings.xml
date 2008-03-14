@@ -246,30 +246,6 @@
 			<result name="input" type="freemarker">/settings/import-delicious.ftl</result>
 			<result name="error">/common/error.ftl</result>
 		</action>
-		
-		<action name="indexBookmark" class="com.gnizr.web.action.search.IndexBookmark" 
-				method="doDefault">
-			<interceptor-ref name="loggedIn"/>
-			<interceptor-ref name="auth"/>						
-			<interceptor-ref name="auth-gnizr"/>
-			<interceptor-ref name="gnizrDefaultStack"/>	         								
-			<result name="success" type="freemarker">/settings/index-bookmark.ftl</result>
-			<result name="input" type="freemarker">/settings/index-bookmark.ftl</result>
-			<result name="error">/common/error.ftl</result>
-		</action>
-
-		<action name="updateIndex" class="com.gnizr.web.action.search.IndexBookmark">
-			<interceptor-ref name="loggedIn"/>
-			<interceptor-ref name="auth"/>						
-			<interceptor-ref name="auth-gnizr"/>
-			<interceptor-ref name="gnizrDefaultStack"/>
-			<interceptor-ref name="execAndWait"/>	
-			<result name="wait" type="freemarker">/settings/index-wait.ftl</result>
-			<result name="success" type="freemarker">/settings/index-bookmark.ftl</result>		
-			<result name="error">/common/error.ftl</result>
-		</action>
-
-		
 	</package>
 	
 </xwork>

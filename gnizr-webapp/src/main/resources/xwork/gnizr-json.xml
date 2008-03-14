@@ -152,27 +152,5 @@
 		</action>
 	</package>
 	
-	<package name="gnizr-json-user" extends="gnizr-default" namespace="/data/json/user">		
-		<action name="searchBookmark" class="com.gnizr.web.action.search.SearchUserBookmark">
-			<interceptor-ref name="loggedIn"/>
-			<interceptor-ref name="auth"/>			
-			<interceptor-ref name="gnizrDefaultStack"/>		
-			<result name="success" type="json">								
-				<param name="jsonName">jsonResult</param>							
-			</result>	
-			<result name="input" type="freemarker">/common/empty-template.ftl</result>
-		</action>
-	</package>	
-	
-	<package name="gnizr-json-community" extends="gnizr-default" namespace="/data/json/community">		
-		<action name="searchBookmark" class="com.gnizr.web.action.search.SearchCommunityBookmark">
-			<interceptor-ref name="loggedIn"/>	
-			<interceptor-ref name="gnizrDefaultStack"/>		
-			<result name="success" type="json">								
-				<param name="jsonName">jsonResult</param>							
-			</result>	
-			<result name="input" type="freemarker">/common/empty-template.ftl</result>
-		</action>		
-	</package>
 	
 </xwork>
