@@ -152,6 +152,16 @@
 		</action>
 	</package>
 	
+	<package name="gnizr-json-bmarks" extends="gnizr-default" namespace="/data/json/bookmark">
+		<action name="getInfo" class="com.gnizr.web.action.bookmark.FetchBookmark">
+			<interceptor-ref name="loggedIn"/>							
+            <interceptor-ref name="gnizrDefaultStack"/>										
+			<result name="success" type="json">
+				<param name="jsonName">jsonResult</param>				
+			</result>		
+		</action>
+	</package>
+	
 	<package name="gnizr-json-user" extends="gnizr-default" namespace="/data/json/user">		
 		<action name="searchBookmark" class="com.gnizr.web.action.search.SearchUserBookmark">
 			<interceptor-ref name="loggedIn"/>
