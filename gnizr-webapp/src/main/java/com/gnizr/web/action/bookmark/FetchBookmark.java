@@ -16,16 +16,22 @@
  */
 package com.gnizr.web.action.bookmark;
 
+import java.util.Map;
+
+import net.sf.json.JSON;
+import net.sf.json.JSONObject;
+import net.sf.json.JSONSerializer;
+
 import org.apache.log4j.Logger;
 
 import com.gnizr.core.bookmark.BookmarkManager;
+import com.gnizr.core.util.FormatUtil;
 import com.gnizr.db.dao.Bookmark;
 import com.gnizr.db.dao.User;
 import com.gnizr.web.action.AbstractAction;
 import com.gnizr.web.action.LoggedInUserAware;
-import com.opensymphony.xwork.Preparable;
 
-public class FetchBookmark extends AbstractAction implements LoggedInUserAware, Preparable{
+public class FetchBookmark extends AbstractAction implements LoggedInUserAware{
 
 	private static final Logger logger = Logger.getLogger(FetchBookmark.class);
 
@@ -41,13 +47,6 @@ public class FetchBookmark extends AbstractAction implements LoggedInUserAware, 
 	 */
 	public Bookmark getBookmark() {
 		return bookmark;
-	}
-
-	/**
-	 * @param bookmark the bookmark to set
-	 */
-	public void setBookmark(Bookmark bookmark) {
-		this.bookmark = bookmark;
 	}
 
 	/**
@@ -87,23 +86,24 @@ public class FetchBookmark extends AbstractAction implements LoggedInUserAware, 
 
 	@Override
 	protected String go() throws Exception {
-		if(bookmark == null){
-			return ERROR;
-		}else{
-			return SUCCESS;
+		logger.debug("FetchBookmark.go()");
+		if(getBookmarkId() > 0){
+			bookmark = bookmarkManager.getBookmark(getBookmarkId());
 		}
+		return SUCCESS;
 	}
 
 	public void setLoggedInUser(User user) {
 		this.loggedInUser = user;		
 	}
 
-	public void prepare() throws Exception {
-		if(bookmarkId > 0){
-			bookmark = bookmarkManager.getBookmark(bookmarkId);
+	public JSON getJsonResult(){
+		if(bookmark == null){
+			return new JSONObject();			
 		}else{
-			bookmark = null;
+			Map<String,Object> bookmarkMap = FormatUtil.getBookmarkAsMap(bookmark);
+			return JSONSerializer.toJSON(bookmarkMap);
 		}
-		logger.debug("fetched bookmark: bookmarkId="+bookmarkId+",bookmark="+bookmark);
 	}
+	
 }
