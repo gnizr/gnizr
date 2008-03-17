@@ -8,14 +8,17 @@ import net.sf.json.JSONObject;
 
 import com.gnizr.core.search.BookmarkDoc;
 import com.gnizr.core.search.BookmarkSearcher;
+import com.gnizr.core.search.DocumentCreator;
 import com.gnizr.core.util.GnizrDaoUtil;
 import com.gnizr.core.util.SyndFeedFactory;
 import com.gnizr.db.dao.DaoResult;
+import com.gnizr.db.dao.User;
 import com.gnizr.web.action.AbstractPagingAction;
+import com.gnizr.web.action.LoggedInUserAware;
 import com.gnizr.web.action.OpenSearchResultAware;
 import com.sun.syndication.feed.synd.SyndFeed;
 
-public class SearchCommunityBookmark extends AbstractPagingAction implements OpenSearchResultAware{
+public class SearchCommunityBookmark extends AbstractPagingAction implements OpenSearchResultAware, LoggedInUserAware{
 
 	/**
 	 * 
@@ -25,6 +28,7 @@ public class SearchCommunityBookmark extends AbstractPagingAction implements Ope
 	private String queryString;
 	private List<BookmarkDoc> bookmarks;
 	private int totalMatched;
+	private User loggedInUser;
 	
 	private BookmarkSearcher bookmarkSearcher;
 	
@@ -56,7 +60,14 @@ public class SearchCommunityBookmark extends AbstractPagingAction implements Ope
 			int offset = computeOffset(getPage());			
 			DaoResult<BookmarkDoc> result = null;
 			try{
-				result = bookmarkSearcher.searchAll(getQueryString(),offset,getPerPageCount());
+				StringBuilder qs = new StringBuilder(getQueryString());
+				if(loggedInUser != null && loggedInUser.getUsername() != null){
+					qs.append(" -");
+					qs.append(DocumentCreator.FIELD_USER);
+					qs.append(":");
+					qs.append(loggedInUser.getUsername());
+				}				
+				result = bookmarkSearcher.searchAll(qs.toString(),offset,getPerPageCount());
 				int max = computeMaxPageNumber(getPerPageCount(),result.getSize());
 				setTotalNumOfPages(max);
 				setNextPageNum(getPage(),max);
@@ -95,5 +106,9 @@ public class SearchCommunityBookmark extends AbstractPagingAction implements Ope
 	
 	public int getTotalMatched() {
 		return totalMatched;
+	}
+
+	public void setLoggedInUser(User user) {
+		this.loggedInUser = user;		
 	}
 }
