@@ -79,7 +79,7 @@ INPUT: postUrl
     </#list>
    ::
   </#if>
-   saved by <a href="${gzLinkUrl(postLink.urlHash)}">${postLink.count}
+  saved by <a href="${gzBookmarkUrl(postId?c)}">${postLink.count}
   <#if (postLink.count > 1)>people <#else> person</#if></a>
    :: ${postCreatedOn?string("EEE, MMM d, ''yy")}
    </div>

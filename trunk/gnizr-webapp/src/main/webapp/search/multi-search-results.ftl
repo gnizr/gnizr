@@ -10,8 +10,10 @@
  imagePathUrl = '${gzUrl("/images")}';
  queryTerm = '${q?if_exists?js_string}';
  proxyUrl = '${gzUrl("/data/json/searchproxy.action?searchUrl=")}';
+ bookmarkDetailUrl = '${gzUrl("/bookmark/id")}';
  <#-- global variables defined in suggest-searchterms.js -->
  searchUrl = '${thisPageBaseHref}';
+ <#-------------------------------------------------------->
  postUrl = '${gzUrl("/post?")}';
  <#if q?exists>
  fetchSuggestionUrl = '${gzUrl("/data/json/suggestSearchTags.action?q="+q?js_string)}';

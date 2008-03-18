@@ -153,7 +153,8 @@
 	</package>
 	
 	<package name="gnizr-json-bmarks" extends="gnizr-default" namespace="/data/json/bookmark">
-		<action name="getInfo" class="com.gnizr.web.action.bookmark.FetchBookmark">
+		<action name="getInfo" class="com.gnizr.web.action.bookmark.FetchBookmark"
+  		        method="doGetBookmarkOnly">
 			<interceptor-ref name="loggedIn"/>							
             <interceptor-ref name="gnizrDefaultStack"/>										
 			<result name="success" type="json">

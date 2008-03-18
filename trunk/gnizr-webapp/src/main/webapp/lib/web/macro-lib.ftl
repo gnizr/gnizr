@@ -64,6 +64,11 @@ INPUT: pageTitle:String // the <title/> of this HTML page
 <meta name="generator" content="Gnizr ${gnizrVersion()}${gnizrDevVersion()}"></meta>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
 <title>${pageTitle}</title>
+<link rel="shortcut icon" href="${gzUrl('/images/favicon.ico')}" />
+
+<!-- GNIZR OPENSEARCH DESCRIPTION -->
+<link rel="search" type="application/opensearchdescription+xml" href="${gzUrl('/settings/opensearch/description.action')}" title="Gnizr" />
+
 <!-- GNIZR DEFAULT CSS -->
 <link href="${gzUrl("/css/gnizr-default.css")}" rel="stylesheet" type="text/css">
 <link href="${gzUrl("/css/gnizr-header.css")}" rel="stylesheet" type="text/css">
@@ -213,13 +218,16 @@ as <h1/> (page header) of this page:
 <div id="search-box">
 <@ww.form action="search" namespace="/bookmark" theme="simple">
   <@ww.textfield id="search-input" name="queryString" value="${queryString?if_exists}" size="40"/>
+  <@ww.hidden name="type" value="opensearch"/>
+  <#--
     <#if loggedInUser?exists> 
       <#assign opt = r"#{'opensearch':'OpenSearch','user':'My Bookmark Archive','text':'Community'}"/>
       <@ww.select id="search-space" name="type" list=opt/>   
     <#else>
       <@ww.hidden name="type" value="opensearch"/>
     </#if>      
-    <@ww.submit id="search-submit" cssClass="btn" value="Search"/>    
+    -->
+    <@ww.submit id="search-submit" cssClass="" value="Search"/>    
 </@ww.form>
 </div>
 <div id="header2-menu">   

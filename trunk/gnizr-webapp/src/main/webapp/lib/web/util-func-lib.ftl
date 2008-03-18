@@ -185,6 +185,10 @@ Encodes a RESTful url representation of a link page
   <#return gzUrl("/url/"+linkUrlHash)/>
 </#function>
 
+<#function gzBookmarkUrl bookmarkId>
+  <#return gzUrl("/bookmark/id/"+bookmarkId)/>
+</#function>
+
 <#--
 ===================================================================
 FUNCTION: gzJsUrl
