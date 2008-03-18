@@ -14,6 +14,6 @@ Changelog
   * Deprecated !LinkManager.getLinkHistory and created pageListHistory
   * Changed the URI format for identifying bookmark in an !OpenSearch result feed
   * Replaced SQL-driven search with Lucene search.
-  * Combined all searches under a single !OpenSearch funcion.
+  * Combined all searches under a single !OpenSearch function.
   * Replaced the old Link History page with a new View Bookmark Detail page.
-  * Enabled Firefox to discovery gnizr opensearch service. Gnizr search engine can be added to the Browser search bar. 
+  * Enabled Firefox to discover gnizr opensearch service. Gnizr search engine can be added to the Browser search bar. 
