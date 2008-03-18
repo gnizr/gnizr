@@ -10,3 +10,10 @@ Changelog
     * SVN Revision: 579
   * Merged `OpenSearchDirectory` configuration into `gnizr-config.xml`
     * SVN Revision: 583
+  * Fixed !BookmarkDBDao.pageBookmarks(Link,int,int) to instantiate the full result object.
+  * Deprecated !LinkManager.getLinkHistory and created pageListHistory
+  * Changed the URI format for identifying bookmark in an !OpenSearch result feed
+  * Replaced SQL-driven search with Lucene search.
+  * Combined all searches under a single !OpenSearch funcion.
+  * Replaced the old Link History page with a new View Bookmark Detail page.
+  * Enabled Firefox to discovery gnizr opensearch service. Gnizr search engine can be added to the Browser search bar. 
