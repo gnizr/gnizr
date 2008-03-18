@@ -178,6 +178,15 @@
 	
 	<package name="gnizr-opensearch-description" extends="gnizr-default"
 		namespace="/settings/opensearch">
+		<action name="description"
+			class="com.gnizr.web.action.settings.ListSettings"
+			method="doDefault">			
+			<interceptor-ref name="gnizrNoPolicyDefaultStack"/>
+			<result name="success" type="freemarker">
+				<param name="location">/settings/gnizr-searchdescription.ftl</param>
+				<param name="contentType">text/xml</param>
+			</result>
+		</action>
 		<action name="mybookmarks"
 			class="com.gnizr.web.action.settings.ListSettings"
 			method="doDefault">			

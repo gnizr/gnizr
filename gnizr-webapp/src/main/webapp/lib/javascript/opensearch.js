@@ -6,6 +6,8 @@ var selectSearchServicesULID = 'selectSearchServices';
 var entryFocusedClass = 'resultEntryFocused';
 var saveResultLinkClass = 'saveLink';
 var linkActionClass = 'linkAction';
+var viewDetailClass = 'viewDetail'
+var viewDetailLinkClass = 'viewDetailLink';
 
 /* Cookie related global variables */
 var chckSrvCookieName = 'rememberCheckedServices';
@@ -18,6 +20,7 @@ var searchManager = null;
 var queryTerm = null;
 var proxyUrl = null;
 var postUrl = null;
+var bookmarkDetailUrl = null;
 var loggedInUser = null;
 var loadingImg = '/loading-bar-blue.gif';
 var checkedServicesMap = {};
@@ -177,15 +180,27 @@ SearchExecutor.prototype.fetchMoreData = function(){
          }
          var link = anEntry.link;
          var editLinkElm = '';
+         // setup the hock for injecting a quick-save or edit-bookmark link
          if(MochiKit.Base.isUndefinedOrNull(loggedInUser) == false){
             editLinkElm = MochiKit.DOM.SPAN({'class':'invisible ' + linkActionClass},
                MochiKit.DOM.A({'href':'#','class':'system-link ' + saveResultLinkClass},'')); 
          }
+         // setup the hack for injecting a view-bookmark-detail link
+         var id = parseBookmarkId(anEntry.id);
+         var viewDetailElm = '';
+         if(id > 0){
+         	MochiKit.Logging.log('Found gnizr bookmark id:' + id);
+         	var dtlUrl = bookmarkDetailUrl + '/' + id;
+         	viewDetailElm = MochiKit.DOM.SPAN({'class':'invisible ' + viewDetailClass},
+         	   MochiKit.DOM.A({'href':dtlUrl,'target':'_blank','class':'system-link ' + viewDetailLinkClass},'view'));
+         }         
          var summaryElm = MochiKit.DOM.P({'class':'entryDescription'});
          summaryElm.innerHTML = summary;
          var entryElm = MochiKit.DOM.LI(null,
             MochiKit.DOM.A({'class':'entryTitle','href':link,'target':'_blank'},title),
             editLinkElm,
+            ' ',
+            viewDetailElm,
 			summaryElm            
           );                                  
          MochiKit.DOM.appendChildNodes(resultElm,entryElm); 

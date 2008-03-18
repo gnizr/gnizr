@@ -279,5 +279,9 @@
   <to last="true">/images/markers/red-dot.png</to>		
 </rule>	
 	
+<rule>
+  <from>^/bookmark/id/([0-9]+)$</from>
+  <to last="true">/community/getBookmarkInfo.action?bookmarkId=$1</to>
+</rule>	
 </urlrewrite>
 

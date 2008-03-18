@@ -117,7 +117,14 @@
 			<result name="input" type="redirect">/home</result>
 			<result name="error" type="freemarker">/common/error.ftl</result>
 		</action>
-		
+	</package>
+
+	<package name="gnizr-bookmark-info" extends="gnizr-default" namespace="/community">
+		<action name="getBookmarkInfo" class="com.gnizr.web.action.bookmark.FetchBookmark">
+			<interceptor-ref name="loggedIn"/>
+			<interceptor-ref name="gnizrDefaultStack"/>
+			<result name="success" type="freemarker">/bookmarks/view-detail.ftl</result>
+		</action>		
 	</package>
 	
 	<package name="gnizr-forme-bookmarks" extends="gnizr-default"
