@@ -218,7 +218,7 @@ public class BookmarkDBDao implements BookmarkDao{
 				size = 0;
 			}
 			while(rs.next()){
-				Bookmark b = createBookmarkObject(rs);
+				Bookmark b = createBookmarkObject2(rs);
 				logger.debug("found bmark="+b);
 				bmarks.add(b);
 			}
