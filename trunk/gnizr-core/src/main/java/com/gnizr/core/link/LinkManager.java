@@ -23,6 +23,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import com.gnizr.core.exceptions.NoSuchLinkException;
 import com.gnizr.core.util.GnizrDaoUtil;
 import com.gnizr.db.dao.Bookmark;
 import com.gnizr.db.dao.DaoResult;
@@ -71,6 +72,11 @@ public class LinkManager implements Serializable{
 		return null;
 	}
 	
+	/**
+	 * @deprecated Since 2.4
+	 * @param link
+	 * @return
+	 */
 	public List<Bookmark> getHistory(Link link) {
 		logger.debug("getHistory: link="+link);
 		List<Bookmark> result = new ArrayList<Bookmark>();
@@ -93,4 +99,13 @@ public class LinkManager implements Serializable{
 		}
 		return result;
 	}
+	
+	public DaoResult<Bookmark> pageLinkHistory(Link link, int offset, int count) throws NoSuchLinkException{
+		logger.debug("getHistory: link="+link);
+		GnizrDaoUtil.checkNull(link);
+		Link aLink = new Link(link);
+		GnizrDaoUtil.fillId(linkDao, aLink);
+		return  bookmarkDao.pageBookmarks(aLink, offset, count);
+	}
+	
 }
