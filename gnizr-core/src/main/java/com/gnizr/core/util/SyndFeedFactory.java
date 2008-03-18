@@ -69,7 +69,7 @@ public class SyndFeedFactory {
 			entry.setTitle(bmark.getTitle());
 			entry.setAuthor(bmark.getUsername());
 			entry.setLink(bmark.getUrl());
-			entry.setUri("urn:bookmark:"+bmark.getBookmarkId());		
+			entry.setUri("urn-x:gnizr:bookmark:"+bmark.getBookmarkId());		
 			SyndContent cnt = new SyndContentImpl();
 			cnt.setType("text/html");
 			if(bmark.getNotes() != null){
