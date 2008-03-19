@@ -21,9 +21,11 @@
   </#list>
 </#if>
 </p> 
+<#if bookmark.notes?exists && (bookmark.notes?length > 0)>
 <div class="notes">
 ${bookmark.notes}
 </div>
+</#if>
 <p class="meta">Created On: ${bookmark.createdOn} :: Last Updated: ${bookmark.lastUpdated} :: 
 <#if loggedInUser?exists>
   <#if (loggedInUser.id == bookmark.user.id)>
