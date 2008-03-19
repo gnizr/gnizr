@@ -16,8 +16,6 @@
  */
 package com.gnizr.web.action.bookmark;
 
-import java.util.Map;
-
 import org.apache.log4j.Logger;
 
 import com.gnizr.core.bookmark.BookmarkManager;
@@ -47,8 +45,6 @@ public class ImportDeliciousPosts extends AbstractAction implements LoggedInUser
 	private BookmarkManager bookmarkManager;
 	private FolderManager folderManager;
 
-	@SuppressWarnings({ "unused", "unchecked" })
-	private Map session;
 	private ImportStatus status;
 	
 	public ImportStatus getStatus() {
@@ -92,10 +88,6 @@ public class ImportDeliciousPosts extends AbstractAction implements LoggedInUser
 		this.deliciousUsername = deliciousUsername;
 	}
 
-	public void setSession(Map session) {
-		this.session = session;		
-	}
-
 	public BookmarkManager getBookmarkManager() {
 		return bookmarkManager;
 	}
@@ -127,7 +119,4 @@ public class ImportDeliciousPosts extends AbstractAction implements LoggedInUser
 	public void setFolderManager(FolderManager folderManager) {
 		this.folderManager = folderManager;
 	}
-	
-	
-
 }
