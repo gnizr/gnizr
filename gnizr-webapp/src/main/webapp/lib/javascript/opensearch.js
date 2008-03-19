@@ -167,6 +167,11 @@ SearchExecutor.prototype.fetchMoreData = function(){
     var resultTile = this.resultTile;     
     var searchExec = this;   
     
+    function appendNoMatchingResult(result){
+    	 var noMatchElm = MochiKit.DOM.P({'class':'search-result-message'},'No matching results were found!');
+    	 MochiKit.DOM.replaceChildNodes(resultTile.tileContentElm,noMatchElm);
+    }
+    
     function appendOneResult(anEntry){
         //MochiKit.Logging.log('e'+i+':'+anEntry.link+','+anEntry.title);
         var title = anEntry.title;
@@ -229,6 +234,9 @@ SearchExecutor.prototype.fetchMoreData = function(){
             for(var i = 0; i < entries.length; i++){
                 appendOneResult(entries[i]);
                 searchExec.totalFetched++;
+            }
+            if(entries.length == 0){
+            	appendNoMatchingResult(result);
             }
         }
         if(MochiKit.Base.isUndefinedOrNull(result.startIndex) == false){
