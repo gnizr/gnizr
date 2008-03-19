@@ -16,22 +16,22 @@
 	xmlns:content="http://purl.org/rss/1.0/modules/content/"
 	>
 <channel rdf:about="${thisPageHref}">
-	<title>${title}</title>
+	<title>${title?html}</title>
 	<link>${thisPageHref}</link>
 	<description>10 bookmarks recently saved by ${username}</description>
 	<dc:date>${getDateTimeISO8601(now)}</dc:date>
 	<items>
 	  <rdf:Seq>
 	<#list bookmark as bm>
-	    <rdf:li resource="${gzUrl("/bookmark/"+bm.id)}"/>	   	
+	    <rdf:li resource="${gzBookmarkUrl(bm.id?c)}"/>	   	
 	</#list>
 	  </rdf:Seq>
 	</items>
 </channel>
 <#list bookmark as bm>
-<item rdf:about="${gzUrl("/bookmark/"+bm.id)}">
-  <title>${bm.title}</title>
-  <link>${bm.link.url?html}</link>
+<item rdf:about="${gzBookmarkUrl(bm.id?c)}">
+  <title>${bm.title?html}</title>
+  <link>${gzBookmarkUrl(bm.id?c)?html}</link>
   <dc:date>${getDateTimeISO8601(bm.lastUpdated)}</dc:date>
   <dc:creator>${bm.user.fullname}</dc:creator>
   <dc:subject>
