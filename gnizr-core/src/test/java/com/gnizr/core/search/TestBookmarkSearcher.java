@@ -13,7 +13,7 @@ import com.gnizr.db.dao.User;
 
 public class TestBookmarkSearcher extends GnizrCoreTestBase {
 
-	private IndexStoreProfile profile;
+	private SearchIndexProfile profile;
 	private SearchIndexManager searchIndexManager;
 	
 	private BookmarkPager bookmarkPager;
@@ -23,7 +23,7 @@ public class TestBookmarkSearcher extends GnizrCoreTestBase {
 	protected void setUp() throws Exception {
 		super.setUp();
 		
-		profile = new IndexStoreProfile();
+		profile = new SearchIndexProfile();
 		profile.setDirectoryPath("target/search-data");
 		profile.setOverwrite(true);
 		
@@ -32,7 +32,7 @@ public class TestBookmarkSearcher extends GnizrCoreTestBase {
 		searchIndexManager.init();
 		
 		searcher = new BookmarkSearcher();
-		searcher.setIndexStoreProfile(profile);
+		searcher.setSearchIndexProfile(profile);
 		searcher.init();
 		
 		bookmarkPager = new BookmarkPager(getGnizrDao());

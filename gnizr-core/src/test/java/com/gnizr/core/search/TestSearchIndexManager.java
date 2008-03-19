@@ -9,7 +9,7 @@ import org.apache.lucene.index.IndexWriter;
 
 public class TestSearchIndexManager extends TestCase {
 
-	private IndexStoreProfile profile;
+	private SearchIndexProfile profile;
 	private SearchIndexManager manager;
 	
 	private Document doc1;
@@ -18,7 +18,7 @@ public class TestSearchIndexManager extends TestCase {
 	
 	protected void setUp() throws Exception {
 		super.setUp();
-		profile = new IndexStoreProfile();
+		profile = new SearchIndexProfile();
 		profile.setDirectoryPath("target/search-data");
 		manager = new SearchIndexManager();
 		manager.setProfile(profile);

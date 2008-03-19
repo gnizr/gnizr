@@ -49,7 +49,7 @@ public class SearchIndexManager implements Serializable{
 
 	private static final Logger logger = Logger.getLogger(SearchIndexManager.class);
 	
-	private IndexStoreProfile profile;
+	private SearchIndexProfile profile;
 
 	private LinkedBlockingQueue<Request> documentQueue;
 
@@ -175,7 +175,7 @@ public class SearchIndexManager implements Serializable{
 	 * Returns the profile used for configuring this class instance.
 	 * @return current profile
 	 */
-	public IndexStoreProfile getProfile() {
+	public SearchIndexProfile getProfile() {
 		return profile;
 	}
 
@@ -183,7 +183,7 @@ public class SearchIndexManager implements Serializable{
 	 * Sets the profile used for configuring the class instance.
 	 * @param profile profile to use
 	 */
-	public void setProfile(IndexStoreProfile profile) {
+	public void setProfile(SearchIndexProfile profile) {
 		this.profile = profile;
 	}
 	

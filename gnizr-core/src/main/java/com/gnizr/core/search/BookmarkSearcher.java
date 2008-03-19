@@ -23,20 +23,20 @@ public class BookmarkSearcher implements Serializable {
 
 	private static final long serialVersionUID = -5131043207555467304L;
 
-	private IndexStoreProfile indexStoreProfile;
+	private SearchIndexProfile searchIndexProfile;
 
-	public IndexStoreProfile getIndexStoreProfile() {
-		return indexStoreProfile;
+	public SearchIndexProfile getSearchIndexProfile() {
+		return searchIndexProfile;
 	}
 
-	public void setIndexStoreProfile(IndexStoreProfile indexStoreProfile) {
-		this.indexStoreProfile = indexStoreProfile;
+	public void setSearchIndexProfile(SearchIndexProfile searchIndexProfile) {
+		this.searchIndexProfile = searchIndexProfile;
 	}
 
 	public void init() {
-		if (indexStoreProfile == null) {
+		if (searchIndexProfile == null) {
 			throw new NullPointerException(
-					"BookmarkSearcher.init(): indexStoreProfile is not defined");
+					"BookmarkSearcher.init(): searchIndexProfile is not defined");
 		}
 	}
 
@@ -45,7 +45,7 @@ public class BookmarkSearcher implements Serializable {
 		DaoResult<BookmarkDoc> result = null;
 		IndexSearcher searcher = null;
 		try {
-			searcher = new IndexSearcher(indexStoreProfile.getDirectoryPath());
+			searcher = new IndexSearcher(searchIndexProfile.getDirectoryPath());
 			QueryParser parser = new QueryParser(DocumentCreator.FIELD_TITLE,
 					new StandardAnalyzer());
 			Hits hits = searcher.search(parser.parse(query));
@@ -74,7 +74,7 @@ public class BookmarkSearcher implements Serializable {
 		DaoResult<BookmarkDoc> result = null;
 		IndexSearcher searcher = null;
 		try {
-			searcher = new IndexSearcher(indexStoreProfile.getDirectoryPath());
+			searcher = new IndexSearcher(searchIndexProfile.getDirectoryPath());
 			QueryParser parser = new QueryParser(DocumentCreator.FIELD_TITLE,
 					new StandardAnalyzer());
 			

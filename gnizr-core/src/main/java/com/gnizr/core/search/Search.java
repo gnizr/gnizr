@@ -41,7 +41,7 @@ public class Search implements Serializable{
 	private static final Logger logger = Logger.getLogger(Search.class);
 	
 	private GnizrDao gnizrDao;
-	private IndexStoreProfile indexStoreProfile;
+	private SearchIndexProfile searchIndexProfile;
 	
 	public Search(GnizrDao gnizrDao){
 		this.gnizrDao = gnizrDao;
@@ -55,20 +55,20 @@ public class Search implements Serializable{
 		this.gnizrDao = gnizrDao;
 	}
 
-	public IndexStoreProfile getIndexStoreProfile() {
-		return indexStoreProfile;
+	public SearchIndexProfile getSearchIndexProfile() {
+		return searchIndexProfile;
 	}
 
-	public void setIndexStoreProfile(IndexStoreProfile indexStoreProfile) {
-		this.indexStoreProfile = indexStoreProfile;
+	public void setSearchIndexProfile(SearchIndexProfile searchIndexProfile) {
+		this.searchIndexProfile = searchIndexProfile;
 	}
 
 	public void init(){
 		if(gnizrDao == null){
 			throw new NullPointerException("Search.init(): GnizrDao is not defined");
 		}
-		if(indexStoreProfile == null){
-			throw new NullPointerException("Search.init(): indexStoreProfile is not defined");
+		if(searchIndexProfile == null){
+			throw new NullPointerException("Search.init(): searchIndexProfile is not defined");
 		}
 	}
 	
