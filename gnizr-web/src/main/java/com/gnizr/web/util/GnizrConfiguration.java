@@ -78,6 +78,8 @@ public class GnizrConfiguration implements Serializable {
 	public static final String SERVER_MAINTENANCE = "serverMaintenanceModeEnabled";
 	public static final String OPENSEARCH_SERVICES = "openSearchServices";
 
+	private String siteName;
+	private String siteDescription;
 	private String webApplicationUrl;
 	private String googleMapsKey;
 	private String snapShotsKey;
@@ -149,5 +151,21 @@ public class GnizrConfiguration implements Serializable {
 
 	public void setOpenSearchServices(List<String> openSearchServices) {
 		this.openSearchServices = openSearchServices;
+	}
+
+	public String getSiteName() {
+		return siteName;
+	}
+
+	public void setSiteName(String siteName) {
+		this.siteName = siteName;
+	}
+
+	public String getSiteDescription() {
+		return siteDescription;
+	}
+
+	public void setSiteDescription(String siteDescription) {
+		this.siteDescription = siteDescription;
 	}
 }
