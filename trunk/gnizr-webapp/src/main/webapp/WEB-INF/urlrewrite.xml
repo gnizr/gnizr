@@ -18,21 +18,6 @@
 </rule>	
 
 <rule>
-  <from>^/settings/changepassword$</from>	
-  <to last="true">/settings/edit-password.ftl</to>
-</rule>	
-	
-<rule>
-  <from>^/settings/updateprofile$</from>	
-  <to last="true">/settings/edit-profile.ftl</to>
-</rule>	
-
-<rule>
-  <from>^/settings/delicious$</from>	
-  <to last="true">/settings/import-delicious.ftl</to>
-</rule>			
-
-<rule>
   <from>^/register$</from>
   <to last="true">/users/register.ftl</to>
 </rule>		

@@ -3,7 +3,7 @@
 <#-- import Freemarker macros that are common to the site -->
 <#include "/lib/web/macro-lib.ftl"/>
 
-<#assign title="${loggedInUser.username}'s settings -- gnizr"/>
+<#assign title="${loggedInUser.username}'s settings"/>
 <#assign username=loggedInUser.username/>
 <@pageBegin pageTitle=title cssHref=[gzUrl("/css/gnizr-folders.css"),gzUrl("/css/gnizr-settings.css")]/>
 

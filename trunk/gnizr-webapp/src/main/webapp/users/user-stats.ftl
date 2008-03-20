@@ -3,7 +3,7 @@
 <#include "/lib/web/macro-lib.ftl"/>
 <#-- import Freemarker macros that are specific to USERS -->
 <#include "./macro-lib.ftl"/>
-<#assign title="top users -- gnizr"/>
+<#assign title="top users"/>
 <@pageBegin pageTitle=title cssHref=[gzUrl("/css/gnizr-userstats.css")]/>
 <@headerBlock>
 </@headerBlock>

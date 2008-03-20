@@ -8,7 +8,6 @@
 <#assign username=user.username/>
 <#assign title="${loggedInUser.username}'s folders"/>
 <#assign thisPageHref = gzUserFolderUrl(loggedInUser.username,"")/>
-<#assign title=title+" -- gnizr"/>
 <@pageBegin pageTitle=title cssHref=[gzUrl("/css/gnizr-folder.css")]
             thisPageHref=thisPageHref
             toPageHref=thisPageHref/>

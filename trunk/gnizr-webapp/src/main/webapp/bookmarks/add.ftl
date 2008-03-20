@@ -5,9 +5,9 @@
 <@ensureUserLoggedIn>
 <#assign username=loggedInUser.username/>
 <#if url?exists >
-  <#assign title="save url: " + url + " -- gnizr">
+  <#assign title="save url: " + url>
 <#else>
-  <#assign title="save url -- gnizr"/>
+  <#assign title="save url"/>
 </#if>
 <@pageBegin pageTitle=title cssHref=[gzUrl("/css/gnizr-post.css")]>                                  
 </@pageBegin>

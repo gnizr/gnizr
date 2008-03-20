@@ -1,12 +1,20 @@
 <#include "/lib/web/macro-lib.ftl"/>
 <#-- if logged in, go to the home page of the user -->
 <@goHome>
-<@pageBegin pageTitle="gnizr -- organize." 
+<@pageBegin pageTitle="login" 
             cssHref=[gzUrl("/css/gnizr-frontpage.css")]/>          
 <div id="headline">
+<#if (gnizrConfiguration.siteName)?exists>
+<h1>${gnizrConfiguration.siteName?html}</h1>
+<#else>
 <h1>gnizr<span class="version">${gnizrVersion()}</span></h1>
+</#if>
 <br></br>
+<#if (gnizrConfiguration.siteDescription)?exists>
+<h2>${gnizrConfiguration.siteDescription?html}</h2>
+<#else>
 <h2>organize</h2>
+</#if>
 </div>
 <div id="login">
 <@ww.form action="userLogin.action" method="post">

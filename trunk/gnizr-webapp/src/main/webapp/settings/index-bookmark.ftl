@@ -8,7 +8,7 @@
 
 <#-- if not logged in, redirect to the login page -->
 <@ensureUserLoggedIn>
-<#assign title="rebuild bookmark search index -- ${loggedInUser.username} -- gnizr"/>
+<#assign title="rebuild bookmark search index -- ${loggedInUser.username}"/>
 <#assign username=loggedInUser.username/>
 
 <@pageBegin pageTitle=title cssHref=[gzUrl("/css/gnizr-settings.css")]/>

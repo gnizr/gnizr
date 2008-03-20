@@ -2,8 +2,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/" 
    xmlns:gn="http://gnizr.com/ont/opensearch/2007/11/">
-  <ShortName>Gnizr Community</ShortName>
-  <Description>Search bookmarks in gnizr</Description>
+  <ShortName>Bookmarked by others</ShortName>
+  <Description>Search bookmarks in ${gnizrConfiguration.siteName?if_exists?html}</Description>
   <Tags>bookmarks gnizr</Tags>
   <gn:DefaultEnabled>true</gn:DefaultEnabled>
   <Url type="application/vnd.gn-opensearch+json"

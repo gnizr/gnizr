@@ -6,7 +6,6 @@
 <#include "./macro-lib.ftl"/>
 <#assign title="${user.username}'s folders"/>
 <#assign thisPageHref = gzUserFolderUrl(user.username,"")/>
-<#assign title=title+" -- gnizr"/>
 
 <@pageBegin pageTitle=title cssHref=[gzUrl("/css/gnizr-folder.css")]
             thisPageHref=thisPageHref

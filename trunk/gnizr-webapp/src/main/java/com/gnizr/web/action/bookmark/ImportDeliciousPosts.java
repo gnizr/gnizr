@@ -60,9 +60,11 @@ public class ImportDeliciousPosts extends AbstractAction implements LoggedInUser
 			status = importService.doImport();
 		}catch(DeliciousNotAuthorizedException e){
 			addActionMessage("del.icio.us authorization error. either your username or password is incorrect.");
+			logger.error("del.icio.us import error. " + e);
 			return INPUT;
 		}catch(DeliciousException e){
 			addActionMessage("del.icio.us web service is currently busy. try again later.");
+			logger.error("del.icio.us import error. " + e);
 			return INPUT;
 		}catch(Exception e){
 			logger.error(e);

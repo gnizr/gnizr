@@ -5,7 +5,7 @@
   <#assign title=username+"'s clustermap -- gnizr"/>  
   <#assign sourceUrl=gzFullUrl("/data/clustermap/bookmark.action?username="+username)/>
 <#else>
-  <#assign title="clustermap -- gnizr"/> 
+  <#assign title="clustermap"/> 
 </#if>
 
 <@pageBegin pageTitle=title cssHref=[gzUrl("/css/gnizr-clustermap.css")]/>

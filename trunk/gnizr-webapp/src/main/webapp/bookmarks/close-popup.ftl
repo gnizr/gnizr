@@ -1,6 +1,6 @@
 <#include "/lib/web/macro-lib.ftl"/>
 <#assign username=loggedInUser.username/>
-<#assign title="bookmark saved -- gnizr"/>
+<#assign title="bookmark saved"/>
 <@pageBegin pageTitle=title>
 <script type="text/javascript" src="${gzUrl("/lib/javascript/close-popup.js")}"></script>
 </@pageBegin>

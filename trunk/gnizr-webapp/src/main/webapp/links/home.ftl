@@ -10,9 +10,9 @@
 <#assign thislink = thisbmark.link/>
 
 <#if (thislink.url)?exists>
-  <#assign title="url: ${thislink.url} -- gnizr"/>
+  <#assign title="url: ${thislink.url}"/>
 <#else>
-  <#assign title="link history -- gnizr"/>
+  <#assign title="link history"/>
 </#if>
 
 <@pageBegin pageTitle=title cssHref=[gzUrl("/css/gnizr-linkhistory.css")]/>

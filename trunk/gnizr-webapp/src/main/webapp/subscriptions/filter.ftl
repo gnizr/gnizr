@@ -5,7 +5,7 @@
 <#-- import Freemarker macros that are specific to TAGS -->
 <#include "../tags/macro-lib.ftl"/>
 
-<#assign title="filter subscriptions -- gnizr"/>
+<#assign title="filter subscriptions"/>
 <#assign thisPageHref="/subscription/filter"/>
 
 <@pageBegin pageTitle=title/>

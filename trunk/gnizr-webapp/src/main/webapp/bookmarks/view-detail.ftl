@@ -1,6 +1,6 @@
 <#include "/lib/web/macro-lib.ftl"/>
 <#if bookmark?exists>
-  <#assign title='\''+bookmark.title+'\' saved by ' + bookmark.user.username + ' -- gnizr'/>
+  <#assign title='\''+bookmark.title+'\' saved by ' + bookmark.user.username/>
   <#assign thisPageHref = gzBookmarkUrl(bookmark.id?c)/>
 </#if>
 <@pageBegin pageTitle=title cssHref=[gzUrl("/css/gnizr-linkhistory.css")]>
