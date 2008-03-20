@@ -1,7 +1,7 @@
 <#-- import Freemarker macros that are common to the site -->
 <#include "/lib/web/macro-lib.ftl"/>
 <#include "./macro-lib.ftl"/>
-<#assign title="seach -- gnizr"/>
+<#assign title="seach"/>
 
 <@pageBegin pageTitle=title cssHref=[gzUrl("/css/gnizr-search.css")]/>
 <@headerBlock/>

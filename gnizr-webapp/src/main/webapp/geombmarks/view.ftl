@@ -2,7 +2,6 @@
 <#include "/json/macro-lib.ftl"/>
 <#assign username=user.username/>
 <#assign title="${username}'s bookmarks on a map"/>
-<#assign title=title+" -- gnizr"/>
 <@pageBegin pageTitle=title cssHref=[gzUrl("/css/gnizr-gmbmarks.css")]>
 <#if (gnizrConfiguration.googleMapsKey)?exists>
 <script type="text/javascript" src="${googleMapKeyUrl(gnizrConfiguration.googleMapsKey)}"></script>

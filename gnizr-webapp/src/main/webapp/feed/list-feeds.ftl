@@ -5,7 +5,6 @@
 <#assign title="${user.username}'s feed subscriptions"/>
 <#assign thisPageHref = gzUserFeedUrl(user.username,"")/>
 ${session.setAttribute("thisPageHref",thisPageHref)}
-<#assign title=title+" -- gnizr"/>
 <@pageBegin pageTitle=title cssHref=[gzUrl("/css/gnizr-feed.css")]/>
 <@headerBlock/>
 <@pageContent>  

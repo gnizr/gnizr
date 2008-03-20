@@ -2,7 +2,7 @@
 <#assign ww=JspTaglibs["/WEB-INF/webwork.tld"] >
 <#-- import Freemarker macros that are common to the site -->
 <#include "/lib/web/macro-lib.ftl"/>
-<#assign title="gnizr"/>
+<#assign title="Oops..."/>
 <#if loggedInUser?exists>
   <#assign user=loggedInUser/>
 </#if>

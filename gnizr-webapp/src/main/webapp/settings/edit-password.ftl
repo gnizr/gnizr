@@ -9,7 +9,7 @@
 <#-- if not logged in, redirect to the login page -->
 <@ensureUserLoggedIn>
 
-<#assign title="${loggedInUser.username}'s settings -- gnizr"/>
+<#assign title="${loggedInUser.username}'s settings"/>
 <#assign username=loggedInUser.username/>
 <@pageBegin pageTitle=title cssHref=[gzUrl("/css/gnizr-settings.css")]>
 </@pageBegin>
@@ -19,7 +19,7 @@
 
 <@pageContent>
 <#assign bct = settingsBCT(username)/>
-<#assign bct = bct + [gzBCTPair('change password', gzUrl("/settings/changepassword"))]/> 
+<#assign bct = bct + [gzBCTPair('change password', gzUrl("/settings/changePassword.action"))]/> 
 <@infoBlock bct=bct/>	
   <@changePasswordForm/>
 </@pageContent>

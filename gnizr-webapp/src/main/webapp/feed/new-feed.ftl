@@ -3,7 +3,7 @@
 <#-- import Freemarker macros that are common to the site -->
 <#include "/lib/web/macro-lib.ftl"/>
 <#include "./macro-lib.ftl"/>
-<#assign title="new feed subscription -- gnizr"/>
+<#assign title="new feed subscription"/>
 <#assign username = loggedInUser.username/>
 <@pageBegin pageTitle=title cssHref=[gzUrl("/css/gnizr-feed.css")]/>
 <@headerBlock/>

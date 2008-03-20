@@ -4,7 +4,7 @@
 <#-- import Freemarker macros that are specific to USERS -->
 <#include "./macro-lib.ftl"/>
 <#assign username = loggedInUser.username/>
-<#assign title="pages saved for '${username}' -- gnizr"/>
+<#assign title="pages saved for '${username}'"/>
 <#assign thisPageBaseHref=gzUrl("/for/me")/>
 <#if sender?exists && sender != ''>
   <#assign thisPageHref=thisPageBaseHref+"/from/"+sender/>

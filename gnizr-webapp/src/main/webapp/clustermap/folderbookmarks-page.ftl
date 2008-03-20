@@ -7,7 +7,7 @@
 <#include "./macro-lib.ftl"/>
 
 <#if (username)?exists>
-  <#assign title=user.username+"'s folder clustermap -- gnizr"/>  
+  <#assign title=user.username+"'s folder clustermap"/>  
   <#assign sourceUrl=gzFullUrl("/data/clustermap/folder.action?username="+username+"&folderName="+folderName?url)/>
 <#else>
   <#assign title="clustermap -- gnizr"/> 

@@ -53,7 +53,7 @@ INPUT: pageTitle:String // the <title/> of this HTML page
        cssHref:Sequence // a list of CSS URL to be linked in <head/>
 ===================================================================
 -->
-<#macro pageBegin pageTitle="gnizr" cssHref=[] 
+<#macro pageBegin pageTitle="" cssHref=[] 
 				  bodyOnUnload="" bodyOnLoad="" bodyOnResize="" enableJS=true
 				  thisPageHref="" thisPageBaseHref="" toPageHref="">
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
@@ -63,7 +63,11 @@ INPUT: pageTitle:String // the <title/> of this HTML page
 <!-- leave this for stats -->
 <meta name="generator" content="Gnizr ${gnizrVersion()}${gnizrDevVersion()}"></meta>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
-<title>${pageTitle}</title>
+<title>${pageTitle?html}
+<#if gnizrConfiguration?exists && gnizrConfiguration.siteName?exists>
+-- ${gnizrConfiguration.siteName?html}
+</#if>
+</title>
 <link rel="shortcut icon" href="${gzUrl('/images/favicon.ico')}" />
 
 <!-- GNIZR OPENSEARCH DESCRIPTION -->
@@ -197,7 +201,11 @@ as <h1/> (page header) of this page:
 <!-- HEADER BLOCK BEGINS -->
 <div id="header2">
   <div id="header2-l">
-    <h1 class="logo"><a href="${gzUrl("/")}">gnizr</a></h1>
+    <#local logoName = 'gnizr'/>
+    <#if (gnizrConfiguration.siteName)?exists> 
+      <#local logoName = gnizrConfiguration.siteName/>
+    </#if>   
+    <h1 class="logo"><a href="${gzUrl("/")}">${logoName}</a></h1>
   </div>
   <div id="header2-r">
     <ul id="app-links">

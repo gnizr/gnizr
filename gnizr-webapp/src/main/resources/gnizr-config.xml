@@ -43,6 +43,17 @@
 	
 	<bean id="gnizrConfiguration" class="com.gnizr.web.util.GnizrConfiguration"
 		  singleton="true">
+        
+        <!-- Define the site name of your gnizr installation -->
+		<property name="siteName">
+			<value>gnizr 2.4</value>
+		</property>  
+		
+		<!-- Define a short-description of your site -->
+		<property name="siteDescription">
+			<value>organize</value>
+		</property> 
+		
 		<!-- Define the web application URL of this gnizr installation -->
 		<property name="webApplicationUrl">
 			<value>http://localhost:8080/gnizr</value>

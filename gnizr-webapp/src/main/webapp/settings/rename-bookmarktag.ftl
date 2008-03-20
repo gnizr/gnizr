@@ -3,7 +3,7 @@
 <#-- import Freemarker macros that are specific to SETTING -->
 <#include "./macro-lib.ftl"/>
 <@ensureUserLoggedIn>
-<#assign title="rename tags -- gnizr"/>
+<#assign title="rename tags"/>
 <#assign username=loggedInUser.username/>
 <@pageBegin pageTitle=title />
 <@headerBlock/>
