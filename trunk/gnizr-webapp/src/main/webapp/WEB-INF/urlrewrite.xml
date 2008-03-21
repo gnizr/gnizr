@@ -33,7 +33,7 @@
 </rule>		
 	
 <rule>
-  <from>^/home/\b(\w+)\b$</from>
+  <from>^/home/\b([a-zA-Z0-9\.]+)\b$</from>
   <to last="true">/folder/view.action?username=$1&amp;folderName=_my_</to>
 </rule>
 	
@@ -85,7 +85,7 @@
 </rule>	
 	
 <rule>
-  <from>^/for/me/from/([a-zA-Z0-9]+)(\?.*)?$</from>
+  <from>^/for/me/from/([a-zA-Z0-9\.]+)(\?.*)?$</from>
   <to last="true">/bookmark/formebyuser.action?sender=$1</to>
 </rule>	
 	
@@ -99,12 +99,12 @@
 <rule>
   <name>View pages with username defined</name>
   <note>Redirects a request for mapping user tagged bookmark</note>	
-  <from>^/\b(map|gmap|clustermap|timeline)\b/user/([a-zA-Z0-9]+)$</from>
+  <from>^/\b(map|gmap|clustermap|timeline)\b/user/([a-zA-Z0-9\.]+)$</from>
   <to last="true">/$1/bookmark.action?username=$2</to>
 </rule>
 	
 <rule>
-  <from>^/\b(gmap)\b/user/([a-zA-Z0-9]+)/folder/([^/]+)$</from>
+  <from>^/\b(gmap)\b/user/([a-zA-Z0-9\.]+)/folder/([^/]+)$</from>
   <to last="true">/$1/bookmark.action?username=$2&amp;folder=$3</to>
 </rule>			
 	
@@ -112,12 +112,12 @@
   <name>Output user bookmark page in non-HTML formats</name>
   <note>Redirects a request to output user bookmark page one of the following formats:
   georss,clustermap, timeline, rss1.0, rdf</note>
-  <from>^/user/([a-zA-Z0-9]+)/output/\b(georss|clustermap|timeline|rss1.0|rdf)\b$</from>  
+  <from>^/user/([a-zA-Z0-9\.]+)/output/\b(georss|clustermap|timeline|rss1.0|rdf)\b$</from>  
   <to last="true">/data/$2/bookmark.action?username=$1</to>
 </rule>		
 		
 <rule>
-  <from>^/rdf/user/([a-zA-Z0-9]+)$</from>	
+  <from>^/rdf/user/([a-zA-Z0-9\.]+)$</from>	
   <to last="true">/data/rdf/bookmark.action?username=$1</to>
 </rule>		
 	
@@ -139,7 +139,7 @@
 </rule>		
 			
 <rule>
-  <from>^/url/([a-zA-Z0-9]+)$</from>
+  <from>^/url/([a-zA-Z0-9\.]+)$</from>
   <to last="true">/community/viewLinkHistory.action?urlHash=$1</to>
 </rule>	
 	
@@ -174,44 +174,44 @@
 </rule>	
 
 <rule>
-  <from>^/user/([a-zA-Z0-9]+)(\?.*)?$</from>
+  <from>^/user/([a-zA-Z0-9\.]+)(\?.*)?$</from>
   <to last="true">/folder/view.action?username=$1&amp;folderName=_my_</to>	
 </rule>			
 	
 <rule>
-  <from>^/user/([a-zA-Z0-9]+)/tag/([\S&amp;&amp;[^\?]]+)(\?.*)?$</from> 
+  <from>^/user/([a-zA-Z0-9\.]+)/tag/([\S&amp;&amp;[^\?]]+)(\?.*)?$</from> 
   <!--<from>^/user/([a-zA-Z0-9]+)/tag/([\S]+)$</from> 	-->
   <to last="true">/folder/view.action?username=$1&amp;tag=$2&amp;folderName=_my_</to>	
 </rule>	
 		
 <rule>
-  <from>^/user/([a-zA-Z0-9]+)/bookmark/archive(\?.*)?$</from>
+  <from>^/user/([a-zA-Z0-9\.]+)/bookmark/archive(\?.*)?$</from>
   <to last="true">/bookmark/viewUserPage.action?username=$1</to>
 </rule>				
 
 <rule>
-<from>^/user/([a-zA-Z0-9]+)/bookmark/archive/tag/([\S&amp;&amp;[^\?]]+)(\?.*)?$</from> 
+<from>^/user/([a-zA-Z0-9\.]+)/bookmark/archive/tag/([\S&amp;&amp;[^\?]]+)(\?.*)?$</from> 
   <!--<from>^/user/([a-zA-Z0-9]+)/bookmark/archive/tag/([\S\&amp;]+)$</from>-->
   <to last="true">/bookmark/viewUserPage.action?username=$1&amp;tag=$2</to>	
 </rule>	
 	
 <rule>
-  <from>^/user/([a-zA-Z0-9]+)/feed$</from>
+  <from>^/user/([a-zA-Z0-9\.]+)/feed$</from>
   <to last="true">/feed/list.action?username=$1</to>
 </rule>		
 	
 <rule>
-  <from>^/user/([a-zA-Z0-9]+)/folder$</from>
+  <from>^/user/([a-zA-Z0-9\.]+)/folder$</from>
   <to last="true">/folder/list.action?username=$1</to>
 </rule>		
 		
 <rule>
-  <from>^/user/([a-zA-Z0-9]+)/folder/([^/\?]+)(\?.*)?$</from>
+  <from>^/user/([a-zA-Z0-9\.]+)/folder/([^/\?]+)(\?.*)?$</from>
   <to last="true">/folder/view.action?username=$1&amp;folderName=$2</to>
 </rule>	
 	
 <rule>
- <from>^/user/([a-zA-Z0-9]+)/folder/([^/]+)/tag/([\S&amp;&amp;[^\?]]+)(\?.*)?$</from>
+ <from>^/user/([a-zA-Z0-9\.]+)/folder/([^/]+)/tag/([\S&amp;&amp;[^\?]]+)(\?.*)?$</from>
   <!-- <from>^/user/([a-zA-Z0-9]+)/folder/([^/]+)/tag/([\S]+)$</from>	-->
   <to last="true">/folder/view.action?username=$1&amp;folderName=$2&amp;tag=$3</to>
 </rule>	
@@ -219,7 +219,7 @@
 <rule>
   <name>View pages of user folder</name>
   <note>Redirects a request for mapping user folder bookmark</note>	
-  <from>^/\b(clustermap)\b/user/([a-zA-Z0-9]+)/folder/([^/]+)$</from>
+  <from>^/\b(clustermap)\b/user/([a-zA-Z0-9\.]+)/folder/([^/]+)$</from>
   <to last="true">/$1/folder.action?username=$2&amp;folderName=$3</to>
 </rule>	
 	
@@ -227,7 +227,7 @@
   <name>Output user folder page in non-HTML formats</name>
   <note>Redirects a request to output user folder page to one of the following formats:
   clustermap</note>
-  <from>^/user/([a-zA-Z0-9]+)/folder/([^/]+)/output/\b(clustermap)\b$</from>  
+  <from>^/user/([a-zA-Z0-9\.]+)/folder/([^/]+)/output/\b(clustermap)\b$</from>  
   <to last="true">/data/$3/folder.action?username=$1&amp;folderName=$2</to>
 </rule>		
 	
