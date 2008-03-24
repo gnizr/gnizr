@@ -9,4 +9,40 @@ First, it provides a search engine aggregator that allows users to search over m
 
 Second, gnizr provides !OpenSearch for its bookmark search. Gnizr users can add 'gnizr search' as a search plugin to their Firefox browser. Developers can create new applications that query gnizr search via the !OpenSearch standard.
 
+== Gnizr Search Engine Aggregator ==
 
+On starting the gnizr application, the search engine aggregator reads the list of defined [http://www.opensearch.org/Specifications/OpenSearch/1.1#OpenSearch_description_document OpenSearch service description] files. 
+
+In gnizr 2.3.x releases, the list of description files are defined in `WEB-INF/classes/spring/core-search.xml`. 
+
+{{{
+<bean id="openSearchDirectory" class="com.gnizr.core.search.OpenSearchDirectory" singleton="true">
+  <constructor-arg>
+    <list>
+      <value>/settings/opensearch/mybookmarks.action</value>
+      <value>/settings/opensearch/community.action</value>
+      <value>/settings/opensearch/yahoo-searchdescription.xml</value>
+      <value>http://www.pfaf.org/database/openSearch.rss</value>
+    </list>
+  </constructor-arg>		
+</bean>
+}}}
+
+In gnizr 2.4.x releases, the list of description files are defined in `WEB-INF/classes/gnizr-config.xml`.
+
+{{{
+<bean id="gnizrConfiguration" class="com.gnizr.web.util.GnizrConfiguration"
+		  singleton="true">
+...
+  <property name="openSearchServices">			
+    <list>
+      <value>/settings/opensearch/mybookmarks.action</value>
+      <value>/settings/opensearch/community.action</value>
+      <value>/settings/opensearch/yahoo-searchdescription.xml</value>
+      <value>http://www.pfaf.org/database/openSearch.rss</value>
+    </list>
+  </property>
+</bean>
+}}}
+
+When a path value (i.e., defined in `<value/>`) is a relative path, the search engine aggregator assumes the file is located on the same host as the gnizr installation. It concatenates the URL defined by [GnizrConfigXML `webApplicationUrl`] with the relative path to form the full URL to access the search description file. 
