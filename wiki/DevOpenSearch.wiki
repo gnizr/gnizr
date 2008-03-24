@@ -51,7 +51,7 @@ In gnizr 2.4.x releases, the list of description files are defined in `WEB-INF/c
 
 When a path value (i.e., defined in `<value/>`) is a relative path, the search engine aggregator assumes the file is located on the same host as the gnizr installation. It concatenates the URL defined by [GnizrConfigXML `webApplicationUrl`] with the relative path to form the full URL to access the search description file. 
 
-== Search Gnizr Bookmarks via OpenSearch ==
+== Search Gnizr Bookmarks via !OpenSearch ==
 
 By default, gnizr provides two different types of bookmark search. One for searching within a user's bookmark collection, and the other for searching within the whole gnizr community. OpenSearch is implemented for each type of bookmark search. The service descriptions are published in two distinctive documents.
 
