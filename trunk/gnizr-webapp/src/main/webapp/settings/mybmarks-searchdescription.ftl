@@ -4,7 +4,7 @@
   xmlns="http://a9.com/-/spec/opensearch/1.1/"
   xmlns:gn="http://gnizr.com/ont/opensearch/2007/11/">
   <ShortName>Bookmarked by me</ShortName>
-  <Description>Search my saved bookmarks in ${gnizrConfiguration.siteName?if_exists?html}</Description>
+  <Description>Search my saved bookmarks in ${getSiteName()}</Description>
   <Tags>bookmarks gnizr</Tags>
   <gn:DefaultEnabled>true</gn:DefaultEnabled>
   <Url type="application/vnd.gn-opensearch+json" 

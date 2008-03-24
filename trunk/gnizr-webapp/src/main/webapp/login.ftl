@@ -4,17 +4,9 @@
 <@pageBegin pageTitle="login" 
             cssHref=[gzUrl("/css/gnizr-frontpage.css")]/>          
 <div id="headline">
-<#if (gnizrConfiguration.siteName)?exists>
-<h1>${gnizrConfiguration.siteName?html}</h1>
-<#else>
-<h1>gnizr<span class="version">${gnizrVersion()}</span></h1>
-</#if>
+<h1>${getSiteName()}</h1>
 <br></br>
-<#if (gnizrConfiguration.siteDescription)?exists>
-<h2>${gnizrConfiguration.siteDescription?html}</h2>
-<#else>
-<h2>organize</h2>
-</#if>
+<h2>${getSiteDescription()}</h2>
 </div>
 <div id="login">
 <@ww.form action="userLogin.action" method="post">
