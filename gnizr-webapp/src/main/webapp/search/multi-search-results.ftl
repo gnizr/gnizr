@@ -2,6 +2,7 @@
 <#include "./macro-lib.ftl"/>
 <#assign queryString=q?if_exists/>
 <#assign thisPageBaseHref=gzUrl("/search/list.action")/>  
+<#assign title="search " + q?if_exists?html/>
 <@pageBegin pageTitle=title cssHref=[gzUrl("/css/gnizr-search.css")]>                       
 <script type="text/javascript" src="${gzUrl("/lib/javascript/opensearch.js")}"></script> 
 <script type="text/javascript" src="${gzUrl("/lib/javascript/suggest-searchterms.js")}"></script>
