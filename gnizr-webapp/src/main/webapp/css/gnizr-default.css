@@ -569,3 +569,8 @@ ul#breadcrumbs{
 .invisible {
 	display: none;
 }
+
+.icon-label{
+	vertical-align: text-bottom;
+	padding: 0px 1px;
+}

@@ -10,7 +10,7 @@ INPUT: postUrl
        postLink     
 -->
 <#macro postItem postId postUrl postTitle postNotes 
-        postUser postTags postCreatedOn postLink postInFolders=[] emText=[]>
+        postUser postTags postCreatedOn postLink postInFolders=[] emText=[] postMachineTags=[]>
 <#if (postId > 0)>
   <#if folderName?exists && loggedInUser?exists> 
     <#if (loggedInUser.username==folder.user.username)>
@@ -29,6 +29,7 @@ INPUT: postUrl
 <div class="post-title">  
      <@ww.checkbox cssClass="selectBookmark invisible" name="bookmarkId" id="c_"+bmarkId fieldValue=postId?c/>     
      <a id="${bmarkId}" href="${postUrl}" class="previewlink bmark-link" target="_blank">${highlightText(postTitle,emText,"SPAN",["matched_text"])}</a>           
+     <@iconLabels mTags=postMachineTags/>
 </div>    
   <div class="post-actions">  
   <#nested/>
@@ -150,3 +151,25 @@ INPUT: postUrl
     <#return [nts]/>    
   </#if>
 </#function>
+
+<#macro iconLabels mTags>
+  <#list mTags as mt>
+   <#if mt.predicate == 'icon'>
+      <#if mt.value == 'video'>
+        <img class="icon-label" src="${gzUrl('/images/video-icon-16.png')}" alt="icon:video"/>
+      <#elseif mt.value == 'audio'>
+        <img class="icon-label" src="${gzUrl('/images/audio-icon-16.png')}" alt="icon:audio"/>
+      <#elseif mt.value == 'image'>
+        <img class="icon-label" src="${gzUrl('/images/image-icon-16.png')}" alt="icon:image"/>
+      <#elseif mt.value == 'heart'>
+        <img class="icon-label" src="${gzUrl('/images/heart-icon-16.png')}" alt="icon:heart"/>
+      <#elseif mt.value == 'star'>
+        <img class="icon-label" src="${gzUrl('/images/star-icon-16.png')}" alt="icon:star"/>
+      <#elseif mt.value == 'db'>
+        <img class="icon-label" src="${gzUrl('/images/db-icon-16.png')}" alt="icon:db"/>
+      <#elseif mt.value == '!'>
+        <img class="icon-label" src="${gzUrl('/images/exclaim-icon-16.png')}" alt="icon:!"/>
+      </#if>
+   </#if>
+  </#list>
+</#macro>
