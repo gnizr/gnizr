@@ -1,4 +1,27 @@
 <#setting url_escaping_charset="UTF-8">
+
+<#-- 
+FUNCTION: getSiteName
+-->
+<#function getSiteName>
+  <#local siteName = 'gnizr'/>
+  <#if (gnizrConfiguration.siteName)?exists>
+    <#return gnizrConfiguration.siteName/>
+  </#if>
+  <#return siteName/>
+</#function>
+
+<#-- 
+FUNCTION: getSiteDescription
+-->
+<#function getSiteDescription>
+  <#local siteDsp = 'organize'/>
+  <#if (gnizrConfiguration.siteDescription)?exists>
+    <#return gnizrConfiguration.siteDescription/>
+  </#if>
+  <#return siteDsp/>
+</#function>
+
 <#--
 FUNCTION: hasRememberMeCookie
 -->
