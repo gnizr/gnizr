@@ -7,7 +7,11 @@ Gnizr supports [http://www.opensearch.org OpenSearch] in two different ways.
 
 First, it provides a search engine aggregator that allows users to search over multiple !OpenSearch search services simultaneously. Search over third-party applications (e.g., Google and Wikipedia) can be made available to gnizr users by registering new !OpenSearch description files with gnizr.
 
+||[http://www.flickr.com/photos/14804582@N08/2357863109/ http://farm4.static.flickr.com/3160/2357863109_4a93f4dea9_o.png]||
+
 Second, gnizr provides !OpenSearch for its bookmark search. Gnizr users can add 'gnizr search' as a search plugin to their Firefox browser. Developers can create new applications that query gnizr search via the !OpenSearch standard.
+
+|| [http://www.flickr.com/photos/14804582@N08/2358714878/ http://farm4.static.flickr.com/3032/2358714878_bb07f71c86_o.png] ||
 
 == Gnizr Search Engine Aggregator ==
 
