@@ -1,5 +1,7 @@
 #bookmark-detail{
 	width: 80%;
+	border: 1px solid #C0C0C0;
+	padding: 8px;
 }
 
 h2.title{
@@ -21,8 +23,8 @@ h2.title{
 .notes{
   	margin: 8px 0px;
   	padding: 14px 12px;
-  	border-bottom: 1px solid #C0C0C0;
-  	border-top: 1px solid  #C0C0C0;
+  	/*border-bottom: 1px solid #C0C0C0;
+  	border-top: 1px solid  #C0C0C0; */
 }
 
 /** ======= MAIN DIV for Link History ===== **/

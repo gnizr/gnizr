@@ -44,13 +44,14 @@ INPUT: bookmarks:Sequence // a sequence of Bookmark objects
   <#local postNotes = bm.notes/>
   <#local postUser = bm.user/>
   <#local postTags = bm.tagList/>
+  <#local postMachineTags = bm.machineTagList/>
   <#local postCreatedOn = bm.createdOn/>
   <#local postLink = bm.link/>
   <#local postInFolders = bm.folderList/>
   <@postItem postId=postId postUrl=postUrl postTitle=postTitle
                    postNotes=postNotes postUser=postUser postTags=postTags
                    postCreatedOn=postCreatedOn postLink=postLink 
-                   postInFolders=postInFolders/>
+                   postInFolders=postInFolders postMachineTags=postMachineTags/>
 </#list>
 </ul>
 <!-- BOOKMARK LIST ENDS -->
