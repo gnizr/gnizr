@@ -23,7 +23,7 @@ Follow these links to a specific development topic:
 
   # [GnizrDesignOverview Gnizr Architecture Overview]
   # [GnizrDatabaseModel Database Model Overview]
-  # User Account Management and Authentication 
+  # [DevUserManageAndAuth User Account Management and Authentication]
   # Bookmark Management and Event Notification
   # RSS Crawling and Gnizr Robot
   # Machine Tag Syntax and Implementation
@@ -273,7 +273,7 @@ You should place all your program files in the `src/main` directory.
 || `spring.xml` || `src/main/resources`||
 || `xwork.xml` || `src/main/resources`||
 
-See DevHelloWorldDemo for an example of program file structure layout. 
+See [HelloWorldDemo] for an example of program file structure layout. 
 
 ==== Step 8: Overlay `gnizr-webapp` WAR into your project ====
 
