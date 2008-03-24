@@ -63,15 +63,11 @@ INPUT: pageTitle:String // the <title/> of this HTML page
 <!-- leave this for stats -->
 <meta name="generator" content="Gnizr ${gnizrVersion()}${gnizrDevVersion()}"></meta>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
-<title>${pageTitle?html}
-<#if gnizrConfiguration?exists && gnizrConfiguration.siteName?exists>
--- ${gnizrConfiguration.siteName?html}
-</#if>
-</title>
+<title>${pageTitle?html} -- ${getSiteName()}</title>
 <link rel="shortcut icon" href="${gzUrl('/images/favicon.ico')}" />
 
 <!-- GNIZR OPENSEARCH DESCRIPTION -->
-<link rel="search" type="application/opensearchdescription+xml" href="${gzUrl('/settings/opensearch/description.action')}" title="Gnizr" />
+<link rel="search" type="application/opensearchdescription+xml" href="${gzUrl('/settings/opensearch/description.action')}" title="${getSiteName()}" />
 
 <!-- GNIZR DEFAULT CSS -->
 <link href="${gzUrl("/css/gnizr-default.css")}" rel="stylesheet" type="text/css">
