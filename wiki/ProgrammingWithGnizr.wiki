@@ -24,6 +24,7 @@ Follow these links to a specific development topic:
   # [GnizrDesignOverview Gnizr Architecture Overview]
   # [GnizrDatabaseModel Database Model Overview]
   # [DevUserManageAndAuth User Account Management and Authentication]
+  # [DevOpenSearch Gnizr OpenSearch Support]
   # Bookmark Management and Event Notification
   # RSS Crawling and Gnizr Robot
   # Machine Tag Syntax and Implementation
