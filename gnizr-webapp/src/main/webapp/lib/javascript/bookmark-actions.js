@@ -53,7 +53,8 @@ var removalFldrsList = {};
 /**
  * A function to be called when windows.onLoad is called.
  */
-function initializePage(){		
+function initializePage(){
+	//MochiKit.LoggingPane.createLoggingPane(true);		
 	makeVisibleCheckbox();
 	populateCheckboxAction();	
 	populateSubmitOption();

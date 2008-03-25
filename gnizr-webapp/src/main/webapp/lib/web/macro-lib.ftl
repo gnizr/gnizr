@@ -97,6 +97,9 @@ INPUT: pageTitle:String // the <title/> of this HTML page
   setForYouCountUrl('${gzUrl("/data/json/getForUserCount.action")}');
   setSaveBookmarkUrl('${gzUrl("/data/json/saveBookmark.action")}');
   setFetchBookmarkUrl('${gzUrl("/data/json/getBookmark.action")}');
+
+  // global variable
+  var imgUrl = '${gzUrl("/images/")}';
 </script>
 </#if>
 <!-- JAVASCRIPT DATA ENDS -->

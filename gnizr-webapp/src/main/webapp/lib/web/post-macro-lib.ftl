@@ -159,8 +159,8 @@ INPUT: postUrl
         <img class="icon-label" src="${gzUrl('/images/video-icon-16.png')}" alt="icon:video"/>
       <#elseif mt.value == 'audio'>
         <img class="icon-label" src="${gzUrl('/images/audio-icon-16.png')}" alt="icon:audio"/>
-      <#elseif mt.value == 'image'>
-        <img class="icon-label" src="${gzUrl('/images/image-icon-16.png')}" alt="icon:image"/>
+      <#elseif mt.value == 'photo'>
+        <img class="icon-label" src="${gzUrl('/images/photo-icon-16.png')}" alt="icon:photo"/>
       <#elseif mt.value == 'heart'>
         <img class="icon-label" src="${gzUrl('/images/heart-icon-16.png')}" alt="icon:heart"/>
       <#elseif mt.value == 'star'>
