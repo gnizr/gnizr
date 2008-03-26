@@ -1,0 +1,91 @@
+<!DOCTYPE xwork PUBLIC "-//OpenSymphony Group//XWork 1.0//EN"
+	"http://www.opensymphony.com/xwork/xwork-1.0.dtd">
+<xwork>
+	
+	<!-- see also webwork doc: http://www.opensymphony.com/webwork/wikidocs/Interceptors.html -->
+	
+	<package name="gnizr-system-admin" extends="gnizr-default" namespace="/admin">		
+		<action name="editUser" class="com.gnizr.web.action.user.EditUser"
+			method="fetchEditData">
+			<interceptor-ref name="loggedIn"/>
+			<interceptor-ref name="auth-gnizr"/>
+            <interceptor-ref name="gnizrDefaultStack"/>
+			<result name="success" type="freemarker">/settings/edit-user.ftl</result>			
+			<result name="error" type="freemarker">/common/error.ftl</result>
+		</action>
+		
+		<action name="deleteUser" class="com.gnizr.web.action.user.EditUser"
+			method="doDelete">
+			<interceptor-ref name="loggedIn"/>
+			<interceptor-ref name="auth-gnizr"/>
+            <interceptor-ref name="gnizrDefaultStack"/>
+			<result name="success" type="freemarker">/settings/edit-user.ftl</result>	
+			<result name="input" type="freemarker">/settings/edit-user.ftl</result>		
+			<result name="error" type="freemarker">/common/error.ftl</result>
+		</action>
+		
+		<action name="editProfile" class="com.gnizr.web.action.user.EditUser"
+			method="doUpdate">
+			<interceptor-ref name="loggedIn"/>
+			<interceptor-ref name="auth-gnizr"/>
+            <interceptor-ref name="gnizrDefaultStack"/>
+			<result name="success" type="freemarker">/settings/edit-profile.ftl</result>	
+			<result name="input" type="freemarker">/settings/edit-user.ftl</result>		
+			<result name="error" type="freemarker">/common/error.ftl</result>
+		</action>
+		
+		<action name="changePassword" class="com.gnizr.web.action.user.EditUser"
+			method="doChangePassword">
+			<interceptor-ref name="loggedIn"/>
+			<interceptor-ref name="auth-gnizr"/>
+	        <interceptor-ref name="gnizrDefaultStack"/>
+			<result name="success" type="freemarker">/settings/edit-profile.ftl</result>	
+			<result name="input" type="freemarker">/settings/edit-profile.ftl</result>		
+			<result name="error" type="freemarker">/common/error.ftl</result>
+		</action>
+		
+		<action name="saveProfile" class="com.gnizr.web.action.user.EditUser"
+			method="doUpdate">
+			<interceptor-ref name="loggedIn"/>
+			<interceptor-ref name="auth-gnizr"/>
+            <interceptor-ref name="gnizrDefaultStack"/>
+			<interceptor-ref name="validation"/>
+			<result name="success" type="freemarker">/settings/edit-profile.ftl</result>	
+			<result name="input" type="freemarker">/settings/edit-profile.ftl</result>		
+			<result name="error" type="freemarker">/common/error.ftl</result>
+		</action>
+		
+		<action name="newUser" class="com.gnizr.web.action.user.EditUser"
+			method="doAddNewUser">
+			<interceptor-ref name="loggedIn"/>
+			<interceptor-ref name="auth-gnizr"/>
+            <interceptor-ref name="gnizrDefaultStack"/>
+			<result name="success" type="freemarker">/settings/add-newuser.ftl</result>	
+			<result name="input" type="freemarker">/settings/add-newuser.ftl</result>		
+			<result name="error" type="freemarker">/common/error.ftl</result>
+		</action>
+		
+		<action name="addNewUser" class="com.gnizr.web.action.user.EditUser"
+			method="doAddNewUser">
+			<interceptor-ref name="loggedIn"/>
+			<interceptor-ref name="auth-gnizr"/>
+            <interceptor-ref name="gnizrDefaultStack"/>
+			<interceptor-ref name="validation"/>
+			<interceptor-ref name="workflow"/>
+			<result name="success" type="freemarker">/settings/add-newuser.ftl</result>	
+			<result name="input" type="freemarker">/settings/add-newuser.ftl</result>		
+			<result name="error" type="freemarker">/common/error.ftl</result>
+		</action>
+		
+		<action name="updateOwnership" class="com.gnizr.web.action.folder.UpdateOwnership">
+			<interceptor-ref name="loggedIn"/>
+			<interceptor-ref name="auth"/>						
+			<interceptor-ref name="gnizrDefaultStack"/>	         
+			<interceptor-ref name="execAndWait"/>					
+			<result name="wait" type="freemarker">/settings/updateownership-wait.ftl</result>
+			<result name="success" type="freemarker">/settings/updateownership.ftl</result>			
+		</action>		
+		
+	</package>
+
+</xwork>

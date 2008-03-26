@@ -1,0 +1,15 @@
+<!DOCTYPE xwork PUBLIC "-//OpenSymphony Group//XWork 1.0//EN"
+	"http://www.opensymphony.com/xwork/xwork-1.0.dtd">
+<xwork>
+	
+	<!-- see also webwork doc: http://www.opensymphony.com/webwork/wikidocs/Interceptors.html -->
+	
+	<package name="gnizr-ui" extends="gnizr-default" namespace="/ui">
+		<action name="menu" class="com.gnizr.web.action.ui.MenuControl">			
+			<interceptor-ref name="loggedIn"/>
+            <interceptor-ref name="defaultStack"/>			
+			<result name="success" type="freemarker">/ui/menu-template.ftl</result>		
+			<result name="input" type="freemarker">/ui/menu-template.ftl</result>	
+		</action>
+    </package>
+</xwork>
