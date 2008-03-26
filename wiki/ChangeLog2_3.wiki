@@ -4,6 +4,7 @@
 ==== Version 2.3.0 Final (in progress) ====
 
 Changelog
+  * [http://code.google.com/p/gnizr/issues/detail?id=42 Issue 42] : Error accessing /home of user who username contains '.' (fixed, verified)
   * [http://code.google.com/p/gnizr/issues/detail?id=47 Issue 47]:  	!ConcurrentModificationException on logout using RC1 (fixed, need testing)
 
 ==== Version 2.3.0-RC2 (14 March 2008) ====
