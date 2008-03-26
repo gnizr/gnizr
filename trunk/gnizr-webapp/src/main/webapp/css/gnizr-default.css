@@ -125,6 +125,15 @@ a.system-link:active{
 	text-decoration: underline;
 }
 
+SPAN.system-link{
+	color: #0066cc;
+	text-decoration: underline;
+}
+
+.system-link{
+	cursor: pointer;
+}
+
 .align-right {
 	float: right;
 }
