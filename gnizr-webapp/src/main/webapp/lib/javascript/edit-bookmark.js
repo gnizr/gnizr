@@ -939,7 +939,7 @@ function showMachineTagHelper(contentElm){
 	clearSuggestedTags();
 	MochiKit.Logging.log('showMachineTagHelper: cleared suggested tags DIV');
 	var cancelElm = MochiKit.DOM.SPAN({'class':'machine-tag-helper-cancel'},
-		 MochiKit.DOM.A({'class':'system-link', 'href':'#',
+		 MochiKit.DOM.SPAN({'class':'system-link',
 	                    'onclick':'clearSuggestedTags()'},'Cancel'));
 	MochiKit.DOM.addElementClass(contentElm,'machine-tag-helper')
 	var suggestTagsElm = MochiKit.DOM.getElement(suggestedTagsDIVId);
