@@ -1,11 +1,12 @@
 #summary Changelog of all releases made under version 2.3
 #labels Phase-Implementation
 
-==== Version 2.3.0 Final (in progress) ====
+==== Version 2.3.0 Final (27 March 2008) ====
 
 Changelog
   * [http://code.google.com/p/gnizr/issues/detail?id=42 Issue 42] : Error accessing /home of user who username contains '.' (fixed, verified)
   * [http://code.google.com/p/gnizr/issues/detail?id=47 Issue 47]:  	!ConcurrentModificationException on logout using RC1 (fixed, need testing)
+  * Fixed HTML character escape issues in the generation of RSS feed.
 
 ==== Version 2.3.0-RC2 (14 March 2008) ====
 
