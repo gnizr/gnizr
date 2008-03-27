@@ -4,7 +4,6 @@
 == Current Releases ==
   
 || Branch 2.3.0 || [ChangeLog2_3 gnizr-2.3.0] (27 March 2008) ||
-|| Branch 2.2.0 || [ChangeLog2_2 gnizr-2.2.0] (7 December 2007) ||
 
 == Upcoming Releases ==
   
@@ -33,6 +32,7 @@ We tag our software after a Stable Release or a Development Release has been cre
   * [ChangeLog2_3 gnizr-2.3.0-M3] (26 December 2007) 
   * [ChangeLog2_3 gnizr-2.3.0-M2] (14 December 2007)
   * [ChangeLog2_3 gnizr-2.3.0-M1] (20 November 2007) 
+  * [ChangeLog2_2 gnizr-2.2.0] (7 December 2007)
   * [ChangeLog2_2 gnizr-2.2.0-RC3] (21 November 2007)
   * [ChangeLog2_2 gnizr-2.2.0-RC2] (23 October 2007)
   * [ChangeLog2_2 gnizr-2.2.0-RC1] (12 October 2007)
