@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>	
+<tag_prpt id="1" name="related" ns_prefix="skos" description="SKOS related" prpt_type="default" cardinality="-1"/>
+<tag_prpt id="2" name="broader" ns_prefix="skos" description="SKOS broader" prpt_type="default" cardinality="-1"/>
+<tag_prpt id="3" name="narrower" ns_prefix="skos" description="SKOS narrower" prpt_type="default" cardinality="-1"/>
+<tag_prpt id="4" name="resident" ns_prefix="gn" description="resident history" prpt_type="spatial" cardinality="-1"/>	
+</dataset>

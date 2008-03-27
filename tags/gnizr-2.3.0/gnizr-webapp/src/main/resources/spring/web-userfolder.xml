@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+	"http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	<bean id="listUserFolderContent"
+		class="com.gnizr.web.action.folder.ListUserFolderContent"
+		singleton="false">
+		<property name="folderManager">
+			<ref bean="folderManager"/>
+		</property>
+	</bean>
+	
+	<bean id="listUserFolders"
+		class="com.gnizr.web.action.folder.ListUserFolders" singleton="false">
+		<property name="folderManager">
+			<ref bean="folderManager"/>
+		</property>
+	</bean>
+	
+	<bean id="editUserFolder" class="com.gnizr.web.action.folder.EditUserFolder" singleton="false">
+		<property name="folderManager">
+			<ref bean="folderManager"/>
+		</property>
+		<property name="bookmarkManager">
+			<ref bean="bookmarkManager"/>
+		</property>
+	</bean>
+	
+</beans>
