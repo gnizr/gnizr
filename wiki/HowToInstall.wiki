@@ -1,4 +1,4 @@
-#summary How to install gnizr step-by-step
+#summary How to install and upgrade gnizr step-by-step
 #labels Featured
 
 This page describes the steps to install gnizr web applications. Developers can also download and build gnizr from [HowToBuild the SVN source code]. 
