@@ -44,6 +44,8 @@ If you have any questions, post them in [http://groups.google.com/group/gnizr-us
 
 Gnizr comes with a default user account -- `gnizr`, who is the administrator of the system. After you have logged in as `gnizr`, you can create additional user accounts.
 
+|| *NOTE*: This `gnizr` account is not the same MySQL database user account for accessing gnizr database. ||
+
   # Go to the front page of gnizr 
      * If installed on `localhost` port 8080, `http://localhost:8080/gnizr`
   # Log in as `gnizr`
