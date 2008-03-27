@@ -27,19 +27,19 @@ Note: We assume that you have properly installed MySQL database. If you need add
 
 == Upgrade database tables and stored procedures ==
 
-Instructions described in this section are for upgrading gnizr software from an existing installation. If installing gnizr for the first time, follow instructions in "_Create database tables and stored procedures_". 
+Instructions described in this section are for upgrading gnizr software from an existing installation. If you install gnizr for the first time, follow instructions in "_Create database tables and stored procedures_". 
 
-=== Upgrading to gnizr 2.3.0 (including milestone releases) ===
+=== Upgrading to gnizr 2.3.0  ===
 
 If you are currently running gnizr 2.2.x or 2.3.0 milestones, do the following:
 
   # *Backup your existing database* -- always a good idea :-)
   # Go to the SQL script directory
-    * `cd gnizr-2.3.x/sql` or `cd gnizr-2.3.x-Mz/sql`
+    * `cd gnizr-2.3.0/sql`
   # Run BASH script to upgrade database 
     * `chmod 755 loadsch.sh loadsp.sh loadupg.sh`
-    * `./loadupg.sh gnizr_db gnizr gnizrpass`
     * syntax: `loadupg [db_name] [db_username] [db_password]`
+        * e.g., `./loadupg.sh gnizr_db gnizr gnizrpass`
   # Done!
 
 == Related ==
