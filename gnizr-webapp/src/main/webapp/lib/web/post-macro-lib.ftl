@@ -10,7 +10,7 @@ INPUT: postUrl
        postLink     
 -->
 <#macro postItem postId postUrl postTitle postNotes 
-        postUser postTags postCreatedOn postLink postInFolders=[] emText=[] postMachineTags=[]>
+        postUser postTags postCreatedOn postLink postInFolders=[] emText=[]>
 <#if (postId > 0)>
   <#if folderName?exists && loggedInUser?exists> 
     <#if (loggedInUser.username==folder.user.username)>
@@ -29,7 +29,6 @@ INPUT: postUrl
 <div class="post-title">  
      <@ww.checkbox cssClass="selectBookmark invisible" name="bookmarkId" id="c_"+bmarkId fieldValue=postId?c/>     
      <a id="${bmarkId}" href="${postUrl}" class="previewlink bmark-link" target="_blank">${highlightText(postTitle,emText,"SPAN",["matched_text"])}</a>           
-     <@iconLabels mTags=postMachineTags user=postUser.username/>
 </div>    
   <div class="post-actions">  
   <#nested/>
@@ -80,7 +79,7 @@ INPUT: postUrl
     </#list>
    ::
   </#if>
-  saved by <a href="${gzBookmarkUrl(postId?c)}">${postLink.count}
+   saved by <a href="${gzLinkUrl(postLink.urlHash)}">${postLink.count}
   <#if (postLink.count > 1)>people <#else> person</#if></a>
    :: ${postCreatedOn?string("EEE, MMM d, ''yy")}
    </div>
@@ -151,32 +150,3 @@ INPUT: postUrl
     <#return [nts]/>    
   </#if>
 </#function>
-
-<#macro iconLabels mTags user>
-  <#list mTags as mt>
-   <#if mt.predicate == 'icon'>
-      <#if mt.value == 'video'>
-        <#local url = gzUserBmarkArchivesUrl(user,"icon:video")/>
-        <a href="${url}"><img class="icon" src="${gzUrl('/images/video-icon-16.png')}" alt="icon:video"/></a>
-      <#elseif mt.value == 'audio'>
-        <#local url = gzUserBmarkArchivesUrl(user,"icon:audio")/>
-        <a href="${url}"><img class="icon" src="${gzUrl('/images/audio-icon-16.png')}" alt="icon:audio"/></a>
-      <#elseif mt.value == 'photo'>
-        <#local url = gzUserBmarkArchivesUrl(user,"icon:photo")/>
-        <a href="${url}"><img class="icon" src="${gzUrl('/images/photo-icon-16.png')}" alt="icon:photo"/></a>
-      <#elseif mt.value == 'heart'>
-        <#local url = gzUserBmarkArchivesUrl(user,"icon:heart")/>
-        <a href="${url}"><img class="icon" src="${gzUrl('/images/heart-icon-16.png')}" alt="icon:heart"/></a>
-      <#elseif mt.value == 'star'>
-        <#local url = gzUserBmarkArchivesUrl(user,"icon:star")/>
-        <a href="${url}"><img class="icon" src="${gzUrl('/images/star-icon-16.png')}" alt="icon:star"/></a>
-      <#elseif mt.value == 'db'>
-        <#local url = gzUserBmarkArchivesUrl(user,"icon:db")/>
-        <a href="${url}"><img class="icon" src="${gzUrl('/images/db-icon-16.png')}" alt="icon:db"/></a>
-      <#elseif mt.value == '!'>
-        <#local url = gzUserBmarkArchivesUrl(user,"icon:!")/>
-        <a href="${url}"><img class="icon" src="${gzUrl('/images/exclaim-icon-16.png')}" alt="icon:!"/></a>
-      </#if>
-   </#if>
-  </#list>
-</#macro>

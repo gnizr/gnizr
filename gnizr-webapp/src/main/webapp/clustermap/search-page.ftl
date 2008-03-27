@@ -4,7 +4,7 @@
   <#assign title="search '${queryString}' in clustermap -- gnizr"/>  
   <#assign sourceUrl=gzFullUrl("/data/clustermap/search.action?queryString=${queryString?url}&type=${type?default('text')}")/>
 <#else>
-  <#assign title = "search in clustermap"/>
+  <#assign title = "search in clustermap -- gnizr"/>
 </#if>
 <@pageBegin pageTitle=title cssHref=[gzUrl("/css/gnizr-clustermap.css")]/>
 <@headerBlock/>

@@ -9,6 +9,13 @@
 		</field-validator>
 	</field>
 	
+	<field name="editUser.username" >
+		<field-validator type="regex" short-circuit="true">
+			<param name="expression">[a-zA-Z0-9\.]+</param>
+			<message>username must not contain special characters</message>
+		</field-validator>
+	</field>
+		
 	<field name="editUser.username">
 		<field-validator type="stringlength" short-circuit="true">
 			<param name="minLength">3</param>

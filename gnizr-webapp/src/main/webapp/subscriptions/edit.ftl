@@ -1,6 +1,6 @@
 <#assign ww=JspTaglibs["/WEB-INF/webwork.tld"]>
 <html>
-<title>edit subscription</title>
+<title>edit subscription - gnizr</title>
 <h2>
 <@ww.url id="userhome" value="viewUserPage.action?username=${loggedInUser.username}"/>
 gnizr / <a href="${userhome}">${loggedInUser.username}</a>

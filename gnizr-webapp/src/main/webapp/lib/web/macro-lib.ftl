@@ -11,11 +11,11 @@ NOTE: returns a version string to be injected in the <head/> of
 each gnizr page.
 -->
 <#function gnizrVersion >
-  <#return "2.4.0"/>
+  <#return "2.3.0"/>
 </#function>
 
 <#function gnizrDevVersion >
-  <#return "-M1"/>
+  <#return ""/>
 </#function>
 
 <#-- 
@@ -53,7 +53,7 @@ INPUT: pageTitle:String // the <title/> of this HTML page
        cssHref:Sequence // a list of CSS URL to be linked in <head/>
 ===================================================================
 -->
-<#macro pageBegin pageTitle="" cssHref=[] 
+<#macro pageBegin pageTitle="gnizr" cssHref=[] 
 				  bodyOnUnload="" bodyOnLoad="" bodyOnResize="" enableJS=true
 				  thisPageHref="" thisPageBaseHref="" toPageHref="">
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
@@ -63,12 +63,7 @@ INPUT: pageTitle:String // the <title/> of this HTML page
 <!-- leave this for stats -->
 <meta name="generator" content="Gnizr ${gnizrVersion()}${gnizrDevVersion()}"></meta>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
-<title>${pageTitle?html} -- ${getSiteName()}</title>
-<link rel="shortcut icon" href="${gzUrl('/images/favicon.ico')}" />
-
-<!-- GNIZR OPENSEARCH DESCRIPTION -->
-<link rel="search" type="application/opensearchdescription+xml" href="${gzUrl('/settings/opensearch/description.action')}" title="${getSiteName()}" />
-
+<title>${pageTitle}</title>
 <!-- GNIZR DEFAULT CSS -->
 <link href="${gzUrl("/css/gnizr-default.css")}" rel="stylesheet" type="text/css">
 <link href="${gzUrl("/css/gnizr-header.css")}" rel="stylesheet" type="text/css">
@@ -97,9 +92,6 @@ INPUT: pageTitle:String // the <title/> of this HTML page
   setForYouCountUrl('${gzUrl("/data/json/getForUserCount.action")}');
   setSaveBookmarkUrl('${gzUrl("/data/json/saveBookmark.action")}');
   setFetchBookmarkUrl('${gzUrl("/data/json/getBookmark.action")}');
-
-  // global variable
-  var imgUrl = '${gzUrl("/images/")}';
 </script>
 </#if>
 <!-- JAVASCRIPT DATA ENDS -->
@@ -200,11 +192,7 @@ as <h1/> (page header) of this page:
 <!-- HEADER BLOCK BEGINS -->
 <div id="header2">
   <div id="header2-l">
-    <#local logoName = 'gnizr'/>
-    <#if (gnizrConfiguration.siteName)?exists> 
-      <#local logoName = gnizrConfiguration.siteName/>
-    </#if>   
-    <h1 class="logo"><a href="${gzUrl("/")}">${logoName}</a></h1>
+    <h1 class="logo"><a href="${gzUrl("/")}">gnizr</a></h1>
   </div>
   <div id="header2-r">
     <ul id="app-links">
@@ -225,16 +213,13 @@ as <h1/> (page header) of this page:
 <div id="search-box">
 <@ww.form action="search" namespace="/bookmark" theme="simple">
   <@ww.textfield id="search-input" name="queryString" value="${queryString?if_exists}" size="40"/>
-  <@ww.hidden name="type" value="opensearch"/>
-  <#--
     <#if loggedInUser?exists> 
       <#assign opt = r"#{'opensearch':'OpenSearch','user':'My Bookmark Archive','text':'Community'}"/>
       <@ww.select id="search-space" name="type" list=opt/>   
     <#else>
       <@ww.hidden name="type" value="opensearch"/>
     </#if>      
-    -->
-    <@ww.submit id="search-submit" cssClass="" value="Search"/>    
+    <@ww.submit id="search-submit" cssClass="btn" value="Search"/>    
 </@ww.form>
 </div>
 <div id="header2-menu">   

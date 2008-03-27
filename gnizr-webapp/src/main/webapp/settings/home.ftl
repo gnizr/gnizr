@@ -5,7 +5,7 @@
 <#include "./macro-lib.ftl"/>
 <#-- if not logged in, redirect to the login page -->
 <@ensureUserLoggedIn>
-<#assign title="${loggedInUser.username}'s settings"/>
+<#assign title="${loggedInUser.username}'s settings -- gnizr"/>
 <#assign username=loggedInUser.username/>
 <@pageBegin pageTitle=title cssHref=[gzUrl("/css/gnizr-settings.css")]/>
  <@headerBlock/>
@@ -15,8 +15,8 @@
 <@mainBlock>
 <@settingsBlock title="Account Settings">
 <ul>
-<li><a href="${gzUrl('/settings/changePassword.action')}">Change your password</a></li>
-<li><a href="${gzUrl('/settings/changeProfile.action')}">Change your personal profile</a></li> 
+<li><a href="${gzUrl('/settings/changepassword')}">Change your password</a></li>
+<li><a href="${gzUrl('/settings/updateprofile')}">Update your personal profile</a></li> 
 </ul>
 </@settingsBlock>
 <@settingsBlock title="Manage Bookmarks & Folders">
@@ -39,7 +39,7 @@
 
 <@settingsBlock title="Import/Export Bookmarks">
 <ul>
-<li><a href="${gzUrl("/settings/delicious.action")}">Import from del.icio.us</a></li>
+<li><a href="${gzUrl("/settings/delicious")}">Import from del.icio.us</a></li>
 </ul>
 </@settingsBlock>
 
@@ -50,8 +50,6 @@
 <li><a href="${adminUser}" title="edit user accounts">Manage user accounts</a></li>
 <@ww.url id="adminRssRobotHref" namespace="/admin" action="robot.action" includeParams="none"/>
 <li><a href="${adminRssRobotHref}" title="change RSS robot settings">Manage RSS robot</a></li>
-<@ww.url id="upIndexHref" namespace="/settings" action="indexBookmark.action" includeParams="none"/>
-<li><a href="${upIndexHref}" title="rebuild search index">Rebuild search index</a></li>
 </ul>
 </@settingsBlock>
 <#--

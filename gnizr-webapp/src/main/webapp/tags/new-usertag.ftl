@@ -6,7 +6,7 @@
 <#include "./macro-lib.ftl"/>
 <#include "/settings/macro-lib.ftl"/>
 <#assign username = loggedInUser.username/>
-<#assign title="edit tag relations"/>
+<#assign title="edit tag relations -- gnizr"/>
 
 <@pageBegin pageTitle=title cssHref=[gzUrl("/css/gnizr-tagcloud.css"),
 	                                 gzUrl("/css/gnizr-editusertag.css")]/>

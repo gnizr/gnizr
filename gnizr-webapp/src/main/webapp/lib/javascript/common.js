@@ -21,9 +21,9 @@ function detectBrowser() {
     BO["safari1.1"] = BO["safari"] && !BO["safari1.2"] && !BO["safari2.0"]; 
     return BO; 
 } 
-
+ 
 var BO = new detectBrowser(); 
-//==================================================== 
+
 SaveLinkUtil = {
     popUpEdit: function(postUrl,link,title){
         var params = MochiKit.Base.queryString({'url':link,'title':title,'redirect':'false','saveAndClose':'true'});        
@@ -54,23 +54,3 @@ SaveLinkUtil = {
          d.addCallbacks(saveOkay,saveFailed);		 
     }    
 }
-//==================================================== 
-/**
- * Parses URI of gnizr bookmark and extract the ID of the bookmark. 
- * Returns -1 if unable to parse the input string or no ID
- * can be extracted from the input.
- */
-function parseBookmarkId(uri){
-	var id = -1;
-	if(MochiKit.Base.isUndefinedOrNull(uri) == false){
-		var re = new RegExp('urn-x:gnizr:bookmark:([0-9]+)');
-		var m = re.exec(uri);
-		if(m != null && m.length == 2){
-			id = m[1];
-		}else{
-			MochiKit.Logging.log('func: parseBookmarkId. Cannot find bookmarkId in ' + uri);
-		}
-	}	
-	return id;
-}
-

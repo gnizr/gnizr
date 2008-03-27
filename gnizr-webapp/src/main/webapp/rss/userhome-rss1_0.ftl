@@ -23,20 +23,20 @@
 	<items>
 	  <rdf:Seq>
 	<#list bookmark as bm>
-	    <rdf:li resource="${gzBookmarkUrl(bm.id?c)}"/>	   	
+	    <rdf:li resource="${gzUrl("/bookmark/"+bm.id)}"/>	   	
 	</#list>
 	  </rdf:Seq>
 	</items>
 </channel>
 <#list bookmark as bm>
-<item rdf:about="${gzBookmarkUrl(bm.id?c)}">
+<item rdf:about="${gzUrl("/bookmark/"+bm.id)}">
   <title>${bm.title?html}</title>
-  <link>${gzBookmarkUrl(bm.id?c)?html}</link>
+  <link>${bm.link.url?html}</link>
   <dc:date>${getDateTimeISO8601(bm.lastUpdated)}</dc:date>
   <dc:creator>${bm.user.fullname}</dc:creator>
   <dc:subject>
   <#list bm.tagList as tag>
-    ${tag} 
+    ${tag?html} 
   </#list>
   </dc:subject>
   <description>${(bm.notes?if_exists)?html}</description>

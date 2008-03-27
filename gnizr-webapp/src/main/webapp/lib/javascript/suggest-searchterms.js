@@ -38,7 +38,6 @@ SuggestSearchTerms = {
                    SuggestSearchTerms.narrowerTags != null ||
                    SuggestSearchTerms.broaderTags != null){
                     SuggestSearchTerms.createSuggestionBox();
-                    SuggestSearchTerms.showSuggestion();
                 }
             };
             var gotDataFailed = function(err){
@@ -90,7 +89,7 @@ SuggestSearchTerms = {
     createListData: function(tags){
         var listElm = MochiKit.DOM.UL(null);
         for(var i = 0; i < tags.length; i++){
-            var tUrl = searchUrl + '?' + MochiKit.Base.queryString({'q':'tag:'+tags[i] + ' OR ' + tags[i]});
+            var tUrl = searchUrl + '?' + MochiKit.Base.queryString({'q':tags[i]});
             MochiKit.DOM.appendChildNodes(listElm,
             MochiKit.DOM.LI(null,
              MochiKit.DOM.A({'href':tUrl},tags[i])));

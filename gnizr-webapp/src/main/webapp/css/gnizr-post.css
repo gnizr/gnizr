@@ -79,7 +79,6 @@
 }
 
 #suggestedTags{
-    margin-top: 4px;
 	height: 20px;
 }
 
@@ -185,32 +184,3 @@
 	width: 200px;
 	height: 100px;
 }
-
-.machine-tag-helper{
-	margin: 2px 0px;
-	display: inline;
-}
-
-.machine-tag-helper-cancel{
-	margin-left: 0px;
-	margin-right: 8px;
-}
-
-/*  Media Icon Picker Style */
-.media-icon-list {
-	list-style-type: none;
-	display: inline;
-	margin: 0px;
-	padding: 0px;
-}
-
-.media-icon{
-	display: inline;
-	padding: 0px 6px;
-}
-
-#media-icon-name-focused{
-	margin: 4px auto;
-	width: 10px;
-}
-

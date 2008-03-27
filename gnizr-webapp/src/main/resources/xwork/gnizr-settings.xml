@@ -178,15 +178,6 @@
 	
 	<package name="gnizr-opensearch-description" extends="gnizr-default"
 		namespace="/settings/opensearch">
-		<action name="description"
-			class="com.gnizr.web.action.settings.ListSettings"
-			method="doDefault">			
-			<interceptor-ref name="gnizrNoPolicyDefaultStack"/>
-			<result name="success" type="freemarker">
-				<param name="location">/settings/gnizr-searchdescription.ftl</param>
-				<param name="contentType">text/xml</param>
-			</result>
-		</action>
 		<action name="mybookmarks"
 			class="com.gnizr.web.action.settings.ListSettings"
 			method="doDefault">			
@@ -223,17 +214,7 @@
 			<result name="success" type="freemarker">/settings/home.ftl</result>	 
 		</action>
 			
-		<action name="changePassword" class="com.gnizr.web.action.user.ChangeUserProfile"
-			method="doInput">
-			<interceptor-ref name="loggedIn"/>
-			<interceptor-ref name="auth"/>			
-			<interceptor-ref name="gnizrDefaultStack"/>		
-			<result name="success" type="freemarker">/settings/edit-password.ftl</result>
-			<result name="input" type="freemarker">/settings/edit-password.ftl</result>
-		</action>
-		
-		<action name="updatePassword" class="com.gnizr.web.action.user.ChangeUserProfile"
-		    method="doUpdatePassword">
+		<action name="changePassword" class="com.gnizr.web.action.user.ChangeUserProfile">
 			<interceptor-ref name="loggedIn"/>
 			<interceptor-ref name="auth"/>			
 			<interceptor-ref name="gnizrDefaultStack"/>
@@ -244,35 +225,18 @@
 			<result name="error" type="freemarker">/error.ftl</result>
 		</action>
 		
-		<action name="changeProfile" class="com.gnizr.web.action.user.ChangeUserProfile"
-			method="doInput">
+		<action name="updateProfile" class="com.gnizr.web.action.user.ChangeUserProfile">
 			<interceptor-ref name="loggedIn"/>
 			<interceptor-ref name="auth"/>			
-			<interceptor-ref name="gnizrDefaultStack"/>		
-			<result name="success" type="freemarker">/settings/edit-profile.ftl</result>
-			<result name="input" type="freemarker">/settings/edit-profile.ftl</result>
-		</action>
-					
-		<action name="updateProfile" class="com.gnizr.web.action.user.ChangeUserProfile"
-		method="doUpdateProfile">
-			<interceptor-ref name="loggedIn"/>
-			<interceptor-ref name="auth"/>			
-			<interceptor-ref name="gnizrDefaultStack"/>
+			<interceptor-ref name="gnizrDefaultStack"/>	
             <interceptor-ref name="validation"/>
-			<interceptor-ref name="workflow"/>		
+            <interceptor-ref name="workflow"/>	
 			<result name="success" type="freemarker">/settings/edit-profile.ftl</result>
 			<result name="input" type="freemarker">/settings/edit-profile.ftl</result>
-		</action>
+			<result name="error" type="freemarker">/error.ftl</result>
+		</action>	
 		
-		<action name="delicious" class="com.gnizr.web.action.bookmark.ImportDeliciousPosts"
-				method="doInput">
-			<interceptor-ref name="loggedIn"/>
-			<interceptor-ref name="auth"/>						
-			<interceptor-ref name="gnizrDefaultStack"/>	         					
-			<result name="input" type="freemarker">/settings/import-delicious.ftl</result>
-		</action>
-			
-		<action name="importPosts" class="com.gnizr.web.action.bookmark.ImportDeliciousPosts">
+		<action name="importDeliciousPosts" class="com.gnizr.web.action.bookmark.ImportDeliciousPosts">
 			<interceptor-ref name="loggedIn"/>
 			<interceptor-ref name="auth"/>						
 			<interceptor-ref name="gnizrDefaultStack"/>	         
@@ -280,31 +244,8 @@
 			<result name="wait" type="freemarker">/settings/import-wait.ftl</result>
 			<result name="success" type="freemarker">/settings/import-delicious.ftl</result>
 			<result name="input" type="freemarker">/settings/import-delicious.ftl</result>
-		</action>
-		
-		<action name="indexBookmark" class="com.gnizr.web.action.search.IndexBookmark" 
-				method="doDefault">
-			<interceptor-ref name="loggedIn"/>
-			<interceptor-ref name="auth"/>						
-			<interceptor-ref name="auth-gnizr"/>
-			<interceptor-ref name="gnizrDefaultStack"/>	         								
-			<result name="success" type="freemarker">/settings/index-bookmark.ftl</result>
-			<result name="input" type="freemarker">/settings/index-bookmark.ftl</result>
 			<result name="error">/common/error.ftl</result>
 		</action>
-
-		<action name="updateIndex" class="com.gnizr.web.action.search.IndexBookmark">
-			<interceptor-ref name="loggedIn"/>
-			<interceptor-ref name="auth"/>						
-			<interceptor-ref name="auth-gnizr"/>
-			<interceptor-ref name="gnizrDefaultStack"/>
-			<interceptor-ref name="execAndWait"/>	
-			<result name="wait" type="freemarker">/settings/index-wait.ftl</result>
-			<result name="success" type="freemarker">/settings/index-bookmark.ftl</result>		
-			<result name="error">/common/error.ftl</result>
-		</action>
-
-		
 	</package>
 	
 </xwork>

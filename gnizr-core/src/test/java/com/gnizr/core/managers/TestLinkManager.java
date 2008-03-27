@@ -22,8 +22,6 @@ import org.dbunit.dataset.xml.FlatXmlDataSet;
 import com.gnizr.core.GnizrCoreTestBase;
 import com.gnizr.core.link.LinkManager;
 import com.gnizr.db.dao.Bookmark;
-import com.gnizr.db.dao.DaoResult;
-import com.gnizr.db.dao.Link;
 
 public class TestLinkManager extends GnizrCoreTestBase {
 
@@ -48,14 +46,5 @@ public class TestLinkManager extends GnizrCoreTestBase {
 		assertNotNull(b);
 		assertEquals("Spring Framework: Inversion of Control (IoC)",b.getTitle());
 	}
-	
-	public void testPageLinkHistory() throws Exception{
-		DaoResult<Bookmark> result = linkManager.pageLinkHistory(new Link(209), 0, 10);
-		assertEquals(2,result.getSize());
-		assertEquals(2,result.getResult().size());
-		
-		result = linkManager.pageLinkHistory(new Link(209), 1, 10);
-		assertEquals(2,result.getSize());
-		assertEquals(1,result.getResult().size());
-	}
+
 }

@@ -16,6 +16,8 @@
  */
 package com.gnizr.web.action.bookmark;
 
+import java.util.Map;
+
 import org.apache.log4j.Logger;
 
 import com.gnizr.core.bookmark.BookmarkManager;
@@ -45,6 +47,8 @@ public class ImportDeliciousPosts extends AbstractAction implements LoggedInUser
 	private BookmarkManager bookmarkManager;
 	private FolderManager folderManager;
 
+	@SuppressWarnings("unused")
+	private Map session;
 	private ImportStatus status;
 	
 	public ImportStatus getStatus() {
@@ -60,11 +64,9 @@ public class ImportDeliciousPosts extends AbstractAction implements LoggedInUser
 			status = importService.doImport();
 		}catch(DeliciousNotAuthorizedException e){
 			addActionMessage("del.icio.us authorization error. either your username or password is incorrect.");
-			logger.error("del.icio.us import error. " + e);
 			return INPUT;
 		}catch(DeliciousException e){
 			addActionMessage("del.icio.us web service is currently busy. try again later.");
-			logger.error("del.icio.us import error. " + e);
 			return INPUT;
 		}catch(Exception e){
 			logger.error(e);
@@ -88,6 +90,10 @@ public class ImportDeliciousPosts extends AbstractAction implements LoggedInUser
 
 	public void setDeliciousUsername(String deliciousUsername) {
 		this.deliciousUsername = deliciousUsername;
+	}
+
+	public void setSession(Map session) {
+		this.session = session;		
 	}
 
 	public BookmarkManager getBookmarkManager() {
@@ -121,4 +127,7 @@ public class ImportDeliciousPosts extends AbstractAction implements LoggedInUser
 	public void setFolderManager(FolderManager folderManager) {
 		this.folderManager = folderManager;
 	}
+	
+	
+
 }

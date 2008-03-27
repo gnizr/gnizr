@@ -16,6 +16,8 @@ ${session.setAttribute("thisPageHref",thisPageHref)}
   <#assign title=title+" tagged ${tag}"/>
   <#assign thisPageHref = gzUserTagUrl(username,tag)/>
 </#if>
+<#assign title=title+" -- gnizr"/>
+
 <@pageBegin pageTitle=title cssHref=[gzUrl("/css/gnizr-userpage.css")]/>
 
 <@headerBlock/>

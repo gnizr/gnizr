@@ -3,16 +3,24 @@
 	"http://www.springframework.org/dtd/spring-beans.dtd">
 <beans>
 	
+	
+	<!-- gnizr business logic -->
+	
 	<bean id="search" class="com.gnizr.core.search.Search" singleton="true">
 		<constructor-arg>
 			<ref bean="gnizrDao"/>
 		</constructor-arg>
 	</bean>
-	
-	<bean id="bookmarkSearcher" class="com.gnizr.core.search.BookmarkSearcher" singleton="true"
-		  init-method="init">
-		<property name="searchIndexProfile">
-			<ref bean="searchIndexProfile"/>
-		</property>
+
+	<bean id="openSearchDirectory" class="com.gnizr.core.search.OpenSearchDirectory" singleton="true">
+		<constructor-arg>
+			<list>
+				<value>/settings/opensearch/mybookmarks.action</value>
+				<value>/settings/opensearch/community.action</value>
+				<value>/settings/opensearch/yahoo-searchdescription.xml</value>
+				<value>http://www.pfaf.org/database/openSearch.rss</value>
+			</list>
+		</constructor-arg>		
 	</bean>
+	
 </beans>

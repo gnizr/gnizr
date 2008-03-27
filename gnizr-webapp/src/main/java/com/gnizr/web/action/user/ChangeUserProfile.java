@@ -62,7 +62,7 @@ public class ChangeUserProfile extends AbstractAction implements LoggedInUserAwa
 	}
 
 	
-	public String doUpdatePassword(){
+	public String changePassword(){
 		if(password.equals(passwordConfirm) == false){
 			addActionMessage("The password values that you've entered are not the same.");
 			return INPUT;
@@ -97,7 +97,7 @@ public class ChangeUserProfile extends AbstractAction implements LoggedInUserAwa
 		session.put(SessionConstants.LOGGED_IN_USER,loggedInUser);
 	}
 	
-	public String doUpdateProfile(){
+	public String updateProfile(){
 		User profile = new User(loggedInUser);		
 		if(email != null){
 			profile.setEmail(email);

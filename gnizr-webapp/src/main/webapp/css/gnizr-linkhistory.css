@@ -1,32 +1,3 @@
-#bookmark-detail{
-	width: 80%;
-	border: 1px solid #C0C0C0;
-	padding: 8px;
-}
-
-h2.title{
-  	margin: 2px 0px;
-  	padding: 0px;
-}
-
-.link{
-  	margin: 2px 0px;
-  	padding: 0px;
-  	color: #0066FF;
-}
-
-.meta{
-  	margin: 10px 0px;
-  	padding: 0px;
-}
-
-.notes{
-  	margin: 8px 0px;
-  	padding: 14px 12px;
-  	/*border-bottom: 1px solid #C0C0C0;
-  	border-top: 1px solid  #C0C0C0; */
-}
-
 /** ======= MAIN DIV for Link History ===== **/
 
 .link-description, .user-comments{

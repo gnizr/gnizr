@@ -6,10 +6,10 @@
 <#include "./macro-lib.ftl"/>
 
 <#if (user.username)?exists>
-  <#assign title=user.username+"'s timeline"/>
+  <#assign title=user.username+"'s timeline -- gnizr"/>
   <#assign sourceUrl=gzUrl("/user/"+user.username+"/output/timeline")/>
 <#else>
-  <#assign title="timeline"/> 
+  <#assign title="timeline -- gnizr"/> 
 </#if>
 
 <@pageBegin pageTitle=title             

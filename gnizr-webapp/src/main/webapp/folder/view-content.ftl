@@ -16,6 +16,7 @@
   <#assign thisPageHref = thisPageBaseHref/>  
 </#if>
 <#assign toPageHref = getToPageHref(thisPageHref)/>
+<#assign title=title+" -- gnizr"/>
 <@pageBegin pageTitle=title cssHref=[gzUrl("/css/gnizr-userpage.css")]
 		    thisPageBaseHref=thisPageBaseHref 
             thisPageHref=thisPageHref

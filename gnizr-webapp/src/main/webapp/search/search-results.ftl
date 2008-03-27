@@ -6,7 +6,7 @@
 <#include "./macro-lib.ftl"/>
 <#assign thisPageBaseHref=gzUrl("/bookmark/search.action")/>  
 <#if (queryString)?exists>
-  <#assign title='search: ${queryString}'/>
+  <#assign title='search: ${queryString} -- gnizr'/>
   <#assign thisPageHref=thisPageBaseHref+'?queryString='+queryString?url/>
   <#if type?exists && type == 'text'>
     <#assign thisPageHref=thisPageHref+'&type=text'/>

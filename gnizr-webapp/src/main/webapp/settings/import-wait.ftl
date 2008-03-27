@@ -7,7 +7,7 @@
 <@ww.url id="thisPageHref" method="post" includeParams="none"/>
 <#-- if not logged in, redirect to the login page -->
 <@ensureUserLoggedIn>
-<#assign title="import del.icio.us -- ${loggedInUser.username}"/>
+<#assign title="import del.icio.us -- ${loggedInUser.username} -- gnizr"/>
 <#assign username=loggedInUser.username/>
 <@pageBegin pageTitle=title cssHref=[gzUrl("/css/gnizr-settings.css")]>
 <meta http-equiv="refresh" content="5;url=${thisPageHref}"/>

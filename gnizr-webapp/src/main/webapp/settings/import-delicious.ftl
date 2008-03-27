@@ -8,7 +8,7 @@
 
 <#-- if not logged in, redirect to the login page -->
 <@ensureUserLoggedIn>
-<#assign title="import del.icio.us -- ${loggedInUser.username} "/>
+<#assign title="import del.icio.us -- ${loggedInUser.username} -- gnizr"/>
 <#assign username=loggedInUser.username/>
 
 <@pageBegin pageTitle=title cssHref=[gzUrl("/css/gnizr-settings.css")]/>
@@ -16,7 +16,7 @@
 </@headerBlock>
 
 <@pageContent>
-  <#assign bct = settingsBCT(username) + [gzBCTPair('import from del.icio.us',gzUrl('/settings/delicious.action'))]/>
+  <#assign bct = settingsBCT(username) + [gzBCTPair('import from del.icio.us',gzUrl('/settings/delicious'))]/>
   <@infoBlock bct=bct/>
 <@mainBlock>  
 <#if (status?exists = false)>

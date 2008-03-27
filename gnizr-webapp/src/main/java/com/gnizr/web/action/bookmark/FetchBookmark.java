@@ -16,25 +16,16 @@
  */
 package com.gnizr.web.action.bookmark;
 
-import java.util.List;
-import java.util.Map;
-
-import net.sf.json.JSON;
-import net.sf.json.JSONObject;
-import net.sf.json.JSONSerializer;
-
 import org.apache.log4j.Logger;
 
 import com.gnizr.core.bookmark.BookmarkManager;
-import com.gnizr.core.link.LinkManager;
-import com.gnizr.core.util.FormatUtil;
 import com.gnizr.db.dao.Bookmark;
-import com.gnizr.db.dao.DaoResult;
 import com.gnizr.db.dao.User;
 import com.gnizr.web.action.AbstractAction;
 import com.gnizr.web.action.LoggedInUserAware;
+import com.opensymphony.xwork.Preparable;
 
-public class FetchBookmark extends AbstractAction implements LoggedInUserAware{
+public class FetchBookmark extends AbstractAction implements LoggedInUserAware, Preparable{
 
 	private static final Logger logger = Logger.getLogger(FetchBookmark.class);
 
@@ -43,24 +34,20 @@ public class FetchBookmark extends AbstractAction implements LoggedInUserAware{
 	private int bookmarkId;
 	private Bookmark bookmark;
 	private BookmarkManager bookmarkManager;
-	private LinkManager linkManager;
 	private User loggedInUser;	
-	private List<Bookmark> othersSaved;
-	private int totalOthersSaved;
 	
-	public int getTotalOthersSaved() {
-		return totalOthersSaved;
-	}
-
-	public List<Bookmark> getOthersSaved() {
-		return othersSaved;
-	}
-
 	/**
 	 * @return the bookmark
 	 */
 	public Bookmark getBookmark() {
 		return bookmark;
+	}
+
+	/**
+	 * @param bookmark the bookmark to set
+	 */
+	public void setBookmark(Bookmark bookmark) {
+		this.bookmark = bookmark;
 	}
 
 	/**
@@ -100,47 +87,23 @@ public class FetchBookmark extends AbstractAction implements LoggedInUserAware{
 
 	@Override
 	protected String go() throws Exception {
-		logger.debug("FetchBookmark.go()");
-		if(getBookmarkId() > 0){
-			bookmark = bookmarkManager.getBookmark(getBookmarkId());
-			if(bookmark != null && bookmark.getLink() != null){
-				DaoResult<Bookmark> res = linkManager.pageLinkHistory(bookmark.getLink(),0,10);
-				totalOthersSaved = res.getSize();
-				othersSaved = res.getResult();
-			}else{
-				logger.debug("No such bookmark goes by the ID " + getBookmarkId());
-			}
+		if(bookmark == null){
+			return ERROR;
+		}else{
+			return SUCCESS;
 		}
-		return SUCCESS;
 	}
 
 	public void setLoggedInUser(User user) {
 		this.loggedInUser = user;		
 	}
 
-	public String doGetBookmarkOnly() throws Exception{
-		logger.debug("FetchBookmark.go()");
-		if(getBookmarkId() > 0){
-			bookmark = bookmarkManager.getBookmark(getBookmarkId());
-		}
-		return SUCCESS;
-	}
-	
-	public JSON getJsonResult(){
-		if(bookmark == null){
-			return new JSONObject();			
+	public void prepare() throws Exception {
+		if(bookmarkId > 0){
+			bookmark = bookmarkManager.getBookmark(bookmarkId);
 		}else{
-			Map<String,Object> bookmarkMap = FormatUtil.getBookmarkAsMap(bookmark);
-			return JSONSerializer.toJSON(bookmarkMap);
+			bookmark = null;
 		}
+		logger.debug("fetched bookmark: bookmarkId="+bookmarkId+",bookmark="+bookmark);
 	}
-
-	public LinkManager getLinkManager() {
-		return linkManager;
-	}
-
-	public void setLinkManager(LinkManager linkManager) {
-		this.linkManager = linkManager;
-	}
-	
 }

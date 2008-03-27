@@ -8,7 +8,7 @@
 
 <#-- if not logged in, redirect to the login page -->
 <@ensureUserLoggedIn>
-<#assign title="add new users"/>
+<#assign title="add new users -- gnizr"/>
 <@pageBegin pageTitle=title cssHref=[gzUrl("/css/gnizr-settings.css")]/>
 
 <@headerBlock/>

@@ -1,7 +1,7 @@
 <#include "/lib/web/macro-lib.ftl"/>
 <#include "./macro-lib.ftl"/>
 <#assign username = loggedInUser.username/>
-<#assign title="edit tag '${tag}'"/>
+<#assign title="edit tag '${tag}' -- gnizr"/>
 <#assign thisPageHref=gzTagUrl(tag)/>
 <#if editValueName?exists == false>
   <#assign editValueName="relatedTags"/>

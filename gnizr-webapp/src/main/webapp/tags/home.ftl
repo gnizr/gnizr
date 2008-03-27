@@ -4,7 +4,7 @@
 <#include "/lib/web/macro-lib.ftl"/>
 <#include "/lib/web/rdf-macro-lib.ftl"/>
 <#include "./macro-lib.ftl"/>
-<#assign title="bookmarks tagged '${tag}'"/>
+<#assign title="bookmarks tagged '${tag}' -- gnizr"/>
 <#assign thisPageHref=gzTagUrl(tag)/>
 <#assign thisPageRdf = getTagUri(tag)/>
 <#assign toPageHref = getToPageHref(thisPageHref)/>

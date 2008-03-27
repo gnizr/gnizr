@@ -6,8 +6,6 @@ var selectSearchServicesULID = 'selectSearchServices';
 var entryFocusedClass = 'resultEntryFocused';
 var saveResultLinkClass = 'saveLink';
 var linkActionClass = 'linkAction';
-var viewDetailClass = 'viewDetail'
-var viewDetailLinkClass = 'viewDetailLink';
 
 /* Cookie related global variables */
 var chckSrvCookieName = 'rememberCheckedServices';
@@ -20,7 +18,6 @@ var searchManager = null;
 var queryTerm = null;
 var proxyUrl = null;
 var postUrl = null;
-var bookmarkDetailUrl = null;
 var loggedInUser = null;
 var loadingImg = '/loading-bar-blue.gif';
 var checkedServicesMap = {};
@@ -167,11 +164,6 @@ SearchExecutor.prototype.fetchMoreData = function(){
     var resultTile = this.resultTile;     
     var searchExec = this;   
     
-    function appendNoMatchingResult(result){
-    	 var noMatchElm = MochiKit.DOM.P({'class':'search-result-message'},'No matching results were found!');
-    	 MochiKit.DOM.replaceChildNodes(resultTile.tileContentElm,noMatchElm);
-    }
-    
     function appendOneResult(anEntry){
         //MochiKit.Logging.log('e'+i+':'+anEntry.link+','+anEntry.title);
         var title = anEntry.title;
@@ -181,32 +173,18 @@ SearchExecutor.prototype.fetchMoreData = function(){
             if(summary.length > 250){
                 summary = summary.substring(0,250) + '...';
             }
-           //summary = summary.escapeHTML();
+           summary = summary.escapeHTML();
          }
          var link = anEntry.link;
          var editLinkElm = '';
-         // setup the hock for injecting a quick-save or edit-bookmark link
          if(MochiKit.Base.isUndefinedOrNull(loggedInUser) == false){
             editLinkElm = MochiKit.DOM.SPAN({'class':'invisible ' + linkActionClass},
                MochiKit.DOM.A({'href':'#','class':'system-link ' + saveResultLinkClass},'')); 
          }
-         // setup the hack for injecting a view-bookmark-detail link
-         var id = parseBookmarkId(anEntry.id);
-         var viewDetailElm = '';
-         if(id > 0){
-         	MochiKit.Logging.log('Found gnizr bookmark id:' + id);
-         	var dtlUrl = bookmarkDetailUrl + '/' + id;
-         	viewDetailElm = MochiKit.DOM.SPAN({'class':'invisible ' + viewDetailClass},
-         	   MochiKit.DOM.A({'href':dtlUrl,'target':'_blank','class':'system-link ' + viewDetailLinkClass},'view'));
-         }         
-         var summaryElm = MochiKit.DOM.P({'class':'entryDescription'});
-         summaryElm.innerHTML = summary;
          var entryElm = MochiKit.DOM.LI(null,
             MochiKit.DOM.A({'class':'entryTitle','href':link,'target':'_blank'},title),
             editLinkElm,
-            ' ',
-            viewDetailElm,
-			summaryElm            
+            MochiKit.DOM.P({'class':'entryDescription'},summary) 
           );                                  
          MochiKit.DOM.appendChildNodes(resultElm,entryElm); 
          resultTile.notifyResultEntryCreated(entryElm);      
@@ -234,9 +212,6 @@ SearchExecutor.prototype.fetchMoreData = function(){
             for(var i = 0; i < entries.length; i++){
                 appendOneResult(entries[i]);
                 searchExec.totalFetched++;
-            }
-            if(entries.length == 0){
-            	appendNoMatchingResult(result);
             }
         }
         if(MochiKit.Base.isUndefinedOrNull(result.startIndex) == false){
@@ -273,30 +248,20 @@ SearchExecutor.prototype.fetchMoreData = function(){
        resultTile.hideLoadingDialog();  
        MochiKit.Logging.log('fetch data failed. ' + result);
     }    
-    MochiKit.Logging.log('try to fetchMoreData from : ' + this.searchDataUrl);        
-      
-    if(MochiKit.Base.isUndefinedOrNull(this.searchDataUrl) == false){
-    	var callUrl = null;
-    	if(this.service.type == 'synd'){
-    		if(MochiKit.Base.isUndefinedOrNull(proxyUrl) == false){
-    			callUrl =  proxyUrl + encodeURIComponent(this.searchDataUrl);	
-    		}else{
-    	   		alert('Internal Error: proxy URL is undefined');  
-	    	}
-    	}else if(this.service.type == 'gn-json'){
-    		callUrl = this.searchDataUrl;
-	    }else{
-    		MochiKit.Logging.log('Unsupport OpenSearch result type: neither gn-json or synd');
-	    }
-	    if(MochiKit.Base.isUndefinedOrNull(callUrl) == false){
-    		this.resultTile.showLoadingDialog();
-   			MochiKit.Logging.log('AJAX call: ' + callUrl);
-        	var d = MochiKit.Async.loadJSONDoc(callUrl);
-        	d.addCallbacks(onSucceed,onFailed);            
-	    }
+    MochiKit.Logging.log('try to fetchMoreData from : ' + this.searchDataUrl);    
+    if(MochiKit.Base.isUndefinedOrNull(proxyUrl) == false){        
+        if(MochiKit.Base.isUndefinedOrNull(this.searchDataUrl) == false){
+            this.resultTile.showLoadingDialog();
+            var callUrl = proxyUrl + encodeURIComponent(this.searchDataUrl);
+            MochiKit.Logging.log('AJAX call: ' + callUrl);
+            var d = MochiKit.Async.loadJSONDoc(callUrl);
+            d.addCallbacks(onSucceed,onFailed);            
+        }else{
+            MochiKit.Logging.log('No more results in the searh stream. Halt.');
+        }
     }else{
-    	MochiKit.Logging.log('No more results in the searh stream. Halt.');
-    }
+        alert('Internal Error: proxy URL is undefined');    
+    }    
 }
 
 SearchExecutor.prototype.terminate = function(){

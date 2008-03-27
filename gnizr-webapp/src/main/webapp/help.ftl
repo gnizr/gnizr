@@ -1,6 +1,5 @@
 <#include "/lib/web/macro-lib.ftl"/>
-<@pageBegin pageTitle="help -- gnizr"> 
-</@pageBegin>          
+<@pageBegin pageTitle="help -- gnizr" />          
 <@headerBlock></@headerBlock>
 <@pageContent>
 <@mainBlock>

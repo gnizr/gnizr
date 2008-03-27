@@ -8,7 +8,7 @@
 
 <#-- if not logged in, redirect to the login page -->
 <@ensureUserLoggedIn>
-<#assign title="updating user bookmark ownership"/>
+<#assign title="updating user bookmark ownership -- gnizr"/>
 <#assign username=loggedInUser.username/>
 
 <@pageBegin pageTitle=title cssHref=[gzUrl("/css/gnizr-settings.css")]/>

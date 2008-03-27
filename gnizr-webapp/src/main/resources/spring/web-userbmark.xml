@@ -68,7 +68,7 @@
 	</bean>
 	
 	<bean id="listBookmarkHasGeomMarker" class="com.gnizr.web.action.bookmark.ListBookmarkHasGeomMarker" singleton="false">
-		<property name="bookmarkManager">
+	<property name="bookmarkManager">
 			<ref bean="bookmarkManager"/>
 		</property>
 		<property name="folderManager">
@@ -77,11 +77,5 @@
         <property name="userManager">
 			<ref bean="userManager"/>
 		</property>		
-	</bean>
-	
-	<bean id="fetchBookmark" class="com.gnizr.web.action.bookmark.FetchBookmark" singleton="false">
-		<property name="bookmarkManager">
-			<ref bean="bookmarkManager"/>
-		</property>
 	</bean>
 </beans>

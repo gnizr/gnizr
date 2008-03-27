@@ -17,28 +17,26 @@
 		</action>
 	</package>
 	
-	<package name="gnizr-atom-user" extends="gnizr-default" namespace="/data/atom/user">			
-		<action name="searchBookmark" class="com.gnizr.web.action.search.SearchUserBookmark">
+	<package name="gnizr-atom-user" extends="gnizr-default" namespace="/data/atom/user">		
+		<action name="search" class="com.gnizr.web.action.search.SearchBookmark">
 			<interceptor-ref name="loggedIn"/>			
-			<interceptor-ref name="auth"/>
-			<interceptor-ref name="gnizrDefaultStack"/>		
+			<interceptor-ref name="gnizrNoPolicyDefaultStack"/>	
+			<param name="type">user</param>		
 			<result name="success" type="opensearch">								
-				<param name="encoding">UTF-8</param>							
+				<param name="encoding">UTF-8</param>				
 			</result>	
-			<result name="input" type="freemarker">/common/empty-template.ftl</result>
 		</action>
 	</package>
 	
-	<package name="gnizr-atom-community" extends="gnizr-default" namespace="/data/atom/community">				
-		<action name="searchBookmark" class="com.gnizr.web.action.search.SearchCommunityBookmark">
+	<package name="gnizr-atom-community" extends="gnizr-default" namespace="/data/atom/community">		
+		<action name="search" class="com.gnizr.web.action.search.SearchBookmark">
 			<interceptor-ref name="loggedIn"/>			
-			<interceptor-ref name="gnizrDefaultStack"/>		
+			<interceptor-ref name="gnizrNoPolicyDefaultStack"/>	
+			<param name="type">text</param>		
 			<result name="success" type="opensearch">								
-				<param name="encoding">UTF-8</param>							
+				<param name="encoding">UTF-8</param>				
 			</result>	
-			<result name="input" type="freemarker">/common/empty-template.ftl</result>
 		</action>
-		
 	</package>
 	
 </xwork>

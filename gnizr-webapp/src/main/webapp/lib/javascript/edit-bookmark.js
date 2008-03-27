@@ -392,7 +392,6 @@ function addSubscribeMT(){
 }
 
 function addMachineTagToTagline(ns,pred,value){
-	MochiKit.Logging.log('called addMachineTagToTagline(): ' + ns + ',' + pred + ',' + value);
   var tagsInputElm = MochiKit.DOM.getElement(tagsInputFieldId);
   var tagline = tagsInputElm.value;
   var mtFull = '';
@@ -933,19 +932,5 @@ function getPartiallyMatchedTags(ps,maxCount){
     return matchedTags;
 }
 /* ========  END: Suggest Tags for Auto-Complete Functions ========== */
-
-/* == Used to help user to use machine tags == */
-function showMachineTagHelper(contentElm){
-	clearSuggestedTags();
-	MochiKit.Logging.log('showMachineTagHelper: cleared suggested tags DIV');
-	var cancelElm = MochiKit.DOM.SPAN({'class':'machine-tag-helper-cancel'},
-		 MochiKit.DOM.SPAN({'class':'system-link',
-	                    'onclick':'clearSuggestedTags()'},'Cancel'));
-	MochiKit.DOM.addElementClass(contentElm,'machine-tag-helper')
-	var suggestTagsElm = MochiKit.DOM.getElement(suggestedTagsDIVId);
-	MochiKit.DOM.appendChildNodes(suggestTagsElm,cancelElm, contentElm);
-	MochiKit.Logging.log('showMachineTagHelper: done appending contentElm to the suggested tag DIV');
-}
-
 
 MochiKit.Signal.connect(window,'onload',initializePage);

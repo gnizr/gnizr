@@ -3,7 +3,7 @@
 <#-- import Freemarker macros that are specific to SETTING -->
 <#include "./macro-lib.ftl"/>
 <@ensureUserLoggedIn>
-<#assign title="delete tags "/>
+<#assign title="delete tags -- gnizr"/>
 <#assign username=loggedInUser.username/>
 <@pageBegin pageTitle=title />
 <@headerBlock>

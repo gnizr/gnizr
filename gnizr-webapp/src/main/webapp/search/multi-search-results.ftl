@@ -2,7 +2,6 @@
 <#include "./macro-lib.ftl"/>
 <#assign queryString=q?if_exists/>
 <#assign thisPageBaseHref=gzUrl("/search/list.action")/>  
-<#assign title="search " + q?if_exists?html/>
 <@pageBegin pageTitle=title cssHref=[gzUrl("/css/gnizr-search.css")]>                       
 <script type="text/javascript" src="${gzUrl("/lib/javascript/opensearch.js")}"></script> 
 <script type="text/javascript" src="${gzUrl("/lib/javascript/suggest-searchterms.js")}"></script>
@@ -11,10 +10,8 @@
  imagePathUrl = '${gzUrl("/images")}';
  queryTerm = '${q?if_exists?js_string}';
  proxyUrl = '${gzUrl("/data/json/searchproxy.action?searchUrl=")}';
- bookmarkDetailUrl = '${gzUrl("/bookmark/id")}';
  <#-- global variables defined in suggest-searchterms.js -->
  searchUrl = '${thisPageBaseHref}';
- <#-------------------------------------------------------->
  postUrl = '${gzUrl("/post?")}';
  <#if q?exists>
  fetchSuggestionUrl = '${gzUrl("/data/json/suggestSearchTags.action?q="+q?js_string)}';

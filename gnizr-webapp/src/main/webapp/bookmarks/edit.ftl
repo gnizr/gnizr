@@ -4,12 +4,12 @@
 <@ensureUserLoggedIn>
 <#assign username=loggedInUser.username/>
 <#if url?exists >
-  <#assign title="save url: " + url>
+  <#assign title="save url: " + url + " -- gnizr">
 <#else>
-  <#assign title="save url"/>
+  <#assign title="save url -- gnizr"/>
 </#if>
 <@pageBegin pageTitle=title cssHref=[gzUrl("/css/gnizr-tagcloud.css"),
-                                     gzUrl("/css/gnizr-post.css")]>     
+                                     gzUrl("/css/gnizr-post.css")]>      
 <script type="text/javascript" src="${gzUrl("/lib/javascript/selection.js")}"></script>                                                                                                      
 <script type="text/javascript" src="${gzUrl("/lib/javascript/edit-bookmark.js")}"></script>
 <script type="text/javascript" src="${gzUrl("/data/json/userTagCloud.action?callback=loadUserTags&username="+username)}"></script>
@@ -86,7 +86,6 @@
   <a href="#" id="forUserMTHelper" class="system-link" title="gn:for"><img class="icon" src="${gzUrl('/images/user-16.png')}"></a>
   <a href="#" id="folderMTHelper" class="system-link" title="gn:folder"><img class="icon" src="${gzUrl('/images/folder-16.gif')}"></a>
   <a href="#" id="subscribeMTHelper" class="system-link" title="gn:subscribe"><img class="icon" src="${gzUrl('/images/rss-16.png')}"></a> 
-  <img id="mediaIconMTHelper" class="system-link icon" src="${gzUrl('/images/icon-16.gif')}"/>
   </span>		
   <@ww.textarea cssClass="text-input-tags" label="tags (use white-space to separte multiple tags)"  labelposition="top"
                  name="tags"  value="${(editBookmark.tags)?if_exists}"/>                   
@@ -156,8 +155,7 @@ Tools: <a id="addTags" href="#">edit tags</a> | <a id="addPlacemarks" href="#">e
 </table>
 <div id="map"></div>
 </div>
-</div>   
-<script type="text/javascript" src="${gzUrl("/lib/javascript/mediaicon-picker.js")}"></script>
+</div>
 </@pageContent>
 <@pageEnd/>
 

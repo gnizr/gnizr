@@ -18,6 +18,21 @@
 </rule>	
 
 <rule>
+  <from>^/settings/changepassword$</from>	
+  <to last="true">/settings/edit-password.ftl</to>
+</rule>	
+	
+<rule>
+  <from>^/settings/updateprofile$</from>	
+  <to last="true">/settings/edit-profile.ftl</to>
+</rule>	
+
+<rule>
+  <from>^/settings/delicious$</from>	
+  <to last="true">/settings/import-delicious.ftl</to>
+</rule>			
+
+<rule>
   <from>^/register$</from>
   <to last="true">/users/register.ftl</to>
 </rule>		
@@ -264,9 +279,5 @@
   <to last="true">/images/markers/red-dot.png</to>		
 </rule>	
 	
-<rule>
-  <from>^/bookmark/id/([0-9]+)$</from>
-  <to last="true">/community/getBookmarkInfo.action?bookmarkId=$1</to>
-</rule>	
 </urlrewrite>
 

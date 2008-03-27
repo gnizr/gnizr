@@ -10,7 +10,7 @@
 <#-- if a user is already logged in, 
      redirect to the home page of the user -->
 <@goHome>
-<#assign title="new user registration"/>
+<#assign title="new user registration -- gnizr"/>
 
 <@pageBegin pageTitle=title cssHref=[gzUrl("/css/gnizr-frontpage.css")]/>
 

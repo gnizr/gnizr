@@ -2,7 +2,7 @@
 <#-- import Freemarker macros that are common to the site -->
 <#include "/lib/web/macro-lib.ftl"/>
 
-<#assign title="manage user accounts"/>
+<#assign title="manage user accounts -- gnizr"/>
 
 <@pageBegin pageTitle=title cssHref=[gzUrl("/css/gnizr-settings.css"),
                                      gzUrl("/css/gnizr-edituser.css")]/>

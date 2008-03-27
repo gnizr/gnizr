@@ -9,14 +9,14 @@
 <#-- if not logged in, redirect to the login page -->
 <@ensureUserLoggedIn>
 
-<#assign title="change profile"/>
+<#assign title="change profile -- gnizr"/>
 <@pageBegin pageTitle=title cssHref=[gzUrl("/css/gnizr-settings.css")]/>
 
 <@headerBlock>
 </@headerBlock>
 <@pageContent>
 <#assign bct = settingsBCT(loggedInUser.username)/>
-<#assign bct = bct + [gzBCTPair('change profile', gzUrl("/settings/changeProfile.action"))]/> 
+<#assign bct = bct + [gzBCTPair('update profile', gzUrl("/settings/updateprofile"))]/> 
 <#if (editUser.username)?exists && (loggedInUser.username != editUser.username)>
   <#assign bct = bct + userhomeBCT(editUser.username)/> 
 </#if>

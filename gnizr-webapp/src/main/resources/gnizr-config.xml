@@ -43,17 +43,6 @@
 	
 	<bean id="gnizrConfiguration" class="com.gnizr.web.util.GnizrConfiguration"
 		  singleton="true">
-        
-        <!-- Define the site name of your gnizr installation -->
-		<property name="siteName">
-			<value>gnizr 2.4</value>
-		</property>  
-		
-		<!-- Define a short-description of your site -->
-		<property name="siteDescription">
-			<value>organize</value>
-		</property> 
-		
 		<!-- Define the web application URL of this gnizr installation -->
 		<property name="webApplicationUrl">
 			<value>http://localhost:8080/gnizr</value>
@@ -78,23 +67,6 @@
 			<value>close</value>
 		</property>
 		<property name="serverMaintenanceModeEnabled">
-			<value>false</value>
-		</property>
-		<property name="openSearchServices">			
-			<list>
-				<value>/settings/opensearch/mybookmarks.action</value>
-				<value>/settings/opensearch/community.action</value>
-				<value>/settings/opensearch/yahoo-searchdescription.xml</value>
-				<value>http://www.pfaf.org/database/openSearch.rss</value>
-			</list>
-		</property>
-	</bean>
-	
-	<bean id="searchIndexProfile" class="com.gnizr.core.search.SearchIndexProfile" singleton="true">
-		<property name="directoryPath">
-			<value>D:/cygwin/tmp/search-data</value>
-		</property>
-		<property name="overwrite">
 			<value>false</value>
 		</property>
 	</bean>
