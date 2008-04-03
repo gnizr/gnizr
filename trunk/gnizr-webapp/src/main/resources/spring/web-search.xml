@@ -41,4 +41,8 @@
 		</property>
 	</bean>
 	
+	<bean id="searchQuerySuggest" class="com.gnizr.web.action.search.SearchQuerySuggest" singleton="false">
+		
+	</bean>
+	
 </beans>

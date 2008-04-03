@@ -18,8 +18,8 @@ import com.gnizr.web.action.AbstractLoggedInUserAction;
 import com.opensymphony.webwork.interceptor.SessionAware;
 
 /**
- * <p>An Action implementation for building search index of bookmarks 
- * saved by the gnizr users. This action should be accessible only to
+ * <p>An Action implementation for building a search index of all bookmarks. 
+ * This action should be accessible only to
  * the superuser of the gnizr system (i.e., the user <code>gnizr</code>).</p>
  * <p>The enforcement of this logic is done by using the proper
  * interceptor configuration in the XWork configuration.
@@ -35,6 +35,7 @@ public class IndexBookmark extends AbstractLoggedInUserAction implements Session
 	
 	private SearchIndexManager searchIndexManager;
 	private BookmarkPager bookmarkPager;
+	private boolean reset;
 	private IndexStatus status;
 	@SuppressWarnings("unchecked")
 	private Map session;
@@ -195,6 +196,14 @@ public class IndexBookmark extends AbstractLoggedInUserAction implements Session
 	@SuppressWarnings("unchecked")
 	public void setSession(Map session) {
 		this.session = session;
+	}
+
+	public boolean isReset() {
+		return reset;
+	}
+
+	public void setReset(boolean reset) {
+		this.reset = reset;
 	}
 	
 }
