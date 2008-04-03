@@ -72,6 +72,7 @@ INPUT: pageTitle:String // the <title/> of this HTML page
 <!-- GNIZR DEFAULT CSS -->
 <link href="${gzUrl("/css/gnizr-default.css")}" rel="stylesheet" type="text/css">
 <link href="${gzUrl("/css/gnizr-header.css")}" rel="stylesheet" type="text/css">
+<link href="${gzUrl("/css/ajax-suggestions.css")}" rel="stylesheet" type="text/css">
 
 <!-- PAGE SPECIFIC CSS BEGINS -->
 <#list cssHref as css>
@@ -86,6 +87,7 @@ INPUT: pageTitle:String // the <title/> of this HTML page
 <script type="text/javascript" charset="utf-8" src="${gzUrl("/lib/javascript/tags-util.js")}"></script>
 <script type="text/javascript" charset="utf-8" src="${gzUrl("/lib/javascript/common.js")}"></script>
 <script type="text/javascript" charset="utf-8" src="${gzUrl("/lib/javascript/cookie-util.js")}"></script>
+<script type="text/javascript" charset="utf-8" src="${gzUrl("/lib/javascript/ajaxSuggestions/ajaxSuggestions.js")}"></script>
 <#if (gnizrConfiguration.snapShotsKey)?exists>
 <script type="text/javascript" src="http://shots.snap.com/snap_shots.js?${gnizrConfiguration.snapShotsKey}"></script>
 </#if>
@@ -162,6 +164,7 @@ INPUT: rssHref:String // a feed URL of this page
     </#if>
   </div>
 </div>
+
 <!-- FOOTER ENDS -->
 </body>
 <!-- HTML BODY ENDS -->
@@ -186,7 +189,6 @@ as <h1/> (page header) of this page:
 </@headerBlock>
 ===================================================================
 -->
-
 <#macro headerBlock namespace="" isTagPage=false>
 <#if (user.username)?exists>
   <#local username = user.username/>
@@ -224,18 +226,18 @@ as <h1/> (page header) of this page:
 </div>  
 <div id="search-box">
 <@ww.form action="search" namespace="/bookmark" theme="simple">
-  <@ww.textfield id="search-input" name="queryString" value="${queryString?if_exists}" size="40"/>
+  <#local suggestUrl = gzUrl('/search/suggest.action')/>
+  <@ww.textfield id="search-input" name="queryString" 
+                 value="${queryString?if_exists}" size="40"
+                 cssClass="ajax-suggestion url-"+suggestUrl
+                />
   <@ww.hidden name="type" value="opensearch"/>
-  <#--
-    <#if loggedInUser?exists> 
-      <#assign opt = r"#{'opensearch':'OpenSearch','user':'My Bookmark Archive','text':'Community'}"/>
-      <@ww.select id="search-space" name="type" list=opt/>   
-    <#else>
-      <@ww.hidden name="type" value="opensearch"/>
-    </#if>      
-    -->
     <@ww.submit id="search-submit" cssClass="" value="Search"/>    
 </@ww.form>
+<div id="ajax-suggestions-container">
+	<div id="ajax-suggestions-results" class="invisible">
+	</div>
+</div>
 </div>
 <div id="header2-menu">   
    <@ww.action name="menu" namespace="/ui" executeResult=true>    

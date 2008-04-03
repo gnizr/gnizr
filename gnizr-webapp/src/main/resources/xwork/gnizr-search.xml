@@ -45,6 +45,12 @@
 			<interceptor-ref name="gnizrDefaultStack"/>		
 			<result name="success" type="freemarker">/search/multi-search-results.ftl</result>	
 		</action>		
+		
+		<action name="suggest" class="com.gnizr.web.action.search.SearchQuerySuggest">
+			<interceptor-ref name="loggedIn"/>	
+			<interceptor-ref name="gnizrDefaultStack"/>		
+			<result name="success" type="freemarker">/search/search-suggest-template.ftl</result>
+		</action>
 	</package>
 	
 	

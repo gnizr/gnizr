@@ -246,15 +246,20 @@ SPAN.system-link{
 }
 
 #search-box{
-	width: 640px;
+	width: 400px;
 	margin-left: auto;
 	margin-right: auto;
-	text-align: center;
+	text-align: left;
+	padding: 0px;
 }
 
 
 #search{
   display:inline;
+}
+
+#search-input{
+	width: 280px;
 }
 
 #search-input, #search-space, #seach-submit{
