@@ -19,22 +19,22 @@ public class SearchIndexProfile implements Serializable{
 
 	private static final Logger logger = Logger.getLogger(SearchIndexProfile.class);
 	
-	private String directoryPath;
+	private String searchIndexDirectory;
 	
 	private boolean overwrite;
 	
 	public SearchIndexProfile(){
-		this.directoryPath = null;
+		this.searchIndexDirectory = null;
 		this.overwrite = true;
 	}
 	
-	public String getDirectoryPath() {
-		return directoryPath;
+	public String getSearchIndexDirectory() {
+		return searchIndexDirectory;
 	}
 
-	public void setDirectoryPath(String directoryPath) {
-		this.directoryPath = directoryPath;
-		final String m = "Set search index directory: " + directoryPath;
+	public void setSearchIndexDirectory(String indexDirectory) {
+		this.searchIndexDirectory = indexDirectory;
+		final String m = "Set search index directory: " + indexDirectory;
 		logger.info(m);
 	}
 

@@ -19,7 +19,7 @@ public class TestSearchIndexManager extends TestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 		profile = new SearchIndexProfile();
-		profile.setDirectoryPath("target/search-data");
+		profile.setSearchIndexDirectory("target/search-data");
 		manager = new SearchIndexManager();
 		manager.setProfile(profile);
 		manager.init();
@@ -52,7 +52,7 @@ public class TestSearchIndexManager extends TestCase {
 	}
 	
 	private void reloadIndexDB() throws Exception{
-		IndexWriter writer = new IndexWriter(profile.getDirectoryPath(),new StandardAnalyzer(),true);
+		IndexWriter writer = new IndexWriter(profile.getSearchIndexDirectory(),new StandardAnalyzer(),true);
 		writer.addDocument(doc1);
 		writer.addDocument(doc2);
 		writer.close();

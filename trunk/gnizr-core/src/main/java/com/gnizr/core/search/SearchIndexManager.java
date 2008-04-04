@@ -71,13 +71,13 @@ public class SearchIndexManager implements Serializable{
 			return;
 		}
 		File dir = null;
-		if(profile.getDirectoryPath() == null){
+		if(profile.getSearchIndexDirectory() == null){
 			logger.error("Undefined search index database directory: null");
 		}else{
-			dir = new File(profile.getDirectoryPath());
+			dir = new File(profile.getSearchIndexDirectory());
 			try{
 				if(dir.exists() == true && dir.isDirectory() == false){
-					logger.error("Defined search index databse path is not a directory: " + profile.getDirectoryPath());
+					logger.error("Defined search index databse path is not a directory: " + profile.getSearchIndexDirectory());
 					return;
 				}				
 			}catch(Exception e){
@@ -86,7 +86,7 @@ public class SearchIndexManager implements Serializable{
 		}
 		if (profile.isOverwrite() == true) {
 			logger.info("Overwriting the existing index store, if it exists.");
-			File f = new File(profile.getDirectoryPath());
+			File f = new File(profile.getSearchIndexDirectory());
 			try {
 				boolean isOkay = deleteDir(f);
 				logger.debug("Delete is okay? " + isOkay);
@@ -242,9 +242,9 @@ public class SearchIndexManager implements Serializable{
 		TermDocs termDocs = null;
 		Document leadDoc = null;
 		try{
-			boolean exists = IndexReader.indexExists(profile.getDirectoryPath());
+			boolean exists = IndexReader.indexExists(profile.getSearchIndexDirectory());
 			if(exists == true){
-				reader = IndexReader.open(profile.getDirectoryPath());
+				reader = IndexReader.open(profile.getSearchIndexDirectory());
 				Term key = new Term(DocumentCreator.FIELD_URL_MD5,urlHash);
 				termDocs = reader.termDocs(key);					
 				boolean found = false;
@@ -294,9 +294,9 @@ public class SearchIndexManager implements Serializable{
 		TermDocs termDocs = null;
 		Document leadDoc = null;
 		try{
-			boolean exists = IndexReader.indexExists(profile.getDirectoryPath());
+			boolean exists = IndexReader.indexExists(profile.getSearchIndexDirectory());
 			if(exists == true){
-				reader = IndexReader.open(profile.getDirectoryPath());
+				reader = IndexReader.open(profile.getSearchIndexDirectory());
 				Term key = new Term(DocumentCreator.FIELD_URL_MD5,urlHash);
 				termDocs = reader.termDocs(key);		
 				boolean found = false;
@@ -404,7 +404,7 @@ public class SearchIndexManager implements Serializable{
 			}
 			IndexWriter writer = null;
 			try{			
-				writer = new IndexWriter(profile.getDirectoryPath(), new StandardAnalyzer());				
+				writer = new IndexWriter(profile.getSearchIndexDirectory(), new StandardAnalyzer());				
 				writer.addDocument(doc);
 			}catch(Exception e){
 				logger.error("Can't add documen to the index. Doc = " + doc + ", exception = " + e);
@@ -425,7 +425,7 @@ public class SearchIndexManager implements Serializable{
 			}
 			IndexWriter writer = null;
 			try{
-				writer = new IndexWriter(profile.getDirectoryPath(), new StandardAnalyzer());
+				writer = new IndexWriter(profile.getSearchIndexDirectory(), new StandardAnalyzer());
 				Term t = new Term(DocumentCreator.FIELD_BOOKMARK_ID,doc.get(DocumentCreator.FIELD_BOOKMARK_ID));
 				writer.deleteDocuments(t);
 			}catch(Exception e){
@@ -463,7 +463,7 @@ public class SearchIndexManager implements Serializable{
 			}
 			IndexWriter writer = null;
 			try{
-				writer = new IndexWriter(profile.getDirectoryPath(), new StandardAnalyzer());
+				writer = new IndexWriter(profile.getSearchIndexDirectory(), new StandardAnalyzer());
 				Term t = new Term(DocumentCreator.FIELD_BOOKMARK_ID,doc.get(DocumentCreator.FIELD_BOOKMARK_ID));
 				writer.updateDocument(t, doc);
 			}catch(Exception e){

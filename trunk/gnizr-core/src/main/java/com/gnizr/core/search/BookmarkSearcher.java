@@ -45,7 +45,7 @@ public class BookmarkSearcher implements Serializable {
 		DaoResult<BookmarkDoc> result = null;
 		IndexSearcher searcher = null;
 		try {
-			searcher = new IndexSearcher(searchIndexProfile.getDirectoryPath());
+			searcher = new IndexSearcher(searchIndexProfile.getSearchIndexDirectory());
 			QueryParser parser = new QueryParser(DocumentCreator.FIELD_TITLE,
 					new StandardAnalyzer());
 			Hits hits = searcher.search(parser.parse(query));
@@ -74,7 +74,7 @@ public class BookmarkSearcher implements Serializable {
 		DaoResult<BookmarkDoc> result = null;
 		IndexSearcher searcher = null;
 		try {
-			searcher = new IndexSearcher(searchIndexProfile.getDirectoryPath());
+			searcher = new IndexSearcher(searchIndexProfile.getSearchIndexDirectory());
 			QueryParser parser = new QueryParser(DocumentCreator.FIELD_TITLE,
 					new StandardAnalyzer());
 			
