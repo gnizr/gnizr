@@ -1,7 +1,13 @@
 #summary Changelog of all releases made under version 2.4
 #labels Phase-Implementation
 
-==== Version 2.4.0-M1 (in progress) ====
+
+==== Version 2.4.0-M2 (in progress) ====
+ 
+Changelog
+  * ...
+
+==== Version 2.4.0-M1 (04 April 2008) ====
 
 Changelog
   * [http://code.google.com/p/gnizr/issues/detail?id=35 Issue 35]: !OpenSearch result page shows a non-functional result tile separator (fixed, need testing)
@@ -17,3 +23,4 @@ Changelog
   * Combined all searches under a single !OpenSearch function.
   * Replaced the old Link History page with a new View Bookmark Detail page.
   * Enabled Firefox to discover gnizr opensearch service. Gnizr search engine can be added to the Browser search bar. 
+  * Implemented the use of `gn:icon` machine tag and its Machine Tag Helper UI
