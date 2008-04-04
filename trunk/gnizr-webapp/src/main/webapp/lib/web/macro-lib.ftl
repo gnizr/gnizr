@@ -72,8 +72,9 @@ INPUT: pageTitle:String // the <title/> of this HTML page
 <!-- GNIZR DEFAULT CSS -->
 <link href="${gzUrl("/css/gnizr-default.css")}" rel="stylesheet" type="text/css">
 <link href="${gzUrl("/css/gnizr-header.css")}" rel="stylesheet" type="text/css">
+<#--
 <link href="${gzUrl("/css/ajax-suggestions.css")}" rel="stylesheet" type="text/css">
-
+-->
 <!-- PAGE SPECIFIC CSS BEGINS -->
 <#list cssHref as css>
 <link href="${css}" rel="stylesheet" type="text/css">
@@ -87,7 +88,9 @@ INPUT: pageTitle:String // the <title/> of this HTML page
 <script type="text/javascript" charset="utf-8" src="${gzUrl("/lib/javascript/tags-util.js")}"></script>
 <script type="text/javascript" charset="utf-8" src="${gzUrl("/lib/javascript/common.js")}"></script>
 <script type="text/javascript" charset="utf-8" src="${gzUrl("/lib/javascript/cookie-util.js")}"></script>
+<#--
 <script type="text/javascript" charset="utf-8" src="${gzUrl("/lib/javascript/ajaxSuggestions/ajaxSuggestions.js")}"></script>
+-->
 <#if (gnizrConfiguration.snapShotsKey)?exists>
 <script type="text/javascript" src="http://shots.snap.com/snap_shots.js?${gnizrConfiguration.snapShotsKey}"></script>
 </#if>
@@ -234,10 +237,12 @@ as <h1/> (page header) of this page:
   <@ww.hidden name="type" value="opensearch"/>
     <@ww.submit id="search-submit" cssClass="" value="Search"/>    
 </@ww.form>
+<#--
 <div id="ajax-suggestions-container">
 	<div id="ajax-suggestions-results" class="invisible">
 	</div>
 </div>
+-->
 </div>
 <div id="header2-menu">   
    <@ww.action name="menu" namespace="/ui" executeResult=true>    
