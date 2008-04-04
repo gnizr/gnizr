@@ -1,7 +1,7 @@
 #summary The XML configuration for gnizr 2.4 (experimental).
 #labels Phase-Deploy
 
-|| *NOTE*: This document is for gnizr 2.4 only. For gnizr 2.2 and 2.3 application configuration, read GnizrConfigXML. ||
+|| *NOTE*: This document is for gnizr 2.4 only.  ||
 
 This page describes the specification of gnizr XML configuration file. This configuration controls the JDBC connectivity to gnizr MySQL database and the runtime behavior of a gnizr deployment. 
 
@@ -26,7 +26,8 @@ You should edit this configuration file to suit your machine's configuration. Co
 || `registrationPolicy` || Whether you required new user accounts to be created by system administrator. If `open`, anyone can register a new account via a self-register page. If `close`, new accounts must be manually created by gnizr administrator. || `open`|| No || 
 || `serverMaintenanceModeEnabled` || Whether the application is run in a service maintenance mode. If `true`, only gnizr administrator is allowed to login. If `false`, any registered user can login. || `false`|| No || 
 || `openSearchServices` || A list of OpenSearch service description document URL || See !OpenSearch documentation (pending) || Yes ||
-|| `directoryPath` || An existing directory path for storing gnizr Lucene search index || `C:\search-data` || Yes ||
+|| `searchIndexDirectory` || An existing directory path for storing Lucene search index || `C:\search-data` || Yes ||
+|| `resetSearchIndexOnStart` || A flag tells gnizr whether to reset the search index when it starts. On reset, all content in the directory defined by `searchIndexDirectory` will be deleted. ||  `false` || No ||
   
 
 == Tips ==
