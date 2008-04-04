@@ -24,7 +24,7 @@ public class TestIndexBookmark extends GnizrWebappTestBase {
 	protected void setUp() throws Exception {
 		super.setUp();
 		profile = new SearchIndexProfile();
-		profile.setDirectoryPath("target/search-data");
+		profile.setSearchIndexDirectory("target/search-data");
 		profile.setOverwrite(true);
 		
 		searchIndexManager = new SearchIndexManager();

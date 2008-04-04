@@ -91,7 +91,7 @@
 	</bean>
 	
 	<bean id="searchIndexProfile" class="com.gnizr.core.search.SearchIndexProfile" singleton="true">
-		<property name="directoryPath">
+		<property name="searchIndexDirectory">
 			<value>D:/cygwin/tmp/search-data</value>
 		</property>
 		<property name="overwrite">
