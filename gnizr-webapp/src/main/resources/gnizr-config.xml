@@ -94,7 +94,7 @@
 		<property name="searchIndexDirectory">
 			<value>D:/cygwin/tmp/search-data</value>
 		</property>
-		<property name="overwrite">
+		<property name="resetSearchIndexOnStart">
 			<value>false</value>
 		</property>
 	</bean>
