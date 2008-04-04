@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+	"http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>	
+	<bean id="scheduledRssRobotTask"
+		class="org.springframework.scheduling.timer.ScheduledTimerTask"
+		singleton="true">
+		<!-- wait 10 seconds before starting repeated execution -->
+		<property name="delay" value="10000"/>
+		<property name="period" value="10000"/>
+		<!-- run every 1 hour -->
+		<!--
+		<property name="period" value="3600000"/>
+			-->
+		<property name="timerTask" ref="crawlRssFeed"/>
+	</bean>
+	
+	<bean id="defaultFeedCrawlerFactory"
+		class="com.gnizr.core.robot.rss.DefaultFeedCrawlerFactory" singleton="true"/>
+	
+	<bean id="taskExecutor"
+		class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor"
+		destroy-method="shutdown" singleton="true">
+		<property name="corePoolSize" value="5"/>
+		<property name="maxPoolSize" value="10"/>		
+	</bean>
+	
+	<bean id="crawlRssFeed" class="com.gnizr.core.robot.rss.CrawlRssFeed"
+		destroy-method="shutdown" singleton="true">
+		<property name="feedSubscriptionManager">
+			<ref bean="feedSubscriptionManager"/>
+		</property>
+		<property name="bookmarkManager">
+			<ref bean="bookmarkManager"/>
+		</property>
+		<property name="crawlerFactory">
+			<ref bean="defaultFeedCrawlerFactory"/>
+		</property>
+		<property name="threadPoolTaskExecutor">
+			<ref bean="taskExecutor"/>
+		</property>
+	</bean>
+	
+	<bean id="rssRobotService"
+		class="com.gnizr.web.action.robot.rss.RssRobotService"
+		singleton="false">
+		<property name="crawlRssFeed">
+			<ref bean="crawlRssFeed"/>
+		</property>
+	</bean>
+	
+</beans>
