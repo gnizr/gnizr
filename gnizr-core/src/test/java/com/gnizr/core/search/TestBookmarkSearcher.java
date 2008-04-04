@@ -24,7 +24,7 @@ public class TestBookmarkSearcher extends GnizrCoreTestBase {
 		super.setUp();
 		
 		profile = new SearchIndexProfile();
-		profile.setDirectoryPath("target/search-data");
+		profile.setSearchIndexDirectory("target/search-data");
 		profile.setOverwrite(true);
 		
 		searchIndexManager = new SearchIndexManager();
