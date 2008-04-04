@@ -21,11 +21,11 @@ public class SearchIndexProfile implements Serializable{
 	
 	private String searchIndexDirectory;
 	
-	private boolean overwrite;
+	private boolean resetSearchIndexOnStart;
 	
 	public SearchIndexProfile(){
 		this.searchIndexDirectory = null;
-		this.overwrite = true;
+		this.resetSearchIndexOnStart = true;
 	}
 	
 	public String getSearchIndexDirectory() {
@@ -38,13 +38,13 @@ public class SearchIndexProfile implements Serializable{
 		logger.info(m);
 	}
 
-	public boolean isOverwrite() {
-		return overwrite;
+	public boolean isResetSearchIndexOnStart() {
+		return resetSearchIndexOnStart;
 	}
 
-	public void setOverwrite(boolean overwrite) {
-		this.overwrite = overwrite;
-		final String m = "Set search index overwrite: " + overwrite;
+	public void setResetSearchIndexOnStart(boolean overwrite) {
+		this.resetSearchIndexOnStart = overwrite;
+		final String m = "Set search index resetSearchIndexOnStart: " + overwrite;
 		logger.info(m);
 	}
 	

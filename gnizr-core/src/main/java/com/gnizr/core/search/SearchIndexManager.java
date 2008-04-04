@@ -84,7 +84,7 @@ public class SearchIndexManager implements Serializable{
 				logger.error(e.toString());
 			}
 		}
-		if (profile.isOverwrite() == true) {
+		if (profile.isResetSearchIndexOnStart() == true) {
 			logger.info("Overwriting the existing index store, if it exists.");
 			File f = new File(profile.getSearchIndexDirectory());
 			try {
