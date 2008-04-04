@@ -11,8 +11,10 @@
         <include>com.gnizr:gnizr-webapp</include>
       </includes>
       <binaries>
-        <outputDirectory>gnizr-${version}</outputDirectory>
+        <outputDirectory>gnizr-${version}/gnizr</outputDirectory>
+<!--
         <outputFileNameMapping>gnizr</outputFileNameMapping>
+-->
         <includeDependencies>false</includeDependencies>
         <unpack>true</unpack>
       </binaries>
