@@ -5,7 +5,7 @@
 ==== Version 2.4.0-M2 (in progress) ====
  
 Changelog
-  * ...
+  * Changed my bookmark search engine description from "Bookmarked by me" to "Bookmarked by you".
 
 ==== Version 2.4.0-M1 (04 April 2008) ====
 
