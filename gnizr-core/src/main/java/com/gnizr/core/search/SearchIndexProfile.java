@@ -11,7 +11,7 @@ import org.apache.log4j.Logger;
  * @since 2.4
  */
 public class SearchIndexProfile implements Serializable{
-
+	
 	/**
 	 * 
 	 */
@@ -22,6 +22,8 @@ public class SearchIndexProfile implements Serializable{
 	private String searchIndexDirectory;
 	
 	private boolean resetSearchIndexOnStart;
+	
+	private String searchSuggestDataFile;
 	
 	public SearchIndexProfile(){
 		this.searchIndexDirectory = null;
@@ -47,5 +49,14 @@ public class SearchIndexProfile implements Serializable{
 		final String m = "Set search index resetSearchIndexOnStart: " + overwrite;
 		logger.info(m);
 	}
+
+	public String getSearchSuggestDataFile() {
+		return searchSuggestDataFile;
+	}
+
+	public void setSearchSuggestDataFile(String searchSuggestDataFile) {
+		this.searchSuggestDataFile = searchSuggestDataFile;
+	}
 	
+
 }

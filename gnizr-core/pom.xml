@@ -70,5 +70,10 @@
 			<artifactId>lucene-highlighter</artifactId>
 			<scope>compile</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-spellchecker</artifactId>
+			<scope>compile</scope>
+		</dependency>
 	</dependencies>
 </project>
