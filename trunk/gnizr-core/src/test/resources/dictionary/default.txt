@@ -1,0 +1,11 @@
+test1
+test1 23
+test 12456
+test
+web
+blogs
+weblogs
+class:world
+class:animal
+class:human
+class:HappyPerson
