@@ -15,4 +15,18 @@
 			<ref bean="searchIndexProfile"/>
 		</property>
 	</bean>
+	
+	<bean id="searchSuggestIndexer" class="com.gnizr.core.search.SearchSuggestIndexer" singleton="true"
+		init-method="init">
+		<property name="searchIndexProfile">
+			<ref bean="searchIndexProfile"/>
+		</property>
+	</bean>
+	
+	<bean id="searchTermSuggestion" class="com.gnizr.core.search.SearchTermSuggestion" singleton="true">
+		<property name="searchSuggestIndexer">
+			<ref bean="searchSuggestIndexer"/>
+		</property>
+	</bean>
+	
 </beans>
