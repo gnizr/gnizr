@@ -92,10 +92,13 @@
 	
 	<bean id="searchIndexProfile" class="com.gnizr.core.search.SearchIndexProfile" singleton="true">
 		<property name="searchIndexDirectory">
-			<value>C:/search-data</value>
+			<value>D:/tmp/search-data</value>
 		</property>
 		<property name="resetSearchIndexOnStart">
 			<value>false</value>
+		</property>
+		<property name="searchSuggestDataFile">
+			<value>/dictionary/default.txt</value>
 		</property>
 	</bean>
 	
