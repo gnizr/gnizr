@@ -21,6 +21,9 @@
 		<property name="searchIndexProfile">
 			<ref bean="searchIndexProfile"/>
 		</property>
+		<property name="gnizrDao">
+			<ref bean="gnizrDao"/>
+		</property>
 	</bean>
 	
 	<bean id="searchTermSuggestion" class="com.gnizr.core.search.SearchTermSuggestion" singleton="true">
