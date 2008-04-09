@@ -84,6 +84,7 @@ public class SearchIndexManager implements Serializable{
 				logger.error(e.toString());
 			}
 		}
+		/*
 		if (profile.isResetSearchIndexOnStart() == true) {
 			logger.info("Overwriting the existing index store, if it exists.");
 			File f = new File(profile.getSearchIndexDirectory());
@@ -94,6 +95,7 @@ public class SearchIndexManager implements Serializable{
 				logger.error(e);
 			}
 		}
+		*/
 		documentQueue = new LinkedBlockingQueue<Request>();
 		worker = new UpdateIndexWorker();
 		workerThread = new Thread(worker);		
@@ -126,7 +128,7 @@ public class SearchIndexManager implements Serializable{
 		}
 		return 0;
 	}
-	
+/*	
 	private static boolean deleteDir(File dir) {
 		if (dir.isDirectory()) {
 			String[] children = dir.list();
@@ -140,7 +142,7 @@ public class SearchIndexManager implements Serializable{
 		// The directory is now empty so delete it
 		return dir.delete();
 	}
-	
+*/	
 	/**
 	 * Checks whether the thread that is responsible for adding,
 	 * deleting and updating bookmark index is still alive.
