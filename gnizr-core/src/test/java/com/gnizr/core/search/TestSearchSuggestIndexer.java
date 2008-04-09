@@ -1,25 +1,21 @@
 package com.gnizr.core.search;
 
-import java.io.File;
 import java.io.IOException;
-
-import junit.framework.TestCase;
 
 import org.apache.lucene.index.CorruptIndexException;
 import org.apache.lucene.index.IndexReader;
+import org.dbunit.dataset.IDataSet;
+import org.dbunit.dataset.xml.FlatXmlDataSet;
 
-public class TestSearchSuggestIndexer extends TestCase {
+import com.gnizr.core.GnizrCoreTestBase;
+
+public class TestSearchSuggestIndexer extends GnizrCoreTestBase {
 
 	private SearchIndexProfile profile;
 	private SearchSuggestIndexer indexer;
 	
 	protected void setUp() throws Exception {
-		super.setUp();
-		profile = new SearchIndexProfile();
-		profile.setSearchIndexDirectory("target/search-data");
-		profile.setSearchSuggestDataFile("src/test/resources/dictionary/default.txt");
-		indexer = new SearchSuggestIndexer();
-		indexer.setSearchIndexProfile(profile);
+		super.setUp();		
 	}
 
 	protected void tearDown() throws Exception {
@@ -27,11 +23,33 @@ public class TestSearchSuggestIndexer extends TestCase {
 	}
 
 	public void testInit() throws CorruptIndexException, IOException {
+		profile = new SearchIndexProfile();
+		profile.setSearchIndexDirectory("target/search-data");
+		profile.setSearchSuggestDataFile("src/test/resources/dictionary/default.txt");
+		profile.setSuggestPopularTagsEnabled(false);
+		indexer = new SearchSuggestIndexer();
+		indexer.setSearchIndexProfile(profile);
 		indexer.init();
-		File indexDir = indexer.getSuggestIndexDirectory();
-		assertNotNull(indexDir);
-		IndexReader reader = IndexReader.open(indexDir);
-		assertEquals(8, reader.numDocs());
+		IndexReader reader = indexer.openSuggestIndexReader();
+		assertEquals(11, reader.numDocs());
+	}
+
+	public void testInit2() throws Exception{
+		profile = new SearchIndexProfile();
+		profile.setSearchIndexDirectory("target/search-data");		
+		profile.setSuggestPopularTagsEnabled(true);
+		indexer = new SearchSuggestIndexer();
+		indexer.setGnizrDao(getGnizrDao());
+		indexer.setSearchIndexProfile(profile);
+		indexer.init();
+		IndexReader reader = indexer.openSuggestIndexReader();
+		assertEquals(4, reader.numDocs());
+	}
+	
+	
+	@Override
+	protected IDataSet getDataSet() throws Exception {
+		return new FlatXmlDataSet(TestSearchSuggestIndexer.class.getResourceAsStream("/TestSearchSuggestIndexer-input.xml"));
 	}
 
 }

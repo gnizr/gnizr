@@ -25,6 +25,16 @@ public class SearchIndexProfile implements Serializable{
 	
 	private String searchSuggestDataFile;
 	
+	private boolean suggestPopularTagsEnabled;
+
+	public boolean isSuggestPopularTagsEnabled() {
+		return suggestPopularTagsEnabled;
+	}
+
+	public void setSuggestPopularTagsEnabled(boolean suggestPopularTagsEnabled) {
+		this.suggestPopularTagsEnabled = suggestPopularTagsEnabled;
+	}
+
 	public SearchIndexProfile(){
 		this.searchIndexDirectory = null;
 		this.resetSearchIndexOnStart = true;
@@ -58,5 +68,4 @@ public class SearchIndexProfile implements Serializable{
 		this.searchSuggestDataFile = searchSuggestDataFile;
 	}
 	
-
 }

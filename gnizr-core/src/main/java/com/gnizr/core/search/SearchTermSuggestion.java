@@ -1,6 +1,5 @@
 package com.gnizr.core.search;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -41,26 +40,34 @@ public class SearchTermSuggestion implements Serializable{
 		if(queryString != null && queryString.length() >= minQueryStringLength){
 			Term term = new Term("t", queryString);
 			PrefixQuery prefixQuery = new PrefixQuery(term);
-			File indexDir = searchSuggestIndexer.getSuggestIndexDirectory();
-			if(indexDir != null){
-				IndexSearcher indexSearch = null;
-				try{
-					indexSearch = new IndexSearcher(IndexReader.open(indexDir));
-					Hits hits = indexSearch.search(prefixQuery);
-					for(int i = 0; i < hits.length() && i < maxSuggestionSize; i++){
-						String value = hits.doc(i).get("t");
-						results.add(value);
-					}
-				}catch(Exception e){
-					logger.error(e);
-				}finally{
-					try {
+			IndexReader indexReader = null;
+			IndexSearcher indexSearch = null;
+			try{
+				indexReader = searchSuggestIndexer.openSuggestIndexReader();
+				indexSearch = new IndexSearcher(indexReader);
+				Hits hits = indexSearch.search(prefixQuery);
+				for(int i = 0; i < hits.length() && i < maxSuggestionSize; i++){
+					String value = hits.doc(i).get("t");
+					results.add(value);
+				}
+			}catch(Exception e){
+				logger.error(e);
+			}finally{
+				try {
+					if(indexSearch != null){
 						indexSearch.close();
+					}
+				} catch (IOException e) {
+					logger.error(e);
+				}
+				if(indexReader != null){
+					try {
+						indexReader.close();
 					} catch (IOException e) {
 						logger.error(e);
 					}
 				}
-			}
+			}		
 		}
 		return results.toArray(new String[results.size()]);
 	}
