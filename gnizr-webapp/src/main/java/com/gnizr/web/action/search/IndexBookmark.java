@@ -35,7 +35,6 @@ public class IndexBookmark extends AbstractLoggedInUserAction implements Session
 	
 	private SearchIndexManager searchIndexManager;
 	private BookmarkPager bookmarkPager;
-	private boolean reset;
 	private IndexStatus status;
 	@SuppressWarnings("unchecked")
 	private Map session;
@@ -85,6 +84,17 @@ public class IndexBookmark extends AbstractLoggedInUserAction implements Session
 	protected boolean isStrictLoggedInUserMode() {
 		return true;
 	}
+	
+	@Override
+	public String doDefault() throws Exception {
+		logger.debug("IndexBookmark.doDefault()");
+		IndexStatus status = (IndexStatus)session.get("status");
+		if(status != null){
+			logger.debug("Clear index status report from Session.");
+			session.remove("status");
+		}
+		return SUCCESS;
+	}
 
 	/**
 	 * <p>Executes this action to perform search index update. Once the process is started,
@@ -100,6 +110,9 @@ public class IndexBookmark extends AbstractLoggedInUserAction implements Session
 	protected String go() throws Exception {
 		logger.debug("IndexBookmark action go() is called.");
 		resolveUser();
+		
+		logger.debug("Resetting search index database...");
+		searchIndexManager.resetIndex();
 		
 		status = new IndexStatus();
 		session.put("status", status);
@@ -196,14 +209,6 @@ public class IndexBookmark extends AbstractLoggedInUserAction implements Session
 	@SuppressWarnings("unchecked")
 	public void setSession(Map session) {
 		this.session = session;
-	}
-
-	public boolean isReset() {
-		return reset;
-	}
-
-	public void setReset(boolean reset) {
-		this.reset = reset;
 	}
 	
 }

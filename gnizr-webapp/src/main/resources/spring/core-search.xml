@@ -11,8 +11,8 @@
 	
 	<bean id="bookmarkSearcher" class="com.gnizr.core.search.BookmarkSearcher" singleton="true"
 		  init-method="init">
-		<property name="searchIndexProfile">
-			<ref bean="searchIndexProfile"/>
+		<property name="searchIndexManager">
+			<ref bean="searchIndexManager"/>
 		</property>
 	</bean>
 	
