@@ -21,26 +21,60 @@ import org.apache.lucene.search.TermQuery;
 
 import com.gnizr.db.dao.DaoResult;
 
+/**
+ * Provides bookmark search function. This class can be used to perform search over the collection of bookmarks
+ * saved by a given user or all users in the system. 
+ * 
+ * @author Harry Chen
+ * @since 2.4.0
+ */
 public class BookmarkSearcher implements Serializable {
 
 	private static final long serialVersionUID = -5131043207555467304L;
 
 	private SearchIndexManager searchIndexManager;
 
+	/**
+	 * Checks whether <code>searchIndexManager</code> is properly 
+	 * set on this class. 
+	 */
 	public void init() {
 		if(searchIndexManager == null){
 			throw new NullPointerException("BookmarkSearcher.init(): searchIndexManager is not defined");
 		}
 	}
 
+	/**
+	 * Returns the <code>SearchIndexManager</code> object used by this class.
+	 * @return an instantiated <code>SearchIndexManager</code>. Returns <code>null</code>,
+	 * if the object hasn't been set.
+	 */
 	public SearchIndexManager getSearchIndexManager() {
 		return searchIndexManager;
 	}
 
+	/**
+	 * Sets the <code>SearchindexManager</code> object to be used by this class.
+	 * @param searchIndexManager an instantiated <code>SearchIndexManager</code> object.
+	 */
 	public void setSearchIndexManager(SearchIndexManager searchIndexManager) {
 		this.searchIndexManager = searchIndexManager;
 	}
 
+	/**
+	 * Find bookmarks that matches the input query from the collection 
+	 * of bookmarks saved by all users. 
+	 *  
+	 * @param query the search query expressed using the Lucene query syntax.
+	 * @param offset defines the start position to collect bookmarks from the search result. 
+	 * The starting position of the first item in search result is <code>0</code>. 
+	 * @param count the maximum number of bookmarks to collect from the search result. This number should be less than 
+	 * or equal to <code>DaoResult.getSize</code>. 
+	 * @return a search result object of the matching bookmarks.
+	 * 
+	 * @throws IOException
+	 * @throws ParseException
+	 */
 	public DaoResult<BookmarkDoc> searchAll(String query, int offset, int count)
 			throws IOException, ParseException {
 		DaoResult<BookmarkDoc> result = null;
@@ -71,6 +105,22 @@ public class BookmarkSearcher implements Serializable {
 		return result;
 	}
 
+
+	/**
+	 * Find bookmarks that matches the input query from the collection 
+	 * of bookmarks saved by a given user. 
+	 *  
+	 * @param query the search query expressed using the Lucene query syntax.
+	 * @param username search only within this user's bookmark collection.
+	 * @param offset defines the start position to collect bookmarks from the search result. 
+	 * The starting position of the first item in search result is <code>0</code>. 
+	 * @param count the maximum number of bookmarks to collect from the search result. This number should be less than 
+	 * or equal to <code>DaoResult.getSize</code>. 
+	 * @return a search result object of the matching bookmarks.
+	 * 
+	 * @throws IOException
+	 * @throws ParseException
+	 */
 	public DaoResult<BookmarkDoc> searchUser(String query, String username, int offset, int count)
 		throws IOException, ParseException{
 		DaoResult<BookmarkDoc> result = null;
