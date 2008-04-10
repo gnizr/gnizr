@@ -19,20 +19,19 @@ public class TestBookmarkSearcher extends GnizrCoreTestBase {
 	private BookmarkPager bookmarkPager;
 	
 	private BookmarkSearcher searcher;
-	
+
 	protected void setUp() throws Exception {
 		super.setUp();
 		
 		profile = new SearchIndexProfile();
-		profile.setSearchIndexDirectory("target/search-data");
-		profile.setResetSearchIndexOnStart(true);
+		profile.setSearchIndexDirectory("target/testBookmarkSearch-data");
 		
-		searchIndexManager = new SearchIndexManager();
+		searchIndexManager = new SearchIndexManager(true);
 		searchIndexManager.setProfile(profile);
-		searchIndexManager.init();
+		searchIndexManager.init();		
 		
 		searcher = new BookmarkSearcher();
-		searcher.setSearchIndexProfile(profile);
+		searcher.setSearchIndexManager(searchIndexManager);
 		searcher.init();
 		
 		bookmarkPager = new BookmarkPager(getGnizrDao());
@@ -48,8 +47,6 @@ public class TestBookmarkSearcher extends GnizrCoreTestBase {
 		for(Bookmark bm : bmarks){
 			searchIndexManager.addIndex(DocumentCreator.createDocument(bm));
 		}
-
-		
 		while(searchIndexManager.isIndexProcessActive() == true){
 			Thread.sleep(5000);
 		}

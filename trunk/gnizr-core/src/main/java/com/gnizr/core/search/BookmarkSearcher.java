@@ -1,12 +1,14 @@
 package com.gnizr.core.search;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.lucene.analysis.standard.StandardAnalyzer;
+import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.document.Document;
+import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.queryParser.QueryParser;
@@ -23,21 +25,20 @@ public class BookmarkSearcher implements Serializable {
 
 	private static final long serialVersionUID = -5131043207555467304L;
 
-	private SearchIndexProfile searchIndexProfile;
-
-	public SearchIndexProfile getSearchIndexProfile() {
-		return searchIndexProfile;
-	}
-
-	public void setSearchIndexProfile(SearchIndexProfile searchIndexProfile) {
-		this.searchIndexProfile = searchIndexProfile;
-	}
+	private SearchIndexManager searchIndexManager;
 
 	public void init() {
-		if (searchIndexProfile == null) {
-			throw new NullPointerException(
-					"BookmarkSearcher.init(): searchIndexProfile is not defined");
+		if(searchIndexManager == null){
+			throw new NullPointerException("BookmarkSearcher.init(): searchIndexManager is not defined");
 		}
+	}
+
+	public SearchIndexManager getSearchIndexManager() {
+		return searchIndexManager;
+	}
+
+	public void setSearchIndexManager(SearchIndexManager searchIndexManager) {
+		this.searchIndexManager = searchIndexManager;
 	}
 
 	public DaoResult<BookmarkDoc> searchAll(String query, int offset, int count)
@@ -45,9 +46,10 @@ public class BookmarkSearcher implements Serializable {
 		DaoResult<BookmarkDoc> result = null;
 		IndexSearcher searcher = null;
 		try {
-			searcher = new IndexSearcher(searchIndexProfile.getSearchIndexDirectory());
-			QueryParser parser = new QueryParser(DocumentCreator.FIELD_TITLE,
-					new StandardAnalyzer());
+			File directory = searchIndexManager.getIndexDirectory();
+			searcher = new IndexSearcher(IndexReader.open(directory));
+			Analyzer analyzer = DocumentCreator.createDocumentAnalyzer();
+			QueryParser parser = new QueryParser(DocumentCreator.FIELD_TEXT,analyzer);
 			Hits hits = searcher.search(parser.parse(query));
 			List<BookmarkDoc> bmDocs = new ArrayList<BookmarkDoc>();
 			if (offset >= 0 && offset < hits.length()) {
@@ -74,9 +76,10 @@ public class BookmarkSearcher implements Serializable {
 		DaoResult<BookmarkDoc> result = null;
 		IndexSearcher searcher = null;
 		try {
-			searcher = new IndexSearcher(searchIndexProfile.getSearchIndexDirectory());
-			QueryParser parser = new QueryParser(DocumentCreator.FIELD_TITLE,
-					new StandardAnalyzer());
+			File directory = searchIndexManager.getIndexDirectory();
+			searcher = new IndexSearcher(IndexReader.open(directory));
+			Analyzer analyzer = DocumentCreator.createDocumentAnalyzer();
+			QueryParser parser = new QueryParser(DocumentCreator.FIELD_TEXT,analyzer);
 			
 			TermQuery matchUserQuery = new TermQuery(new Term(DocumentCreator.FIELD_USER,username));
 			Query inputQuery = parser.parse(query);

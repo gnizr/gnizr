@@ -24,7 +24,7 @@ public class TestSearchSuggestIndexer extends GnizrCoreTestBase {
 
 	public void testInit() throws CorruptIndexException, IOException {
 		profile = new SearchIndexProfile();
-		profile.setSearchIndexDirectory("target/search-data");
+		profile.setSearchIndexDirectory("target/testSearchSuggestIndexer-data");
 		profile.setSearchSuggestDataFile("src/test/resources/dictionary/default.txt");
 		profile.setSuggestPopularTagsEnabled(false);
 		indexer = new SearchSuggestIndexer();

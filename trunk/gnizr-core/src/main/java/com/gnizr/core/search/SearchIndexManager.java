@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import org.apache.log4j.Logger;
-import org.apache.lucene.analysis.standard.StandardAnalyzer;
+import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.FieldSelector;
 import org.apache.lucene.document.FieldSelectorResult;
@@ -60,6 +60,20 @@ public class SearchIndexManager implements Serializable{
 	// used to signal workerThread that this class instance is shutting down.
 	private static final Document POISON_DOC = new Document();
 	
+	private boolean forceIndexReset;
+
+	private File indexDirectory;
+	
+	private static final String INDEX_DIR = "bmarks-idx";
+	
+	public SearchIndexManager(){
+		this.forceIndexReset = false;
+	}
+	
+	public SearchIndexManager(boolean resetIndex){
+		this.forceIndexReset = resetIndex;
+	}
+	
 	/**
 	 * Initializes this class instance and outputs errors in the log file if 
 	 * the <code>profile</code> is <code>null</code>.
@@ -70,37 +84,46 @@ public class SearchIndexManager implements Serializable{
 			// quit. as soon as 
 			return;
 		}
-		File dir = null;
+		
 		if(profile.getSearchIndexDirectory() == null){
 			logger.error("Undefined search index database directory: null");
+			throw new NullPointerException("Search index directory is undefined in the configuration file.");
 		}else{
-			dir = new File(profile.getSearchIndexDirectory());
-			try{
-				if(dir.exists() == true && dir.isDirectory() == false){
-					logger.error("Defined search index databse path is not a directory: " + profile.getSearchIndexDirectory());
-					return;
-				}				
-			}catch(Exception e){
-				logger.error(e.toString());
+			File dir = new File(profile.getSearchIndexDirectory());
+			if(dir.exists() && dir.isDirectory() == false){
+				logger.error("Defined path is not a directory. Path: " + dir.toString());
+				throw new RuntimeException("Defined search index directory is not a system directory.");
 			}
+			indexDirectory = new File(profile.getSearchIndexDirectory(),INDEX_DIR);			
 		}
-		/*
-		if (profile.isResetSearchIndexOnStart() == true) {
+		
+		if (forceIndexReset == true) {
 			logger.info("Overwriting the existing index store, if it exists.");
-			File f = new File(profile.getSearchIndexDirectory());
-			try {
-				boolean isOkay = deleteDir(f);
-				logger.debug("Delete is okay? " + isOkay);
-			} catch (Exception e) {
-				logger.error(e);
-			}
+			createEmptyIndexDirectory();
 		}
-		*/
+		
 		documentQueue = new LinkedBlockingQueue<Request>();
 		worker = new UpdateIndexWorker();
 		workerThread = new Thread(worker);		
 		workerThread.setDaemon(true);
 		workerThread.start();
+	}
+	
+	private void createEmptyIndexDirectory(){		
+		IndexWriter writer = null;
+		try{
+			writer = new IndexWriter(indexDirectory,DocumentCreator.createDocumentAnalyzer(),true);
+		} catch (Exception e){
+			logger.error("Unable to reset the search index. Path " + indexDirectory.toString(),e);
+		}finally{
+			if(writer != null){
+				try {
+					writer.close();
+				} catch (Exception e){
+					logger.error(e);
+				}
+			}
+		}
 	}
 	
 	/**
@@ -128,21 +151,7 @@ public class SearchIndexManager implements Serializable{
 		}
 		return 0;
 	}
-/*	
-	private static boolean deleteDir(File dir) {
-		if (dir.isDirectory()) {
-			String[] children = dir.list();
-			for (int i = 0; i < children.length; i++) {
-				boolean success = deleteDir(new File(dir, children[i]));
-				if (!success) {
-					return false;
-				}
-			}
-		}
-		// The directory is now empty so delete it
-		return dir.delete();
-	}
-*/	
+	
 	/**
 	 * Checks whether the thread that is responsible for adding,
 	 * deleting and updating bookmark index is still alive.
@@ -219,9 +228,15 @@ public class SearchIndexManager implements Serializable{
 		}
 	}
 	
+	public void resetIndex() throws InterruptedException {
+		documentQueue.put(new Request(null,RST));
+	}
+	
 	private static final int ADD = 1;
 	private static final int DEL = 2;
 	private static final int UPD = 3;
+	private static final int RST = 4;
+	
 	
 	private class Request {
 		Document doc;
@@ -244,9 +259,9 @@ public class SearchIndexManager implements Serializable{
 		TermDocs termDocs = null;
 		Document leadDoc = null;
 		try{
-			boolean exists = IndexReader.indexExists(profile.getSearchIndexDirectory());
+			boolean exists = IndexReader.indexExists(indexDirectory);
 			if(exists == true){
-				reader = IndexReader.open(profile.getSearchIndexDirectory());
+				reader = IndexReader.open(indexDirectory);
 				Term key = new Term(DocumentCreator.FIELD_URL_MD5,urlHash);
 				termDocs = reader.termDocs(key);					
 				boolean found = false;
@@ -296,9 +311,9 @@ public class SearchIndexManager implements Serializable{
 		TermDocs termDocs = null;
 		Document leadDoc = null;
 		try{
-			boolean exists = IndexReader.indexExists(profile.getSearchIndexDirectory());
+			boolean exists = IndexReader.indexExists(indexDirectory);
 			if(exists == true){
-				reader = IndexReader.open(profile.getSearchIndexDirectory());
+				reader = IndexReader.open(indexDirectory);
 				Term key = new Term(DocumentCreator.FIELD_URL_MD5,urlHash);
 				termDocs = reader.termDocs(key);		
 				boolean found = false;
@@ -364,17 +379,19 @@ public class SearchIndexManager implements Serializable{
 						logger.debug("Updating total # of doc: " + estimateWorkLoad);			
 						for(Request req : partialList){							
 							Document doc = req.doc;
-							if(POISON_DOC.equals(doc)){
+							if(doc != null && POISON_DOC.equals(doc)){
 								logger.debug("Terminate UpdateIndexWorker.");
 								stopRunning = true;
 							}else{		
-								if(req.type == ADD){
+								if(req.type == ADD && doc != null){
 									doAdd(doc);
-								}else if(req.type == UPD){
+								}else if(req.type == UPD && doc != null){
 									doUpdate(doc);
-								}else if(req.type == DEL){
+								}else if(req.type == DEL && doc != null){
 									doDelete(doc);
-								}							
+								}else if(req.type == RST){
+									doReset();
+								}
 							}
 							estimateWorkLoad--;
 						}												
@@ -392,6 +409,10 @@ public class SearchIndexManager implements Serializable{
 			return estimateWorkLoad; 
 		}
 		
+		private void doReset(){
+			createEmptyIndexDirectory();
+		}		
+		
 		private void doAdd(Document doc){
 			if(doc == null){
 				throw new NullPointerException("Can't add document to the index. Doc is NULL");
@@ -406,7 +427,8 @@ public class SearchIndexManager implements Serializable{
 			}
 			IndexWriter writer = null;
 			try{			
-				writer = new IndexWriter(profile.getSearchIndexDirectory(), new StandardAnalyzer());				
+				Analyzer analyzer = DocumentCreator.createDocumentAnalyzer();
+				writer = new IndexWriter(indexDirectory,analyzer);				
 				writer.addDocument(doc);
 			}catch(Exception e){
 				logger.error("Can't add documen to the index. Doc = " + doc + ", exception = " + e);
@@ -427,7 +449,8 @@ public class SearchIndexManager implements Serializable{
 			}
 			IndexWriter writer = null;
 			try{
-				writer = new IndexWriter(profile.getSearchIndexDirectory(), new StandardAnalyzer());
+				Analyzer analyzer = DocumentCreator.createDocumentAnalyzer();
+				writer = new IndexWriter(indexDirectory, analyzer);
 				Term t = new Term(DocumentCreator.FIELD_BOOKMARK_ID,doc.get(DocumentCreator.FIELD_BOOKMARK_ID));
 				writer.deleteDocuments(t);
 			}catch(Exception e){
@@ -465,7 +488,8 @@ public class SearchIndexManager implements Serializable{
 			}
 			IndexWriter writer = null;
 			try{
-				writer = new IndexWriter(profile.getSearchIndexDirectory(), new StandardAnalyzer());
+				Analyzer analyzer = DocumentCreator.createDocumentAnalyzer();
+				writer = new IndexWriter(indexDirectory,analyzer);
 				Term t = new Term(DocumentCreator.FIELD_BOOKMARK_ID,doc.get(DocumentCreator.FIELD_BOOKMARK_ID));
 				writer.updateDocument(t, doc);
 			}catch(Exception e){
@@ -481,6 +505,9 @@ public class SearchIndexManager implements Serializable{
 			}	
 		}				
 	}
-	
+
+	public File getIndexDirectory() {
+		return indexDirectory;
+	}
 	
 }

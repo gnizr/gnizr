@@ -2,10 +2,7 @@ package com.gnizr.core.search;
 
 import junit.framework.TestCase;
 
-import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
-import org.apache.lucene.document.Field;
-import org.apache.lucene.index.IndexWriter;
 
 public class TestSearchIndexManager extends TestCase {
 
@@ -19,25 +16,23 @@ public class TestSearchIndexManager extends TestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 		profile = new SearchIndexProfile();
-		profile.setSearchIndexDirectory("target/search-data");
-		manager = new SearchIndexManager();
+		profile.setSearchIndexDirectory("target/testSearchIndexManager-data");
+		manager = new SearchIndexManager(true);
 		manager.setProfile(profile);
 		manager.init();
 		
 		urlHash = "a1234567890";
 
 		doc1 = new Document();
-		doc1.add(new Field(DocumentCreator.FIELD_URL_MD5,urlHash,Field.Store.YES,Field.Index.UN_TOKENIZED));
-		doc1.add(new Field(DocumentCreator.FIELD_BOOKMARK_ID,"111",Field.Store.YES,Field.Index.UN_TOKENIZED));
+		doc1.add(DocumentCreator.createFieldUrlHash(urlHash));		
+		doc1.add(DocumentCreator.createFieldBookmarkId(111));
 		
 		doc2 = new Document();
-		doc2.add(new Field(DocumentCreator.FIELD_URL_MD5,urlHash,Field.Store.YES,Field.Index.UN_TOKENIZED));
-		doc2.add(new Field(DocumentCreator.FIELD_BOOKMARK_ID,"112",Field.Store.YES,Field.Index.UN_TOKENIZED));
+		doc2.add(DocumentCreator.createFieldUrlHash(urlHash));
+		doc2.add(DocumentCreator.createFieldBookmarkId(112));
 		doc2 = DocumentCreator.addIndexTypeLead(doc2);
 	}
 	
-	
-
 	protected void tearDown() throws Exception {
 		super.tearDown();
 		manager.destroy();
@@ -52,10 +47,10 @@ public class TestSearchIndexManager extends TestCase {
 	}
 	
 	private void reloadIndexDB() throws Exception{
-		IndexWriter writer = new IndexWriter(profile.getSearchIndexDirectory(),new StandardAnalyzer(),true);
-		writer.addDocument(doc1);
-		writer.addDocument(doc2);
-		writer.close();
+		manager.resetIndex();
+		manager.addIndex(doc2);
+		manager.addIndex(doc1);
+		Thread.sleep(5000);
 	}
 
 	public void testFindLeadDocument() throws Exception{
@@ -83,7 +78,8 @@ public class TestSearchIndexManager extends TestCase {
 	
 	public void testUpdateIndex() throws Exception {
 		reloadIndexDB();
-		doc2.add(new Field(DocumentCreator.FIELD_TITLE,"some title",Field.Store.YES,Field.Index.TOKENIZED));
+		doc2.add(DocumentCreator.createFieldTitle("some title"));
+		//doc2.add(new Field(DocumentCreator.FIELD_TITLE,"some title",Field.Store.YES,Field.Index.TOKENIZED));
 		manager.updateIndex(doc2);
 		Thread.sleep(5000);
 		Document leadDoc = manager.findLeadDocument(urlHash);
@@ -106,8 +102,10 @@ public class TestSearchIndexManager extends TestCase {
 		reloadIndexDB();
 		String doc3UrlHash = "999aaa2222";
 		Document doc3 = new Document();
-		doc3.add(new Field(DocumentCreator.FIELD_URL_MD5,doc3UrlHash,Field.Store.YES,Field.Index.UN_TOKENIZED));
-		doc3.add(new Field(DocumentCreator.FIELD_BOOKMARK_ID,"2000",Field.Store.YES,Field.Index.UN_TOKENIZED));
+		doc3.add(DocumentCreator.createFieldUrlHash(doc3UrlHash));
+		//doc3.add(new Field(DocumentCreator.FIELD_URL_MD5,doc3UrlHash,Field.Store.YES,Field.Index.UN_TOKENIZED));
+		doc3.add(DocumentCreator.createFieldBookmarkId(2000));
+		//doc3.add(new Field(DocumentCreator.FIELD_BOOKMARK_ID,"2000",Field.Store.YES,Field.Index.UN_TOKENIZED));
 		manager.addIndex(doc3);
 		Thread.sleep(5000);
 		Document leadDoc1 = manager.findLeadDocument(urlHash);
