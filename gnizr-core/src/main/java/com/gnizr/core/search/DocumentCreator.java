@@ -18,9 +18,14 @@ package com.gnizr.core.search;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.apache.lucene.analysis.Analyzer;
+import org.apache.lucene.analysis.KeywordAnalyzer;
+import org.apache.lucene.analysis.PerFieldAnalyzerWrapper;
+import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.DateTools;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
@@ -42,6 +47,7 @@ public class DocumentCreator implements Serializable {
 	public static final String FIELD_TITLE = "title";
 	public static final String FIELD_NOTES = "notes";
 	public static final String FIELD_TAG = "tag";
+	public static final String FIELD_TEXT = "text"; // combined NOTES, TITLE and TAGS
 	public static final String FIELD_USER = "user";
 	public static final String FIELD_CREATED_ON = "createdOn";
 	public static final String FIELD_LAST_UPDATED = "lastUpdated";
@@ -59,7 +65,7 @@ public class DocumentCreator implements Serializable {
 	/**
 	 * Adds a <code>Field</code> to the input <code>Document</code> to indicate 
 	 * that this document is the leading document in search. When multiple bookmarks
-	 * of the same URL is bookmarked, a leading document is one document that
+	 * of the same URL is bookmarked, a leading document is the one document that
 	 * is the representative of all other bookmarks.  
 	 * 
 	 * @param doc a new <code>Field</code> will be added to this document
@@ -104,7 +110,79 @@ public class DocumentCreator implements Serializable {
 		}
 		return doc;
 	}
+	
+	public static Field createFieldBookmarkId(int id){
+		return new Field(FIELD_BOOKMARK_ID, String.valueOf(id),
+				Field.Store.YES, Field.Index.TOKENIZED);
+	}
+	
+	public static Field createFieldTitle(String title){
+		if(title == null){
+			throw new NullPointerException("title is NULL");
+		}
+		return new Field(FIELD_TITLE, title, Field.Store.YES,Field.Index.NO);	
+	}
 
+	public static Field createFieldText(String text){
+		if(text == null){
+			throw new NullPointerException("text is NULL");
+		}
+		return new Field(FIELD_TEXT, text, Field.Store.NO, Field.Index.TOKENIZED);
+	}
+	
+	public static Field createFieldUser(String username){
+		if(username == null){
+			throw new NullPointerException("username is NULL");
+		}
+		return new Field(FIELD_USER,username,Field.Store.YES, Field.Index.TOKENIZED);
+	}
+	
+	public static Field createFieldUrl(String url){
+		if(url == null){
+			throw new NullPointerException("url is NULL");
+		}
+		return new Field(FIELD_URL, url, Field.Store.YES, Field.Index.NO);
+	}
+	
+	public static Field createFieldUrlHash(String urlHash){
+		if(urlHash == null){
+			throw new NullPointerException("urlHash is NULL");
+		}
+		return new Field(FIELD_URL_MD5, urlHash,Field.Store.YES,Field.Index.TOKENIZED);
+	}
+	
+	public static Field createFieldNotes(String notes){
+		if(notes == null){
+			throw new NullPointerException("notes is NULL");
+		}
+		return new Field(FIELD_NOTES, notes, Field.Store.COMPRESS, Field.Index.NO);
+	}
+	
+	public static Field createFieldTag(String tag){
+		if(tag == null){
+			throw new NullPointerException("tag is NULL");
+		}
+		return new Field(FIELD_TAG, tag, Field.Store.NO, Field.Index.TOKENIZED);
+	}
+	
+	public static Field createFieldCreatedOn(Date date){
+		if(date == null){
+			throw new NullPointerException("createdOn is NULL");
+		}
+		String createdOn = DateTools.dateToString(date,DateTools.Resolution.DAY);
+		return new Field(FIELD_CREATED_ON, createdOn, Field.Store.NO,
+				Field.Index.UN_TOKENIZED);
+	}
+
+	public static Field createFieldLastUpdated(Date date){
+		if(date == null){
+			throw new NullPointerException("lastUpdated is NULL");			
+		}
+		String lastUpdated = DateTools.dateToString(date,DateTools.Resolution.DAY);
+		return new Field(FIELD_LAST_UPDATED, lastUpdated, Field.Store.NO,
+				Field.Index.UN_TOKENIZED);
+	}
+	
 	public static Document createDocument(Bookmark bookmark) {
 		if (bookmark == null) {
 			return null;
@@ -114,23 +192,19 @@ public class DocumentCreator implements Serializable {
 			logger.error("DocumentCreator detects an input Bookmark ID <= 0");
 			return null;
 		}
-		doc.add(new Field(FIELD_BOOKMARK_ID, String.valueOf(bookmark.getId()),
-				Field.Store.YES, Field.Index.UN_TOKENIZED));
+		doc.add(createFieldBookmarkId(bookmark.getId()));
+		
 		if (bookmark.getTitle() == null || bookmark.getTitle().length() == 0) {
 			logger.error("DocumentCreator detects an input "
 					+ "Bookmark Title has length 0. BookmarkId="
 					+ bookmark.getId());
 			return null;
 		}
-		doc.add(new Field(FIELD_TITLE, bookmark.getTitle(), Field.Store.YES,
-				Field.Index.TOKENIZED));
-		if (bookmark.getLink() == null || bookmark.getLink().getUrl() == null) {
-			logger.error("DocumentCreator detects an input "
-					+ "Bookmark URL == null. BookmarkId=" + bookmark.getId());
-			return null;
-		}
-		doc.add(new Field(FIELD_URL, bookmark.getLink().getUrl(),
-				Field.Store.YES, Field.Index.NO));
+		doc.add(createFieldTitle(bookmark.getTitle()));
+		doc.add(createFieldText(bookmark.getTitle()));
+
+		
+		// user:
 		if (bookmark.getUser() == null
 				|| bookmark.getUser().getUsername() == null) {
 			logger.error("DocumentCreator detects an input "
@@ -138,49 +212,64 @@ public class DocumentCreator implements Serializable {
 					+ bookmark.getId());
 			return null;
 		}
+		doc.add(createFieldUser(bookmark.getUser().getUsername()));
+		
+		if (bookmark.getLink() == null || bookmark.getLink().getUrl() == null) {
+			logger.error("DocumentCreator detects an input "
+					+ "Bookmark URL == null. BookmarkId=" + bookmark.getId());
+			return null;
+		}
+		doc.add(createFieldUrl(bookmark.getLink().getUrl()));		
+		
+		// url: & urlMD5:
 		if (bookmark.getLink() == null || bookmark.getLink().getUrlHash() == null) {
 			logger.error("DocumentCreator detects an input "
 					+ "Bookmark URL Hash == null. BookmarkId=" + bookmark.getId());
 			return null;
 		}
-		doc.add(new Field(FIELD_URL_MD5, bookmark.getLink().getUrlHash(),
-				Field.Store.YES,Field.Index.UN_TOKENIZED));
+		doc.add(createFieldUrlHash(bookmark.getLink().getUrlHash()));
 		
-		doc.add(new Field(FIELD_USER, bookmark.getUser().getUsername(),
-				Field.Store.YES, Field.Index.UN_TOKENIZED));
+		// notes:
 		String notes = extractText(bookmark.getNotes());
 		if (notes != null) {
-			doc.add(new Field(FIELD_NOTES, notes, Field.Store.COMPRESS,
-					Field.Index.TOKENIZED));
+			doc.add(createFieldNotes(bookmark.getNotes()));
+			doc.add(createFieldText(bookmark.getNotes()));
 		}
+		// tag:
 		List<String> tagList = bookmark.getTagList();
 		for (String tag : tagList) {
-			doc.add(new Field(FIELD_TAG, tag, Field.Store.NO,
-					Field.Index.UN_TOKENIZED));
+			doc.add(createFieldTag(tag));
+			doc.add(createFieldText(tag));
 		}
+		// createdOn:
 		if (bookmark.getCreatedOn() == null) {
 			logger.error("DocumentCreator detects an input "
 					+ "Bookmark createdOn == null. BookmarkId="
 					+ bookmark.getId());
 			return null;
 		}
-		String createdOn = DateTools.dateToString(bookmark.getCreatedOn(),
-				DateTools.Resolution.DAY);
+		doc.add(createFieldCreatedOn(bookmark.getCreatedOn()));
+		
+		// lastUpdated:
 		if (bookmark.getLastUpdated() == null) {
 			logger.error("DocumentCreator detects an input "
 					+ "Bookmark lastUpdated == null. BookmarkId="
 					+ bookmark.getId());
 			return null;
-		}
-		String lastUpdated = DateTools.dateToString(bookmark.getLastUpdated(),
-				DateTools.Resolution.DAY);
-		doc.add(new Field(FIELD_CREATED_ON, createdOn, Field.Store.NO,
-				Field.Index.UN_TOKENIZED));
-		doc.add(new Field(FIELD_LAST_UPDATED, lastUpdated, Field.Store.NO,
-				Field.Index.UN_TOKENIZED));
+		}		
+		doc.add(createFieldLastUpdated(bookmark.getLastUpdated()));		
 		return doc;
 	}
 
+	public static Analyzer createDocumentAnalyzer(){
+		PerFieldAnalyzerWrapper wrapper = new PerFieldAnalyzerWrapper(new StandardAnalyzer());
+		wrapper.addAnalyzer(DocumentCreator.FIELD_BOOKMARK_ID,new KeywordAnalyzer());
+		wrapper.addAnalyzer(DocumentCreator.FIELD_URL_MD5,new KeywordAnalyzer());
+		wrapper.addAnalyzer(DocumentCreator.FIELD_TAG, new KeywordAnalyzer());
+		wrapper.addAnalyzer(DocumentCreator.FIELD_USER,new KeywordAnalyzer());
+		return wrapper;
+	}
+	
 	private static String extractText(String htmlContent) {
 		if (htmlContent != null && htmlContent.length() > 0) {
 			Source source = new Source(htmlContent);

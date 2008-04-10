@@ -70,6 +70,9 @@ public class TestDocumentCreator extends TestCase {
 		String lDate = doc1.get(DocumentCreator.FIELD_LAST_UPDATED);
 		assertEquals("20080123",cDate);
 		assertEquals("20080211",lDate);
+		
+		String txt = doc1.get(DocumentCreator.FIELD_TEXT);
+		assertNotNull(txt);
 	}
 
 	public void testRemoveIndexTypeLead() throws Exception{

@@ -11,7 +11,7 @@ public class TestSearchTermSuggestion extends TestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 		profile = new SearchIndexProfile();
-		profile.setSearchIndexDirectory("target/search-data");
+		profile.setSearchIndexDirectory("target/testSearchTermSuggestion");
 		profile.setSearchSuggestDataFile("src/test/resources/dictionary/default.txt");
 		indexer = new SearchSuggestIndexer();
 		indexer.setSearchIndexProfile(profile);
