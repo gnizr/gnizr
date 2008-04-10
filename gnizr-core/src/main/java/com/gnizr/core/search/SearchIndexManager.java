@@ -34,10 +34,12 @@ import org.apache.lucene.index.Term;
 import org.apache.lucene.index.TermDocs;
 
 /**
- * This class provides the implementation for building 
- * bookmark search index using Lucene API.
+ * Creates and manages the search index of bookmarks. Search index is created using Lucene API.
+ * The implementation for changing search index (i.e., add, delete or update a bookmark index) 
+ * is executed in the separate internal thread.  
  * 
  * @author Harry Chen
+ * @since 2.4.0
  *
  */
 public class SearchIndexManager implements Serializable{
@@ -66,17 +68,31 @@ public class SearchIndexManager implements Serializable{
 	
 	private static final String INDEX_DIR = "bmarks-idx";
 	
+	/**
+	 * Creates an instance of this class. If a
+	 * search index database exists, use it as it. 
+	 */
 	public SearchIndexManager(){
 		this.forceIndexReset = false;
 	}
 	
+	/**
+	 * Creates an instance of this class and optionally defines
+	 * whether or not to force
+	 * an existing search index database should be cleared.
+	 * 
+	 * @param resetIndex <code>true</code> if an existing search index
+	 * database should be cleared upon initialization. 
+	 */
 	public SearchIndexManager(boolean resetIndex){
 		this.forceIndexReset = resetIndex;
 	}
 	
 	/**
 	 * Initializes this class instance and outputs errors in the log file if 
-	 * the <code>profile</code> is <code>null</code>.
+	 * the <code>profile</code> is <code>null</code>. Forces the index database to be cleared
+	 * if the <code>resetIndex</code> is set to <code>true</code> in the constructor. Starts the internal
+	 * thread for managing the search index database.
 	 */
 	public void init(){
 		if(profile == null){
@@ -199,7 +215,7 @@ public class SearchIndexManager implements Serializable{
 	}
 	
 	/**
-	 * Adds a <code>Document</code> to the queue of documents to be
+	 * Appends a <code>Document</code> to the queue of documents to be
 	 * updated in the search index database. The update request 
 	 * is performed in an asynchronous fashion. There is no guarantee 
 	 * that the update will be completed right 
@@ -208,7 +224,6 @@ public class SearchIndexManager implements Serializable{
 	 * @param doc a document to be updated.
 	 * @throws InterruptedException 
 	 *
-	 * @throws InterruptedException
 	 */
 	public void updateIndex(Document doc) throws InterruptedException {
 		if (doc != null) {
@@ -216,18 +231,48 @@ public class SearchIndexManager implements Serializable{
 		}
 	}
 	
+	/**
+	 * Appends a <code>Document</code> to the queue of documents to be
+	 * added in the search index database. The add request 
+	 * is performed in an asynchronous fashion. There is no guarantee 
+	 * that the add will be completed right 
+	 * after this method has been called.
+	 *  
+	 * @param doc a document to be added.
+	 * @throws InterruptedException 
+	 *
+	 */
 	public void addIndex(Document doc) throws InterruptedException{
 		if(doc != null){
 			documentQueue.put(new Request(doc,ADD));
 		}
 	}
 
+	/**
+	 * Appends a <code>Document</code> to the queue of documents to be
+	 * deleted from the search index database. The delete request 
+	 * is performed in an asynchronous fashion. There is no guarantee 
+	 * that the delete will be completed right 
+	 * after this method has been called.
+	 *  
+	 * @param doc a document to be deleted.
+	 * @throws InterruptedException 
+	 *
+	 */
 	public void deleteIndex(Document doc) throws InterruptedException{
 		if(doc != null){
 			documentQueue.put(new Request(doc,DEL));
 		}
 	}
 	
+	/**
+	 * Instructs this class to clear all index records
+	 * from the existing search index database as soon as possible. 
+	 * This request is executed in an asynchronous fashion. There
+	 * is no guarantee that this request can be completed right after
+	 * the call.
+	 * @throws InterruptedException
+	 */
 	public void resetIndex() throws InterruptedException {
 		documentQueue.put(new Request(null,RST));
 	}
@@ -254,6 +299,13 @@ public class SearchIndexManager implements Serializable{
 		}
 	}
 	
+	/**
+	 * Finds the representative bookmark document for a ginve URL hash.  
+	 * 
+	 * @param urlHash a URL MD5 Hash.
+	 * 
+	 * @return a Lucene document of the representative bookmark
+	 */
 	public Document findLeadDocument(String urlHash){
 		IndexReader reader = null;
 		TermDocs termDocs = null;
@@ -306,6 +358,13 @@ public class SearchIndexManager implements Serializable{
 		return leadDoc;
 	}
 	
+	/**
+	 * Finds a non-representative bookmark document for a given URL hash.  
+	 * 
+	 * @param urlHash a URL MD5 Hash.
+	 * 
+	 * @return a Lucene document of a non-representative bookmark
+	 */
 	public Document findNonLeadDocument(String urlHash){
 		IndexReader reader = null;
 		TermDocs termDocs = null;
@@ -506,6 +565,14 @@ public class SearchIndexManager implements Serializable{
 		}				
 	}
 
+	/**
+	 * Returns the directory where the search index database is stored
+	 * @return the <code>File</code> that represents the storage location 
+	 * of the index. Even if the return value 
+	 * is not <code>null</code>, there is no guarantee that this directory exists in
+	 * the system.
+	 * @return the directory of the search index database. 
+	 */
 	public File getIndexDirectory() {
 		return indexDirectory;
 	}
