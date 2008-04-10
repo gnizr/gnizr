@@ -164,6 +164,17 @@ SPAN.system-link{
 	font-size: 1em;
 }
 
+div.instruction {
+	width: 640px;
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+
+div.instruction p{
+	padding: 4px; 
+	margin: 4px 0px;
+}
+
 /* ========= Global DIVs =========== */
 .cleardiv {
 	clear: both;

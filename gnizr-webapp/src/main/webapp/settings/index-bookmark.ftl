@@ -19,16 +19,31 @@
   <#assign bct = settingsBCT(username) + [gzBCTPair('rebuild search index',gzUrl('/settings/indexBookmark.action'))]/>
   <@infoBlock bct=bct/>
 <@mainBlock>  
+<h2>Rebuild Search Index</h2>
 <#if (status?exists == false)>
-<p>To rebuild search index database, click the button in below.</p>
+<div class="instruction">
+<p>To rebuild the search index database, click the button in below.</p>
+<p>This operation 
+will delete the existing search index database, and creates a new database
+from the bookmarks that are currently saved in the system.  
+</p>
+<p>If there are many bookmarks in the system, this operation may take few minutes.</p>
+<p><b>TIPS</b>: It's recommended that you run gnizr with the <i>serverMaintenanceModeEnabled</i> option
+enabled in the <i>gnizr-config.xml</i> file before starting the re-index operation.</p>
+</div>
 <@ww.form action="updateIndex.action" namespace="/settings" method="post">
   <@ww.submit cssClass="btn" value="Rebuild Index Now"/>
 </@ww.form>
+
 <#else>
-Search index created sucessfully!
+<div class="instruction">
+<p>
 <ul>
-<li>Total number of bookmark indexed: ${status.bookmarkIndexed?c}</li>
+ <li>Search index created sucessfully!</li>
+ <li>Total number of bookmark indexed: ${status.bookmarkIndexed?c}</li>
 </ul>
+</p>
+</div>
 </#if>
 </@mainBlock>
 </@pageContent>
