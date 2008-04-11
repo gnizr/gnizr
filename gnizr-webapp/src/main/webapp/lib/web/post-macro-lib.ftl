@@ -35,9 +35,9 @@ INPUT: postUrl
 	</#if>
 </#if>
 <div class="post-title">     
-     <a id="${bmarkId}" href="${gzBookmarkUrl(postId?c)}" class="bmark-title link-title" target="_blank">${postTitle}</a>           
+     <a id="${bmarkId}" href="${gzBookmarkUrl(postId?c)}" class="bmark-title link-title" >${postTitle}</a>           
      <@iconLabels mTags=postMachineTags user=postUser.username/> 
-     <div class="post-link"><a href="${postUrl}" class="bmark-link web-link">${prettyFormatUrl(postUrl)}</a></div>   
+     <div class="post-link"><a href="${postUrl}" class="bmark-link web-link" target="_blank">${prettyFormatUrl(postUrl)}</a></div>   
 </div>    
 
   <div class="post-actions">  

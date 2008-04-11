@@ -297,6 +297,12 @@ MACRO: pageContent
 </div>
 </#macro>
 
+<#macro pageContentLite>
+<#nested>
+</body>
+</html>
+</#macro>
+
 <#-- 
 ===================================================================
 MACRO: mainBlock
