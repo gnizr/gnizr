@@ -125,6 +125,22 @@ a.system-link:active{
 	text-decoration: underline;
 }
 
+a.link-title:link, 
+a.link-title:visited,
+a.link-title:hover,
+a.link-title:active{
+	color: #FF6600;
+	text-decoration: underline;
+}
+
+a.web-link:link, 
+a.web-link:visited,
+a.web-link:hover,
+a.web-link:active{
+	color: green;
+	text-decoration: underline;
+}
+
 SPAN.system-link{
 	color: #0066cc;
 	text-decoration: underline;
@@ -245,7 +261,7 @@ div.instruction p{
 }
 
 .selectBookmark {
-	margin: 0px 4px 2px 0px;
+    margin: 4px 4px 0px 0px;
 	padding: 0px;
 	height: 12px;
 	width: 12px;
@@ -430,11 +446,17 @@ ul#breadcrumbs{
 }
 
 .post .post-container .post-title{
+	float:left;
 	width: 96%;
 	padding: 0px;
-	margin: 2px 0px 0px 0px;
-	font-size: 1.30em;
+	margin: 0px;
+	font-size: 1.25em;
 	line-height: 1.25em;
+}
+
+.post .post-select {
+	float:left;
+	width: 16px;
 }
 
 .post .post-title a:link, 
@@ -442,6 +464,17 @@ ul#breadcrumbs{
 .post .post-title a:hover,
 .post .post-title a:active{
 	text-decoration: underline;
+}
+
+.post .post-link{
+	font-size: 0.8em;
+}
+
+.post .post-link a:link, 
+.post .post-link a:visited,
+.post .post-link a:hover,
+.post .post-link a:active{	
+	text-decoration: none;
 }
 
 .post .post-container .post-actions{
@@ -464,6 +497,7 @@ ul#breadcrumbs{
 }
 
 .post .notes {
+    clear:both;
 	margin: 4px 8px;
 	padding: 0px;
 	width: 96%;
@@ -492,16 +526,10 @@ ul#breadcrumbs{
 	bottom: 4px;
 }
 
-
-
 .post .meta {
     margin: 2px 0px 0px 0px;
 	padding: 0px;
 	width: 96%;
-}
-
-.post a.folder:link, .post a.folder:visited, .post a.folder:hover, .post a.folder:active{
-	/*color: blue;*/
 }
 
 .tagUsageCount {
