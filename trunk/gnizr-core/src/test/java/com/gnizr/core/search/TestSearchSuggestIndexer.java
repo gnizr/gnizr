@@ -31,7 +31,7 @@ public class TestSearchSuggestIndexer extends GnizrCoreTestBase {
 		indexer.setSearchIndexProfile(profile);
 		indexer.init();
 		IndexReader reader = indexer.openSuggestIndexReader();
-		assertEquals(11, reader.numDocs());
+		assertEquals(13, reader.numDocs());
 	}
 
 	public void testInit2() throws Exception{
