@@ -1,6 +1,7 @@
 var saveBmarkLinkClass = "save-bmark-link";
 var editBmarkLinkClass = "edit-bmark-link";
 var bmarkLinkClass = "bmark-link";
+var bmarkTitleClass = "bmark-title";
 var postClass = "post";
 var notesClass = "notes";
 var shrNotesClass = "shrtNotes";
@@ -117,7 +118,8 @@ function getBookmark(postElm){
 	var bmark = {};
 	var bmarkLinkElm = MochiKit.DOM.getFirstElementByTagAndClassName('A',bmarkLinkClass,postElm);
 	bmark['url'] = MochiKit.DOM.getNodeAttribute(bmarkLinkElm,'href');
-	bmark['title'] = MochiKit.DOM.scrapeText(bmarkLinkElm);
+	var bmarkTitleElm = MochiKit.DOM.getFirstElementByTagAndClassName('A',bmarkTitleClass,postElm);	
+	bmark['title'] = MochiKit.DOM.scrapeText(bmarkTitleElm);
 	var shrtNotesElm = MochiKit.DOM.getFirstElementByTagAndClassName('DIV',shrNotesClass,postElm);
 	var notesElm = MochiKit.DOM.getFirstElementByTagAndClassName('DIV',extNotesClass,postElm);	
 	if(notesElm != null){		  

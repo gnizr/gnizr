@@ -25,12 +25,21 @@ INPUT: postUrl
 </#if>
 <#local savbmUrl=gzUrl("/post?url="+postUrl?url+"&title="+postTitle?url) />        
 <li id="${'p_'+bmarkId}" class="post">   
+
 <div class="post-container">  
-<div class="post-title">  
-     <@ww.checkbox cssClass="selectBookmark invisible" name="bookmarkId" id="c_"+bmarkId fieldValue=postId?c/>     
-     <a id="${bmarkId}" href="${postUrl}" class="previewlink bmark-link" target="_blank">${highlightText(postTitle,emText,"SPAN",["matched_text"])}</a>           
-     <@iconLabels mTags=postMachineTags user=postUser.username/>
+ <#if loggedInUser?exists> 
+    <#if (loggedInUser.username == postUser.username) && (postId > 0)>  
+<div class="post-select">
+<@ww.checkbox cssClass="selectBookmark " name="bookmarkId" id="c_"+bmarkId fieldValue=postId?c/>  
+</div>
+	</#if>
+</#if>
+<div class="post-title">     
+     <a id="${bmarkId}" href="${gzBookmarkUrl(postId?c)}" class="bmark-title link-title" target="_blank">${postTitle}</a>           
+     <@iconLabels mTags=postMachineTags user=postUser.username/> 
+     <div class="post-link"><a href="${postUrl}" class="bmark-link web-link">${prettyFormatUrl(postUrl)}</a></div>   
 </div>    
+
   <div class="post-actions">  
   <#nested/>
   <#if loggedInUser?exists> 
@@ -44,30 +53,15 @@ INPUT: postUrl
 </div>
    
     <#assign notesGrp = sliceNotes(postNotes)/>
-    <#if (notesGrp?size == 1)>    
-      <#assign n = highlightText(notesGrp[0],emText,"SPAN",["matched_text"])/>
-      <#if n != "">
-       <div class="notes">
-         <div class="shrtNotes">${n}</div>
-       </div> 
-      </#if>
-    <#elseif (notesGrp?size == 2)>
-      <div class="notes">
-         <div class="prvwNotes">${highlightText(notesGrp[0],emText,"SPAN",["matched_text"])} ... 
-         <a href="#" title="read more" class="showMoreNotes showOrHideNotes"><img alt="read more" src="${gzUrl("/images/call_out.gif")}"></img></a>
-         </div>
-         <div class="extNotes invisible">${highlightText(notesGrp[1],emText,"SPAN",["matched_text"])}
-         <a href="#" title="show less" class="showLessNotes showOrHideNotes"><img alt="show less" src="${gzUrl("/images/call_in.gif")}"></img></a> 
-         </div>       
-      </div>          
-    </#if>
-   
+    <div class="notes">
+      <div class="shrtNotes">${notesGrp[0]}</div>
+    </div>
     <div class="meta">
     <div class="info">by <a href="${gzUserUrl(postUser.username)}">${postUser.username}</a> 
   <#if (postTags?size > 0) >
     tagged 
   <#list postTags as tag>    
-    <a class="tag" href="${gzUserBmarkArchivesUrl(postUser.username,tag)}">${highlightText(tag,emText,"SPAN",["matched_text"])}</a><#if tag_has_next>, </#if>
+    <a class="tag" href="${gzUserBmarkArchivesUrl(postUser.username,tag)}">tag</a><#if tag_has_next>, </#if>
   </#list>
   ::
   </#if>
@@ -136,11 +130,11 @@ INPUT: postUrl
 <#function sliceNotes notes>
   <#local nts = notes/> 
   <#local s = notes?replace("</?[a-z]+[^>]*>"," ","irm")/>
-  <#if (s?length > 255) || (notes?matches(".*<.*>.*"))>
+  <#if (s?length > 100) || (notes?matches(".*<.*>.*"))>
     <#local shrNotes = ""/>   
     <#local res = s?matches("([\\S]+)","rm")/>
     <#list res as t>     
-      <#if (t_index < 30) == true>
+      <#if (t_index < 15) == true>
         <#local shrNotes = shrNotes + t?groups[1] + " "/> 
       <#else>
         <#break/>

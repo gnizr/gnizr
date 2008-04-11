@@ -85,9 +85,11 @@ function makeVisibleCheckbox(){
 	}	
 	var bmarkSelects = MochiKit.DOM.getElementsByTagAndClassName('INPUT',selectBookmarkClass);	
 	for(var i = 0; i < bmarkSelects.length; i++){	
+		/*
 		if(MochiKit.DOM.hasElementClass(bmarkSelects[i],'invisible')){
 			MochiKit.DOM.removeElementClass(bmarkSelects[i],'invisible');
 		}
+		*/
 		MochiKit.Signal.connect(bmarkSelects[i],'onclick',handleBookmarkCheckboxClicked);							
 	}	
 }
