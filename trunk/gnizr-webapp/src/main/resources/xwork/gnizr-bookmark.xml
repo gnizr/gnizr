@@ -124,7 +124,13 @@
 			<interceptor-ref name="loggedIn"/>
 			<interceptor-ref name="gnizrDefaultStack"/>
 			<result name="success" type="freemarker">/bookmarks/view-detail.ftl</result>
-		</action>		
+		</action>
+				
+		<action name="getBookmarkInfoLite" class="com.gnizr.web.action.bookmark.FetchBookmark">
+			<interceptor-ref name="loggedIn"/>
+			<interceptor-ref name="gnizrDefaultStack"/>
+			<result name="success" type="freemarker">/bookmarks/view-detail-lite.ftl</result>
+		</action>	
 	</package>
 	
 	<package name="gnizr-forme-bookmarks" extends="gnizr-default"
