@@ -9,3 +9,5 @@ class:world
 class:animal
 class:human
 class:HappyPerson
+fulltext
+business
