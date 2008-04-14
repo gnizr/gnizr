@@ -8695,3 +8695,10 @@ zone
 zone's
 zones
 zoom
+foaf:knows
+icon:heart
+icon:!
+icon:db
+icon:video
+icon:audio
+icon:photo

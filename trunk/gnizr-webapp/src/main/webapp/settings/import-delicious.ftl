@@ -19,7 +19,7 @@
   <#assign bct = settingsBCT(username) + [gzBCTPair('import from del.icio.us',gzUrl('/settings/delicious.action'))]/>
   <@infoBlock bct=bct/>
 <@mainBlock>  
-<#if (status?exists = false)>
+<#if (importStatus?exists = false)>
 <p>To import bookmarks from <a href="http://del.icio.us" title="del.icio.us">del.icio.us</a>, enter your
 account information in below.</p>
 <div id="action-message">
@@ -28,11 +28,11 @@ account information in below.</p>
 <@importDeliciousForm/>
 <p><span class="warning-message">Warning</span>: if a bookmark already exists in your gnizr account, it will be overwritten by the one from del.icio.us.</p>
 <#else>
-<p class="success-message">Finished! Total number of del.icio.us bookmarks: ${status.totalNumber}
+<p class="success-message">Finished! Total number of del.icio.us bookmarks: ${importStatus.totalNumber}
 <ul>
-<li>imported: ${status.numberAdded}</li>
-<li>updated: ${status.numberUpdated}</li>
-<li>skipped: ${status.numberError}</li>
+<li>imported: ${importStatus.numberAdded}</li>
+<li>updated: ${importStatus.numberUpdated}</li>
+<li>skipped: ${importStatus.numberError}</li>
 </ul>
 </p>
 </#if>

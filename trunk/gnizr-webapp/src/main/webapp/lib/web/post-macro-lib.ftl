@@ -61,7 +61,7 @@ INPUT: postUrl
   <#if (postTags?size > 0) >
     tagged 
   <#list postTags as tag>    
-    <a class="tag" href="${gzUserBmarkArchivesUrl(postUser.username,tag)}">tag</a><#if tag_has_next>, </#if>
+    <a class="tag" href="${gzUserBmarkArchivesUrl(postUser.username,tag)}">${tag}</a><#if tag_has_next>, </#if>
   </#list>
   ::
   </#if>

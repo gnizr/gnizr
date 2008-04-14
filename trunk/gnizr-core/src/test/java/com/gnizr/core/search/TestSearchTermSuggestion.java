@@ -71,9 +71,8 @@ public class TestSearchTermSuggestion extends GnizrCoreTestBase {
 			Document doc = DocumentCreator.createDocument(bm);
 			manager.addIndex(doc);
 		}
-		while(manager.isIndexProcessActive() == true){
-			Thread.sleep(5000);
-		}
+		
+		Thread.sleep(10000);
 		
 		File indexDir = manager.getIndexDirectory();
 		IndexReader indexReader = IndexReader.open(indexDir);
@@ -82,6 +81,15 @@ public class TestSearchTermSuggestion extends GnizrCoreTestBase {
 	
 		words = suggest.suggest("full",indexReader,DocumentCreator.FIELD_TEXT);
 		assertEquals(1,words.length);
+		
+		words = suggest.suggest("class",indexReader,DocumentCreator.FIELD_TAG);
+		assertEquals(1,words.length);
+		
+		words = suggest.suggest("class:a",indexReader,DocumentCreator.FIELD_TAG);
+		assertEquals(1,words.length);
+		
+		words = suggest.suggest("class:w",indexReader,DocumentCreator.FIELD_TAG);
+		assertEquals(0,words.length);		
 	}
 
 	@Override

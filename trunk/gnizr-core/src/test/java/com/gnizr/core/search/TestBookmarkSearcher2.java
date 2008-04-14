@@ -13,9 +13,8 @@ import com.gnizr.db.dao.Bookmark;
 import com.gnizr.db.dao.DaoResult;
 import com.gnizr.db.dao.User;
 
-public class TestBookmarkSearcher extends GnizrCoreTestBase {
-	private static final Logger logger = Logger.getLogger(TestBookmarkSearcher.class);
-	
+public class TestBookmarkSearcher2 extends GnizrCoreTestBase {
+	private static final Logger logger = Logger.getLogger(TestBookmarkSearcher2.class);
 	private SearchIndexProfile profile;
 	private SearchIndexManager searchIndexManager;
 	
@@ -27,7 +26,7 @@ public class TestBookmarkSearcher extends GnizrCoreTestBase {
 		super.setUp();
 		
 		profile = new SearchIndexProfile();
-		profile.setSearchIndexDirectory("target/testBookmarkSearch-data");
+		profile.setSearchIndexDirectory("target/testBookmarkSearch-data-2");
 		
 		searchIndexManager = new SearchIndexManager(true);
 		searchIndexManager.setProfile(profile);
@@ -43,24 +42,14 @@ public class TestBookmarkSearcher extends GnizrCoreTestBase {
 		List<Bookmark> bmarks = result.getResult();
 		for(Bookmark bm : bmarks){
 			searchIndexManager.addIndex(DocumentCreator.createDocument(bm));
-		}
-		logger.debug("1. SearchIndexManager workload = " + searchIndexManager.getIndexProcessWorkLoad());
-	
-		logger.debug("SearchIndexManager is busy. Sleep for 5000 ms");
+		}		
 		Thread.sleep(5000);
-			
-		logger.debug("2. SearchIndexManager workload = " + searchIndexManager.getIndexProcessWorkLoad());
 		result = bookmarkPager.pageAllBookmark(new User(3));
 		bmarks = result.getResult();
-		for(Bookmark bm : bmarks){		
+		for(Bookmark bm : bmarks){
 			searchIndexManager.addIndex(DocumentCreator.createDocument(bm));
-		}		
-		logger.debug("3. SearchIndexManager workload = " + searchIndexManager.getIndexProcessWorkLoad());
-	
-		logger.debug("SearchIndexManager is busy. Sleep for 5000 ms");
+		}
 		Thread.sleep(5000);
-		
-		logger.debug("4. SearchIndexManager workload = " + searchIndexManager.getIndexProcessWorkLoad());
 	}
 
 	protected void tearDown() throws Exception {
@@ -68,15 +57,14 @@ public class TestBookmarkSearcher extends GnizrCoreTestBase {
 		searchIndexManager.destroy();
 	}
 
-	public void testSearchAll() throws Exception{
+	public void testSearchUser() throws Exception{
 		String idxPath = searchIndexManager.getIndexDirectory().getAbsolutePath();
 		if(IndexReader.isLocked(idxPath)){
 			logger.debug("idx locked: " + idxPath);
 		}else{
 			logger.debug("idx is not unlocked: " + idxPath);
 		}
-		
-		DaoResult<BookmarkDoc> result = searcher.searchAll("MySQL +\"Part 2\"",0,10);
+		DaoResult<BookmarkDoc> result = searcher.searchUser("MySQL","hchen1",0,10);
 		assertNotNull(result);
 		assertEquals(1,result.getSize());
 		assertEquals(1,result.getResult().size());
@@ -88,38 +76,19 @@ public class TestBookmarkSearcher extends GnizrCoreTestBase {
 		assertNotNull(doc.getUrl());
 		assertNotNull(doc.getUrlHash());
 		
-		result = searcher.searchAll("MySQL Security",0,10);
-		assertEquals(3,result.getSize());
-		
-		result = searcher.searchAll("mysql security",2,10);
-		assertEquals(3,result.getSize());
-		assertEquals(1,result.getResult().size());
-		
-		result = searcher.searchAll("security mysql geo", 0, 1);
-		assertEquals(4,result.getSize());
-		assertEquals(1,result.getResult().size());
-		
-		result = searcher.searchAll("security mysql geo", 1, 1);
-		assertEquals(4,result.getSize());
-		assertEquals(1,result.getResult().size());
-		
-		result = searcher.searchAll("security mysql geo", 2, 1);
-		assertEquals(4,result.getSize());
-		assertEquals(1,result.getResult().size());
-		
-		result = searcher.searchAll("security mysql geo", 3, 1);
-		assertEquals(4,result.getSize());
-		assertEquals(1,result.getResult().size());
-		
-		result = searcher.searchAll("security mysql geo", 4, 1);
-		assertEquals(4,result.getSize());
+		result = searcher.searchUser("Wii machine", "hchen1", 0, 10);
+		assertEquals(0,result.getSize());
 		assertEquals(0,result.getResult().size());
+		
+		result = searcher.searchUser("Wii machine", "joe", 0, 10);
+		assertEquals(1,result.getSize());
+		assertEquals(1,result.getResult().size());
 	}
-
+	
 	
 	@Override
 	protected IDataSet getDataSet() throws Exception {
-		return new FlatXmlDataSet(TestBookmarkSearcher.class.getResourceAsStream("/TestBookmarkSearcher-input.xml"));
+		return new FlatXmlDataSet(TestBookmarkSearcher2.class.getResourceAsStream("/TestBookmarkSearcher-input.xml"));
 	}
 
 }

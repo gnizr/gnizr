@@ -8,6 +8,9 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 import org.apache.lucene.index.CorruptIndexException;
 import org.apache.lucene.index.IndexReader;
+import org.apache.lucene.queryParser.QueryParser;
+import org.apache.lucene.search.Query;
+import org.apache.lucene.search.TermQuery;
 
 import com.gnizr.core.search.DocumentCreator;
 import com.gnizr.core.search.SearchIndexManager;
@@ -70,28 +73,73 @@ public class SearchQuerySuggest extends AbstractAction {
 	protected String go() throws Exception {
 		logger.debug("Start SearchTermSuggestion. q = " + getQ()
 				+ " keywords size: " + keywords.size());
-		if (q != null && searchTermSuggestion != null) {
+		if (q != null && searchTermSuggestion != null) {		
+			TermQuery termQuery = null;
+			QueryParser parser = new QueryParser(DocumentCreator.FIELD_TEXT,DocumentCreator.createDocumentAnalyzer());
+			Query query = null;
+			try{
+				query = parser.parse(q);
+			}catch(Exception e){
+				logger.debug("QueryParser error: " + e);
+			}
+			if(query == null){
+				return SUCCESS;
+			}			
+			if((query instanceof TermQuery) == false){
+				logger.debug("No search term suggestion. Non TermQuery is not curently support: " + q);
+				return SUCCESS;
+			}else{
+				termQuery = (TermQuery)query;
+				String fld = termQuery.getTerm().field();
+				if(fld.equals(DocumentCreator.FIELD_TEXT) == false &&
+				   fld.equals(DocumentCreator.FIELD_TAG) == false){
+					logger.debug("No search term suggestion. Term field is neither 'tag' or 'text'. Field: " + fld);
+					return SUCCESS;
+				}
+			}
+				
 			String[] results = new String[0];
 			IndexReader idxReader = null; 
-			try{
-				idxReader = getIndexReader();
+			try{				
+				idxReader = getIndexReader();			
+				String field = termQuery.getTerm().field();
+				String value = termQuery.getTerm().text();				
+				results = searchTermSuggestion.suggest(value,idxReader,field);
+				if(results != null && results.length > 0){
+					if(field.equals(DocumentCreator.FIELD_TAG)){
+						keywords = formatToKeywords(results,DocumentCreator.FIELD_TAG);
+					}else{
+						keywords = formatToKeywords(results,null);
+					}
+				}
 			}catch(Exception e){
 				logger.error(e);
-			}
-			if(idxReader != null){
-				try{
-					results = searchTermSuggestion.suggest(q,idxReader,DocumentCreator.FIELD_TEXT);
-				}finally{
-					idxReader.close();
+			}finally{
+				if(idxReader != null){
+					try{
+						idxReader.close();
+					}catch(Exception e){
+						logger.error("Unable to close IndexReader for bookmark search index");
+					}
 				}
-			}else{
-				results = searchTermSuggestion.suggest(q);
-			}
-			for (String s : results) {
-				keywords.put(s, s);
 			}
 		}
 		return SUCCESS;
+	}
+	
+	private Map<String,String> formatToKeywords(String[] terms, String field){
+		Map<String,String> map = new HashMap<String, String>();
+		for(String t : terms){
+			String key = t;
+			if(field != null){				
+				key = key.replace(":", "\\:");
+				key = key.replace("!", "\\!");
+				key = key.replace("~", "\\~");
+				key = field + ":" + key;
+			}
+			map.put(key,key);
+		}
+		return map;
 	}
 
 }
