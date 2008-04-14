@@ -45,10 +45,10 @@ public class ImportDeliciousPosts extends AbstractAction implements LoggedInUser
 	private BookmarkManager bookmarkManager;
 	private FolderManager folderManager;
 
-	private ImportStatus status;
+	private ImportStatus importStatus;
 	
-	public ImportStatus getStatus() {
-		return status;
+	public ImportStatus getImportStatus() {
+		return importStatus;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -57,7 +57,7 @@ public class ImportDeliciousPosts extends AbstractAction implements LoggedInUser
 		DeliciousImport importService = new DeliciousImport(deliciousUsername,deliciousPassword,
 				loggedInUser,userManager,bookmarkManager,folderManager,false);
 		try{
-			status = importService.doImport();
+			importStatus = importService.doImport();
 		}catch(DeliciousNotAuthorizedException e){
 			addActionMessage("del.icio.us authorization error. either your username or password is incorrect.");
 			logger.error("del.icio.us import error. " + e);
@@ -121,4 +121,5 @@ public class ImportDeliciousPosts extends AbstractAction implements LoggedInUser
 	public void setFolderManager(FolderManager folderManager) {
 		this.folderManager = folderManager;
 	}
+	
 }

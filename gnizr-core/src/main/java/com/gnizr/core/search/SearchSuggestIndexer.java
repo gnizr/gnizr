@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 import org.apache.log4j.Logger;
-import org.apache.lucene.analysis.standard.StandardAnalyzer;
+import org.apache.lucene.analysis.KeywordAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.index.CorruptIndexException;
@@ -118,7 +118,7 @@ public class SearchSuggestIndexer implements Serializable {
 			IOException {
 		IndexWriter indexWriter = null;
 		try {
-			indexWriter = new IndexWriter(directory, new StandardAnalyzer(),
+			indexWriter = new IndexWriter(directory, new KeywordAnalyzer(),
 					true);
 			for (Tag tag : tags) {
 				String t = tag.getLabel();
@@ -173,7 +173,7 @@ public class SearchSuggestIndexer implements Serializable {
 		BufferedReader dataReader = createDataBufferedReader(dataFile);
 		if (dataReader != null) {
 			IndexWriter indexWriter = new IndexWriter(directory,
-					new StandardAnalyzer(), true);
+					new KeywordAnalyzer(), true);
 			try {
 				String aline = dataReader.readLine();
 				while (aline != null) {

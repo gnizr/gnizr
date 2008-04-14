@@ -134,6 +134,7 @@ public class SearchIndexManager implements Serializable{
 		}finally{
 			if(writer != null){
 				try {
+					writer.optimize();
 					writer.close();
 				} catch (Exception e){
 					logger.error(e);
@@ -425,6 +426,11 @@ public class SearchIndexManager implements Serializable{
 	private class UpdateIndexWorker implements Runnable {
 		private List<Request> partialList = new ArrayList<Request>();
 		int estimateWorkLoad = 0;
+		
+		public UpdateIndexWorker(){
+			estimateWorkLoad = documentQueue.size();
+		}
+		
 		public void run() {		
 			boolean stopRunning = false;
 			while (true && stopRunning == false) {				
@@ -493,7 +499,7 @@ public class SearchIndexManager implements Serializable{
 				logger.error("Can't add documen to the index. Doc = " + doc + ", exception = " + e);
 			}finally{
 				if(writer != null){
-					try {
+					try {					
 						writer.close();
 					} catch (Exception e){
 						logger.error(e);
@@ -511,12 +517,13 @@ public class SearchIndexManager implements Serializable{
 				Analyzer analyzer = DocumentCreator.createDocumentAnalyzer();
 				writer = new IndexWriter(indexDirectory, analyzer);
 				Term t = new Term(DocumentCreator.FIELD_BOOKMARK_ID,doc.get(DocumentCreator.FIELD_BOOKMARK_ID));
-				writer.deleteDocuments(t);
+				writer.deleteDocuments(t);			
 			}catch(Exception e){
 				logger.error("Can't add documen to the index. Doc = " + doc + ", exception = " + e);
 			}finally{
 				if(writer != null){
 					try {
+						writer.optimize();
 						writer.close();
 					} catch (Exception e){
 						logger.error(e);
@@ -550,12 +557,13 @@ public class SearchIndexManager implements Serializable{
 				Analyzer analyzer = DocumentCreator.createDocumentAnalyzer();
 				writer = new IndexWriter(indexDirectory,analyzer);
 				Term t = new Term(DocumentCreator.FIELD_BOOKMARK_ID,doc.get(DocumentCreator.FIELD_BOOKMARK_ID));
-				writer.updateDocument(t, doc);
+				writer.updateDocument(t, doc);			
 			}catch(Exception e){
 				logger.error("Can't add documen to the index. Doc = " + doc + ", exception = " + e);
 			}finally{
 				if(writer != null){
 					try {
+						writer.optimize();
 						writer.close();
 					} catch (Exception e){
 						logger.error(e);
