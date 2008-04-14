@@ -13,9 +13,9 @@ If you have any questions, post them in [http://groups.google.com/group/gnizr-us
 
 == Steps to Install ==
 
-  # Download and unpack latest gnizr release.
+  # Download and unpack a gnizr release.
     * e.g., after unpacking, the top-level directory is `gnizr-x.y.z`
-  # Prepare MySQL database for gnizr installation
+  # Prepare MySQL database for installation
     * See SetupGnizrDatabase
   # Copy gnizr web application directory to Tomcat
     * `cp -r gnizr-x.y.z/gnizr /your/tomcat/webapps/`
@@ -25,7 +25,7 @@ If you have any questions, post them in [http://groups.google.com/group/gnizr-us
 
 == Steps to Upgrade ==
 
-  # Download and unpack latest gnizr release.
+  # Download and unpack a gnizr release.
     * e.g., after unpacking, the top-level directory is `gnizr-x.y.z`
   # Upgrade gnizr database
     * See _Upgrade database tables and stored procedures_ in SetupGnizrDatabase
