@@ -6,6 +6,11 @@
  
 Changelog
   * Changed my bookmark search engine description from "Bookmarked by me" to "Bookmarked by you".
+  * [http://code.google.com/p/gnizr/issues/detail?id=49 Issue 49]: Provide a link for adding search plugin to Firefox and IE7 (fixed, verified)
+  * [http://code.google.com/p/gnizr/issues/detail?id=50 Issue 50]: Provide search suggestions as the user types in the search box (fixed, verified)
+  * [http://code.google.com/p/gnizr/issues/detail?id=51 Issue 51]: Re-building search index should overwrite the existing search index database (fixed, verified)
+  * [http://code.google.com/p/gnizr/issues/detail?id=52 Issue 52]: Avoid loading the full HTML bookmark description in the HOME page (fixed, verified)
+
 
 ==== Version 2.4.0-M1 (04 April 2008) ====
 
