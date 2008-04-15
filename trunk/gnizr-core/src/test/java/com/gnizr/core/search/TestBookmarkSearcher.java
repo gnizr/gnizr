@@ -61,6 +61,7 @@ public class TestBookmarkSearcher extends GnizrCoreTestBase {
 		Thread.sleep(5000);
 		
 		logger.debug("4. SearchIndexManager workload = " + searchIndexManager.getIndexProcessWorkLoad());
+		Thread.sleep(5000);
 	}
 
 	protected void tearDown() throws Exception {
