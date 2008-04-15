@@ -22,7 +22,7 @@
 <span class="large-text">Please wait while the search index is being created...</span> 
 <br/><br/>
 <#if (Session.status?exists == true)>
-Processing ${Session.status.bookmarkIndexed?c} of ${Session.status.totalBookmarkCount?c}
+Processing ${Session.status.bookmarkIndexed?c} of ${Session.status.totalBookmarkCount?c} bookmarks.
 </#if>
 <br/><br/>
 If this page does not refresh, <a href="${thisPageHref}">click here</a>.

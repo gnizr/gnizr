@@ -1,6 +1,5 @@
 package com.gnizr.web.action.search;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -131,7 +130,7 @@ public class IndexBookmark extends AbstractLoggedInUserAction implements Session
 			int start = 0;
 			int numOfPages = bookmarkPager.getMaxPageNumber(user,ppc);
 			for(int i = 0; i < numOfPages; i++){
-				//logger.debug("--> page=" + i + ", start="+start+", ppc=" + ppc);
+				logger.debug("--> page=" + i + ", start="+start+", ppc=" + ppc);
 				DaoResult<Bookmark> result  = bookmarkPager.pageBookmark(user,start,ppc);
 				doIndex(result.getResult());
 				start = start + ppc;
@@ -140,43 +139,37 @@ public class IndexBookmark extends AbstractLoggedInUserAction implements Session
 					status.setBookmarkIndexed(status.getTotalBookmarkCount());
 				}else{
 					status.setBookmarkIndexed(indexCount);
-				}								
-				while(searchIndexManager.getIndexProcessWorkLoad() > 222){
+				}			
+				logger.debug("searchIndexManager.getIndexProcessWorkload = " + searchIndexManager.getIndexProcessWorkLoad());
+				while(searchIndexManager.getIndexProcessWorkLoad() > 100){
 					try{
-						logger.debug("Wait 5 seconds. SearchIndexManager seems to be too busy -- reach max load 222.");
-						Thread.sleep(5000);					
+						logger.debug("Wait 100ms. SearchIndexManager seems to be too busy");
+						Thread.sleep(100);					
 					}catch(Exception e){						
 						logger.error(e);					
 					}
-				}
+				}				
 			}
-			while(searchIndexManager.getIndexProcessWorkLoad() > 0){
-				try{
-					logger.debug("Wait 5 seconds. SearchIndexManager still has tasks left to work on.");
-					Thread.sleep(5000);
-				}catch(Exception e){
-					logger.error(e);
-				}
-			}			
+		}
+		while(searchIndexManager.isIndexProcessActive() == true){
+			try{
+				logger.debug("Wait 5 seconds. SearchIndexManager still have work to do.");
+				Thread.sleep(5000);					
+			}catch(Exception e){						
+				logger.error(e);					
+			}
 		}
 		return SUCCESS;
 	}
 
 	private void doIndex(List<Bookmark> bookmarks){
 		try{
-			List<Document> docs = new ArrayList<Document>();
 			for(Bookmark b : bookmarks){
 				Document d = DocumentCreator.createDocument(b);
 				if(d != null){
-					docs.add(d);
+					searchIndexManager.addIndex(d);
 				}
 			}			
-			logger.debug("Created Document from Bookmarks. Total number = " + docs.size());
-			for(Document d : docs){
-				searchIndexManager.deleteIndex(d);
-				searchIndexManager.addIndex(d);
-			}
-			logger.debug("Requested the SearchIndexManager to update index.");
 		}catch(Exception e){
 			logger.error("IndexBookmark.doIndex(), "+e);
 		}
