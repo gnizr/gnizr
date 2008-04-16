@@ -34,7 +34,7 @@ The !WebWork! action implementation uses a search suggestion class implemented i
 
 The computation for finding matching search term suggestions is built on Lucene API. Matching algorithm tries to perform an "auto-complete" operation on the input term using a set of dictionary words. For example, `foo` could match `food`, `foot`, `foobar` etc. 
 
-Those dictionary words come from two different sources -- a static word dictionary file and a dynamic set of tags used to label bookmarks. The default static word dictionary is the SCOWL (Spell Checker Oriented Word Lists) file from the [ http://wordlist.sourceforge.net/ wordlist project]. The dynamic dictionary words are collected from the gnizr tag database of the local installation. Upon starting the server, this dictionary is built by querying the top 2000 most frequently used tags in the system. 
+Those dictionary words come from two different sources -- a static word dictionary file and a dynamic set of tags used to label bookmarks. The default static word dictionary is the SCOWL (Spell Checker Oriented Word Lists) file from the [http://wordlist.sourceforge.net/ wordlist project]. The dynamic dictionary words are collected from the gnizr tag database of the local installation. Upon starting the server, this dictionary is built by querying the top 2000 most frequently used tags in the system. 
 
 Lucene API is used to maintain a search index database of those dictionary words. Search algorithm works as the follows. 
 
