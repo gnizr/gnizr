@@ -5,7 +5,7 @@
 
 The purpose of search term suggestion is to improve the user's search experience. 
 
-This feature can help to overcome several problems. First, a user often doesn't know whether or not an input search query will return any matching results until the user actually clicks on the 'search' button. A trial-and-error approach to search is inefficient. Second, searching bookmarks by tags requires prior knowledge about how tags are used. Users can't possibly remember all available tags used in the system. If the user doesn't know what tags exist in the system, the user can't effectively use tags to find bookmarks. Finally, machine tag syntax can be difficult to remember for some users. Not knowing what values are available for a given machine tag predicate, users can't search for machine tagged bookmarks. 
+This feature can help to overcome several problems. First, a user often doesn't know whether or not an input search query will return any matching results until the user actually clicks on the 'search' button. A trial-and-error approach to search is inefficient. Second, searching bookmarks by tags requires prior knowledge about how tags are used. Users can't possibly remember all available tags used in the system. If the user doesn't know what tags exist in the system, the user can't effectively use tags to find bookmarks. Finally, machine tag syntax can be difficult to remember for some users. Not knowing what values are available for a given Machine Tag predicate, users can't search for Machine-Tagged bookmarks. 
 
 = Solution = 
 
