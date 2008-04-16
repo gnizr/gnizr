@@ -1,10 +1,15 @@
 #summary Suggests search terms as the user types in the search box.
 #labels Phase-Design,Phase-Implementation
 
-= Introduction =
+= About =
 
-The purpose of search term suggestion is to improve the user's search experience. This feature can help to overcome the following problems:
+The purpose of search term suggestion is to improve the user's search experience. 
 
-  * Often a user doesn't know whether or not an input search query will return any matching results until the user actually clicks on the 'search' button. A trial-and-error approach to search is inefficient. 
-  * Searching bookmarks by tags requires prior knowledge about tag usage. Users cannot possibly remember all available tags used in the system. If a user doesn't know what tags exist in the system, the user can't use tags to search for bookmarks effectively. 
-  * Machine tag syntax can be difficult to remember for some users. Not knowing what values are available for a given machine tag predicate, users can't effectively search for machine tagged bookmarks. 
+This feature can help to overcome several problems. First, a user often doesn't know whether or not an input search query will return any matching results until the user actually clicks on the 'search' button. A trial-and-error approach to search is inefficient. Second, searching bookmarks by tags requires prior knowledge about how tags are used. Users cannot possibly remember all available tags used in the system. If the user doesn't know what tags exist in the system, the user can't use tags to effectively find bookmarks. Finally, machine tag syntax can be difficult to remember for some users. Not knowing what values are available for a given machine tag predicate, users can't search for machine tagged bookmarks. 
+
+= Solution = 
+
+As the user enters a search term in the search box, suggests relevant search terms. 
+
+|| [http://www.flickr.com/photos/14804582@N08/2419151518/ http://farm4.static.flickr.com/3185/2419151518_d6bb2f5715.jpg]||
+|| [http://www.flickr.com/photos/14804582@N08/2418333775/ http://farm3.static.flickr.com/2103/2418333775_48e6280da5.jpg] ||
