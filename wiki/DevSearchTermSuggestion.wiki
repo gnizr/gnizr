@@ -38,6 +38,6 @@ Those dictionary words come from two different sources -- a static word dictiona
 
 Lucene API is used to maintain a search index database of those dictionary words. Search algorithm works as the follows. 
 
-  # Given a term `t`, find all words that match `t*` (e.g., if the word is `foo`, find `foo*`. 
+  # Given a term `t`, find all words that match `t*` (e.g., if the word is `foo`, find `foo*`). 
   # For each `w` in the matching words, check if the usage frequency of `w` in the bookmark search index database is greater than 0. This index database is the Lucene index database that stores search information about all bookmarks.
   # Add all `w` that has non-zero usage frequency to the result list until the list size reach a defined maximum threshold. 
