@@ -18,7 +18,7 @@ As the user enters a search term in the search box, suggests relevant search ter
 
 The design for search term suggestion consists of the following components:
 
-  # a JavaScript program that monitors and interacts with the user input in the search box. 
+  # a !JavaScript program that monitors and interacts with the user input in the search box. 
   # A !WebWork action that takes any search input and returns a list of suggestions to be displayed.
   # A lookup table used to find matching suggestions for any given search term.
 
@@ -41,6 +41,4 @@ Lucene API is used to maintain a search index database of those dictionary words
   # Given a term `t`, find all words that match `t*` (e.g., if the word is `foo`, find `foo*`. 
   # For each `w` in the matching words, check if the usage frequency of `w` in the bookmark search index database is greater than 0. This index database is the Lucene index database that stores search information about all bookmarks.
   # Add all `w` that has non-zero usage frequency to the result list until the list size reach a defined maximum threshold. 
-
-
 
