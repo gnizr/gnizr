@@ -43,3 +43,13 @@ The search algorithm works as the follows.
   # Given a term `t`, find all words that match `t*` (e.g., if the word is `foo`, find `foo*`). 
   # For each `w` in the matching words, check if the usage frequency of `w` in the bookmark search index database is greater than 0. This index database is the Lucene index database that stores search information about all bookmarks.
   # Add all `w` that has non-zero usage frequency to the result list until the list size reaches a defined maximum threshold. 
+
+= Related Classes =
+
+  * [http://fisheye2.cenqua.com/browse/gnizr/trunk/gnizr-core/src/main/java/com/gnizr/core/search/SearchIndexProfile.java SearchIndexProfile.java]
+  * [http://fisheye2.cenqua.com/browse/gnizr/trunk/gnizr-core/src/main/java/com/gnizr/core/search/SearchIndexManager.java SearchIndexManager.java]
+  * [http://fisheye2.cenqua.com/browse/gnizr/trunk/gnizr-core/src/main/java/com/gnizr/core/search/BookmarkSearcher.java BookmarkSearch.java]
+  * [http://fisheye2.cenqua.com/browse/gnizr/trunk/gnizr-core/src/main/java/com/gnizr/core/search/SearchSuggestIndexer.java SearchSuggestIndex.java]
+  * [http://fisheye2.cenqua.com/browse/gnizr/trunk/gnizr-core/src/main/java/com/gnizr/core/search/SearchTermSuggestion.java SearchTermSuggestion.java]
+  * [http://fisheye2.cenqua.com/browse/gnizr/trunk/gnizr-webapp/src/main/java/com/gnizr/web/action/search/SearchQuerySuggest.java SearchQuerySuggest.java] (Webwork Action)
+  * [http://fisheye2.cenqua.com/browse/gnizr/trunk/gnizr-webapp/src/main/webapp/lib/javascript/ajaxSuggestions/ajaxSuggestions.js ajaxSuggestions.js]
