@@ -54,7 +54,7 @@ INPUT: pageTitle:String // the <title/> of this HTML page
 ===================================================================
 -->
 <#macro pageBegin pageTitle="" cssHref=[] 
-				  bodyOnUnload="" bodyOnLoad="" bodyOnResize="" enableJS=true
+				  enableJS=true
 				  thisPageHref="" thisPageBaseHref="" toPageHref="">
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
 "http://www.w3.org/TR/html4/loose.dtd">
@@ -126,17 +126,7 @@ INPUT: pageTitle:String // the <title/> of this HTML page
 <!-- OTHER DATA ENDS -->
 </head>
 <!-- HTML BODY BEGINS -->
-<body
-<#if (bodyOnUnload?length > 0) > 
-     onunload="${bodyOnUnload}"
-</#if>
-<#if (bodyOnLoad?length >0)> 
-      onload="${bodyOnLoad}" 
-</#if>      
-<#if (bodyOnResize?length >0)>
-      onresize="${bodyOnResize}"
-</#if>      
->
+<body>
 </#macro>
 
 

@@ -1,9 +1,3 @@
-#feeds {
-	margin-left: auto;
-	margin-right: auto;
-	width: 80%;
-}
-
 #feedTable {
 	margin-left: auto;
 	margin-right: auto;
@@ -13,25 +7,32 @@
 }
 
 #feedTable th {
-	font-size: 120%;
+	font-size: 1.2em;
 }
 
 .feedRow {
-	height: 60px;
+
 }
 
 .feedRow td {
 	border-bottom-style: solid;
 	border-bottom-width: 1px;
 	border-bottom-color: #cccccc;
+	padding: 10px 0px;
 }
 
 .feedname,.autoimport {
-	font-size: 110%;
+	font-size: 1.2em;
 }
 
 .autoimport {
 	text-align: center;
+	width: 100px;
+}
+
+.settings{
+	text-align: right;
+	width: 120px;
 }
 
 .feedurl {
@@ -52,7 +53,7 @@
 }
 
 .last-sync {
-	color: #006400;
+	color: #8D38C9;
 }
 
 .pending {
