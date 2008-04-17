@@ -82,6 +82,16 @@
 			<result name="input" type="freemarker">/settings/create-folder.ftl</result>
 		</action>
 		
+		<action name="createMyBookmarksFolder" class="com.gnizr.web.action.folder.EditUserFolder"
+		    method="doCreateMyBookmarksFolder">
+			<interceptor-ref name="loggedIn"/>	
+			<interceptor-ref name="auth"/>
+            <interceptor-ref name="gnizrDefaultStack"/>
+            <!--  go straight to /user/[username] is going to '_my_' folder -->
+			<result name="success" type="redirect">/user/${loggedInUser.username}</result>
+			<result name="input" type="freemarker">/settings/create-folder.ftl</result>
+		</action>
+		
 		<action name="edit" class="com.gnizr.web.action.folder.EditUserFolder">
 			<interceptor-ref name="loggedIn"/>	
 			<interceptor-ref name="auth"/>
