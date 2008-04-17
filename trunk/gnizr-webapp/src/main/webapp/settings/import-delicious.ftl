@@ -19,22 +19,36 @@
   <#assign bct = settingsBCT(username) + [gzBCTPair('import from del.icio.us',gzUrl('/settings/delicious.action'))]/>
   <@infoBlock bct=bct/>
 <@mainBlock>  
+<@pageTitle>Import del.icio.us Bookmarks</@pageTitle>
 <#if (importStatus?exists = false)>
+<@pageDescription>
 <p>To import bookmarks from <a href="http://del.icio.us" title="del.icio.us">del.icio.us</a>, enter your
 account information in below.</p>
-<div id="action-message">
-<@ww.actionmessage/>
-</div>
-<@importDeliciousForm/>
 <p><span class="warning-message">Warning</span>: if a bookmark already exists in your gnizr account, it will be overwritten by the one from del.icio.us.</p>
+</@pageDescription>
+<div id="action-message">
+  <@ww.actionmessage/>
+</div>
+
+<@formInput>
+<@ww.form action="importPosts.action" method="post">
+  <@ww.textfield cssClass="text-input-username" label="del.icio.us username" name="deliciousUsername"/>
+  <@ww.password cssClass="text-input-password" label="del.icio.us password" name="deliciousPassword"/>
+  <@ww.submit value="Begin Import" cssClass="btn"/>
+</@ww.form>
+</@formInput>
+
 <#else>
-<p class="success-message">Finished! Total number of del.icio.us bookmarks: ${importStatus.totalNumber}
+<@pageDescription>
+<p class="success-message">Finished! Total number of del.icio.us bookmarks: ${importStatus.totalNumber}</p>
+<p>
 <ul>
 <li>imported: ${importStatus.numberAdded}</li>
 <li>updated: ${importStatus.numberUpdated}</li>
 <li>skipped: ${importStatus.numberError}</li>
 </ul>
 </p>
+</@pageDescription>
 </#if>
 </@mainBlock>
 </@pageContent>

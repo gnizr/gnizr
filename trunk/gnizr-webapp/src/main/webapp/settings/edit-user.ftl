@@ -14,12 +14,14 @@
                [gzBCTPair('edit users',gzUrl('/admin/editUser.action'))]/> 
 <@infoBlock bct=bct/>
 <@mainBlock>
-<h3>Manage user accounts</h3>
-<p class="instruction">
+<@pageTitle>Manage User Accounts</@pageTitle>
+<@pageDescription>
+<p>
 Users who currently have access to gnizr. Deleting a user will permanently remove all 
 bookmarks of that user. To change a user's password, full name
 or email address, click "edit profile". 
 </p>
+</@pageDescription>
 <table class="usersTable">
 <tr><th>Username</th><th>Full Name</th><th>Email</th><th>Created On</th><th>Action</th></tr>
 <#list gnizrUsers as gUser>

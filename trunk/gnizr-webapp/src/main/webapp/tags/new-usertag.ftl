@@ -18,17 +18,20 @@
 <#assign bct = bct + [gzBCTPair('edit tag relations', gzUrl("/edit/tag"))]/> 
 <@infoBlock bct=bct/>
 <@mainBlock>
-<p class="instruction">
+<@pageTitle>Edit Tag Relations</@pageTitle>
+<@pageDescription>
+<p>
 Tag relations define how different tags are related to each other. Making tag relations explicit can 
 help you to organize your tag cloud. 
 </p>
-<p class="instruction">
+<p>
 Define tag relations for a new tag or an existing tag. 
 </p>
-<p class="instruction">
-<b>Note</b>: New tags will not appear in your tag cloud unless it is used 
+<p>
+<b>Note</b>: New tags will not appear in your tag cloud unless they are used 
 by one or more bookmarks.
 </p>
+</@pageDescription>
 <div id="createNewTag">
 <h4>Create a new tag</h4>
 <@ww.form action="edit" method="post" namespace="/settings/tags">

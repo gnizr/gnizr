@@ -87,45 +87,41 @@ INPUT: postUrl
   <#nested/>
 <#else>
 <h3>No saved bookmarks here!</h3>
-<p>
-
+<div class="short-infobox">
 <#if inFolder != "">
-<#local user = inFolder.user/>
-  <#if tag?exists>
-<h4>Explore bookmarks tagged '${tag}':</h4>  
-<ul>
-<#local mytaggedHref = gzUserBmarkArchivesUrl(user.username,tag)/>
-<li><a href="${mytaggedHref}">by ${user.username} in bookmark archive</a></li>
-<#local cmmtagHref = gzUrl('/tag/'+tag?url)/>
-<li><a href="${cmmtagHref}">by users in the community</a></li>
-</ul>    
-  </#if>
-<h4>Explore bookmarks saved by ${user.username}:</h4>
-<ul>
-<#local fldrHref = gzUserFolderUrl(user.username,'')/>
-<li><a href="${fldrHref}" title="folders">in other folders</a></li>
-<#local arcHref = gzUserBmarkArchivesUrl(user.username)/>
-<li><a href="${arcHref}" title="bookmark archive">in bookmark archive</a></li>
-</ul>
-<#else>
-  <#if loggedInUser?exists && (loggedInUser.username == username)>
-<h4>Try this:</h4>  
-<ul>
-<li><a href="${gzUrl('/post')}">Add new bookmark</a></li>  
-</ul>
-  </#if>
+  <#if (loggedInUser.username)?exists>
+    <@whatCanIDo loggedInUser=loggedInUser user=inFolder.user/>      
+  </#if>   
 </#if>
-<h4>Explore the community:</h4>
-<ul>
-<#local cmmtyHref = gzUrl('/topusers')/>
-<li><a href="${cmmtyHref}" title="top users">top users</a></li>
-<#local tagsHref = gzUrl('/tags')/>
-<li><a href="${tagsHref}" title="popular tags">popular tags</a></li>
-</ul>
-</p>
-
+<@whatCanAnyoneDo/>
+</div>
 </#if>  
 </#macro>
+
+<#macro whatCanIDo loggedInUser user>
+<#-- if there is a loggedInUser and the user is viewing his/her own page -->
+<#if (isUserAuth(loggedInUser,user) == true)>
+<h3>Get Started!</h3>  
+<ul>
+<li><a href="${gzUrl('/post')}">Add new bookmark</a></li> 
+<li><a href="${gzUrl('/settings/folders/create!doInput.action')}">Create new folder</a></li>
+<li><a href="${gzUrl('/settings/feeds/create!doInput.action')}">Subscribe to RSS feed</a></li>
+<li><a href="${gzUrl("/settings/help.action")}">Get browser tools</a></li>
+</ul>
+</#if>
+</#macro>
+
+<#macro whatCanAnyoneDo>
+<h3>You can explore the community...</h3>
+<ul>
+<#local cmmtyHref = gzUrl('/topusers')/>
+<li><a href="${cmmtyHref}" title="top users">Top users</a></li>
+<#local tagsHref = gzUrl('/tags')/>
+<li><a href="${tagsHref}" title="popular tags">Popular tags</a></li>
+</ul>
+</#macro>
+
+
 
 <#function sliceNotes notes>
   <#local nts = notes/> 

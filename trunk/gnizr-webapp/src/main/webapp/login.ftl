@@ -2,13 +2,25 @@
 <#-- if logged in, go to the home page of the user -->
 <@goHome>
 <@pageBegin pageTitle="login" 
-            cssHref=[gzUrl("/css/gnizr-frontpage.css")]/>          
-<div id="headline">
-<h1>${getSiteName()}</h1>
-<br></br>
-<h2>${getSiteDescription()}</h2>
+            cssHref=[gzUrl("/css/gnizr-frontpage.css")]/>                      
+
+<div class="loginPage">          
+
+<div id="siteBanner">
+  <h1 class="siteName">${getSiteName()}</h1>
+  <h2 class="siteDescription">${getSiteDescription()}</h2>
 </div>
-<div id="login">
+
+
+<div id="siteFeatures">
+<#if gzIsUserRegistrationOpen() == true>
+<@pageTitle>New User?</@pageTitle>
+<p><a href="${gzUrl('/register')}" class="large-text system-link">Create an account</a></p>
+</#if>
+</div>
+
+<@formInput id="siteLogin">
+<@pageTitle>User Login</@pageTitle>
 <@ww.form action="userLogin.action" method="post">
 <@ww.textfield label="Username" name="user.username"/>
 <@ww.password label="Password" name="user.password"/>
@@ -19,12 +31,10 @@
 <@ww.submit cssClass="btn" value="login"/>
 <@ww.actionerror/>
 </@ww.form>
-<#if gzIsUserRegistrationOpen() == true>
-<p>
-Not yet a user? <a href="${gzUrl("/register")}">Click here</a>
-</p>
-</#if>
+</@formInput>
 </div>
+
+<div class="cleardiv"/>
 <@pageEnd/>
 </@goHome>
 

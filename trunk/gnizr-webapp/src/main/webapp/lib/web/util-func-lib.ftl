@@ -302,8 +302,10 @@ OUTPUT: returns 'yes', 'no' that maps 'true', 'false' respectively
 </#function>
 
 <#function isUserAuth loggedInUser user>
- <#if loggedInUser?exists && (user.username == loggedInUser.username)>
-   <#return true/>
+ <#if (loggedInUser.username)?exists>
+   <#if (user.username == loggedInUser.username)>
+     <#return true/>
+   </#if>
  </#if>
  <#return false/>
 </#function>

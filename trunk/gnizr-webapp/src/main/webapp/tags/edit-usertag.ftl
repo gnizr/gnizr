@@ -18,22 +18,23 @@
                       gzBCTPair(tag,gzUrl("/settings/tags/edit.action?tag="+tag?url))]/> 
 <@infoBlock bct=bct/>
 <@mainBlock>
-<p class="instruction">
+<@pageTitle>Edit Tag Relations</@pageTitle>
+<@pageDescription>
 Define semantic relationships between <b>'${tag}'</b> and other tags. 
-</p>
-<ol class="instruction">
-<li>Choose a relation on the left.</li>
+<ol>
+<li>Choose a relationship type on the left.</li>
 <li>Enter one or more tags on the right.</li>
-<li>Tags should be seperated with spaces.</li>
+<li>Tags should be separated with spaces.</li>
 <li>Click "Save" when you are done.</li>
 </ol>
-<p class="instruction">
-<b>Tips</b>: To define relations between your tags and those of the other users, use Machine Tag "tag". 
+<p>
+<b>Tips</b>: To define relationships between your tags and those of the other users, use Machine Tag "tag". 
 </p>
-<ul class="instruction">
+<ul>
 <li><code>tag:joe/java</code> -- tag "java" of user "joe"</li>
 <li><code>tag:joe/semantic_web</code> -- tag "semantic_web" of user "joe"</li>
 </ul>
+</@pageDescription>
 <div id="editArea">
 <div id="controlPanel">
 <ul>

@@ -12,19 +12,22 @@
 <#assign bct = settingsBCT(username) + [gzBCTPair('rename tags',gzUrl('/settings/tags/rename.action'))]/>
   <@infoBlock bct=bct/>
 <@mainBlock>
-<p class="instruction">
+<@pageTitle>Rename Tags</@pageTitle>
+<@pageDescription>
+<p>
 Define new tags to replace an existing tag. 
 Any bookmarks that use that tag will be automatically updated. 
 </p>
-<ol class="instruction">
+<ol>
 <li>Select a tag from the list to be renamed</li>
 <li>Enter one or more new tags -- separate tags with spaces</li>
 <li>Click the "rename" button</li>
 </ol>
-<p class="instruction">
+<p>
 <@ww.url id="deleteTagHref" value="/settings/tags/delete.action" includeParams="none"/>
-Tip: You can also <a href="${deleteTagHref}" title="delete tags">delete tags</a>.
+<b>Tip</b>: You can also <a href="${deleteTagHref}" title="delete tags">delete tags</a>.
 </p>
+</@pageDescription>
 <div id="edit-bookmarktag">
 <#assign opts = "#"+"{"/>
 <#list userTags as ut>
@@ -35,14 +38,15 @@ Tip: You can also <a href="${deleteTagHref}" title="delete tags">delete tags</a>
   <#assign opts = opts+itm/>
 </#list>
 <#assign opts = opts + "}"/>
+<@formInput>
 <@ww.form action="rename.action" method="post">
-<@ww.select label="tag to be renamed" 
+<@ww.select label="Tag to be renamed" 
             name="tag"             
             list=opts/>         
-<@ww.textfield label="new tag/tags" name="newTag" size="20"/>            
+<@ww.textfield label="New tag/tags" name="newTag" size="20"/>            
 <@ww.submit value="rename" cssClass="btn"/>            
 </@ww.form>
-
+</@formInput>
 <#if tag?exists>
 <p>Rename tag: <b>${tag}</b>
 <#if action.actionMessages?has_content>
