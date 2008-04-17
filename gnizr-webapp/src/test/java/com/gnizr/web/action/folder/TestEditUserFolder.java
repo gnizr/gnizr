@@ -179,5 +179,17 @@ public class TestEditUserFolder extends GnizrWebappTestBase {
 		String code = action.doPurgeFolder();
 		assertEquals(ActionSupport.SUCCESS, code);
 	}
+	
+	public void testCreateMyBookmarksFolder() throws Exception{		
+		int count = folderManager.getUserFolderCount(new User(3));
+		assertEquals(0,count);
+		action.setLoggedInUser(new User(3));
+		String code = action.doCreateMyBookmarksFolder();
+		assertEquals(ActionSupport.SUCCESS,code);
+		count = folderManager.getUserFolderCount(new User(3));
+		assertEquals(1,count);
+		Folder f = folderManager.getUserFolder(new User(3),FolderManager.MY_BOOKMARKS_LABEL);
+		assertNotNull(f);
+	}
 
 }

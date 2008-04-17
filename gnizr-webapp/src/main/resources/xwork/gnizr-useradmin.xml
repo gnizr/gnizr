@@ -26,8 +26,14 @@
 		
 		<action name="register" class="com.gnizr.web.action.user.Registration">
         	<interceptor-ref name="config-gnizr"/>			
-   		    <interceptor-ref name="validationWorkflowStack"/>			
+   		    <interceptor-ref name="validationWorkflowStack"/>
+   		    <!--  			
 			<result name="success" type="redirect">/home</result>
+			-->
+			<result name="success" type="redirect-action">
+				<param name="namespace">/settings/folders</param>
+				<param name="actionName">createMyBookmarksFolder</param>			
+			</result>
 			<result name="input" type="freemarker">/users/register.ftl</result>
 			<result name="error" type="freemarker">/users/register.ftl</result>
 		</action>

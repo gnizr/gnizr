@@ -70,6 +70,12 @@ public class EditUserFolder extends AbstractAction implements LoggedInUserAware{
 		return SUCCESS;
 	}
 	
+	public String doCreateMyBookmarksFolder() throws Exception {
+		logger.debug("EditUserFolder: doCreateMyBookmarksFolder for user = " + getLoggedInUser());
+		setFolderName(FolderManager.MY_BOOKMARKS_LABEL);
+		return go();
+	}
+	
 	public String doUpdateFolder() {
 		Folder existingFolder = null;
 		if(folderName != null && folderName.length() > 0){
