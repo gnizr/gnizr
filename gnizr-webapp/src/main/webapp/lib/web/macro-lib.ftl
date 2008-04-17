@@ -303,6 +303,22 @@ MACRO: pageContent
 </html>
 </#macro>
 
+<#macro pageTitle>
+<h2><#nested/></h2>
+</#macro>
+
+<#macro pageDescription>
+<div class="instruction"><#nested/></div>
+</#macro>
+
+<#macro formInput id="">
+<div class="forminput" 
+ <#if id != "">
+   id="${id}"
+ </#if>
+ ><#nested/></div>
+</#macro>
+
 <#-- 
 ===================================================================
 MACRO: mainBlock

@@ -22,27 +22,50 @@
 </#if>
 <@infoBlock bct=bct/>	
 <@mainBlock>
+<@pageTitle>Edit User Profile</@pageTitle>
   <#if loggedInUser.username == "gnizr" && editUser?exists>
+  <@pageDescription>
+  You can change user profile. All fields with '*' are required.
+  </@pageDescription>
+  <@formInput>
   <@ww.form cssClass="userInputForm" action="saveProfile.action" method="post">
     <@ww.textfield label="Username" name="editUser.username" readonly="true"/>
     <@ww.textfield label="Full name" name="editUser.fullname" 
-       value="${editUser.fullname}"/>
+       value="${editUser.fullname}" required="true"/>
     <@ww.textfield label="Email" name="editUser.email" 
-       value="${editUser.email}" />                    
-    <@ww.submit value="change" cssClass="btn"/>
+       value="${editUser.email}" required="true"/>                    
+    <@ww.submit value="Save" cssClass="btn"/>
   </@ww.form>
+  </@formInput>
+    
+  <@pageDescription>
+  You can change login password. The number of characters in your password must be between 5-20. 
+  </@pageDescription>
   
-  <@ww.form cssClass="userInputForm" action="changePassword.action" method="post">   
+  <@formInput>
+  <@ww.form action="changePassword.action" method="post">   
     <@ww.textfield label="Username" name="editUser.username" value="${editUser.username}" readonly="true"/>            
-    <@ww.password label="New password" name="editUser.password" value="${editUser.password?if_exists}"/>       
-    <@ww.submit value="reset" cssClass="btn"/>
+    <@ww.password label="New password" name="editUser.password" value="${editUser.password?if_exists}" required="true"/>       
+    <@ww.submit value="Save" cssClass="btn"/>
   </@ww.form>
   <@ww.actionmessage cssClass="errorMessage"/>
+  </@formInput>
   <#else>  
-    <@changeProfileForm email=email?default(loggedInUser.email) fullname=fullname?default(loggedInUser.fullname)/>
-  </#if>
   
-
+  <@pageDescription>
+  You can change user profile. All fields with '*' are required.
+  </@pageDescription>
+  
+  <@formInput>
+  <@ww.actionmessage/>    
+<@ww.form action="updateProfile" method="post">
+  <@ww.textfield cssClass="text-input-fullname" label="Full name" name="fullname" value="${loggedInUser.fullname}" required="true"/>
+  <@ww.textfield cssClass="text-input-email" label="Email" name="email" value="${loggedInUser.email}" required="true"/>  
+  <@ww.submit value="Save" cssClass="btn"/>
+</@ww.form>
+  </@formInput>
+  
+  </#if>
 </@mainBlock>
 </@pageContent>
 

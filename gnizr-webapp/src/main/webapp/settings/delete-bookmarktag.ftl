@@ -13,19 +13,22 @@
 <#assign bct = settingsBCT(username) + [gzBCTPair('rename tags',gzUrl('/settings/tags/rename.action'))]/>
   <@infoBlock bct=bct/>
 <@mainBlock>
-<p class="instruction">
+<@pageTitle>Delete Tags</@pageTitle>
+<@pageDescription>
+<p>
 Delete tags that are used by your bookmarks. Deleting a tag will not
 remove any bookmarks that use it. 
 </p>
-<ol class="instruction">
+<ol>
 <li>Select a tag from the list to be deleted</li>
-<li>Click the "delete" button</li>
+<li>Click the "Delete" button</li>
 </ol>
-<p class="instruction">
-Tip: You can also 
+<p>
+<b>Tip</b>: You can also 
 <@ww.url id="renameTagHref" value="/settings/tags/rename.action" includeParams="none"/>
 <a href="${renameTagHref}" title="rename tags">rename tags</a>.
 </p>
+</@pageDescription>
 <div id="edit-bookmarktag">
 <#assign opts = "#"+"{"/>
 <#list userTags as ut>
@@ -36,12 +39,16 @@ Tip: You can also
   <#assign opts = opts+itm/>
 </#list>
 <#assign opts = opts + "}"/>
+
+<@formInput>
 <@ww.form action="delete.action" method="post">
-<@ww.select label="tag" 
+<@ww.select label="Your tag" 
             name="tag"         
             list=opts/>         
-<@ww.submit value="delete" cssClass="btn"/>            
+<@ww.submit value="Delete" cssClass="btn"/>            
 </@ww.form>
+</@formInput>
+
 <#if tag?exists>
 <p>
 Delete tag: <b>${tag}</b>

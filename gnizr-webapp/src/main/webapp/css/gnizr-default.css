@@ -62,7 +62,13 @@ h3 {
 }
 
 h4 {
+    font-size: 12px;
 	margin-left: 0.75em;
+}
+
+form{
+	margin: 0px;
+	padding: 0px;
 }
 
 input.btn {
@@ -86,19 +92,6 @@ input.btn {
 /* IE7 ignores this */
 input.btn[class]{
 	width: auto;
-}
-
-.userInputForm {
-	font-size: 12px;
-	text-align: right;
-	margin: auto;
-}
-
-.instruction{
-	font-size: 12px;
-	margin-top: 10px;	
-	width: 75%;
-    margin-left: 25px;
 }
 
 .lighter-text {
@@ -181,14 +174,28 @@ SPAN.system-link{
 }
 
 div.instruction {
-	width: 640px;
-	margin-top: 1em;
-	margin-bottom: 1em;
+	width: 480px;
+	margin: 1em 0em;
 }
 
-div.instruction p{
-	padding: 4px; 
-	margin: 4px 0px;
+div.short-infobox, div.infobox{	
+	border-style: solid;
+	border-color: #ccc;
+    border-width: medium;
+    padding: 1.5em 2em;
+    /*background-color: #fffaf0;*/
+}
+
+div.short-infobox{
+	width: 400px;
+}
+
+div.infobox{
+	width: 460px;
+}
+
+div.forminput{
+	margin: 2em;
 }
 
 /* ========= Global DIVs =========== */

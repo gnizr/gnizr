@@ -3,51 +3,43 @@
 	vertical-align: text-top;
 }
 
-#headline, #login, #register{
-	margin-top: 45px;
-	margin-left: auto;
-	margin-right: auto;
-	text-align: center;
+.loginPage{ 
+	margin: auto;
+	position: static;
 }
 
-#footer, #footer #sitemap{
-	margin: none;
-	margin-left: auto;
-	margin-right: auto;
-	text-align:center;
-	float:none;
+#siteBanner{
+	margin: 40px 0px 0px 20px;
 }
 
-#login{
-	height: 250px;
-	width: 260px;
-	border-width: 0px;
-	border-style: none;
-	margin-top: 25px;
-	font-size: 12px;
-}
-
-h1{
-	font-size: 34px;
-	color: #FF6600;
-}
-
-h2 {
-	font-size: 14px;
-}
-
-
-#userLogin ul, #register ul {
-	list-style-type: none;
-	width: 300px;	
+#siteFeatures {
+	float:left;
+	width: 300px;
+	margin-top: 40px;
+	margin-left: 60px;
+	margin-right: 10px;
 	padding: 0px;
-	margin-left: auto;
-	margin-right: auto;
 }
 
-#userLogin table, #register table{
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: auto;
-  margin-bottom: 45px;;
+#siteLogin{
+	float: left;
+	width: 240px;
+	margin: 40px auto 0px auto;
+	padding: 8px;
+	border-style: solid;
+	border-color: #ccc;
+    border-width: medium;
+    padding: 1.5em 2em;
 }
+
+h1.siteName{
+	font-size: 2em;
+	color: #FF6600;
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+
+h2.siteDescription{
+	font-size: 1.5em;
+}
+

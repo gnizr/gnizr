@@ -21,7 +21,20 @@
 <#assign bct = settingsBCT(username)/>
 <#assign bct = bct + [gzBCTPair('change password', gzUrl("/settings/changePassword.action"))]/> 
 <@infoBlock bct=bct/>	
-  <@changePasswordForm/>
+<@pageTitle>Chanage Password</@pageTitle>
+
+<@pageDescription>
+You can change your login password. The number of characters in your password must be between 5-20. 
+</@pageDescription>
+
+<@formInput>
+<@ww.actionmessage/>
+<@ww.form action="updatePassword" method="post">
+  <@ww.password cssClass="text-input-password" label="New Password" name="password"/>
+  <@ww.password cssClass="text-input-password" label="Confirm Password" name="passwordConfirm"/>  
+  <@ww.submit value="Save" cssClass="btn"/>
+</@ww.form>
+</@formInput>
 </@pageContent>
 
 <@pageEnd/>

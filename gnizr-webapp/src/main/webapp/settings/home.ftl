@@ -15,8 +15,8 @@
 <@mainBlock>
 <@settingsBlock title="Account Settings">
 <ul>
-<li><a href="${gzUrl('/settings/changePassword.action')}">Change your password</a></li>
-<li><a href="${gzUrl('/settings/changeProfile.action')}">Change your personal profile</a></li> 
+<li><a href="${gzUrl('/settings/changePassword.action')}">Change password</a></li>
+<li><a href="${gzUrl('/settings/changeProfile.action')}">Edit profile</a></li> 
 </ul>
 </@settingsBlock>
 <@settingsBlock title="Manage Bookmarks & Folders">

@@ -5,10 +5,12 @@
 <@pageContent>
 <@mainBlock>
 <h2>Browser Tools</h2>
+<div class="instruction">
 <p>
 You can add these tools to your browser. They provide an integrated user experience for 
 saving bookmarks, visiting your bookmark collections and searching for information.  
 </p>
+</div>
 <h3>Save bookmark tool</h3>
 <ul>
   <li>Drag 
