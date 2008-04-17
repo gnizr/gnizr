@@ -26,10 +26,13 @@ import com.gnizr.core.user.UserManager;
 import com.gnizr.db.dao.User;
 import com.gnizr.web.action.AbstractAction;
 import com.gnizr.web.action.SessionConstants;
+import com.gnizr.web.util.GnizrConfiguration;
 import com.opensymphony.webwork.interceptor.SessionAware;
 
 /**
- * @author Torey
+ * This class implements an <code>Action</code> for new user registration.
+ *  
+ * @author Torey Alford, Harry Chen
  *
  */
 public class Registration extends AbstractAction implements SessionAware{
@@ -44,6 +47,8 @@ public class Registration extends AbstractAction implements SessionAware{
 
 	private User user;
 	private UserManager userManager;
+	
+	@SuppressWarnings("unchecked")
 	private Map session;
 	
 	private String checkPassword;
@@ -57,12 +62,19 @@ public class Registration extends AbstractAction implements SessionAware{
 	}
 	
 	private boolean isOpenRegistrationPolicy(){
-		String policy = (String)session.get(SessionConstants.REGISTRATION_POLICY);
+		// default policy is closed;
+		String policy = "close";
+		GnizrConfiguration config = getGnizrConfiguration();
+		if(config != null && config.getRegistrationPolicy() != null){
+			policy = config.getRegistrationPolicy();
+		}	
 		if(policy != null){
 			if(policy.equalsIgnoreCase("open")){
+				logger.debug("Registration config: registrationPolicy is open");
 				return true;
 			}
 		}
+		logger.debug("Registration config: registrationPolicy is close");
 		return false;
 	}
 
@@ -125,6 +137,7 @@ public class Registration extends AbstractAction implements SessionAware{
 		this.userManager = userManager;
 	}
 
+	@SuppressWarnings("unchecked")
 	public void setSession(Map session) {
 		this.session = session;		
 	}
