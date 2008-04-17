@@ -12,8 +12,15 @@
 <@headerBlock/>
 <@pageContent>
 <#assign bct = [gzBCTPair(username,gzUserUrl(username)),
-                gzBCTPair("RSS subscriptions",gzUserFeedUrl(username,""))]/>
+                gzBCTPair("edit subscriptions",gzUserFeedUrl(username,""))]/>
 <@infoBlock bct=bct/>
+<@pageTitle>Edit Feed Subscription</@pageTitle>
+<@pageDescription>
+<p>Change how you want to this feed to be imported as bookmarks.
+You can choose to save bookmarks into one or more destinated folders. Also,
+you can defined tags to be added to those bookmarks. 
+</p> 
+</@pageDescription>
 <div id="feed">
 <p id="feed-heading">
 <span id="feed-title">${thisFeedName}</span>

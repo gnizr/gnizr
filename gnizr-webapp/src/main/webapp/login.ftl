@@ -2,7 +2,8 @@
 <#-- if logged in, go to the home page of the user -->
 <@goHome>
 <@pageBegin pageTitle="login" 
-            cssHref=[gzUrl("/css/gnizr-frontpage.css")]/>                      
+            cssHref=[gzUrl("/css/gnizr-frontpage.css")]
+            enableJS=false/>                      
 
 <div class="loginPage">          
 
@@ -33,7 +34,6 @@
 </@ww.form>
 </@formInput>
 </div>
-
 <div class="cleardiv"/>
 <@pageEnd/>
 </@goHome>

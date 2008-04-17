@@ -68,7 +68,5 @@ public class ListSubscriptions extends AbstractLoggedInUserAction{
 	protected boolean isStrictLoggedInUserMode() {
 		return false;
 	}
-	
-	
 
 }

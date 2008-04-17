@@ -9,26 +9,33 @@
 <@headerBlock/>
 <@pageContent>  
 <#assign bct = settingsBCT(username) +
-               [gzBCTPair("RSS subscriptions",gzUserFeedUrl(username,""))]/>
+               [gzBCTPair("create bookmarks from feeds",gzUserFeedUrl(username,""))]/>
 <@infoBlock bct=bct/>
 
-  <div id="feeds">  
-
-  <div id="create-feed-form">    
+<@pageTitle>Create Bookmarks from Feeds</@pageTitle>
+<@pageDescription>
+<p>You can create new bookmarks from <a href="http://en.wikipedia.org/wiki/Web_feed">Web feeds</a>. 
+By subscribing to a Web feed, a robot will be created to monitor updates published by the feed. 
+New updates will be imported into your account as bookmarks.</p>
+<p><b>Tips</b>: Ask your administrator if this feature is enabled.</p> 
+</@pageDescription>
+<@formInput>     
     <@ww.form action="create" namespace="/settings/feeds">
      <@ww.textfield id="new-feed-url" label="feed url" name="feedUrl" value="http://"/>
      <@ww.submit cssClass="btn" value="subscribe"/>
     </@ww.form>
-    
+</@formInput>
+
    <#if action.actionMessages?has_content>
-   <ul>
+   <div class="errorMessage">
+   <p><ul>
    <#list action.actionMessages as msg>
      <li>${getActionMsg(msg)}</li>
    </#list>
    </ul>
+    </p>
+    </div>
   </#if>
-  </div> 
-   
-  </div>  
+  
 </@pageContent>
 <@pageEnd/>

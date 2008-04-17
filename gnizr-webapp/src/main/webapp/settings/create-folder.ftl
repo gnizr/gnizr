@@ -13,18 +13,17 @@
   <#assign bct = settingsBCT(username) +
                  [gzBCTPair('folders',gzUserFolderUrl(username,''))]/>
   <@infoBlock bct=bct/>
-  <div id="create-folder-form">    
+  <@pageTitle>Create Folder</@pageTitle>
+  <@pageDescription>
+  <p>Create folders to organize bookmarks.</p>
+  <p>Folder names must not contain these characters: * ? & / \\ ; ' " * % ^ + _</p>
+  </@pageDescription>
+  <@formInput>    
     <@ww.form action="create" namespace="/settings/folders">
-     <@ww.textfield label="new folder" name="folderName"/>
-     <@ww.submit cssClass="btn" value="create"/>
+     <@ww.textfield label="Folder Name" name="folderName"/>
+     <@ww.submit cssClass="btn" value="Create Folder"/>
     </@ww.form>
-    <div class="errorMessage">
-	 <ul>
-	 <li>Folder name must not contain these characters: * ? & / \\ ; ' " * % ^ + _</li>
-	 </ul>
-    </div>
-    </div> 
-  </div>
+  </@formInput>
 
 </@pageContent>
 <@pageEnd/>
