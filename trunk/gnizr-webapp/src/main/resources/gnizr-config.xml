@@ -75,7 +75,7 @@
 			<value>open</value>
 		</property>
 		<property name="registrationPolicy">
-			<value>open</value>
+			<value>close</value>
 		</property>
 		<property name="serverMaintenanceModeEnabled">
 			<value>false</value>

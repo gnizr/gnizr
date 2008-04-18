@@ -12,16 +12,24 @@
 <@goHome>
 <#assign title="new user registration"/>
 
-<@pageBegin pageTitle=title cssHref=[gzUrl("/css/gnizr-frontpage.css")]/>
+<@pageBegin pageTitle=title cssHref=[gzUrl("/css/gnizr-frontpage.css")] 
+            enableJS=false/>
 
-<div id="headline">
-<h1>gnizr</h1>
-<h2>organize</h2>
+<div class="frontPage">
+
+<div id="siteBanner">
+  <h1 class="siteName">${getSiteName()}</h1>
+  <h2 class="siteDescription">${getSiteDescription()}</h2>
 </div>
-<div id="register">
-<h2>User Registration</h2>
-<@ww.form action="/register.action" method="post">
-<@ww.actionerror/>
+
+<@formInput id="siteRegister">
+<@ww.form action="userRegister.action" method="post">
+<#if (action.actionErrors)?has_content>
+<ul class="formErrors">
+  <#list action.actionErrors as msg>
+    <li class="errorMessage">${msg}</li>
+  </#list>
+</#if>
 <@ww.textfield label="Username" name="user.username" required="true"/>
 <@ww.password  label="Password" name="user.password" required="true"/>
 <@ww.password label="Confirm Password" name="checkPassword" required="true"/>
@@ -29,6 +37,13 @@
 <@ww.textfield label="Email" name="user.email" required="true"/>
 <@ww.submit value="submit" cssClass="btn"/>
 </@ww.form>
+</@formInput>
+
+<div id="siteFeatures">
+<@pageTitle>Already have an account?</@pageTitle>
+<p><a href="${gzUrl('/login')}" class="large-text system-link">Click to login</a></p>
 </div>
+
 <@pageEnd/>
+</div>
 </@goHome>

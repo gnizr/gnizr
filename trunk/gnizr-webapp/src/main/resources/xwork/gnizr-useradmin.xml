@@ -24,25 +24,31 @@
 			<result name="error" type="freemarker">/login.ftl</result>
 		</action>
 		
+		<action name="logout" class="com.gnizr.web.action.user.UserLogout">
+	        <interceptor-ref name="config-gnizr"/>	
+			<interceptor-ref name="basicStack"/>		
+			<result name="success" type="redirect">/</result>
+			<result name="error">/common/error.ftl</result>
+		</action>
+	</package>
+	
+	<package name="gnizr-registration" extends="gnizr-default">
 		<action name="register" class="com.gnizr.web.action.user.Registration">
+			<interceptor-ref name="gnizrDefaultStack"/>					
+			<result name="input" type="freemarker">/users/register.ftl</result>							
+			<result name="error" type="freemarker">/users/register.ftl</result>
+		</action>
+	
+		<action name="userRegister" class="com.gnizr.web.action.user.Registration"
+				method="doRegistration">
         	<interceptor-ref name="config-gnizr"/>			
    		    <interceptor-ref name="validationWorkflowStack"/>
-   		    <!--  			
-			<result name="success" type="redirect">/home</result>
-			-->
 			<result name="success" type="redirect-action">
 				<param name="namespace">/settings/folders</param>
 				<param name="actionName">createMyBookmarksFolder</param>			
 			</result>
 			<result name="input" type="freemarker">/users/register.ftl</result>
 			<result name="error" type="freemarker">/users/register.ftl</result>
-		</action>
-		
-		<action name="logout" class="com.gnizr.web.action.user.UserLogout">
-	        <interceptor-ref name="config-gnizr"/>	
-			<interceptor-ref name="basicStack"/>		
-			<result name="success" type="redirect">/</result>
-			<result name="error">/common/error.ftl</result>
 		</action>
 	</package>	
 	

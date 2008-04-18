@@ -77,13 +77,17 @@ public class Registration extends AbstractAction implements SessionAware{
 		logger.debug("Registration config: registrationPolicy is close");
 		return false;
 	}
+	
+	protected String go() throws Exception{
+		if(isOpenRegistrationPolicy() == false){
+			addActionError("Sorry! New user registration is currently closed.");
+			return ERROR;
+		}
+		return INPUT;
+	}
 
-	/* (non-Javadoc)
-	 * @see com.gnizr.web.action.AbstractAction#go()
-	 */
 	@SuppressWarnings("unchecked")
-	@Override
-	protected String go() throws Exception {	
+	public String doRegistration() throws Exception{	
 		logger.debug("user="+user);
 		if(isOpenRegistrationPolicy() == false){
 			addActionError("Sorry! New user registration is currently closed.");

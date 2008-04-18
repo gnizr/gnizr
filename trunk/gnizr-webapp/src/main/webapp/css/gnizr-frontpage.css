@@ -3,7 +3,7 @@
 	vertical-align: text-top;
 }
 
-.loginPage{ 
+.frontPage{ 
 	margin: auto;
 	position: static;
 }
@@ -12,19 +12,17 @@
 	margin: 40px 0px 0px 20px;
 }
 
-#siteFeatures {
-	float:left;
+#siteFeatures, #siteLogin, #siteRegister{
+	float: left;
+	margin: 40px 40px 40px 20px;
+}
+
+#siteFeatures {	
 	width: 300px;
-	margin-top: 40px;
-	margin-left: 60px;
-	margin-right: 10px;
 	padding: 0px;
 }
 
-#siteLogin{
-	float: left;
-	width: 240px;
-	margin: 40px auto 0px auto;
+#siteLogin, #siteRegister{
 	padding: 8px;
 	border-style: solid;
 	border-color: #ccc;
@@ -32,8 +30,16 @@
     padding: 1.5em 2em;
 }
 
+#siteLogin{
+	width: 240px;
+}
+
+#siteRegister{
+	width: 280px;
+}
+
 h1.siteName{
-	font-size: 2em;
+	font-size: 2.5em;
 	color: #FF6600;
 	margin-top: 1em;
 	margin-bottom: 1em;
@@ -42,4 +48,5 @@ h1.siteName{
 h2.siteDescription{
 	font-size: 1.5em;
 }
+
 
