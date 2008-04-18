@@ -24,12 +24,7 @@
 
 <@formInput id="siteRegister">
 <@ww.form action="userRegister.action" method="post">
-<#if (action.actionErrors)?has_content>
-<ul class="formErrors">
-  <#list action.actionErrors as msg>
-    <li class="errorMessage">${msg}</li>
-  </#list>
-</#if>
+<@displayActionError action=action/>
 <@ww.textfield label="Username" name="user.username" required="true"/>
 <@ww.password  label="Password" name="user.password" required="true"/>
 <@ww.password label="Confirm Password" name="checkPassword" required="true"/>
