@@ -39,7 +39,7 @@
   </@formInput>
     
   <@pageDescription>
-  You can change login password. The number of characters in your password must be between 5-20. 
+  You can change login password. The number of characters in the password must be between 5-20. 
   </@pageDescription>
   
   <@formInput>
