@@ -198,6 +198,22 @@ div.forminput{
 	margin: 2em;
 }
 
+ul.formErrors {
+	list-style-type: none;
+	padding: 0px;
+	margin: 20px auto;
+}
+
+li.errorMessage{
+	padding: 0px;
+	margin: 0px;
+}
+
+.errorMessage{
+	color: red;
+}
+
+
 /* ========= Global DIVs =========== */
 .cleardiv {
 	clear: both;
@@ -335,9 +351,6 @@ ul#breadcrumbs{
 	padding: 0px;
 	margin: 0px;
 }
-
-
-
 
 /* ===== SIDEBAR DIV content ==== */
 .menu {
@@ -613,11 +626,6 @@ ul#breadcrumbs{
 .header-menu{
    display:block;
    padding-bottom:1px;
-}
-
-.errorMessage {
-	color: red;
-	font-size: 12px;
 }
 
 .systemMessage{

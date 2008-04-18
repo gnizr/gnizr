@@ -19,7 +19,7 @@
 
 <rule>
   <from>^/register$</from>
-  <to last="true">/users/register.ftl</to>
+  <to last="true">/register.action</to>
 </rule>		
 	
 <rule>

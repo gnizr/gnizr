@@ -5,19 +5,11 @@
             cssHref=[gzUrl("/css/gnizr-frontpage.css")]
             enableJS=false/>                      
 
-<div class="loginPage">          
+<div class="frontPage">          
 
 <div id="siteBanner">
   <h1 class="siteName">${getSiteName()}</h1>
   <h2 class="siteDescription">${getSiteDescription()}</h2>
-</div>
-
-
-<div id="siteFeatures">
-<#if gzIsUserRegistrationOpen() == true>
-<@pageTitle>New User?</@pageTitle>
-<p><a href="${gzUrl('/register')}" class="large-text system-link">Create an account</a></p>
-</#if>
 </div>
 
 <@formInput id="siteLogin">
@@ -33,6 +25,13 @@
 <@ww.actionerror/>
 </@ww.form>
 </@formInput>
+</div>
+
+<div id="siteFeatures">
+<#if gzIsUserRegistrationOpen() == true>
+<@pageTitle>New User?</@pageTitle>
+<p><a href="${gzUrl('/register')}" class="large-text system-link">Create an account</a></p>
+</#if>
 </div>
 <div class="cleardiv"/>
 <@pageEnd/>
