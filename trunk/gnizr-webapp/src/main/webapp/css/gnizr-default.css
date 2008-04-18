@@ -296,7 +296,7 @@ li.errorMessage{
 }
 
 #search-box{
-	width: 400px;
+	width: 300px;
 	margin-left: auto;
 	margin-right: auto;
 	text-align: left;
@@ -309,11 +309,10 @@ li.errorMessage{
 }
 
 #search-input{
-	width: 280px;
+	width: 200px;
 }
 
 #search-input, #search-space, #seach-submit{
-	font-size: 1.10em;
 	display:inline;	
 }
 

@@ -221,7 +221,7 @@ as <h1/> (page header) of this page:
                  cssClass="ajax-suggestion url-"+suggestUrl
                 />
   <@ww.hidden name="type" value="opensearch"/>
-    <@ww.submit id="search-submit" cssClass="" value="Search"/>    
+    <@ww.submit id="search-submit" cssClass="btn" value="Search"/>    
 </@ww.form>
 <#-- This DIV is used loading query suggestions -->
 <div id="ajax-suggestions-container">
@@ -237,9 +237,9 @@ as <h1/> (page header) of this page:
 <div id="header2-sub-menu">
 <#if loggedInUser?exists>
 <ul>
-<li class="first"><img class="icon" src="${gzUrl("/images/home-16.gif")}"></img><a href="${gzUrl("/home")}">home</a></li>
-<li><img src="${gzUrl("/images/link-16.gif")}" class="icon"></img><a href="${gzUrl("/for/me")}" title="for you by others" id="bmarkForYou">for you</a></li>
-<li><img class="icon" src="${gzUrl("/images/add-16.gif")}"></img><a href="${gzUrl("/post")}"  title="add new bookmark">bookmark</a></li>
+<li class="first"><img class="icon" src="${gzUrl("/images/home-16.gif")}"></img><a href="${gzUrl("/home")}" class="system-link">home</a></li>
+<li><img src="${gzUrl("/images/link-16.gif")}" class="icon"></img><a href="${gzUrl("/for/me")}" title="for you by others" id="bmarkForYou" class="system-link">for you</a></li>
+<li><img class="icon" src="${gzUrl("/images/add-16.gif")}"></img><a href="${gzUrl("/post")}"  title="add new bookmark" class="system-link">bookmark</a></li>
 </#if>
 </ul>
 </div>
@@ -465,4 +465,13 @@ show
                 list=r"#{'':'---- select action ----'}"/>      
     </div>                
   </div>
+</#macro>
+
+<#macro displayActionError action>
+<#if (action.actionErrors)?has_content>
+<ul class="formErrors">
+  <#list action.actionErrors as msg>
+    <li class="errorMessage">${msg}</li>
+  </#list>
+</#if>
 </#macro>
