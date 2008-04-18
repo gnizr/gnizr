@@ -54,6 +54,11 @@
 			<value>organize</value>
 		</property> 
 		
+		<!--  Define the admin email contact of your site -->
+		<property name="siteContactEmail">
+			<value></value>
+		</property>
+		
 		<!-- Define the web application URL of this gnizr installation -->
 		<property name="webApplicationUrl">
 			<value>http://localhost:8080/gnizr</value>
