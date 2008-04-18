@@ -80,6 +80,7 @@ public class GnizrConfiguration implements Serializable {
 
 	private String siteName;
 	private String siteDescription;
+	private String siteContactEmail;
 	private String webApplicationUrl;
 	private String googleMapsKey;
 	private String snapShotsKey;
@@ -167,5 +168,13 @@ public class GnizrConfiguration implements Serializable {
 
 	public void setSiteDescription(String siteDescription) {
 		this.siteDescription = siteDescription;
+	}
+
+	public String getSiteContactEmail() {
+		return siteContactEmail;
+	}
+
+	public void setSiteContactEmail(String siteContactEmail) {
+		this.siteContactEmail = siteContactEmail;
 	}
 }
