@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+	"http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	
+	<bean id="search" class="com.gnizr.core.search.Search" singleton="true">
+		<constructor-arg>
+			<ref bean="gnizrDao"/>
+		</constructor-arg>
+	</bean>
+	
+	<bean id="bookmarkSearcher" class="com.gnizr.core.search.BookmarkSearcher" singleton="true"
+		  init-method="init">
+		<property name="searchIndexManager">
+			<ref bean="searchIndexManager"/>
+		</property>
+	</bean>
+	
+	<bean id="searchSuggestIndexer" class="com.gnizr.core.search.SearchSuggestIndexer" singleton="true"
+		init-method="init">
+		<property name="searchIndexProfile">
+			<ref bean="searchIndexProfile"/>
+		</property>
+		<property name="gnizrDao">
+			<ref bean="gnizrDao"/>
+		</property>
+	</bean>
+	
+	<bean id="searchTermSuggestion" class="com.gnizr.core.search.SearchTermSuggestion" singleton="true">
+		<property name="searchSuggestIndexer">
+			<ref bean="searchSuggestIndexer"/>
+		</property>
+	</bean>
+	
+</beans>

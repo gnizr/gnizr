@@ -1,0 +1,57 @@
+<!DOCTYPE xwork PUBLIC "-//OpenSymphony Group//XWork 1.0//EN"
+	"http://www.opensymphony.com/xwork/xwork-1.0.dtd">
+<xwork>
+	
+	<!-- see also webwork doc: http://www.opensymphony.com/webwork/wikidocs/Interceptors.html -->
+	
+	<package name="gnizr-search-bookmark" extends="gnizr-default" namespace="/bookmark">
+		
+		<action name="searchInput" class="com.gnizr.web.action.search.SearchBookmark"
+			method="doInput">			
+			<interceptor-ref name="loggedIn"/>							
+            <interceptor-ref name="gnizrDefaultStack"/>			
+			<result name="input" type="freemarker">/search/home.ftl</result>			
+			<result name="error" type="freemarker">/edit.ftl</result>	
+		</action>
+		
+		<action name="search" class="com.gnizr.web.action.search.SearchBookmark">			
+			<interceptor-ref name="loggedIn"/>							
+            <interceptor-ref name="gnizrDefaultStack"/>
+			<result name="success" type="chain">getSearchCommonTags</result>
+			<result name="input" type="redirect">/search/home.ftl</result>			
+			<result name="error" type="freemarker">/edit.ftl</result>	
+			<result name="redirect" type="redirect-action">
+				<param name="actionName">list</param>
+				<param name="namespace">/search</param>
+				<param name="q">${queryString}</param>
+			</result>
+		</action>
+
+		<action name="getSearchCommonTags" class="com.gnizr.web.action.link.GetCommonTags">												
+			<interceptor-ref name="loggedIn"/>
+			<interceptor-ref name="alias"/>	
+			<interceptor-ref name="gnizrNoPrepareStack"/>
+			<interceptor-ref name="chain"/>			
+			<result name="success" type="freemarker">/search/search-results.ftl</result>
+			<result name="input" type="freemarker">/search/search-results.ftl</result>
+			<result name="error" type="freemarker">/common/error.ftl</result>
+		</action>
+		
+	</package>
+	
+	<package name="gnizr-opensearch" extends="gnizr-default" namespace="/search">
+		<action name="list" class="com.gnizr.web.action.search.ListSearchEngines">
+			<interceptor-ref name="loggedIn"/>	
+			<interceptor-ref name="gnizrDefaultStack"/>		
+			<result name="success" type="freemarker">/search/multi-search-results.ftl</result>	
+		</action>		
+		
+		<action name="suggest" class="com.gnizr.web.action.search.SearchQuerySuggest">
+			<interceptor-ref name="loggedIn"/>	
+			<interceptor-ref name="gnizrDefaultStack"/>		
+			<result name="success" type="freemarker">/search/search-suggest-template.ftl</result>
+		</action>
+	</package>
+	
+	
+</xwork>

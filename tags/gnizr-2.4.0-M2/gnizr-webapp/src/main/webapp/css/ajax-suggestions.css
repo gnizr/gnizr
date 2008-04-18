@@ -1,0 +1,46 @@
+#ajax-suggestions-container{
+ 	position:relative;
+ 	z-index: 100;
+}
+
+#ajax-suggestions-results{
+	position:absolute;
+	top:0px;
+	left:0px;
+	background: white;
+	border-style: solid;
+	border-color: #ccc;
+    border-width: 1px;
+    width: 200px;  
+}
+
+#ajax-suggestions-results ul{
+	list-style: none;
+	margin: 0em;
+	padding: 0px;
+}
+
+#ajax-suggestions-results li{
+	margin: 0em;
+	padding: 0px;
+}
+
+#ajax-suggestions-results a{
+	display: block;
+	padding: 0.25em 1em;
+	text-decoration: none;
+}
+
+#ajax-suggestions-results a.selected{
+	font-weight: bold;
+	background: #FFFF00;
+}
+
+#ajax-suggestions-results a:hover{
+	background: #FFFFCC;
+}
+
+#ajax-suggestions-results p{
+	margin-bottom: 0.5em;
+}
+	

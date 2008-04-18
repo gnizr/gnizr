@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+	<user id="1" username="gnizr" password=""
+		fullname="gnizr" created_on="2006-11-16 21:55:18.0"
+		email="" acct_status="1"/>
+	<user id="2" username="hchen1" password="cf95caeb19ac6b9743cb6398d68da02e"
+		fullname="Harry Chen" created_on="2006-11-16 21:55:18.0"
+		email="harry.chen@gmail.com" acct_status="1"/>
+	<user id="3" username="jsmith" password="39ce7e2a8573b41ce73b5ba41617f8f7"
+		fullname="Joe Smith" created_on="2006-11-16 21:55:18.0"
+		email="jsmith@hchen1.com" acct_status="1"/>
+	<link id="202" mime_type_id="1003" url="http://rss.cnn.com/rss/cnn_topstories.rss" url_hash="4a557f2f685dba25493c4f53092d421c"
+		/>
+	<link id="203" mime_type_id="1003" url="http://rss.slashdot.org/Slashdot/slashdot" url_hash="0a30ee5d677d2e622cac4572bc0a415a"
+		/>
+	<link id="204" mime_type_id="1003" url="http://dev.gnizr.com/test-data/eqs7day-M2.5.xml" url_hash="a8ba06181e9cf2215613ed740a804197"
+		/>
+	<bookmark id="300" user_id="2" link_id="202" title="CNN News Feed"
+		notes="top news" created_on="2006-11-16 21:55:19.0" last_updated="2006-11-19 21:55:19.0" 
+		/>
+	<bookmark id="301" user_id="2" link_id="203" title="Slashdot Feed"
+		notes="news for nerds" created_on="2006-11-18 21:55:19.0" last_updated="2006-11-18 21:55:19.0" 
+		/>
+	<bookmark id="302" user_id="2" link_id="204" title="GeoRSS Feed"
+		notes="GeoRSS news" created_on="2006-11-18 21:55:19.0" last_updated="2006-11-18 21:55:19.0" 
+		/>
+	<feed_subscription id="400" bookmark_id="300"  auto_import="true" last_sync="2007-02-01 08:10:15.2" match_text=""/>
+	<feed_subscription id="401" bookmark_id="301"  auto_import="true" match_text=""/>
+	<feed_subscription id="402" bookmark_id="302"  auto_import="true" last_sync="2007-02-01 08:10:15.2" match_text=""/>
+			
+	<folder id="60" owner_id="1" folder_name="dummy" description="" last_updated="2006-11-18 21:55:19.0" />
+	<folder id="66" owner_id="2" folder_name="latest news" description="stuff that matters" last_updated="2006-11-18 21:55:19.0"/>
+	<folder id="67" owner_id="2" folder_name="news2" description="" last_updated="2006-11-18 21:55:19.0"/>
+	<folder id="68" owner_id="3" folder_name="news2" description="owner 3's folder" last_updated="2006-11-18 21:55:19.0"/>
+	<folder id="69" owner_id="2" folder_name="georss data" description="" last_updated="2006-11-18 21:55:19.0"/>
+	
+	<feed_folder id="10" folder_id="66" feed_id="400"/>
+	<feed_folder id="11" folder_id="67" feed_id="400"/>
+	<feed_folder id="12" folder_id="69" feed_id="402"/>
+		
+	<bookmark_folder id="800" folder_id="60" bookmark_id="302" last_updated="2006-11-18 21:55:19.0"/>
+	
+	<tag id="1" tag="cnn" count="1"/>
+	<tag id="2" tag="java" count="3"/>
+</dataset>
