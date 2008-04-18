@@ -213,6 +213,7 @@ as <h1/> (page header) of this page:
     </ul>
   </div>
 </div>  
+
 <div id="search-box">
 <@ww.form action="search" namespace="/bookmark" theme="simple">
   <#local suggestUrl = gzUrl('/search/suggest.action')/>
@@ -223,17 +224,19 @@ as <h1/> (page header) of this page:
   <@ww.hidden name="type" value="opensearch"/>
     <@ww.submit id="search-submit" cssClass="btn" value="Search"/>    
 </@ww.form>
-<#-- This DIV is used loading query suggestions -->
+
+<!-- This DIV is used loading query suggestions -->
 <div id="ajax-suggestions-container">
 	<div id="ajax-suggestions-results" class="invisible">
 	</div>
 </div>
-
 </div>
+
 <div id="header2-menu">   
    <@ww.action name="menu" namespace="/ui" executeResult=true>    
    </@ww.action>   
 </div>
+
 <div id="header2-sub-menu">
 <#if loggedInUser?exists>
 <ul>

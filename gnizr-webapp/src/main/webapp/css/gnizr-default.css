@@ -173,6 +173,10 @@ SPAN.system-link{
 	font-size: 1em;
 }
 
+.notes{
+	color:black;
+}
+
 div.instruction {
 	width: 480px;
 	margin: 1em 0em;
@@ -284,7 +288,7 @@ li.errorMessage{
 }
 
 .selectBookmark {
-    margin: 4px 4px 0px 0px;
+    margin: 8px 0px;
 	padding: 0px;
 	height: 12px;
 	width: 12px;
@@ -297,10 +301,9 @@ li.errorMessage{
 
 #search-box{
 	width: 300px;
-	margin-left: auto;
-	margin-right: auto;
-	text-align: left;
 	padding: 0px;
+	margin: auto;
+	text-align: left;
 }
 
 
@@ -460,8 +463,8 @@ ul#breadcrumbs{
 .post .post-container {
 	position: relative;
 	width:100%;    
-    margin: 0px 0px;
-    padding:0px;
+    margin: 0px;
+    padding: 0px;
 }
 
 .post .post-container .post-title{
@@ -470,12 +473,12 @@ ul#breadcrumbs{
 	padding: 0px;
 	margin: 0px;
 	font-size: 1.25em;
-	line-height: 1.25em;
 }
 
 .post .post-select {
 	float:left;
 	width: 16px;
+	margin-right: 4px;
 }
 
 .post .post-title a:link, 
@@ -517,7 +520,7 @@ ul#breadcrumbs{
 
 .post .notes {
     clear:both;
-	margin: 4px 8px;
+	margin: 0px;
 	padding: 0px;
 	width: 96%;
 }

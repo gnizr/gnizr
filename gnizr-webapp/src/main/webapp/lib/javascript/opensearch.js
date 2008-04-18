@@ -199,7 +199,7 @@ SearchExecutor.prototype.fetchMoreData = function(){
          	viewDetailElm = MochiKit.DOM.SPAN({'class':'invisible ' + viewDetailClass},
          	   MochiKit.DOM.A({'href':dtlUrl,'target':'_blank','class':'system-link ' + viewDetailLinkClass},'view'));
          }         
-         var summaryElm = MochiKit.DOM.P({'class':'entryDescription'});
+         var summaryElm = MochiKit.DOM.P({'class':'entryDescription notes'});
          summaryElm.innerHTML = summary;
          var entryElm = MochiKit.DOM.LI(null,
             MochiKit.DOM.A({'class':'entryTitle link-title','href':link,'target':'_blank'},title),

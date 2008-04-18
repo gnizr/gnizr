@@ -38,7 +38,7 @@
 <@pageTitle>Already have an account?</@pageTitle>
 <p><a href="${gzUrl('/login')}" class="large-text system-link">Click to login</a></p>
 </div>
-
-<@pageEnd/>
 </div>
+<div class="cleardiv"/>
+<@pageEnd/>
 </@goHome>
