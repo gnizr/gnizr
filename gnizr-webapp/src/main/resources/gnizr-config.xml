@@ -80,7 +80,7 @@
 			<value>open</value>
 		</property>
 		<property name="registrationPolicy">
-			<value>close</value>
+			<value>open</value>
 		</property>
 		<property name="serverMaintenanceModeEnabled">
 			<value>false</value>
