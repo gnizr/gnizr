@@ -35,7 +35,7 @@ INPUT: postUrl
 	</#if>
 </#if>
 <div class="post-title">     
-     <a id="${bmarkId}" href="${gzBookmarkUrl(postId?c)}" class="bmark-title link-title" >${postTitle}</a>           
+     <a id="${bmarkId}" href="${gzBookmarkUrl(postId?c)}" class="bmark-title link-title" >${cleanTitle(postTitle)}</a>           
      <@iconLabels mTags=postMachineTags user=postUser.username/> 
      <div class="post-link"><a href="${postUrl}" class="bmark-link web-link" target="_blank">${prettyFormatUrl(postUrl)}</a></div>   
 </div>    
@@ -121,7 +121,10 @@ INPUT: postUrl
 </ul>
 </#macro>
 
-
+<#function cleanTitle title>
+	<#local s = title?replace("</?[a-z]+[^>]*>"," ","irm")/>
+	<#return s/>
+</#function>
 
 <#function sliceNotes notes>
   <#local nts = notes/> 
