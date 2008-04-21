@@ -2,7 +2,7 @@
 #labels Phase-Implementation
 
 
-==== Version 2.4.0-M2 (in progress) ====
+==== Version 2.4.0-M2 (18 April 2008) ====
  
 Changelog
   * Changed my bookmark search engine description from "Bookmarked by me" to "Bookmarked by you".
@@ -10,7 +10,16 @@ Changelog
   * [http://code.google.com/p/gnizr/issues/detail?id=50 Issue 50]: Provide search suggestions as the user types in the search box (fixed, verified)
   * [http://code.google.com/p/gnizr/issues/detail?id=51 Issue 51]: Re-building search index should overwrite the existing search index database (fixed, verified)
   * [http://code.google.com/p/gnizr/issues/detail?id=52 Issue 52]: Avoid loading the full HTML bookmark description in the HOME page (fixed, verified)
-
+  * [http://code.google.com/p/gnizr/issues/detail?id=53 Issue 53]: Use of 'registerationPolicy' in gnizr-config.xml is broken (fixed, need testing)
+  * [http://code.google.com/p/gnizr/issues/detail?id=54 Issue 54]: Re-redirect new users to a more informative front page. (fixed, need testing)
+  * [http://code.google.com/p/gnizr/issues/detail?id=56 Issue 56]: Prevent users from saving bookmark title with HTML tags (partially fixed)
+  * [http://code.google.com/p/gnizr/issues/detail?id=3 Issue 3]: Ability to easily search community tags. (partially fixed)
+  * [http://code.google.com/p/gnizr/issues/detail?id=44 Issue 44]: OutOfMemory exception when search in community bookmarks (fixed, need testing)
+  * Improved the UI for listing user bookmarks
+  * Text descriptions have been added to various "settings" functions
+  * Updated the UI of "login" and "registration" page. 
+  * Added new configuration property: `siteContactEmail`
+  * Changed configuration property: `directoryPath` to `searchIndexDirectory`
 
 ==== Version 2.4.0-M1 (04 April 2008) ====
 
