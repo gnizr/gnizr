@@ -71,6 +71,10 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+		</dependency>
 		<!-- Define <version/> in this POM because using <classifier/> in 
 		the parent POM failed. Probably it's a bug in Maven 2 -->
 		<dependency>
