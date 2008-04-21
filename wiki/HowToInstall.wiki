@@ -20,7 +20,8 @@ If you have any questions, post them in [http://groups.google.com/group/gnizr-us
   # Copy gnizr web application directory to Tomcat
     * `cp -r gnizr-x.y.z/gnizr /your/tomcat/webapps/`
   # Edit gnizr configuration 
-    * See [GnizrConfigXML]
+    * _For gnizr 2.3.0_: See [GnizrConfigXML]
+    * _For gnizr 2.4.0_: See [GnizrConfigXML_2_4]
   # Start Tomcat
 
 == Steps to Upgrade ==
