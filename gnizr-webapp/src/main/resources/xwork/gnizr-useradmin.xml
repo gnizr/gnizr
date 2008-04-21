@@ -52,4 +52,14 @@
 		</action>
 	</package>	
 	
+	<package name="gnizr-forgotpassword" extends="gnizr-default" namespace="/password">
+		<action name="forgot" class="com.gnizr.web.action.user.RequestPasswordReset">
+			<interceptor-ref name="config-gnizr"/>			
+			<interceptor-ref name="basicStack"/>				
+			<result name="success" type="freemarker">/users/forgotpassword.ftl</result>	
+			<result name="input" type="freemarker">/users/forgotpassword.ftl</result>							
+			<result name="error" type="freemarker">/users/forgotpassword.ftl</result>
+		</action>
+	</package>	
+	
 </xwork>

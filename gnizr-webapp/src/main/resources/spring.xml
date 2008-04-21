@@ -31,5 +31,5 @@
 	<import resource="spring/web-timeline.xml"/>
     <import resource="spring/web-search.xml"/>
 	<import resource="spring/web-rssrobot.xml"/>
-	
+	<import resource="spring/web-forgotpassword.xml"/>
 </beans>
