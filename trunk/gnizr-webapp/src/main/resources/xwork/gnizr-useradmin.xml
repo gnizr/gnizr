@@ -11,8 +11,8 @@
 			<interceptor-ref name="config-gnizr"/>			
 			<interceptor-ref name="basicStack"/>
 			<result name="success" type="redirect">/home</result>				
-			<result name="input" type="freemarker">/login.ftl</result>
-			<result name="error" type="freemarker">/login.ftl</result>
+			<result name="input" type="freemarker">/login/login.ftl</result>
+			<result name="error" type="freemarker">/login/login.ftl</result>
 		</action>
 		
 		<action name="userLogin" class="com.gnizr.web.action.user.UserLogin">
@@ -20,8 +20,8 @@
 			<interceptor-ref name="config-gnizr"/>			
 			<interceptor-ref name="validationWorkflowStack"/>
 			<result name="success" type="redirect">/home</result>				
-			<result name="input" type="freemarker">/login.ftl</result>
-			<result name="error" type="freemarker">/login.ftl</result>
+			<result name="input" type="freemarker">/login/login.ftl</result>
+			<result name="error" type="freemarker">/login/login.ftl</result>
 		</action>
 		
 		<action name="logout" class="com.gnizr.web.action.user.UserLogout">
@@ -35,8 +35,8 @@
 	<package name="gnizr-registration" extends="gnizr-default">
 		<action name="register" class="com.gnizr.web.action.user.Registration">
 			<interceptor-ref name="gnizrDefaultStack"/>					
-			<result name="input" type="freemarker">/registration/register.ftl</result>							
-			<result name="error" type="freemarker">/registration/register.ftl</result>
+			<result name="input" type="freemarker">/login/register.ftl</result>							
+			<result name="error" type="freemarker">/login/register.ftl</result>
 		</action>
 	
 		<action name="userRegister" class="com.gnizr.web.action.user.Registration"
