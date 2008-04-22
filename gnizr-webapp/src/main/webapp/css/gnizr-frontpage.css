@@ -12,7 +12,11 @@
 	margin: 30px 0px 0px 20px;
 }
 
-#siteFeatures, #siteLogin, #siteRegister{
+#siteFeatures, 
+#siteLogin, 
+#siteRegister, 
+#forgotPassword,
+#resetReqSent{
 	float: left;
 	margin: 40px 40px 40px 20px;
 }
@@ -22,7 +26,9 @@
 	padding: 0px;
 }
 
-#siteLogin, #siteRegister{
+#siteLogin, 
+#siteRegister, 
+#forgotPassword{
 	padding: 8px;
 	border-style: solid;
 	border-color: #ccc;
@@ -37,6 +43,21 @@
 #siteRegister{
 	width: 280px;
 }
+
+#forgotPassword{
+	width: 240px;
+}
+
+#resetReqSent{
+	width: 400px;
+	padding: 0px 0px; 0px; 8px;
+}
+
+#siteLoginHelp{
+	text-align: center;
+	margin-top: 1em;
+}
+
 
 h1.siteName{
 	font-size: 2.5em;

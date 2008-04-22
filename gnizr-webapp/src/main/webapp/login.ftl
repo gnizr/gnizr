@@ -22,8 +22,11 @@
 <#if redirectToPage?exists>
   <@ww.hidden name="redirectToPage" value="${redirectToPage}"/>
 </#if>
-<@ww.submit cssClass="btn" value="login"/>
+<@ww.submit cssClass="btn" value="Login"/>
 </@ww.form>
+<div id="siteLoginHelp">
+<a href="${gzUrl("/password/forgot.action")}" class="system-link">I forgot my password</a>
+</div>
 </@formInput>
 </div>
 
