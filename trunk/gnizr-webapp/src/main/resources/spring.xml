@@ -6,6 +6,8 @@
 	<!-- initial gnizr system configuration -->
 	<import resource="gnizr-config.xml"/>
 	
+	<import resource="spring/gnizr-misc.xml"/>
+	
 	<!-- creates DAO objects to access records in the persistent data store -->
 	<import resource="spring/gnizr-dao.xml"/>
 

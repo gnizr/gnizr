@@ -35,8 +35,8 @@
 	<package name="gnizr-registration" extends="gnizr-default">
 		<action name="register" class="com.gnizr.web.action.user.Registration">
 			<interceptor-ref name="gnizrDefaultStack"/>					
-			<result name="input" type="freemarker">/users/register.ftl</result>							
-			<result name="error" type="freemarker">/users/register.ftl</result>
+			<result name="input" type="freemarker">/registration/register.ftl</result>							
+			<result name="error" type="freemarker">/registration/register.ftl</result>
 		</action>
 	
 		<action name="userRegister" class="com.gnizr.web.action.user.Registration"
@@ -47,18 +47,25 @@
 				<param name="namespace">/settings/folders</param>
 				<param name="actionName">createMyBookmarksFolder</param>			
 			</result>
-			<result name="input" type="freemarker">/users/register.ftl</result>
-			<result name="error" type="freemarker">/users/register.ftl</result>
+			<result name="input" type="freemarker">/login/register.ftl</result>
+			<result name="error" type="freemarker">/login/register.ftl</result>
 		</action>
 	</package>	
 	
 	<package name="gnizr-forgotpassword" extends="gnizr-default" namespace="/password">
-		<action name="forgot" class="com.gnizr.web.action.user.RequestPasswordReset">
+		<action name="forgot" class="com.gnizr.web.action.user.RequestPasswordReset"
+		      method="doInput">
+			<interceptor-ref name="config-gnizr"/>			
+			<interceptor-ref name="basicStack"/>						
+			<result name="input" type="freemarker">/login/forgot.ftl</result>							
+			<result name="error" type="freemarker">/login/forgot.ftl</result>
+		</action>
+		<action name="requestReset" class="com.gnizr.web.action.user.RequestPasswordReset">
 			<interceptor-ref name="config-gnizr"/>			
 			<interceptor-ref name="basicStack"/>				
-			<result name="success" type="freemarker">/users/forgotpassword.ftl</result>	
-			<result name="input" type="freemarker">/users/forgotpassword.ftl</result>							
-			<result name="error" type="freemarker">/users/forgotpassword.ftl</result>
+			<result name="success" type="freemarker">/login/requested.ftl</result>	
+			<result name="input" type="freemarker">/login/requested.ftl</result>							
+			<result name="error" type="freemarker">/login/requested.ftl</result>
 		</action>
 	</package>	
 	

@@ -1,8 +1,12 @@
 package com.gnizr.web.action.user;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.log4j.Logger;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 
 import com.gnizr.core.exceptions.NoSuchUserException;
 import com.gnizr.core.user.PasswordManager;
@@ -10,6 +14,9 @@ import com.gnizr.core.user.UserManager;
 import com.gnizr.db.dao.User;
 import com.gnizr.web.action.AbstractAction;
 import com.gnizr.web.action.error.ActionErrorCode;
+
+import freemarker.template.Configuration;
+import freemarker.template.Template;
 
 public class RequestPasswordReset extends AbstractAction{
 
@@ -27,7 +34,17 @@ public class RequestPasswordReset extends AbstractAction{
 	private PasswordManager passwordManager;
 	private MailSender mailSender;
 	private SimpleMailMessage templateMessage;
+	private Configuration freemarkerEngine;
 	
+	public Configuration getFreemarkerEngine() {
+		return freemarkerEngine;
+	}
+
+	public void setFreemarkerEngine(
+			Configuration freemarkerEngine) {
+		this.freemarkerEngine = freemarkerEngine;
+	}
+
 	public SimpleMailMessage getTemplateMessage() {
 		return templateMessage;
 	}
@@ -91,6 +108,11 @@ public class RequestPasswordReset extends AbstractAction{
 	}
 
 	private boolean sendPasswordResetEmail(String token, User user){
+		Map<String,Object> model = new HashMap<String, Object>();
+		model.put("token", token);
+		model.put("username",user.getUsername());
+		model.put("gnizrConfiguration", getGnizrConfiguration());
+		
 		if(getTemplateMessage() == null){
 			logger.error("RequestPasswordReset: templateMessge bean is not defined");
 			addActionError(String.valueOf(ActionErrorCode.ERROR_CONFIG));
@@ -104,7 +126,17 @@ public class RequestPasswordReset extends AbstractAction{
 		}
 		SimpleMailMessage msg = new SimpleMailMessage(getTemplateMessage());
 		msg.setTo(toEmail);
-		msg.setText("Token = " + token);
+		
+		Template fmTemplate = null;
+		String text = null;
+		try{			
+			fmTemplate = freemarkerEngine.getTemplate("login/notifyreset-template.ftl");
+			text = FreeMarkerTemplateUtils.processTemplateIntoString(fmTemplate,model);
+		}catch(Exception e){
+			logger.error("RequestPasswordReset: error creating message template from Freemarker engine");
+		}
+
+		msg.setText(text);
 		
 		if(getMailSender() == null){
 			logger.error("RequestPasswordReset: mailSender bean is not defined");
