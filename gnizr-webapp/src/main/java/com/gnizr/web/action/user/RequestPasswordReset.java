@@ -127,6 +127,15 @@ public class RequestPasswordReset extends AbstractAction{
 		SimpleMailMessage msg = new SimpleMailMessage(getTemplateMessage());
 		msg.setTo(toEmail);
 		
+		if(msg.getFrom() == null){
+			String contactEmail = getGnizrConfiguration().getSiteContactEmail();
+			if(contactEmail != null){
+				msg.setFrom(contactEmail);
+			}else{
+				msg.setFrom("help@localhost");
+			}
+		}		
+				
 		Template fmTemplate = null;
 		String text = null;
 		try{			

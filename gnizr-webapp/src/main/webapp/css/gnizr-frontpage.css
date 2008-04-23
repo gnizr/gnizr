@@ -16,7 +16,7 @@
 #siteLogin, 
 #siteRegister, 
 #forgotPassword,
-#resetReqSent{
+.frontPageMessage{
 	float: left;
 	margin: 40px 40px 40px 20px;
 }
@@ -48,7 +48,7 @@
 	width: 240px;
 }
 
-#resetReqSent{
+.frontPageMessage{
 	width: 400px;
 	padding: 0px 0px; 0px; 8px;
 }
