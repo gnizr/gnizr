@@ -4,14 +4,22 @@
 <@pageBegin pageTitle="gnizr -- organize." 
             cssHref=[gzUrl("/css/gnizr-frontpage.css")] enableJS=false/>
             
-<div id="headline">
-<h1>gnizr<span class="version">${gnizrVersion()}</span></h1>
-<br></br>
-<h2>organize</h2>
-<br/>
-<h2>Server is currently under routine maintenance...</h2>
-<h3>Please come back later!</h3>
+<div class="frontPage">          
+
+<div id="siteBanner">
+  <h1 class="siteName">${getSiteName()}</h1>
+  <h2 class="siteDescription">${getSiteDescription()}</h2>
 </div>
+
+<div class="frontPageMessage">
+<@pageTitle>Site Maintenance</@pageTitle>
+<p>
+This site is currently under maintenance. 
+</p>
+<p>Please come back later.</p>
+</div>
+</div>
+<div class="cleardiv"/>
 <@pageEnd/>
 
 

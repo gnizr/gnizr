@@ -7,9 +7,7 @@
 		<field-validator type="requiredstring" short-circuit="true">
 			<message>username is required.</message>
 		</field-validator>
-	</field>
-	
-	<field name="user.username">
+
 		<field-validator type="stringlength" short-circuit="true">
 			<param name="minLength">3</param>
 			<param name="maxLength">12</param>

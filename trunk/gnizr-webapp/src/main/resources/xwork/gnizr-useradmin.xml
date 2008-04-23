@@ -34,14 +34,14 @@
 	
 	<package name="gnizr-registration" extends="gnizr-default">
 		<action name="register" class="com.gnizr.web.action.user.Registration">
-			<interceptor-ref name="gnizrDefaultStack"/>					
+			<interceptor-ref name="gnizrNoPolicyDefaultStack"/>					
 			<result name="input" type="freemarker">/login/register.ftl</result>							
 			<result name="error" type="freemarker">/login/register.ftl</result>
 		</action>
 	
 		<action name="userRegister" class="com.gnizr.web.action.user.Registration"
 				method="doRegistration">
-        	<interceptor-ref name="config-gnizr"/>			
+        	<interceptor-ref name="gnizrNoPolicyDefaultStack"/>			
    		    <interceptor-ref name="validationWorkflowStack"/>
 			<result name="success" type="redirect-action">
 				<param name="namespace">/settings/folders</param>
@@ -55,17 +55,15 @@
 	<package name="gnizr-forgotpassword" extends="gnizr-default" namespace="/password">
 		<action name="forgot" class="com.gnizr.web.action.user.RequestPasswordReset"
 		      method="doInput">
-			<interceptor-ref name="config-gnizr"/>			
-			<interceptor-ref name="basicStack"/>						
+			<interceptor-ref name="gnizrNoPolicyDefaultStack"/>			
 			<result name="input" type="freemarker">/login/forgot.ftl</result>							
 			<result name="error" type="freemarker">/login/forgot.ftl</result>
 		</action>
 		<action name="requestReset" class="com.gnizr.web.action.user.RequestPasswordReset">
-			<interceptor-ref name="config-gnizr"/>			
-			<interceptor-ref name="basicStack"/>				
+			<interceptor-ref name="gnizrNoPolicyDefaultStack"/>					
 			<result name="success" type="freemarker">/login/requested.ftl</result>	
-			<result name="input" type="freemarker">/login/requested.ftl</result>							
-			<result name="error" type="freemarker">/login/requested.ftl</result>
+			<result name="input" type="freemarker">/login/forgot.ftl</result>							
+			<result name="error" type="freemarker">/login/forgot.ftl</result>
 		</action>
 	</package>	
 	
