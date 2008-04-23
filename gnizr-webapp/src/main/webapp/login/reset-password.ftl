@@ -14,13 +14,13 @@
 
 <div class="frontPageMessage">
 <@pageTitle>Reset Password</@pageTitle>
-<p>
-To reset your password, provide your username.
-</p>
 <@displayActionError action=action/>
-<@ww.form namespace="/password" action="requestReset.action" method="post">
-<@ww.textfield label="Username" name="username"/>
-<@ww.submit cssClass="btn" value="Submit"/>
+<@ww.form namespace="/password" action="resetPassword.action" method="post">
+<@ww.password label="New Password" name="password"/>
+<@ww.password label="Confirm New Password" name="passwordConfirm"/>
+<@ww.hidden name="username" value="${username}"/>
+<@ww.hidden name="token" value="${token}"/>
+<@ww.submit cssClass="btn" value="Save"/>
 </@ww.form>
 </div>
 
