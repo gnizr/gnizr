@@ -6,13 +6,12 @@
 
 <div class="frontPage">          
 
-
 <div id="siteBanner">
   <h1 class="siteName">${getSiteName()}</h1>
   <h2 class="siteDescription">${getSiteDescription()}</h2>
 </div>
 
-<div id="resetReqSent">
+<div class="frontPageMessage">
 <@pageTitle>Sent User Verification</@pageTitle>
 <p>A verification message has been sent to 
 the email address that is associated with your account.</p>

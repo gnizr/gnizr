@@ -55,12 +55,13 @@
 	<package name="gnizr-forgotpassword" extends="gnizr-default" namespace="/password">
 		<action name="forgot" class="com.gnizr.web.action.user.RequestPasswordReset"
 		      method="doInput">
-			<interceptor-ref name="gnizrNoPolicyDefaultStack"/>			
+			<interceptor-ref name="gnizrNoPolicyDefaultStack"/>					    
 			<result name="input" type="freemarker">/login/forgot.ftl</result>							
 			<result name="error" type="freemarker">/login/forgot.ftl</result>
 		</action>
 		<action name="requestReset" class="com.gnizr.web.action.user.RequestPasswordReset">
 			<interceptor-ref name="gnizrNoPolicyDefaultStack"/>					
+		    <interceptor-ref name="validationWorkflowStack"/>			
 			<result name="success" type="freemarker">/login/requested.ftl</result>	
 			<result name="input" type="freemarker">/login/forgot.ftl</result>							
 			<result name="error" type="freemarker">/login/forgot.ftl</result>

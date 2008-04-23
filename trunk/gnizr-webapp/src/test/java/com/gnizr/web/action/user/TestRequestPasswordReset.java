@@ -75,7 +75,7 @@ public class TestRequestPasswordReset extends GnizrWebappTestBase {
 	@SuppressWarnings("unchecked")
 	public void testValidationMissingUsername() throws Exception {
 		DefaultActionValidatorManager validator = new DefaultActionValidatorManager();
-		validator.validate(action, null);
+		validator.validate(action, "requestReset");
 		assertTrue(action.hasFieldErrors());
 		Map<String, Object> errors = action.getFieldErrors();
 		assertEquals(1, errors.size());
@@ -85,7 +85,7 @@ public class TestRequestPasswordReset extends GnizrWebappTestBase {
 	public void testValidationUsernameTooShort() throws Exception {
 		DefaultActionValidatorManager validator = new DefaultActionValidatorManager();
 		action.setUsername("ab");
-		validator.validate(action, null);
+		validator.validate(action, "requestReset");
 		assertTrue(action.hasFieldErrors());
 		Map<String, Object> errors = action.getFieldErrors();
 		assertEquals(1, errors.size());
@@ -95,7 +95,7 @@ public class TestRequestPasswordReset extends GnizrWebappTestBase {
 	public void testValidationUsernameFilled() throws Exception {
 		DefaultActionValidatorManager validator = new DefaultActionValidatorManager();
 		action.setUsername("hchen1");
-		validator.validate(action, null);
+		validator.validate(action, "requestReset");
 		assertFalse(action.hasFieldErrors());
 		Map<String, Object> errors = action.getFieldErrors();
 		assertEquals(0, errors.size());
