@@ -4,8 +4,7 @@
             cssHref=[gzUrl("/css/gnizr-frontpage.css")]
             enableJS=false/>                      
 
-<div class="frontPage">   
-       
+<div class="frontPage">          
 
 <div id="siteBanner">
   <h1 class="siteName">${getSiteName()}</h1>
@@ -13,16 +12,11 @@
 </div>
 
 <div class="frontPageMessage">
-<@pageTitle>Reset Password</@pageTitle>
-<p>
-To reset your password, provide your username.
-</p>
-<@displayActionError action=action/>
-<@ww.form namespace="/password" action="requestReset.action" method="post">
-<@ww.textfield label="Username" name="username"/>
-<@ww.submit cssClass="btn" value="Submit"/>
-</@ww.form>
+<@pageTitle>Successfully Changed Password</@pageTitle>
+<p>Your password has been changed!</p>
+<p>Click <a href="${gzUrl("/login")}" class="system-link">here</a> to login</p>
 </div>
 
+</div>
 <div class="cleardiv"/>
 <@pageEnd/>

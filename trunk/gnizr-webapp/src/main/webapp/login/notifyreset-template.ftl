@@ -1,3 +1,3 @@
 Follow this URL to reset your password:
 
-${gnizrConfiguration.webApplicationUrl}/password/reset.action?u=${username}&token=${token}
+${gnizrConfiguration.webApplicationUrl}/password/verifyRequest.action?username=${username}&token=${token}

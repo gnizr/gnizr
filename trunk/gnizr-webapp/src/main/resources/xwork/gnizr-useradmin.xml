@@ -26,7 +26,10 @@
 		
 		<action name="logout" class="com.gnizr.web.action.user.UserLogout">
 	        <interceptor-ref name="config-gnizr"/>	
-			<interceptor-ref name="basicStack"/>		
+			<interceptor-ref name="basicStack"/>
+			<interceptor-ref name="sessionInvalidate">
+	    		<param name="type">Now</param>
+	    	</interceptor-ref>		
 			<result name="success" type="redirect">/</result>
 			<result name="error">/common/error.ftl</result>
 		</action>
@@ -65,6 +68,20 @@
 			<result name="success" type="freemarker">/login/requested.ftl</result>	
 			<result name="input" type="freemarker">/login/forgot.ftl</result>							
 			<result name="error" type="freemarker">/login/forgot.ftl</result>
+		</action>
+		<action name="verifyRequest" class="com.gnizr.web.action.user.ResetPassword"
+				method="doVerify">
+			<interceptor-ref name="gnizrNoPolicyDefaultStack"/>		
+			<result name="success" type="freemarker">/login/reset-password.ftl</result>	
+			<result name="input" type="freemarker">/login/verify-failed.ftl</result>							
+			<result name="error" type="freemarker">/login/verify-failed.ftl</result>
+		</action>
+		<action name="resetPassword" class="com.gnizr.web.action.user.ResetPassword">
+			<interceptor-ref name="gnizrNoPolicyDefaultStack"/>
+  			<interceptor-ref name="validationWorkflowStack"/>									
+			<result name="success" type="freemarker">/login/reset-okay.ftl</result>	
+			<result name="input" type="freemarker">/login/reset-password.ftl</result>							
+			<result name="error" type="freemarker">/login/reset-password.ftl</result>
 		</action>
 	</package>	
 	
