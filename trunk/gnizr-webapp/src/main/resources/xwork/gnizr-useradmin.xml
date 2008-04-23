@@ -81,7 +81,7 @@
   			<interceptor-ref name="validationWorkflowStack"/>									
 			<result name="success" type="freemarker">/login/reset-okay.ftl</result>	
 			<result name="input" type="freemarker">/login/reset-password.ftl</result>							
-			<result name="error" type="freemarker">/login/reset-password.ftl</result>
+			<result name="error" type="freemarker">/login/verify-failed.ftl</result>
 		</action>
 	</package>	
 	
