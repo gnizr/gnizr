@@ -25,7 +25,6 @@ import org.dbunit.dataset.xml.FlatXmlDataSet;
 import com.gnizr.core.web.junit.GnizrWebappTestBase;
 import com.gnizr.db.dao.Tag;
 import com.gnizr.db.dao.tag.TagDao;
-import com.gnizr.web.view.freemarker.ComputeTagCloudMethod;
 
 import freemarker.ext.beans.BeansWrapper;
 import freemarker.ext.beans.CollectionModel;

@@ -5,8 +5,8 @@ import java.util.Map;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSet;
 
-import com.gnizr.core.user.PasswordManager;
 import com.gnizr.core.user.UserManager;
+import com.gnizr.core.util.TokenManager;
 import com.gnizr.core.web.junit.GnizrWebappTestBase;
 import com.gnizr.db.dao.User;
 import com.opensymphony.xwork.ActionSupport;
@@ -15,7 +15,7 @@ import com.opensymphony.xwork.validator.DefaultActionValidatorManager;
 public class TestResetPassword extends GnizrWebappTestBase {
 
 	private UserManager userManager;
-	private PasswordManager passwordManager;
+	private TokenManager tokenManager;
 	private ResetPassword action;
 	
 	private String token;
@@ -24,16 +24,16 @@ public class TestResetPassword extends GnizrWebappTestBase {
 	protected void setUp() throws Exception {
 		super.setUp();
 		userManager = new UserManager(getGnizrDao());
-		passwordManager = new PasswordManager();
-		passwordManager.setUserManager(userManager);
-		passwordManager.init();
+		tokenManager = new TokenManager();
+		tokenManager.setUserManager(userManager);
+		tokenManager.init();
 		
 		action = new ResetPassword();
-		action.setPasswordManager(passwordManager);
+		action.setTokenManager(tokenManager);
 		action.setUserManager(userManager);
 		
 		username = "hchen1";
-		token = passwordManager.createResetToken(userManager.getUser(username));		
+		token = tokenManager.createResetToken(userManager.getUser(username));		
 	}
 
 	protected void tearDown() throws Exception {

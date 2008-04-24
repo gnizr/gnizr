@@ -8,8 +8,8 @@ import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSet;
 
 import com.gnizr.core.bookmark.BookmarkPager;
-import com.gnizr.core.search.SearchIndexProfile;
 import com.gnizr.core.search.SearchIndexManager;
+import com.gnizr.core.search.SearchIndexProfile;
 import com.gnizr.core.user.UserManager;
 import com.gnizr.core.web.junit.GnizrWebappTestBase;
 import com.gnizr.db.dao.User;

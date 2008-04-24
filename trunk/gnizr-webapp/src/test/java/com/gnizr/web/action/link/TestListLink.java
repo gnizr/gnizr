@@ -28,7 +28,6 @@ import com.gnizr.core.web.junit.GnizrWebappTestBase;
 import com.gnizr.db.dao.Bookmark;
 import com.gnizr.web.action.SessionConstants;
 import com.gnizr.web.action.bookmark.TestListBookmark;
-import com.gnizr.web.action.link.ListLink;
 import com.opensymphony.xwork.ActionSupport;
 
 public class TestListLink extends GnizrWebappTestBase {

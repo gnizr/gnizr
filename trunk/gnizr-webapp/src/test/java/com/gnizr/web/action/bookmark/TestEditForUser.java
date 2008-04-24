@@ -24,7 +24,6 @@ import com.gnizr.core.web.junit.GnizrWebappTestBase;
 import com.gnizr.db.dao.DaoResult;
 import com.gnizr.db.dao.ForUser;
 import com.gnizr.db.dao.User;
-import com.gnizr.web.action.bookmark.EditForUser;
 import com.opensymphony.xwork.ActionSupport;
 
 public class TestEditForUser extends GnizrWebappTestBase {

@@ -26,7 +26,6 @@ import org.dbunit.dataset.xml.FlatXmlDataSet;
 import com.gnizr.core.user.UserManager;
 import com.gnizr.core.web.junit.GnizrWebappTestBase;
 import com.gnizr.db.dao.UserTag;
-import com.gnizr.web.action.tag.GetUserTagGroups;
 import com.opensymphony.xwork.ActionSupport;
 
 public class TestGetUserTagGroups extends GnizrWebappTestBase {

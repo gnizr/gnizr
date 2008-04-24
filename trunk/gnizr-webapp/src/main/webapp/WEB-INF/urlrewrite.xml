@@ -19,7 +19,7 @@
 
 <rule>
   <from>^/register$</from>
-  <to last="true">/register.action</to>
+  <to last="true">/register/newUser.action</to>
 </rule>		
 	
 <rule>

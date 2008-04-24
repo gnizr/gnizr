@@ -18,7 +18,6 @@ package com.gnizr.web.result;
 
 import com.gnizr.web.action.OpenSearchResultAware;
 import com.opensymphony.xwork.ActionInvocation;
-import com.opensymphony.xwork.Result;
 
 /**
  * <p>An extended {@link RomeResult} to output OpenSearch Response in ATOM. This class extends the function provided 

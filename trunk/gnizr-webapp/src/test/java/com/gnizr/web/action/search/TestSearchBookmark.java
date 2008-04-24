@@ -28,7 +28,6 @@ import com.gnizr.core.user.UserManager;
 import com.gnizr.core.web.junit.GnizrWebappTestBase;
 import com.gnizr.db.dao.Bookmark;
 import com.gnizr.db.dao.User;
-import com.gnizr.web.action.search.SearchBookmark;
 import com.gnizr.web.util.GnizrConfiguration;
 import com.opensymphony.xwork.ActionSupport;
 import com.sun.syndication.feed.module.opensearch.OpenSearchModule;

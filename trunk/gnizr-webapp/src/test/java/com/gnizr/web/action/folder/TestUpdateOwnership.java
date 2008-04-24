@@ -26,7 +26,6 @@ import com.gnizr.core.web.junit.GnizrWebappTestBase;
 import com.gnizr.db.dao.Bookmark;
 import com.gnizr.db.dao.DaoResult;
 import com.gnizr.db.dao.User;
-import com.gnizr.web.action.folder.UpdateOwnership;
 import com.opensymphony.xwork.ActionSupport;
 
 public class TestUpdateOwnership extends GnizrWebappTestBase {

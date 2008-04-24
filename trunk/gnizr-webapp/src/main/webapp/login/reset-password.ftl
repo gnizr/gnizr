@@ -1,6 +1,6 @@
 <#include "/lib/web/macro-lib.ftl"/>
 
-<@pageBegin pageTitle="login" 
+<@pageBegin pageTitle="reset password" 
             cssHref=[gzUrl("/css/gnizr-frontpage.css")]
             enableJS=false/>                      
 
@@ -16,8 +16,8 @@
 <@pageTitle>Reset Password</@pageTitle>
 <@displayActionError action=action/>
 <@ww.form namespace="/password" action="resetPassword.action" method="post">
-<@ww.password label="New Password" name="password"/>
-<@ww.password label="Confirm New Password" name="passwordConfirm"/>
+<@ww.password label="New Password" name="password" size="25"/>
+<@ww.password label="Confirm New Password" name="passwordConfirm" size="25"/>
 <@ww.hidden name="username" value="${username}"/>
 <@ww.hidden name="token" value="${token}"/>
 <@ww.submit cssClass="btn" value="Save"/>

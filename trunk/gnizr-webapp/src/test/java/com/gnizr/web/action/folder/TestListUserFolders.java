@@ -24,7 +24,6 @@ import org.dbunit.dataset.xml.FlatXmlDataSet;
 import com.gnizr.core.folder.FolderManager;
 import com.gnizr.core.web.junit.GnizrWebappTestBase;
 import com.gnizr.db.dao.Folder;
-import com.gnizr.web.action.folder.ListUserFolders;
 import com.opensymphony.xwork.ActionSupport;
 
 public class TestListUserFolders extends GnizrWebappTestBase {

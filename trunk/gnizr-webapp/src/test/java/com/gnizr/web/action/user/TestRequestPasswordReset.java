@@ -11,8 +11,8 @@ import org.springframework.ui.freemarker.FreeMarkerConfigurationFactory;
 
 import com.dumbster.smtp.SimpleSmtpServer;
 import com.dumbster.smtp.SmtpMessage;
-import com.gnizr.core.user.PasswordManager;
 import com.gnizr.core.user.UserManager;
+import com.gnizr.core.util.TokenManager;
 import com.gnizr.core.web.junit.GnizrWebappTestBase;
 import com.gnizr.web.util.GnizrConfiguration;
 import com.opensymphony.xwork.ActionSupport;
@@ -23,7 +23,7 @@ import freemarker.template.Configuration;
 public class TestRequestPasswordReset extends GnizrWebappTestBase {
 
 	private UserManager userManager;
-	private PasswordManager passwordManager;
+	private TokenManager tokenManager;
 	private RequestPasswordReset action;
 	private SimpleMailMessage templateMessage;
 	private JavaMailSenderImpl mailSender;
@@ -42,9 +42,9 @@ public class TestRequestPasswordReset extends GnizrWebappTestBase {
 		freemarkerEngine = factory.createConfiguration();
 		
 		userManager = new UserManager(getGnizrDao());
-		passwordManager = new PasswordManager();
-		passwordManager.setUserManager(userManager);
-		passwordManager.init();
+		tokenManager = new TokenManager();
+		tokenManager.setUserManager(userManager);
+		tokenManager.init();
 		
 		templateMessage = new SimpleMailMessage();
 		templateMessage.setSubject("Reset Password");
@@ -54,8 +54,8 @@ public class TestRequestPasswordReset extends GnizrWebappTestBase {
 		
 		action = new RequestPasswordReset();
 		action.setUserManager(userManager);
-		action.setPasswordManager(passwordManager);
-		action.setTemplateMessage(templateMessage);
+		action.setTokenManager(tokenManager);
+		action.setVerifyResetTemplate(templateMessage);
 		action.setMailSender(mailSender);
 		action.setFreemarkerEngine(freemarkerEngine);
 		action.setGnizrConfiguration(gnizrConfiguration);

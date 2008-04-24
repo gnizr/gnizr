@@ -35,6 +35,10 @@
 			<!-- routes user requests to a maintenance page if the server is being worked on -->
 			<interceptor name="server-maintenance"
 				class="com.gnizr.web.interceptor.ServerMaintenanceInterceptor"/>
+
+			<!-- routes registration requests to a special page if a closed user registration policy is imposed -->
+			<interceptor name="registration-policy"
+				class="com.gnizr.web.interceptor.RegistrationPolicyInterceptor"/>				
 		</interceptors>
 		
 		<!-- all action result of type "login" will redirect to /login by default -->

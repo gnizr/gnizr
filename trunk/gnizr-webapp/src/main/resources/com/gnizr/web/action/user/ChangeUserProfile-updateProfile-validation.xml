@@ -12,9 +12,7 @@
 		<field-validator type="requiredstring" short-circuit="true">
 			<message>email is required.</message>
 		</field-validator>
-	</field>
-	
-	<field name="email">
+
 		<field-validator type="email" short-circuit="true">
 			<message>not a valid email address</message>
 		</field-validator>

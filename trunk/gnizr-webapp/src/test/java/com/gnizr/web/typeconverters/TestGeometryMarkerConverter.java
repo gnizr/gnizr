@@ -19,7 +19,6 @@ package com.gnizr.web.typeconverters;
 import junit.framework.TestCase;
 
 import com.gnizr.db.dao.PointMarker;
-import com.gnizr.web.typeconverters.GeometryMarkerConverter;
 
 public class TestGeometryMarkerConverter extends TestCase {
 

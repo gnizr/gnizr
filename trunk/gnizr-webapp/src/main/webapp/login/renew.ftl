@@ -1,6 +1,6 @@
 <#include "/lib/web/macro-lib.ftl"/>
 
-<@pageBegin pageTitle="login" 
+<@pageBegin pageTitle="renew account activation" 
             cssHref=[gzUrl("/css/gnizr-frontpage.css")]
             enableJS=false/>                      
 
@@ -13,18 +13,18 @@
 </div>
 
 <div class="frontPageMessage">
-<@pageTitle>Reset Password</@pageTitle>
+<@pageTitle>Renew Account Activation</@pageTitle>
 <p>
-To reset your password, provide your username.
+To initiate the activation of your account, provide your username.
 </p>
 <#if (action.actionErrors)?has_content>
 <p>
 <ul class="formErrors"> 
-    <li class="errorMessage">No email is associated with this username.</li>
+    <li class="errorMessage">Invalid username or this account is already active.</li>
 </ul>  
 </p>
 </#if>
-<@ww.form namespace="/password" action="requestReset.action" method="post">
+<@ww.form namespace="/register" action="requestRenew.action" method="post">
 <@ww.textfield label="Username" name="username" size="25"/>
 <@ww.submit cssClass="btn" value="Submit"/>
 </@ww.form>

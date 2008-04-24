@@ -25,7 +25,6 @@ import com.gnizr.core.user.UserManager;
 import com.gnizr.core.web.junit.GnizrWebappTestBase;
 import com.gnizr.db.dao.User;
 import com.gnizr.db.dao.UserTag;
-import com.gnizr.web.action.tag.EditUserTag;
 import com.opensymphony.xwork.ActionSupport;
 
 public class TestEditUserTag extends GnizrWebappTestBase {

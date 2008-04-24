@@ -8,7 +8,7 @@
 		</constructor-arg>
 	</bean>
 	
-	<bean id="passwordManager" class="com.gnizr.core.user.PasswordManager" singleton="true"
+	<bean id="tokenManager" class="com.gnizr.core.util.TokenManager" singleton="true"
 		init-method="init">
 		<property name="userManager">
 			<ref bean="userManager"/>

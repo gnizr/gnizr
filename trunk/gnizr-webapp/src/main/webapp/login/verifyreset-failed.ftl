@@ -1,6 +1,6 @@
 <#include "/lib/web/macro-lib.ftl"/>
 
-<@pageBegin pageTitle="send verification request" 
+<@pageBegin pageTitle="verification failed" 
             cssHref=[gzUrl("/css/gnizr-frontpage.css")]
             enableJS=false/>                      
 
@@ -12,13 +12,11 @@
 </div>
 
 <div class="frontPageMessage">
-<@pageTitle>Sent Verification Request</@pageTitle>
-<p>A verification request message has been sent to 
-the email address that is associated with your account.</p>
-<p>To reset your password, follow the instructions in
-the message.</p>  
+<@pageTitle>Verification Failed</@pageTitle>
+<p>Sorry! We can't proceed to reset your password.</p>
+<p>Your password reset request may be expired or invalid.</p>  
+<p><a href="${gzUrl("/password/forgot.action")}" class="system-link">Create a new request</a></p>
 </div>
-
 </div>
 <div class="cleardiv"/>
 <@pageEnd/>

@@ -34,4 +34,5 @@
     <import resource="spring/web-search.xml"/>
 	<import resource="spring/web-rssrobot.xml"/>
 	<import resource="spring/web-forgotpassword.xml"/>
+	<import resource="spring/web-registeruser.xml"/>
 </beans>

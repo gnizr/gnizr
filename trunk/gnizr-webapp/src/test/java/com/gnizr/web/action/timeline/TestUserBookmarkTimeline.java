@@ -26,7 +26,6 @@ import org.dbunit.dataset.xml.FlatXmlDataSet;
 import com.gnizr.core.user.UserManager;
 import com.gnizr.db.dao.GnizrDao;
 import com.gnizr.db.dao.User;
-import com.gnizr.web.action.timeline.UserBookmarkTimeline;
 import com.opensymphony.xwork.ActionSupport;
 
 public class TestUserBookmarkTimeline extends DatabaseTestCase {

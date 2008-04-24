@@ -28,7 +28,6 @@ import com.gnizr.core.user.UserManager;
 import com.gnizr.core.web.junit.GnizrWebappTestBase;
 import com.gnizr.db.dao.Bookmark;
 import com.gnizr.db.dao.PointMarker;
-import com.gnizr.web.action.bookmark.ListBookmarkHasGeomMarker;
 import com.opensymphony.xwork.ActionSupport;
 
 public class TestListBookmarkHasGeomMarker extends GnizrWebappTestBase {

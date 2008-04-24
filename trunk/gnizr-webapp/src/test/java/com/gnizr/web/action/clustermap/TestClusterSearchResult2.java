@@ -29,7 +29,6 @@ import com.gnizr.db.dao.Bookmark;
 import com.gnizr.db.dao.Link;
 import com.gnizr.db.dao.Tag;
 import com.gnizr.db.dao.User;
-import com.gnizr.web.action.clustermap.ClusterSearchResult;
 import com.opensymphony.xwork.ActionSupport;
 
 public class TestClusterSearchResult2 extends GnizrWebappTestBase {
