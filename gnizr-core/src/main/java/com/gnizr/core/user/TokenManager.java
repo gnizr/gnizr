@@ -9,17 +9,16 @@ import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
-import com.gnizr.core.exceptions.NoSuchUserException;
 import com.gnizr.db.dao.User;
 
 /**
- * Manages the recovery of user passwords. 
+ * Manages tokens created for authentication. 
  * 
  * @author Harry Chen
  * @since 2.4.0
  *
  */
-public class PasswordManager implements Serializable{
+public class TokenManager implements Serializable{
 
 	/**
 	 * 
@@ -29,12 +28,12 @@ public class PasswordManager implements Serializable{
 	
 	private UserManager userManager;
 	
-	private ConcurrentHashMap<String,ResetPasswordTicket> openTickets;
+	private ConcurrentHashMap<String,TokenTicket> openTickets;
 	
 	private static final SecureRandom random = new SecureRandom();
 
 	public void init(){
-		openTickets = new ConcurrentHashMap<String, ResetPasswordTicket>();
+		openTickets = new ConcurrentHashMap<String, TokenTicket>();
 		random.setSeed(System.currentTimeMillis());
 	}
 	
@@ -65,7 +64,7 @@ public class PasswordManager implements Serializable{
 		}
 		String token = UUID.randomUUID().toString();
 		Date createdOn = GregorianCalendar.getInstance().getTime();
-		ResetPasswordTicket ticket = new ResetPasswordTicket(token,user.getUsername(),createdOn);
+		TokenTicket ticket = new TokenTicket(token,user.getUsername(),createdOn);
 		if(openTickets.replace(user.getUsername(), ticket) == null){
 			openTickets.put(user.getUsername(),ticket);
 		}
@@ -77,7 +76,7 @@ public class PasswordManager implements Serializable{
 		if(user == null || user.getUsername() == null){
 			throw new NullPointerException("User is null. user=" + user);
 		}
-		ResetPasswordTicket ticket = openTickets.get(user.getUsername());
+		TokenTicket ticket = openTickets.get(user.getUsername());
 		if(ticket != null && token != null && token.length() > 0){
 			if(ticket.getUsername().equals(user.getUsername())){
 				UUID tokenUUID = UUID.fromString(token);
@@ -88,29 +87,31 @@ public class PasswordManager implements Serializable{
 		return false;
 	}
 	
-	public boolean resetPassword(String token, User user) throws NoSuchUserException{
+	public boolean deleteToken(String token, User user){
 		if(isValidResetToken(token, user) == true){
-			openTickets.remove(user.getUsername());
-			return userManager.changePassword(user);
+			TokenTicket ticket = openTickets.remove(user.getUsername());
+			if(ticket != null){
+				return true;
+			}
 		}
 		return false;
 	}
 	
-	public List<ResetPasswordTicket> listOpenTickets(){
-		return new ArrayList<ResetPasswordTicket>(openTickets.values());
+	public List<TokenTicket> listOpenTickets(){
+		return new ArrayList<TokenTicket>(openTickets.values());
 	}
 	
 	/**
-	 * Ticket for tracking password reset request.
+	 * Ticket for tracking token usage.
 	 * @author Harry Chen
 	 *
 	 */
-	public class ResetPasswordTicket {		
+	public class TokenTicket {		
 		private String token;
 		private String username;	
 		private Date createdOn;
 			
-		public ResetPasswordTicket(String token, String username, Date createdOn){
+		public TokenTicket(String token, String username, Date createdOn){
 			this.username = username;
 			this.token = token;
 			if(createdOn != null){
