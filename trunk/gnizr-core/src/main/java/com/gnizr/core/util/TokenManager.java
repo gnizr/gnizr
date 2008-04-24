@@ -1,4 +1,4 @@
-package com.gnizr.core.user;
+package com.gnizr.core.util;
 
 import java.io.Serializable;
 import java.security.SecureRandom;
@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
+import com.gnizr.core.user.UserManager;
 import com.gnizr.db.dao.User;
 
 /**

@@ -200,6 +200,8 @@ public class UserManager implements Serializable{
 			}
 		}else{
 			u = new User(user);
+			// no password change is required.
+			u.setPassword(null);
 		}				
 		u.setAccountStatus(AccountStatus.ACTIVE);
 		return userDao.updateUser(u);
