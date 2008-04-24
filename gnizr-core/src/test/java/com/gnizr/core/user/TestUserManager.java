@@ -14,7 +14,7 @@
  * Portions created by the Initial Contributor are Copyright (C) 2007
  * Image Matters LLC. All Rights Reserved.
  */
-package com.gnizr.core.managers;
+package com.gnizr.core.user;
 
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSet;
@@ -77,6 +77,9 @@ public class TestUserManager extends GnizrCoreTestBase {
 	}
 	
 	public void testActivateUserAccount() throws Exception{
+		User u = new User("hchen1","foobar");
+		assertTrue(userManager.changePassword(u));
+		
 		assertEquals(AccountStatus.INACTIVE,userManager.getAccountStatus(new User("hchen1")));
 		assertTrue(userManager.activateUserAccount(new User("hchen1")));
 		assertTrue(userManager.activateUserAccount(new User("hchen1")));		
@@ -89,6 +92,8 @@ public class TestUserManager extends GnizrCoreTestBase {
 			ec = true;
 		}
 		assertTrue(ec);
+		
+		u = userManager.getUser("hchen1","foobar");
 	}
 	
 	public void testChangePassword() throws Exception{

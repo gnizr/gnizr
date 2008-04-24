@@ -1,4 +1,4 @@
-package com.gnizr.core.user;
+package com.gnizr.core.util;
 
 import java.util.List;
 
@@ -6,6 +6,7 @@ import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSet;
 
 import com.gnizr.core.GnizrCoreTestBase;
+import com.gnizr.core.user.UserManager;
 import com.gnizr.db.dao.User;
 
 public class TestTokenManager extends GnizrCoreTestBase {
