@@ -30,7 +30,6 @@ import com.gnizr.db.dao.Bookmark;
 import com.gnizr.db.dao.Link;
 import com.gnizr.db.dao.PointMarker;
 import com.gnizr.db.dao.User;
-import com.gnizr.web.action.bookmark.EditBookmark;
 import com.opensymphony.xwork.ActionSupport;
 
 public class TestEditBookmark2 extends GnizrWebappTestBase {

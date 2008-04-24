@@ -1,6 +1,6 @@
 <#include "/lib/web/macro-lib.ftl"/>
 
-<@pageBegin pageTitle="send verification request" 
+<@pageBegin pageTitle="user registration closed" 
             cssHref=[gzUrl("/css/gnizr-frontpage.css")]
             enableJS=false/>                      
 
@@ -12,11 +12,9 @@
 </div>
 
 <div class="frontPageMessage">
-<@pageTitle>Sent Verification Request</@pageTitle>
-<p>A verification request message has been sent to 
-the email address that is associated with your account.</p>
-<p>To reset your password, follow the instructions in
-the message.</p>  
+<@pageTitle>User Registration Closed</@pageTitle>
+<p>All user registration functions are closed.</p>
+<p>Pleae come back later.</p>  
 </div>
 
 </div>

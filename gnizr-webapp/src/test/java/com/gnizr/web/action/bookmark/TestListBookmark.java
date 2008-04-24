@@ -30,7 +30,6 @@ import com.gnizr.core.user.UserManager;
 import com.gnizr.core.web.junit.GnizrWebappTestBase;
 import com.gnizr.db.dao.Bookmark;
 import com.gnizr.web.action.SessionConstants;
-import com.gnizr.web.action.bookmark.ListUserBookmark;
 import com.opensymphony.xwork.ActionSupport;
 
 public class TestListBookmark extends GnizrWebappTestBase{

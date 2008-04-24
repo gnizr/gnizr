@@ -19,8 +19,6 @@ package com.gnizr.web.view.freemarker;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.gnizr.web.view.freemarker.HighlightTextMethod;
-
 import junit.framework.TestCase;
 import freemarker.template.SimpleScalar;
 import freemarker.template.SimpleSequence;

@@ -23,7 +23,6 @@ import com.gnizr.core.foruser.ForUserManager;
 import com.gnizr.core.foruser.ForUserPager;
 import com.gnizr.core.web.junit.GnizrWebappTestBase;
 import com.gnizr.db.dao.User;
-import com.gnizr.web.action.bookmark.ListForUserBookmark;
 import com.opensymphony.xwork.ActionSupport;
 
 public class TestListForUserBookmark extends GnizrWebappTestBase {

@@ -476,5 +476,6 @@ show
   <#list action.actionErrors as msg>
     <li class="errorMessage">${msg}</li>
   </#list>
+</ul>  
 </#if>
 </#macro>

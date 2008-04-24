@@ -26,10 +26,10 @@
 		
 	<field name="editUser.password" >
 		<field-validator type="stringlength" short-circuit="true">
-			<param name="minLength">5</param>
+			<param name="minLength">6</param>
 			<param name="maxLength">20</param>
 			<param name="trim">true</param>
-			<message>must be between 5-20 characters long</message>
+			<message>must be between 6-20 characters long</message>
 		</field-validator>
 	</field>
 	

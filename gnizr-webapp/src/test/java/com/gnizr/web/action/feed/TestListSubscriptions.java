@@ -26,7 +26,6 @@ import com.gnizr.core.user.UserManager;
 import com.gnizr.core.web.junit.GnizrWebappTestBase;
 import com.gnizr.db.dao.FeedSubscription;
 import com.gnizr.db.dao.User;
-import com.gnizr.web.action.feed.ListSubscriptions;
 import com.opensymphony.xwork.ActionSupport;
 
 public class TestListSubscriptions extends GnizrWebappTestBase {

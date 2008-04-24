@@ -32,4 +32,10 @@
 		</property>	
 	</bean>
 	
+	<bean id="registrationPolicyInterceptor" class="com.gnizr.web.interceptor.RegistrationPolicyInterceptor" singleton="true">
+		<property name="gnizrConfiguration">
+			<ref bean="gnizrConfiguration"/>
+		</property>	
+	</bean>
+	
 </beans>

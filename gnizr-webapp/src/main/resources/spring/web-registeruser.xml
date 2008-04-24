@@ -2,9 +2,11 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
 	"http://www.springframework.org/dtd/spring-beans.dtd">
 <beans>
-	<bean id="requestPasswordReset" class="com.gnizr.web.action.user" singleton="false">
+
+	<bean id="registerUser" class="com.gnizr.web.action.user.RegisterUser"
+		singleton="false">
 		<property name="userManager">
-			<ref bean="userManager"/>
+			<ref bean="userManager" />
 		</property>
 		<property name="tokenManager">
 			<ref bean="tokenManager"/>
@@ -12,25 +14,26 @@
 		<property name="mailSender">
 			<ref bean="mailSender"/>
 		</property>
-		<property name="verifyResetTemplate">
-			<ref bean="verifyResetTemplate"/>
+		<property name="verifyEmailTemplate">
+			<ref bean="verifyEmailTemplate"/>
 		</property>
 		<property name="freemarkerEngine">
 			<ref bean="freemarkerEngine"/>
 		</property>
 	</bean>
 	
-	<bean id="resetPassword" class="com.gnizr.web.action.user" singleton="false">
+	<bean id="activateUserAccount" class="com.gnizr.web.action.user.ActivateUserAccount"
+		singleton="false">
 		<property name="userManager">
-			<ref bean="userManager"/>
+			<ref bean="userManager" />
 		</property>
 		<property name="tokenManager">
 			<ref bean="tokenManager"/>
 		</property>
-	</bean>
-
-	<bean id="verifyResetTemplate" class="org.springframework.mail.SimpleMailMessage" singleton="true">  		
-  		<property name="subject" value="Reset Password"/>
+	</bean>	
+	
+	<bean id="verifyEmailTemplate" class="org.springframework.mail.SimpleMailMessage" singleton="true">  		
+  		<property name="subject" value="Verify Email"/>
   		
   		<!--  Edit the following if you want customize the email message sent 
   		      for password recovery -->  

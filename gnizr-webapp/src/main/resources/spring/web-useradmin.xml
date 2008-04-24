@@ -3,12 +3,6 @@
 	"http://www.springframework.org/dtd/spring-beans.dtd">
 <beans>
 	
-	<bean id="registration" class="com.gnizr.web.action.user.Registration" singleton="false">
-		<property name="userManager">
-			<ref bean="userManager"/>
-		</property>
-	</bean>
-	
 	<bean id="userLogin" class="com.gnizr.web.action.user.UserLogin" singleton="false">
 		<property name="userManager">
 			<ref bean="userManager"/>

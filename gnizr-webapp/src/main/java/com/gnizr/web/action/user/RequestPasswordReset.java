@@ -9,8 +9,8 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 
 import com.gnizr.core.exceptions.NoSuchUserException;
-import com.gnizr.core.user.PasswordManager;
 import com.gnizr.core.user.UserManager;
+import com.gnizr.core.util.TokenManager;
 import com.gnizr.db.dao.User;
 import com.gnizr.web.action.AbstractAction;
 import com.gnizr.web.action.error.ActionErrorCode;
@@ -31,9 +31,9 @@ public class RequestPasswordReset extends AbstractAction{
 	private String username;
 	
 	private UserManager userManager;
-	private PasswordManager passwordManager;
+	private TokenManager tokenManager;
 	private MailSender mailSender;
-	private SimpleMailMessage templateMessage;
+	private SimpleMailMessage verifyResetTemplate;
 	private Configuration freemarkerEngine;
 	
 	public Configuration getFreemarkerEngine() {
@@ -45,12 +45,12 @@ public class RequestPasswordReset extends AbstractAction{
 		this.freemarkerEngine = freemarkerEngine;
 	}
 
-	public SimpleMailMessage getTemplateMessage() {
-		return templateMessage;
+	public SimpleMailMessage getVerifyResetTemplate() {
+		return verifyResetTemplate;
 	}
 
-	public void setTemplateMessage(SimpleMailMessage templateMessage) {
-		this.templateMessage = templateMessage;
+	public void setVerifyResetTemplate(SimpleMailMessage templateMessage) {
+		this.verifyResetTemplate = templateMessage;
 	}
 
 	public MailSender getMailSender() {
@@ -77,12 +77,12 @@ public class RequestPasswordReset extends AbstractAction{
 		this.userManager = userManager;
 	}
 
-	public PasswordManager getPasswordManager() {
-		return passwordManager;
+	public TokenManager getTokenManager() {
+		return tokenManager;
 	}
 
-	public void setPasswordManager(PasswordManager passwordManager) {
-		this.passwordManager = passwordManager;
+	public void setTokenManager(TokenManager passwordManager) {
+		this.tokenManager = passwordManager;
 	}
 
 	@Override
@@ -93,10 +93,10 @@ public class RequestPasswordReset extends AbstractAction{
 		}catch(NoSuchUserException e){
 			logger.debug("RequestPasswordReset: No such user in the system. Username = " + username);
 			addActionError(String.valueOf(ActionErrorCode.ERROR_NO_SUCH_USER));
-			return ERROR;
+			return INPUT;
 		}
 		
-		String token = passwordManager.createResetToken(user);
+		String token = tokenManager.createResetToken(user);
 		if(token != null){
 			if(sendPasswordResetEmail(token, user) == false){
 				return ERROR;
@@ -113,7 +113,7 @@ public class RequestPasswordReset extends AbstractAction{
 		model.put("username",user.getUsername());
 		model.put("gnizrConfiguration", getGnizrConfiguration());
 		
-		if(getTemplateMessage() == null){
+		if(getVerifyResetTemplate() == null){
 			logger.error("RequestPasswordReset: templateMessge bean is not defined");
 			addActionError(String.valueOf(ActionErrorCode.ERROR_CONFIG));
 			return false;
@@ -124,7 +124,7 @@ public class RequestPasswordReset extends AbstractAction{
 			addActionError(String.valueOf(ActionErrorCode.ERROR_EMAIL_UNDEF));
 			return false;
 		}
-		SimpleMailMessage msg = new SimpleMailMessage(getTemplateMessage());
+		SimpleMailMessage msg = new SimpleMailMessage(getVerifyResetTemplate());
 		msg.setTo(toEmail);
 		
 		if(msg.getFrom() == null){

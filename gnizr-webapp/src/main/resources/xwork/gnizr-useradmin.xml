@@ -27,7 +27,7 @@
 		<action name="logout" class="com.gnizr.web.action.user.UserLogout">
 	        <interceptor-ref name="config-gnizr"/>	
 			<interceptor-ref name="basicStack"/>
-			<interceptor-ref name="sessionInvalidate">
+			<interceptor-ref name="sessionInvalidation">
 	    		<param name="type">Now</param>
 	    	</interceptor-ref>		
 			<result name="success" type="redirect">/</result>
@@ -35,23 +35,52 @@
 		</action>
 	</package>
 	
-	<package name="gnizr-registration" extends="gnizr-default">
-		<action name="register" class="com.gnizr.web.action.user.Registration">
+	<package name="gnizr-register" extends="gnizr-default" namespace="/register">
+	
+		<action name="newUser" class="com.gnizr.web.action.user.RegisterUser"
+				method="doInput">
+			<interceptor-ref name="registration-policy"/>	
+			<interceptor-ref name="gnizrNoPolicyDefaultStack"/>						
+			<result name="input" type="freemarker">/login/register.ftl</result>
+			<result name="close" type="freemarker">/login/register-closed.ftl</result>							
+		</action>
+		
+		<action name="renewUser" class="com.gnizr.web.action.user.RegisterUser"
+			method="doInput">
+			<interceptor-ref name="registration-policy"/>				
 			<interceptor-ref name="gnizrNoPolicyDefaultStack"/>					
-			<result name="input" type="freemarker">/login/register.ftl</result>							
-			<result name="error" type="freemarker">/login/register.ftl</result>
+			<result name="input" type="freemarker">/login/renew.ftl</result>
+			<result name="close" type="freemarker">/login/register-closed.ftl</result>				
 		</action>
 	
-		<action name="userRegister" class="com.gnizr.web.action.user.Registration"
-				method="doRegistration">
-        	<interceptor-ref name="gnizrNoPolicyDefaultStack"/>			
-   		    <interceptor-ref name="validationWorkflowStack"/>
+		<action name="createUser" class="com.gnizr.web.action.user.RegisterUser">
+			<interceptor-ref name="registration-policy"/>	
+			<interceptor-ref name="gnizrNoPolicyDefaultStack"/>					
+			<interceptor-ref name="validationWorkflowStack"/>
+			<result name="input" type="freemarker">/login/register.ftl</result>	
+			<result name="success" type="freemarker">/login/registered.ftl</result>
+			<result name="close" type="freemarker">/login/register-closed.ftl</result>
+		</action>
+		
+		<action name="requestRenew" class="com.gnizr.web.action.user.RegisterUser"
+			method="doRenewUserAccount">
+			<interceptor-ref name="registration-policy"/>	
+			<interceptor-ref name="gnizrNoPolicyDefaultStack"/>					
+			<interceptor-ref name="validationWorkflowStack"/>	
+			<result name="input" type="freemarker">/login/renew.ftl</result>
+			<result name="success" type="freemarker">/login/registered.ftl</result>				
+			<result name="close" type="freemarker">/login/register-closed.ftl</result>			
+		</action>
+		
+		<action name="verifyEmail" class="com.gnizr.web.action.user.ActivateUserAccount">
+			<interceptor-ref name="registration-policy"/>	
+			<interceptor-ref name="gnizrNoPolicyDefaultStack"/>					
+			<result name="input" type="freemarker">/login/verifyemail-failed.ftl</result>	
 			<result name="success" type="redirect-action">
 				<param name="namespace">/settings/folders</param>
 				<param name="actionName">createMyBookmarksFolder</param>			
 			</result>
-			<result name="input" type="freemarker">/login/register.ftl</result>
-			<result name="error" type="freemarker">/login/register.ftl</result>
+			<result name="close" type="freemarker">/login/register-closed.ftl</result>		
 		</action>
 	</package>	
 	
@@ -73,15 +102,15 @@
 				method="doVerify">
 			<interceptor-ref name="gnizrNoPolicyDefaultStack"/>		
 			<result name="success" type="freemarker">/login/reset-password.ftl</result>	
-			<result name="input" type="freemarker">/login/verify-failed.ftl</result>							
-			<result name="error" type="freemarker">/login/verify-failed.ftl</result>
+			<result name="input" type="freemarker">/login/verifyreset-failed.ftl</result>							
+			<result name="error" type="freemarker">/login/verifyreset-failed.ftl</result>
 		</action>
 		<action name="resetPassword" class="com.gnizr.web.action.user.ResetPassword">
 			<interceptor-ref name="gnizrNoPolicyDefaultStack"/>
   			<interceptor-ref name="validationWorkflowStack"/>									
 			<result name="success" type="freemarker">/login/reset-okay.ftl</result>	
 			<result name="input" type="freemarker">/login/reset-password.ftl</result>							
-			<result name="error" type="freemarker">/login/verify-failed.ftl</result>
+			<result name="error" type="freemarker">/login/verifyreset-failed.ftl</result>
 		</action>
 	</package>	
 	

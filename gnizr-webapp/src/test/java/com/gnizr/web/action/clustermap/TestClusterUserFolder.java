@@ -28,7 +28,6 @@ import com.gnizr.core.web.junit.GnizrWebappTestBase;
 import com.gnizr.db.dao.Bookmark;
 import com.gnizr.db.dao.Tag;
 import com.gnizr.db.dao.User;
-import com.gnizr.web.action.clustermap.ClusterUserFolder;
 import com.opensymphony.xwork.ActionSupport;
 
 public class TestClusterUserFolder extends GnizrWebappTestBase {

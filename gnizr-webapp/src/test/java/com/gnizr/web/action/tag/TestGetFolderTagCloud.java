@@ -31,7 +31,6 @@ import com.gnizr.db.dao.Bookmark;
 import com.gnizr.db.dao.FolderTag;
 import com.gnizr.db.dao.User;
 import com.gnizr.web.action.SessionConstants;
-import com.gnizr.web.action.tag.GetFolderTagCloud;
 import com.opensymphony.xwork.ActionSupport;
 
 public class TestGetFolderTagCloud extends GnizrWebappTestBase {

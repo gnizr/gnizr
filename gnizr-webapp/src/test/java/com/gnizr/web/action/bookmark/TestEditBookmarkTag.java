@@ -32,7 +32,6 @@ import com.gnizr.db.dao.Tag;
 import com.gnizr.db.dao.User;
 import com.gnizr.db.dao.bookmark.BookmarkDao;
 import com.gnizr.db.dao.tag.TagDao;
-import com.gnizr.web.action.bookmark.EditBookmarkTag;
 import com.opensymphony.xwork.ActionSupport;
 
 public class TestEditBookmarkTag extends GnizrWebappTestBase{

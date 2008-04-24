@@ -25,7 +25,6 @@ import com.gnizr.core.web.junit.GnizrWebappTestBase;
 import com.gnizr.db.dao.Bookmark;
 import com.gnizr.db.dao.Folder;
 import com.gnizr.db.dao.User;
-import com.gnizr.web.action.bookmark.ManageBookmarks;
 import com.opensymphony.xwork.ActionSupport;
 
 public class TestManageBookmarks extends GnizrWebappTestBase {

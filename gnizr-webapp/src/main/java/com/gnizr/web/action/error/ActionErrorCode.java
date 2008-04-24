@@ -13,22 +13,6 @@ public interface ActionErrorCode {
 	public static final int ERROR_CONFIG = 11;
 	
 	/**
-	 * Error creating token for reseting user password. Code:12.
-	 */
-	public static final int ERROR_NO_RESET_TOKEN = 12;
-	
-	/**
-	 * Can't verify user password change token. Code 13.
-	 */
-	public static final int ERROR_VERIFY_TOKEN = 13;
-	
-	
-	/**
-	 * Can't reset user's password. Code 14.
-	 */
-	public static final int ERROR_PASSWORD_RESET = 14;
-
-	/**
 	 * No such user in the system. Code 1000.
 	 */
 	public static final int ERROR_NO_SUCH_USER = 1000;
@@ -37,6 +21,42 @@ public interface ActionErrorCode {
 	 * User's email is not defined. Code 1001.
 	 */
 	public static final int ERROR_EMAIL_UNDEF = 1001;
+	
+	/**
+	 * Input username is taken by an existing user. Code 1002 
+	 */
+	public static final int ERROR_USERNAME_TAKEN = 1002;
+	
+	/**
+	 * Failed to create a new user account. Code 1003 
+	 */
+	public static final int ERROR_CREATE_ACCOUNT = 1003;
+	
+	/**
+	 * Unable to send email. Code 1004.
+	 */
+	public static final int ERROR_SEND_EMAIL = 1004;
+	
+	/**
+	 * Error creating token for reseting user password. Code 1005.
+	 */
+	public static final int ERROR_NO_RESET_TOKEN = 1005;
+	
+	/**
+	 * Can't verify user password change token. Code 1006.
+	 */
+	public static final int ERROR_VERIFY_TOKEN = 1006;
+	
+	/**
+	 * Can't reset user's password. Code 14.
+	 */
+	public static final int ERROR_PASSWORD_RESET = 1007;
+	
+	
+	/**
+	 * Attempt to activate an already active user account. Code 14.
+	 */
+	public static final int ERROR_ACCOUNT_ACTIVE = 1007;
 
 	
 }

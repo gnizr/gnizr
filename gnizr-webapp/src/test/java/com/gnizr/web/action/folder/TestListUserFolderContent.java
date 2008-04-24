@@ -30,7 +30,6 @@ import com.gnizr.db.dao.Bookmark;
 import com.gnizr.db.dao.Folder;
 import com.gnizr.db.dao.User;
 import com.gnizr.web.action.SessionConstants;
-import com.gnizr.web.action.folder.ListUserFolderContent;
 import com.opensymphony.xwork.ActionSupport;
 
 public class TestListUserFolderContent extends GnizrWebappTestBase {

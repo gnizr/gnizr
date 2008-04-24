@@ -28,7 +28,6 @@ import com.gnizr.core.tag.TagPager;
 import com.gnizr.core.web.junit.GnizrWebappTestBase;
 import com.gnizr.db.dao.User;
 import com.gnizr.db.dao.UserTag;
-import com.gnizr.web.action.tag.SuggestTags;
 
 
 public class TestSuggestTags extends GnizrWebappTestBase {

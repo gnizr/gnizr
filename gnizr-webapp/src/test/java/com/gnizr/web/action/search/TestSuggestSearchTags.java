@@ -10,7 +10,6 @@ import org.dbunit.dataset.xml.FlatXmlDataSet;
 import com.gnizr.core.tag.TagManager;
 import com.gnizr.core.tag.TagPager;
 import com.gnizr.core.web.junit.GnizrWebappTestBase;
-import com.gnizr.web.action.search.SuggestSearchTags;
 import com.opensymphony.xwork.ActionSupport;
 
 public class TestSuggestSearchTags extends GnizrWebappTestBase {

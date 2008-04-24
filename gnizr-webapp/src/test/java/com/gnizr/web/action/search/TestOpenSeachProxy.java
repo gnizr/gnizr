@@ -1,11 +1,9 @@
 package com.gnizr.web.action.search;
 
+import junit.framework.TestCase;
 import net.sf.json.JSONObject;
 
-import com.gnizr.web.action.search.OpenSearchProxy;
 import com.opensymphony.xwork.ActionSupport;
-
-import junit.framework.TestCase;
 
 public class TestOpenSeachProxy extends TestCase {
 

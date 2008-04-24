@@ -3,8 +3,8 @@ package com.gnizr.web.action.user;
 import org.apache.log4j.Logger;
 
 import com.gnizr.core.exceptions.NoSuchUserException;
-import com.gnizr.core.user.PasswordManager;
 import com.gnizr.core.user.UserManager;
+import com.gnizr.core.util.TokenManager;
 import com.gnizr.db.dao.User;
 import com.gnizr.web.action.AbstractAction;
 import com.gnizr.web.action.error.ActionErrorCode;
@@ -24,7 +24,7 @@ public class ResetPassword extends AbstractAction{
 	private String passwordConfirm;
 	
 	private UserManager userManager;
-	private PasswordManager passwordManager;
+	private TokenManager tokenManager;
 	
 	public UserManager getUserManager() {
 		return userManager;
@@ -34,12 +34,12 @@ public class ResetPassword extends AbstractAction{
 		this.userManager = userManager;
 	}
 
-	public PasswordManager getPasswordManager() {
-		return passwordManager;
+	public TokenManager getTokenManager() {
+		return tokenManager;
 	}
 
-	public void setPasswordManager(PasswordManager passwordManager) {
-		this.passwordManager = passwordManager;
+	public void setTokenManager(TokenManager tokenManager) {
+		this.tokenManager = tokenManager;
 	}
 
 	public String getUsername() {
@@ -63,7 +63,7 @@ public class ResetPassword extends AbstractAction{
 		User user = null;
 		try{
 			user = userManager.getUser(username);
-			boolean isValid = passwordManager.isValidResetToken(token, user);
+			boolean isValid = tokenManager.isValidResetToken(token, user);
 			if(isValid == true){
 				return SUCCESS;
 			}else{
@@ -88,9 +88,11 @@ public class ResetPassword extends AbstractAction{
 				// assume that validator has checked the password == passwordConfirm
 				if(password != null && passwordConfirm != null){
 					user.setPassword(password);
-					boolean isOkay = passwordManager.resetPassword(token, user);
-					if(isOkay == true){
-						return SUCCESS;
+					if(tokenManager.deleteToken(token, user)){
+						boolean isOkay = userManager.changePassword(user);
+						if(isOkay == true){
+							return SUCCESS;
+						}
 					}
 					addActionError(String.valueOf(ActionErrorCode.ERROR_PASSWORD_RESET));	
 				}				
