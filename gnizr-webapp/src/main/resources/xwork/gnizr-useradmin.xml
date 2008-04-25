@@ -6,22 +6,27 @@
 	
 	<package name="gnizr-no-policy" extends="gnizr-basic">
 		<action name="login" class="com.gnizr.web.action.user.UserLogin"
-			method="doDefault">
+			method="doDefault">				
 			<interceptor-ref name="loggedIn"/>					
-			<interceptor-ref name="config-gnizr"/>			
-			<interceptor-ref name="basicStack"/>
+			<interceptor-ref name="config-gnizr"/>
+			<interceptor-ref name="basicStack"/>	
 			<result name="success" type="redirect">/home</result>				
 			<result name="input" type="freemarker">/login/login.ftl</result>
-			<result name="error" type="freemarker">/login/login.ftl</result>
+			<result name="error" type="freemarker">/common/error.ftl</result>
 		</action>
 		
 		<action name="userLogin" class="com.gnizr.web.action.user.UserLogin">
+			<interceptor-ref name="sessionInvalidation">
+	    		<param name="type">NextRequest</param>
+	    	</interceptor-ref>
 			<interceptor-ref name="loggedIn"/>		
 			<interceptor-ref name="config-gnizr"/>			
 			<interceptor-ref name="validationWorkflowStack"/>
 			<result name="success" type="redirect">/home</result>				
 			<result name="input" type="freemarker">/login/login.ftl</result>
-			<result name="error" type="freemarker">/login/login.ftl</result>
+			<result name="disabled" type="freemarker">/login/account-disabled.ftl</result>
+			<result name="inactive" type="freemarker">/login/account-inactive.ftl</result>
+			<result name="error" type="freemarker">/common/error.ftl</result>
 		</action>
 		
 		<action name="logout" class="com.gnizr.web.action.user.UserLogout">

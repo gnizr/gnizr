@@ -1,5 +1,8 @@
 package com.gnizr.web.action.user;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSet;
 
@@ -19,6 +22,8 @@ public class TestActivateUserAccount extends GnizrWebappTestBase {
 	private String username;
 	private String token;
 	
+	private Map<String, Object> session;
+	
 	protected void setUp() throws Exception {
 		super.setUp();
 		userManager = new UserManager(getGnizrDao());
@@ -26,9 +31,12 @@ public class TestActivateUserAccount extends GnizrWebappTestBase {
 		tokenManager.setUserManager(userManager);
 		tokenManager.init();
 		
+		session = new HashMap<String, Object>();
+		
 		action = new ActivateUserAccount();
 		action.setUserManager(userManager);
-		action.setTokenManager(tokenManager);	
+		action.setTokenManager(tokenManager);
+		action.setSession(session);
 		
 		username = "hchen1";
 		token = tokenManager.createResetToken(new User(username));

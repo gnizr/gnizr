@@ -33,10 +33,11 @@
 
 		<!-- Defines misc. JDBC paramaters -->
 		<property name="connectionProperties">
-			<value>
-				useUnicode=true characterEncoding=UTF-8
-				characterSetResults=UTF-8
-			</value>
+			<props>
+				<prop key="useUnicode">true</prop>
+				<prop key="characterEncoding">UTF-8</prop>
+				<prop key="characterSetResults">UTF-8</prop>
+			</props>
 		</property>
 	</bean>
 
@@ -90,12 +91,8 @@
 			<list>
 				<value>/settings/opensearch/mybookmarks.action</value>
 				<value>/settings/opensearch/community.action</value>
-				<value>
-					/settings/opensearch/yahoo-searchdescription.xml
-				</value>
-				<value>
-					http://www.pfaf.org/database/openSearch.rss
-				</value>
+				<value>/settings/opensearch/yahoo-searchdescription.xml</value>
+				<value>http://www.pfaf.org/database/openSearch.rss</value>
 			</list>
 		</property>
 	</bean>

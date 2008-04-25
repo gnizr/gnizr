@@ -16,6 +16,9 @@ saving bookmarks, visiting your bookmark collections and searching for informati
   <li>Drag 
   '<a href="javascript:var d=document,g='${gzUrl("/post?")}',l=d.location,e=encodeURIComponent,p='url='+e(l.href)+'&title='+e(d.title);1;a=function(){if(!window.open(g+p+'&saveAndClose=true','${getSiteName()}','toolbar=no,status=no,resizable=yes,width=800,height=640,scrollbars=yes'))l.href=g+p+'&saveAndClose=false&redirect=true'};if(/Firefox/.test(navigator.userAgent))setTimeout(a,0);else{a()};void(0)" title="post to ${getSiteName()}" onclick="window.alert('Drag this link to your bookmarks toolbar, or right-click it and choose Bookmark This Link...');return false;">post to ${getSiteName()}</a>' 
   up to your Bookmark Toolbar.</li>
+  <li>Drag 
+  '<a href="javascript:(function(){setTimeout(function(){var g='${gzUrl("/post?")}', p='url='+encodeURIComponent(location.href)+'&title='+encodeURIComponent(document.title); try{window.open(g+p+'&saveAndClose=true','gnizr','toolbar=no,status=no,resizable=yes,width=800,height=640,scrollbars=yes');}catch(e){location.href=g+p+'&saveAndClose=false&redirect=true';}},10);})()" title="post to ${getSiteName()}" onclick="window.alert('Drag this link to your bookmarks toolbar, or right-click it and choose Bookmark This Link...');return false;">post to ${getSiteName()}</a>' 
+  up to your Bookmark Toolbar. (experimental)</li>
 </ul>
 <h3>Your bookmark homepage</h3>
 <ul>  
