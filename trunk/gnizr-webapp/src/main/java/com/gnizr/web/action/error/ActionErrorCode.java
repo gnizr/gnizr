@@ -48,15 +48,30 @@ public interface ActionErrorCode {
 	public static final int ERROR_VERIFY_TOKEN = 1006;
 	
 	/**
-	 * Can't reset user's password. Code 14.
+	 * Can't reset user's password. Code 1007.
 	 */
 	public static final int ERROR_PASSWORD_RESET = 1007;
 	
 	
 	/**
-	 * Attempt to activate an already active user account. Code 14.
+	 * User account status is ACTIVE. Code 1008.
 	 */
-	public static final int ERROR_ACCOUNT_ACTIVE = 1007;
+	public static final int ERROR_ACCOUNT_ACTIVE = 1008;
+	
+	/**
+	 * User account status is INACTIVE. Code 1009.
+	 */
+	public static final int ERROR_ACCOUNT_INACTIVE = 1009;
+	
+	/**
+	 * User account status is DISABLED. Code 1010.
+	 */
+	public static final int ERROR_ACCOUNT_DISABLED = 1010;
+	
+	/**
+	 * Login failed. Code 1011.
+	 */
+	public static final int ERROR_LOGIN_FAILED = 1011;
 
 	
 }

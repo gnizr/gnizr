@@ -1,5 +1,4 @@
 <#include "/lib/web/macro-lib.ftl"/>
-
 <@pageBegin pageTitle="login" 
             cssHref=[gzUrl("/css/gnizr-frontpage.css")]
             enableJS=false/>                      

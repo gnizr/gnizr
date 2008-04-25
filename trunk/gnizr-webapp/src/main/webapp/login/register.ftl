@@ -1,16 +1,9 @@
 <#assign ww=JspTaglibs["/WEB-INF/webwork.tld"] >
 <#-- import Freemarker macros that are common to the site -->
 <#include "/lib/web/macro-lib.ftl"/>
-
-<#-- if a user is already logged in, 
-     redirect to the home page of the user -->
-<@goHome>
 <#assign title="new user registration"/>
-
 <@pageBegin pageTitle=title cssHref=[gzUrl("/css/gnizr-frontpage.css")] 
-            enableJS=false/>
-            
-
+            enableJS=false/>        
 <div class="frontPage">
 
 <div id="siteBanner">
@@ -50,4 +43,3 @@ accept the <a href="#">Terms of Service</a> and have read and understand the
 </div>
 <div class="cleardiv"/>
 <@pageEnd/>
-</@goHome>

@@ -26,14 +26,16 @@ import org.apache.log4j.Logger;
 
 import com.gnizr.core.user.UserManager;
 import com.gnizr.db.dao.User;
+import com.gnizr.db.vocab.AccountStatus;
 import com.gnizr.web.action.AbstractAction;
 import com.gnizr.web.action.LoggedInUserAware;
 import com.gnizr.web.action.SessionConstants;
+import com.gnizr.web.action.error.ActionErrorCode;
 import com.gnizr.web.util.ServletUtilities;
 import com.opensymphony.webwork.interceptor.SessionAware;
 
 public class UserLogin extends AbstractAction implements SessionAware, LoggedInUserAware{
-
+	
 	/**
 	 * 
 	 */
@@ -47,6 +49,7 @@ public class UserLogin extends AbstractAction implements SessionAware, LoggedInU
 	
 	private UserManager userManager;
 	
+	@SuppressWarnings("unchecked")
 	private Map session;
 	
 	private boolean rememberMe;
@@ -111,21 +114,25 @@ public class UserLogin extends AbstractAction implements SessionAware, LoggedInU
 	
 	@SuppressWarnings("unchecked")
 	private String doLogin() throws Exception{
-		User userRecord = null;
-		if(user != null && userManager.isAuthorized(user)){			
-			userRecord = userManager.getUser(user.getUsername());
-			if(userRecord != null){
+		User userRecord = userManager.getUser(user.getUsername(), user.getPassword());
+		if(userRecord != null){
+			if(userRecord.getAccountStatus() == AccountStatus.ACTIVE){
 				session.put(SessionConstants.LOGGED_IN_USER,userRecord);
 				doRememberMe(userRecord);
 				return SUCCESS;
+			}else if(userRecord.getAccountStatus() == AccountStatus.INACTIVE){
+				addActionError(String.valueOf(ActionErrorCode.ERROR_ACCOUNT_INACTIVE));
+				return "inactive";
+			}else{
+				addActionError(String.valueOf(ActionErrorCode.ERROR_ACCOUNT_DISABLED));
+				return "disabled";
 			}
-		}else{
-			addActionError("password incorrect or account does not exist");			
 		}
-		session.put(SessionConstants.LOGGED_IN_USER,null);
+		addActionError(String.valueOf(ActionErrorCode.ERROR_LOGIN_FAILED));
 		return INPUT;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void setSession(Map session) {
 		this.session = session;		
 	}

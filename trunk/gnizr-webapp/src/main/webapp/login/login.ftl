@@ -1,6 +1,5 @@
 <#include "/lib/web/macro-lib.ftl"/>
 <#-- if logged in, go to the home page of the user -->
-<@goHome>
 <@pageBegin pageTitle="login" 
             cssHref=[gzUrl("/css/gnizr-frontpage.css")]
             enableJS=false/>                      
@@ -15,7 +14,11 @@
 
 <@formInput id="siteLogin">
 <@pageTitle>User Login</@pageTitle>
-<@displayActionError action=action/>
+<#if (action.actionErrors)?has_content>
+<ul class="formErrors">
+    <li class="errorMessage">Username and password do not match.</li>
+</ul>  
+</#if>
 <@ww.form action="userLogin.action" method="post">
 <@ww.textfield label="Username" name="user.username"/>
 <@ww.password label="Password" name="user.password"/>
@@ -44,6 +47,5 @@
 </div>
 <div class="cleardiv"/>
 <@pageEnd/>
-</@goHome>
 
 
