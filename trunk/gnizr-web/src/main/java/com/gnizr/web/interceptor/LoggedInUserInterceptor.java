@@ -75,6 +75,10 @@ public class LoggedInUserInterceptor implements Interceptor{
 			if(user != null){
 				session.put(SessionConstants.LOGGED_IN_USER,user);
 			}
+		}else{
+			if(userManager.hasUser(user) == false){
+				session.clear();
+			}
 		}
 		Action action = (Action)actionInvocation.getAction();
 		if(user != null && (action instanceof LoggedInUserAware)){
