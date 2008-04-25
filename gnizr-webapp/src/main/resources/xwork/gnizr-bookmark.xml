@@ -13,8 +13,8 @@
 			<interceptor-ref name="config-gnizr"/>			
 			<interceptor-ref name="basicStack"/>
 			<result name="success" type="redirect">${redirectToPage}</result>							
-			<result name="input" type="freemarker">/login.ftl</result>
-			<result name="error" type="freemarker">/login.ftl</result>
+			<result name="input" type="freemarker">/login/login.ftl</result>
+			<result name="error" type="freemarker">/login/login.ftl</result>
 		</action>
 		
 		<action name="userLogin" class="com.gnizr.web.action.user.UserLogin">
@@ -22,8 +22,8 @@
 			<interceptor-ref name="config-gnizr"/>			
 			<interceptor-ref name="validationWorkflowStack"/>
 	   	    <result name="success" type="redirect">${redirectToPage}</result>			
-			<result name="input" type="freemarker">/login.ftl</result>
-			<result name="error" type="freemarker">/login.ftl</result>
+			<result name="input" type="freemarker">/login/login.ftl</result>
+			<result name="error" type="freemarker">/login/login.ftl</result>
 		</action>
 		
 		<action name="add" class="com.gnizr.web.action.bookmark.EditBookmark"
