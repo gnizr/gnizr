@@ -65,7 +65,17 @@ to ${request.contextPath}
 <#function gzIsUserRegistrationOpen>
   <#if (gnizrConfiguration.registrationPolicy)?exists>
     <#local policy = gnizrConfiguration.registrationPolicy/>
-    <#if policy?matches("open","i")>      
+    <#if policy?matches("open","i") || policy?matches("approval","i")>      
+      <#return true/>
+    </#if>
+  </#if>
+    <#return false/>
+</#function>
+
+<#function gzIsRegistrationApprovalRequired>
+  <#if (gnizrConfiguration.registrationPolicy)?exists>
+    <#local policy = gnizrConfiguration.registrationPolicy/>
+    <#if policy?matches("close","i") || policy?matches("approval","i")>      
       <#return true/>
     </#if>
   </#if>

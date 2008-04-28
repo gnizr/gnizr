@@ -10,19 +10,23 @@
 			<interceptor-ref name="loggedIn"/>					
 			<interceptor-ref name="config-gnizr"/>
 			<interceptor-ref name="basicStack"/>	
-			<result name="success" type="redirect">/home</result>				
+			<result name="success" type="redirect-action">
+				<param name="namespace">/settings/folders</param>
+				<param name="actionName">createMyBookmarksFolder</param>			
+			</result>
 			<result name="input" type="freemarker">/login/login.ftl</result>
 			<result name="error" type="freemarker">/common/error.ftl</result>
 		</action>
 		
 		<action name="userLogin" class="com.gnizr.web.action.user.UserLogin">
-			<interceptor-ref name="sessionInvalidation">
-	    		<param name="type">NextRequest</param>
-	    	</interceptor-ref>
 			<interceptor-ref name="loggedIn"/>		
-			<interceptor-ref name="config-gnizr"/>			
+			<interceptor-ref name="config-gnizr"/>	
+			<interceptor-ref name="basicStack"/>			
 			<interceptor-ref name="validationWorkflowStack"/>
-			<result name="success" type="redirect">/home</result>				
+			<result name="success" type="redirect-action">
+				<param name="namespace">/settings/folders</param>
+				<param name="actionName">createMyBookmarksFolder</param>			
+			</result>				
 			<result name="input" type="freemarker">/login/login.ftl</result>
 			<result name="disabled" type="freemarker">/login/account-disabled.ftl</result>
 			<result name="inactive" type="freemarker">/login/account-inactive.ftl</result>
@@ -87,6 +91,22 @@
 			</result>
 			<result name="close" type="freemarker">/login/register-closed.ftl</result>		
 		</action>
+		
+		<action name="approve" class="com.gnizr.web.action.user.ApproveUserAccount"
+			 method="doApproveActivationRequest">
+			<interceptor-ref name="auth-gnizr"/>	
+			<interceptor-ref name="gnizrNoPolicyDefaultStack"/>					
+			<result name="input" type="freemarker">/login/approval-failed.ftl</result>		
+			<result name="success" type="freemarker">/login/approval-okay.ftl</result>
+		</action>
+		
+		<action name="deny" class="com.gnizr.web.action.user.ApproveUserAccount"
+			method="doDenyActivationRequest">
+			<interceptor-ref name="auth-gnizr"/>	
+			<interceptor-ref name="gnizrNoPolicyDefaultStack"/>					
+			<result name="input" type="freemarker">/login/approval-failed.ftl</result>		
+			<result name="success" type="freemarker">/login/approval-deny.ftl</result>
+		</action>		
 	</package>	
 	
 	<package name="gnizr-forgotpassword" extends="gnizr-default" namespace="/password">
