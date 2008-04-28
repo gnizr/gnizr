@@ -56,7 +56,7 @@
 
 		<!--  Define the admin email contact of your site -->
 		<property name="siteContactEmail">
-			<value>harry.chen@gmail.com</value>
+			<value></value>
 		</property>
 
 		<!-- Define the web application URL of this gnizr installation -->
@@ -65,9 +65,7 @@
 		</property>
 		<!-- Define the Google Maps API Key to be used for this gnizr installation -->
 		<property name="googleMapsKey">
-			<value>
-				ABQIAAAA5UsQFqmHpHln5pC8nyp05RTwM0brOpm-All5BF6PoaKBxRWWERS_Vpbx966CLXx9tDQthE6QI_9_bg
-			</value>
+			<value>ABQIAAAA5UsQFqmHpHln5pC8nyp05RTwM0brOpm-All5BF6PoaKBxRWWERS_Vpbx966CLXx9tDQthE6QI_9_bg</value>
 		</property>
 		<!-- Define Snap Shots configuration paramaters -->
 		<property name="snapShotsKey">
@@ -75,14 +73,22 @@
 		</property>
 		<!--
 			Defines whether or not anonymous readers are allowed to view gnizr users' bookmarks 
-			- "close" indicates user login is required for viewing any gnizr user pages
-			- "open" indicates anonymous readers are permitted to view user pages
+			- "close": indicates user login is required for viewing any gnizr user pages
+			- "open": indicates anonymous readers are permitted to view user pages
 		-->
 		<property name="anonymousReaderPolicy">
 			<value>close</value>
 		</property>
+		<!-- 
+		    Defines new user registration policy. 
+		    - "close": new user account can only be created by logging as the Super User 'gnizr'
+		    - "open": any person with a valid email can create a new account 
+ 			- "approval": any person can register, but account activation requires explicit admin approval
+ 						
+ 			If "open" or "approval" is used, siteContactEmail option must be defined (see above)
+		 -->
 		<property name="registrationPolicy">
-			<value>open</value>
+			<value>approval</value>
 		</property>
 		<property name="serverMaintenanceModeEnabled">
 			<value>false</value>
@@ -118,10 +124,10 @@
 		http://static.springframework.org/spring/docs/2.5.x/api/org/springframework/mail/javamail/JavaMailSenderImpl.html	
 	-->
 	<bean id="mailSender"
-		class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		class="org.springframework.mail.javamail.JavaMailSenderImpl" singleton="true">
 		<property name="host">
 			<value>localhost</value>
 		</property>
 	</bean>
-
+	
 </beans>
