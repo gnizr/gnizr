@@ -83,7 +83,7 @@
 		    Defines new user registration policy. 
 		    - "close": new user account can only be created by logging as the Super User 'gnizr'
 		    - "open": any person with a valid email can create a new account 
- 			- "approval": any person can register, but account activation requires explicit admin approval
+ 			- "approval": any person can register, but account activation requires explicit 'gnizr' approval
  						
  			If "open" or "approval" is used, siteContactEmail option must be defined (see above)
 		 -->
@@ -106,7 +106,7 @@
 	<bean id="searchIndexProfile"
 		class="com.gnizr.core.search.SearchIndexProfile" singleton="true">
 		<property name="searchIndexDirectory">
-			<value>d:/tmp/search-data</value>
+			<value>c:/search-data</value>
 		</property>
 		<property name="resetSearchIndexOnStart">
 			<value>false</value>
