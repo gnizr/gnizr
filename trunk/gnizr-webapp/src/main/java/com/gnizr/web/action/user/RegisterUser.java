@@ -45,7 +45,20 @@ public class RegisterUser extends AbstractAction{
 	private TokenManager tokenManager;
 	private MailSender mailSender;
 	private SimpleMailMessage verifyEmailTemplate;
+	private SimpleMailMessage approvalEmailTemplate;
+	private SimpleMailMessage notifyEmailTemplate;
 	private Configuration freemarkerEngine;
+	
+	private boolean isApprovalRequired(){
+		String v = getGnizrConfiguration().getRegistrationPolicy();
+		if(v != null && "approval".equalsIgnoreCase(v)){
+			return true;
+		}
+		// it's okay dont' check for "open" or "close" because
+		// the registrationPolicyInterceptor will take care of this
+		// before the action is executed.
+		return false;
+	}
 	
 	@Override
 	protected String go() throws Exception {
@@ -72,9 +85,16 @@ public class RegisterUser extends AbstractAction{
 				String token = tokenManager.createResetToken(user);
 				logger.debug("Created email verification token: " + token + " for user = " + username);
 				if(token != null){
-					if(sendEmailVerification(token,user) == false){
-						logger.error("Send email verification failed. To user email " + user.getEmail());
-						return ERROR;
+					if(isApprovalRequired() == false){
+						if(sendEmailVerification(token,user) == false){
+							logger.error("Send email verification failed. To user email " + user.getEmail());
+							return ERROR;
+						}
+					}else{
+						if(sendNotifyAndApproval(token,user) == false){
+							logger.error("Send email notify and approval failed. To user email " + user.getEmail());
+							return ERROR;
+						}
 					}
 				}else{
 					logger.error("Unable to create token.");
@@ -90,6 +110,8 @@ public class RegisterUser extends AbstractAction{
 		return SUCCESS;
 	}
 	
+
+
 	public String doRenewUserAccount() throws Exception{
 		User user = null;
 		try{
@@ -102,8 +124,14 @@ public class RegisterUser extends AbstractAction{
 			if(user.getAccountStatus() == AccountStatus.INACTIVE){
 				String token = tokenManager.createResetToken(user);
 				if(token != null){
-					if(sendEmailVerification(token, user) == true){
-						return SUCCESS;
+					if(isApprovalRequired() == false){
+						if(sendEmailVerification(token, user) == true){
+							return SUCCESS;
+						}
+					}else{
+						if(sendNotifyAndApproval(token, user) == true){
+							return SUCCESS;
+						}
 					}
 				}
 			}else{
@@ -114,6 +142,86 @@ public class RegisterUser extends AbstractAction{
 		}
 		return ERROR;
 	}	
+	
+	private boolean sendNotifyAndApproval(String token, User user) {
+		Map<String,Object> model = new HashMap<String, Object>();
+		model.put("token", token);
+		model.put("username",user.getUsername());
+		model.put("email",user.getEmail());
+		model.put("createdOn", user.getCreatedOn());
+		model.put("gnizrConfiguration", getGnizrConfiguration());
+		
+		if(getNotifyEmailTemplate() == null){
+			logger.error("RegisterUser: notifyEmailTemplate bean is not defined");
+			addActionError(String.valueOf(ActionErrorCode.ERROR_CONFIG));
+			return false;
+		}
+		if(getApprovalEmailTemplate() == null){
+			logger.error("RegisterUser: approvalEmailTemplate bean is not defined");
+			addActionError(String.valueOf(ActionErrorCode.ERROR_CONFIG));
+			return false;
+		}
+		
+		String toUserEmail = user.getEmail();
+		String toAppvEmail = getGnizrConfiguration().getSiteContactEmail();
+		if(toUserEmail == null){
+			logger.error("RegisterUser: the email of user " + user.getUsername() + " is not defined");
+			addActionError(String.valueOf(ActionErrorCode.ERROR_EMAIL_UNDEF));
+			return false;
+		}
+				
+		SimpleMailMessage notifyMsg = new SimpleMailMessage(getNotifyEmailTemplate());
+		notifyMsg.setTo(toUserEmail);
+		
+		if(notifyMsg.getFrom() == null){
+			String contactEmail = getGnizrConfiguration().getSiteContactEmail();
+			if(contactEmail != null){
+				notifyMsg.setFrom(contactEmail);
+			}else{
+				notifyMsg.setFrom("no-reply@localhost");
+			}
+		}	
+		
+		SimpleMailMessage approvalMsg = new SimpleMailMessage(getApprovalEmailTemplate());
+		if(toAppvEmail != null){
+			approvalMsg.setTo(toAppvEmail);
+			approvalMsg.setFrom(toUserEmail);
+		}else{
+			logger.error("RegisterUser: siteContactEmail is not defined. Can't sent approval emaili. Abort.");
+			return false;
+		}
+				
+		Template fmTemplate1 = null;
+		Template fmTemplate2 = null;
+		String text1 = null;
+		String text2 = null;
+		try{			
+			fmTemplate1 = freemarkerEngine.getTemplate("login/notifyemail-template.ftl");
+			fmTemplate2 = freemarkerEngine.getTemplate("login/approvalemail-template.ftl");
+			text1 = FreeMarkerTemplateUtils.processTemplateIntoString(fmTemplate1,model);
+			text2 = FreeMarkerTemplateUtils.processTemplateIntoString(fmTemplate2,model);
+		}catch(Exception e){
+			logger.error("RegisterUser: error creating message template from Freemarker engine");
+		}
+		notifyMsg.setText(text1);
+		approvalMsg.setText(text2);		
+		
+		if(getMailSender() == null){
+			logger.error("RegisterUser: mailSender bean is not defined");
+			addActionError(String.valueOf(ActionErrorCode.ERROR_CONFIG));
+			return false;
+		}
+		try{
+			getMailSender().send(notifyMsg);
+			getMailSender().send(approvalMsg);
+			return true;
+		}catch(Exception e){
+			logger.error("RegisterUser: send mail error. " + e);
+			addActionError(String.valueOf(ActionErrorCode.ERROR_INTERNAL));
+		}		
+		
+		return false;
+	}
 	
 	private boolean sendEmailVerification(String token, User user){
 		Map<String,Object> model = new HashMap<String, Object>();
@@ -244,5 +352,21 @@ public class RegisterUser extends AbstractAction{
 
 	public void setFreemarkerEngine(Configuration freemarketEngine) {
 		this.freemarkerEngine = freemarketEngine;
+	}
+
+	public SimpleMailMessage getApprovalEmailTemplate() {
+		return approvalEmailTemplate;
+	}
+
+	public void setApprovalEmailTemplate(SimpleMailMessage approvalEmailTemplate) {
+		this.approvalEmailTemplate = approvalEmailTemplate;
+	}
+
+	public SimpleMailMessage getNotifyEmailTemplate() {
+		return notifyEmailTemplate;
+	}
+
+	public void setNotifyEmailTemplate(SimpleMailMessage notifyEmailTemplate) {
+		this.notifyEmailTemplate = notifyEmailTemplate;
 	}
 }

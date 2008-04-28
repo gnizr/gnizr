@@ -27,6 +27,8 @@ public class TestRegisterUser extends GnizrWebappTestBase {
 	private UserManager userManager;
 	private TokenManager tokenManager;
 	private SimpleMailMessage templateMessage;
+	private SimpleMailMessage notifyMessage;
+	private SimpleMailMessage approvalMessage;
 	private JavaMailSenderImpl mailSender;
 	private GnizrConfiguration gnizrConfiguration;
 	private Configuration freemarkerEngine;	
@@ -51,7 +53,13 @@ public class TestRegisterUser extends GnizrWebappTestBase {
 		
 		templateMessage = new SimpleMailMessage();
 		templateMessage.setSubject("Email Verification");
-
+		
+		notifyMessage = new SimpleMailMessage();
+		notifyMessage.setSubject("Account Registration Pending");
+		
+		approvalMessage = new SimpleMailMessage();
+		approvalMessage.setSubject("Account Registration Approval");
+		
 		mailSender = new JavaMailSenderImpl();
 		mailSender.setHost("localhost");
 		
@@ -59,9 +67,11 @@ public class TestRegisterUser extends GnizrWebappTestBase {
 		action.setUserManager(userManager);
 		action.setTokenManager(tokenManager);
 		action.setVerifyEmailTemplate(templateMessage);
+		action.setApprovalEmailTemplate(approvalMessage);
+		action.setNotifyEmailTemplate(notifyMessage);
 		action.setMailSender(mailSender);
 		action.setFreemarkerEngine(freemarkerEngine);
-		action.setGnizrConfiguration(gnizrConfiguration);
+		action.setGnizrConfiguration(gnizrConfiguration);		
 	}
 
 	protected void tearDown() throws Exception {
@@ -297,6 +307,43 @@ public class TestRegisterUser extends GnizrWebappTestBase {
 			mailServer.stop();
 		}
 		assertTrue(mailServer.getReceivedEmailSize() == 0);
+	}
+	
+	
+	@SuppressWarnings("unchecked")
+	public void testGoApprovalEnabled() throws Exception{
+		SimpleSmtpServer mailServer = SimpleSmtpServer.start();
+		try {
+			action.getGnizrConfiguration().setRegistrationPolicy("approval");
+			action.setUsername("johnp");
+			action.setPassword("poploop");
+			action.setPasswordConfirm("poploop");
+			action.setEmail("johnp@example.com");
+			String op = action.execute();
+			assertEquals(ActionSupport.SUCCESS, op);
+		} finally {
+			mailServer.stop();
+		}
+		assertTrue(mailServer.getReceivedEmailSize() == 2);
+		Iterator<SmtpMessage> emailIter = mailServer.getReceivedEmail();
+		SmtpMessage email = (SmtpMessage) emailIter.next();
+		assertTrue(email.getHeaderValue("Subject").equals("Account Registration Pending"));
+		assertNotNull(email.getBody());
+		assertTrue(email.getBody().contains("NotifyEmail"));
+		assertTrue(email.getBody().contains("Username(johnp)"));
+		assertTrue(email.getBody().contains("URL(http://foo.com/gnizr/register/verifyEmail.action?username=johnp"));
+		
+		email = (SmtpMessage) emailIter.next();
+		assertTrue(email.getHeaderValue("Subject").equals("Account Registration Approval"));
+		assertNotNull(email.getBody());
+		assertTrue(email.getBody().contains("ApprovalEmail"));
+		assertTrue(email.getBody().contains("CreatedOn: "));
+		assertTrue(email.getBody().contains("Email(johnp@example.com)"));
+		assertTrue(email.getBody().contains("Username(johnp)"));
+		assertTrue(email.getBody().contains("URL(http://foo.com/gnizr/register/verifyEmail.action?username=johnp"));
+		
+		User user = userManager.getUser("johnp","poploop");
+		assertEquals(AccountStatus.INACTIVE,user.getAccountStatus().intValue());
 	}
 	
 	
