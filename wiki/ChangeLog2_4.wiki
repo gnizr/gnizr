@@ -1,6 +1,17 @@
 #summary Changelog of all releases made under version 2.4
 #labels Phase-Implementation
 
+==== Version 2.4.0-M3 (in progress) ====
+
+Changelog
+
+  * [http://code.google.com/p/gnizr/issues/detail?id=58 Issue 58] : Allow users to recover their password (fixed, need testing)
+  * [http://code.google.com/p/gnizr/issues/detail?id=60 Issue 60]: HTTP session is not cleared after the user logout (fixed, verified)
+  * [http://code.google.com/p/gnizr/issues/detail?id=61 Issue 61]: Verify user email when creating the user account
+  * [http://code.google.com/p/gnizr/issues/detail?id=63 Issue 63]: Allow the administrator to explicitly approve new user registration
+  * Changed `siteContactEmail` configuration property from OPTIONAL to REQUIRED. 
+  * Changed `siteContactEmail` default value to `help@localhost`.
+ 
 
 ==== Version 2.4.0-M2 (18 April 2008) ====
  
