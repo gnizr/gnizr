@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+	"http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	
+	<bean id="searchBookmark" class="com.gnizr.web.action.search.SearchBookmark" singleton="false">
+		<property name="search">
+			<ref bean="search"/>
+		</property>
+		<property name="userManager">
+			<ref bean="userManager"/>
+		</property>
+	</bean>	
+	
+	<bean id="listSearchEngines" class="com.gnizr.web.action.search.ListSearchEngines" singleton="false"/>
+	
+	<bean id="suggestSearchTags" class="com.gnizr.web.action.search.SuggestSearchTags" singleton="false">
+		<property name="tagManager">
+			<ref bean="tagManager"/>
+		</property>
+		<property name="tagPager">
+			<ref bean="tagPager"/>
+		</property>
+	</bean>
+	
+	<bean id="indexBookmark" class="com.gnizr.web.action.search.IndexBookmark" singleton="false">
+		<property name="searchIndexManager">
+		 	<ref bean="searchIndexManager"/>
+		</property>
+	</bean>
+	
+	<bean id="searchCommunityBookmark" class="com.gnizr.web.action.search.SearchCommunityBookmark" singleton="false">
+		<property name="bookmarkSearcher">
+			<ref bean="bookmarkSearcher"/>
+		</property>
+	</bean>
+	
+	<bean id="searchUserBookmark" class="com.gnizr.web.action.search.SearchUserBookmark" singleton="false">
+		<property name="bookmarkSearcher">
+			<ref bean="bookmarkSearcher"/>
+		</property>
+	</bean>
+	
+	<bean id="searchQuerySuggest" class="com.gnizr.web.action.search.SearchQuerySuggest" singleton="false">	
+	</bean>
+	
+</beans>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+	"http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	
+	<!-- initial gnizr system configuration -->
+	<import resource="gnizr-config.xml"/>
+	
+	<import resource="spring/gnizr-misc.xml"/>
+	
+	<!-- creates DAO objects to access records in the persistent data store -->
+	<import resource="spring/gnizr-dao.xml"/>
+
+	<!-- creates core classes common to all web application components -->
+	<import resource="spring/core-managers.xml"/>
+	<import resource="spring/core-pagers.xml"/>
+	<import resource="spring/core-tagging.xml"/>	
+	<import resource="spring/core-search.xml"/>
+	<import resource="spring/core-bookmark.xml"/>
+	<import resource="spring/core-timer.xml"/>
+	
+	<!-- creates webwork interceptors common to all webwork actions -->
+	<import resource="spring/web-interceptors.xml"/>	
+	
+	<import resource="spring/web-useradmin.xml"/>
+	<import resource="spring/web-userbmark.xml"/>
+	<import resource="spring/web-userfolder.xml"/>
+	<import resource="spring/web-usertags.xml"/>	
+	<import resource="spring/web-userfeed.xml"/>
+	<import resource="spring/web-links.xml"/>	
+	<import resource="spring/web-ui.xml"/>
+	<import resource="spring/web-clustermap.xml"/>
+	<import resource="spring/web-timeline.xml"/>
+    <import resource="spring/web-search.xml"/>
+	<import resource="spring/web-rssrobot.xml"/>
+	<import resource="spring/web-forgotpassword.xml"/>
+	<import resource="spring/web-registeruser.xml"/>
+</beans>

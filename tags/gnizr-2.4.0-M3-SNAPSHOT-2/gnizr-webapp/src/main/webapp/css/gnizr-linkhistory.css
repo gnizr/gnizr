@@ -1,0 +1,105 @@
+#bookmark-detail{
+	width: 80%;
+	border: 1px solid #C0C0C0;
+	padding: 8px;
+}
+
+h2.title{
+  	margin: 2px 0px;
+  	padding: 0px;
+}
+
+.link{
+  	margin: 2px 0px;
+  	padding: 0px;
+  	color: #0066FF;
+}
+
+.meta{
+  	margin: 10px 0px;
+  	padding: 0px;
+}
+
+.notes{
+  	margin: 8px 0px;
+  	padding: 14px 12px;
+  	/*border-bottom: 1px solid #C0C0C0;
+  	border-top: 1px solid  #C0C0C0; */
+}
+
+/** ======= MAIN DIV for Link History ===== **/
+
+.link-description, .user-comments{
+	width: 60%;
+	padding: 0px;
+	margin:0px;
+}
+
+p.link-description{
+	padding: 8px;
+	margin-bottom: 4px;
+	padding-left:0px;
+}
+
+ol.user-comments{
+    margin:0px;
+    margin-top: 40px;
+    padding:0px;
+}
+
+ol.user-comments li{	
+	border-bottom: 1px solid #999999;
+	margin:0px;
+	padding:0px;
+}
+
+p.user-comment{
+	padding: 8px;
+	margin-bottom: 4px;
+}
+
+.link-description {
+	font-size: 11px;
+	background-color: #FFFFCC;
+}
+
+.link-description a:link{
+	color: #FF6600;
+	text-decoration: none; 
+}
+
+.link-description a:hover{
+	color: #FF6600;
+	text-decoration: underline; 
+}
+
+.link-description a:visited { 
+	text-decoration: none; 
+	color: #FF6600;
+}
+
+.link-description a:active { 
+	color: #4C4C4C;
+	text-decoration: none; 
+}
+
+.link-description .title {
+  	font-size: 130%;
+}
+
+.link-description .commands {
+	padding-left: 85%;
+}
+
+.user-comments {
+	list-style-type:none;
+}
+
+.user-comment .date{
+	float: right;
+}
+
+.user-comment .quote{
+	font-size: 120%;	
+}
+
