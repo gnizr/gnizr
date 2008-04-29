@@ -15,7 +15,7 @@ each gnizr page.
 </#function>
 
 <#function gnizrDevVersion >
-  <#return "-M2"/>
+  <#return "-M3"/>
 </#function>
 
 <#-- 
