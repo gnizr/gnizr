@@ -24,7 +24,7 @@ You should edit this configuration file to suit your machine's configuration. Co
 || `googleMapsKey` || [http://www.google.com/apis/maps/signup.html Google Maps API key] of your site || _a key registered for `http://localhost` || Yes || 
 || `snapShotsKey` || [http://www.snap.com/about/shots1.php SnapShots API key] of your site || || No || 
 || `anonymousReaderPolicy` || Whether you allow anonymous user to view contents published in gnizr. If `open`, anyone can view contents published in gnizr. If `close`, only logged in user is allowed to view published contents. || `open` ||  No || 
-|| `registrationPolicy` || Whether you required new user accounts to be created by system administrator. Valid options: `open`,`close` and `approval`. See DevUserRegistration|| `open`|| No || 
+|| `registrationPolicy` || Whether you required new user accounts to be created by system administrator. Valid options: `open`,`close` and `approval`. See DevUserRegistrationPolicy|| `open`|| No || 
 || `serverMaintenanceModeEnabled` || Whether the application is run in a service maintenance mode. If `true`, only gnizr administrator is allowed to login. If `false`, any registered user can login. || `false`|| No || 
 || `openSearchServices` || A list of OpenSearch service description document URL || See [DevOpenSearch OpenSearch documentation] || Yes ||
 || `searchIndexDirectory` || An existing directory path for storing Lucene search index || `C:\search-data` || Yes ||
