@@ -1,7 +1,7 @@
 #summary Tips on configuring `mailSender` in `gnizr-config.xml`
 #labels Phase-Deploy
 
-To enable email support in gnizr, you must properly configure the `mailSender` property in the `gnizr-config.xml` file. The property defines how gnizr should communicate with the SMTP server on your network, and use it to send email messages.
+To enable email support in gnizr, you must properly configure the `mailSender` property in the `gnizr-config.xml` file. This property defines how gnizr should communicate with the SMTP server on your network, and use it to send email messages.
 
 This document describes some typical `mailSender` configuration.
 
