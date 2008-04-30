@@ -20,3 +20,15 @@ Valid values for `registrationPolicy`:
 
 If this property is not defined, the default value is `open`.
 
+== Design == 
+
+The design for Close Policy implementation is as follows. If the user registration policy is `close`, then any one who attempts to invoke the user registration pages will receive a notice message, which says the user registration function is closed.
+
+For `open` and `approval` policy implementation, the business logic is depicted in the following UML diagrams:
+
+
+|| [http://www.flickr.com/photos/14804582@N08/2453931161/  http://farm3.static.flickr.com/2253/2453931161_47cf62b7fa_o.png] ||
+
+|| [http://www.flickr.com/photos/14804582@N08/2454757210/ http://farm3.static.flickr.com/2394/2454757210_31e045f744_o.png]||
+
+
