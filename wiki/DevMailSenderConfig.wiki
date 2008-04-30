@@ -5,6 +5,8 @@ To enable email support in gnizr, you must properly configure the `mailSender` p
 
 This document describes some typical `mailSender` configuration.
 
+For advanced SMTP configuration, consult [http://static.springframework.org/spring/docs/2.5.x/api/org/springframework/mail/javamail/JavaMailSenderImpl.html  JavaMailSenderImpl] and [http://java.sun.com/products/javamail/javadocs/com/sun/mail/smtp/package-summary.html JavaMail] documentation.
+
 == SMTP Server Runs on `localhost` ==
 
 If the SMTP server runs on the same host as the gnizr web application, the following configuration should be sufficient.
@@ -23,7 +25,7 @@ If the SMTP server runs on the same host as the gnizr web application, the follo
 
 == SMTP Server with SSL Support ==
 
-If the SMTP server supports SSL and require user authentication, you can use the following configuration:
+If the SMTP server supports SSL and requires user authentication, you can use the following configuration:
 
 {{{
 <bean id="mailSender"
