@@ -90,8 +90,7 @@
 	</dependencies>
 	<build>
 		<finalName>gnizr</finalName>
-		<outputDirectory>
-			${basedir}/src/main/webapp/WEB-INF/classes</outputDirectory>
+		<outputDirectory>${basedir}/src/main/webapp/WEB-INF/classes</outputDirectory>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

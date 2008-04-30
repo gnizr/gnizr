@@ -1,16 +1,6 @@
 <#include "/lib/web/macro-lib.ftl"/>
-
-<@pageBegin pageTitle="reset password" 
-            cssHref=[gzUrl("/css/gnizr-frontpage.css")]
-            enableJS=false/>                      
-
-<div class="frontPage">   
-       
-
-<div id="siteBanner">
-  <h1 class="siteName">${getSiteName()}</h1>
-  <h2 class="siteDescription">${getSiteDescription()}</h2>
-</div>
+<#include "/login/macro-lib.ftl"/>
+<@frontPage title="reset password">
 
 <div class="frontPageMessage">
 <@pageTitle>Reset Password</@pageTitle>
@@ -24,5 +14,4 @@
 </@ww.form>
 </div>
 
-<div class="cleardiv"/>
-<@pageEnd/>
+</@frontPage>

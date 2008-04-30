@@ -1,15 +1,6 @@
 <#include "/lib/web/macro-lib.ftl"/>
-
-<@pageBegin pageTitle="user registration closed" 
-            cssHref=[gzUrl("/css/gnizr-frontpage.css")]
-            enableJS=false/>                      
-
-<div class="frontPage">          
-
-<div id="siteBanner">
-  <h1 class="siteName">${getSiteName()}</h1>
-  <h2 class="siteDescription">${getSiteDescription()}</h2>
-</div>
+<#include "/login/macro-lib.ftl"/>
+<@frontPage title="user registration closed">
 
 <div class="frontPageMessage">
 <@pageTitle>User Registration Closed</@pageTitle>
@@ -17,6 +8,4 @@
 <p>Pleae come back later.</p>  
 </div>
 
-</div>
-<div class="cleardiv"/>
-<@pageEnd/>
+</@frontPage>
