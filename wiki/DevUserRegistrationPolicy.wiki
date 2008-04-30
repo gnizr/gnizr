@@ -1,0 +1,19 @@
+#summary Describes the design and implementation of different user registration policy.
+#labels Phase-Design,Phase-Implementation
+
+|| NOTE: This document is for gnizr 2.4 only ||
+
+= Introduction =
+
+Gnizr implements a policy-driven user registration function. Depending on the configuration, system administrators can choose to implement one of the following user registration policy:
+
+  # Allow any one with a valid email address to create and activate new user accounts.
+  # Allow any one to create new accounts, but their activation requires the explicit approval from the administrator.
+  # Prohibit any one to create new account, and only the administrator can create and activate new user accounts.
+
+= Details =
+
+Add your content here.  Format your content with:
+  * Text in *bold* or _italic_
+  * Headings, paragraphs, and lists
+  * Automatic links to other wiki pages
