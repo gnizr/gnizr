@@ -3,17 +3,20 @@
 
 || NOTE: This document is for gnizr 2.4 only ||
 
-= Introduction =
-
 Gnizr implements a policy-driven user registration function. Depending on the configuration, system administrators can choose to implement one of the following user registration policy:
 
-  # Allow any one with a valid email address to create and activate new user accounts.
-  # Allow any one to create new accounts, but their activation requires the explicit approval from the administrator.
-  # Prohibit any one to create new account, and only the administrator can create and activate new user accounts.
+  # _Open Policy_: allow any one with a valid email address to create and activate new user accounts.
+  # _Approval Policy_: allow any one to create new accounts, but their activation requires the explicit approval from the administrator.
+  # _Close Policy_: prohibit any one to create new account, and only the administrator can create and activate new user accounts.
 
-= Details =
+== Configuration == 
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+To set the user registration policy, system administrators should edit the `registrationPolicy` property in `gnizr-config.xml`. 
+
+Valid values for `registrationPolicy`:
+  * `open` -- for Open Policy
+  * `close` -- for Close Policy
+  * `approval` -- for Approval Policy
+
+If this property is not defined, the default value is `open`.
+
