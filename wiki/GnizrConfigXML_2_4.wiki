@@ -28,10 +28,10 @@ You should edit this configuration file to suit your machine's configuration. Co
 || `serverMaintenanceModeEnabled` || Whether the application is run in a service maintenance mode. If `true`, only gnizr administrator is allowed to login. If `false`, any registered user can login. || `false`|| No || 
 || `openSearchServices` || A list of OpenSearch service description document URL || See [DevOpenSearch OpenSearch documentation] || Yes ||
 || `searchIndexDirectory` || An existing directory path for storing Lucene search index || `C:\search-data` || Yes ||
-|| `resetSearchIndexOnStart` || A flag tells gnizr whether to reset the search index when it starts. On reset, all content in the directory defined by `searchIndexDirectory` will be deleted. (obsolete) ||  `false` || No ||
+|| `resetSearchIndexOnStart` || A flag tells gnizr whether to reset the search index when it starts. On reset, all content in the directory defined by `searchIndexDirectory` will be deleted. (obsolete since 2.4.0-M2) ||  `false` || No ||
 || `searchSuggestDataFile` || A dictionary file used for building search suggestion. Site admins can add new terms to this file. See also DevSearchTermSuggestion || `/dictionary/default.txt` || No ||
 || `suggestPopularTagsEnabled` || Configures whether or not frequently used tags should be used to build search suggest dictionary index. || `true` || No || 
-|| `mailSender` || Defines the configuration for communicating with an SMTP server. See DevMailSenderConfig || `localhost` || Yes ||
+|| `mailSender` || Defines the configuration for communicating with an SMTP server. See DevMailSenderConfig (available since 2.4.0-M3)|| `localhost` || Yes ||
 
 == Tips ==
 
