@@ -21,7 +21,7 @@ Valid values for `registrationPolicy`:
 If this property is not defined, the default value is `open`.
 
 
-|| *NOTE*: Setting property value to either `open` or `approval` will require the proper configuration of SMTP server (i.e., the `mailSender` property) and provide a valid sender email (i.e., the `siteContactEmail`) in `gnizr-config.xml`. ||
+|| *NOTE*: Setting the property value to either `open` or `approval` will require the proper configuration of SMTP server (i.e., the `mailSender` property) and provide a valid sender email (i.e., the `siteContactEmail`) in `gnizr-config.xml`. ||
 
 == Design == 
 
