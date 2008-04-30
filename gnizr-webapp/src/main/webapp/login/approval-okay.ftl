@@ -1,15 +1,6 @@
 <#include "/lib/web/macro-lib.ftl"/>
-
-<@pageBegin pageTitle="approved registration" 
-            cssHref=[gzUrl("/css/gnizr-frontpage.css")]
-            enableJS=false/>                      
-
-<div class="frontPage">          
-
-<div id="siteBanner">
-  <h1 class="siteName">${getSiteName()}</h1>
-  <h2 class="siteDescription">${getSiteDescription()}</h2>
-</div>
+<#include "/login/macro-lib.ftl"/>
+<@frontPage title="approved registration">
 
 <div class="frontPageMessage">
 <@pageTitle>Approved User Registration: ${username}</@pageTitle>
@@ -17,6 +8,5 @@
 been sent to the user's email address.</p>
 <p>No additional actions are required</p>  
 </div>
-</div>
-<div class="cleardiv"/>
-<@pageEnd/>
+
+</@frontPage>

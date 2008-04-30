@@ -1,15 +1,6 @@
 <#include "/lib/web/macro-lib.ftl"/>
-
-<@pageBegin pageTitle="inactive user account" 
-            cssHref=[gzUrl("/css/gnizr-frontpage.css")]
-            enableJS=false/>                      
-
-<div class="frontPage">          
-
-<div id="siteBanner">
-  <h1 class="siteName">${getSiteName()}</h1>
-  <h2 class="siteDescription">${getSiteDescription()}</h2>
-</div>
+<#include "/login/macro-lib.ftl"/>
+<@frontPage title="inactive user account">
 
 <#if gzIsRegistrationApprovalRequired() == true>
 <div class="frontPageMessage">
@@ -37,8 +28,7 @@ below to verify this information.</p>
 <br/>
 <p><a href="${gzUrl("/register/renewUser.action")}" class="large-text system-link">Verify email</a></p>
 </div>
+
 </#if>
 
-</div>
-<div class="cleardiv"/>
-<@pageEnd/>
+</@frontPage>

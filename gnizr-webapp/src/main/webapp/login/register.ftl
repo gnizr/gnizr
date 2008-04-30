@@ -1,15 +1,6 @@
-<#assign ww=JspTaglibs["/WEB-INF/webwork.tld"] >
-<#-- import Freemarker macros that are common to the site -->
 <#include "/lib/web/macro-lib.ftl"/>
-<#assign title="new user registration"/>
-<@pageBegin pageTitle=title cssHref=[gzUrl("/css/gnizr-frontpage.css")] 
-            enableJS=false/>        
-<div class="frontPage">
-
-<div id="siteBanner">
-  <h1 class="siteName">${getSiteName()}</h1>
-  <h2 class="siteDescription">${getSiteDescription()}</h2>
-</div>
+<#include "/login/macro-lib.ftl"/>
+<@frontPage title="new user registration">
 
 <div class="frontPageMessage">
 <@pageTitle>Create an Account</@pageTitle>
@@ -41,5 +32,4 @@ accept the <a href="#">Terms of Service</a> and have read and understand the
 <a href="#">Our Privacy Policy</a>, and agree to be bound by both.
 </p>
 </div>
-<div class="cleardiv"/>
-<@pageEnd/>
+</@frontPage>

@@ -121,7 +121,8 @@
 
 	<!-- Configure the JavaMail sender according your site's SMTP configuration. 
 		For available bean properties, see Spring API:
-		http://static.springframework.org/spring/docs/2.5.x/api/org/springframework/mail/javamail/JavaMailSenderImpl.html	
+		http://static.springframework.org/spring/docs/2.5.x/api/org/springframework/mail/javamail/JavaMailSenderImpl.html
+		http://java.sun.com/products/javamail/javadocs/com/sun/mail/smtp/package-summary.html	
 	-->
 	<bean id="mailSender"
 		class="org.springframework.mail.javamail.JavaMailSenderImpl" singleton="true">

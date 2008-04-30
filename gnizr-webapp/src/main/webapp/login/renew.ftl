@@ -1,16 +1,6 @@
 <#include "/lib/web/macro-lib.ftl"/>
-
-<@pageBegin pageTitle="renew account activation" 
-            cssHref=[gzUrl("/css/gnizr-frontpage.css")]
-            enableJS=false/>                      
-
-<div class="frontPage">   
-       
-
-<div id="siteBanner">
-  <h1 class="siteName">${getSiteName()}</h1>
-  <h2 class="siteDescription">${getSiteDescription()}</h2>
-</div>
+<#include "/login/macro-lib.ftl"/>
+<@frontPage title="renew account activation">
 
 <div class="frontPageMessage">
 <@pageTitle>Renew Account Activation</@pageTitle>
@@ -29,6 +19,4 @@ To initiate the activation of your account, provide your username.
 <@ww.submit cssClass="btn" value="Submit"/>
 </@ww.form>
 </div>
-
-<div class="cleardiv"/>
-<@pageEnd/>
+</@frontPage>

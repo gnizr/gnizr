@@ -1,15 +1,6 @@
 <#include "/lib/web/macro-lib.ftl"/>
-<@pageBegin pageTitle="login" 
-            cssHref=[gzUrl("/css/gnizr-frontpage.css")]
-            enableJS=false/>                      
-
-<div class="frontPage">   
-       
-
-<div id="siteBanner">
-  <h1 class="siteName">${getSiteName()}</h1>
-  <h2 class="siteDescription">${getSiteDescription()}</h2>
-</div>
+<#include "/login/macro-lib.ftl"/>
+<@frontPage title="forgot password">
 
 <div class="frontPageMessage">
 <@pageTitle>Reset Password</@pageTitle>
@@ -28,6 +19,4 @@ To reset your password, provide your username.
 <@ww.submit cssClass="btn" value="Submit"/>
 </@ww.form>
 </div>
-
-<div class="cleardiv"/>
-<@pageEnd/>
+</@frontPage>

@@ -134,6 +134,13 @@ a.web-link:active{
 	text-decoration: underline;
 }
 
+a.nodecor:link, 
+a.nodecor:visited,
+a.nodecor:hover,
+a.nodecor:active{	
+	text-decoration: none;
+}
+
 SPAN.system-link{
 	color: #0066cc;
 	text-decoration: underline;
