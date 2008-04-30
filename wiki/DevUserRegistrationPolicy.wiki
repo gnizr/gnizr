@@ -29,7 +29,4 @@ The design for Close Policy implementation is as follows. If the user registrati
 
 For `open` and `approval` policy implementation, the business logic is depicted in the following UML diagrams:
 
-
-|| [http://www.flickr.com/photos/14804582@N08/2453931161/  http://farm3.static.flickr.com/2253/2453931161_cdda24535f_m.jpg] ||
-
-|| [http://www.flickr.com/photos/14804582@N08/2454757210/ http://farm3.static.flickr.com/2394/2454757210_53a85f1a04_m.jpg]||
+|| [http://www.flickr.com/photos/14804582@N08/2453931161/  http://farm3.static.flickr.com/2253/2453931161_cdda24535f_m.jpg] || [http://www.flickr.com/photos/14804582@N08/2454757210/ http://farm3.static.flickr.com/2394/2454757210_53a85f1a04_m.jpg]||
