@@ -174,8 +174,10 @@ public class SearchIndexManager implements Serializable {
 	}
 
 	/**
-	 * Gets an estimated count of the workload of the internal index thread. Use
-	 * with caution. This number is only an estimated number.
+	 * Gets an estimated count of the workload of the internal index thread. 
+	 * This number is the sum of <code>getIndexProcessPending</code> and 
+	 * <code>getIndexProcessWorking</code>. Use
+	 * with caution. This number is only an estimate.
 	 * 
 	 * @return workload count
 	 */
@@ -184,6 +186,27 @@ public class SearchIndexManager implements Serializable {
 		int numPending = documentQueue.size();
 		return numPending + numWorking;
 	}
+	
+	/**
+	 * Gets an estimated count of the amount of work that is 
+	 * pending to be processed. Use with caution. This number 
+	 * is only an estimate. 
+	 * @return pending work count.
+	 */
+	public int getIndexProcessPending(){
+		return documentQueue.size();
+	}
+
+	/**
+	 * Gets an estimated count of the amount of work 
+	 * that is currently being processed (i.e., not pending). 
+	 * Use with caution. This number is only an estimate.
+	 * @return amount of work being processed.
+	 */
+	public int getIndexProcessWorking(){
+		return worker.getWorkQueueSize();
+	}
+	                                    
 
 	/**
 	 * Checks whether the thread that is responsible for adding, deleting and
@@ -454,7 +477,7 @@ public class SearchIndexManager implements Serializable {
 	}
 
 	private class UpdateIndexWorker implements Runnable {
-		private static final int MAX_WORK_SIZE = 100;
+		private static final int MAX_WORK_SIZE = Integer.MAX_VALUE;
 		private Queue<Request> workQueue = new LinkedList<Request>();
 	
 		private Queue<Request> batchRequest(BlockingQueue<Request> inputQueue)
