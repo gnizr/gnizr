@@ -126,7 +126,7 @@ public class IndexBookmark extends AbstractLoggedInUserAction implements Session
 		for(UserStat stat : userStats){
 			User user = userManager.getUser(stat.getUsername());
 			logger.info("Indexing the bookmarks of user: " + user.getUsername());
-			int ppc = 10;
+			int ppc = 1000;
 			int start = 0;
 			int numOfPages = bookmarkPager.getMaxPageNumber(user,ppc);
 			for(int i = 0; i < numOfPages; i++){
@@ -141,10 +141,10 @@ public class IndexBookmark extends AbstractLoggedInUserAction implements Session
 					status.setBookmarkIndexed(indexCount);
 				}			
 				logger.debug("searchIndexManager.getIndexProcessWorkload = " + searchIndexManager.getIndexProcessWorkLoad());
-				while(searchIndexManager.getIndexProcessWorkLoad() > 100){
+				while(searchIndexManager.getIndexProcessWorkLoad() > 2000){
 					try{
 						logger.debug("Wait 100ms. SearchIndexManager seems to be too busy");
-						Thread.sleep(100);					
+						Thread.sleep(2000);					
 					}catch(Exception e){						
 						logger.error(e);					
 					}
