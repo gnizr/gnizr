@@ -12,26 +12,10 @@
       </includes>
       <binaries>
         <outputDirectory>gnizr-${version}/gnizr</outputDirectory>
-<!--
-        <outputFileNameMapping>gnizr</outputFileNameMapping>
--->
         <includeDependencies>false</includeDependencies>
         <unpack>true</unpack>
       </binaries>
     </moduleSet>
-<!--
-    <moduleSet>
-      <includes>
-        <include>com.gnizr:gnizr-clustermap</include>
-      </includes>
-      <binaries>
-        <outputDirectory>gnizr-${version}/gnizr/applets</outputDirectory>
-        <outputFileNameMapping>gnizr-clustermap-applet.jar</outputFileNameMapping>
-        <includeDependencies>false</includeDependencies>
-        <unpack>false</unpack>
-      </binaries>    
-    </moduleSet>
--->
     <moduleSet>
       <includes>
         <include>com.gnizr:gnizr-db</include>
