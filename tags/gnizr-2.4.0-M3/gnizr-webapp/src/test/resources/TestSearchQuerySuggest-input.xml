@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+<user id="1" username="gnizr" password="63073e692013dffeed4b7e0f30920ff8" fullname="gnizr" created_on="2007-02-26 11:04:19.0" email="" acct_status="1"/>
+  <user id="2" username="hchen1" password="cf95caeb19ac6b9743cb6398d68da02e" fullname="hchen1" created_on="2007-02-26 11:04:33.0" email="harry.chen@gmail.com" acct_status="1"/>
+  <user id="3" username="joe" password="cbff98184193fb964111f2662c38fe0d" fullname="joe" created_on="2007-02-26 18:36:49.0" email="joe@example.com" acct_status="0"/>
+		
+  <link id="1" mime_type_id="0" url="http://www.w3.org/2005/Incubator/geo/Wiki/Geo_Update" url_hash="129ccb651f4172ce14b85ae538667253"/>
+  <link id="2" mime_type_id="0" url="http://www.eclipse.org/projects/dev_process/bugzilla-use.php" url_hash="e317a5fad150e660dcab24f8ceb625a9"/>
+  <link id="3" mime_type_id="0" url="http://www.databasejournal.com/features/mysql/article.php/10897_1587371_1" url_hash="a4be21d01fb334f8277ffb0f779c46e8"/>
+  <link id="4" mime_type_id="0" url="http://www.databasejournal.com/features/mysql/article.php/1578331" url_hash="d0392c3cdfcbf29f3ed3521ac67f9833"/>
+  <link id="5" mime_type_id="0" url="http://www.acm.org/pubs/cacm/" url_hash="8faf3ae22299cbafc7f2c362ddb843cb"/>
+  <link id="6" mime_type_id="0" url="http://www.economistshop.com/asp/default.asp" url_hash="7d28f151f775e984da8522a582c8c300"/>
+  <link id="7" mime_type_id="0" url="http://www.geekyweekly.com/mycategoryorder" url_hash="8d5d402ae625e72bff236966b49c0dba"/>
+  <link id="8" mime_type_id="0" url="http://www.gamepro.com/news.cfm?article_id=98728" url_hash="d1a8e491759cb30d11357c4776be9c66"/>
+  <link id="9" mime_type_id="0" url="http://www.gwu.edu/~nsarchiv/" url_hash="ee28bac7e55abb1dd886c7b531ead3fd"/>
+  <link id="10" mime_type_id="0" url="http://pipes.yahoo.com/" url_hash="cfde41e41831eaee774d11505166eb54"/>
+	
+  <bookmark id="1" user_id="2" link_id="1" title="Geo Update - W3C Geospatial Incubator Group Wiki" notes="" created_on="2007-02-26 11:04:36.0" last_updated="2007-02-26 11:04:36.0" />
+  <bookmark id="2" user_id="2" link_id="2" title="Eclipse Bugzilla Use" notes="how the eclipse project uses Bugzilla" created_on="2007-02-26 11:04:36.0" last_updated="2007-02-26 11:04:36.0"/>
+  <bookmark id="3" user_id="2" link_id="3" title="Using Fulltext Indexes in MySQL - Part 2, Boolean searches" notes="" created_on="2007-02-26 11:04:36.0" last_updated="2007-02-26 11:04:36.0" />
+  <bookmark id="4" user_id="3" link_id="4" title="Using Fulltext Indexes in MySQL - Part 1" notes="Using Fulltext Indexes in MySQL - Part 1" created_on="2007-02-26 11:04:37.0" last_updated="2007-02-26 11:04:37.0" />
+  <bookmark id="5" user_id="2" link_id="5" title="Communications of the ACM" notes="" created_on="2007-02-26 11:04:37.0" last_updated="2007-02-26 11:04:37.0" />
+  <bookmark id="6" user_id="2" link_id="6" title="For all Economist books and range of exclusive business accessories" notes="" created_on="2007-02-26 11:04:37.0" last_updated="2007-02-26 11:04:37.0" />
+  <bookmark id="7" user_id="3" link_id="7" title="My Category Order - WordPress Plugin" notes="" created_on="2007-02-26 11:04:37.0" last_updated="2007-02-26 11:04:37.0" />
+  <bookmark id="8" user_id="3" link_id="8" title="New Wii feature unveiled: Wii voting" notes="" created_on="2007-02-26 11:04:38.0" last_updated="2007-02-26 11:04:38.0" />
+  <bookmark id="9" user_id="2" link_id="9" title="The National Security Archive" notes="The National Security Archive is an  independent non-governmental research institute and library located at The George Washington University in Washington, D.C. The Archive collects and publishes declassified documents acquired through the Freedom of Info" created_on="2007-02-26 11:04:38.0" last_updated="2007-02-26 11:04:38.0" />
+  <bookmark id="10" user_id="2" link_id="10" title="Pipes: Rewire the web" notes="" created_on="2007-02-26 11:04:38.0" last_updated="2007-02-26 11:04:38.0"/> 
+		
+  <tag id="1" tag="class:animal" count="2"/>
+  <tag id="2" tag="web" count="1"/>
+	
+  <bookmark_tag_idx id="1" tag_id="1" bookmark_id="1" count="1" position="1"/>
+  <bookmark_tag_idx id="2" tag_id="1" bookmark_id="3" count="1" position="1"/>  	
+	
+  <user_tag_idx id="1" user_id="1" tag_id="1" count="2"/>
+	
+  <link_tag_idx id="1" link_id="1" tag_id="1" count="1"/>
+  <link_tag_idx id="2" link_id="3" tag_id="1" count="1"/>
+  	
+</dataset>

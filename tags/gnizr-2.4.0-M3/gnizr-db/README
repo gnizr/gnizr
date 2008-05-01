@@ -1,0 +1,32 @@
+README for gnizr-db
+
+This project defines MySQL scripts for populating gnizr database and
+Java implementations for accessing data model objects in the
+database. 
+
+Requirements:
+ - install MySQL 5.0.26
+ - install Cygwin and bash shell
+ - install Maven 2
+
+(1) To create gnizr database for the first time
+
+ - login to MySQL on localhost as an administrator
+ - create a MySQL user "gnizr" with password "gnizr"
+ - create the following database "Catelogs"
+   (1) gnizr_db
+   (2) gnizr_test
+ - give user "gnizr" full permissions to use catelogs (1) & (2)
+ - cd gnizr-db/src/main/resources/sql
+ - run script loadsch.sh
+   - i.e., ./loadsch.sh
+
+(2) To build and install gnizr-db project using maven
+ 
+ - mvn install
+
+(3) An overview of all gnizr stored procedures
+ 
+- see gnizr-db/storedprocedures.txt
+
+Dev Note: update this file if new stored procedures are added.  
