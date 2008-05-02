@@ -13,6 +13,7 @@ Changelog
   * [http://code.google.com/p/gnizr/issues/detail?id=60 Issue 60]: HTTP session is not cleared after the user logout (fixed, verified)
   * [http://code.google.com/p/gnizr/issues/detail?id=61 Issue 61]: Verify user email when creating the user account
   * [http://code.google.com/p/gnizr/issues/detail?id=63 Issue 63]: Allow the administrator to explicitly approve new user registration
+  * [http://code.google.com/p/gnizr/issues/detail?id=64 Issue 64]: Bookmarklet failed to work in IE6 (in progress, need testing)
   * Changed `siteContactEmail` configuration property from OPTIONAL to REQUIRED. 
   * Changed `siteContactEmail` default value to `help@localhost`.
   * Optimized the algorithm and reduced the amount of time required for rebuilding search index. 
