@@ -13,6 +13,11 @@ public interface ActionErrorCode {
 	public static final int ERROR_CONFIG = 11;
 	
 	/**
+	 * IO Error. Code 12.
+	 */
+	public static final int ERROR_IO = 12;
+	
+	/**
 	 * No such user in the system. Code 1000.
 	 */
 	public static final int ERROR_NO_SUCH_USER = 1000;
@@ -72,6 +77,8 @@ public interface ActionErrorCode {
 	 * Login failed. Code 1011.
 	 */
 	public static final int ERROR_LOGIN_FAILED = 1011;
+
+
 
 	
 }
