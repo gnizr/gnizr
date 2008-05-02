@@ -20,14 +20,14 @@ import com.gnizr.db.dao.Folder;
 import com.gnizr.web.action.AbstractLoggedInUserAction;
 import com.gnizr.web.action.error.ActionErrorCode;
 
-public class ExportBookmarks extends AbstractLoggedInUserAction{
+public class ExportNetscapeBookmarks extends AbstractLoggedInUserAction{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -1655282635626280225L;
 
-	private static final Logger logger = Logger.getLogger(ExportBookmarks.class);
+	private static final Logger logger = Logger.getLogger(ExportNetscapeBookmarks.class);
 	
 	private FolderManager folderManager;
 	
@@ -50,6 +50,12 @@ public class ExportBookmarks extends AbstractLoggedInUserAction{
 	protected String go() throws Exception {
 		super.resolveUser();
 		
+		if(getLoggedInUser() == null){
+			logger.error("ExportNetscapeBookmarks: missing LoggedInUser object");
+			addActionError(String.valueOf(ActionErrorCode.ERROR_NO_SUCH_USER));
+			return ERROR;
+		}
+		
 		logger.debug("ExportBookmark: user = " + getLoggedInUser());
 		try{
 			this.tmpFile = createTempDataFile();
@@ -66,10 +72,10 @@ public class ExportBookmarks extends AbstractLoggedInUserAction{
 				writeExportData(writer);
 			}catch(NoSuchUserException e){
 				addActionError(String.valueOf(ActionErrorCode.ERROR_NO_SUCH_USER));
-				logger.error("ExportBookmarks. no such user = " + getLoggedInUser() + " " + e);
+				logger.error("ExportNetscapeBookmarks. no such user = " + getLoggedInUser() + " " + e);
 			}catch(IOException e){
 				addActionError(String.valueOf(ActionErrorCode.ERROR_IO));
-				logger.error("ExportBookmarks. IO Error. file: " + tmpFile.getAbsolutePath() 
+				logger.error("ExportNetscapeBookmarks. IO Error. file: " + tmpFile.getAbsolutePath() 
 						+ " " + e);
 			}finally{
 				if(writer != null){
@@ -106,17 +112,19 @@ public class ExportBookmarks extends AbstractLoggedInUserAction{
 	}
 	
 	private void writeFolderContent(FileWriter fwriter, Folder folder) throws IOException, NoSuchUserException{
-		fwriter.append("<DL><p>\n");
 		fwriter.append("<DT><H3>");
 		StringEscapeUtils.escapeHtml(fwriter,folder.getName());
 		fwriter.append("</H3>\n");
 		if(folder.getDescription() != null && folder.getDescription().length() > 0){
+			fwriter.append("<DD>");
 			StringEscapeUtils.escapeHtml(fwriter, folder.getDescription());
+			fwriter.append("\n");
 		}
 		int offset = 0;
-		int ppc = 100;		
+		int ppc = 100;				
 		DaoResult<Bookmark> result = folderManager.pageFolderContent(getLoggedInUser(),
 				folder.getName(), offset, ppc);
+		fwriter.append("<DL><p>\n");
 		while(offset < result.getSize()){
 			List<Bookmark> bookmarks = result.getResult();
 			for(Bookmark bm : bookmarks){
@@ -135,13 +143,20 @@ public class ExportBookmarks extends AbstractLoggedInUserAction{
 	private void writeBookmark(FileWriter fwriter, Bookmark bookmark) throws IOException{
 		fwriter.append("<DT><A HREF=\"");
 		fwriter.append(bookmark.getLink().getUrl());
-		fwriter.append("\">");
+		fwriter.append("\"");
+		if(bookmark.getTags().length() > 0){
+			fwriter.append(" TAGS=\"");
+			fwriter.append(bookmark.getTags());
+			fwriter.append("\" ");
+		}
+		fwriter.append(">");
 		StringEscapeUtils.escapeHtml(fwriter, bookmark.getTitle());
 		fwriter.append("</A>");
 		if(bookmark.getNotes() != null && bookmark.getNotes().length() > 0){
 			fwriter.append("<DD>");
 			StringEscapeUtils.escapeHtml(fwriter, bookmark.getNotes());
 		}
+		fwriter.append("\n");
 	}
 	
 	private void writePreBody(FileWriter fwriter) throws IOException{
@@ -167,7 +182,7 @@ public class ExportBookmarks extends AbstractLoggedInUserAction{
 		if(tmpDirPath != null){
 			tmpDir = new File(tmpDirPath);
 			if(tmpDir.exists() == false || tmpDir.isDirectory() == false){
-				logger.error("ExportBookmarks: tempDirectoryPath doesn't exist " + tmpDirPath);
+				logger.error("ExportNetscapeBookmarks: tempDirectoryPath doesn't exist " + tmpDirPath);
 				tmpDir = null;
 			}
 		}
