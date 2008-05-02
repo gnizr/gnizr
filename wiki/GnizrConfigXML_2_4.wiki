@@ -20,7 +20,7 @@ You should edit this configuration file to suit your machine's configuration. Co
 || `webApplicationUrl` || The URL to your gnizr installation || `http://localhost:8080/gnizr`|| No ||
 || `siteName` || A custom name for this gnizr installation || `gnizr` || Yes ||
 || `siteDescription` || A short description of this gnizr installation || `organize` || No || 
-|| `siteContactEmail` || The email of the site admin. If `registrationPolicy` is `closed`, the Registration page will direct new users to send new account request to this email address || _empty string_ || No ||
+|| `siteContactEmail` || The email of the site admin. If `registrationPolicy` is `closed`, the Registration page will direct new users to send new account request to this email address || _empty string_ || Yes ||
 || `googleMapsKey` || [http://www.google.com/apis/maps/signup.html Google Maps API key] of your site || _a key registered for `http://localhost` || Yes || 
 || `snapShotsKey` || [http://www.snap.com/about/shots1.php SnapShots API key] of your site || || No || 
 || `anonymousReaderPolicy` || Whether you allow anonymous user to view contents published in gnizr. If `open`, anyone can view contents published in gnizr. If `close`, only logged in user is allowed to view published contents. || `open` ||  No || 
