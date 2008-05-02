@@ -4,11 +4,11 @@
 == Current Releases ==
   
 || Branch 2.3.0 || [ChangeLog2_3 gnizr-2.3.0] (27 March 2008) ||
-|| Branch 2.4.0 || [ChangeLog2_4 gnizr-2.4.0-M2] (18 April 2008) ||
+|| Branch 2.4.0 || [ChangeLog2_4 gnizr-2.4.0-M3] (2 May 2008) ||
 
 == Upcoming Releases ==
   
-  * [ChangeLog2_4 gnizr-2.4.0-M3]
+  * [ChangeLog2_4 gnizr-2.4.0-M4]
 
 == How We Plan Releases ==
 
@@ -27,6 +27,7 @@ We create a new "Release Branch" when we begin developing the new version of the
 We tag our software after a Stable Release or a Development Release has been created. Tagged branches are usually consisted of major, minor and bugfix version number (e.g., `gnizr-2.2.0`). Sometimes they also include a build qualifier (e.g., `gnizr-2.2.0-M3`).
 
 == Past Releases ==
+  * [ChangeLog2_4 gnizr-2.4.0-M2] (18 April 2008)
   * [ChangeLog2_4 gnizr-2.4.0-M1] (04 April 2008)
   * [ChangeLog2_3 gnizr-2.3.0-RC2] (14 March 2008)
   * [ChangeLog2_3 gnizr-2.3.0-RC1] (11 February 2008) 
