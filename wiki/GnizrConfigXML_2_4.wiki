@@ -7,7 +7,7 @@ This page describes the specification of gnizr XML configuration file. This conf
 
 == Edit gnizr-config.xml ==
 
-The gnizr web application comes with a configuration file called `gnizr-config.xml`. This file is located in the directory `gnizr/WEB-INF/classes`. 
+The gnizr web application requires a configuration file called `gnizr-config.xml`. You can create this file by following a sample configuration located in the directory `gnizr/WEB-INF/classes`. The filename of this sample configuration is called `gnizr-config-sample.xml`.
 
 You should edit this configuration file to suit your machine's configuration. Configurations are defined as a set of property/value pairs. You should only edit properties that are described in the following section and leave others untouched.
 
