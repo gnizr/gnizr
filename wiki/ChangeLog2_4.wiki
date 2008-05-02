@@ -1,7 +1,11 @@
 #summary Changelog of all releases made under version 2.4
 #labels Phase-Implementation
 
-==== Version 2.4.0-M3 (in progress) ====
+==== Version 2.4.0-M4 (in progress) ====
+  * ...
+
+
+==== Version 2.4.0-M3 (2 May 2008) ====
 
 Changelog
 
@@ -11,6 +15,7 @@ Changelog
   * [http://code.google.com/p/gnizr/issues/detail?id=63 Issue 63]: Allow the administrator to explicitly approve new user registration
   * Changed `siteContactEmail` configuration property from OPTIONAL to REQUIRED. 
   * Changed `siteContactEmail` default value to `help@localhost`.
+  * Optimized the algorithm and reduced the amount of time required for rebuilding search index. 
  
 
 ==== Version 2.4.0-M2 (18 April 2008) ====
