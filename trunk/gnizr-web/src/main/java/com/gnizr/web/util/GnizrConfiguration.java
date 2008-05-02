@@ -86,6 +86,7 @@ public class GnizrConfiguration implements Serializable {
 	private String snapShotsKey;
 	private String anonymousReaderPolicy;
 	private String registrationPolicy;
+	private String tempDirectoryPath;
 	private boolean serverMaintenanceModeEnabled;
 	private List<String> openSearchServices;
 	
@@ -176,5 +177,13 @@ public class GnizrConfiguration implements Serializable {
 
 	public void setSiteContactEmail(String siteContactEmail) {
 		this.siteContactEmail = siteContactEmail;
+	}
+
+	public String getTempDirectoryPath() {
+		return tempDirectoryPath;
+	}
+
+	public void setTempDirectoryPath(String tempDirectoryPath) {
+		this.tempDirectoryPath = tempDirectoryPath;
 	}
 }
