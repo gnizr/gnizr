@@ -1,8 +1,6 @@
 #summary Success stories of gnizr
 #labels Featured
 
-= Introduction =
-
 This page lists the success stories of gnizr. If you have good experience with gnizr and would like to share your stories with the community, post them in the comment section of this page or email them to [mailto:gnizr.contact@gmail.com gnizr.contact@gmail.com].
 
 Drop us a note if you want to add your organization's name to the *Who's Using gnizr* section.
