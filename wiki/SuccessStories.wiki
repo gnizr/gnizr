@@ -11,7 +11,7 @@ Drop us a note if you want to add your organization's name to the *Who's Using g
 
 Dr. Harry Chen says:
 
-  I think gnizr is an excellent tool for education. When teaching the [http://socialwebtechnologies.blogspot.com Social Web Technologies] course, I installed a copy of gnizr behind the eBiquity Research Group's firewall and used the software share bookmarks with students in the class. 
+  Gnizr is an excellent tool for education. When teaching the [http://socialwebtechnologies.blogspot.com Social Web Technologies] course, I installed a copy of gnizr behind the eBiquity Research Group's firewall and used the software share bookmarks with students in the class. 
 
   I also used gnizr in a [http://groups.google.com/group/umbc-cmsc-socialwebtech-class/web/group-project-home a group programming project] to teach students Web application development and open source project management. The process of hacking gnizr code and its underlying technologies -- !WebWork, Freemarker, Spring, XML and Maven, has given students the opportunity to experiment with the  real-world software development process and team collaboration.
 
