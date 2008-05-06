@@ -19,6 +19,7 @@ package com.gnizr.web.util;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 /**
  * <p>Holds the configuration of a gnizr web application. An instance of this class 
@@ -86,9 +87,10 @@ public class GnizrConfiguration implements Serializable {
 	private String snapShotsKey;
 	private String anonymousReaderPolicy;
 	private String registrationPolicy;
-	private String tempDirectoryPath;
+	private String tempDirectoryPath;	
 	private boolean serverMaintenanceModeEnabled;
-	private List<String> openSearchServices;
+	private List<String> openSearchServices = new ArrayList<String>();
+	private Properties appProperties = new Properties();
 	
 	/**
 	 * Creates an instance of this class to hold
@@ -186,4 +188,13 @@ public class GnizrConfiguration implements Serializable {
 	public void setTempDirectoryPath(String tempDirectoryPath) {
 		this.tempDirectoryPath = tempDirectoryPath;
 	}
+	
+	public Properties getAppProperties() {
+		return appProperties;
+	}
+
+	public void setAppProperties(Properties appProperties) {
+		this.appProperties = appProperties;
+	}
+
 }
