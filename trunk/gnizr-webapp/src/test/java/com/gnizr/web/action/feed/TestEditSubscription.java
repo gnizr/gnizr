@@ -16,6 +16,8 @@
  */
 package com.gnizr.web.action.feed;
 
+import java.util.Map;
+
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSet;
 
@@ -25,6 +27,7 @@ import com.gnizr.core.web.junit.GnizrWebappTestBase;
 import com.gnizr.db.dao.FeedSubscription;
 import com.gnizr.db.dao.User;
 import com.opensymphony.xwork.ActionSupport;
+import com.opensymphony.xwork.validator.DefaultActionValidatorManager;
 
 public class TestEditSubscription extends GnizrWebappTestBase {
 
@@ -94,5 +97,13 @@ public class TestEditSubscription extends GnizrWebappTestBase {
 		assertNull(feed);
 	}
 	
+	@SuppressWarnings("unchecked")
+	public void testValidationURLMissing() throws Exception{
+		DefaultActionValidatorManager validator = new DefaultActionValidatorManager();
+		validator.validate(action, "create");
+		assertTrue(action.hasFieldErrors());
+		Map<String, Object> errors = action.getFieldErrors();
+		assertEquals(1, errors.size());
+	}
 	
 }

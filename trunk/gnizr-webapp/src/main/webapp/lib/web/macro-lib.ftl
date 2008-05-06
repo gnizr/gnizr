@@ -479,3 +479,13 @@ show
 </ul>  
 </#if>
 </#macro>
+
+<#macro displayActionMessage action>
+<#if (action.actionMessages)?has_content>
+<ul class="formErrors">
+  <#list action.actionMessages as msg>
+    <li class="errorMessage">${msg}</li>
+  </#list>
+</ul>  
+</#if>
+</#macro>
