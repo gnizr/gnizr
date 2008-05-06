@@ -38,6 +38,7 @@ public class HighlightTextMethod implements TemplateMethodModelEx{
 
 	private static final Logger logger = Logger.getLogger(HighlightTextMethod.class);
 	
+	@SuppressWarnings("unchecked")
 	public Object exec(List args) throws TemplateModelException {
 		if(args.size() != 3 && args.size() != 4){
 			throw new TemplateModelException("Wrong number of arguments");
