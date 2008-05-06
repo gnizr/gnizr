@@ -17,7 +17,11 @@
 <p>You can collect links from <a href="http://en.wikipedia.org/wiki/Web_feed">Web feeds</a>.  
 By subscribing to a Web feed, a robot will be created to monitor new entries published by the feed.
 For each entry in the feed, the URL of which will be collected and saved as bookmarks.</p>
-<p><b>Tips</b>: Ask your administrator if this feature is enabled.</p> 
+<#if serviceEnabled == false>
+<div class="system-message"><b>Annoucement</b>: Sorry! The Link Collect service is currently unavaible. The administrator
+asked all robots to a break. But, you can still create or edit 
+your Link Collect subscriptions.</div>
+</#if>
 </@pageDescription>
 <#assign fval = "http://"/>
 <#if feedUrl?exists>
