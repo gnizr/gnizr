@@ -22,6 +22,11 @@ tags to be added to those bookmarks.</p>
 To stop collecting links from this feed, disable the <b>Auto Import</b>
 option.
 </p> 
+<#if serviceEnabled == false>
+<div class="system-message"><b>Annoucement</b>: Sorry! The Link Collect service is currently unavaible. The administrator
+asked all robots to a break. But, you can still create or edit 
+your Link Collect subscriptions.</div>
+</#if>
 </@pageDescription>
 <div id="feed">
 <p id="feed-heading">
