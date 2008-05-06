@@ -58,6 +58,12 @@
       <url>https://maven-repository.dev.java.net/nonav/repository</url>
       <layout>legacy</layout>
     </repository>
+    <repository>
+      <id>repo5</id>
+      <name>jTidy Maven Repository</name>
+      <url>http://jtidy.sourceforge.net/snapshots</url>
+      <layout>default</layout>
+    </repository>
   </repositories>
 
   <dependencyManagement>
@@ -236,6 +242,12 @@
       <artifactId>dumbster</artifactId>
       <version>1.6</version>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>jtidy</groupId>
+      <artifactId>jtidy</artifactId>
+      <version>8.0-SNAPSHOT</version>
+      <scope>compile</scope>
     </dependency>
   </dependencies>
   </dependencyManagement>

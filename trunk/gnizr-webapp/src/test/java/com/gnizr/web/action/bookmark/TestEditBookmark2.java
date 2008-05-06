@@ -132,6 +132,22 @@ public class TestEditBookmark2 extends GnizrWebappTestBase {
 		assertEquals("",bm.getNotes());
 	}
 	
+	public void testAddBookmark2() throws Exception {
+		User loggedInUser = userManager.getUser("hchen1");
+		action.setLoggedInUser(loggedInUser);
+		action.setTitle("CNN homepage");
+		action.setNotes("<script type=\"javascript\">alert(343)</script>notes goes here...<h1>233</h1>");
+		action.setUrl("http://cnn.com");
+		String result = action.execute();
+		assertEquals(ActionSupport.SUCCESS,result);
+
+		int bmid = bookmarkManager.getBookmarkId(loggedInUser, "http://cnn.com");
+		assertTrue(bmid > 0);
+		Bookmark bm = bookmarkManager.getBookmark(bmid);
+		assertEquals("CNN homepage",bm.getTitle());
+		assertEquals("notes goes here... <h3>233</h3>",bm.getNotes());
+	}
+	
 	public void testUpdateBookmark() throws Exception{
 		User loggedInUser = userManager.getUser("gnizr");
 		action.setLoggedInUser(loggedInUser);

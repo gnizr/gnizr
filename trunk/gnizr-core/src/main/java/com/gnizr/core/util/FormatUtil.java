@@ -1,5 +1,7 @@
 package com.gnizr.core.util;
 
+import java.io.StringReader;
+import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -7,8 +9,15 @@ import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
 import org.htmlparser.Parser;
+import org.htmlparser.Tag;
+import org.htmlparser.tags.FrameTag;
+import org.htmlparser.tags.HeadingTag;
+import org.htmlparser.tags.ScriptTag;
+import org.htmlparser.util.NodeList;
 import org.htmlparser.util.ParserException;
+import org.htmlparser.visitors.NodeVisitor;
 import org.htmlparser.visitors.TextExtractingVisitor;
+import org.w3c.tidy.Tidy;
 
 import com.gnizr.db.dao.Bookmark;
 
@@ -22,6 +31,67 @@ import com.gnizr.db.dao.Bookmark;
 public class FormatUtil {
 	
 	private static final Logger logger = Logger.getLogger(FormatUtil.class);
+	
+	public static String tidyHTML(String htmlCode, boolean bodyOnly, String encoding){
+		if(htmlCode == null){
+			throw new NullPointerException("Input HTML code string is NULL");
+		}
+		StringReader stringReader = new StringReader(htmlCode);
+		StringWriter tidyHtmlWriter = new StringWriter();
+		try{
+			Tidy tidy = new Tidy();
+			tidy.setPrintBodyOnly(bodyOnly);
+			tidy.setJoinClasses(true);
+			tidy.setJoinStyles(true);
+			tidy.setQuoteAmpersand(true);
+			tidy.setHideComments(true);
+			tidy.setInputEncoding(encoding);
+			tidy.setOutputEncoding(encoding);		
+			tidy.parse(stringReader,tidyHtmlWriter);
+			return tidyHtmlWriter.getBuffer().toString();
+		}catch(Exception e){
+			logger.error("FormatUtil: tidyHTML error: " + e);
+		}finally{		
+			if(stringReader != null){
+				stringReader.close();
+			}
+		}
+		return htmlCode;		
+	}
+		
+	public static String removeAbusiveTags(String htmlCode){
+		if(htmlCode == null){
+			throw new NullPointerException("Input HTML code string is NULL");
+		}		
+		try{
+			Parser parser = Parser.createParser(htmlCode, "UTF-8");
+			final NodeList nl = parser.parse(null);
+			nl.visitAllNodesWith(new NodeVisitor(){
+				public void visitTag(Tag tag){
+					if((tag instanceof ScriptTag) ||
+					   (tag instanceof FrameTag)){
+						if(tag.getParent() == null){
+							nl.remove(tag);
+						}else{
+							tag.getParent().getChildren().remove(tag);
+						}
+					}
+					if(tag instanceof HeadingTag){
+						if("H1".equalsIgnoreCase(tag.getTagName())||
+						   "H2".equalsIgnoreCase(tag.getTagName())){
+							tag.setTagName("H3");
+							tag.getEndTag().setTagName("/H3");
+						}
+					}					
+				}
+			});			
+			return nl.toHtml();
+		}catch(Exception e){
+			System.out.println(e);
+		}
+		return "";
+	}
+	
 	
 	/**
 	 * Removes HTML tags from a HTML string

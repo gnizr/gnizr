@@ -25,6 +25,37 @@ public class TestFormatUtil extends TestCase {
 		assertFalse(text.contains("<HTML>"));
 	}
 	
+	public void testTidyHTML() throws Exception{
+		InputStream is = TestFormatUtil.class.getResourceAsStream("/TestFormatUtil-badhtml.html");
+		int x = is.available();
+		byte b[] = new byte[x];
+		is.read(b);
+		String content = new String(b);	
+		String text = FormatUtil.tidyHTML(content, true,"utf8");
+		assertFalse(text.contains("<HTML>"));
+		assertTrue(text.contains("</p>"));
+		assertTrue(text.contains("</ul>"));
+		assertTrue(text.contains("</script>"));
+	}
+	
+	public void testRemoveAbusiveTags() throws Exception{
+		InputStream is = TestFormatUtil.class.getResourceAsStream("/TestFormatUtil-badhtml.html");
+		int x = is.available();
+		byte b[] = new byte[x];
+		is.read(b);
+		String content = new String(b);	
+		String text = FormatUtil.tidyHTML(content, true,"utf8");
+		text = FormatUtil.removeAbusiveTags(text);
+		assertFalse(text.contains("<HTML>"));
+		assertTrue(text.contains("</p>"));
+		assertTrue(text.contains("</ul>"));
+		assertFalse(text.contains("javascript"));
+		assertFalse(text.contains("H1"));
+		assertTrue(text.contains("H3"));
+		assertFalse(text.contains("frame"));
+		assertFalse(text.contains("iframe"));
+	}
+	
 	
 	public void testRemoveLongWord() throws Exception{
 		String t = "jajdjdjdjdjjdjdjdjdjdjd 123 djdjdjdjdjdjdjjdd";
