@@ -3,29 +3,31 @@
 <#include "./macro-lib.ftl"/>
 <#assign thisFeedUrl = feed.bookmark.link.url/>
 <#assign thisFeedName = feed.bookmark.title/>
-<#assign title="edit feed: " + thisFeedUrl/>
+<#assign title="edit link collect: " + thisFeedUrl/>
 <#assign username=loggedInUser.username/>
 <#assign thisPageHref = gzUserFeedUrl(loggedInUser.username,thisFeedUrl)/>
-<#assign title=title+" -- gnizr"/>
 <@pageBegin pageTitle=title cssHref=[gzUrl("/css/gnizr-feed.css")]>
 </@pageBegin>
 <@headerBlock/>
 <@pageContent>
-<#assign bct = [gzBCTPair(username,gzUserUrl(username)),
-                gzBCTPair("edit subscriptions",gzUserFeedUrl(username,""))]/>
+<#assign bct = settingsBCT(username) + 
+               [gzBCTPair("edit link collect",gzUserFeedUrl(username,""))]/>
 <@infoBlock bct=bct/>
-<@pageTitle>Edit Feed Subscription</@pageTitle>
+<@pageTitle>Edit Link Collect</@pageTitle>
 <@pageDescription>
-<p>Change how you want to this feed to be imported as bookmarks.
-You can choose to save bookmarks into one or more destinated folders. Also,
-you can defined tags to be added to those bookmarks. 
+<p>Change how you want to create bookmarks from this Web feed.
+You can save bookmarks into one or more folders, and define 
+tags to be added to those bookmarks.</p>
+<p>
+To stop collecting links from this feed, disable the <b>Auto Import</b>
+option.
 </p> 
 </@pageDescription>
 <div id="feed">
 <p id="feed-heading">
 <span id="feed-title">${thisFeedName}</span>
 <span id="feed-url">${prettyFormatUrl(thisFeedUrl)}</span>
-<#assign edtbmUrl=gzUrl("/edtpost?url="+thisFeedUrl?url) />
+<#assign edtbmUrl=gzUrl("/edtpost?url="+thisFeedUrl?url+"&redirectToPage="+thisPageHref?url) />
 <span id="edit-feed-bmark"><a href="${edtbmUrl}">edit description</a></span>
 </p>
 <h3>Current Settings</h3>
@@ -64,14 +66,15 @@ you can defined tags to be added to those bookmarks.
   <@ww.combobox label="Add tag" name="tag" list="myTags" value=""/>
   <@ww.hidden name="feedUrl" value="${thisFeedUrl}"/>
   <@ww.submit cssClass="btn" value="save"/>
-</@ww.form>
-  <#if action.actionMessages?has_content>
-   <ul>
-   <#list action.actionMessages as msg>
-     <li>${getActionMsg(msg)}</li>
+
+<#if (action.actionMessages)?has_content>
+   <ul class="formErrors">
+   <#list (action.actionMessages) as msg>
+     <li class="errorMessage">${getActionMsg(msg)}</li>
    </#list>
    </ul>
-  </#if>
+  </#if> 
+</@ww.form>
 </div>
 
 <@sidebarBlock>

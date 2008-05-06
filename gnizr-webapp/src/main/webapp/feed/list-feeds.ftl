@@ -2,7 +2,7 @@
 <#assign ww=JspTaglibs["/WEB-INF/webwork.tld"] >
 <#-- import Freemarker macros that are common to the site -->
 <#include "/lib/web/macro-lib.ftl"/>
-<#assign title="${user.username}'s feed subscriptions"/>
+<#assign title="${user.username}'s link collect"/>
 <#assign thisPageHref = gzUserFeedUrl(user.username,"")/>
 <#if session?exists>
   ${session.setAttribute("thisPageHref",thisPageHref)}
@@ -11,14 +11,14 @@
 <@headerBlock/>
 <@pageContent>  
 <#assign bct = [gzBCTPair(username,gzUserUrl(username)),
-                gzBCTPair("RSS subscriptions",gzUserFeedUrl(username,""))]/>
+                gzBCTPair("link collect",gzUserFeedUrl(username,""))]/>
 <@infoBlock bct=bct/>
-<@pageTitle>RSS Subscriptions</@pageTitle>
+<@pageTitle>Link Collect</@pageTitle>
 <@pageDescription>
-<p>You can create new bookmarks from <a href="http://en.wikipedia.org/wiki/Web_feed">Web feeds</a>. 
-By subscribing to a Web feed, a robot will be created to monitor updates published by the feed. 
-New updates will be imported into your account as bookmarks.</p>
-<p>Robots will only import from subscriptions that have <b>Auto Import</b> enabled.</p>
+<p>You can collect links from <a href="http://en.wikipedia.org/wiki/Web_feed">Web feeds</a>.  
+By subscribing to a Web feed, a robot will be created to monitor new entries published by the feed.
+For each entry in the feed, the URL of which will be collected and saved as bookmarks.</p>
+<p>Robots will only process those feed subscriptions that have <b>Auto Import</b> enabled.</p>
 
 <p><b>Tips</b>: Ask your administrator if this feature is enabled.</p> 
 </@pageDescription>
@@ -67,17 +67,10 @@ New updates will be imported into your account as bookmarks.</p>
 <#if loggedInUser?exists && isUserAuth(loggedInUser,user)>
   <div id="create-feed-form">    
     <@ww.form action="create" namespace="/settings/feeds">
-     <@ww.textfield id="new-feed-url" label="feed url" name="feedUrl"/>
+     <@ww.textfield id="new-feed-url" label="feed url" name="feedUrl" value="http://"/>
      <@ww.submit cssClass="btn" value="subscribe"/>
     </@ww.form>
-    
-   <#if action.actionMessages?has_content>
-   <ul>
-   <#list action.actionMessages as msg>
-     <li>${msg}</li>
-   </#list>
-   </ul>
-  </#if>
+    <@displayActionMessage action=action/>
   </div> 
 </#if>    
 </@pageContent>

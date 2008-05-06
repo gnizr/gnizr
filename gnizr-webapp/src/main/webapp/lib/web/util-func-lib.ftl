@@ -168,7 +168,7 @@ Encodes a RESTful url representation of a user's folder
 ===================================================================
 -->
 <#function gzUserFeedUrl username feedUrl>
-  <#return gzUrl("/user/"+username+"/feed/"+feedUrl)/>
+  <#return gzUrl("/settings/feeds/edit.action?feedUrl="+feedUrl?url)/>
 </#function>
 
 <#--
