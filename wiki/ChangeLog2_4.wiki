@@ -2,7 +2,7 @@
 #labels Phase-Implementation
 
 ==== Version 2.4.0-M4 (in progress) ====
-  * ...
+  * Renamed "RSS Subscription" to "link collect"; improved user instructions. 
 
 
 ==== Version 2.4.0-M3 (2 May 2008) ====
