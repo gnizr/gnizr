@@ -1,0 +1,44 @@
+<!DOCTYPE xwork PUBLIC "-//OpenSymphony Group//XWork 1.0//EN"
+	"http://www.opensymphony.com/xwork/xwork-1.0.dtd">
+<xwork>
+	
+	<!-- see also webwork doc: http://www.opensymphony.com/webwork/wikidocs/Interceptors.html -->
+	<package name="gnizr-export" extends="gnizr-default" namespace="/settings/export">		
+		<action name="bookmark" class="com.gnizr.web.action.export.ExportDispatcher"
+			method="doDefault">
+			<interceptor-ref name="loggedIn"/>	
+			<interceptor-ref name="auth"/>
+            <interceptor-ref name="gnizrDefaultStack"/>
+			<result name="success" type="freemarker">/export/home.ftl</result>			
+			<result name="input" type="freemarker">/export/home.ftl</result>
+			<result name="error" type="freemarker">/common/error.ftl</result>
+		</action>
+		
+		<action name="bookmarkDispatch" class="com.gnizr.web.action.export.ExportDispatcher">
+			<interceptor-ref name="loggedIn"/>	
+			<interceptor-ref name="auth"/>
+            <interceptor-ref name="gnizrDefaultStack"/>
+			<result name="success" type="redirect-action">
+			    <param name="namespace">/settings/export</param>
+				<param name="actionName">bookmark-${format}</param>
+			</result>			
+			<result name="input" type="freemarker">/export/home.ftl</result>
+			<result name="error" type="freemarker">/common/error.ftl</result>
+		</action>
+			
+		<action name="bookmark-netscape" class="com.gnizr.web.action.export.ExportNetscapeBookmarks">
+			<interceptor-ref name="loggedIn"/>	
+			<interceptor-ref name="auth"/>
+            <interceptor-ref name="gnizrDefaultStack"/>
+            <result name="success" type="stream">
+            	<param name="contentType">text/html</param>
+            	<param name="inputName">netscapeBookmarkStream</param>
+            	<param name="contentDisposition">Content-disposition: attachment; filename="my-bookmark.html"</param>
+            	<param name="bufferSize">1024</param>
+            </result>
+            <result name="input" type="freemarker">/export/home.ftl</result>
+			<result name="error" type="freemarker">/common/error.ftl</result>
+		</action>
+	</package>
+	
+</xwork>
