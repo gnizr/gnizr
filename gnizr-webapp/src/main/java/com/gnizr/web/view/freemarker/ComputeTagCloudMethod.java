@@ -39,6 +39,7 @@ import freemarker.template.TemplateModelException;
 public class ComputeTagCloudMethod implements TemplateMethodModelEx{
 
 	
+	@SuppressWarnings("unchecked")
 	public Object exec(List args) throws TemplateModelException {
 		if(args.size() < 1 || args.size() > 3){
 			throw new TemplateModelException("Wrong number of arguments");
