@@ -19,6 +19,7 @@ package com.gnizr.web.action.feed;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -42,6 +43,7 @@ import com.gnizr.db.dao.Folder;
 import com.gnizr.db.dao.MachineTag;
 import com.gnizr.db.dao.UserTag;
 import com.gnizr.web.action.AbstractLoggedInUserAction;
+import com.gnizr.web.action.robot.rss.RssRobotService;
 import com.sun.syndication.feed.synd.SyndFeed;
 import com.sun.syndication.io.SyndFeedInput;
 import com.sun.syndication.io.XmlReader;
@@ -99,6 +101,12 @@ public class EditSubscription extends AbstractLoggedInUserAction {
 		this.bookmarkManager = bookmarkManager;
 	}
 
+	public boolean isServiceEnabled(){
+		Properties prpt = getGnizrConfiguration().getAppProperties();
+		String v = prpt.getProperty(RssRobotService.SERVICE_ENABLED_KEY,"false");
+		return Boolean.parseBoolean(v);
+	}
+	
 	public String doDefault() throws Exception {
 		resolveUser();
 		if (feedUrl != null && user != null) {

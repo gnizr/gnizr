@@ -17,11 +17,13 @@
 package com.gnizr.web.action.feed;
 
 import java.util.List;
+import java.util.Properties;
 
 import com.gnizr.core.feed.FeedSubscriptionManager;
 import com.gnizr.db.dao.DaoResult;
 import com.gnizr.db.dao.FeedSubscription;
 import com.gnizr.web.action.AbstractLoggedInUserAction;
+import com.gnizr.web.action.robot.rss.RssRobotService;
 
 public class ListSubscriptions extends AbstractLoggedInUserAction{
 
@@ -47,6 +49,12 @@ public class ListSubscriptions extends AbstractLoggedInUserAction{
 
 	public List<FeedSubscription> getSubscriptions() {
 		return subscriptions;
+	}
+	
+	public boolean isServiceEnabled(){
+		Properties prpt = getGnizrConfiguration().getAppProperties();
+		String v = prpt.getProperty(RssRobotService.SERVICE_ENABLED_KEY,"false");
+		return Boolean.parseBoolean(v);
 	}
 
 	@Override
