@@ -21,6 +21,7 @@
 	<include file="xwork/gnizr-json.xml"/>
 	<include file="xwork/gnizr-clustermap.xml"/>
 	<include file="xwork/gnizr-timeline.xml"/>
+	<include file="xwork/gnizr-export.xml"/>
 	<include file="xwork/gnizr-rssrobot.xml"/>
 	
 </xwork>

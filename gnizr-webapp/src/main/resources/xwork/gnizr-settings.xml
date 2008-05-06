@@ -129,6 +129,8 @@
 			<interceptor-ref name="loggedIn"/>	
 			<interceptor-ref name="auth"/>
             <interceptor-ref name="gnizrDefaultStack"/>
+            <interceptor-ref name="validation"/>
+			<interceptor-ref name="workflow"/>
 			<result name="success" type="redirect">edit.action?feedUrl=${feedUrl}</result>
 			<result name="input" type="freemarker">/feed/new-feed.ftl</result>
 			<result name="error" type="freemarker">/common/error.ftl</result>
