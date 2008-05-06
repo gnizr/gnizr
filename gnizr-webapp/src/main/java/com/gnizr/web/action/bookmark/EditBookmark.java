@@ -25,6 +25,7 @@ import org.apache.log4j.Logger;
 import com.gnizr.core.bookmark.BookmarkManager;
 import com.gnizr.core.folder.FolderManager;
 import com.gnizr.core.link.LinkManager;
+import com.gnizr.core.util.FormatUtil;
 import com.gnizr.core.util.GnizrDaoUtil;
 import com.gnizr.db.dao.Bookmark;
 import com.gnizr.db.dao.Link;
@@ -64,7 +65,10 @@ public class EditBookmark extends AbstractAction implements LoggedInUserAware {
 	}
 
 	public void setNotes(String notes) {
-		this.notes = notes;
+		if(notes != null){
+			String tmpStr = FormatUtil.tidyHTML(notes,true, "utf8");
+			this.notes = FormatUtil.removeAbusiveTags(tmpStr);
+		}
 	}
 
 	public boolean isRedirect() {
@@ -88,7 +92,10 @@ public class EditBookmark extends AbstractAction implements LoggedInUserAware {
 	}
 
 	public void setTitle(String title) {
-		this.title = title;
+		if(title != null){
+			String tmpStr = FormatUtil.extractTextFromHtml(title);
+			this.title = tmpStr;
+		}
 	}
 
 	public String getUrl() {
