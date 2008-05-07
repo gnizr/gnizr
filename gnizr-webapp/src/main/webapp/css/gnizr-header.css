@@ -69,19 +69,13 @@
 	text-decoration: underline;
 	font-weight: bold;
 }
-/*
-#header2-l, #header2-r{
-	margin: 0px;
-	padding: 0px;
-}
-*/
 
 #header2-l{
 	position:absolute;
  	top: 0px;
  	left: 0px;
  	width: 400px;
- 	margin: 0px 8px;
+ 	margin: 0px 0px;
  	padding: 0px;
 }
 
