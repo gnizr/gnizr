@@ -165,6 +165,38 @@ public class TestEditUserFolder extends GnizrWebappTestBase {
 		
 	}
 	
+	
+
+	public void testUpdateFolder2() throws Exception{
+		action.setLoggedInUser(new User(2));
+		action.setFolderName("x-folder");
+		
+		Folder folderData = new Folder();
+		folderData.setDescription("new dsp <b>helloworld</b> <script type=\"text/javascript\">alert(123);</script>");
+		folderData.setName("new name");
+		
+		action.setFolder(folderData);
+		
+		String code = action.doUpdateFolder();
+		assertEquals(ActionSupport.SUCCESS,code);
+		
+		Folder newNameFolder = folderManager.getUserFolder(new User(2), "new name");
+		assertNotNull(newNameFolder);
+		assertNull(folderManager.getUserFolder(new User(2), "x-folder"));
+		
+		String dsp = newNameFolder.getDescription();
+		assertFalse(dsp.contains("javascript"));
+		assertFalse(dsp.contains("<b>"));
+		assertFalse(dsp.contains("</b>"));
+	
+		// try renaming folder name that contains illegal character
+		folderData.setName("java_programming");
+		action.setFolder(folderData);
+		code = action.doUpdateFolder();
+		assertEquals(ActionSupport.INPUT,code);
+		
+	}
+	
 	public void testDeleteUserFolder() throws Exception{
 		action.setLoggedInUser(new User(2));
 		action.setFolderName("x-folder");
