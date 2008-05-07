@@ -29,7 +29,6 @@
 <@settingsBlock title="Manage Tags">
 <ul>
 <li><a href="${gzUrl("/edit/tag")}" title="edit tag relations">Create/Edit tag relations</a></li>
-<#--<li><a href="${gzUrl("/edit/geotag")}">Edit geotag</a></li>-->
 <@ww.url id="deleteTagHref" value="/settings/tags/delete.action" includeParams="none"/>
 <@ww.url id="renameTagHref" value="/settings/tags/rename.action" includeParams="none"/>
 <li><a href="${deleteTagHref}" title="delete tags">Delete tags</a></li>
@@ -40,6 +39,7 @@
 <@settingsBlock title="Import/Export Bookmarks">
 <ul>
 <li><a href="${gzUrl("/settings/delicious.action")}">Import from del.icio.us</a></li>
+<li><a href="${gzUrl("/settings/export/bookmark.action")}">Export bookmarks to a file</a></li>
 </ul>
 </@settingsBlock>
 
