@@ -216,7 +216,7 @@ public class TestEditBookmark2 extends GnizrWebappTestBase {
 		PointMarker pm2 = new PointMarker();
 		pm2.setId(-2);
 		pm2.setMarkerIconId(10);
-		pm2.setNotes("this is marker2 notes");
+		pm2.setNotes("this is marker2 notes <h1>hello</h1> <br> <hr>");
 		pm2.setPoint(20.0, 40.00);
 		
 		User loggedInUser = userManager.getUser("hchen1");
@@ -246,6 +246,9 @@ public class TestEditBookmark2 extends GnizrWebappTestBase {
 					assertEquals(ep.getNotes(),p.getNotes());
 					assertEquals(ep.getMarkerIconId(),p.getMarkerIconId());
 					assertTrue(ep.getPoint().equals(p.getPoint()));
+					assertFalse(ep.getNotes().contains("h1"));
+					assertFalse(ep.getNotes().contains("br"));
+					assertFalse(ep.getNotes().contains("hr"));
 					found++;
 				}
 			}

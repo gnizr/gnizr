@@ -175,6 +175,13 @@ public class EditBookmark extends AbstractAction implements LoggedInUserAware {
 			List<PointMarker> curPtMarkers = bookmarkManager.getPointMarkers(bm);
 			if(pointMarkers != null){
 				if(pointMarkers.length > 0){
+					for(int i = 0; i < pointMarkers.length; i++){
+						String tmpStr = pointMarkers[i].getNotes();
+						if(tmpStr != null && tmpStr.length() > 0){
+							tmpStr = FormatUtil.tidyAndExtractTextFromHtml(tmpStr);
+							pointMarkers[i].setNotes(tmpStr);
+						}						
+					}					
 					List<PointMarker>  addedPt = bookmarkManager.addPointMarkers(bm, Arrays.asList(pointMarkers));			
 					for(PointMarker pt : addedPt){
 						addedPtMarkerIds.add(pt.getId());
