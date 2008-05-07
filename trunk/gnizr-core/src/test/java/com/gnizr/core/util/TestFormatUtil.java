@@ -51,6 +51,7 @@ public class TestFormatUtil extends TestCase {
 		assertTrue(text.contains("</ul>"));
 		assertFalse(text.contains("javascript"));
 		assertFalse(text.contains("H1"));
+		assertFalse(text.contains("/H1"));
 		assertTrue(text.contains("H3"));
 		assertFalse(text.contains("frame"));
 		assertFalse(text.contains("iframe"));

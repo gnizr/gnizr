@@ -92,6 +92,11 @@ public class FormatUtil {
 		return "";
 	}
 	
+	public static String tidyAndExtractTextFromHtml(String htmlCode){
+		String tmpStr = tidyHTML(htmlCode, true,"utf8");
+		return extractTextFromHtml(tmpStr);
+	}
+	
 	
 	/**
 	 * Removes HTML tags from a HTML string
