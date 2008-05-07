@@ -23,6 +23,7 @@ import org.apache.log4j.Logger;
 
 import com.gnizr.core.bookmark.BookmarkManager;
 import com.gnizr.core.folder.FolderManager;
+import com.gnizr.core.util.FormatUtil;
 import com.gnizr.core.util.GnizrDaoUtil;
 import com.gnizr.db.dao.Bookmark;
 import com.gnizr.db.dao.Folder;
@@ -210,8 +211,19 @@ public class EditUserFolder extends AbstractAction implements LoggedInUserAware{
 		return loggedInUser;
 	}
 
+	/**
+	 * Sets the folder to edit. Cleans the description text of
+	 * this folder description -- remove all HTML tags. 
+	 * 
+	 * @param folder an instance of <code>Folder</code> to be edited.
+	 */
 	public void setFolder(Folder folder) {
-		this.folder = folder;
+		this.folder = folder;		
+		if(folder != null && folder.getDescription() != null){
+			String tmpStr = folder.getDescription();
+			tmpStr = FormatUtil.tidyAndExtractTextFromHtml(tmpStr);			
+			this.folder.setDescription(tmpStr);
+		}
 	}
 
 	public String getOwner() {
