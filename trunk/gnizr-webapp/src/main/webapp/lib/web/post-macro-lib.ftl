@@ -52,9 +52,9 @@ INPUT: postUrl
   </div>   
 </div>
    
-    <#assign notesGrp = sliceNotes(postNotes)/>
+    <#assign shrtNotes = makeShortNotes(postNotes)/>
     <div class="notes">
-      <div class="shrtNotes">${notesGrp[0]}</div>
+      <div class="shrtNotes">${shrtNotes}</div>
     </div>
     <div class="meta">
     <div class="info">by <a href="${gzUserUrl(postUser.username)}">${postUser.username}</a> 
@@ -126,23 +126,23 @@ INPUT: postUrl
 	<#return s/>
 </#function>
 
-<#function sliceNotes notes>
-  <#local nts = notes/> 
-  <#local s = notes?replace("</?[a-z]+[^>]*>"," ","irm")/>
-  <#if (s?length > 100) || (notes?matches(".*<.*>.*"))>
-    <#local shrNotes = ""/>   
-    <#local res = s?matches("([\\S]+)","rm")/>
-    <#list res as t>     
-      <#if (t_index < 15) == true>
-        <#local shrNotes = shrNotes + t?groups[1] + " "/> 
-      <#else>
-        <#break/>
-      </#if>    
-    </#list>
-    <#return [shrNotes+"...",nts]/>
-  <#else>
-    <#return [nts]/>    
-  </#if>
+<#function makeShortNotes notes>
+   <#local textNotes = scrapeText(notes)/>
+   <#if (textNotes?length > 140)>
+     <#local saveWords = ""/>
+     <#local wordList = textNotes?matches("([\\S]+)","rm")/>
+     <#list wordList as w>
+       <#if (saveWords?length + w?length > 140)>
+         <#local saveWords = saveWords + " ..."/>
+         <#break/>
+       <#else>
+         <#local saveWords = saveWords + " " + w/>
+       </#if>
+     </#list>
+     <#return saveWords/>
+   <#else>
+     <#return textNotes/>
+   </#if>
 </#function>
 
 <#macro iconLabels mTags user>

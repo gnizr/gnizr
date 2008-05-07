@@ -63,6 +63,7 @@
 		<property name="webApplicationUrl">
 			<value>http://localhost:8080/gnizr</value>
 		</property>
+		
 		<!-- Define the Google Maps API Key to be used for this gnizr installation -->
 		<property name="googleMapsKey">
 			<value>ABQIAAAA5UsQFqmHpHln5pC8nyp05RTwM0brOpm-All5BF6PoaKBxRWWERS_Vpbx966CLXx9tDQthE6QI_9_bg</value>
@@ -100,6 +101,15 @@
 				<value>/settings/opensearch/yahoo-searchdescription.xml</value>
 				<value>http://www.pfaf.org/database/openSearch.rss</value>
 			</list>
+		</property>
+		
+		<!-- 
+		     Define a temp directory where gnizr will use to save temporary files.
+		     If not defined, then gnizr will use whatever the default directory provided by
+		     the Tomcat Server. 
+		  -->
+		<property name="tempDirectoryPath">
+			<value></value>
 		</property>
 	</bean>
 

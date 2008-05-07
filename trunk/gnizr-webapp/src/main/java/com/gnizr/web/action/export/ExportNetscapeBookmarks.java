@@ -30,6 +30,7 @@ import org.apache.log4j.Logger;
 
 import com.gnizr.core.exceptions.NoSuchUserException;
 import com.gnizr.core.folder.FolderManager;
+import com.gnizr.core.util.FormatUtil;
 import com.gnizr.db.dao.Bookmark;
 import com.gnizr.db.dao.DaoResult;
 import com.gnizr.db.dao.Folder;
@@ -129,11 +130,19 @@ public class ExportNetscapeBookmarks extends AbstractLoggedInUserAction{
 	
 	private void writeFolderContent(FileWriter fwriter, Folder folder) throws IOException, NoSuchUserException{
 		fwriter.append("<DT><H3>");
-		StringEscapeUtils.escapeHtml(fwriter,folder.getName());
+		String fname = folder.getName();
+		if(FolderManager.MY_BOOKMARKS_LABEL.equals(fname)){
+			fname = "My Bookmarks";
+		}else if(FolderManager.IMPORTED_BOOKMARKS_LABEL.equals(fname)){
+			fname = "My RSS Imported";
+		}
+		StringEscapeUtils.escapeHtml(fwriter,fname);
 		fwriter.append("</H3>\n");
 		if(folder.getDescription() != null && folder.getDescription().length() > 0){
 			fwriter.append("<DD>");
-			StringEscapeUtils.escapeHtml(fwriter, folder.getDescription());
+			String fdsp = folder.getDescription();
+			fdsp = FormatUtil.extractTextFromHtml(fdsp);
+			StringEscapeUtils.escapeHtml(fwriter,fdsp.trim());
 			fwriter.append("\n");
 		}
 		int offset = 0;
@@ -166,13 +175,20 @@ public class ExportNetscapeBookmarks extends AbstractLoggedInUserAction{
 			fwriter.append("\" ");
 		}
 		fwriter.append(">");
-		StringEscapeUtils.escapeHtml(fwriter, bookmark.getTitle());
+		StringEscapeUtils.escapeHtml(fwriter, bookmark.getTitle().trim());
 		fwriter.append("</A>");
 		if(bookmark.getNotes() != null && bookmark.getNotes().length() > 0){
 			fwriter.append("<DD>");
-			StringEscapeUtils.escapeHtml(fwriter, bookmark.getNotes());
+			String notes = bookmark.getNotes();
+			notes = FormatUtil.tidyAndExtractTextFromHtml(notes);		
+			if(notes.length() > 255){
+				StringEscapeUtils.escapeHtml(fwriter,notes.substring(0,255).trim());
+				fwriter.append(" [...]");
+			}else{
+				StringEscapeUtils.escapeHtml(fwriter,notes.trim());
+			}
 		}
-		fwriter.append("\n");
+		fwriter.append("</DD>\n");
 	}
 	
 	private void writePreBody(FileWriter fwriter) throws IOException{

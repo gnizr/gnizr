@@ -5,8 +5,6 @@
 <#-- import Freemarker macros that are specific to SETTING -->
 <#include "./macro-lib.ftl"/>
 <@ww.url id="thisPageHref" method="post" includeParams="none"/>
-<#-- if not logged in, redirect to the login page -->
-<@ensureUserLoggedIn>
 <#assign title="rebuild search index -- ${loggedInUser.username}"/>
 <#assign username=loggedInUser.username/>
 <@pageBegin pageTitle=title cssHref=[gzUrl("/css/gnizr-settings.css")]>
@@ -33,4 +31,3 @@ If this page does not refresh, <a href="${thisPageHref}">click here</a>.
 </@mainBlock>
 </@pageContent>
 <@pageEnd/>
-</@ensureUserLoggedIn>

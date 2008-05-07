@@ -26,14 +26,16 @@ import com.opensymphony.xwork.util.OgnlValueStack;
 public class GnizrFreemarkerManager extends FreemarkerManager{
 	private static final String HIGHLIGHT_TEXT_KEY = "highlightText";
 	private static final String COMPUTE_TAG_CLOUD = "computeTagCloud";
+	private static final String TIDY_HTML = "tidyHtml";
+	private static final String SCRAPE_TEXT = "scrapeText";
 
 	@Override
 	public void populateContext(ScopesHashModel model, OgnlValueStack stack, Object object, HttpServletRequest request, HttpServletResponse response) {
 		super.populateContext(model, stack, object, request, response);
 		model.put(HIGHLIGHT_TEXT_KEY, new HighlightTextMethod());
 		model.put(COMPUTE_TAG_CLOUD, new ComputeTagCloudMethod());
+		model.put(TIDY_HTML, new TidyHtmlMethod());
+		model.put(SCRAPE_TEXT, new ScrapeTextMethod());
 	}
-	
-	
 	
 }
