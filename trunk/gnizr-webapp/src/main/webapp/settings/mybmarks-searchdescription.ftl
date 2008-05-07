@@ -1,5 +1,5 @@
-<#include "/lib/web/macro-lib.ftl"/>
 <?xml version="1.0" encoding="UTF-8"?>
+<#include "/lib/web/macro-lib.ftl"/>
 <OpenSearchDescription 
   xmlns="http://a9.com/-/spec/opensearch/1.1/"
   xmlns:gn="http://gnizr.com/ont/opensearch/2007/11/">

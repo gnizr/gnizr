@@ -1,5 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <#include "/lib/web/macro-lib.ftl"/>
-<?xml version="1.0"?>
 <OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
 <ShortName>${getSiteName()}</ShortName>
 <Description>${getSiteDescription()}</Description>

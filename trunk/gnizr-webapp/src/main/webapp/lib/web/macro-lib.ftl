@@ -7,7 +7,6 @@
 <#include "./json-macro-lib.ftl"/>
 <#include "./footer-macro-lib.ftl"/>
 <#include "./header-macro-lib.ftl"/>
-
 <#-- 
 FUNCTION: gnizrVersion
 NOTE: returns a version string to be injected in the <head/> of 
