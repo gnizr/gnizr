@@ -5,7 +5,9 @@
   * Renamed "RSS Subscription" to "link collect"; improved user instructions. 
   * Created `FormatUtil` methods to tidy and remove unsafe HTML tags.
   * Editing User folder description prohibits the use of HTML tags.
-  * ..
+  * Editing bookmark notes prohibits the use of unsafe HTML tags (e.g., `script`, `iframe`);
+  * Editing bookmark geo-markers prohibits the use of HTML tags.
+  * ...
 
 
 ==== Version 2.4.0-M3 (2 May 2008) ====
