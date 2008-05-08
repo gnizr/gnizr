@@ -10,21 +10,21 @@
 You can add these tools to your browser. They provide an integrated user experience for 
 saving bookmarks, visiting your bookmark collections and searching for information.  
 </p>
+<div class="system-message">
+<b>For Internet Explorer Users</b>: If you cannot drag to save links, use right-click to save links to your Favorites folder.
 </div>
-<h3>Save bookmark tool</h3>
+</div>
+<h4>Save Bookmark Tool</h4>
 <ul>
   <li>Drag 
-  '<a href="javascript:var d=document,g='${gzUrl("/post?")}',l=d.location,e=encodeURIComponent,p='url='+e(l.href)+'&title='+e(d.title);1;a=function(){if(!window.open(g+p+'&saveAndClose=true','${getSiteName()}','toolbar=no,status=no,resizable=yes,width=800,height=640,scrollbars=yes'))l.href=g+p+'&saveAndClose=false&redirect=true'};if(/Firefox/.test(navigator.userAgent))setTimeout(a,0);else{a()};void(0)" title="post to ${getSiteName()}" onclick="window.alert('Drag this link to your bookmarks toolbar, or right-click it and choose Bookmark This Link...');return false;">post to ${getSiteName()}</a>' 
+  '<a href="javascript:(function(){setTimeout(function(){var g='${gzUrl("/post?url=")}'+encodeURIComponent(location.href)+'&title='+encodeURIComponent(document.title)+'&saveAndClose=';try{var u=g+'true', t='gnizr',o='toolbar=no,status=no,resizable=yes,width=800,height=640,scrollbars=yes',w=window.open(u,t,o); if(!w){w=window.open('',t,o);w.location.href=u;}} catch(e){w=null;};if(w==null){location.href=g+'false&redirect=true';}},10);})()" title="post to ${getSiteName()}" onclick="window.alert('Drag this link to your bookmarks toolbar, or right-click it and choose Bookmark This Link...');return false;">post to ${getSiteName()}</a>' 
   up to your Bookmark Toolbar.</li>
-  <li>Drag 
-  '<a href="javascript:(function(){setTimeout(function(){var g='${gzUrl("/post?")}', p='url='+encodeURIComponent(location.href)+'&title='+encodeURIComponent(document.title); try{window.open(g+p+'&saveAndClose=true','gnizr','toolbar=no,status=no,resizable=yes,width=800,height=640,scrollbars=yes');}catch(e){location.href=g+p+'&saveAndClose=false&redirect=true';}},10);})()" title="post to ${getSiteName()}" onclick="window.alert('Drag this link to your bookmarks toolbar, or right-click it and choose Bookmark This Link...');return false;">post to ${getSiteName()}</a>' 
-  up to your Bookmark Toolbar. (experimental)</li>
 </ul>
-<h3>Your bookmark homepage</h3>
+<h4>Your Bookmark Homepage</h4>
 <ul>  
   <li>Drag this link: '<a href="javascript:location.href='${gzUrl("/home")}'" onclick="window.alert('Drag this link to your bookmarks toolbar, or right-click it and choose Bookmark This Link...');return false;">my ${getSiteName()} bookmarks</a>' up to your Bookmarks Toolbar.
 </ul>
-<h3>Add browser search plugin</h3>
+<h4>Add Browser Search Plugin</h4>
 <ul>
   <li>Click <a href="javascript:window.external.AddSearchProvider('${gzUrl('/settings/opensearch/description.action')}');">this link</a> to add a search plugin your Firefox or Internet Explorer 7 browser.</li>
 </ul>
