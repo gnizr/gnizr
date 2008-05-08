@@ -200,9 +200,9 @@ SearchExecutor.prototype.fetchMoreData = function(){
          	   MochiKit.DOM.A({'href':dtlUrl,'target':'_blank','class':'system-link ' + viewDetailLinkClass},'view'));
          }         
          var summaryElm = MochiKit.DOM.P({'class':'entryDescription notes'});
-         summaryElm.innerHTML = summary;
+         summaryElm.innerHTML = summary.escapeHTML();
          var entryElm = MochiKit.DOM.LI(null,
-            MochiKit.DOM.A({'class':'entryTitle link-title','href':link,'target':'_blank'},title),
+            MochiKit.DOM.A({'class':'entryTitle link-title','href':link,'target':'_blank'},title.escapeHTML()),
             editLinkElm,
             ' ',
             viewDetailElm,
@@ -442,10 +442,11 @@ QuickSave.prototype.connectOnClick = function (saveOrEditNode, actionLabel){
             saveLoadingElm.innerHTML = 'done!';
         }
         function onErr(data){
+        	alert(data);
             saveLoadingElm.innerHTML = 'error!';
         }      
         MochiKit.DOM.replaceChildNodes(this.linkActionElement,saveLoadingElm);
-        var linkEntry = this.linkEntry;
+        var linkEntry = this.linkEntry;     
         SaveLinkUtil.ajaxSave(saveBookmarkUrl,linkEntry.url,linkEntry.title,onSucc,onErr);       
      }
     
