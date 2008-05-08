@@ -202,7 +202,7 @@ SearchExecutor.prototype.fetchMoreData = function(){
          var summaryElm = MochiKit.DOM.P({'class':'entryDescription notes'});
          summaryElm.innerHTML = summary.escapeHTML();
          var entryElm = MochiKit.DOM.LI(null,
-            MochiKit.DOM.A({'class':'entryTitle link-title','href':link,'target':'_blank'},title.escapeHTML()),
+            MochiKit.DOM.A({'class':'entryTitle link-title','href':link,'target':'_blank'},title),
             editLinkElm,
             ' ',
             viewDetailElm,
