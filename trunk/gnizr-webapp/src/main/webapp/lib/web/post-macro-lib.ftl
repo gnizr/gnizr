@@ -37,7 +37,9 @@ INPUT: postUrl
 <div class="post-title">     
      <a id="${bmarkId}" href="${gzBookmarkUrl(postId?c)}" class="bmark-title link-title" >${postTitle?html}</a>           
      <@iconLabels mTags=postMachineTags user=postUser.username/> 
-     <div class="post-link"><a href="${postUrl}" class="bmark-link web-link" target="_blank">${prettyFormatUrl(postUrl)}</a></div>   
+     <div class="post-link">
+       <a href="${postUrl?html}" class="bmark-link web-link" target="_blank">${makeShortUrl(postUrl)?html}</a>
+     </div>   
 </div>    
 
   <div class="post-actions">  
