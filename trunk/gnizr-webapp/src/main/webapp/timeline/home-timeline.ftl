@@ -1,26 +1,20 @@
-<#-- 
- users/home-timeline.ftl  
- A freemarker template that displays user bookmakrs in SIMILE Timeline XML output.
--->
-<#-- import Freemarker macros that are common to the site -->
-<#include "/lib/web/macro-lib.ftl"/>
-<#-- import Freemarker macros that are specific to USERS -->
-<#include "./macro-lib.ftl"/>
 <?xml version="1.0" encoding="UTF-8"?>
 <data>
+<#include "/lib/web/macro-lib.ftl"/>
+<#include "./macro-lib.ftl"/>
 <#list bookmark as bm>
   <event start="${getTimelineDateTime(bm.createdOn)}" 
          image="${gzUrl("/images/tiny-webpage.gif")}"
          title="${bm.title?html}">         
 <#if bm.notes?exists>
-  <#assign notes = sliceNotes(bm.notes)/>
+  <#assign notes = makeShortNotes(bm.notes)/>
 <#else>
   <#assign notes = [""]/>
 </#if>         
 <#assign bcontent = 
    '<div class="bmark_content">' +
-   '<a target="_blank" title="${bm.title}" href="${bm.link.url}">' + bm.link.url + '</a>' +
-   '<p>' + notes[0]?html + '</p>' 
+   '<a target="_blank" title="${bm.title?html}" href="${bm.link.url}">' + bm.link.url + '</a>' +
+   '<p>' + notes?html + '</p>' 
 />       
 <#if (bm.tagList?size > 0)>
   <#assign bcontent=bcontent+ '<b>tags</b>:'/>
