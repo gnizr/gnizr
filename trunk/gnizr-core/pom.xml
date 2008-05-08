@@ -76,7 +76,7 @@
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
-			<groupId>jtidy</groupId>
+			<groupId>org.hibernate</groupId>
 			<artifactId>jtidy</artifactId>
 			<scope>compile</scope>
 		</dependency>
