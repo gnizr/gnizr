@@ -20,7 +20,6 @@
 separate copies of the same bookmark will be created in the respective folders.</p>
 <p>After you click on the 'Export' button, the export process will begin. 
 After the process is completed, you will be asked to save a file that contains the exported bookmarks.</p>
-<p>If you have many bookmarks, this process may take a moment. Do not click stop or reload this page.</p>
 <p>Select the format that you want to export.</p>
 </@pageDescription>
 <div id="action-message">
@@ -34,6 +33,11 @@ After the process is completed, you will be asked to save a file that contains t
   <@ww.submit value="Export" cssClass="btn"/>
 </@ww.form>
 </@formInput>
+<@pageDescription>
+<div class="system-message">
+<p><b>Note:</b> If you have many bookmarks, this process may take a moment. Do not click stop or reload this page.</p>
+</div>
+</@pageDescription>
 
 </@mainBlock>
 </@pageContent>

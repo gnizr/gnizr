@@ -39,7 +39,7 @@
 <@settingsBlock title="Import/Export Bookmarks">
 <ul>
 <li><a href="${gzUrl("/settings/delicious.action")}">Import from del.icio.us</a></li>
-<li><a href="${gzUrl("/settings/export/bookmark.action")}">Export bookmarks to a file</a></li>
+<li><a href="${gzUrl("/settings/export/bookmark.action")}">Export bookmarks</a></li>
 </ul>
 </@settingsBlock>
 
