@@ -92,7 +92,7 @@ public class TestBookmarkEntryFactory extends TestCase {
 		Bookmark b = bmEntry.getBookmark();
 		assertEquals(title,b.getTitle());
 		assertEquals(link,b.getLink().getUrl());
-		assertEquals(content.getValue(),b.getNotes());
+		assertEquals(content.getValue(),b.getNotes().trim());
 		List<String> tags = b.getTagList();
 		assertTrue(tags.contains("123"));
 		assertTrue(tags.contains("abc"));
@@ -125,7 +125,7 @@ public class TestBookmarkEntryFactory extends TestCase {
 		Bookmark b = bmEntry.getBookmark();
 		assertEquals(title,b.getTitle());
 		assertEquals(link,b.getLink().getUrl());
-		assertEquals(content.getValue(),b.getNotes());
+		assertEquals(content.getValue(),b.getNotes().trim());
 		List<String> tags = b.getTagList();
 		assertTrue(tags.contains("123"));
 		assertTrue(tags.contains("abc"));
