@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/"
 	xmlns:gn="http://gnizr.com/ont/opensearch/2007/11/">
-  <ShortName>Yahoo! News</ShortName>
-  <Description>Yahoo! News</Description>
-  <Tags>yahoo web news</Tags>
+  <ShortName>YouTube</ShortName>
+  <Description>YouTube Search</Description>
+  <Tags>youtube video web</Tags>
   <Url type="text/xml" 
-       template="http://search.msn.com/results.aspx?q={searchTerms}+site%3anews.yahoo.com&amp;format=rss&amp;count=10&amp;first={startIndex}"/>	
+       template="http://search.msn.com/results.aspx?q={searchTerms}+site%3ayoutube.com&amp;format=rss&amp;count=10&amp;first={startIndex}"/>	
   <gn:DefaultEnabled>false</gn:DefaultEnabled>
 </OpenSearchDescription>

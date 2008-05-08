@@ -309,20 +309,25 @@ SearchExecutor.prototype.terminate = function(){
 SearchExecutor.prototype.getNextSearchQuery = function(){
     var pStr = decodeURIComponent(this.service.serviceUrl).split('?');
     MochiKit.Logging.log('getNextSearchQuery: split serviceUrl => ' + pStr);
+    MochiKit.Logging.log("pStr[0]: baseUrl=" + pStr[0]);  
+    MochiKit.Logging.log("pStr[1]:" + pStr[1]); 
     var baseUrl = pStr[0];  
     // in case, a service considers {searchTerms} as part of the URL path
-    baseUrl = baseUrl.replace("{searchTerms}",encodeURIComponent(this.qs)); 
-      
-    var qTerms = MochiKit.Base.parseQueryString(pStr[1]);
+    baseUrl = baseUrl.replace("{searchTerms}",encodeURIComponent(this.qs));     
+    var qTerms = MochiKit.Base.parseQueryString(pStr[1]);    
     var qTerms2 = {}; // needed bec parseQueryString include '&' as a key
     for(key in qTerms){
+    	MochiKit.Logging.log("qTerms[" +key + "] = " +qTerms[key]);
         if(qTerms[key] == '{count}'){
             qTerms2[key] = 10;
             MochiKit.Logging.log('replace {count} with 10');
         }else if(qTerms[key] == '{searchTerms}'){
             qTerms2[key] = this.qs;
             MochiKit.Logging.log('replace {searchTerms} with ' + qTerms2[key]);
-        }else if(qTerms[key] == '{startIndex}'){
+        }else if(qTerms[key].indexOf('{searchTerms}') != -1){	    
+	        qTerms2[key] = qTerms[key].replace(/\{searchTerms\}/,this.qs);
+	        MochiKit.Logging.log('repalcing qTerms using rule 2: ' + qTerms2[key] + ", qs = " + this.qs);
+        }else if(qTerms[key] == '{startIndex}'){ 
             if(this.startIndex <= 0){
                 this.startIndex = 1;
             }else{

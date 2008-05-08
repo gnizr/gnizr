@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/"
+	xmlns:gn="http://gnizr.com/ont/opensearch/2007/11/">
+  <ShortName>Google Blog Search</ShortName>
+  <Description>Google Blog Search</Description>
+  <Tags>blogs google web news</Tags>
+  <Url type="text/xml" 
+       template="http://blogsearch.google.com/blogsearch_feeds?q={searchTerms}&amp;ie=utf-8&amp;num=10&amp;output=rss&amp;start={startIndex}"/>	
+  <gn:DefaultEnabled>false</gn:DefaultEnabled>
+</OpenSearchDescription>
