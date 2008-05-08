@@ -39,7 +39,7 @@ SaveLinkUtil = {
         };       
     },
     ajaxSave: function(postUrl,link,title,onSuccess,onFail){        
-         var bmarkQS = MochiKit.Base.queryString({'url':link,'title':title});
+         var bmarkQS = MochiKit.Base.queryString({'url':link,'title':title});      	
          var d = MochiKit.Async.loadJSONDoc(postUrl + '?' + bmarkQS);
          var saveOkay = function(data){
              if(MochiKit.Base.isUndefinedOrNull(onSuccess) == false){

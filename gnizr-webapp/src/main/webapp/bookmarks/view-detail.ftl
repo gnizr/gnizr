@@ -1,6 +1,6 @@
 <#include "/lib/web/macro-lib.ftl"/>
 <#if bookmark?exists>
-  <#assign title='\''+bookmark.title+'\' saved by ' + bookmark.user.username/>
+  <#assign title='\''+(bookmark.title)?html+'\' saved by ' + bookmark.user.username/>
   <#assign thisPageHref = gzBookmarkUrl(bookmark.id?c)/>
 </#if>
 <@pageBegin pageTitle=title cssHref=[gzUrl("/css/gnizr-linkhistory.css")]>
@@ -12,8 +12,8 @@
 <@infoBlock bct=bct/> 
 <#if bookmark?exists>
 <div id="bookmark-detail">
-<h2 class="title"><a target="_blank" href="${bookmark.link.url}" title="${bookmark.title}">${bookmark.title}</a></h2>
-<p class="link">${bookmark.link.url}</p>
+<h2 class="title"><a target="_blank" href="${bookmark.link.url}" title="${bookmark.title?html}">${bookmark.title?html}</a></h2>
+<p class="link">${prettyFormatUrl(bookmark.link.url)}</p>
 <p class="meta">Saved by <a href="${gzUserUrl(bookmark.user.username)}">${bookmark.user.username}</a> 
 <#if (bookmark.tagList?size > 0)> tagged
   <#list bookmark.tagList as tag>    

@@ -7,7 +7,7 @@
    'title':'${bookmark.title?js_string?html}',
    'url':'${bookmark.link.url?html}',
    'notes':'${notes?js_string?html}',   
-   'summary':'${(sliceNotes(notes)[0])?js_string?html}',
+   'summary':'${(makeShortNotes(notes))?js_string?html}',
    'tags':${list2array(bookmark.tagList)},
    'lastUpdated':'${(bookmark.lastUpdated)?datetime}',
    'createdOn':'${(bookmark.createdOn)?datetime}',

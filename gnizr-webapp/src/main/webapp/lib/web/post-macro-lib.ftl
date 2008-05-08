@@ -35,7 +35,7 @@ INPUT: postUrl
 	</#if>
 </#if>
 <div class="post-title">     
-     <a id="${bmarkId}" href="${gzBookmarkUrl(postId?c)}" class="bmark-title link-title" >${cleanTitle(postTitle)}</a>           
+     <a id="${bmarkId}" href="${gzBookmarkUrl(postId?c)}" class="bmark-title link-title" >${postTitle?html}</a>           
      <@iconLabels mTags=postMachineTags user=postUser.username/> 
      <div class="post-link"><a href="${postUrl}" class="bmark-link web-link" target="_blank">${prettyFormatUrl(postUrl)}</a></div>   
 </div>    
@@ -54,7 +54,7 @@ INPUT: postUrl
    
     <#assign shrtNotes = makeShortNotes(postNotes)/>
     <div class="notes">
-      <div class="shrtNotes">${shrtNotes}</div>
+      <div class="shrtNotes">${shrtNotes?html}</div>
     </div>
     <div class="meta">
     <div class="info">by <a href="${gzUserUrl(postUser.username)}">${postUser.username}</a> 
