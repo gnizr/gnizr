@@ -98,6 +98,11 @@ public class EditUserFolder extends AbstractAction implements LoggedInUserAware{
 					return INPUT;
 				}
 			}
+			if(folder != null && folder.getDescription() != null){
+				String tmpStr = folder.getDescription();
+				tmpStr = FormatUtil.tidyAndExtractTextFromHtml(tmpStr);			
+				folder.setDescription(tmpStr);
+			}			
 			existingFolder.setDescription(folder.getDescription());
 			try{
 				isOkay = folderManager.updateFolder(loggedInUser,existingFolder);
@@ -212,18 +217,12 @@ public class EditUserFolder extends AbstractAction implements LoggedInUserAware{
 	}
 
 	/**
-	 * Sets the folder to edit. Cleans the description text of
-	 * this folder description -- remove all HTML tags. 
+	 * Sets the folder to edit.
 	 * 
 	 * @param folder an instance of <code>Folder</code> to be edited.
 	 */
 	public void setFolder(Folder folder) {
-		this.folder = folder;		
-		if(folder != null && folder.getDescription() != null){
-			String tmpStr = folder.getDescription();
-			tmpStr = FormatUtil.tidyAndExtractTextFromHtml(tmpStr);			
-			this.folder.setDescription(tmpStr);
-		}
+		this.folder = folder;				
 	}
 
 	public String getOwner() {
