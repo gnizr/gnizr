@@ -145,7 +145,7 @@ public class TestEditBookmark2 extends GnizrWebappTestBase {
 		assertTrue(bmid > 0);
 		Bookmark bm = bookmarkManager.getBookmark(bmid);
 		assertEquals("CNN homepage",bm.getTitle());
-		assertEquals("notes goes here... <h3>233</h3>",bm.getNotes());
+		assertEquals("notes goes here... <H3>233</H3>",bm.getNotes().trim());
 	}
 	
 	public void testUpdateBookmark() throws Exception{
