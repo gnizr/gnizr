@@ -98,7 +98,7 @@ public class BookmarkEntryFactory {
 	
 	protected String createTitle(SyndEntry entry, SyndFeed fromFeed, FeedSubscription fromSubscription){
 		if(entry.getTitle() != null){
-			return FormatUtil.extractTextFromHtml(entry.getTitle());
+			return FormatUtil.extractTextFromHtml(entry.getTitle()).trim();
 		}
 		return null;
 	}
@@ -106,7 +106,7 @@ public class BookmarkEntryFactory {
 	protected String createNotes(SyndEntry entry, SyndFeed fromFeed, FeedSubscription fromSubscription){
 		SyndContent content = entry.getDescription();
 		if(content != null){
-			return FormatUtil.tidyAndExtractTextFromHtml(content.getValue());
+			return FormatUtil.tidyAndExtractTextFromHtml(content.getValue()).trim();
 		}
 		return "";
 	}
