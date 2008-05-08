@@ -296,6 +296,23 @@ OUTPUT: returns 'yes', 'no' that maps 'true', 'false' respectively
   </#if>
 </#function>
 
+<#function makeShortUrl url>
+ <#local sUrl = dropHttpPrefix(url)/>
+ <#if (sUrl?length > 60)>
+   <#return sUrl?substring(0,60) + "..."/>
+ <#else>
+   <#return sUrl/>
+ </#if>
+</#function>
+
+<#function dropHttpPrefix url>
+  <#if url?starts_with("http://")>
+    <#return url?substring(7)/>
+  <#else>
+    <#return url/>
+  </#if>
+</#function>
+
 <#function prettyFormatUrl url breakCnt=45>
   <#if (url?length > breakCnt)> 
     <#local ppUrl =""/>

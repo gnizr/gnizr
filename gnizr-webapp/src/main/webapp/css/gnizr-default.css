@@ -497,6 +497,8 @@ ul#breadcrumbs{
 
 .post .post-link{
 	font-size: 0.8em;
+	 height: 1.75em;            /* constrain height */
+    line-height:1.75em;        /* to be adjusted */   
 }
 
 .post .post-link a:link, 
