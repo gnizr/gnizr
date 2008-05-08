@@ -24,6 +24,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import com.gnizr.core.folder.FolderManager;
+import com.gnizr.core.util.FormatUtil;
 import com.gnizr.core.util.GnizrDaoUtil;
 import com.gnizr.core.vocab.MachineTags;
 import com.gnizr.db.dao.Bookmark;
@@ -96,17 +97,21 @@ public class BookmarkEntryFactory {
 	}
 	
 	protected String createTitle(SyndEntry entry, SyndFeed fromFeed, FeedSubscription fromSubscription){
-		return entry.getTitle();
+		if(entry.getTitle() != null){
+			return FormatUtil.extractTextFromHtml(entry.getTitle());
+		}
+		return null;
 	}
 	
 	protected String createNotes(SyndEntry entry, SyndFeed fromFeed, FeedSubscription fromSubscription){
 		SyndContent content = entry.getDescription();
 		if(content != null){
-			return content.getValue();
+			return FormatUtil.tidyAndExtractTextFromHtml(content.getValue());
 		}
 		return "";
 	}
 	
+	@SuppressWarnings("unchecked")
 	protected List<String> createTags(SyndEntry entry, SyndFeed fromFeed, FeedSubscription fromSubscription){
 		List<String> tags = new ArrayList<String>();
 		List categories = entry.getCategories();
