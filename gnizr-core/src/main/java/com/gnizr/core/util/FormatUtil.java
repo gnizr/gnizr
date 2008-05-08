@@ -2,12 +2,16 @@ package com.gnizr.core.util;
 
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
+import org.htmlparser.Attribute;
 import org.htmlparser.Parser;
 import org.htmlparser.Tag;
 import org.htmlparser.tags.FrameTag;
@@ -67,6 +71,7 @@ public class FormatUtil {
 			Parser parser = Parser.createParser(htmlCode, "UTF-8");
 			final NodeList nl = parser.parse(null);
 			nl.visitAllNodesWith(new NodeVisitor(){
+				@SuppressWarnings("unchecked")
 				public void visitTag(Tag tag){
 					if((tag instanceof ScriptTag) ||
 					   (tag instanceof FrameTag)){
@@ -82,7 +87,20 @@ public class FormatUtil {
 							tag.setTagName("H3");
 							tag.getEndTag().setTagName("/H3");
 						}
-					}					
+					}
+					List<String> attrs2remove = new ArrayList<String>();
+					Vector<Attribute> attrs = tag.getAttributesEx();
+					for(Attribute attr : attrs){					
+						if(attr.getLength() > 2){
+							String prefix2Char = attr.getName().substring(0,2);
+							if(prefix2Char.equalsIgnoreCase("on")){
+								attrs2remove.add(attr.getName());
+							}
+						}
+					}
+					for(String a2r : attrs2remove){
+						tag.removeAttribute(a2r);
+					}
 				}
 			});			
 			return nl.toHtml();
