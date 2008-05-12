@@ -60,6 +60,7 @@ function initializePage(){
 	populateSubmitOption();
 	populateSelectOption();		
 	monitorSelection();	
+	
 }
 
 /**

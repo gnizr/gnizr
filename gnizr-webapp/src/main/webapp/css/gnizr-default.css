@@ -665,15 +665,15 @@ ul#breadcrumbs{
 }
 
 .overlay-dialog{
- 	 width: 300px;
-     margin: 300px auto;
+ 	 width: 80%;   
+ 	 margin: 100px; auto;
      background-color: #fff;
-     border:1px solid #000;
+     border:3px solid #000;
      padding:15px;
-     text-align:center;
+     text-align:left;
 }
 
-.overlay-dialog-close{
-	margin-top: 8px;
-	margin-bottom: 4px;
+.overlay-dialog .dialog-menu{
+	text-align:right;
+	font-size: 1.25em;
 }
