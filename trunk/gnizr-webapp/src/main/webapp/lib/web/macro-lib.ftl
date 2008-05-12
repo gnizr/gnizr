@@ -89,7 +89,7 @@ INPUT: pageTitle:String // the <title/> of this HTML page
 <script type="text/javascript" charset="utf-8" src="${gzUrl("/lib/javascript/common.js")}"></script>
 <script type="text/javascript" charset="utf-8" src="${gzUrl("/lib/javascript/cookie-util.js")}"></script>
 <script type="text/javascript" charset="utf-8" src="${gzUrl("/lib/javascript/ajaxSuggestions/ajaxSuggestions.js")}"></script>
-<#if (gnizrConfiguration.snapShotsKey)?exists>
+<#if (gnizrConfiguration.snapShotsKey)?exists && (gnizrConfiguration.snapShotsKey?length > 0)>
 <script type="text/javascript" src="http://shots.snap.com/snap_shots.js?${gnizrConfiguration.snapShotsKey}"></script>
 </#if>
 <script type="text/javascript" src="${gzUrl("/lib/javascript/showhide-bmrknotes.js")}"></script>
@@ -103,6 +103,7 @@ INPUT: pageTitle:String // the <title/> of this HTML page
 
   // global variable
   var imgUrl = '${gzUrl("/images/")}';
+  var bmUrl = '${gzUrl("/community/getBookmarkInfoLite.action?bookmarkId=")}';
 </script>
 </#if>
 <!-- JAVASCRIPT DATA ENDS -->
@@ -175,8 +176,6 @@ MACRO: pageContent
 
 <#macro pageContentLite>
 <#nested>
-</body>
-</html>
 </#macro>
 
 <#macro pageTitle>
