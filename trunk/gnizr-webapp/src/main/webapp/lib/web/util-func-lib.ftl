@@ -308,6 +308,8 @@ OUTPUT: returns 'yes', 'no' that maps 'true', 'false' respectively
 <#function dropHttpPrefix url>
   <#if url?starts_with("http://")>
     <#return url?substring(7)/>
+  <#elseif url?starts_with("https://")>
+    <#return url?substring(8)/>
   <#else>
     <#return url/>
   </#if>

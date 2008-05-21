@@ -20,8 +20,10 @@
 		    thisPageBaseHref=thisPageBaseHref 
             thisPageHref=thisPageHref
             toPageHref=toPageHref>
+<#--
   <script type="text/javascript" src="${gzUrl("/lib/javascript/overlay-dialog.js")}"></script>           
   <script type="text/javascript" src="${gzUrl("/lib/javascript/bookmark-quick-view.js")}"></script>    
+  -->
 <#if loggedInUser?exists>
   <#if isUserAuth(loggedInUser,user)>  
   <script type="text/javascript" src="${gzUrl("/lib/javascript/bookmark-actions.js")}"></script>     

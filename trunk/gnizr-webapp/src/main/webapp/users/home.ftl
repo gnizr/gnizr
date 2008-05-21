@@ -19,8 +19,10 @@
             toPageHref=toPageHref>
   <link rel="alternate" type="application/rss+xml" title="RSS 1.0" 
         href="${gzFullUrl("/user/"+username+"/output/rss1.0")}"/>    
+<#--        
   <script type="text/javascript" src="${gzUrl("/lib/javascript/overlay-dialog.js")}"></script>           
   <script type="text/javascript" src="${gzUrl("/lib/javascript/bookmark-quick-view.js")}"></script>        
+  -->
 <#if loggedInUser?exists>
   <#if isUserAuth(loggedInUser,user)>  
   <script type="text/javascript" src="${gzUrl("/lib/javascript/bookmark-actions.js")}"></script>     
