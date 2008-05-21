@@ -34,11 +34,11 @@ INPUT: postUrl
 </div>
 	</#if>
 </#if>
-<div class="post-title">     
-    <#--
-     <a id="${bmarkId}" href="${gzBookmarkUrl(postId?c)}" class="bmark-title link-title" >${postTitle?html}</a>           
-     -->
+<div class="post-title">         
+     <a id="${bmarkId}" href="${gzBookmarkUrl(postId?c)}" class="bmark-title link-title" >${postTitle?html}</a>                
+     <#--
      <a id="${bmarkId}" href="javascript:viewBookmarkInDialogBox(${postId?c})" class="bmark-title link-title" >${postTitle?html}</a>           
+     -->
      <@iconLabels mTags=postMachineTags user=postUser.username/> 
      <div class="post-link">
        <a href="${postUrl?html}" class="bmark-link web-link" target="_blank">${makeShortUrl(postUrl)?html}</a>
