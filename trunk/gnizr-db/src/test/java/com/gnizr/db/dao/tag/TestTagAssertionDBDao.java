@@ -22,6 +22,7 @@ import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSet;
 
 import com.gnizr.db.dao.GnizrDBTestBase;
+import com.gnizr.db.dao.Tag;
 import com.gnizr.db.dao.TagAssertion;
 import com.gnizr.db.dao.TagProperty;
 import com.gnizr.db.dao.User;
@@ -276,5 +277,17 @@ public class TestTagAssertionDBDao extends GnizrDBTestBase {
 		assertEquals(0,r.size());
 	}
 	
+	public void testFindRelatedTags() throws Exception{
+		Tag tag_news = new Tag(2);
+		List<Tag> result = dao.findRelatedTags(tag_news, 1);
+		assertEquals(1, result.size());
+		
+		result = dao.findRelatedTags(tag_news, 1000);
+		assertEquals(2, result.size());
+		
+		Tag t = result.get(0);
+		assertNotNull(t.getLabel());
+		assertTrue(t.getCount()>0);
+	}
 	
 }

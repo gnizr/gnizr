@@ -30,6 +30,7 @@ import javax.sql.DataSource;
 import org.apache.log4j.Logger;
 
 import com.gnizr.db.dao.DBUtil;
+import com.gnizr.db.dao.Tag;
 import com.gnizr.db.dao.TagAssertion;
 import com.gnizr.db.dao.TagProperty;
 import com.gnizr.db.dao.User;
@@ -651,5 +652,36 @@ public class TagAssertionDBDao implements TagAssertionDao{
 			}
 		}
 		return isOkay;
+	}
+
+	public List<Tag> findRelatedTags(Tag tag, int maxCount) {
+		logger.debug("input: tag="+tag+",maxCount="+maxCount);
+		List<Tag> relatedTags = new ArrayList<Tag>();
+		PreparedStatement stmt = null;
+		Connection conn = null;
+		try{				
+			conn = dataSource.getConnection();
+			stmt = conn.prepareStatement("call findRelatedTags(?,?)");
+			stmt.setInt(1,tag.getId());			
+			stmt.setInt(2,maxCount);		
+			ResultSet rs = stmt.executeQuery();
+			while(rs.next()){
+				Tag relTag = TagDBDao.createTagObject(rs);
+				relatedTags.add(relTag);
+				logger.debug("found: " + relTag);
+			}
+			if(relatedTags.size() == 0){
+				logger.debug("found no matching related tags");
+			}
+		}catch(SQLException e){		
+			logger.fatal(e);
+		}finally{
+			try {
+				DBUtil.cleanup(conn,stmt);
+			} catch (SQLException e) {
+				logger.fatal(e);
+			}
+		}
+		return relatedTags;
 	}
 }
