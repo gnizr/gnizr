@@ -19,6 +19,7 @@ package com.gnizr.db.dao.tag;
 import java.io.Serializable;
 import java.util.List;
 
+import com.gnizr.db.dao.Tag;
 import com.gnizr.db.dao.TagAssertion;
 import com.gnizr.db.dao.TagProperty;
 import com.gnizr.db.dao.User;
@@ -39,6 +40,13 @@ public interface TagAssertionDao extends Serializable {
 
 	public List<TagAssertion> findTagAssertion(User user, UserTag subjectTag,
 			TagProperty tagPrpt, UserTag objectTag);
+
+	/** 
+	 * Finds a list of <code>Tag</code> that are related to the input <code>tag</code>.
+	 * @param tag find tags related to this tag. Must not be <code>null</code>. 
+	 * @param maxCount find no more than <code>maxCount</code> number of tags
+	 */
+	public List<Tag> findRelatedTags(Tag tag, int maxCount);
 	
 	public boolean createTagAssertion(TagAssertion[] asrt);
 	

@@ -357,3 +357,35 @@ BEGIN
           s_user_tag.tag_id = s_tag.id AND
           o_user_tag.tag_id = o_tag.id;
 END//
+##############################################################
+# PROCEDURE: findRelatedTags
+# INPUT: tagId
+# OUTPUT: an array of tag objects that are related to the 
+# input tag
+DROP PROCEDURE IF EXISTS findRelatedTags//
+CREATE PROCEDURE findRelatedTags(tagId INT, maxCount INT)
+BEGIN
+  SET @tagId = tagId;
+  SET @maxCount = maxCount;
+  
+  PREPARE STMT FROM "
+  SELECT DISTINCT tag.id, tag.tag, tag.count FROM tag, user_tag_idx 
+    WHERE tag.id = user_tag_idx.tag_id AND 
+          user_tag_idx.id IN
+  (SELECT * FROM (    
+  (SELECT tag_assertion.subject_id as u_tag_id FROM tag_assertion WHERE
+    tag_assertion.prpt_id = 1 AND 
+    tag_assertion.object_id IN
+    (SELECT user_tag_idx.id FROM user_tag_idx 
+     WHERE user_tag_idx.tag_id = ?)) 
+   UNION
+  (SELECT tag_assertion.object_id as u_tag_id FROM tag_assertion WHERE
+    tag_assertion.prpt_id = 1 AND 
+    tag_assertion.subject_id IN
+    (SELECT user_tag_idx.id FROM user_tag_idx 
+     WHERE user_tag_idx.tag_id = ? )) 
+  ) as u_tag_id_tbl)
+  ORDER BY tag.count DESC LIMIT ?";
+  
+  EXECUTE STMT USING @tagId, @tagId, @maxCount;
+END//
