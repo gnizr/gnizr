@@ -2,6 +2,7 @@
 #labels Phase-Implementation
 
 ==== Version 2.4.0-M4 (in progress) ====
+  * [http://code.google.com/p/gnizr/issues/detail?id=64 Issue 64]: Bookmarklet failed to work in IE6 
   * Renamed "RSS Subscription" to "link collect"; improved user instructions. 
   * Created `FormatUtil` methods to tidy and remove unsafe HTML tags.
   * Editing User folder description prohibits the use of HTML tags.
