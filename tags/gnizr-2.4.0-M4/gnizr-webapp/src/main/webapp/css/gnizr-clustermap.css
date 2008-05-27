@@ -1,0 +1,25 @@
+#clustermap {
+	height: 600px;
+	margin-top: 0px;
+	padding: 7px;
+	border: solid #4C4C4C;
+	border-width: 1px;
+	background-color: #CCCCCC;
+}
+
+#searchForm{
+	position: relative;
+	width: 480px;
+	margin: auto;
+    height: 40px;
+}
+
+#wwgrp_searchQuery{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+}
+
+#searchQuery{
+	width: 300px;
+}

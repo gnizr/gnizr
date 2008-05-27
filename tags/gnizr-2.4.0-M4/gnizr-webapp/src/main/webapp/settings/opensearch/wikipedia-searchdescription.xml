@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/"
+	xmlns:gn="http://gnizr.com/ont/opensearch/2007/11/">
+  <ShortName>Wikipedia (en)</ShortName>
+  <Description>Wikipedia (en)</Description>
+  <Tags>wikipedia references</Tags>
+  <Url type="text/xml" 
+       template="http://search.msn.com/results.aspx?q={searchTerms}+site%3aen.wikipedia.org&amp;format=rss&amp;count=10&amp;first={startIndex}"/>	
+  <gn:DefaultEnabled>false</gn:DefaultEnabled>
+</OpenSearchDescription>

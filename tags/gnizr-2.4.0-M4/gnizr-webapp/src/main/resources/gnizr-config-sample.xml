@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+	"http://www.springframework.org/dtd/spring-beans.dtd">
+<!--
+	This is the configuration file of gnizr. It's a Spring configuration that 
+	defines various runtime parameters of the system. If your system environment
+	setup is different from the default values, modify them accordingly. 
+	
+	Typically, you only need to modify paramaters that are labeled "MODIFY-ME".	
+-->
+<beans>
+	<!-- Defines the Database Connection to use -->
+	<bean id="dataSource" class="com.gnizr.db.dao.GnizrBasicDataSource"
+		destroy-method="close" singleton="true">
+		<property name="driverClassName">
+			<value>com.mysql.jdbc.Driver</value>
+		</property>
+
+		<!-- MODIFY-ME: Defines the URL for connecting to gnizr database -->
+		<property name="url">
+			<value>jdbc:mysql://localhost/gnizr_db</value>
+		</property>
+
+		<!-- MODIFY-ME: Defines the database username -->
+		<property name="username">
+			<value>gnizr</value>
+		</property>
+
+		<!-- MODIFY-ME: Defines the database password -->
+		<property name="password">
+			<value>gnizr</value>
+		</property>
+
+		<!-- Defines misc. JDBC paramaters -->
+		<property name="connectionProperties">
+			<props>
+				<prop key="useUnicode">true</prop>
+				<prop key="characterEncoding">UTF-8</prop>
+				<prop key="characterSetResults">UTF-8</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="gnizrConfiguration"
+		class="com.gnizr.web.util.GnizrConfiguration" singleton="true">
+
+		<!-- Define the site name of your gnizr installation -->
+		<property name="siteName">
+			<value>gnizr 2.4</value>
+		</property>
+
+		<!-- Define a short-description of your site -->
+		<property name="siteDescription">
+			<value>organize</value>
+		</property>
+
+		<!--  Define the admin email contact of your site -->
+		<property name="siteContactEmail">
+			<value></value>
+		</property>
+
+		<!-- Define the web application URL of this gnizr installation -->
+		<property name="webApplicationUrl">
+			<value>http://localhost:8080/gnizr</value>
+		</property>
+		
+		<!-- Define the Google Maps API Key to be used for this gnizr installation -->
+		<property name="googleMapsKey">
+			<value>ABQIAAAA5UsQFqmHpHln5pC8nyp05RTwM0brOpm-All5BF6PoaKBxRWWERS_Vpbx966CLXx9tDQthE6QI_9_bg</value>
+		</property>
+		<!-- Define Snap Shots configuration paramaters -->
+		<property name="snapShotsKey">
+			<value></value>
+		</property>
+		<!--
+			Defines whether or not anonymous readers are allowed to view gnizr users' bookmarks 
+			- "close": indicates user login is required for viewing any gnizr user pages
+			- "open": indicates anonymous readers are permitted to view user pages
+		-->
+		<property name="anonymousReaderPolicy">
+			<value>close</value>
+		</property>
+		<!-- 
+		    Defines new user registration policy. 
+		    - "close": new user account can only be created by logging as the Super User 'gnizr'
+		    - "open": any person with a valid email can create a new account 
+ 			- "approval": any person can register, but account activation requires explicit 'gnizr' approval
+ 						
+ 			If "open" or "approval" is used, siteContactEmail option must be defined (see above)
+		 -->
+		<property name="registrationPolicy">
+			<value>approval</value>
+		</property>
+		<property name="serverMaintenanceModeEnabled">
+			<value>false</value>
+		</property>
+		<property name="openSearchServices">
+			<list>
+				<value>/settings/opensearch/mybookmarks.action</value>
+				<value>/settings/opensearch/community.action</value>
+				<value>/settings/opensearch/yahoo-searchdescription.xml</value>
+				<value>http://www.pfaf.org/database/openSearch.rss</value>
+			</list>
+		</property>
+		
+		<!-- 
+		     Define a temp directory where gnizr will use to save temporary files.
+		     If not defined, then gnizr will use whatever the default directory provided by
+		     the Tomcat Server. 
+		  -->
+		<property name="tempDirectoryPath">
+			<value></value>
+		</property>
+	</bean>
+
+	<bean id="searchIndexProfile"
+		class="com.gnizr.core.search.SearchIndexProfile" singleton="true">
+		<property name="searchIndexDirectory">
+			<value>c:/search-data</value>
+		</property>
+		<property name="resetSearchIndexOnStart">
+			<value>false</value>
+		</property>
+		<property name="searchSuggestDataFile">
+			<value>/dictionary/default.txt</value>
+		</property>
+		<property name="suggestPopularTagsEnabled">
+			<value>true</value>
+		</property>
+	</bean>
+
+	<!-- Configure the JavaMail sender according your site's SMTP configuration. 
+		For available bean properties, see Spring API:
+		http://static.springframework.org/spring/docs/2.5.x/api/org/springframework/mail/javamail/JavaMailSenderImpl.html
+		http://java.sun.com/products/javamail/javadocs/com/sun/mail/smtp/package-summary.html	
+	-->
+	<bean id="mailSender"
+		class="org.springframework.mail.javamail.JavaMailSenderImpl" singleton="true">
+		<property name="host">
+			<value>localhost</value>
+		</property>
+	</bean>
+	
+</beans>
