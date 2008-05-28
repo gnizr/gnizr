@@ -1,13 +1,14 @@
-<#-- /webapp/users/folder-home.ftl -->
 <#assign ww=JspTaglibs["/WEB-INF/webwork.tld"] >
-<#-- import Freemarker macros that are common to the site -->
 <#include "/lib/web/macro-lib.ftl"/>
-<#-- import Freemarker macros that are specific to USERS -->
 <#include "/users/macro-lib.ftl"/>
 <#assign username = user.username/>
 <#assign title="${username}'s folder '${gzFormatFolderName(folderName)}'"/>
 <#assign thisPageBaseHref = gzUserFolderUrl(username,folderName)/>
-<#assign thisPageRSS = gzUserUrl(username)+"/output/rss1.0"/>
+<#if folderName?exists && folderName != '_my_'>
+  <#assign thisPageRSS = gzUserUrl(username)+"/folder/"+folderName?url+"/output/rss1.0"/>
+<#else>
+  <#assign thisPageRSS = gzUserUrl(username)+"/output/rss1.0"/>
+</#if>
 <#assign thisPageRDF = gzUserUrl(username)+"/output/rdf"/>
 <#if tag?exists>
   <#assign thisPageHref = thisPageBaseHref + "/tag/"+tag?url/>
