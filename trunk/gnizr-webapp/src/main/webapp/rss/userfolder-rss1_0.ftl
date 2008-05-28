@@ -1,6 +1,6 @@
 <#include "/lib/web/macro-lib.ftl"/>
 <#include "../users/macro-lib.ftl"/>
-<#assign title="${username}'s bookmarks"/>
+<#assign title="${username}'s bookmarks saved in '${folderName}'"/>
 <#assign thisPageHref=gzUserUrl(username)/>
 <?xml version="1.0" encoding="UTF-8"?>
 <rdf:RDF
@@ -12,7 +12,7 @@
 <channel rdf:about="${thisPageHref}">
 	<title>${title?html}</title>
 	<link>${thisPageHref}</link>
-	<description>10 bookmarks recently saved by ${username}</description>
+	<description>10 bookmarks saved by ${username} in folder '${folderName}'</description>
 	<dc:date>${getDateTimeISO8601(now)}</dc:date>
 	<items>
 	  <rdf:Seq>
