@@ -11,6 +11,7 @@
   * Upgraded to Freemarker 2.3.8.
   * Added more !OpenSearch engines (del.icio.us, nytimes, google blog search, yahoo news and wikipedia).
   * DB added: !TagAssertionDao.findRelatedTags
+  * Users can export saved bookmarks to a file `bookmarks.html`.
 
 
 ==== Version 2.4.0-M3 (2 May 2008) ====
