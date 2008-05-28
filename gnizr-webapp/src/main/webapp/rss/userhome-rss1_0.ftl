@@ -16,13 +16,13 @@
 	<dc:date>${getDateTimeISO8601(now)}</dc:date>
 	<items>
 	  <rdf:Seq>
-	<#list bookmarks as bm>
+	<#list bookmark as bm>
 	    <rdf:li resource="${gzBookmarkUrl(bm.id?c)}"/>	   	
 	</#list>
 	  </rdf:Seq>
 	</items>
 </channel>
-<#list bookmarks as bm>
+<#list bookmark as bm>
 <item rdf:about="${gzBookmarkUrl(bm.id?c)}">
   <title>${bm.title?html}</title>
   <link>${gzBookmarkUrl(bm.id?c)?html}</link>

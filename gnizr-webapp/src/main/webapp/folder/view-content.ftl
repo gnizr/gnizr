@@ -4,11 +4,15 @@
 <#assign username = user.username/>
 <#assign title="${username}'s folder '${gzFormatFolderName(folderName)}'"/>
 <#assign thisPageBaseHref = gzUserFolderUrl(username,folderName)/>
-<#if folderName?exists && folderName != '_my_'>
-  <#assign thisPageRSS = gzUserUrl(username)+"/folder/"+folderName?url+"/output/rss1.0"/>
+<#if folderName?exists>
+  <#assign purl = "/folder/"+folderName?url/>
+  <#if tag?exists>
+     <#assign purl = purl + "/tag/"+tag?url/>
+  </#if>  
 <#else>
-  <#assign thisPageRSS = gzUserUrl(username)+"/output/rss1.0"/>
+  <#assign purl=""/>
 </#if>
+<#assign thisPageRSS = gzUserUrl(username)+purl+"/output/rss1.0"/>
 <#assign thisPageRDF = gzUserUrl(username)+"/output/rdf"/>
 <#if tag?exists>
   <#assign thisPageHref = thisPageBaseHref + "/tag/"+tag?url/>

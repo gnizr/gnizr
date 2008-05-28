@@ -3,17 +3,28 @@
 <xwork>
 	
 	<package name="gnizr-rss1.0" extends="gnizr-default" namespace="/data/rss1.0">		
-		<action name="bookmark" class="com.gnizr.web.action.folder.ListUserFolderContent">
+		<action name="bookmark" class="com.gnizr.web.action.bookmark.ListUserBookmark">
 			<interceptor-ref name="loggedIn"/>			
 			<interceptor-ref name="gnizrDefaultStack"/>	
-			<param name="folderName">_my_</param>	
 			<param name="page">1</param>
 			<param name="perPageCount">10</param>
 			<result name="success" type="freemarker">
 				<param name="location">/rss/userhome-rss1_0.ftl</param>
 				<param name="contentType">xhtml/xml</param>
-			</result>					
-			<result name="input" type="freemarker">/common/nosuchuser.ftl</result>					
+			</result>		
+			<result name="input" type="freemarker">/common/nosuchuser.ftl</result>								
+			<result name="error" type="freemarker">/common/error.ftl</result>	
+		</action>
+		<action name="bookmarktagged" class="com.gnizr.web.action.bookmark.ListUserBookmark">
+			<interceptor-ref name="loggedIn"/>			
+			<interceptor-ref name="gnizrDefaultStack"/>	
+			<param name="page">1</param>
+			<param name="perPageCount">10</param>
+			<result name="success" type="freemarker">
+				<param name="location">/rss/userhome-tagged-rss1_0.ftl</param>
+				<param name="contentType">xhtml/xml</param>
+			</result>		
+			<result name="input" type="freemarker">/common/nosuchuser.ftl</result>								
 			<result name="error" type="freemarker">/common/error.ftl</result>	
 		</action>
 		<action name="folder" class="com.gnizr.web.action.folder.ListUserFolderContent">
@@ -23,6 +34,18 @@
 			<param name="perPageCount">10</param>
 			<result name="success" type="freemarker">
 				<param name="location">/rss/userfolder-rss1_0.ftl</param>
+				<param name="contentType">xhtml/xml</param>
+			</result>		
+			<result name="input" type="freemarker">/common/nosuchuser.ftl</result>								
+			<result name="error" type="freemarker">/common/error.ftl</result>	
+		</action>
+		<action name="foldertagged" class="com.gnizr.web.action.folder.ListUserFolderContent">
+			<interceptor-ref name="loggedIn"/>			
+			<interceptor-ref name="gnizrDefaultStack"/>	
+			<param name="page">1</param>
+			<param name="perPageCount">10</param>
+			<result name="success" type="freemarker">
+				<param name="location">/rss/userfolder-tagged-rss1_0.ftl</param>
 				<param name="contentType">xhtml/xml</param>
 			</result>		
 			<result name="input" type="freemarker">/common/nosuchuser.ftl</result>								
