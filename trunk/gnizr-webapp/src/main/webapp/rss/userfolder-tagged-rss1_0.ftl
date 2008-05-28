@@ -2,7 +2,7 @@
 <#include "/lib/web/macro-lib.ftl"/>
 <#include "../users/macro-lib.ftl"/>
 <#assign fldname = gzFormatFolderName(folderName)?html/>
-<#assign title="${username}'s bookmarks saved in '${fldname}'"/>
+<#assign title="${username}'s bookmarks saved in '${fldname}' tagged '${tag}'"/>
 <#assign thisPageHref=gzUserUrl(username)/>
 <rdf:RDF
 	xmlns="http://purl.org/rss/1.0/"
@@ -13,7 +13,7 @@
 <channel rdf:about="${thisPageHref}">
 	<title>${title?html}</title>
 	<link>${thisPageHref}</link>
-	<description>10 bookmarks saved by ${username} in folder '${fldname}'</description>
+	<description>10 bookmarks saved by ${username} in folder '${fldname}' tagged '${tag?html}'</description>
 	<dc:date>${getDateTimeISO8601(now)}</dc:date>
 	<items>
 	  <rdf:Seq>

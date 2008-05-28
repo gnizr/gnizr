@@ -1,9 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <#include "/lib/web/macro-lib.ftl"/>
 <#include "../users/macro-lib.ftl"/>
-<#assign fldname = gzFormatFolderName(folderName)?html/>
-<#assign title="${username}'s bookmarks saved in '${fldname}'"/>
+<#assign title="${username}'s bookmarks tagged '${tag?html}'"/>
 <#assign thisPageHref=gzUserUrl(username)/>
+<?xml version="1.0" encoding="UTF-8"?>
 <rdf:RDF
 	xmlns="http://purl.org/rss/1.0/"
 	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
@@ -13,17 +12,17 @@
 <channel rdf:about="${thisPageHref}">
 	<title>${title?html}</title>
 	<link>${thisPageHref}</link>
-	<description>10 bookmarks saved by ${username} in folder '${fldname}'</description>
+	<description>10 bookmarks recently saved by ${username} tagged '${tag?html}'</description>
 	<dc:date>${getDateTimeISO8601(now)}</dc:date>
 	<items>
 	  <rdf:Seq>
-	<#list bookmarks as bm>
+	<#list bookmark as bm>
 	    <rdf:li resource="${gzBookmarkUrl(bm.id?c)}"/>	   	
 	</#list>
 	  </rdf:Seq>
 	</items>
 </channel>
-<#list bookmarks as bm>
+<#list bookmark as bm>
 <item rdf:about="${gzBookmarkUrl(bm.id?c)}">
   <title>${bm.title?html}</title>
   <link>${gzBookmarkUrl(bm.id?c)?html}</link>

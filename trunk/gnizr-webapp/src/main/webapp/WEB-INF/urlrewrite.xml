@@ -117,8 +117,18 @@
 </rule>		
 
 <rule>
+  <from>^/user/([a-zA-Z0-9\.]+)/tag/([\S&amp;&amp;[^\?]]+)/output/\b(georss|clustermap|timeline|rss1.0|rdf)\b$</from>  
+  <to last="true">/data/$3/bookmarktagged.action?username=$1&amp;tag=$2</to>
+</rule>	
+
+<rule>
   <from>^/user/([a-zA-Z0-9\.]+)/folder/([^/]+)/output/\b(georss|clustermap|timeline|rss1.0|rdf)\b$</from>  
   <to last="true">/data/$3/folder.action?username=$1&amp;folderName=$2</to>
+</rule>	
+
+<rule>
+  <from>^/user/([a-zA-Z0-9\.]+)/folder/([^/]+)/tag/([\S&amp;&amp;[^\?]]+)/output/\b(georss|clustermap|timeline|rss1.0|rdf)\b$</from>  
+  <to last="true">/data/$4/foldertagged.action?username=$1&amp;folderName=$2&amp;tag=$3</to>
 </rule>	
 		
 <rule>
