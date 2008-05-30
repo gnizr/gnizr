@@ -9,6 +9,17 @@ PASS=$3
 echo "DATABSE: $DB"
 echo "USER: $USER"
 echo "PASSWORD: $PASS"
+echo "-----------------"
+rows=`mysql -u $USER -p${PASS} -e "show tables" $DB |wc -l`
+if [ $rows -gt 0 ]
+  then echo "Looks like the gnizr has already been installed."
+       echo "Enter YES to continue (ALL EXISTING DATA WILL BE LOST!): "
+       read input
+       if [ "$input" != "YES" ] 
+          then echo "Quit! No changes are made."
+               exit 1
+       fi 
+fi 
 echo "======= Create gnizr DB Schema =======" 
 echo "loading gnizr_db.sql into $DB"
 mysql -u $2 --password=$3 $DB < gnizr_db.sql
