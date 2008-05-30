@@ -9,7 +9,7 @@ PASS=$3
 echo "DATABSE: $DB"
 echo "USER: $USER"
 echo "PASSWORD: $PASS"
-echo "====== Upgrading databaes to 2.3.0 ======"
+echo "====== Upgrading databaes to 2.4.0 ======"
 echo "  ==> Step 1: Upgrade Stored Procedures ...."
 ./loadsp.sh $1 $2 $3
 echo "  ==> Upgrade Done!"
