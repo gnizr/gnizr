@@ -212,9 +212,9 @@ public class UserManager implements Serializable{
 	 * <code>AccountStatus.DISABLED</code>. 
 	 * 
 	 * @see com.gnizr.db.vocab.AccountStatus
-	 * @param useran instantiated <code>User</code> object of an existing user record in 
+	 * @param user an instantiated <code>User</code> object of an existing user record in 
 	 * the persistent store.
-	 * @return <code>true</code> if the user account is successfuly disabled. Otherwise, 
+	 * @return <code>true</code> if the user account is successfully disabled. Otherwise, 
 	 * returns <code>false</code>
 	 */
 	public boolean disableUserAccount(User user) throws NoSuchUserException{
@@ -229,6 +229,28 @@ public class UserManager implements Serializable{
 			u = new User(user);
 		}
 		u.setAccountStatus(AccountStatus.DISABLED);
+		return userDao.updateUser(u);
+	}
+	
+	/**
+	 * Sets the status of a user account to <code>AccountStatus.INACTIVE</code>
+	 * @param user an instantiated <code>User</code> object of an existing user record in 
+	 * the persistent store.
+	 * @return <code>true</code> if the operation succeed. Otherwise, return <code>false</code>
+	 * @throws NoSuchUserException the input user doesn't exist in the datbase.
+	 */
+	public boolean inactivateUserAccount(User user) throws NoSuchUserException{
+		logger.debug("resetUserAccount: username="+user);
+		User u = null;
+		if(user.getId() <= 0 && user.getUsername() != null){
+			u = GnizrDaoUtil.getUser(userDao,user.getUsername());
+			if(u == null){
+				throw new NoSuchUserException("no such user: "+user.getUsername());
+			}
+		}else{
+			u = new User(user);
+		}
+		u.setAccountStatus(AccountStatus.INACTIVE);
 		return userDao.updateUser(u);
 	}
 	
