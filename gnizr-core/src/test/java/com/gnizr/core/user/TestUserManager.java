@@ -96,6 +96,17 @@ public class TestUserManager extends GnizrCoreTestBase {
 		u = userManager.getUser("hchen1","foobar");
 	}
 	
+	public void testInactivateUserAccount() throws Exception{
+		User u = new User("hchen1","foobar");
+		assertTrue(userManager.changePassword(u));
+		
+		assertEquals(AccountStatus.INACTIVE,userManager.getAccountStatus(new User("hchen1")));
+		assertTrue(userManager.activateUserAccount(new User("hchen1")));	
+		assertEquals(AccountStatus.ACTIVE,userManager.getAccountStatus(new User("hchen1")));
+		assertTrue(userManager.inactivateUserAccount(new User("hchen1")));		
+		assertEquals(AccountStatus.INACTIVE,userManager.getAccountStatus(new User("hchen1")));	
+	}
+	
 	public void testChangePassword() throws Exception{
 		User u = userManager.getUser("hchen1");
 		u.setPassword("foobar");
