@@ -29,7 +29,17 @@
 			<interceptor-ref name="loggedIn"/>
 			<interceptor-ref name="auth-gnizr"/>
             <interceptor-ref name="gnizrDefaultStack"/>
-			<result name="success" type="freemarker">/settings/edit-profile.ftl</result>	
+			<result name="success" type="freemarker">/settings/edit-profile-super.ftl</result>	
+			<result name="input" type="freemarker">/settings/edit-user.ftl</result>		
+			<result name="error" type="freemarker">/common/error.ftl</result>
+		</action>
+		
+		<action name="changeStatus" class="com.gnizr.web.action.user.EditUser"
+			method="doChangeStatus">
+			<interceptor-ref name="loggedIn"/>
+			<interceptor-ref name="auth-gnizr"/>
+            <interceptor-ref name="gnizrDefaultStack"/>
+			<result name="success" type="freemarker">/settings/edit-profile-super.ftl</result>	
 			<result name="input" type="freemarker">/settings/edit-user.ftl</result>		
 			<result name="error" type="freemarker">/common/error.ftl</result>
 		</action>
@@ -39,7 +49,7 @@
 			<interceptor-ref name="loggedIn"/>
 			<interceptor-ref name="auth-gnizr"/>
 	        <interceptor-ref name="gnizrDefaultStack"/>
-			<result name="success" type="freemarker">/settings/edit-profile.ftl</result>	
+			<result name="success" type="freemarker">/settings/edit-profile-super.ftl</result>	
 			<result name="input" type="freemarker">/settings/edit-profile.ftl</result>		
 			<result name="error" type="freemarker">/common/error.ftl</result>
 		</action>
@@ -50,7 +60,7 @@
 			<interceptor-ref name="auth-gnizr"/>
             <interceptor-ref name="gnizrDefaultStack"/>
 			<interceptor-ref name="validation"/>
-			<result name="success" type="freemarker">/settings/edit-profile.ftl</result>	
+			<result name="success" type="freemarker">/settings/edit-profile-super.ftl</result>	
 			<result name="input" type="freemarker">/settings/edit-profile.ftl</result>		
 			<result name="error" type="freemarker">/common/error.ftl</result>
 		</action>
