@@ -26,6 +26,7 @@ import com.gnizr.core.user.UserManager;
 import com.gnizr.core.util.GnizrDaoUtil;
 import com.gnizr.db.dao.Folder;
 import com.gnizr.db.dao.User;
+import com.gnizr.db.vocab.AccountStatus;
 import com.gnizr.web.action.AbstractAction;
 
 public class EditUser extends AbstractAction {
@@ -112,6 +113,28 @@ public class EditUser extends AbstractAction {
 		return op;
 	}
 	
+	public String doChangeStatus() {
+		String op = INPUT;
+		boolean isOkay = false;
+		try{		
+			if(editUser.getAccountStatus() == AccountStatus.ACTIVE){
+				isOkay = userManager.activateUserAccount(editUser);
+			}else if(editUser.getAccountStatus() == AccountStatus.INACTIVE){
+				isOkay = userManager.inactivateUserAccount(editUser);
+			}else if(editUser.getAccountStatus() == AccountStatus.DISABLED){
+				isOkay = userManager.disableUserAccount(editUser);
+			}			
+			editUser = userManager.getUser(editUser.getUsername());
+		}catch(Exception e){
+			addActionMessage("No such user: " + editUser.getUsername());
+			op = INPUT;
+		}		
+		if(isOkay == true){
+			addActionMessage("Successfully changed user account status!");
+			op = SUCCESS;
+		}
+		return op;
+	}
 	
 	public String doUpdate() {
 		String op = INPUT;
@@ -121,7 +144,7 @@ public class EditUser extends AbstractAction {
 				op = SUCCESS;
 			} else {
 				boolean isOkay = userManager.changeProfile(editUser);
-				if(isOkay == true){
+				if(isOkay == true){										
 					addActionMessage("Successfully changed user profile");
 					op = SUCCESS;
 				}else{
