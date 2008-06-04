@@ -2,7 +2,7 @@
 #labels Phase-Implementation
 
 ==== Version 2.4.0-RC1 (in progress) ====
-  * [http://code.google.com/p/gnizr/issues/detail?id=64 Issue 64]: Warn db overwrite when running the install script (fixed, need testing)
+  * [http://code.google.com/p/gnizr/issues/detail?id=67 Issue 67]: Warn db overwrite when running the install script (fixed, need testing)
   * [http://code.google.com/p/gnizr/issues/detail?id=68 Issue 68]: Publish RSS of bookmarks that are recently saved in a given folder (fixed, need testing)
   * [http://code.google.com/p/gnizr/issues/detail?id=69 Issue 69]: Publish RSS of bookmarks of a specific tag that are recently saved in a given folder (fixed, need testing)
   * [http://code.google.com/p/gnizr/issues/detail?id=70 Issue 70]: Publish RSS of bookmarks that are recently saved in the bookmark archive stream (fixed, need testing)
