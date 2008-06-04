@@ -1,0 +1,54 @@
+<!DOCTYPE validators PUBLIC "-//OpenSymphony Group//XWork Validator 1.0.2//EN"
+	"http://www.opensymphony.com/xwork/xwork-validator-1.0.2.dtd">
+
+<validators>
+	<field name="username">
+		<field-validator type="requiredstring" short-circuit="true">
+			<message>'username' is required!</message>
+		</field-validator>
+		
+		<field-validator type="stringlength" short-circuit="true">
+			<param name="minLength">3</param>
+			<param name="maxLength">12</param>
+			<param name="trim">true</param>
+			<message>must be 3-12 characters long</message>
+		</field-validator>
+		
+		<field-validator type="regex">
+			<param name="expression">[a-zA-Z]+[a-zA-Z0-9]*</param>
+			<message>contains invalid characters</message>
+		</field-validator>
+	</field>	
+	
+	<field name="password">
+		<field-validator type="requiredstring" short-circuit="true">
+			<message>'password' is required!</message>
+		</field-validator>
+		<field-validator type="stringlength" short-circuit="true">
+			<param name="minLength">6</param>
+			<param name="maxLength">20</param>
+			<param name="trim">true</param>
+			<message>must be between 6-20 characters long</message>
+		</field-validator>
+		<field-validator type="fieldexpression">
+            <param name="expression">(password == passwordConfirm)</param>
+            <message>'password' and 'password confirm' do not match</message>
+        </field-validator>
+	</field>	
+	
+	<field name="passwordConfirm">
+		<field-validator type="requiredstring" short-circuit="true">
+			<message>'password confirm' is required!</message>
+		</field-validator>
+	</field>		
+	
+	<field name="email">
+		<field-validator type="requiredstring" short-circuit="true">
+			<message>email is required.</message>
+		</field-validator>
+
+		<field-validator type="email" short-circuit="true">
+			<message>not a valid email address</message>
+		</field-validator>
+	</field>
+</validators>

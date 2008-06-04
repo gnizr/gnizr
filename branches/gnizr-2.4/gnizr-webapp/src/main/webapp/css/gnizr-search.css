@@ -1,0 +1,150 @@
+#search-block{
+	width: 300px;
+	margin:auto;
+}
+
+#mini-search-block{
+	position: relative;
+	width: 90%;
+	margin-bottom: 20px;
+}
+
+#mini-search-block #wwgrp_search-string{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+}
+
+
+.long-text-input{
+	width: 300px;
+}
+
+#searchForm table{
+   width: 300px;
+   margin-left: auto;
+   margin-right: auto;
+}
+
+#search-view-options{
+	text-align:right;
+	padding:0px;
+	margin:auto;
+}
+
+/* ======== CSS used in OpenSearch result page ====== */
+
+.saveLink, .linkAction{
+	margin-left: 8px;
+}
+
+.resultEntryFocused{
+	background-color: #FFF8C6;
+}
+
+#searchTermSuggest{
+	position: relative;
+	margin-right: 202px;
+	margin-left: 4px;
+	padding: 4px 10px;
+	background-color: 	#E0FFFF;
+	border-width:  1px;
+	border-style: solid;
+	border-color:  #43C6DB;
+}
+
+#searchTermSuggestContent{
+	width: 100%;
+	border-style: none;
+}
+
+#searchTermSuggestContent td{
+	vertical-align:top;
+}
+
+#searchTermSuggestControl{
+	text-align:right;
+}
+
+#searchPageContent{	
+	position: relative;
+	width: 100%;
+}
+
+#searchPageContent #left{
+	position:static;
+	margin-right: 200px;
+}
+
+#searchPageContent #right{
+	position:absolute;
+	top:0px;
+	right:0px;
+	width: 180px;	
+}
+
+#resultTilesRow{
+	height: 480px;
+}
+
+#resultTiles {
+	width:100%;
+}
+
+.searchShortName{
+	font-color: #736F6E;
+	font-weight: bold;
+	font-size: 10px;
+}
+
+.resultMeta {
+	text-align: right;
+}
+
+.tileTitle{
+	padding: 4px 4px;	
+	background-color: #FAF8CC;	
+	border-width:  1px;
+	border-style: solid;
+}
+
+.tileContent{
+	overflow: auto;
+	height: 480px;
+	padding: 2px;
+	border-left-width:  1px;
+	border-left-style: solid;
+	border-left-color:  #736F6E;
+	border-right-width:  1px;
+	border-right-style: solid;
+	border-right-color:  #736F6E;
+	border-bottom-width:  1px;
+	border-bottom-style: solid;
+	border-bottom-color:  #736F6E;
+}
+
+.tileSeperator{
+	width: 10px;
+	cursor: e-resize;
+}
+
+A.entryTitle{
+	font-size: 1.25em;
+	text-decoration: underline;
+}
+
+.fetchMoreDataLink{
+	float:right;
+	padding-right: 4px;
+}
+
+#selectSearchServices {
+  list-style-type: none;
+  margin-left: 0px;
+  padding-left: 4px;
+}
+
+.search-result-message{
+    margin: 20px 20px;
+	padding: 0px;
+}

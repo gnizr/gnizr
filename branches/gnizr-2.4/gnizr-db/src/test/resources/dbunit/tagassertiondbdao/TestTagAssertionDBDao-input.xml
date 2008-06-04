@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+	<user id="1" username="hchen1" password="cf95caeb19ac6b9743cb6398d68da02e"
+		fullname="Harry Chen" created_on="2006-11-16 21:55:18.0"
+		email="harry.chen@gmail.com" acct_status="1"/>
+	
+	<user id="2" username="gnizr" password=""
+		fullname="gnizr" created_on="2006-11-16 21:55:18.0"
+		email="" acct_status="1"/>
+	
+	<user id="3" username="joe" password="cf95caeb19ac6b9743cb6398d68da02e"
+		fullname="joe" created_on="2006-11-16 21:55:18.0"
+		email="joe@gmail.com" acct_status="1"/>
+	
+	<tag id="1" tag="cnn" count="20"/>
+	<tag id="2" tag="news" count="10"/>
+	<tag id="3" tag="foo bar" count="0"/>
+	<tag id="4" tag="breakingnews" count="5"/>
+	
+	<!-- hchen1:cnn -->
+	<user_tag_idx id="100" user_id="1" tag_id="1" count="0"/>
+	<!-- hchen1:news -->
+	<user_tag_idx id="101" user_id="1" tag_id="2" count="0"/>
+	<!-- hchen1:foo bar -->
+	<user_tag_idx id="102" user_id="1" tag_id="3" count="0"/>
+	<!-- gnizr:breakingnews -->
+	<user_tag_idx id="103" user_id="2" tag_id="4" count="0"/>
+	<!-- hchen1:breakingnews -->
+	<user_tag_idx id="104" user_id="1" tag_id="4" count="0"/>
+	
+	<user_tag_idx id="200" user_id="3" tag_id="1" count="0"/>
+	<user_tag_idx id="201" user_id="3" tag_id="2" count="0"/>
+	<user_tag_idx id="202" user_id="3" tag_id="3" count="0"/>
+	<user_tag_idx id="203" user_id="3" tag_id="4" count="0"/>
+	
+	<tag_prpt id="1" name="related" ns_prefix="skos" description="SKOS related" prpt_type="default" cardinality="-1"/>
+	<tag_prpt id="2" name="broader" ns_prefix="skos" description="SKOS broader" prpt_type="default" cardinality="-1"/>
+	<tag_prpt id="3" name="narrower" ns_prefix="skos" description="SKOS narrower" prpt_type="default" cardinality="-1"/>
+	<tag_prpt id="4" name="type" ns_prefix="rdf" description="RDF Type" prpt_type="default" cardinality="-1"/>
+	
+	<!-- hchen1:cnn related hchen1:news -->
+	<tag_assertion id="1" subject_id="100" prpt_id="1" object_id="101" user_id="1"/>
+	<!-- hchen1:news narrower gnizr:breakingnews -->
+	<tag_assertion id="2" subject_id="101" prpt_id="3" object_id="103" user_id="1"/>
+	
+	<!-- testDeleteSKOSRelatedAssertion -->
+	<tag_assertion id="10" subject_id="200" prpt_id="1" object_id="201" user_id="3"/>
+	<tag_assertion id="11" subject_id="201" prpt_id="1" object_id="200" user_id="3"/>
+	
+	<tag_assertion id="12" subject_id="201" prpt_id="1" object_id="202" user_id="3"/>
+
+	<!-- testDeleteSKOSBroaderAssertion -->
+	<tag_assertion id="13" subject_id="200" prpt_id="2" object_id="201" user_id="3"/>
+	<tag_assertion id="14" subject_id="201" prpt_id="3" object_id="200" user_id="3"/>
+	
+	<!-- -->
+	<tag_assertion id="15" subject_id="202" prpt_id="3" object_id="201" user_id="3"/>
+	<tag_assertion id="16" subject_id="202" prpt_id="3" object_id="203" user_id="3"/>
+	<tag_assertion id="17" subject_id="200" prpt_id="2" object_id="202" user_id="3"/>
+	
+	<tag_assertion id="18" subject_id="200" prpt_id="4" object_id="201" user_id="3"/>
+	<tag_assertion id="19" subject_id="200" prpt_id="4" object_id="202" user_id="3"/>
+	<tag_assertion id="20" subject_id="202" prpt_id="4" object_id="201" user_id="3"/>
+	
+</dataset>

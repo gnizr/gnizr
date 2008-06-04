@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+    <user id="0" username="gnizr" password="xxxxx"
+		fullname="gnizr" created_on="2006-11-16 21:55:18.0"
+		email="gnizr@example.com" acct_status="0"/>
+	<user id="2" username="hchen1" password="xxxxxxxx"
+		fullname="Harry Chen" created_on="2006-11-16 21:55:18.0"
+		email="harry.chen@gmail.com" acct_status="0"/>
+</dataset>

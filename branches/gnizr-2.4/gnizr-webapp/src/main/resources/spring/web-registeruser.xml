@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+	"http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+
+	<bean id="registerUser" class="com.gnizr.web.action.user.RegisterUser"
+		singleton="false">
+		<property name="userManager">
+			<ref bean="userManager" />
+		</property>
+		<property name="tokenManager">
+			<ref bean="tokenManager"/>
+		</property>
+		<property name="mailSender">
+			<ref bean="mailSender"/>
+		</property>
+		<property name="verifyEmailTemplate">
+			<ref bean="verifyEmailTemplate"/>
+		</property>
+		<property name="notifyEmailTemplate">
+			<ref bean="notifyEmailTemplate"/>
+		</property>
+		<property name="approvalEmailTemplate">
+			<ref bean="approvalEmailTemplate"/>
+		</property>
+		<property name="freemarkerEngine">
+			<ref bean="freemarkerEngine"/>
+		</property>
+	</bean>
+	
+	<bean id="activateUserAccount" class="com.gnizr.web.action.user.ActivateUserAccount"
+		singleton="false">
+		<property name="userManager">
+			<ref bean="userManager" />
+		</property>
+		<property name="tokenManager">
+			<ref bean="tokenManager"/>
+		</property>
+	</bean>	
+	
+	<bean id="approveUserAccount" class="com.gnizr.web.action.user.ApproveUserAccount"
+		singleton="false">
+		<property name="userManager">
+			<ref bean="userManager" />
+		</property>
+		<property name="tokenManager">
+			<ref bean="tokenManager"/>
+		</property>
+		<property name="mailSender">
+			<ref bean="mailSender"/>
+		</property>
+		<property name="welcomeEmailTemplate">
+			<ref bean="welcomeEmailTemplate"/>
+		</property>
+		<property name="freemarkerEngine">
+			<ref bean="freemarkerEngine"/>
+		</property>
+	</bean>
+	
+	<bean id="welcomeEmailTemplate" class="org.springframework.mail.SimpleMailMessage" singleton="true">  		
+  		<property name="subject" value="User Account Approved"/>
+  		
+  		<!--  Edit the following if you want customize the email message sent 
+  		      for password recovery -->  
+  		<!-- 
+  		<property name="from" value="sender-of-the-email@myhost.com"/>
+  		 -->      
+	</bean>
+	
+	<bean id="verifyEmailTemplate" class="org.springframework.mail.SimpleMailMessage" singleton="true">  		
+  		<property name="subject" value="Verify Email"/>
+  		
+  		<!--  Edit the following if you want customize the email message sent 
+  		      for password recovery -->  
+  		<!-- 
+  		<property name="from" value="sender-of-the-email@myhost.com"/>
+  		 -->      
+	</bean>
+	
+	<bean id="notifyEmailTemplate" class="org.springframework.mail.SimpleMailMessage" singleton="true">  		
+  		<property name="subject" value="Registration Pending"/>
+  		
+  		<!--  Edit the following if you want customize the email message sent 
+  		      for password recovery -->  
+  		<!-- 
+  		<property name="from" value="sender-of-the-email@myhost.com"/>
+  		 -->      
+	</bean>
+	
+	<bean id="approvalEmailTemplate" class="org.springframework.mail.SimpleMailMessage" singleton="true">  		
+  		<property name="subject" value="Registration Approval"/>
+  		
+  		<!--  Edit the following if you want customize the email message sent 
+  		      for password recovery -->  
+  		<!-- 
+  		<property name="from" value="sender-of-the-email@myhost.com"/>
+  		 -->      
+	</bean>
+	
+</beans>

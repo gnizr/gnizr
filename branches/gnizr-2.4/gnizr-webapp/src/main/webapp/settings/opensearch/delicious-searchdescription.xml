@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/"
+	xmlns:gn="http://gnizr.com/ont/opensearch/2007/11/">
+  <ShortName>Del.icio.us</ShortName>
+  <Description>Del.icio.us Search</Description>
+  <Tags>tags bookmark web news</Tags>
+  <Url type="text/xml" 
+       template="http://search.msn.com/results.aspx?q={searchTerms}+site%3adel.icio.us&amp;format=rss&amp;count=10&amp;first={startIndex}"/>	
+  <gn:DefaultEnabled>false</gn:DefaultEnabled>
+</OpenSearchDescription>

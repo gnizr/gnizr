@@ -1,0 +1,679 @@
+/* gnizr-default CSS document */
+
+a:link {
+	color: #FF6600;
+	text-decoration: none;
+}
+
+a:active {
+	text-decoration: none;
+	color: #FF6600;
+}
+
+a:visited {
+	color: #FF6600;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #FF6600;
+	text-decoration: underline;
+}
+
+body {
+	background-color: #FFFFFF;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	line-height: 1.3em;
+	color: #4C4C4C;
+	margin-right: 10px;
+	margin-left: 10px;
+	margin-top: 7px;
+	margin-bottom: 7px;
+}
+
+p {
+	padding: 0; 
+	margin-top: 0;
+}
+
+h1, h2, h3{
+	margin-top: 0px;
+	padding-top: 1px;	
+	padding-bottom: 1px;
+}
+
+h1 {
+	font-size: 20px;
+	font-weight: bold;
+	color: #4C4C4C;
+}
+
+h2 {
+	font-size: 14px;
+	font-weight: bold;
+	color: #333333;	
+}
+
+h3 {
+	font-size: 12px;
+	font-weight: bold;
+	color: #333333;
+}
+
+h4 {
+    font-size: 12px;
+	margin-left: 0.75em;
+}
+
+form{
+	margin: 0px;
+	padding: 0px;
+}
+
+input.btn {
+	color: #4C4C4C;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	background-color: #FFFFCC;
+	filter: progid :   DXImageTransform .   Microsoft .   Gradient (  
+		GradientType =   0, StartColorStr =   '#ffffffff', EndColorStr =  
+		'#ffeeddaa' );
+	border-top: 1px solid #ccc;
+	border-right: 1px solid #333333;
+	border-bottom: 1px solid #333333;
+	border-left: 1px solid #ccc;
+	padding: 0 .50em;
+	/* hack to fix button width in IE7 */
+	width: 0;
+	overflow: visible;
+}
+
+/* IE7 ignores this */
+input.btn[class]{
+	width: auto;
+}
+
+.lighter-text {
+	font-weight: lighter;
+}
+
+.smaller-text {
+	font-size: 85%;
+}
+
+.large-text{
+	font-size: 120%;
+}
+
+a.selected {
+	background-color: #FFFF00;
+}
+
+a.system-link:link, 
+a.system-link:visited,
+a.system-link:hover,
+a.system-link:active{
+	color: #0066cc;
+	text-decoration: underline;
+}
+
+a.link-title:link, 
+a.link-title:visited,
+a.link-title:hover,
+a.link-title:active{
+	color: #FF6600;
+	text-decoration: underline;
+}
+
+a.web-link:link, 
+a.web-link:visited,
+a.web-link:hover,
+a.web-link:active{
+	color: green;
+	text-decoration: underline;
+}
+
+a.nodecor:link, 
+a.nodecor:visited,
+a.nodecor:hover,
+a.nodecor:active{	
+	text-decoration: none;
+}
+
+SPAN.system-link{
+	color: #0066cc;
+	text-decoration: underline;
+}
+
+.system-link{
+	cursor: pointer;
+}
+
+.align-right {
+	float: right;
+}
+
+.icon {
+	border: none;
+	vertical-align: text-bottom;
+	padding: 0px 2px;
+}
+
+.matched_text{
+	background-color:yellow;
+}
+
+.system-message{
+	padding: 20px;
+	border-style: solid;
+	border-color: #ccc;
+    border-width: 1px;
+}
+
+.system-message .title{
+	font-size: 1.25em;
+	font-weight: bold;
+}
+
+.system-message .description{
+	font-size: 1em;
+}
+
+.notes{
+	color:black;
+}
+
+div.instruction {
+	width: 480px;
+	margin: 1em 0em;
+}
+
+div.short-infobox, div.infobox{	
+	border-style: solid;
+	border-color: #ccc;
+    border-width: medium;
+    padding: 1.5em 2em;
+    /*background-color: #fffaf0;*/
+}
+
+div.short-infobox{
+	width: 400px;
+}
+
+div.infobox{
+	width: 460px;
+}
+
+div.forminput{
+	margin: 2em;
+}
+
+ul.formErrors {
+	list-style-type: none;
+	padding: 0px;
+	margin: 20px auto;
+}
+
+li.errorMessage{
+	padding: 0px;
+	margin: 0px;
+}
+
+.errorMessage{
+	color: red;
+}
+
+
+/* ========= Global DIVs =========== */
+.cleardiv {
+	clear: both;
+}
+
+#pagecontent {
+	position: relative;
+	margin: 0px;
+	padding: 0px;
+}
+
+#contents {
+	padding: 1.5em;
+	background: #FFFFFF;
+	min-height: 300px;
+	position: relative;
+}
+
+#sidebar {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	width: 35%;	
+	border-left: 5px solid #FFFFFF;	
+}
+
+.colored-sidebar {
+	background-color: #FFFAF0;	
+	margin-top: 20px;
+    text-align:justify;
+    padding-bottom: 8px;
+}
+
+#sidebar .element {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	margin-right: 6px;	
+	padding-left: 8px;
+}
+
+#contents ul.posts, #contents #infobanner, #contents .pager, #contents .viewconfig {
+	width: 64%;
+}
+
+.bookmark-action-container {
+	position: relative;
+	background: #fff3b3;
+	height: 32px;
+    border-style: solid;
+    border-color: grey;
+    border-width: 1px;
+}
+
+.bookmark-action-container .actions-left{
+	position: absolute;
+	top:8px;
+	left:10px;	
+}
+
+.bookmark-action-container .actions-right{
+	position: absolute;
+	top:6px;
+	right:4px;		
+}
+
+.bookmark-action-container button, .bookmark-action-container select{
+	font-size: 1em;
+}
+
+.selectBookmark {
+    margin: 8px 0px;
+	padding: 0px;
+	height: 12px;
+	width: 12px;
+}
+
+.select-option{
+	padding-left: 10px;
+	color: blue;
+}
+
+#search-box{
+	width: 300px;
+	padding: 0px;
+	margin: auto;
+	text-align: left;
+}
+
+
+#search{
+  display:inline;
+}
+
+#search-input{
+	width: 200px;
+}
+
+#search-input, #search-space, #seach-submit{
+	display:inline;	
+}
+
+#search-submit{		
+	/*padding: 0px;*/
+}
+
+#infobanner{
+	margin: 0px 0px 15px 0px;
+	padding: 0px;
+}
+
+#breadcrumbs {
+	font-size: 1.15em;
+	font-weight: bold;
+}
+
+#breadcrumbs img {
+	border: none;
+}
+
+#breadcrumbs a:link, 
+#breadcrumbs a:visited,
+#breadcrumbs a:hover,
+#breadcrumbs a:active{
+	color: #0066cc;
+	text-decoration: underline;
+}
+
+ul#breadcrumbs, #breadcrumbs li{
+	display: inline;
+}
+
+ul#breadcrumbs{
+	padding: 0px;
+	margin: 0px;
+}
+
+/* ===== SIDEBAR DIV content ==== */
+.menu {
+	list-style-type: none;
+	margin: 10px 0px;
+	padding: 0px;
+}
+
+.menu li {
+	margin: 1px 2px 1px 2px;
+}
+
+.menu .title {
+	font-size: 12px;
+	font-weight: bold;
+	display: inline;
+}
+
+.submenu li {
+	margin-left: -22px;
+	padding: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+}
+
+
+/** === Paging command links ==== **/
+.pager {
+	position: relative;
+	margin:0px;
+	padding:0px;
+}
+
+
+.pager .pagenumber {
+	text-align: right;
+	margin-left: 25px;	
+}
+
+.pager .pageActionCtrl {
+	position:absolute;
+	top:0px;
+	right:0px;
+}
+
+.viewconfig {	
+	padding-top: 8px;
+	margin:0px;
+}
+
+/** =========== FOOTER DIV ============**/
+#footer {
+	position: static;
+	margin-left: 0px;
+	padding-bottom: 20px;
+	float:left;
+	width: 65%;	
+}
+
+
+#footer #sitemap {
+  margin-left: 10px;
+  margin-top: 5px;
+}
+
+
+#footer a:link {
+	text-decoration: underline;
+	color: #4C4C4C;
+}
+
+#footer a:visited {
+	text-decoration: underline;
+	color: #4C4C4C;
+}
+
+#footer a:hover {
+	color: #FF6600;
+	text-decoration: underline;
+}
+
+#footer a:active {
+	color: #4C4C4C;
+	text-decoration: underline;
+}
+
+/* ======= POSTS DIV content === */
+
+.posts {
+	list-style-type: none;
+	margin-left: 0px;
+	padding-left: 0px;
+	margin-top: 4px;
+	padding-top: 0px;
+}
+
+.posts li{
+	clear:left;
+}
+
+.posts li.post {
+	margin: 20px 0px 20px 4px;
+	padding: 0px;
+}
+
+
+.post .post-container {
+	position: relative;
+	width:100%;    
+    margin: 0px;
+    padding: 0px;
+}
+
+.post .post-container .post-title{
+	float:left;
+	width: 96%;
+	padding: 0px;
+	margin: 0px;
+	font-size: 1.25em;
+}
+
+.post .post-select {
+	float:left;
+	width: 16px;
+	margin-right: 4px;
+}
+
+.post .post-title a:link, 
+.post .post-title a:visited,
+.post .post-title a:hover,
+.post .post-title a:active{
+	text-decoration: underline;
+}
+
+.post .post-link{
+	font-size: 0.8em;
+	 height: 1.75em;            /* constrain height */
+    line-height:1.75em;        /* to be adjusted */   
+}
+
+.post .post-link a:link, 
+.post .post-link a:visited,
+.post .post-link a:hover,
+.post .post-link a:active{	
+	text-decoration: none;
+}
+
+.post .post-container .post-actions{
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	text-align: right;	
+}
+
+.post .commands {
+	display: inline;
+	margin-right: 0px;
+	margin-left: 7px;
+	border-width: 0px;
+}
+
+.post .post-actions img {
+	border-style: none;
+	vertical-align: middle;
+}
+
+.post .notes {
+    clear:both;
+	margin: 0px;
+	padding: 0px;
+	width: 96%;
+}
+.post .notes .shrtNotes{
+	margin: 0px;
+	padding:0px;
+}
+
+.post .notes .shrtNotes, .post .notes .prvwNotes, .post .notes .extNotes {
+	/*position: relative;*/
+}
+
+.post .notes .prvwNotes, .post .notes .extNotes{
+	padding: 4px 10px;
+	background-color: #fffaf0;
+	border-style: solid;
+	border-color: #ccc;
+    border-width: 1px;
+}
+
+.post .notes .showOrHideNotes img {
+	border-style: none;
+	position: absolute;
+	right:  6px;
+	bottom: 4px;
+}
+
+.post .meta {
+    margin: 2px 0px 0px 0px;
+	padding: 0px;
+	width: 96%;
+}
+
+.tagUsageCount {
+	display: none;
+}
+
+.tagcloud {
+	display: inline;
+	list-style-type: none;
+	margin: 0px;
+	padding: 0px;
+	line-height: 1.4em;	
+}
+
+.tagcloud li {
+	display: inline;
+	margin: 0px;
+	padding-right: 2px;
+}
+
+.tagcloud .not-popular {
+	font-size: 1em;
+	color: #AD8484;
+}
+
+.tagcloud .not-very-popular {
+	font-size: 1em;
+    color: #CC6666;
+}
+
+.tagcloud .somewhat-popular {
+    font-size: 1.25em;
+	color: #CC6666;        
+}
+
+.tagcloud .popular {
+    font-size: 1.25em;
+	color: #E05151;        
+}
+
+.tagcloud .very-popular {
+	font-size: 1.25em;
+	color: #F43D3D;		
+}
+
+.tagcloud .ultra-popular {
+	font-size: 1.35em;		
+	color: #F43D3D;       
+}
+
+.category {
+	background-color: #CCCCCC;
+}
+
+
+.large-text {
+	font-size: 16px;
+}
+
+.normal-text {
+	font-size: 11px;
+}
+
+.light-comment {
+	font-size: 10px;
+	color: #999999;;
+}
+
+#sitemap img {
+	vertical-align: bottom;
+	border: none;
+}
+
+.header-menu{
+   display:block;
+   padding-bottom:1px;
+}
+
+.systemMessage{
+	font-size: 1em;
+	font-style: italic;
+	margin-left: 10px;
+}
+
+.invisible {
+	display: none;
+}
+
+.icon-label{
+	vertical-align: text-bottom;
+	padding: 0px 1px;
+}
+
+.overlay{
+	 position: absolute;
+     left: 0px;
+     top: 0px;
+     width:100%;
+     height:100%;
+     text-align:center;
+     z-index: 1000;
+}
+
+.overlay-dialog{
+ 	 width: 80%;   
+ 	 margin: 100px; auto;
+     background-color: #fff;
+     border:3px solid #000;
+     padding:15px;
+     text-align:left;
+}
+
+.overlay-dialog .dialog-menu{
+	text-align:right;
+	font-size: 1.25em;
+}
