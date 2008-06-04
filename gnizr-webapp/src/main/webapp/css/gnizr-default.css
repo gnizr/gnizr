@@ -539,7 +539,7 @@ ul#breadcrumbs{
 }
 
 .post .notes .shrtNotes, .post .notes .prvwNotes, .post .notes .extNotes {
-	position: relative;
+	/*position: relative;*/
 }
 
 .post .notes .prvwNotes, .post .notes .extNotes{
