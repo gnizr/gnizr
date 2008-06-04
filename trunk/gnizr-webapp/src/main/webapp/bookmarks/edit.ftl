@@ -81,13 +81,13 @@
   </div>
   <div class="inputDataRow">		
   <span class="inputLabel">Tags (use white-space to separate multiple tags):</span>
-  <span class="machineTagHelpers">Add machine tag: 
+  <div class="machineTagHelpers">Add machine tag: 
   <a href="#" id="geonamesMTHelper" class="system-link" title="gn:geonames"><img class="icon" src="${gzUrl('/images/globe-16.png')}"></a>
   <a href="#" id="forUserMTHelper" class="system-link" title="gn:for"><img class="icon" src="${gzUrl('/images/user-16.png')}"></a>
   <a href="#" id="folderMTHelper" class="system-link" title="gn:folder"><img class="icon" src="${gzUrl('/images/folder-16.gif')}"></a>
   <a href="#" id="subscribeMTHelper" class="system-link" title="gn:subscribe"><img class="icon" src="${gzUrl('/images/rss-16.png')}"></a> 
   <img id="mediaIconMTHelper" class="system-link icon" src="${gzUrl('/images/icon-16.gif')}"/>
-  </span>		
+  </div>		
   <@ww.textarea cssClass="text-input-tags" label="tags (use white-space to separte multiple tags)"  labelposition="top"
                  name="tags"  value="${(editBookmark.tags)?if_exists}"/>                   
   <div id="suggestedTags"></div>                 
