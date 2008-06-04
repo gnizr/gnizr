@@ -1,7 +1,15 @@
 #summary Changelog of all releases made under version 2.4
 #labels Phase-Implementation
 
-==== Version 2.4.0-M4 (in progress) ====
+==== Version 2.4.0-RC1 (in progress) ====
+  * [http://code.google.com/p/gnizr/issues/detail?id=64 Issue 64]: Warn db overwrite when running the install script (fixed, need testing)
+  * [http://code.google.com/p/gnizr/issues/detail?id=68 Issue 68]: Publish RSS of bookmarks that are recently saved in a given folder (fixed, need testing)
+  * [http://code.google.com/p/gnizr/issues/detail?id=69 Issue 69]: Publish RSS of bookmarks of a specific tag that are recently saved in a given folder (fixed, need testing)
+  * [http://code.google.com/p/gnizr/issues/detail?id=70 Issue 70]: Publish RSS of bookmarks that are recently saved in the bookmark archive stream (fixed, need testing)
+  * [http://code.google.com/p/gnizr/issues/detail?id=71 Issue 71]: Publish RSS of bookmarks of a specific tag that are recently saved in the bookmark archive stream (fixed, need testing)
+  
+
+==== Version 2.4.0-M4 (27 May 2008) ====
   * [http://code.google.com/p/gnizr/issues/detail?id=56 Issue 56]: Prevent users from saving bookmark title with HTML tags (fixed, tested)
   * [http://code.google.com/p/gnizr/issues/detail?id=64 Issue 64]: Bookmarklet failed to work in IE6 (fixed, tested)
   * Renamed "RSS Subscription" to "link collect"; improved user instructions. 
