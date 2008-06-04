@@ -6,7 +6,7 @@
   * [http://code.google.com/p/gnizr/issues/detail?id=68 Issue 68]: Publish RSS of bookmarks that are recently saved in a given folder (fixed, need testing)
   * [http://code.google.com/p/gnizr/issues/detail?id=69 Issue 69]: Publish RSS of bookmarks of a specific tag that are recently saved in a given folder (fixed, need testing)
   * [http://code.google.com/p/gnizr/issues/detail?id=70 Issue 70]: Publish RSS of bookmarks that are recently saved in the bookmark archive stream (fixed, need testing)
-  * [http://code.google.com/p/gnizr/issues/detail?id=71 Issue 71]: Publish RSS of bookmarks of a specific tag that are recently saved in the bookmark archive stream (fixed, need testing)
+  * [http://code.google.com/p/gnizr/issues/detail?id=71 Issue 71]: Publish RSS of bookmarks of a specific tag that are recently saved in the bookmark archive stream (not working)
   
 
 ==== Version 2.4.0-M4 (27 May 2008) ====
