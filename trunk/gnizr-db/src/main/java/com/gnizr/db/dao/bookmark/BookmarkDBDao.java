@@ -24,6 +24,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.sql.Types;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -497,17 +498,17 @@ public class BookmarkDBDao implements BookmarkDao{
 		return result;
 	}
 
-	public List<Bookmark> getPopularCommunityBookmarks(int inPastDays,
-			int maxCount) {
-		logger.debug("getPopularCommunityBookmarks: inPastDays="+inPastDays + ", maxCount="+maxCount);
+	public List<Bookmark> getPopularCommunityBookmarks(Date start, Date end, int maxCount) {
+		logger.debug("getPopularCommunityBookmarks: start= " + start + ", end="+ end + ", maxCount="+maxCount);
 		Connection conn = null;
 		CallableStatement stmt = null;		
 		List<Bookmark> bmarks = new ArrayList<Bookmark>();
 		try {
 			conn = dataSource.getConnection();
-			stmt = conn.prepareCall("call getPopularBookmarks(?,?)");
-			stmt.setLong(1,inPastDays);
-			stmt.setLong(2,maxCount);
+			stmt = conn.prepareCall("call getPopularBookmarks(?,?,?)");
+			stmt.setTimestamp(1,new Timestamp(start.getTime()));
+			stmt.setTimestamp(2,new Timestamp(end.getTime()));
+			stmt.setInt(3,maxCount);
 			ResultSet rs = stmt.executeQuery();
 			while(rs.next()){
 				Bookmark b = createBookmarkObject2(rs);

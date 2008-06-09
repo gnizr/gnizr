@@ -17,6 +17,7 @@
 package com.gnizr.db.dao.bookmark;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import com.gnizr.db.dao.Bookmark;
@@ -112,12 +113,12 @@ public interface BookmarkDao extends Serializable{
 	public boolean updateBookmark(Bookmark bm);	
 	
 	/**
-	 * Returns popular bookmarks saved by users in the past <code>N</code> days. 
-	 * @param inPastDays only look for popular bookmarks that are saved in the defined
-	 * number of days in the past.  
+	 * Returns popular bookmarks saved by users during a time interval 
+	 * @param start the start date/time of the time interval
+	 * @param end the end date/time of the time interval
 	 * @param maxCount returns no more than this number of bookmarks
 	 * @return a non-null list of bookmarks
 	 */
-	public List<Bookmark> getPopularCommunityBookmarks(int inPastDays, int maxCount);
+	public List<Bookmark> getPopularCommunityBookmarks(Date start, Date end, int maxCount);
 	
 }
