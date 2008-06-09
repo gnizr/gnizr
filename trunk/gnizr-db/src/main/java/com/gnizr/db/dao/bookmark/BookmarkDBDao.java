@@ -496,6 +496,35 @@ public class BookmarkDBDao implements BookmarkDao{
 		}		
 		return result;
 	}
+
+	public List<Bookmark> getPopularCommunityBookmarks(int inPastDays,
+			int maxCount) {
+		logger.debug("getPopularCommunityBookmarks: inPastDays="+inPastDays + ", maxCount="+maxCount);
+		Connection conn = null;
+		CallableStatement stmt = null;		
+		List<Bookmark> bmarks = new ArrayList<Bookmark>();
+		try {
+			conn = dataSource.getConnection();
+			stmt = conn.prepareCall("call getPopularBookmarks(?,?)");
+			stmt.setLong(1,inPastDays);
+			stmt.setLong(2,maxCount);
+			ResultSet rs = stmt.executeQuery();
+			while(rs.next()){
+				Bookmark b = createBookmarkObject2(rs);
+				logger.debug("found bmark="+b);
+				bmarks.add(b);
+			}
+		} catch (SQLException e) {
+			logger.fatal(e);
+		}finally{
+			try {
+				DBUtil.cleanup(conn, stmt);
+			} catch (SQLException e) {
+				logger.fatal(e);
+			}
+		}		
+		return bmarks;
+	}
 	
 }
 	

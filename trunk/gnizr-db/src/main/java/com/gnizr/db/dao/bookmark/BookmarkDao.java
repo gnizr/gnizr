@@ -111,4 +111,13 @@ public interface BookmarkDao extends Serializable{
 	
 	public boolean updateBookmark(Bookmark bm);	
 	
+	/**
+	 * Returns popular bookmarks saved by users in the past <code>N</code> days. 
+	 * @param inPastDays only look for popular bookmarks that are saved in the defined
+	 * number of days in the past.  
+	 * @param maxCount returns no more than this number of bookmarks
+	 * @return a non-null list of bookmarks
+	 */
+	public List<Bookmark> getPopularCommunityBookmarks(int inPastDays, int maxCount);
+	
 }

@@ -40,3 +40,6 @@ mysql -u $2 --password=$3 $DB < sp-folder.sql
 echo "loading sp-geommarker.sql into $DB"
 mysql -u $2 --password=$3 $DB < sp-geommarker.sql
 
+echo "loading sp-popular.sql into $DB"
+mysql -u $2 --password=$3 $DB < sp-popular.sql
+
