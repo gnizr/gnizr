@@ -306,18 +306,22 @@ public class Bookmark implements Serializable{
 		this.user = user;
 	}
 
+
 	@Override
 	public int hashCode() {
-		final int PRIME = 31;
-		int result = super.hashCode();
-		result = PRIME * result + ((createdOn == null) ? 0 : createdOn.hashCode());
-		result = PRIME * result + id;
-		result = PRIME * result + ((lastUpdated == null) ? 0 : lastUpdated.hashCode());
-		result = PRIME * result + ((link == null) ? 0 : link.hashCode());
-		result = PRIME * result + ((notes == null) ? 0 : notes.hashCode());
-		result = PRIME * result + ((tags == null) ? 0 : tags.hashCode());
-		result = PRIME * result + ((title == null) ? 0 : title.hashCode());
-		result = PRIME * result + ((user == null) ? 0 : user.hashCode());
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((createdOn == null) ? 0 : createdOn.hashCode());
+		result = prime * result + ((folders == null) ? 0 : folders.hashCode());
+		result = prime * result + id;
+		result = prime * result
+				+ ((lastUpdated == null) ? 0 : lastUpdated.hashCode());
+		result = prime * result + ((link == null) ? 0 : link.hashCode());
+		result = prime * result + ((notes == null) ? 0 : notes.hashCode());
+		result = prime * result + ((tags == null) ? 0 : tags.hashCode());
+		result = prime * result + ((title == null) ? 0 : title.hashCode());
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		return result;
 	}
 
@@ -325,7 +329,7 @@ public class Bookmark implements Serializable{
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (!super.equals(obj))
+		if (obj == null)
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
@@ -334,6 +338,11 @@ public class Bookmark implements Serializable{
 			if (other.createdOn != null)
 				return false;
 		} else if (!createdOn.equals(other.createdOn))
+			return false;
+		if (folders == null) {
+			if (other.folders != null)
+				return false;
+		} else if (!folders.equals(other.folders))
 			return false;
 		if (id != other.id)
 			return false;
