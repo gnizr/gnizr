@@ -51,7 +51,9 @@ public class TestBookmark extends TestCase {
 		assertEquals(b.getTags(),b2.getTags());
 		assertEquals(b.getTitle(),b2.getTitle());
 		assertEquals(b.getFolders(),b2.getFolders());
-		assertEquals(b.getUser().getUsername(),b2.getUser().getUsername());				
+		assertEquals(b.getUser().getUsername(),b2.getUser().getUsername());			
+		
+		assertEquals(b,b2);
 	}
 	
 	public void testGetFilteredMachineTags() throws Exception{
