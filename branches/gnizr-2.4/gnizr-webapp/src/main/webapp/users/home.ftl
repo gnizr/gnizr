@@ -3,14 +3,15 @@
 <#include "./macro-lib.ftl"/>
 <#assign username=user.username/>
 <#assign title="${username}'s bookmarks"/>
-<#assign thisPageBaseHref = gzUserBmarkArchivesUrl(username)/>
-<#assign thisPageRSS = gzUserUrl(username)+"/output/rss1.0"/>
-<#assign thisPageRDF = gzUserUrl(username)+"/output/rdf"/>
 <#if tag?exists>
   <#assign title=title+" tagged '${tag}'"/>
   <#assign thisPageHref = gzUserBmarkArchivesUrl(username,tag)/>    
+  <#assign thisPageRSS = gzUserUrl(username)+"/tag/" + tag + "/output/rss1.0"/>
+  <#assign thisPageRDF = gzUserUrl(username)+ "/output/rdf"/>
 <#else>
   <#assign thisPageHref = gzUserBmarkArchivesUrl(username)/>    
+  <#assign thisPageRSS = gzUserUrl(username)+"/output/rss1.0"/>
+  <#assign thisPageRDF = gzUserUrl(username)+"/output/rdf"/>
 </#if>
 <#assign toPageHref = getToPageHref(thisPageHref)/>
 <@pageBegin pageTitle=title cssHref=[gzUrl("/css/gnizr-userpage.css")]
