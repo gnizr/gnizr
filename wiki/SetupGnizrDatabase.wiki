@@ -5,7 +5,7 @@ This page describes the steps to prepare MySQL database for gnizr installation. 
 
 == Requirement ==
 
-  # Install MySQL 5.0+
+  # Install MySQL 5.0
   # Create a database schema for gnizr
     * e.g., `gnizr_db` 
   # Create a database account for gnizr, and make sure this account has all the necessary privileges to manage and access the gnizr database schema
